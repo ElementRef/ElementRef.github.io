@@ -107,10 +107,14 @@
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
 &lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># https://support.apple.com/zh-cn/HT201372&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo /Applications/Install&lt;span class="se">\ &lt;/span>macOS&lt;span class="se">\ &lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">版本名称&lt;/span>&lt;span class="p">，比如：Monterey&lt;/span>&lt;span class="si">}&lt;/span>.app/Contents/Resources/createinstallmedia --volume /Volumes/&lt;span class="si">${&lt;/span>&lt;span class="nv">U&lt;/span>&lt;span class="p"> 盘名称，比如：MyVolume&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># https://support.apple.com/zh-cn/101578&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo /Applications/Install&lt;span class="se">\ &lt;/span>macOS&lt;span class="se">\ &lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">版本带代号&lt;/span>&lt;span class="si">}&lt;/span>.app/Contents/Resources/createinstallmedia --volume /Volumes/&lt;span class="si">${&lt;/span>&lt;span class="nv">写入位置&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo /Applications/Install&lt;span class="se">\ &lt;/span>macOS&lt;span class="se">\ &lt;/span>Sequoia.app/Contents/Resources/createinstallmedia --volume /Volumes/MyUSBVolume
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo /Applications/Install&lt;span class="se">\ &lt;/span>macOS&lt;span class="se">\ &lt;/span>Sonoma.app/Contents/Resources/createinstallmedia --volume /Volumes/MyUSBVolume
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h2 id="bash-与-zsh-的相互切换">bash 与 zsh 的相互切换&lt;/h2>
@@ -126,24 +130,6 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">chsh -s /bin/bash
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 切换到 zsh&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">chsh -s /bin/zsh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h2 id="本地安装了哪些-brew-包">本地安装了哪些 brew 包&lt;/h2>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">brew list
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h2 id="本地安装了哪些-npm-包">本地安装了哪些 npm 包&lt;/h2>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">npm list -g --depth&lt;span class="o">=&lt;/span>&lt;span class="m">0&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h2 id="不检查-monterey-更新">不检查 Monterey 更新&lt;/h2>
@@ -165,7 +151,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.apple.systempreferences AttentionPrefBundleIDs &lt;span class="m">0&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h2 id="启用-m1-限定主题">启用 M1 限定主题&lt;/h2>
+&lt;/div>&lt;h2 id="启用-imac-限定主题">启用 iMac 限定主题&lt;/h2>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -261,12 +247,12 @@
 &lt;/span>&lt;span class="lnt">6
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看 SIP&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">csrutil status
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 关闭 SIP&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">csrutil disable
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 打开 SIP&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">csrutil &lt;span class="nb">enable&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 关闭 SIP&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">csrutil disable
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看 SIP&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">csrutil status
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h2 id="安装-hugo64056">安装 hugo@0.56&lt;/h2>
@@ -404,9 +390,13 @@
 &lt;/span>&lt;span class="lnt">82
 &lt;/span>&lt;span class="lnt">83
 &lt;/span>&lt;span class="lnt">84
+&lt;/span>&lt;span class="lnt">85
+&lt;/span>&lt;span class="lnt">86
+&lt;/span>&lt;span class="lnt">87
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ssh-keygen -t rsa -C &lt;span class="s2">&amp;#34;hahaha@hotmail.com&amp;#34;&lt;/span> -f &lt;span class="s2">&amp;#34;hahaha_ref&amp;#34;&lt;/span>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 配置多个 SSH&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ssh-keygen -t rsa -C &lt;span class="s2">&amp;#34;hahaha@hotmail.com&amp;#34;&lt;/span> -f &lt;span class="s2">&amp;#34;hahaha_ref&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 添加更改（增、删、改）到暂存区（工作区所有目录）&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git add --all
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 添加已追踪的文件更改到暂存区（工作区所有目录）&lt;/span>
@@ -460,6 +450,8 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git remote -v
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git reset --mixed HEAD^
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 删除当前分支上所有 commit 并生成「删除所有 commit」这一个 commit&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git reset --hard &lt;span class="k">$(&lt;/span>git commit-tree HEAD^&lt;span class="o">{&lt;/span>tree&lt;span class="o">}&lt;/span> -m &lt;span class="s2">&amp;#34;删除所有 commit&amp;#34;&lt;/span>&lt;span class="k">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 删除最近一个 commit，不保留更改&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git reset --hard HEAD^
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 删除最近一个 commit，保留更改&lt;/span>
