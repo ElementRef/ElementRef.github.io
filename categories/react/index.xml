@@ -32,7 +32,7 @@ loading="lazy"
 loading="lazy"
 >
 &lt;/p>
-&lt;h3 id="路由相关特殊文件">路由相关（特殊）文件：&lt;/h3>
+&lt;h2 id="路由相关特殊文件">路由相关（特殊）文件：&lt;/h2>
 &lt;ul>
 &lt;li>layout.tsx，当前路由及其子路由共享的 UI；不会被二次渲染；在页面跳转时，会被缓存和复用；&lt;/li>
 &lt;li>page.tsx，当前路由的 UI；默认为 ServerComponents，可被置为 ClientComponent；&lt;/li>
@@ -44,7 +44,7 @@ loading="lazy"
 &lt;li>template.tsx，Specialized re-rendered LayoutUI；&lt;/li>
 &lt;li>default.tsx，并行路由的 FallbackUI，可以理解为插槽的默认内容。&lt;/li>
 &lt;/ul>
-&lt;h3 id="路由的嵌套表现为组件的嵌套">路由的嵌套表现为组件的嵌套：&lt;/h3>
+&lt;h2 id="路由的嵌套表现为组件的嵌套">路由的嵌套表现为组件的嵌套：&lt;/h2>
 &lt;p>&lt;img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fnested-file-conventions-component-hierarchy.png&amp;amp;w=3840&amp;amp;q=75"
 loading="lazy"
 >
@@ -55,7 +55,7 @@ loading="lazy"
 >
 &lt;/p>
 &lt;p>这是和 PagesRouter 的不同点之一，PagesRouter 中，pages 目录下的任何文件都对应着一条路由记录。&lt;/p>
-&lt;h3 id="路由导航有四种方式">路由导航有四种方式：&lt;/h3>
+&lt;h2 id="路由导航有四种方式">路由导航有四种方式：&lt;/h2>
 &lt;ul>
 &lt;li>&amp;lt;Link&amp;gt; 组件；&lt;/li>
 &lt;li>useRouter Hook，用在 ClientComponent；准确的说，所有 Hook 都只能运行在客户端；&lt;/li>
@@ -214,14 +214,14 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h3 id="部分渲染">部分渲染：&lt;/h3>
+&lt;/div>&lt;h2 id="部分渲染">部分渲染：&lt;/h2>
 &lt;p>当路由切换仅发生在嵌套的子路由之间（/dashboard/settings 2 /dashboard/analytics）时：&lt;/p>
 &lt;p>&lt;img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fpartial-rendering.png&amp;amp;w=3840&amp;amp;q=75"
 loading="lazy"
 >
 &lt;/p>
 &lt;p>Next.js 只会增量渲染 analytics，而不是整个页面。&lt;/p>
-&lt;h3 id="错误处理">错误处理：&lt;/h3>
+&lt;h2 id="错误处理">错误处理：&lt;/h2>
 &lt;ul>
 &lt;li>预期错误：一般发生在 ServerActions 中，例如参数验证失败、失败请求等，避免用 try&amp;hellip;catch 处理；例如前文提到的 redirect；&lt;/li>
 &lt;li>未知错误：一般为未知 bug，使用错误边界做处理，例如 [global-]error.tsx&lt;/li>
@@ -360,7 +360,7 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h3 id="流式渲染">流式渲染：&lt;/h3>
+&lt;/div>&lt;h2 id="流式渲染">流式渲染：&lt;/h2>
 &lt;p>&lt;img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fserver-rendering-without-streaming-chart.png&amp;amp;w=3840&amp;amp;q=75"
 loading="lazy"
 >
@@ -425,7 +425,7 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>为了保证 SEO 不受影响，Next.js 会保证 generateMetadata 部分的数据获取完成之后，再 StreamingUI。&lt;/p>
-&lt;h3 id="重定向">重定向：&lt;/h3>
+&lt;h2 id="重定向">重定向：&lt;/h2>
 &lt;p>在 ServerComponents、ServerActions、RouteHandlers 中使用 redirect 进行重定向：&lt;/p>
 &lt;ul>
 &lt;li>redirect 默认使用 307 状态码（暂时重定向）；在 ServerActions 中使用 303 状态码（重定向到结果页面）；&lt;/li>
@@ -633,7 +633,7 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h3 id="路由组">路由组：&lt;/h3>
+&lt;/div>&lt;h2 id="路由组">路由组：&lt;/h2>
 &lt;p>Next.js 中，路由是基于文件系统用的，目录的嵌套会导致路由的嵌套；如果只想基于业务，将文件目录分组而不影响路由配置，可以使用路由组。&lt;/p>
 &lt;p>&lt;img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Froute-group-organisation.png&amp;amp;w=3840&amp;amp;q=75"
 loading="lazy"
@@ -655,13 +655,13 @@ loading="lazy"
 &lt;li>如果移除了根部的 layout.tsx，记得在任一路由组中配置 page.tsx，否则根路径会没有对应的页面；&lt;/li>
 &lt;li>跨路由组跳转，会导致整个页面刷新；例如 /cart【app/(shop)/layout.js】2 /blog【app/(marketing)/layout.js】。&lt;/li>
 &lt;/ul>
-&lt;h3 id="私有目录">私有目录：&lt;/h3>
+&lt;h2 id="私有目录">私有目录：&lt;/h2>
 &lt;p>目录名称以_开头的目录，当前及子目录都不会被解析为路由；它主要用来在路由逻辑中分离 UI 逻辑（没什么用）。&lt;/p>
 &lt;p>&lt;img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fproject-organization-private-folders.png&amp;amp;w=3840&amp;amp;q=75"
 loading="lazy"
 >
 &lt;/p>
-&lt;h3 id="动态路由">动态路由：&lt;/h3>
+&lt;h2 id="动态路由">动态路由：&lt;/h2>
 &lt;p>目录以 [folder] 或 [&amp;hellip;folder] 命名，例如 [userId]、[&amp;hellip;slug] 等，动态参数通过 props.params 传递。&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -720,7 +720,7 @@ loading="lazy"
 &lt;li>/shop/a/b 对应的 props.params 为 { slug: [&amp;lsquo;a&amp;rsquo;, &amp;lsquo;b&amp;rsquo;] }；&lt;/li>
 &lt;li>/shop/a/b/c 对应的 props.params 为 { slug: [&amp;lsquo;a&amp;rsquo;, &amp;lsquo;b&amp;rsquo;, &amp;lsquo;c&amp;rsquo;] }。&lt;/li>
 &lt;/ul>
-&lt;h3 id="并行路由">并行路由：&lt;/h3>
+&lt;h2 id="并行路由">并行路由：&lt;/h2>
 &lt;p>官网上说，并行路由相当于&lt;strong>具名插槽&lt;/strong>；在我看来，也就是 renderProps；[@folder] 定义的目录不会被解析为路由，而是被解析为同目录下 layout.tsx 的 props。&lt;/p>
 &lt;p>&lt;img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fparallel-routes.png&amp;amp;w=3840&amp;amp;q=75"
 loading="lazy"
@@ -809,7 +809,7 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h3 id="路由拦截">路由拦截：&lt;/h3>
+&lt;/div>&lt;h2 id="路由拦截">路由拦截：&lt;/h2>
 &lt;p>比如，当你点击一张图片，路径为 /photo/flower，然而你不想跳转到新页面，而仅仅想用弹窗的形式预览图片时：&lt;/p>
 &lt;p>&lt;img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fintercepting-routes-soft-navigate.png&amp;amp;w=3840&amp;amp;q=75"
 loading="lazy"
@@ -831,7 +831,7 @@ loading="lazy"
 loading="lazy"
 >
 &lt;/p>
-&lt;h3 id="路由处理程序">路由处理程序&lt;/h3>
+&lt;h2 id="路由处理程序">路由处理程序&lt;/h2>
 &lt;p>相当于 PagesRouter 中的 APIRoute，可以用来做 BFF、请求转发、直接操作数据库、解决跨域问题甚至做全栈开发等。&lt;/p>
 &lt;p>&lt;img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Froute-special-file.png&amp;amp;w=3840&amp;amp;q=75"
 loading="lazy"
@@ -1326,7 +1326,7 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h3 id="中间件">中间件&lt;/h3>
+&lt;/div>&lt;h2 id="中间件">中间件&lt;/h2>
 &lt;p>中间件目前仅支持 &lt;a class="link"
 href="https://edge-runtime.vercel.app/"
 target="_blank" rel="noopener"
@@ -1682,7 +1682,7 @@ Edge
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h3 id="国际化">国际化&lt;/h3>
+&lt;/div>&lt;h2 id="国际化">国际化&lt;/h2>
 &lt;p>可以通过头部信息 Accept-Language 获取浏览器语言设置：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
