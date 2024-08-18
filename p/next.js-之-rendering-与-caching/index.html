@@ -1,0 +1,265 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content='最近想用回 React，CRA 已经不再被推荐使用了'><title>Next.js 之 Rendering 与 Caching · Stay Hungry · Stay Foolish</title>
+<link rel=canonical href=https://ElementRef.github.io/p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/><link rel=stylesheet href=/scss/style.min.25d33c133ac62b31b779da6f9614c6ff632bad670ad454a2b936a66bb28581fc.css><meta property='og:title' content='Next.js 之 Rendering 与 Caching'><meta property='og:description' content='最近想用回 React，CRA 已经不再被推荐使用了'><meta property='og:url' content='https://ElementRef.github.io/p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/'><meta property='og:site_name' content='馬腊咯稽'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:published_time' content='2024-08-18T00:00:00+00:00'><meta property='article:modified_time' content='2024-08-18T00:00:00+00:00'><meta property='og:image' content='https://ElementRef.github.io/img/cover/react.png'><meta name=twitter:title content="Next.js 之 Rendering 与 Caching"><meta name=twitter:description content="最近想用回 React，CRA 已经不再被推荐使用了"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://ElementRef.github.io/img/cover/react.png'><link rel="shortcut icon" href=/favicon.ico><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><meta name=theme-color content="#ffffff"><meta name=robots content="noarchive"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_huae06eac29c2bc6aa7e83a685ea2f6536_13838_300x0_resize_box_3.png width=300 height=404 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>馬腊咯稽</a></h1><h2 class=site-description>Stay Hungry · Stay Foolish</h2></div></header><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>首页</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>归档</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>搜索</span></a></li><li><a href=https://github.com/ElementRef/AboutConfig target=_blank><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M9.828 9.172a4 4 0 100 5.656A10 10 0 0012 12a10 10 0 012.172-2.828 4 4 0 110 5.656A10 10 0 0112 12 10 10 0 009.828 9.172"/></svg>
+<span>配置</span></a></li><li><a href=/%E5%90%AF%E5%8F%91/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>启发</span></a></li><li><a href=/%E5%91%BD%E4%BB%A4/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-terminal" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 7l5 5-5 5"/><line x1="12" y1="19" x2="19" y2="19"/></svg>
+<span>命令</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>关于</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>深色</span></li></div></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/><img src=/img/cover/react.png loading=lazy alt="Next.js 之 Rendering 与 Caching"></a></div><div class=article-details><header class=article-category><a href=/categories/react/>React</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/>Next.js 之 Rendering 与 Caching</a></h2><h3 class=article-subtitle>最近想用回 React，CRA 已经不再被推荐使用了</h3></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Aug 18, 2024</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长：8 分钟</time></div></footer></div></header><section class=article-content><h2 id=servercomponents>ServerComponents</h2><p>ServerComponents 会在服务端进渲染并被缓存；Next.js 一般会基于路由进行 CodeSplit，结合 Suspense 将渲染工作尽可能的分割成更小的单位：</p><ul><li>服务端组件可以直接在服务端获取数据，可以减少来自客户端的 HTTP 数据请求；</li><li>服务端渲染可以减少敏感数据在客户端暴露的风险；</li><li>渲染内容可以被缓存在服务端，提高性能；</li><li>提升首屏渲染性能；</li><li>SEO 友好；</li><li>流式渲染。</li></ul><p>在服务端渲染时，Next.js 会将 ServerComponents 渲染成 ReactServerComponentPayload，然后构建出 HTML；在客户端渲染出 HTML 之后，ReactServerComponentPayload 会被用来和客户端 Fiber 进行 Hydrate，为页面添加交互。</p><p>ReactServerComponentPayload 可以被理解为服务端的组件树，是一种二进制数据，他包含了：</p><ul><li>ServerComponents 的渲染结果；</li><li>ClientComponents 占位符以及相关文件；</li><li>ServerComponents 到 ClientComponents 的 props。</li></ul><p>Next.js 服务端渲染分为三种：</p><ul><li>静态渲染：<ul><li>适用于数据非“千人千面”而且内容都是可以被事先知道的情况下；</li><li>初始化渲染发生在打包阶段，并将结果进行缓存，后台会定期进行缓存验证；</li><li>打包的内容可以被静态部署或被部署在 CDN 上。</li></ul></li><li>动态渲染：<ul><li>渲染发生在每次客户端发起请求时，渲染内容和用户相关性较高；</li><li>在渲染阶段，如果遇到动态函数（请求发生时才能获取的信息）或者没有缓存的数据请求，Next.js 会自动将路由切换至动态渲染；</li><li>使用了 <a class=link href=https://nextjs.org/docs/app/api-reference/functions/cookies target=_blank rel=noopener>cookies()
+</a>、<a class=link href=https://nextjs.org/docs/app/api-reference/functions/headers target=_blank rel=noopener>
+headers()
+</a>、<a class=link href=https://nextjs.org/docs/app/api-reference/file-conventions/page#searchparams-optional target=_blank rel=noopener>
+searchParams
+</a>这些动态 API 的函数被称为动态函数。</li><li></li></ul></li><li>流式渲染：借助 Suspense，将渲染工作拆分，先渲染 FallbackUI，当组件渲染好了之后，替换 FallbackUI。</li></ul><h2 id=clientcomponents>ClientComponents</h2><p>ClientComponents 一般用在有复杂交互的场景下，使用 &lsquo;use client&rsquo; 标识，没有标识而使用浏览器 API 或者 Hook，会导致出错。</p><p><img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fuse-client-directive.png&amp;w=3840&amp;q=75" loading=lazy></p><p>但不必在所有的地方都使用 &lsquo;use client&rsquo; 标识；被导入 &lsquo;use client&rsquo; 标识的文件的模块都会运行在客户端。</p><p>为了提升首屏渲染性能，在页面初次加载时，Client 和 ServerComponents 都会在服务端被渲染为 HTML，然后再 Hydrate，为页面添加交互；在后续页面导航的时候，ClientComponents 会在浏览器里被 JS 渲染，不会有相应的 HTML。</p><h2 id=servercomponents-与-clientcomponents-混合模式>ServerComponents 与 ClientComponents 混合模式</h2><p><img src=/p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/composition-patterns.png width=1288 height=1204 srcset="/p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/composition-patterns_hu0abf1d9b571bb543d60da8a2b70e9bd6_47829_480x0_resize_box_3.png 480w, /p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/composition-patterns_hu0abf1d9b571bb543d60da8a2b70e9bd6_47829_1024x0_resize_box_3.png 1024w" class=gallery-image data-flex-grow=106 data-flex-basis=256px loading=lazy></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// lib/data.ts
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=s1>&#39;server-only&#39;</span><span class=p>;</span> <span class=c1>// ClientComponents 导入，会在编译阶段报错
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>getData() {</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>res</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>fetch</span><span class=p>(</span><span class=s1>&#39;https://external-service.com/data&#39;</span><span class=p>,</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>headers</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>authorization</span>: <span class=kt>process.env.API_KEY</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>res</span><span class=p>.</span><span class=nx>json</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>API_KEY 是一个只能在服务端访问的私有变量（没有以 NEXT_PUBLIC 作为前缀）；为了不泄漏敏感信息，即使 getData 被导入客户端，在客户端也会调用失败。</p><p>可以安装 server-only，并在代码中导入；这样如果 ClientComponents 导入了 getData，会在打包阶段将错误抛出，避免错误发生在生产环境。</p><p>相应的，还有 client-only。</p><p>如果要使用 ReactContext 怎么办？大部分 Context 会在根组件导入，而 Context 只能在客户端运行：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/layout.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=p>{</span> <span class=nx>createContext</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;react&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=nx>ThemeContext</span> <span class=o>=</span> <span class=nx>createContext</span><span class=p>({});</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>RootLayout</span><span class=p>({</span> <span class=nx>children</span> <span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>html</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>ThemeContext.Provider</span> <span class=na>value</span><span class=o>=</span><span class=s>&#34;dark&#34;</span><span class=p>&gt;{</span><span class=nx>children</span><span class=p>}&lt;/</span><span class=nt>ThemeContext.Provider</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>为了能正常运行，需要将 Provider 标志为 &lsquo;use client&rsquo; 再进行导出：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/theme-provider.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s1>&#39;use client&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>createContext</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;react&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=nx>ThemeContext</span> <span class=o>=</span> <span class=nx>createContext</span><span class=p>({});</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>ThemeProvider</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>children</span>
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>children</span>: <span class=kt>React.ReactNode</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>&lt;</span><span class=nt>ThemeContext.Provider</span> <span class=na>value</span><span class=o>=</span><span class=s>&#34;dark&#34;</span><span class=p>&gt;{</span><span class=nx>children</span><span class=p>}&lt;/</span><span class=nt>ThemeContext.Provider</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=c1>// app/layout.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=nx>ThemeProvider</span> <span class=kr>from</span> <span class=s1>&#39;./theme-provider&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>RootLayout</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>children</span>
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>children</span>: <span class=kt>React.ReactNode</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>html</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>ThemeProvider</span><span class=p>&gt;{</span><span class=nx>children</span><span class=p>}&lt;/</span><span class=nt>ThemeProvider</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>为了充分利用服务端渲染的优势，最好将交互逻辑尽可能的与静态数据做分离，降低客户端代码体积。</p><h3 id=在-clientcomponents-中渲染-servercomponents>在 ClientComponents 中渲染 ServerComponents</h3><p>ClientComponents 的渲染工作晚于 ServerComponents，所以不能将 ServerComponents 直接导入到 ClientComponents 中；但是可以通过 props，将 ServerComponents 传给 ClientComponents。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/client-component.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s1>&#39;use client&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=c1>// 这样不行
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=nx>ServerComponent</span> <span class=kr>from</span> <span class=s1>&#39;./Server-Component&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>ClientComponent</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>children</span>
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>children</span>: <span class=kt>React.ReactNode</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=p>[</span><span class=nx>count</span><span class=p>,</span> <span class=nx>setCount</span><span class=p>]</span> <span class=o>=</span> <span class=nx>useState</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>button</span> <span class=na>onClick</span><span class=o>=</span><span class=p>{()</span> <span class=o>=&gt;</span> <span class=nx>setCount</span><span class=p>(</span><span class=nx>count</span> <span class=o>+</span> <span class=mi>1</span><span class=p>)}&gt;{</span><span class=nx>count</span><span class=p>}&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>ServerComponent</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>一般使用 props.children 来实现（都行，其实只要是 renderProps 都行）：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/client-component.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s1>&#39;use client&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>useState</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;react&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>ClientComponent</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>children</span>
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>children</span>: <span class=kt>React.ReactNode</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=p>[</span><span class=nx>count</span><span class=p>,</span> <span class=nx>setCount</span><span class=p>]</span> <span class=o>=</span> <span class=nx>useState</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>button</span> <span class=na>onClick</span><span class=o>=</span><span class=p>{()</span> <span class=o>=&gt;</span> <span class=nx>setCount</span><span class=p>(</span><span class=nx>count</span> <span class=o>+</span> <span class=mi>1</span><span class=p>)}&gt;{</span><span class=nx>count</span><span class=p>}&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span><span class=nx>children</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=c1>// app/page.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=nx>ClientComponent</span> <span class=kr>from</span> <span class=s1>&#39;./client-component&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>ServerComponent</span> <span class=kr>from</span> <span class=s1>&#39;./server-component&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>Page() {</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>ClientComponent</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>ServerComponent</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>ClientComponent</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=部分预渲染>部分预渲染</h2><p>部分预渲染是指，在同一路由下，既有静态组件又有动态组件；为了保证渲染流程不被阻塞，需要将动态部分用 Suspense 包裹。</p><p><img src="https://nextjs.org/_next/image?url=%2Flearn%2Fdark%2Fthinking-in-ppr.png&amp;w=3840&amp;q=75" loading=lazy></p><p>使用<strong>部分预渲染</strong>，需要更改 Next.js 配置，并在需要部分预渲染的组件中导出 experimental_ppr：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// next.config.ts
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=kr>type</span> <span class=p>{</span> <span class=nx>NextConfig</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;next&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>nextConfig</span>: <span class=kt>NextConfig</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>experimental</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Next.js 15+
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>ppr</span><span class=o>:</span> <span class=s1>&#39;incremental&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Next.js 14 中，这样启用，所有的路由都将“部分预渲染”
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>ppr</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=nx>nextConfig</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=c1>// app/page.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=p>{</span> <span class=nx>Suspense</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;react&#34;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>StaticComponent</span><span class=p>,</span> <span class=nx>DynamicComponent</span><span class=p>,</span> <span class=nx>Fallback</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;@/app/ui&#34;</span>
+</span></span><span class=line><span class=cl><span class=c1>// 需要导出
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>export</span> <span class=kr>const</span> <span class=nx>experimental_ppr</span> <span class=o>=</span> <span class=kc>true</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>Page() {</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>     <span class=p>&lt;&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>StaticComponent</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>Suspense</span> <span class=na>fallback</span><span class=o>=</span><span class=p>{&lt;</span><span class=nt>Fallback</span> <span class=p>/&gt;}&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>DynamicComponent</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>Suspense</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>     <span class=p>&lt;/&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>酱紫，当前路由及其子级路由都将启用<strong>部分预渲染</strong>；如果子路由不需要部分预渲染，需要导出 experimental_ppr = false。</p><h2 id=缓存>缓存</h2><p>Next.js 通过对渲染内容和请求数据加缓存来提高性能，下图列出了 Next.js 用到的缓存。</p><p><img src=/p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/caching.png width=1288 height=698 srcset="/p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/caching_hua7eb510fe70ef897dcda1c4b03d29357_38597_480x0_resize_box_3.png 480w, /p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/caching_hua7eb510fe70ef897dcda1c4b03d29357_38597_1024x0_resize_box_3.png 1024w" class=gallery-image data-flex-grow=184 data-flex-basis=442px loading=lazy></p><ul><li>RequestMemoization，合并<strong>当前路由渲染中</strong>遇到的<strong>相同</strong>的请求，并将请求结果缓存；路由渲染完成，清空缓存；</li><li>DataCache，持久缓存，不止存在于当前路由的渲染过程中，侧重于对结果的缓存；</li><li>FullRouteCache，持久缓存，保存在与服务端，对 ReactServerComponentPayload 和 HTML 的缓存，提升服务端渲染性能；</li><li>RouterCache，保存在客户端的，对 ReactServerComponentPayload 的缓存，用来提升导航性能。</li></ul><p>下图列出了<strong>默认</strong>的缓存行为：</p><p><img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fcaching-overview.png&amp;w=3840&amp;q=75" loading=lazy></p><p>实际上的缓存行为，取决于路由是静态还是动态、数据是缓存还是未缓存、请求是初始访问还是后续导航的一部分。</p><h3 id=requestmemoization>RequestMemoization</h3><p>Next.js 扩展了 fetch，会把具有相同 URL 和 Payload 的请求视为相同的请求：</p><p><img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fdeduplicated-fetch-requests.png&amp;w=3840&amp;q=75" loading=lazy></p><p>这样，我们不必为了优化请求并发数，而将状态提升。</p><p><img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Frequest-memoization.png&amp;w=3840&amp;q=75" loading=lazy></p><ul><li>接口第一次被请求时，会在内存中查找，当前请求有没有对应的缓存；</li><li>很显然第一次请求，没有缓存；执行请求逻辑，并将结果缓存在内存中；</li><li>随着渲染的进行，当相同请求被多次调用时，如果命中了缓存，将直接返回缓存结果；</li><li>一旦<strong>当前路由渲染</strong>完毕，缓存就会被清空；</li><li>RequestMemoization 只适用于 <strong>fetch 发起的 GET 请求</strong>；</li><li>RequestMemoization 只适用于 React 组件树：<ul><li>只会发生在 layouts.tsx、page.tsx、ServerComponents、generateMetadata、generateStaticParams 中 fetch 发起的请求；</li><li>不会发生在 RouteHandlers，因为他不是 React 组件树的一部分。</li></ul></li><li>对于 fetch 不适用的场景，可以使用 ReactCache；</li><li>缓存只存在于渲染 React 组件树的过程中，因此无需进行缓存验证。</li></ul><h3 id=datacache>DataCache</h3><p>DataCache 可以在服务器请求和部署之间保留数据。</p><p>在浏览器中，缓存选项用来控制<strong>请求如何与浏览器的 HTTP 缓存</strong>进行交互；在 Next.js 中，缓存选项用来控制<strong>服务器请求如何与服务器的数据缓存</strong>进行交互。</p><p>默认情况下，fetch 发起的数据请求不会被缓存，可以通过 cache 和 revalidate 来配置缓存。</p><p><img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fdata-cache.png&amp;w=3840&amp;q=75" loading=lazy></p><ul><li>当使用 fetch 发起一个带有 &lsquo;force-cache&rsquo; 的请求时，Next.js 会去检查缓存；</li><li>如果没有命中缓存，就发起请求，并将请求结果保存到缓存中；</li><li>当使用 fetch 发起一个带有 &rsquo;no-store&rsquo; 的请求时，Next.js 会略过缓存检查，直接发起请求；</li><li>DataCache 和 RequestMemoization 不冲突：<ul><li>RequestMemoization 侧重于合并相同的请求，减少渲染过程中的重复的请求；</li><li>DataCache 侧重于对请求结果的缓存，缓存时间可配置（revalidate）。</li></ul></li></ul><p>DataCache 的缓存可以配置缓存验证：</p><ul><li>基于时间的验证，比如每隔 60 秒验证一次，适用于时效性没那么重要的数据；</li><li>按需验证，比如，表单提交（发生了数据的修改）之后，需要对缓存进行验证。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// 每小时验证一次（如果一个小时之后，接口又被请求了的话）
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>fetch</span><span class=p>(</span><span class=s1>&#39;https://...&#39;</span><span class=p>,</span> <span class=p>{</span> <span class=nx>next</span><span class=o>:</span> <span class=p>{</span> <span class=nx>revalidate</span>: <span class=kt>3600</span> <span class=p>}</span> <span class=p>});</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Ftime-based-revalidation.png&amp;w=3840&amp;q=75" loading=lazy></p><ul><li>请求第一次被发起时，没有缓存；从外部拿到数据后，缓存起来；</li><li>在配置的验证时间<strong>内</strong>，再次发起请求时，使用命中的缓存数据；</li><li>在配置的验证时间<strong>外</strong>，再次发起请求时：<ul><li>仍将过期的缓存返回；</li><li>在后台对过期缓存进行验证，更新缓存；</li><li>如果缓存验证失败，接着使用过期的缓存。</li></ul></li></ul><p>按需验证需要使用 revalidatePath/revalidateTag 进行缓存验证。</p><p><img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fon-demand-revalidation.png&amp;w=3840&amp;q=75" loading=lazy></p><ul><li>请求第一次被发起时，没有缓存；从外部拿到数据后，缓存起来；</li><li>当触发按需验证时，相应缓存会被清空；而基于时间的验证不会清空缓存；</li><li>下次请求时，没有命中缓存，数据会从外部重新获取。</li></ul><h3 id=fullroutecache-与-routercache>FullRouteCache 与 RouterCache</h3><p>Next.js 在服务端执行渲染时，通过路由配置和 Suspense，将渲染工作拆分为更小的单元；每个渲染单元会分成两部进行渲染：</p><ul><li>React 将 ServerComponents 转化为 ReactServerComponentPayload，这种数据结构是为流式传输优化过的二进制数据；</li><li>Next.js 将 ReactServerComponentPayload 和 ClientComponent 在服务端渲染为 HTML。</li></ul><p>这意味着，不必等待所有内容都渲染完毕之后，才能进行缓存或响应请求。相反，我们可以在渲染单元完成时流式传输渲染结果。</p><p><img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Ffull-route-cache.png&amp;w=3840&amp;q=75" loading=lazy></p><p>默认情况下，Next.js 会缓存路由对应的 ReactServerComponentPayload 和 HTML，这一步发生在打包部署/缓存验证阶段。</p><p>在客户端，ReactServerComponentPayload 会按照路由配置缓存在内存里，用来提升路由导航/预加载的体验；这部分缓存被称为 RouterCache。</p><p>在后续的路由导航过程中，Next.js 会检查 RouterCache 中的 ReactServerComponentPayload，如果命中缓存，则不会对服务器发起请求。</p><p>有两种方式可以使 FullRouteCache 失效：</p><ul><li>对 DataCache 进行缓存验证，这会反过来重新渲染服务端组件，使得 RouterCache 失效；</li><li>重新部署，在重新部署的过程中，FullRouteCache 会被清空并重建。</li></ul><p>如果不想使用 FullRouteCache，每次都动态渲染，可以使用一下方法：</p><ul><li>使用 dynamic = &lsquo;force-dynamic&rsquo; 或 revalidate = 0 路由配置，这将完全跳过 DataCache 和 FullRouteCache，RouterCache 仍存在于客户端；</li><li>不使用 DataCache；</li><li>使用动态函数。</li></ul><p>RouterCache 保存在客户端内存中；记录着访问过的路由缓存和预读取的可能被访问的路由；这样能后加快路由之间导航的性能：</p><ul><li>layout 会被缓存，在路由导航之间复用；</li><li>loading，也会被缓存，在路由导航之间复用；</li><li>page 默认不会被缓存，但是会在浏览器前进后退的过程中被复用；</li><li>RouterCache 会在页面刷新之后被清除；</li><li>默认的 prefetch，不会对动态页面生成 RouterCache，对静态页面有 5 分钟的缓存；</li><li>prefetch={ true }，动态和静态页面都会有 5 分钟的缓存时间。</li></ul><p>有两种方式可以使 RouterCache 失效：</p><ul><li>在 ServerAction 中，执行缓存按需验证；</li><li>在 ServerAction 中，对 cookie 进行修改；</li><li>调用 router.refresh。</li></ul><h3 id=缓存之间的影响>缓存之间的影响</h3><ul><li>对 DataCache 进行缓存验证，会使得 FullRouteCache 失效；</li><li>FullRouteCache 的失效，不会对 DataCache 造成影响；</li><li>对缓存进行按需验证，会使得 DataCache 和 RouterCache 失效；</li><li>在 RouteHandler 中，对 DataCache 进行缓存验证，不会使 RouterCache 失效。</li></ul></section><footer class=article-footer><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/next.js-%E4%B9%8B-datafetching/><div class=article-image><img src=/img/cover/react.png loading=lazy data-key data-hash=/img/cover/react.png></div><div class=article-details><h2 class=article-title>Next.js 之 DataFetching</h2></div></a></article><article class=has-image><a href=/p/next.js-%E4%B9%8B-approuter/><div class=article-image><img src=/img/cover/react.png loading=lazy data-key data-hash=/img/cover/react.png></div><div class=article-details><h2 class=article-title>Next.js 之 AppRouter</h2></div></a></article><article class=has-image><a href=/p/%E8%BD%AC%E6%88%91%E5%9C%A8%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E4%B8%AD%E5%8F%AF%E4%BB%A5%E9%9A%8F%E4%BE%BF%E5%86%99%E6%9C%80%E9%80%9A%E4%BF%97%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%E5%8E%9F%E7%90%86/><div class=article-image><img src=/img/cover/react.png loading=lazy data-key data-hash=/img/cover/react.png></div><div class=article-details><h2 class=article-title>「转」我在函数组件中可以随便写，最通俗异步组件原理</h2></div></a></article><article class=has-image><a href=/p/react-%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8B/><div class=article-image><img src=/img/cover/react.png loading=lazy data-key data-hash=/img/cover/react.png></div><div class=article-details><h2 class=article-title>React 复习笔记（下）</h2></div></a></article><article class=has-image><a href=/p/react-%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%AD/><div class=article-image><img src=/img/cover/react.png loading=lazy data-key data-hash=/img/cover/react.png></div><div class=article-details><h2 class=article-title>React 复习笔记（中）</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
+2017 -
+2024
+<a href=https://github.com/ElementRef target=_blank>馬腊咯稽</a></section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a>, Deploy by Actions<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.13.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#servercomponents>ServerComponents</a></li><li><a href=#clientcomponents>ClientComponents</a></li><li><a href=#servercomponents-与-clientcomponents-混合模式>ServerComponents 与 ClientComponents 混合模式</a><ol><li><a href=#在-clientcomponents-中渲染-servercomponents>在 ClientComponents 中渲染 ServerComponents</a></li></ol></li><li><a href=#部分预渲染>部分预渲染</a></li><li><a href=#缓存>缓存</a><ol><li><a href=#requestmemoization>RequestMemoization</a></li><li><a href=#datacache>DataCache</a></li><li><a href=#fullroutecache-与-routercache>FullRouteCache 与 RouterCache</a></li><li><a href=#缓存之间的影响>缓存之间的影响</a></li></ol></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script></body></html>
