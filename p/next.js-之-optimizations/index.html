@@ -11,7 +11,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
 <span>深色</span></li></div></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/next.js-%E4%B9%8B-optimizations/><img src=/img/cover/react.png loading=lazy alt="Next.js 之 Optimizations"></a></div><div class=article-details><header class=article-category><a href=/categories/react/>React</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/next.js-%E4%B9%8B-optimizations/>Next.js 之 Optimizations</a></h2><h3 class=article-subtitle>最近想用回 React，CRA 已经不再被推荐使用了</h3></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
 <time class=article-time--published>Aug 19, 2024</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
-<time class=article-time--reading>阅读时长：6 分钟</time></div></footer></div></header><section class=article-content><h2 id=ltimagesgt>&lt;Images/></h2><p>ImageComponent 扩展了原生 &lt;img/> 标签：</p><ul><li>为每种设备提供适合大小的图片（srcset），提供了 WebP 和 AVIF 格式；</li><li>在图片加载时，自动阻止内容偏移，优化 CLP；</li><li>图片懒加载，并提供模糊占位；</li><li>按需调整图片大小。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+<time class=article-time--reading>阅读时长：7 分钟</time></div></footer></div></header><section class=article-content><h2 id=ltimagesgt>&lt;Images/></h2><p>ImageComponent 扩展了原生 &lt;img/> 标签：</p><ul><li>为每种设备提供适合大小的图片（srcset），提供了 WebP 和 AVIF 格式；</li><li>在图片加载时，自动阻止内容偏移，优化 CLP；</li><li>图片懒加载，并提供模糊占位；</li><li>按需调整图片大小。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -667,7 +667,101 @@
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl>  <span class=p>});</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+</span></span></code></pre></td></tr></table></div></div><h2 id=静态导出>静态导出</h2><p>默认情况下，在执行 next build 的时候，Next.js 会为每个路由生成静态的 HTML 文件；这种方式可以减少客户端运行的代码，提升加载速度。</p><p>如果没有使用动态数据的场景，可以通过配置，使得 Next.js 渲染出一个静态网站/SPA：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// next.config.js
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>const</span> <span class=nx>nextConfig</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>output</span><span class=o>:</span> <span class=s1>&#39;export&#39;</span> <span class=c1>// 在老版本中，使用 next export 替换
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=c1>// distDir: &#39;dist&#39;, // 可选，将输出目录改为 dist
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=nx>nextConfig</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p>这种模式下：</p><ul><li>ServerComponents 内部的异步请求，会在打包阶段进行；组件运行结果会被保存为静态 HTML，在页面初始渲染或路由跳转时使用；</li><li>next/image 需要借助自定义 loader 完成图片优化；loader 内部定义了如何从远程获取图片资源；</li><li>RouteHandlers 会在打包时运行，并且仅支持 GET 方法；</li><li>ClientComponents 在打包阶段被预渲染为 HTML；需要在客户端渲染完成之后才能访问浏览器 API。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/page.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>export</span> <span class=k>default</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>Page() {</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 异步请求会在打包阶段运行
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kr>const</span> <span class=nx>res</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>fetch</span><span class=p>(</span><span class=s1>&#39;https://api.example.com/...&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>data</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>res</span><span class=p>.</span><span class=nx>json</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>&lt;</span><span class=nt>main</span><span class=p>&gt;...&lt;/</span><span class=nt>main</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=c1>// next.config.js
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>const</span> <span class=nx>nextConfig</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>output</span><span class=o>:</span> <span class=s1>&#39;export&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 需要自定义 loader
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>images</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>loader</span><span class=o>:</span> <span class=s1>&#39;custom&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>loaderFile</span><span class=o>:</span> <span class=s1>&#39;./my-loader.ts&#39;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=nx>nextConfig</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=c1>// my-loader.ts
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>cloudinaryLoader</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>src</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>width</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>quality</span>
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>src</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>width</span>: <span class=kt>number</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>quality?</span>: <span class=kt>number</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>params</span> <span class=o>=</span> <span class=p>[</span><span class=s1>&#39;f_auto&#39;</span><span class=p>,</span> <span class=s1>&#39;c_limit&#39;</span><span class=p>,</span> <span class=sb>`w_</span><span class=si>${</span><span class=nx>width</span><span class=si>}</span><span class=sb>`</span><span class=p>,</span> <span class=sb>`q_</span><span class=si>${</span><span class=nx>quality</span> <span class=o>||</span> <span class=s1>&#39;auto&#39;</span><span class=si>}</span><span class=sb>`</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=sb>`https://res.cloudinary.com/demo/image/upload/</span><span class=si>${</span><span class=nx>params</span><span class=p>.</span><span class=nx>join</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;,&#39;</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span><span class=si>}${</span><span class=nx>src</span><span class=si>}</span><span class=sb>`</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=c1>// ClientComponents 需要在渲染完成之后才能访问浏览器 API
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=p>{</span> <span class=nx>useEffect</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;react&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>ClientComponent() {</span>
+</span></span><span class=line><span class=cl>  <span class=nx>useEffect</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 这里才能访问 window
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=nb>window</span><span class=p>.</span><span class=nx>innerHeight</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span> <span class=p>[])</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>...;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=认证>认证</h2><p>一个完整的前后端系统一定包含这三个东西：</p><ul><li>认证，验证用户是不是他自己，需要一些凭证来证明，比如说：用户名和密码；</li><li>会话，用来在请求中，追踪用户认证状态；</li><li>权限，规定了用户所能访问到的数据范围。</li></ul><p><img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fauthentication-overview.png&amp;w=3840&amp;q=75" loading=lazy></p></section><footer class=article-footer><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
 <span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/next.js-%E4%B9%8B-datafetching/><div class=article-image><img src=/img/cover/react.png loading=lazy data-key data-hash=/img/cover/react.png></div><div class=article-details><h2 class=article-title>Next.js 之 DataFetching</h2></div></a></article><article class=has-image><a href=/p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/><div class=article-image><img src=/img/cover/react.png loading=lazy data-key data-hash=/img/cover/react.png></div><div class=article-details><h2 class=article-title>Next.js 之 Rendering 与 Caching</h2></div></a></article><article class=has-image><a href=/p/next.js-%E4%B9%8B-approuter/><div class=article-image><img src=/img/cover/react.png loading=lazy data-key data-hash=/img/cover/react.png></div><div class=article-details><h2 class=article-title>Next.js 之 AppRouter</h2></div></a></article><article class=has-image><a href=/p/%E8%BD%AC%E6%88%91%E5%9C%A8%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E4%B8%AD%E5%8F%AF%E4%BB%A5%E9%9A%8F%E4%BE%BF%E5%86%99%E6%9C%80%E9%80%9A%E4%BF%97%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%E5%8E%9F%E7%90%86/><div class=article-image><img src=/img/cover/react.png loading=lazy data-key data-hash=/img/cover/react.png></div><div class=article-details><h2 class=article-title>「转」我在函数组件中可以随便写，最通俗异步组件原理</h2></div></a></article><article class=has-image><a href=/p/react-%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8B/><div class=article-image><img src=/img/cover/react.png loading=lazy data-key data-hash=/img/cover/react.png></div><div class=article-details><h2 class=article-title>React 复习笔记（下）</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
 2017 -
 2024
@@ -675,4 +769,4 @@
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
 <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#ltimagesgt>&lt;Images/></a></li><li><a href=#ltscriptgt>&lt;Script/></a></li><li><a href=#nextfont>next/font</a></li><li><a href=#metadata>Metadata</a><ol><li><a href=#staticmetadata>StaticMetadata</a></li><li><a href=#dynamicmetadata>DynamicMetadata</a></li><li><a href=#defaultmetadata>DefaultMetadata</a></li></ol></li><li><a href=#懒加载>懒加载</a></li><li><a href=#性能检测>性能检测</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script></body></html>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#ltimagesgt>&lt;Images/></a></li><li><a href=#ltscriptgt>&lt;Script/></a></li><li><a href=#nextfont>next/font</a></li><li><a href=#metadata>Metadata</a><ol><li><a href=#staticmetadata>StaticMetadata</a></li><li><a href=#dynamicmetadata>DynamicMetadata</a></li><li><a href=#defaultmetadata>DefaultMetadata</a></li></ol></li><li><a href=#懒加载>懒加载</a></li><li><a href=#性能检测>性能检测</a></li><li><a href=#静态导出>静态导出</a></li><li><a href=#认证>认证</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script></body></html>
