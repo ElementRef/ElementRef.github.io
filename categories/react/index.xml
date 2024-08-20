@@ -876,7 +876,13 @@ generateMetadata
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;ul>
-&lt;li>StaticMetadata 和 DynamicMetadata 仅支持 ServerComponents；&lt;/li>
+&lt;li>StaticMetadata 和 DynamicMetadata 仅支持 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+；&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/functions/generate-metadata"
 target="_blank" rel="noopener"
@@ -896,7 +902,7 @@ target="_blank" rel="noopener"
 fetch
 &lt;/a>
 会有 RequestMemoization 优化；&lt;/li>
-&lt;li>为了让 &amp;lt;head/&amp;gt; &lt;a class="link"
+&lt;li>为了让 &amp;lt;head/&amp;gt; 最先被传至客户端，&lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/functions/generate-metadata"
 target="_blank" rel="noopener"
 >
@@ -917,7 +923,19 @@ generateMetadata
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h2 id="懒加载">懒加载&lt;/h2>
-&lt;p>懒加载仅适用于 ClientComponents；因为默认情况下，ServerComponents 会自动被基于路由的 CodeSplit 进行分割。&lt;/p>
+&lt;p>懒加载仅适用于 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+；因为默认情况下，&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+会自动被基于路由的 CodeSplit 进行分割。&lt;/p>
 &lt;p>Next.js 将 React.lazy 和 Suspense 封装成了 next/dynamic：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -1119,10 +1137,28 @@ sendBeacon
 &lt;/div>
 &lt;/div>&lt;p>这种模式下：&lt;/p>
 &lt;ul>
-&lt;li>ServerComponents 内部的异步请求，会在打包阶段进行；组件运行结果会被保存为静态 HTML，在页面初始渲染或路由跳转时使用；&lt;/li>
+&lt;li>&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+内部的异步请求，会在打包阶段进行；组件运行结果会被保存为静态 HTML，在页面初始渲染或路由跳转时使用；&lt;/li>
 &lt;li>next/image 需要借助自定义 loader 完成图片优化；loader 内部定义了如何从远程获取图片资源；&lt;/li>
-&lt;li>RouteHandlers 会在打包时运行，并且仅支持 GET 方法；&lt;/li>
-&lt;li>ClientComponents 在打包阶段被预渲染为 HTML；需要在客户端渲染完成之后才能访问浏览器 API。&lt;/li>
+&lt;li>&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/routing/route-handlers"
+target="_blank" rel="noopener"
+>
+RouteHandlers
+&lt;/a>
+会在打包时运行，并且仅支持 GET 方法；&lt;/li>
+&lt;li>&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+在打包阶段被预渲染为 HTML；需要在客户端渲染完成之后才能访问浏览器 API。&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -1247,7 +1283,25 @@ target="_blank" rel="noopener"
 >
 fetch
 &lt;/a>
-支持数据缓存和缓存验证功能；可以用在 ServerComponents、RouteHandlers、ServerActions 中：&lt;/p>
+支持数据缓存和缓存验证功能；可以用在 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+、&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/routing/route-handlers"
+target="_blank" rel="noopener"
+>
+RouteHandlers
+&lt;/a>
+、&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+中：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -1325,7 +1379,7 @@ page.tsx
 href="https://nextjs.org/docs/app/building-your-application/caching#request-memoization"
 target="_blank" rel="noopener"
 >
-Request Memoization
+RequestMemoization
 &lt;/a>
 。&lt;/p>
 &lt;p>在 Next.js 15 中，&lt;a class="link"
@@ -1390,7 +1444,25 @@ target="_blank" rel="noopener"
 >
 mongodb
 &lt;/a>
-等）可以直接用在 ServerComponents、RouteHandlers、ServerActions 中：&lt;/p>
+等）可以直接用在 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+、&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/routing/route-handlers"
+target="_blank" rel="noopener"
+>
+RouteHandlers
+&lt;/a>
+、&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+中：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -1452,7 +1524,13 @@ mongodb
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h2 id="数据请求库">数据请求库&lt;/h2>
-&lt;p>在 ClientComponents 中可以使用例如 &lt;a class="link"
+&lt;p>在 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+中可以使用例如 &lt;a class="link"
 href="https://swr.vercel.app"
 target="_blank" rel="noopener"
 >
@@ -1483,8 +1561,14 @@ ReactQuery
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h2 id="routerhandlers">RouterHandlers&lt;/h2>
-&lt;p>可以使用 Next.js 提供的 RouterHandlers 完成数据请求（做一层转发），避免敏感数据泄露：&lt;/p>
+&lt;/div>&lt;h2 id="routehandlers">RouteHandlers&lt;/h2>
+&lt;p>可以使用 Next.js 提供的 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/routing/route-handlers"
+target="_blank" rel="noopener"
+>
+RouteHandlers
+&lt;/a>
+完成数据请求（做一层转发），避免敏感数据泄露：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -1511,7 +1595,19 @@ ReactQuery
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>一般 ServerComponents 不需要调用 RouterHandlers，因为他可以直接在服务端完成数据请求。&lt;/p>
+&lt;/div>&lt;p>一般 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+不需要调用 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/routing/route-handlers"
+target="_blank" rel="noopener"
+>
+RouteHandlers
+&lt;/a>
+，因为他可以直接在服务端完成数据请求。&lt;/p>
 &lt;h2 id="并行请求与顺序请求">并行请求与顺序请求&lt;/h2>
 &lt;p>&lt;img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fsequential-parallel-data-fetching.png&amp;amp;w=3840&amp;amp;q=75"
 loading="lazy"
@@ -1681,7 +1777,19 @@ target="_blank" rel="noopener"
 >
 revalidateTag
 &lt;/a>
-来完成按需验证；这两个 API 适用于 RouteHandlers 和 ServerActions 中（这不就是 ReactQuery 做的事情吗？）。&lt;/p>
+来完成按需验证；这两个 API 适用于 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/routing/route-handlers"
+target="_blank" rel="noopener"
+>
+RouteHandlers
+&lt;/a>
+和 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+中（这不就是 ReactQuery 做的事情吗？）。&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -1720,8 +1828,32 @@ revalidateTag
 &lt;/div>
 &lt;/div>&lt;p>如果数据验证过程中出错，那么缓存不会被更新；在下一次请求中，会重新进行缓存验证。&lt;/p>
 &lt;h2 id="serveractions">ServerActions&lt;/h2>
-&lt;p>ServerActions 是一个在服务器上执行的异步函数，可以在 ServerComponents 和 ClientComponents 中调用；用来处理表单提交和数据修改逻辑；使用 &amp;lsquo;use server&amp;rsquo; 声明。&lt;/p>
-&lt;p>在 ServerComponents 中使用：&lt;/p>
+&lt;p>&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+是一个在服务器上执行的异步函数，可以在 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+和 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+中调用；用来处理表单提交和数据修改逻辑；使用 &amp;lsquo;use server&amp;rsquo; 声明。&lt;/p>
+&lt;p>在 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+中使用：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -1737,7 +1869,7 @@ revalidateTag
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// app/page.tsx
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">Page() {&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 这是一个 ServerAction
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 这是一个 ServerActions
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">create() {&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;use server&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// ...
@@ -1746,7 +1878,19 @@ revalidateTag
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>在 ClientComponents 中使用，需要将 ServerAction 单独提出来：&lt;/p>
+&lt;/div>&lt;p>在 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+中使用，需要将 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+单独提出来：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -1763,7 +1907,7 @@ revalidateTag
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// app/actions.ts
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="s1">&amp;#39;use server&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 这是一个 ServerAction
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 这是一个 ServerActions
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">create() {&lt;/span>&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// app/ui/button.tsx
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;use client&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
@@ -1773,7 +1917,19 @@ revalidateTag
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>可以将 ServerAction 作为 props 传入 ClientComponents：&lt;/p>
+&lt;/div>&lt;p>可以将 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+作为 props 传入 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -1803,9 +1959,27 @@ revalidateTag
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;ul>
-&lt;li>ServerActions 可以直接绑定在 form 表单（React 对 form 做了扩展）的 action 属性上，并且在表单提交时，不会刷新页面；&lt;/li>
-&lt;li>ServerActions 可以绑定在事件处理器、useEffect、任何表单元素（例如 button）上；&lt;/li>
-&lt;li>ServerActions 从 &lt;a class="link"
+&lt;li>&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+可以直接绑定在 form 表单（React 对 form 做了扩展）的 action 属性上，并且在表单提交时，不会刷新页面；&lt;/li>
+&lt;li>&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+可以绑定在事件处理器、useEffect、任何表单元素（例如 button）上；&lt;/li>
+&lt;li>&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+从 &lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/file-conventions/layout"
 target="_blank" rel="noopener"
 >
@@ -1818,17 +1992,41 @@ target="_blank" rel="noopener"
 page.tsx
 &lt;/a>
 中继承路由配置；&lt;/li>
-&lt;li>ServerActions 集成了 Next.js 的缓存和缓存验证机制；&lt;/li>
-&lt;li>ServerActions 的入/出参必须可以被&lt;a class="link"
+&lt;li>&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+集成了 Next.js 的缓存和缓存验证机制；&lt;/li>
+&lt;li>&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+的入/出参必须可以被&lt;a class="link"
 href="https://zh-hans.react.dev/reference/rsc/use-server#serializable-parameters-and-return-values"
 target="_blank" rel="noopener"
 >
 序列化
 &lt;/a>
 ；&lt;/li>
-&lt;li>ServerActions 仅支持 POST 方法。&lt;/li>
+&lt;li>&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+仅支持 POST 方法。&lt;/li>
 &lt;/ul>
-&lt;p>绑定在 form 上的 ServerActions 可以接收到 FormData 对象：&lt;/p>
+&lt;p>绑定在 form 上的 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+可以接收到 FormData 对象：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -1861,7 +2059,13 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>通过 bind 使 ServerActions 接收额外的参数：&lt;/p>
+&lt;/div>&lt;p>通过 bind 使 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+接收额外的参数：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -1949,7 +2153,13 @@ requestSubmit
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>这会触发最近的祖先 form 表单的提交，触发绑定的 ServerActions。&lt;/p>
+&lt;/div>&lt;p>这会触发最近的祖先 form 表单的提交，触发绑定的 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+。&lt;/p>
 &lt;p>服务器端表单验证：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -2001,7 +2211,13 @@ target="_blank" rel="noopener"
 >
 useFormState
 &lt;/a>
-接收 ServerActions 的验证结果：&lt;/p>
+接收 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+的验证结果：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -2170,7 +2386,13 @@ useFormState
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>ServerActions 可以直接抛出错误，错误会被 &lt;a class="link"
+&lt;/div>&lt;p>&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+可以直接抛出错误，错误会被 &lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/file-conventions/error"
 target="_blank" rel="noopener"
 >
@@ -2201,7 +2423,13 @@ error.tsx
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>在 ServerActions 中，可以直接调用 &lt;a class="link"
+&lt;/div>&lt;p>在 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+中，可以直接调用 &lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/functions/redirect"
 target="_blank" rel="noopener"
 >
@@ -2240,7 +2468,13 @@ redirect
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>在 ServerActions 中，可以直接操作 cookie：&lt;/p>
+&lt;/div>&lt;p>在 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+中，可以直接操作 cookie：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -2270,7 +2504,13 @@ redirect
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div></description></item><item><title>Next.js 之 Rendering 与 Caching · Stay Hungry · Stay Foolish</title><link>https://ElementRef.github.io/p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/</link><pubDate>Sun, 18 Aug 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/react.png" alt="Next.js 之 Rendering 与 Caching" />&lt;h2 id="servercomponents">ServerComponents&lt;/h2>
-&lt;p>ServerComponents 会在服务端进渲染并被缓存；Next.js 一般会基于路由进行 CodeSplit，结合 Suspense 将渲染工作尽可能的分割成更小的单位：&lt;/p>
+&lt;p>&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+会在服务端进渲染并被缓存；Next.js 一般会基于路由进行 CodeSplit，结合 Suspense 将渲染工作尽可能的分割成更小的单位：&lt;/p>
 &lt;ul>
 &lt;li>服务端组件可以直接在服务端获取数据，可以减少来自客户端的 HTTP 数据请求；&lt;/li>
 &lt;li>服务端渲染可以减少敏感数据在客户端暴露的风险；&lt;/li>
@@ -2279,12 +2519,42 @@ redirect
 &lt;li>SEO 友好；&lt;/li>
 &lt;li>流式渲染。&lt;/li>
 &lt;/ul>
-&lt;p>在服务端渲染时，Next.js 会将 ServerComponents 渲染成 ReactServerComponentPayload，然后构建出 HTML；在客户端渲染出 HTML 之后，ReactServerComponentPayload 会被用来和客户端 Fiber 进行 Hydrate，为页面添加交互。&lt;/p>
+&lt;p>在服务端渲染时，Next.js 会将 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+渲染成 ReactServerComponentPayload，然后构建出 HTML；在客户端渲染出 HTML 之后，ReactServerComponentPayload 会被用来和客户端 Fiber 进行 Hydrate，为页面添加交互。&lt;/p>
 &lt;p>ReactServerComponentPayload 可以被理解为服务端的组件树，是一种二进制数据，他包含了：&lt;/p>
 &lt;ul>
-&lt;li>ServerComponents 的渲染结果；&lt;/li>
-&lt;li>ClientComponents 占位符以及相关文件；&lt;/li>
-&lt;li>ServerComponents 到 ClientComponents 的 props。&lt;/li>
+&lt;li>&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+的渲染结果；&lt;/li>
+&lt;li>&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+占位符以及相关文件；&lt;/li>
+&lt;li>&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+到 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+的 props。&lt;/li>
 &lt;/ul>
 &lt;p>Next.js 服务端渲染分为三种：&lt;/p>
 &lt;ul>
@@ -2324,13 +2594,31 @@ searchParams
 &lt;li>流式渲染：借助 Suspense，将渲染工作拆分，先渲染 FallbackUI，当组件渲染好了之后，替换 FallbackUI。&lt;/li>
 &lt;/ul>
 &lt;h2 id="clientcomponents">ClientComponents&lt;/h2>
-&lt;p>ClientComponents 一般用在有复杂交互的场景下，使用 &amp;lsquo;use client&amp;rsquo; 标识，没有标识而使用浏览器 API 或者 Hook，会导致出错。&lt;/p>
+&lt;p>&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+一般用在有复杂交互的场景下，使用 &amp;lsquo;use client&amp;rsquo; 标识，没有标识而使用浏览器 API 或者 Hook，会导致出错。&lt;/p>
 &lt;p>&lt;img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fuse-client-directive.png&amp;amp;w=3840&amp;amp;q=75"
 loading="lazy"
 >
 &lt;/p>
 &lt;p>但不必在所有的地方都使用 &amp;lsquo;use client&amp;rsquo; 标识；被导入 &amp;lsquo;use client&amp;rsquo; 标识的文件的模块都会运行在客户端。&lt;/p>
-&lt;p>为了提升首屏渲染性能，在页面初次加载时，Client 和 ServerComponents 都会在服务端被渲染为 HTML，然后再 Hydrate，为页面添加交互；在后续页面导航的时候，ClientComponents 会在浏览器里被 JS 渲染，不会有相应的 HTML。&lt;/p>
+&lt;p>为了提升首屏渲染性能，在页面初次加载时，Client 和 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+都会在服务端被渲染为 HTML，然后再 Hydrate，为页面添加交互；在后续页面导航的时候，&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+会在浏览器里被 JS 渲染，不会有相应的 HTML。&lt;/p>
 &lt;h2 id="servercomponents-与-clientcomponents-混合模式">ServerComponents 与 ClientComponents 混合模式&lt;/h2>
 &lt;p>&lt;img src="https://ElementRef.github.io/p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/composition-patterns.png"
 width="1288"
@@ -2369,7 +2657,13 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>API_KEY 是一个只能在服务端访问的私有变量（没有以 NEXT_PUBLIC 作为前缀）；为了不泄漏敏感信息，即使 getData 被导入客户端，在客户端也会调用失败。&lt;/p>
-&lt;p>可以安装 server-only，并在代码中导入；这样如果 ClientComponents 导入了 getData，会在打包阶段将错误抛出，避免错误发生在生产环境。&lt;/p>
+&lt;p>可以安装 server-only，并在代码中导入；这样如果 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+导入了 getData，会在打包阶段将错误抛出，避免错误发生在生产环境。&lt;/p>
 &lt;p>相应的，还有 client-only。&lt;/p>
 &lt;p>如果要使用 ReactContext 怎么办？大部分 Context 会在根组件导入，而 Context 只能在客户端运行：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -2463,7 +2757,43 @@ loading="lazy"
 &lt;/div>
 &lt;/div>&lt;p>为了充分利用服务端渲染的优势，最好将交互逻辑尽可能的与静态数据做分离，降低客户端代码体积。&lt;/p>
 &lt;h3 id="在-clientcomponents-中渲染-servercomponents">在 ClientComponents 中渲染 ServerComponents&lt;/h3>
-&lt;p>ClientComponents 的渲染工作晚于 ServerComponents，所以不能将 ServerComponents 直接导入到 ClientComponents 中；但是可以通过 props，将 ServerComponents 传给 ClientComponents。&lt;/p>
+&lt;p>&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+的渲染工作晚于 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+，所以不能将 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+直接导入到 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+中；但是可以通过 props，将 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+传给 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+。&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -2644,7 +2974,7 @@ loading="lazy"
 &lt;ul>
 &lt;li>RequestMemoization，合并&lt;strong>当前路由渲染中&lt;/strong>遇到的&lt;strong>相同&lt;/strong>的请求，并将请求结果缓存；路由渲染完成，清空缓存；&lt;/li>
 &lt;li>DataCache，持久缓存，不止存在于当前路由的渲染过程中，侧重于对结果的缓存；&lt;/li>
-&lt;li>FullRouteCache，持久缓存，保存在与服务端，对 ReactServerComponentPayload 和 HTML 的缓存，提升服务端渲染性能；&lt;/li>
+&lt;li>FullRouteCache，持久缓存，保存在服务端，对 ReactServerComponentPayload 和 HTML 的缓存，提升服务端渲染性能；&lt;/li>
 &lt;li>RouterCache，保存在客户端的，对 ReactServerComponentPayload 的缓存，用来提升导航性能。&lt;/li>
 &lt;/ul>
 &lt;p>下图列出了&lt;strong>默认&lt;/strong>的缓存行为：&lt;/p>
@@ -2696,7 +3026,13 @@ target="_blank" rel="noopener"
 >
 page.tsx
 &lt;/a>
-、ServerComponents、&lt;a class="link"
+、&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+、&lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/functions/generate-metadata"
 target="_blank" rel="noopener"
 >
@@ -2715,7 +3051,13 @@ target="_blank" rel="noopener"
 fetch
 &lt;/a>
 发起的请求；&lt;/li>
-&lt;li>不会发生在 RouteHandlers，因为他不是 React 组件树的一部分。&lt;/li>
+&lt;li>不会发生在 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/routing/route-handlers"
+target="_blank" rel="noopener"
+>
+RouteHandlers
+&lt;/a>
+，因为他不是 React 组件树的一部分。&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>对于 &lt;a class="link"
@@ -2732,7 +3074,7 @@ fetch
 &lt;p>在浏览器中，缓存选项用来控制&lt;strong>请求如何与浏览器的 HTTP 缓存&lt;/strong>进行交互；在 Next.js 中，缓存选项用来控制&lt;strong>服务器请求如何与服务器的数据缓存&lt;/strong>进行交互：&lt;/p>
 &lt;ul>
 &lt;li>对于不可变的静态文件，头部 Cache-Control 会被设置为 &amp;lsquo;public, max-age=31536000, immutable&amp;rsquo;；并且这些文件在打包过程中，文件名会带上自己的 hash，所以可以被永久缓存，而不用担心超长的缓存时间带来的副作用；&lt;/li>
-&lt;li>对于配置了 revalidate 的资源，头部 Cache-Control 会被设置为 &amp;lsquo;max-age: &amp;lt;revalidateValue&amp;gt;, stale-while-revalidate&amp;rsquo;；确保缓存会在合适的时间失效；&lt;/li>
+&lt;li>对于配置了 revalidate 的资源，头部 Cache-Control 会被设置为 &amp;lsquo;max-age=&amp;lt;revalidateValue&amp;gt;, stale-while-revalidate&amp;rsquo;；确保缓存会在合适的时间失效；&lt;/li>
 &lt;li>对于动态渲染的内容，头部 Cache-Control 会被设置为 &amp;lsquo;private, no-cache, no-store, max-age=0, must-revalidate&amp;rsquo;；阻止内容被缓存。&lt;/li>
 &lt;/ul>
 &lt;p>默认情况下，&lt;a class="link"
@@ -2764,7 +3106,7 @@ fetch
 发起一个带有 &amp;rsquo;no-store&amp;rsquo; 的请求时，Next.js 会略过缓存检查，直接发起请求；&lt;/li>
 &lt;li>DataCache 和 RequestMemoization 不冲突：
 &lt;ul>
-&lt;li>RequestMemoization 侧重于合并相同的请求，减少渲染过程中的重复的请求；&lt;/li>
+&lt;li>RequestMemoization 侧重于合并相同的请求，减少渲染过程中的重复的请求带来的性能浪费；&lt;/li>
 &lt;li>DataCache 侧重于对请求结果的缓存，缓存时间可配置（revalidate）。&lt;/li>
 &lt;/ul>
 &lt;/li>
@@ -2824,8 +3166,20 @@ loading="lazy"
 &lt;h3 id="fullroutecache-与-routercache">FullRouteCache 与 RouterCache&lt;/h3>
 &lt;p>Next.js 在服务端执行渲染时，通过路由配置和 Suspense，将渲染工作拆分为更小的单元；每个渲染单元会分成两部进行渲染：&lt;/p>
 &lt;ul>
-&lt;li>React 将 ServerComponents 转化为 ReactServerComponentPayload，这种数据结构是为流式传输优化过的二进制数据；&lt;/li>
-&lt;li>Next.js 将 ReactServerComponentPayload 和 ClientComponent 在服务端渲染为 HTML。&lt;/li>
+&lt;li>React 将 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+转化为 ReactServerComponentPayload，这种数据结构是为流式传输优化过的二进制；&lt;/li>
+&lt;li>Next.js 将 ReactServerComponentPayload 和 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+在服务端渲染为 HTML。&lt;/li>
 &lt;/ul>
 &lt;p>这意味着，不必等待所有内容都渲染完毕之后，才能进行缓存或响应请求。相反，我们可以在渲染单元完成时流式传输渲染结果。&lt;/p>
 &lt;p>&lt;img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Ffull-route-cache.png&amp;amp;w=3840&amp;amp;q=75"
@@ -2849,7 +3203,7 @@ loading="lazy"
 &lt;p>RouterCache 保存在客户端内存中；记录着访问过的路由缓存和预读取的可能被访问的路由；这样能后加快路由之间导航的性能：&lt;/p>
 &lt;ul>
 &lt;li>layout 会被缓存，在路由导航之间复用；&lt;/li>
-&lt;li>loading，也会被缓存，在路由导航之间复用；&lt;/li>
+&lt;li>loading 也会被缓存，在路由导航之间复用；&lt;/li>
 &lt;li>page 默认不会被缓存，但是会在浏览器前进后退的过程中被复用；&lt;/li>
 &lt;li>RouterCache 会在页面刷新之后被清除；&lt;/li>
 &lt;li>默认的 prefetch，不会对动态页面生成 RouterCache，对静态页面有 5 分钟的缓存；&lt;/li>
@@ -2857,8 +3211,20 @@ loading="lazy"
 &lt;/ul>
 &lt;p>有两种方式可以使 RouterCache 失效：&lt;/p>
 &lt;ul>
-&lt;li>在 ServerAction 中，执行缓存按需验证；&lt;/li>
-&lt;li>在 ServerAction 中，对 cookie 进行修改；&lt;/li>
+&lt;li>在 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+中，执行缓存按需验证；&lt;/li>
+&lt;li>在 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+中，对 cookie 进行修改；&lt;/li>
 &lt;li>调用 router.refresh。&lt;/li>
 &lt;/ul>
 &lt;h3 id="缓存之间的影响">缓存之间的影响&lt;/h3>
@@ -2866,10 +3232,22 @@ loading="lazy"
 &lt;li>对 DataCache 进行缓存验证，会使得 FullRouteCache 失效；&lt;/li>
 &lt;li>FullRouteCache 的失效，不会对 DataCache 造成影响；&lt;/li>
 &lt;li>对缓存进行按需验证，会使得 DataCache 和 RouterCache 失效；&lt;/li>
-&lt;li>在 RouteHandler 中，对 DataCache 进行缓存验证，不会使 RouterCache 失效。&lt;/li>
+&lt;li>在 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/routing/route-handlers"
+target="_blank" rel="noopener"
+>
+RouteHandlers
+&lt;/a>
+中，对 DataCache 进行缓存验证，不会使 RouterCache 失效。&lt;/li>
 &lt;/ul></description></item><item><title>Next.js 之 AppRouter · Stay Hungry · Stay Foolish</title><link>https://ElementRef.github.io/p/next.js-%E4%B9%8B-approuter/</link><pubDate>Thu, 15 Aug 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/next.js-%E4%B9%8B-approuter/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/react.png" alt="Next.js 之 AppRouter" />&lt;p>Next.js 有两种路由，官网上是这样说的：&lt;/p>
 &lt;ul>
-&lt;li>AppRouter 是一种新的路由模式，可以支持 React 最新的功能，例如：ServerComponents、StreamingWithSuspense 和 ServerActions；&lt;/li>
+&lt;li>AppRouter 是一种新的路由模式，可以支持 React 最新的功能，例如：ServerComponents、StreamingWithSuspense 和 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+；&lt;/li>
 &lt;li>PagesRouter 是原来 Next.js 的路由模式，用来兼容已有的旧的 Next.js 应用；&lt;/li>
 &lt;li>两者同时存在时，AppRouter 优先级更高。&lt;/li>
 &lt;/ul>
@@ -2897,7 +3275,7 @@ loading.tsx
 &lt;/li>
 &lt;li>router.prefetch() 被调用时。&lt;/li>
 &lt;/ul>
-&lt;p>AppRouter 存在于项目的 app 目录下，目录下的组件默认为 &lt;a class="link"
+&lt;p>AppRouter 存在于项目的 app 目录下，该目录下的组件默认为 &lt;a class="link"
 href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
 target="_blank" rel="noopener"
 >
@@ -2928,7 +3306,19 @@ target="_blank" rel="noopener"
 >
 page.tsx
 &lt;/a>
-，当前路由的 UI；默认为 ServerComponents，可被置为 ClientComponent；&lt;/li>
+，当前路由的 UI；默认为 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+，可被置为 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+；&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/file-conventions/loading"
 target="_blank" rel="noopener"
@@ -2949,8 +3339,20 @@ target="_blank" rel="noopener"
 >
 error.tsx
 &lt;/a>
-，当前路由及其子路由共享的 ErrorUI (ErrorBoundary)，必须为 ClientComponent；&lt;/li>
-&lt;li>global-error.tsx，全局 ErrorUI，必须为 ClientComponent；&lt;/li>
+，当前路由及其子路由共享的 ErrorUI (ErrorBoundary)，必须为 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+；&lt;/li>
+&lt;li>global-error.tsx，全局 ErrorUI，必须为 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+；&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/file-conventions/route"
 target="_blank" rel="noopener"
@@ -3010,7 +3412,13 @@ target="_blank" rel="noopener"
 >
 layout.tsx
 &lt;/a>
-可以接收动态路由参数，但是不能接收 searchParams；因为 Layout 在路由导航的过程中是共享的，不会重新渲染；同样的，也获取不到 pathname；因为默认情况下，Layout 是一个 ServerComponents，在客户端路由导航的过程中不会重新渲染&lt;/p>
+可以接收动态路由参数，但是不能接收 searchParams；因为 Layout 在路由导航的过程中是共享的，不会重新渲染；同样的，也获取不到 pathname；因为默认情况下，Layout 是一个 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+，在客户端路由导航的过程中不会重新渲染&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -3087,7 +3495,7 @@ page.tsx
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">h1&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>&lt;span class="nx">My&lt;/span> &lt;span class="nx">Page&lt;/span>&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">h1&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * params:
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * params
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * app/shop/[slug]/page.js /shop/1 { slug: &amp;#39;1&amp;#39; }
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * app/shop/[category]/[item]/page.js /shop/1/2 { category: &amp;#39;1&amp;#39;, item: &amp;#39;2&amp;#39; }
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * app/shop/[...slug]/page.js /shop/1/2 { slug: [&amp;#39;1&amp;#39;, &amp;#39;2&amp;#39;] }
@@ -3098,7 +3506,13 @@ page.tsx
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>[route.ts] 相当于 PageRouter 下的 APIRoute：&lt;/p>
+&lt;/div>&lt;p>&lt;a class="link"
+href="https://nextjs.org/docs/app/api-reference/file-conventions/route"
+target="_blank" rel="noopener"
+>
+route.ts
+&lt;/a>
+相当于 PageRoute 下的 APIRoute：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -3117,7 +3531,7 @@ page.tsx
 &lt;/span>&lt;span class="lnt">14
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 当前，context 只包含 params 着一个参数
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 当前，context 只包含 params 一个参数
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">GET&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">request&lt;/span>: &lt;span class="kt">Request&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">context&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">params&lt;/span>: &lt;span class="kt">Params&lt;/span> &lt;span class="p">})&lt;/span> &lt;span class="p">{}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">HEAD&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">request&lt;/span>: &lt;span class="kt">Request&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">context&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">params&lt;/span>: &lt;span class="kt">Params&lt;/span> &lt;span class="p">})&lt;/span> &lt;span class="p">{}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">POST&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">request&lt;/span>: &lt;span class="kt">Request&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">context&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">params&lt;/span>: &lt;span class="kt">Params&lt;/span> &lt;span class="p">})&lt;/span> &lt;span class="p">{}&lt;/span>
@@ -3175,7 +3589,7 @@ layout.tsx
 &lt;li>改变 Next.js 默认行为：
 &lt;ul>
 &lt;li>LayoutUI 中的 SuspenseFallbackUI 只会在初始化渲染的时候展示，后续路由导航都不会再展示；&lt;/li>
-&lt;li>TemplateUI 中的 SuspenseFallbackUI 会在每次路由导航时展示。&lt;/li>
+&lt;li>TemplateUI 中的 SuspenseFallbackUI 会在每次路由导航时都展示。&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
@@ -3205,14 +3619,26 @@ target="_blank" rel="noopener"
 >
 useRouter
 &lt;/a>
-Hook，用在 ClientComponent；准确的说，所有 Hook 都只能运行在客户端；&lt;/li>
+Hook，用在 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+；准确的说，所有 Hook 都只能运行在客户端；&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/functions/redirect"
 target="_blank" rel="noopener"
 >
 redirect
 &lt;/a>
-函数，用在 ServerComponents：
+函数，用在 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+：
 &lt;ul>
 &lt;li>组件中 &lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/functions/redirect"
@@ -3221,7 +3647,13 @@ target="_blank" rel="noopener"
 redirect
 &lt;/a>
 会返回 307 状态码；&lt;/li>
-&lt;li>ServerAction 中 &lt;a class="link"
+&lt;li>&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+中 &lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/functions/redirect"
 target="_blank" rel="noopener"
 >
@@ -3235,7 +3667,13 @@ target="_blank" rel="noopener"
 redirect
 &lt;/a>
 内部是通过 throwError 实现的，所以不能用 try&amp;hellip;catch 中调用，否则失效；&lt;/li>
-&lt;li>在 ClientComponent &lt;strong>渲染过程&lt;/strong>中也可调用，在事件处理回调中不行；&lt;/li>
+&lt;li>在 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+&lt;strong>渲染过程&lt;/strong>中也可调用，在事件处理回调中不行；&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/functions/redirect"
 target="_blank" rel="noopener"
@@ -3400,7 +3838,13 @@ loading="lazy"
 &lt;p>Next.js 只会增量渲染 analytics，而不是整个页面。&lt;/p>
 &lt;h2 id="错误处理">错误处理&lt;/h2>
 &lt;ul>
-&lt;li>预期错误：一般发生在 ServerActions 中，例如参数验证失败、失败请求等，避免用 try&amp;hellip;catch 处理；例如前文提到的 &lt;a class="link"
+&lt;li>预期错误：一般发生在 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+中，例如参数验证失败、失败请求等，避免用 try&amp;hellip;catch 处理；例如前文提到的 &lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/functions/redirect"
 target="_blank" rel="noopener"
 >
@@ -3554,7 +3998,7 @@ loading="lazy"
 &lt;li>服务端渲染出 HTMLString；&lt;/li>
 &lt;li>HTML、静态资源和 JS 被发往客户端；&lt;/li>
 &lt;li>用户看到不可交互的静态页面；&lt;/li>
-&lt;li>React 通过 hydrates，为页面添加交互。&lt;/li>
+&lt;li>React 通过 Hydrates，为页面添加交互。&lt;/li>
 &lt;/ol>
 &lt;p>服务器必须拿到数据，才能开始渲染工作；所以，这个过程时&lt;strong>阻塞&lt;/strong>的，为了让用户尽快看到页面，而不用等到所有数据都准备好；Next.js 引入了 Streaming。&lt;/p>
 &lt;p>&lt;img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Floading-overview.png&amp;amp;w=3840&amp;amp;q=75"
@@ -3619,9 +4063,27 @@ target="_blank" rel="noopener"
 >
 generateMetadata
 &lt;/a>
-部分的数据获取完成之后，再 StreamingUI。&lt;/p>
+数据获取完成之后，再 StreamingUI。&lt;/p>
 &lt;h2 id="重定向">重定向&lt;/h2>
-&lt;p>在 ServerComponents、ServerActions、RouteHandlers 中使用 &lt;a class="link"
+&lt;p>在 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+、&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+、&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/routing/route-handlers"
+target="_blank" rel="noopener"
+>
+RouteHandlers
+&lt;/a>
+中使用 &lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/functions/redirect"
 target="_blank" rel="noopener"
 >
@@ -3635,7 +4097,13 @@ target="_blank" rel="noopener"
 >
 redirect
 &lt;/a>
-默认使用 307 状态码（暂时重定向）；在 ServerActions 中使用 303 状态码（重定向到结果页面）；&lt;/li>
+默认使用 307 状态码（暂时重定向）；在 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+中使用 303 状态码（重定向到结果页面）；&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/functions/redirect"
 target="_blank" rel="noopener"
@@ -3692,7 +4160,25 @@ target="_blank" rel="noopener"
 >
 permanentRedirect
 &lt;/a>
-函数用来处理&lt;strong>永久重定向&lt;/strong>，同样只能在 ServerComponents、ServerActions、RouteHandlers 中使用。当修改用户名导致用户页面被映射到新的 URL 时使用：&lt;/p>
+函数用来处理&lt;strong>永久重定向&lt;/strong>，同样只能在 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+、&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+target="_blank" rel="noopener"
+>
+ServerActions
+&lt;/a>
+、&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/routing/route-handlers"
+target="_blank" rel="noopener"
+>
+RouteHandlers
+&lt;/a>
+中使用。当修改用户名导致用户页面被映射到新的 URL 时使用：&lt;/p>
 &lt;ul>
 &lt;li>&lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/functions/permanentRedirect"
@@ -3931,20 +4417,7 @@ loading="lazy"
 &lt;ul>
 &lt;li>路由组可以随意命名，因为不会影响 URL；&lt;/li>
 &lt;li>(marketing)/about/page.tsx 和 (shop)/about/page.tsx 会导致路由冲突而报错；&lt;/li>
-&lt;li>如果移除了根部的 &lt;a class="link"
-href="https://nextjs.org/docs/app/api-reference/file-conventions/layout"
-target="_blank" rel="noopener"
->
-layout.tsx
-&lt;/a>
-，记得在任一路由组中配置 &lt;a class="link"
-href="https://nextjs.org/docs/app/api-reference/file-conventions/page"
-target="_blank" rel="noopener"
->
-page.tsx
-&lt;/a>
-，否则根路径会没有对应的页面；&lt;/li>
-&lt;li>跨路由组跳转，会导致整个页面刷新；例如 /cart【app/(shop)/layout.js】2 /blog【app/(marketing)/layout.js】。&lt;/li>
+&lt;li>跨路由组跳转，会导致整个页面刷新。&lt;/li>
 &lt;/ul>
 &lt;h2 id="私有目录">私有目录&lt;/h2>
 &lt;p>目录名称以_开头的目录，当前及子目录都不会被解析为路由；它主要用来在路由逻辑中分离 UI 逻辑（没什么用）。&lt;/p>
@@ -4004,7 +4477,7 @@ loading="lazy"
 &lt;li>/shop/a/b 对应的 props.params 为 { slug: [&amp;lsquo;a&amp;rsquo;, &amp;lsquo;b&amp;rsquo;] }；&lt;/li>
 &lt;li>/shop/a/b/c 对应的 props.params 为 { slug: [&amp;lsquo;a&amp;rsquo;, &amp;lsquo;b&amp;rsquo;, &amp;lsquo;c&amp;rsquo;] }。&lt;/li>
 &lt;/ul>
-&lt;p>[[&amp;hellip;folder]] 比 [&amp;hellip;folder] 更进一步，对于 app/shop/[[&amp;hellip;slug]]/page.tsx 他可以匹配 /shop/clothes、/shop/clothes/tops、/shop/clothes/tops/t-shirts：&lt;/p>
+&lt;p>[[&amp;hellip;folder]] 比 [&amp;hellip;folder] 更进一步，对于 app/shop/[[&amp;hellip;slug]]/page.tsx 他可以匹配 /shop、/shop/clothes、/shop/clothes/tops、/shop/clothes/tops/t-shirts：&lt;/p>
 &lt;ul>
 &lt;li>/shop 对应的 props.params 为 {}；&lt;/li>
 &lt;li>/shop/a 对应的 props.params 为 { slug: [&amp;lsquo;a&amp;rsquo;] }；&lt;/li>
@@ -4067,7 +4540,7 @@ target="_blank" rel="noopener"
 >
 default.tsx
 &lt;/a>
-作为 FallbackUI，否则，会渲染 404。&lt;/p>
+作为 FallbackUI（插槽的默认内容），否则，会渲染 404。&lt;/p>
 &lt;p>&lt;img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fparallel-routes-unmatched-routes.png&amp;amp;w=3840&amp;amp;q=75"
 loading="lazy"
 >
@@ -4146,13 +4619,19 @@ loading="lazy"
 loading="lazy"
 >
 &lt;/p>
-&lt;p>只有在 app/**/ 目录下的才叫做路由处理程序；但是 &lt;a class="link"
+&lt;p>只有在 app/**/ 目录下的才叫做路由处理程序；&lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/file-conventions/route"
 target="_blank" rel="noopener"
 >
 route.ts
 &lt;/a>
-同级目录下不能有 page.ts；他支持 GET、POST、PUT、PATCH、DELETE、HEAD 和 OPTIONS 请求，如果遇到不支持的请求方式，会返回 405 状态码（Method Not Allowed）。&lt;/p>
+同级目录下不能有 &lt;a class="link"
+href="https://nextjs.org/docs/app/api-reference/file-conventions/page"
+target="_blank" rel="noopener"
+>
+page.tsx
+&lt;/a>
+；他支持 GET、POST、PUT、PATCH、DELETE、HEAD 和 OPTIONS 请求，如果遇到不支持的请求方式，会返回 405 状态码（Method Not Allowed）。&lt;/p>
 &lt;p>&lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/file-conventions/layout"
 target="_blank" rel="noopener"
@@ -4238,16 +4717,16 @@ route.ts
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">dynamic&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;auto&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 控制当访问的不是使用 generateStaticParams 生成的动态 params 时会发生什么
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 控制，当访问的不是使用 generateStaticParams 生成的动态 params 时会发生什么
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * true 默认值，当 params 不在 generateStaticParams 的返回值里时，按需生成内容
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * false 当 params 不在 generateStaticParams 的返回值里时，返回 404
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">dynamicParams&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 控制对缓存的验证行为，不会覆盖 fetch 里单独配置的 revalidate 值
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * false 默认值，强制无限期缓存，相当于 revalidate: Infinity
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 0 每次请求都动态渲染
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * number 验证时间间隔，单位：秒；不能设置为 3*2，因为 revalidate 需要可以被静态分析
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * false，默认值，强制无限期缓存，相当于 revalidate: Infinity
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 0，每次请求都动态渲染
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * number，验证时间间隔，单位：秒；不能设置为 3*2，因为 revalidate 需要可以被静态分析
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">revalidate&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
@@ -4272,7 +4751,13 @@ route.ts
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">maxDuration&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>路由处理程序的优先级相对较低，他不直接参与页面渲染；也不参与客户端页面导航；要注意与 pages.tsx 的冲突：&lt;/p>
+&lt;/div>&lt;p>路由处理程序的优先级相对较低，他不直接参与页面渲染；也不参与客户端页面导航；要注意与 &lt;a class="link"
+href="https://nextjs.org/docs/app/api-reference/file-conventions/page"
+target="_blank" rel="noopener"
+>
+page.tsx
+&lt;/a>
+的冲突：&lt;/p>
 &lt;ul>
 &lt;li>app/page.tsx 与 app/route.ts 会发生冲突；&lt;/li>
 &lt;li>app/page.tsx 与 app/api/route.ts 不会发生冲突；&lt;/li>
@@ -4679,20 +5164,20 @@ target="_blank" rel="noopener"
 Edge
 &lt;/a>
 运行时，暂不支持 Node。&lt;/p>
-&lt;p>中间件会在请求完成之前运行一些逻辑，通过中间件，可以完成重定向、头部信息修改等；他的运行时机发生在缓存和路由匹配之前。&lt;/p>
+&lt;p>中间件会在请求完成之前运行一些逻辑；通过中间件，可以完成重定向、头部信息修改等；他的运行时机发生在缓存和路由匹配之前。&lt;/p>
 &lt;p>使用场景：&lt;/p>
 &lt;ul>
-&lt;li>用户验证与授权，确认用户身份，在访问资源之前，验证是否有响应权限；&lt;/li>
+&lt;li>用户验证与授权，确认用户身份，在访问资源之前，验证是否有对应权限；&lt;/li>
 &lt;li>服务器端重定向；&lt;/li>
 &lt;li>路径重写；&lt;/li>
-&lt;li>机器人检测：阻止机器人访问；&lt;/li>
+&lt;li>机器人检测，阻止机器人访问；&lt;/li>
 &lt;li>日志或数据分析；&lt;/li>
 &lt;li>功能标记。&lt;/li>
 &lt;/ul>
 &lt;p>不适用场景：&lt;/p>
 &lt;ul>
 &lt;li>复杂数据的获取和修改；&lt;/li>
-&lt;li>负责的计算任务，会导致页面加载延迟；&lt;/li>
+&lt;li>复杂计算任务，会导致页面加载延迟；&lt;/li>
 &lt;li>会话管理；&lt;/li>
 &lt;li>数据库操作。&lt;/li>
 &lt;/ul>
@@ -4792,7 +5277,7 @@ middleware.ts
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果没有，那么每个路由都会调用中间件
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 需要是常量，需要可以被静态分析
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 需要是常量，可以被静态分析
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 必须以 / 开头
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">config&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
