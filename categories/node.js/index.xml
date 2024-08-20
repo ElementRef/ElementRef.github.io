@@ -42,7 +42,7 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>Node 对 C/C++模块调用 process.dlopen 进行加载和执行，dlopen 方法在 Windows 和 *nix 平台下分别有不同的实现，通过 libuv 兼容层进行了封装。&lt;/p>
+&lt;/div>&lt;p>Node 对 C/C++ 模块调用 process.dlopen 进行加载和执行，dlopen 方法在 Windows 和 *nix 平台下分别有不同的实现，通过 libuv 兼容层进行了封装。&lt;/p>
 &lt;p>Node 在对 JSON 文件编译时，利用 fs 模块同步读取 JSON 文件的内容之后，调用 JSON.parse 得到对象，然后将它赋给模块对象的 exports，以供外部调用。&lt;/p>
 &lt;p>Node 最初采用的是 CommonJS 规范，从 v13.2 版本开始，Node 默认支持 ES6 模块；ES6 的模块规范和 CommonJS 规范的差别在于：&lt;/p>
 &lt;ol>
