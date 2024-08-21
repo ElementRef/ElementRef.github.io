@@ -11,7 +11,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
 <span>深色</span></li></div></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/typescript-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93%E4%B8%80/><img src=/img/cover/typescript.png loading=lazy alt="TypeScript 复习总结（一）"></a></div><div class=article-details><header class=article-category><a href=/categories/ts/>TS</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/typescript-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93%E4%B8%80/>TypeScript 复习总结（一）</a></h2><h3 class=article-subtitle>虽说已经写过 TS 项目了，但写的代码还是很初级，我太南了</h3></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
 <time class=article-time--published>Feb 08, 2020</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
-<time class=article-time--reading>阅读时长：10 分钟</time></div></footer></div></header><section class=article-content><h2 id=原始类型一booleannumberstringvoidundefinednullsymbolbigint>原始类型（一）：boolean、number、string、void、undefined、null、symbol、bigint</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+<time class=article-time--reading>阅读时长：12 分钟</time></div></footer></div></header><section class=article-content><h2 id=原始类型一booleannumberstringvoidundefinednullsymbolbigint>原始类型（一）：boolean、number、string、void、undefined、null、symbol、bigint</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -1399,7 +1399,315 @@
 </span></span><span class=line><span class=cl><span class=nx>f</span><span class=p>(</span><span class=nb>Math</span><span class=p>.</span><span class=nx>random</span><span class=p>()</span> <span class=o>&lt;</span> <span class=mf>0.5</span><span class=p>);</span> <span class=c1>// string | number
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>f</span><span class=p>(</span><span class=kc>false</span><span class=p>);</span> <span class=c1>// number
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>f</span><span class=p>(</span><span class=kc>true</span><span class=p>);</span> <span class=c1>// string
-</span></span></span></code></pre></td></tr></table></div></div><h2 id=参考>参考</h2><ul><li><a class=link href=https://jkchao.github.io/typescript-book-chinese target=_blank rel=noopener>深入理解 TypeScript</a></li></ul></section><footer class=article-footer><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+</span></span></span></code></pre></td></tr></table></div></div><h2 id=类型工具>类型工具</h2><p><a class=link href=https://www.typescriptlang.org/docs/handbook/utility-types.html#awaitedtype target=_blank rel=noopener>Awaited<type></a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>type</span> <span class=nx>A</span> <span class=o>=</span> <span class=nx>MyAwaited</span><span class=p>&lt;</span><span class=nt>Promise</span><span class=err>&lt;</span><span class=na>string</span><span class=p>&gt;</span><span class=o>&gt;</span><span class=p>;</span> <span class=c1>// type A = string
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>B</span> <span class=o>=</span> <span class=nx>MyAwaited</span><span class=p>&lt;</span><span class=nt>Promise</span><span class=err>&lt;</span><span class=na>Promise</span><span class=err>&lt;</span><span class=na>number</span><span class=p>&gt;</span><span class=o>&gt;&gt;</span><span class=p>;</span> <span class=c1>// type B = number
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>C</span> <span class=o>=</span> <span class=nx>MyAwaited</span><span class=p>&lt;</span><span class=nt>boolean</span> <span class=err>|</span> <span class=na>Promise</span><span class=err>&lt;</span><span class=na>number</span><span class=p>&gt;</span><span class=o>&gt;</span><span class=p>;</span> <span class=c1>// type C = number | boolean
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>MyAwaited</span><span class=p>&lt;</span><span class=nt>T</span><span class=p>&gt;</span> <span class=o>=</span> <span class=nx>T</span> <span class=kr>extends</span> <span class=nx>Promise</span><span class=p>&lt;</span><span class=nt>infer</span> <span class=na>U</span><span class=p>&gt;</span> <span class=o>?</span> <span class=nx>MyAwaited</span><span class=p>&lt;</span><span class=nt>U</span><span class=p>&gt;</span> <span class=o>:</span> <span class=nx>T</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p><a class=link href=https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype target=_blank rel=noopener>Partial<type></a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>interface</span> <span class=nx>Todo</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>title</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>description</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>PartialTodo</span> <span class=o>=</span> <span class=nx>MyPartial</span><span class=p>&lt;</span><span class=nt>Todo</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>MyPartial</span><span class=p>&lt;</span><span class=nt>T</span><span class=p>&gt;</span> <span class=o>=</span> <span class=nx>T</span> <span class=kr>extends</span> <span class=kt>object</span>
+</span></span><span class=line><span class=cl>  <span class=o>?</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=p>[</span><span class=nx>P</span> <span class=k>in</span> <span class=k>keyof</span> <span class=nx>T</span><span class=p>]</span><span class=o>?:</span> <span class=nx>T</span><span class=p>[</span><span class=nx>P</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=o>:</span> <span class=kt>never</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p><a class=link href=https://www.typescriptlang.org/docs/handbook/utility-types.html#requiredtype target=_blank rel=noopener>Required<type></a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>interface</span> <span class=nx>Todo</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>title?</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>description?</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>RequiredTodo</span> <span class=o>=</span> <span class=nx>MyRequired</span><span class=p>&lt;</span><span class=nt>Todo</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>MyRequired</span><span class=p>&lt;</span><span class=nt>T</span><span class=p>&gt;</span> <span class=o>=</span> <span class=nx>T</span> <span class=kr>extends</span> <span class=kt>object</span>
+</span></span><span class=line><span class=cl>  <span class=o>?</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=p>[</span><span class=nx>P</span> <span class=k>in</span> <span class=k>keyof</span> <span class=nx>T</span><span class=p>]</span><span class=o>-?:</span> <span class=nx>T</span><span class=p>[</span><span class=nx>P</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=o>:</span> <span class=kt>never</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p><a class=link href=https://www.typescriptlang.org/docs/handbook/utility-types.html#readonlytype target=_blank rel=noopener>Readonly<type></a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>interface</span> <span class=nx>Todo</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>title</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>description</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>ReadonlyTodo</span> <span class=o>=</span> <span class=nx>MyReadonly</span><span class=p>&lt;</span><span class=nt>Todo</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>MyReadonly</span><span class=p>&lt;</span><span class=nt>T</span><span class=p>&gt;</span> <span class=o>=</span> <span class=nx>T</span> <span class=kr>extends</span> <span class=kt>object</span>
+</span></span><span class=line><span class=cl>  <span class=o>?</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=kr>readonly</span> <span class=p>[</span><span class=nx>P</span> <span class=k>in</span> <span class=k>keyof</span> <span class=nx>T</span><span class=p>]</span><span class=o>:</span> <span class=nx>T</span><span class=p>[</span><span class=nx>P</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=o>:</span> <span class=kt>never</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p><a class=link href=https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type target=_blank rel=noopener>Record&lt;Keys, Type></a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>type</span> <span class=nx>CatName</span> <span class=o>=</span> <span class=s1>&#39;miffy&#39;</span> <span class=o>|</span> <span class=s1>&#39;boris&#39;</span> <span class=o>|</span> <span class=s1>&#39;mordred&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>interface</span> <span class=nx>CatInfo</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>age</span>: <span class=kt>number</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>breed</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>Cat</span> <span class=o>=</span> <span class=nx>MyRecord</span><span class=p>&lt;</span><span class=nt>CatName</span><span class=err>,</span> <span class=na>CatInfo</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>MyRecord</span><span class=p>&lt;</span><span class=nt>K</span> <span class=na>extends</span> <span class=na>keyof</span> <span class=na>any</span><span class=err>,</span> <span class=na>U</span><span class=p>&gt;</span> <span class=o>=</span> <span class=p>{</span> <span class=p>[</span><span class=nx>P</span> <span class=k>in</span> <span class=nx>K</span><span class=p>]</span><span class=o>:</span> <span class=nx>U</span> <span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><p><a class=link href=https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys target=_blank rel=noopener>Pick&lt;Type, Keys></a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>interface</span> <span class=nx>Todo</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>completed</span>: <span class=kt>boolean</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>description</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>title</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>TodoPreview</span> <span class=o>=</span> <span class=nx>MyPick</span><span class=p>&lt;</span><span class=nt>Todo</span><span class=err>,</span> <span class=err>&#39;</span><span class=na>title</span><span class=err>&#39;</span> <span class=err>|</span> <span class=err>&#39;</span><span class=na>completed</span><span class=err>&#39;</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>MyPick</span><span class=p>&lt;</span><span class=nt>T</span><span class=err>,</span> <span class=na>K</span> <span class=na>extends</span> <span class=na>keyof</span> <span class=na>T</span><span class=p>&gt;</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=p>[</span><span class=nx>P</span> <span class=k>in</span> <span class=nx>K</span><span class=p>]</span><span class=o>:</span> <span class=nx>T</span><span class=p>[</span><span class=nx>P</span><span class=p>];</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><p><a class=link href=https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys target=_blank rel=noopener>Omit&lt;Type, Keys></a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>interface</span> <span class=nx>Todo</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>title</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>description</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>completed</span>: <span class=kt>boolean</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>createdAt</span>: <span class=kt>number</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>TodoPreview</span> <span class=o>=</span> <span class=nx>MyOmit</span><span class=p>&lt;</span><span class=nt>Todo</span><span class=err>,</span> <span class=err>&#39;</span><span class=na>description</span><span class=err>&#39;</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>MyOmit</span><span class=p>&lt;</span><span class=nt>T</span><span class=err>,</span> <span class=na>K</span> <span class=na>extends</span> <span class=na>keyof</span> <span class=na>any</span><span class=p>&gt;</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=p>[</span><span class=nx>P</span> <span class=k>in</span> <span class=nx>Exclude</span><span class=p>&lt;</span><span class=nt>keyof</span> <span class=na>T</span><span class=err>,</span> <span class=na>K</span><span class=p>&gt;]</span><span class=o>:</span> <span class=nx>T</span><span class=p>[</span><span class=nx>P</span><span class=p>];</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><p><a class=link href=https://www.typescriptlang.org/docs/handbook/utility-types.html#excludeuniontype-excludedmembers target=_blank rel=noopener>Exclude&lt;UnionType, ExcludedMembers></a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>type</span> <span class=nx>T0</span> <span class=o>=</span> <span class=nx>MyExclude</span><span class=o>&lt;</span><span class=s1>&#39;a&#39;</span> <span class=o>|</span> <span class=s1>&#39;b&#39;</span> <span class=o>|</span> <span class=s1>&#39;c&#39;</span><span class=p>,</span> <span class=s1>&#39;a&#39;</span><span class=o>&gt;</span><span class=p>;</span> <span class=c1>// &#34;b&#34; | &#34;c&#34;
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T1</span> <span class=o>=</span> <span class=nx>MyExclude</span><span class=o>&lt;</span><span class=s1>&#39;a&#39;</span> <span class=o>|</span> <span class=s1>&#39;b&#39;</span> <span class=o>|</span> <span class=s1>&#39;c&#39;</span><span class=p>,</span> <span class=s1>&#39;a&#39;</span> <span class=o>|</span> <span class=s1>&#39;b&#39;</span><span class=o>&gt;</span><span class=p>;</span> <span class=c1>// &#34;c&#34;
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T2</span> <span class=o>=</span> <span class=nx>MyExclude</span><span class=p>&lt;</span><span class=nt>string</span> <span class=err>|</span> <span class=na>number</span> <span class=err>|</span> <span class=err>(()</span> <span class=err>=</span><span class=p>&gt;</span> <span class=k>void</span><span class=p>),</span> <span class=nb>Function</span><span class=o>&gt;</span><span class=p>;</span> <span class=c1>// string | number
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>Shape</span> <span class=o>=</span>
+</span></span><span class=line><span class=cl>  <span class=o>|</span> <span class=p>{</span> <span class=nx>kind</span><span class=o>:</span> <span class=s1>&#39;circle&#39;</span><span class=p>;</span> <span class=nx>radius</span>: <span class=kt>number</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=o>|</span> <span class=p>{</span> <span class=nx>kind</span><span class=o>:</span> <span class=s1>&#39;square&#39;</span><span class=p>;</span> <span class=nx>x</span>: <span class=kt>number</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=o>|</span> <span class=p>{</span> <span class=nx>kind</span><span class=o>:</span> <span class=s1>&#39;triangle&#39;</span><span class=p>;</span> <span class=nx>x</span>: <span class=kt>number</span><span class=p>;</span> <span class=nx>y</span>: <span class=kt>number</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>T3</span> <span class=o>=</span> <span class=nx>MyExclude</span><span class=p>&lt;</span><span class=nt>Shape</span><span class=err>,</span> <span class=p>{</span> <span class=na>kind</span><span class=err>:</span> <span class=err>&#39;</span><span class=na>circle</span><span class=err>&#39;</span> <span class=p>}&gt;;</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>MyExclude</span><span class=p>&lt;</span><span class=nt>T</span><span class=err>,</span> <span class=na>U</span><span class=p>&gt;</span> <span class=o>=</span> <span class=nx>T</span> <span class=kr>extends</span> <span class=nx>U</span> <span class=o>?</span> <span class=kt>never</span> <span class=o>:</span> <span class=nx>T</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p><a class=link href=https://www.typescriptlang.org/docs/handbook/utility-types.html#extracttype-union target=_blank rel=noopener>Extract&lt;Type, Union></a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>type</span> <span class=nx>T0</span> <span class=o>=</span> <span class=nx>MyExtract</span><span class=o>&lt;</span><span class=s1>&#39;a&#39;</span> <span class=o>|</span> <span class=s1>&#39;b&#39;</span> <span class=o>|</span> <span class=s1>&#39;c&#39;</span><span class=p>,</span> <span class=s1>&#39;a&#39;</span><span class=o>&gt;</span><span class=p>;</span> <span class=c1>// &#34;a&#34;
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T1</span> <span class=o>=</span> <span class=nx>MyExtract</span><span class=o>&lt;</span><span class=s1>&#39;a&#39;</span> <span class=o>|</span> <span class=s1>&#39;b&#39;</span> <span class=o>|</span> <span class=s1>&#39;c&#39;</span><span class=p>,</span> <span class=s1>&#39;a&#39;</span> <span class=o>|</span> <span class=s1>&#39;b&#39;</span><span class=o>&gt;</span><span class=p>;</span> <span class=c1>// &#34;a&#34; | &#34;b&#34;
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T2</span> <span class=o>=</span> <span class=nx>MyExtract</span><span class=p>&lt;</span><span class=nt>string</span> <span class=err>|</span> <span class=na>number</span> <span class=err>|</span> <span class=err>(()</span> <span class=err>=</span><span class=p>&gt;</span> <span class=k>void</span><span class=p>),</span> <span class=nb>Function</span><span class=o>&gt;</span><span class=p>;</span> <span class=c1>// () =&gt; void
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>Shape</span> <span class=o>=</span>
+</span></span><span class=line><span class=cl>  <span class=o>|</span> <span class=p>{</span> <span class=nx>kind</span><span class=o>:</span> <span class=s1>&#39;circle&#39;</span><span class=p>;</span> <span class=nx>radius</span>: <span class=kt>number</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=o>|</span> <span class=p>{</span> <span class=nx>kind</span><span class=o>:</span> <span class=s1>&#39;square&#39;</span><span class=p>;</span> <span class=nx>x</span>: <span class=kt>number</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=o>|</span> <span class=p>{</span> <span class=nx>kind</span><span class=o>:</span> <span class=s1>&#39;triangle&#39;</span><span class=p>;</span> <span class=nx>x</span>: <span class=kt>number</span><span class=p>;</span> <span class=nx>y</span>: <span class=kt>number</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>T3</span> <span class=o>=</span> <span class=nx>MyExtract</span><span class=p>&lt;</span><span class=nt>Shape</span><span class=err>,</span> <span class=p>{</span> <span class=na>kind</span><span class=err>:</span> <span class=err>&#39;</span><span class=na>circle</span><span class=err>&#39;</span> <span class=p>}&gt;;</span> <span class=c1>// { kind: &#34;circle&#34;; radius: number; }
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>MyExtract</span><span class=p>&lt;</span><span class=nt>T</span><span class=err>,</span> <span class=na>U</span><span class=p>&gt;</span> <span class=o>=</span> <span class=nx>T</span> <span class=kr>extends</span> <span class=nx>U</span> <span class=o>?</span> <span class=nx>T</span> : <span class=kt>never</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p><a class=link href=https://www.typescriptlang.org/docs/handbook/utility-types.html#nonnullabletype target=_blank rel=noopener>NonNullable<type></a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>type</span> <span class=nx>T0</span> <span class=o>=</span> <span class=nx>MyNonNullable</span><span class=p>&lt;</span><span class=nt>string</span> <span class=err>|</span> <span class=na>number</span> <span class=err>|</span> <span class=na>undefined</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>T1</span> <span class=o>=</span> <span class=nx>MyNonNullable</span><span class=p>&lt;</span><span class=nt>string</span><span class=err>[]</span> <span class=err>|</span> <span class=na>null</span> <span class=err>|</span> <span class=na>undefined</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>MyNonNullable</span><span class=p>&lt;</span><span class=nt>T</span><span class=p>&gt;</span> <span class=o>=</span> <span class=nx>T</span> <span class=kr>extends</span> <span class=kc>null</span> <span class=o>|</span> <span class=kc>undefined</span> <span class=o>?</span> <span class=kt>never</span> <span class=o>:</span> <span class=nx>T</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p><a class=link href=https://www.typescriptlang.org/docs/handbook/utility-types.html#parameterstype target=_blank rel=noopener>Parameters<type></a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>type</span> <span class=nx>T0</span> <span class=o>=</span> <span class=nx>MyParameters</span><span class=o>&lt;</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=kt>string</span><span class=o>&gt;</span><span class=p>;</span> <span class=c1>// []
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T1</span> <span class=o>=</span> <span class=nx>MyParameters</span><span class=o>&lt;</span><span class=p>(</span><span class=nx>s</span>: <span class=kt>string</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=k>void</span><span class=o>&gt;</span><span class=p>;</span> <span class=c1>// [s: string]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T2</span> <span class=o>=</span> <span class=nx>MyParameters</span><span class=o>&lt;&lt;</span><span class=nx>T</span><span class=o>&gt;</span><span class=p>(</span><span class=nx>arg</span>: <span class=kt>T</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>T</span><span class=o>&gt;</span><span class=p>;</span> <span class=c1>// [arg: unknown]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>declare</span> <span class=kd>function</span> <span class=nx>f1</span><span class=p>(</span><span class=nx>arg</span><span class=o>:</span> <span class=p>{</span> <span class=nx>a</span>: <span class=kt>number</span><span class=p>;</span> <span class=nx>b</span>: <span class=kt>string</span> <span class=p>})</span><span class=o>:</span> <span class=k>void</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>T3</span> <span class=o>=</span> <span class=nx>MyParameters</span><span class=p>&lt;</span><span class=nt>typeof</span> <span class=na>f1</span><span class=p>&gt;;</span> <span class=c1>// [arg: { a: number;b: string; }]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T4</span> <span class=o>=</span> <span class=nx>MyParameters</span><span class=p>&lt;</span><span class=nt>any</span><span class=p>&gt;;</span> <span class=c1>// unknown[]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T5</span> <span class=o>=</span> <span class=nx>MyParameters</span><span class=p>&lt;</span><span class=nt>never</span><span class=p>&gt;;</span> <span class=c1>// never
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T6</span> <span class=o>=</span> <span class=nx>MyParameters</span><span class=p>&lt;</span><span class=nt>string</span><span class=p>&gt;;</span> <span class=c1>// never
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T7</span> <span class=o>=</span> <span class=nx>MyParameters</span><span class=p>&lt;</span><span class=nt>Function</span><span class=p>&gt;;</span> <span class=c1>// never
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>MyParameters</span><span class=p>&lt;</span><span class=nt>T</span> <span class=na>extends</span> <span class=err>(</span><span class=na>...params</span><span class=err>:</span> <span class=na>any</span><span class=err>)</span> <span class=err>=</span><span class=p>&gt;</span> <span class=kt>any</span><span class=o>&gt;</span> <span class=o>=</span> <span class=nx>T</span> <span class=kr>extends</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=p>...</span><span class=nx>params</span>: <span class=kt>infer</span> <span class=nx>U</span>
+</span></span><span class=line><span class=cl><span class=p>)</span> <span class=o>=&gt;</span> <span class=kt>any</span>
+</span></span><span class=line><span class=cl>  <span class=o>?</span> <span class=nx>U</span>
+</span></span><span class=line><span class=cl>  : <span class=kt>never</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p><a class=link href=https://www.typescriptlang.org/docs/handbook/utility-types.html#constructorparameterstype target=_blank rel=noopener>ConstructorParameters<type></a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>type</span> <span class=nx>T0</span> <span class=o>=</span> <span class=nx>MyConstructorParameters</span><span class=p>&lt;</span><span class=nt>ErrorConstructor</span><span class=p>&gt;;</span> <span class=c1>// [message?: string | undefined]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T1</span> <span class=o>=</span> <span class=nx>MyConstructorParameters</span><span class=p>&lt;</span><span class=nt>FunctionConstructor</span><span class=p>&gt;;</span> <span class=c1>// string[]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T2</span> <span class=o>=</span> <span class=nx>MyConstructorParameters</span><span class=p>&lt;</span><span class=nt>RegExpConstructor</span><span class=p>&gt;;</span> <span class=c1>// [pattern: string | RegExp, flags?: string | undefined]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>class</span> <span class=nx>C</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>constructor</span><span class=p>(</span><span class=nx>a</span>: <span class=kt>number</span><span class=p>,</span> <span class=nx>b</span>: <span class=kt>string</span><span class=p>)</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>T3</span> <span class=o>=</span> <span class=nx>MyConstructorParameters</span><span class=p>&lt;</span><span class=nt>typeof</span> <span class=na>C</span><span class=p>&gt;;</span> <span class=c1>// [a: number, b: string]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T4</span> <span class=o>=</span> <span class=nx>MyConstructorParameters</span><span class=p>&lt;</span><span class=nt>any</span><span class=p>&gt;;</span> <span class=c1>// unknown[]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T5</span> <span class=o>=</span> <span class=nx>MyConstructorParameters</span><span class=p>&lt;</span><span class=nt>Function</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>MyConstructorParameters</span><span class=p>&lt;</span><span class=nt>T</span> <span class=na>extends</span> <span class=na>new</span> <span class=err>(</span><span class=na>...params</span><span class=err>:</span> <span class=na>any</span><span class=err>)</span> <span class=err>=</span><span class=p>&gt;</span> <span class=kt>any</span><span class=o>&gt;</span> <span class=o>=</span>
+</span></span><span class=line><span class=cl>  <span class=nx>T</span> <span class=kr>extends</span> <span class=k>new</span> <span class=p>(...</span><span class=nx>params</span>: <span class=kt>infer</span> <span class=nx>U</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=kt>any</span> <span class=o>?</span> <span class=nx>U</span> : <span class=kt>never</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p><a class=link href=https://www.typescriptlang.org/docs/handbook/utility-types.html#returntypetype target=_blank rel=noopener>ReturnType<type></a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>type</span> <span class=nx>T0</span> <span class=o>=</span> <span class=nx>MyReturnType</span><span class=o>&lt;</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=kt>string</span><span class=o>&gt;</span><span class=p>;</span> <span class=c1>// string
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T1</span> <span class=o>=</span> <span class=nx>MyReturnType</span><span class=o>&lt;</span><span class=p>(</span><span class=nx>s</span>: <span class=kt>string</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=k>void</span><span class=o>&gt;</span><span class=p>;</span> <span class=c1>// void
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T2</span> <span class=o>=</span> <span class=nx>MyReturnType</span><span class=o>&lt;&lt;</span><span class=nx>T</span><span class=o>&gt;</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=nx>T</span><span class=o>&gt;</span><span class=p>;</span> <span class=c1>// unknown
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T3</span> <span class=o>=</span> <span class=nx>MyReturnType</span><span class=o>&lt;&lt;</span><span class=nx>T</span> <span class=kr>extends</span> <span class=nx>U</span><span class=p>,</span> <span class=nx>U</span> <span class=kr>extends</span> <span class=kt>number</span><span class=p>[]</span><span class=o>&gt;</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=nx>T</span><span class=o>&gt;</span><span class=p>;</span> <span class=c1>// number[]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>declare</span> <span class=kd>function</span> <span class=nx>f1</span><span class=p>()</span><span class=o>:</span> <span class=p>{</span> <span class=nx>a</span>: <span class=kt>number</span><span class=p>;</span> <span class=nx>b</span>: <span class=kt>string</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>T4</span> <span class=o>=</span> <span class=nx>MyReturnType</span><span class=p>&lt;</span><span class=nt>typeof</span> <span class=na>f1</span><span class=p>&gt;;</span> <span class=c1>// { a: number; b: string; }
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T5</span> <span class=o>=</span> <span class=nx>MyReturnType</span><span class=p>&lt;</span><span class=nt>any</span><span class=p>&gt;;</span> <span class=c1>// any
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T6</span> <span class=o>=</span> <span class=nx>MyReturnType</span><span class=p>&lt;</span><span class=nt>never</span><span class=p>&gt;;</span> <span class=c1>// never
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T7</span> <span class=o>=</span> <span class=nx>MyReturnType</span><span class=p>&lt;</span><span class=nt>string</span><span class=p>&gt;;</span> <span class=c1>// any
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T8</span> <span class=o>=</span> <span class=nx>MyReturnType</span><span class=p>&lt;</span><span class=nt>Function</span><span class=p>&gt;;</span> <span class=c1>// any
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>MyReturnType</span><span class=p>&lt;</span><span class=nt>T</span> <span class=na>extends</span> <span class=err>(</span><span class=na>...params</span><span class=err>:</span> <span class=na>any</span><span class=err>)</span> <span class=err>=</span><span class=p>&gt;</span> <span class=kt>any</span><span class=o>&gt;</span> <span class=o>=</span> <span class=nx>T</span> <span class=kr>extends</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=p>...</span><span class=nx>params</span>: <span class=kt>any</span>
+</span></span><span class=line><span class=cl><span class=p>)</span> <span class=o>=&gt;</span> <span class=k>infer</span> <span class=nx>U</span>
+</span></span><span class=line><span class=cl>  <span class=o>?</span> <span class=nx>U</span>
+</span></span><span class=line><span class=cl>  : <span class=kt>never</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p><a class=link href=https://www.typescriptlang.org/docs/handbook/utility-types.html#instancetypetype target=_blank rel=noopener>InstanceType<type></a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>class</span> <span class=nx>C</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>x</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>y</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>T0</span> <span class=o>=</span> <span class=nx>MyInstanceType</span><span class=p>&lt;</span><span class=nt>typeof</span> <span class=na>C</span><span class=p>&gt;;</span> <span class=c1>// C
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T1</span> <span class=o>=</span> <span class=nx>MyInstanceType</span><span class=p>&lt;</span><span class=nt>any</span><span class=p>&gt;;</span> <span class=c1>// any
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T2</span> <span class=o>=</span> <span class=nx>MyInstanceType</span><span class=p>&lt;</span><span class=nt>never</span><span class=p>&gt;;</span> <span class=c1>// never
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T3</span> <span class=o>=</span> <span class=nx>MyInstanceType</span><span class=p>&lt;</span><span class=nt>string</span><span class=p>&gt;;</span> <span class=c1>// any
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>T4</span> <span class=o>=</span> <span class=nx>MyInstanceType</span><span class=p>&lt;</span><span class=nt>Function</span><span class=p>&gt;;</span> <span class=c1>// any
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>MyInstanceType</span><span class=p>&lt;</span><span class=nt>T</span> <span class=na>extends</span> <span class=na>abstract</span> <span class=na>new</span> <span class=err>(</span><span class=na>...parama</span><span class=err>:</span> <span class=na>any</span><span class=err>)</span> <span class=err>=</span><span class=p>&gt;</span> <span class=kt>any</span><span class=o>&gt;</span> <span class=o>=</span>
+</span></span><span class=line><span class=cl>  <span class=nx>T</span> <span class=kr>extends</span> <span class=kr>abstract</span> <span class=k>new</span> <span class=p>(...</span><span class=nx>parama</span>: <span class=kt>any</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=k>infer</span> <span class=nx>U</span> <span class=o>?</span> <span class=nx>U</span> : <span class=kt>never</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p><a class=link href=https://www.typescriptlang.org/docs/handbook/utility-types.html#thisparametertypetype target=_blank rel=noopener>ThisParameterType<type></a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kd>function</span> <span class=nx>toHex</span><span class=p>(</span><span class=k>this</span><span class=o>:</span> <span class=nb>Number</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>toString</span><span class=p>(</span><span class=mi>16</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>function</span> <span class=nx>numberToString</span><span class=p>(</span><span class=nx>n</span>: <span class=kt>MyThisParameterType</span><span class=p>&lt;</span><span class=nt>typeof</span> <span class=na>toHex</span><span class=p>&gt;)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>toHex</span><span class=p>.</span><span class=nx>apply</span><span class=p>(</span><span class=nx>n</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>MyThisParameterType</span><span class=p>&lt;</span><span class=nt>T</span> <span class=na>extends</span> <span class=err>(</span><span class=na>...params</span><span class=err>:</span> <span class=na>any</span><span class=err>)</span> <span class=err>=</span><span class=p>&gt;</span> <span class=kt>any</span><span class=o>&gt;</span> <span class=o>=</span> <span class=nx>T</span> <span class=kr>extends</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=k>this</span><span class=o>:</span> <span class=k>infer</span> <span class=nx>U</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>...</span><span class=nx>params</span>: <span class=kt>any</span>
+</span></span><span class=line><span class=cl><span class=p>)</span> <span class=o>=&gt;</span> <span class=kt>any</span>
+</span></span><span class=line><span class=cl>  <span class=o>?</span> <span class=nx>U</span>
+</span></span><span class=line><span class=cl>  : <span class=kt>never</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p><a class=link href=https://www.typescriptlang.org/docs/handbook/utility-types.html#omitthisparametertype target=_blank rel=noopener>OmitThisParameter<type></a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kd>function</span> <span class=nx>toHex</span><span class=p>(</span><span class=k>this</span><span class=o>:</span> <span class=nb>Number</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>toString</span><span class=p>(</span><span class=mi>16</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>fiveToHex</span>: <span class=kt>MyOmitThisParameter</span><span class=p>&lt;</span><span class=nt>typeof</span> <span class=na>toHex</span><span class=p>&gt;</span> <span class=o>=</span> <span class=nx>toHex</span><span class=p>.</span><span class=nx>bind</span><span class=p>(</span><span class=mi>5</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>MyOmitThisParameter</span><span class=p>&lt;</span><span class=nt>T</span> <span class=na>extends</span> <span class=err>(</span><span class=na>...params</span><span class=err>:</span> <span class=na>any</span><span class=err>)</span> <span class=err>=</span><span class=p>&gt;</span> <span class=kt>any</span><span class=o>&gt;</span> <span class=o>=</span> <span class=nx>T</span> <span class=kr>extends</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=k>this</span><span class=o>:</span> <span class=kt>any</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>...</span><span class=nx>params</span>: <span class=kt>infer</span> <span class=nx>P</span>
+</span></span><span class=line><span class=cl><span class=p>)</span> <span class=o>=&gt;</span> <span class=k>infer</span> <span class=nx>R</span>
+</span></span><span class=line><span class=cl>  <span class=o>?</span> <span class=p>(...</span><span class=nx>params</span>: <span class=kt>P</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>R</span>
+</span></span><span class=line><span class=cl>  : <span class=kt>never</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=参考>参考</h2><ul><li><a class=link href=https://jkchao.github.io/typescript-book-chinese target=_blank rel=noopener>深入理解 TypeScript</a></li></ul></section><footer class=article-footer><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
 <span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/ts-%E5%9C%A8-react-%E4%B8%AD%E7%9A%84%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8/><div class=article-image><img src=/img/cover/typescript.png loading=lazy data-key data-hash=/img/cover/typescript.png></div><div class=article-details><h2 class=article-title>TS 在 React 中的简单应用</h2></div></a></article><article class=has-image><a href=/p/typescript-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93%E4%BA%8C/><div class=article-image><img src=/img/cover/typescript.png loading=lazy data-key data-hash=/img/cover/typescript.png></div><div class=article-details><h2 class=article-title>TypeScript 复习总结（二）</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
 2017 -
 2024
@@ -1407,4 +1715,4 @@
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
 <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#原始类型一booleannumberstringvoidundefinednullsymbolbigint>原始类型（一）：boolean、number、string、void、undefined、null、symbol、bigint</a></li><li><a href=#原始类型二anyunknownneverobject数组元组>原始类型（二）：any、unknown、never、object、数组、元组</a></li><li><a href=#枚举类型用于声明一组命名的常数当一个变量有几种可能的取值时可以将它定义为枚举类型本质是-js-对象>枚举类型：用于声明一组命名的常数，当一个变量有几种可能的取值时，可以将它定义为枚举类型，本质是 JS 对象</a></li><li><a href=#接口为类型命名为你的代码或第三方代码定义契约>接口：为类型命名、为你的代码或第三方代码定义契约</a></li><li><a href=#类>类</a></li><li><a href=#函数>函数</a></li><li><a href=#泛型一种特殊的变量只用于表示类型而不是值>泛型：一种特殊的变量，只用于表示类型而不是值</a></li><li><a href=#类型断言与类型守卫>类型断言与类型守卫</a></li><li><a href=#高级类型交叉类型联合类型类型别名>高级类型：交叉类型、联合类型、类型别名</a></li><li><a href=#可辨识联合类型>可辨识联合类型</a></li><li><a href=#装饰器在多个不同的类之间共享或者扩展一些方法或行为而不是去直接修改它本身>装饰器：在多个不同的类之间共享或者扩展一些方法或行为，而不是去直接修改它本身</a></li><li><a href=#赋值断言is-关键字可调用类型注解和类型推导>赋值断言、is 关键字、可调用类型注解和类型推导</a></li><li><a href=#索引类型映射类型>索引类型、映射类型</a></li><li><a href=#条件类型>条件类型</a></li><li><a href=#参考>参考</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script></body></html>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#原始类型一booleannumberstringvoidundefinednullsymbolbigint>原始类型（一）：boolean、number、string、void、undefined、null、symbol、bigint</a></li><li><a href=#原始类型二anyunknownneverobject数组元组>原始类型（二）：any、unknown、never、object、数组、元组</a></li><li><a href=#枚举类型用于声明一组命名的常数当一个变量有几种可能的取值时可以将它定义为枚举类型本质是-js-对象>枚举类型：用于声明一组命名的常数，当一个变量有几种可能的取值时，可以将它定义为枚举类型，本质是 JS 对象</a></li><li><a href=#接口为类型命名为你的代码或第三方代码定义契约>接口：为类型命名、为你的代码或第三方代码定义契约</a></li><li><a href=#类>类</a></li><li><a href=#函数>函数</a></li><li><a href=#泛型一种特殊的变量只用于表示类型而不是值>泛型：一种特殊的变量，只用于表示类型而不是值</a></li><li><a href=#类型断言与类型守卫>类型断言与类型守卫</a></li><li><a href=#高级类型交叉类型联合类型类型别名>高级类型：交叉类型、联合类型、类型别名</a></li><li><a href=#可辨识联合类型>可辨识联合类型</a></li><li><a href=#装饰器在多个不同的类之间共享或者扩展一些方法或行为而不是去直接修改它本身>装饰器：在多个不同的类之间共享或者扩展一些方法或行为，而不是去直接修改它本身</a></li><li><a href=#赋值断言is-关键字可调用类型注解和类型推导>赋值断言、is 关键字、可调用类型注解和类型推导</a></li><li><a href=#索引类型映射类型>索引类型、映射类型</a></li><li><a href=#条件类型>条件类型</a></li><li><a href=#类型工具>类型工具</a></li><li><a href=#参考>参考</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script></body></html>

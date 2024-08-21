@@ -3178,6 +3178,523 @@ TypeScript 强大的类型别名
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">f&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// string
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
+&lt;/div>&lt;h2 id="类型工具">类型工具&lt;/h2>
+&lt;p>&lt;a class="link"
+href="https://www.typescriptlang.org/docs/handbook/utility-types.html#awaitedtype"
+target="_blank" rel="noopener"
+>
+Awaited&lt;Type>
+&lt;/a>
+&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">A&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyAwaited&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Promise&lt;/span>&lt;span class="err">&amp;lt;&lt;/span>&lt;span class="na">string&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// type A = string
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">B&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyAwaited&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Promise&lt;/span>&lt;span class="err">&amp;lt;&lt;/span>&lt;span class="na">Promise&lt;/span>&lt;span class="err">&amp;lt;&lt;/span>&lt;span class="na">number&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>&lt;span class="o">&amp;gt;&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// type B = number
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">C&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyAwaited&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">boolean&lt;/span> &lt;span class="err">|&lt;/span> &lt;span class="na">Promise&lt;/span>&lt;span class="err">&amp;lt;&lt;/span>&lt;span class="na">number&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// type C = number | boolean
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">MyAwaited&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">T&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">T&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="nx">Promise&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">infer&lt;/span> &lt;span class="na">U&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">?&lt;/span> &lt;span class="nx">MyAwaited&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">U&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">:&lt;/span> &lt;span class="nx">T&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link"
+href="https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype"
+target="_blank" rel="noopener"
+>
+Partial&lt;Type>
+&lt;/a>
+&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">interface&lt;/span> &lt;span class="nx">Todo&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">title&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">description&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">PartialTodo&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyPartial&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Todo&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">MyPartial&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">T&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">T&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="kt">object&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">?&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="nx">P&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="k">keyof&lt;/span> &lt;span class="nx">T&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">?:&lt;/span> &lt;span class="nx">T&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">P&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">:&lt;/span> &lt;span class="kt">never&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link"
+href="https://www.typescriptlang.org/docs/handbook/utility-types.html#requiredtype"
+target="_blank" rel="noopener"
+>
+Required&lt;Type>
+&lt;/a>
+&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">interface&lt;/span> &lt;span class="nx">Todo&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">title?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">description?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">RequiredTodo&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyRequired&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Todo&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">MyRequired&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">T&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">T&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="kt">object&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">?&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="nx">P&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="k">keyof&lt;/span> &lt;span class="nx">T&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">-?:&lt;/span> &lt;span class="nx">T&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">P&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">:&lt;/span> &lt;span class="kt">never&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link"
+href="https://www.typescriptlang.org/docs/handbook/utility-types.html#readonlytype"
+target="_blank" rel="noopener"
+>
+Readonly&lt;Type>
+&lt;/a>
+&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">interface&lt;/span> &lt;span class="nx">Todo&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">title&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">description&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">ReadonlyTodo&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyReadonly&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Todo&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">MyReadonly&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">T&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">T&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="kt">object&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">?&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">readonly&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="nx">P&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="k">keyof&lt;/span> &lt;span class="nx">T&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">T&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">P&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">:&lt;/span> &lt;span class="kt">never&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link"
+href="https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type"
+target="_blank" rel="noopener"
+>
+Record&amp;lt;Keys, Type&amp;gt;
+&lt;/a>
+&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">CatName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;miffy&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;boris&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;mordred&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">interface&lt;/span> &lt;span class="nx">CatInfo&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">age&lt;/span>: &lt;span class="kt">number&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">breed&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">Cat&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyRecord&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">CatName&lt;/span>&lt;span class="err">,&lt;/span> &lt;span class="na">CatInfo&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">MyRecord&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">K&lt;/span> &lt;span class="na">extends&lt;/span> &lt;span class="na">keyof&lt;/span> &lt;span class="na">any&lt;/span>&lt;span class="err">,&lt;/span> &lt;span class="na">U&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="nx">P&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="nx">K&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">U&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link"
+href="https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys"
+target="_blank" rel="noopener"
+>
+Pick&amp;lt;Type, Keys&amp;gt;
+&lt;/a>
+&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">interface&lt;/span> &lt;span class="nx">Todo&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">completed&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">description&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">title&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">TodoPreview&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyPick&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Todo&lt;/span>&lt;span class="err">,&lt;/span> &lt;span class="err">&amp;#39;&lt;/span>&lt;span class="na">title&lt;/span>&lt;span class="err">&amp;#39;&lt;/span> &lt;span class="err">|&lt;/span> &lt;span class="err">&amp;#39;&lt;/span>&lt;span class="na">completed&lt;/span>&lt;span class="err">&amp;#39;&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">MyPick&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">T&lt;/span>&lt;span class="err">,&lt;/span> &lt;span class="na">K&lt;/span> &lt;span class="na">extends&lt;/span> &lt;span class="na">keyof&lt;/span> &lt;span class="na">T&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="nx">P&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="nx">K&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">T&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">P&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link"
+href="https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys"
+target="_blank" rel="noopener"
+>
+Omit&amp;lt;Type, Keys&amp;gt;
+&lt;/a>
+&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">interface&lt;/span> &lt;span class="nx">Todo&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">title&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">description&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">completed&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">createdAt&lt;/span>: &lt;span class="kt">number&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">TodoPreview&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyOmit&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Todo&lt;/span>&lt;span class="err">,&lt;/span> &lt;span class="err">&amp;#39;&lt;/span>&lt;span class="na">description&lt;/span>&lt;span class="err">&amp;#39;&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">MyOmit&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">T&lt;/span>&lt;span class="err">,&lt;/span> &lt;span class="na">K&lt;/span> &lt;span class="na">extends&lt;/span> &lt;span class="na">keyof&lt;/span> &lt;span class="na">any&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="nx">P&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="nx">Exclude&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">keyof&lt;/span> &lt;span class="na">T&lt;/span>&lt;span class="err">,&lt;/span> &lt;span class="na">K&lt;/span>&lt;span class="p">&amp;gt;]&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">T&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">P&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link"
+href="https://www.typescriptlang.org/docs/handbook/utility-types.html#excludeuniontype-excludedmembers"
+target="_blank" rel="noopener"
+>
+Exclude&amp;lt;UnionType, ExcludedMembers&amp;gt;
+&lt;/a>
+&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">T0&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyExclude&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="s1">&amp;#39;a&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;b&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;c&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;a&amp;#39;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// &amp;#34;b&amp;#34; | &amp;#34;c&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyExclude&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="s1">&amp;#39;a&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;b&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;c&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;a&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;b&amp;#39;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// &amp;#34;c&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyExclude&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">string&lt;/span> &lt;span class="err">|&lt;/span> &lt;span class="na">number&lt;/span> &lt;span class="err">|&lt;/span> &lt;span class="err">(()&lt;/span> &lt;span class="err">=&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="k">void&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="nb">Function&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// string | number
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">Shape&lt;/span> &lt;span class="o">=&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">kind&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;circle&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">radius&lt;/span>: &lt;span class="kt">number&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">kind&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;square&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">x&lt;/span>: &lt;span class="kt">number&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">kind&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;triangle&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">x&lt;/span>: &lt;span class="kt">number&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">y&lt;/span>: &lt;span class="kt">number&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">T3&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyExclude&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Shape&lt;/span>&lt;span class="err">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="na">kind&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="err">&amp;#39;&lt;/span>&lt;span class="na">circle&lt;/span>&lt;span class="err">&amp;#39;&lt;/span> &lt;span class="p">}&amp;gt;;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">MyExclude&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">T&lt;/span>&lt;span class="err">,&lt;/span> &lt;span class="na">U&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">T&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="nx">U&lt;/span> &lt;span class="o">?&lt;/span> &lt;span class="kt">never&lt;/span> &lt;span class="o">:&lt;/span> &lt;span class="nx">T&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link"
+href="https://www.typescriptlang.org/docs/handbook/utility-types.html#extracttype-union"
+target="_blank" rel="noopener"
+>
+Extract&amp;lt;Type, Union&amp;gt;
+&lt;/a>
+&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">T0&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyExtract&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="s1">&amp;#39;a&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;b&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;c&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;a&amp;#39;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// &amp;#34;a&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyExtract&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="s1">&amp;#39;a&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;b&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;c&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;a&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;b&amp;#39;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// &amp;#34;a&amp;#34; | &amp;#34;b&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyExtract&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">string&lt;/span> &lt;span class="err">|&lt;/span> &lt;span class="na">number&lt;/span> &lt;span class="err">|&lt;/span> &lt;span class="err">(()&lt;/span> &lt;span class="err">=&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="k">void&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="nb">Function&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// () =&amp;gt; void
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">Shape&lt;/span> &lt;span class="o">=&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">kind&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;circle&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">radius&lt;/span>: &lt;span class="kt">number&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">kind&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;square&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">x&lt;/span>: &lt;span class="kt">number&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">kind&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;triangle&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">x&lt;/span>: &lt;span class="kt">number&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">y&lt;/span>: &lt;span class="kt">number&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">T3&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyExtract&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Shape&lt;/span>&lt;span class="err">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="na">kind&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="err">&amp;#39;&lt;/span>&lt;span class="na">circle&lt;/span>&lt;span class="err">&amp;#39;&lt;/span> &lt;span class="p">}&amp;gt;;&lt;/span> &lt;span class="c1">// { kind: &amp;#34;circle&amp;#34;; radius: number; }
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">MyExtract&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">T&lt;/span>&lt;span class="err">,&lt;/span> &lt;span class="na">U&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">T&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="nx">U&lt;/span> &lt;span class="o">?&lt;/span> &lt;span class="nx">T&lt;/span> : &lt;span class="kt">never&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link"
+href="https://www.typescriptlang.org/docs/handbook/utility-types.html#nonnullabletype"
+target="_blank" rel="noopener"
+>
+NonNullable&lt;Type>
+&lt;/a>
+&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">T0&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyNonNullable&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">string&lt;/span> &lt;span class="err">|&lt;/span> &lt;span class="na">number&lt;/span> &lt;span class="err">|&lt;/span> &lt;span class="na">undefined&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">T1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyNonNullable&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">string&lt;/span>&lt;span class="err">[]&lt;/span> &lt;span class="err">|&lt;/span> &lt;span class="na">null&lt;/span> &lt;span class="err">|&lt;/span> &lt;span class="na">undefined&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">MyNonNullable&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">T&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">T&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="kc">null&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kc">undefined&lt;/span> &lt;span class="o">?&lt;/span> &lt;span class="kt">never&lt;/span> &lt;span class="o">:&lt;/span> &lt;span class="nx">T&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link"
+href="https://www.typescriptlang.org/docs/handbook/utility-types.html#parameterstype"
+target="_blank" rel="noopener"
+>
+Parameters&lt;Type>
+&lt;/a>
+&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">T0&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyParameters&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="kt">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// []
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyParameters&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">s&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="k">void&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// [s: string]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyParameters&lt;/span>&lt;span class="o">&amp;lt;&amp;lt;&lt;/span>&lt;span class="nx">T&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">arg&lt;/span>: &lt;span class="kt">T&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">T&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// [arg: unknown]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">declare&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">f1&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">arg&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">a&lt;/span>: &lt;span class="kt">number&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">b&lt;/span>: &lt;span class="kt">string&lt;/span> &lt;span class="p">})&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="k">void&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">T3&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyParameters&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">typeof&lt;/span> &lt;span class="na">f1&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span> &lt;span class="c1">// [arg: { a: number;b: string; }]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T4&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyParameters&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">any&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span> &lt;span class="c1">// unknown[]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T5&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyParameters&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">never&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span> &lt;span class="c1">// never
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T6&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyParameters&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">string&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span> &lt;span class="c1">// never
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T7&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyParameters&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Function&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span> &lt;span class="c1">// never
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">MyParameters&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">T&lt;/span> &lt;span class="na">extends&lt;/span> &lt;span class="err">(&lt;/span>&lt;span class="na">...params&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="na">any&lt;/span>&lt;span class="err">)&lt;/span> &lt;span class="err">=&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="kt">any&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">T&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">...&lt;/span>&lt;span class="nx">params&lt;/span>: &lt;span class="kt">infer&lt;/span> &lt;span class="nx">U&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="kt">any&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">?&lt;/span> &lt;span class="nx">U&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> : &lt;span class="kt">never&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link"
+href="https://www.typescriptlang.org/docs/handbook/utility-types.html#constructorparameterstype"
+target="_blank" rel="noopener"
+>
+ConstructorParameters&lt;Type>
+&lt;/a>
+&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">T0&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyConstructorParameters&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">ErrorConstructor&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span> &lt;span class="c1">// [message?: string | undefined]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyConstructorParameters&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">FunctionConstructor&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span> &lt;span class="c1">// string[]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyConstructorParameters&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">RegExpConstructor&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span> &lt;span class="c1">// [pattern: string | RegExp, flags?: string | undefined]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">class&lt;/span> &lt;span class="nx">C&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">a&lt;/span>: &lt;span class="kt">number&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">b&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">T3&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyConstructorParameters&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">typeof&lt;/span> &lt;span class="na">C&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span> &lt;span class="c1">// [a: number, b: string]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T4&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyConstructorParameters&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">any&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span> &lt;span class="c1">// unknown[]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T5&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyConstructorParameters&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Function&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">MyConstructorParameters&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">T&lt;/span> &lt;span class="na">extends&lt;/span> &lt;span class="na">new&lt;/span> &lt;span class="err">(&lt;/span>&lt;span class="na">...params&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="na">any&lt;/span>&lt;span class="err">)&lt;/span> &lt;span class="err">=&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="kt">any&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">T&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="p">(...&lt;/span>&lt;span class="nx">params&lt;/span>: &lt;span class="kt">infer&lt;/span> &lt;span class="nx">U&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="kt">any&lt;/span> &lt;span class="o">?&lt;/span> &lt;span class="nx">U&lt;/span> : &lt;span class="kt">never&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link"
+href="https://www.typescriptlang.org/docs/handbook/utility-types.html#returntypetype"
+target="_blank" rel="noopener"
+>
+ReturnType&lt;Type>
+&lt;/a>
+&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">T0&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyReturnType&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="kt">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// string
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyReturnType&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">s&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="k">void&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// void
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyReturnType&lt;/span>&lt;span class="o">&amp;lt;&amp;lt;&lt;/span>&lt;span class="nx">T&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">T&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// unknown
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T3&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyReturnType&lt;/span>&lt;span class="o">&amp;lt;&amp;lt;&lt;/span>&lt;span class="nx">T&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="nx">U&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">U&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="kt">number&lt;/span>&lt;span class="p">[]&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">T&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// number[]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">declare&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">f1&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">a&lt;/span>: &lt;span class="kt">number&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">b&lt;/span>: &lt;span class="kt">string&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">T4&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyReturnType&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">typeof&lt;/span> &lt;span class="na">f1&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span> &lt;span class="c1">// { a: number; b: string; }
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T5&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyReturnType&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">any&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span> &lt;span class="c1">// any
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T6&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyReturnType&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">never&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span> &lt;span class="c1">// never
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T7&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyReturnType&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">string&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span> &lt;span class="c1">// any
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T8&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyReturnType&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Function&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span> &lt;span class="c1">// any
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">MyReturnType&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">T&lt;/span> &lt;span class="na">extends&lt;/span> &lt;span class="err">(&lt;/span>&lt;span class="na">...params&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="na">any&lt;/span>&lt;span class="err">)&lt;/span> &lt;span class="err">=&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="kt">any&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">T&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">...&lt;/span>&lt;span class="nx">params&lt;/span>: &lt;span class="kt">any&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="k">infer&lt;/span> &lt;span class="nx">U&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">?&lt;/span> &lt;span class="nx">U&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> : &lt;span class="kt">never&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link"
+href="https://www.typescriptlang.org/docs/handbook/utility-types.html#instancetypetype"
+target="_blank" rel="noopener"
+>
+InstanceType&lt;Type>
+&lt;/a>
+&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">class&lt;/span> &lt;span class="nx">C&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">x&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">y&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">T0&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyInstanceType&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">typeof&lt;/span> &lt;span class="na">C&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span> &lt;span class="c1">// C
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyInstanceType&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">any&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span> &lt;span class="c1">// any
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyInstanceType&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">never&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span> &lt;span class="c1">// never
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T3&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyInstanceType&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">string&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span> &lt;span class="c1">// any
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">T4&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">MyInstanceType&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Function&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span> &lt;span class="c1">// any
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">MyInstanceType&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">T&lt;/span> &lt;span class="na">extends&lt;/span> &lt;span class="na">abstract&lt;/span> &lt;span class="na">new&lt;/span> &lt;span class="err">(&lt;/span>&lt;span class="na">...parama&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="na">any&lt;/span>&lt;span class="err">)&lt;/span> &lt;span class="err">=&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="kt">any&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">T&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="kr">abstract&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="p">(...&lt;/span>&lt;span class="nx">parama&lt;/span>: &lt;span class="kt">any&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="k">infer&lt;/span> &lt;span class="nx">U&lt;/span> &lt;span class="o">?&lt;/span> &lt;span class="nx">U&lt;/span> : &lt;span class="kt">never&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link"
+href="https://www.typescriptlang.org/docs/handbook/utility-types.html#thisparametertypetype"
+target="_blank" rel="noopener"
+>
+ThisParameterType&lt;Type>
+&lt;/a>
+&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">function&lt;/span> &lt;span class="nx">toHex&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nb">Number&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">toString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">16&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">function&lt;/span> &lt;span class="nx">numberToString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">n&lt;/span>: &lt;span class="kt">MyThisParameterType&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">typeof&lt;/span> &lt;span class="na">toHex&lt;/span>&lt;span class="p">&amp;gt;)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">toHex&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">apply&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">n&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">MyThisParameterType&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">T&lt;/span> &lt;span class="na">extends&lt;/span> &lt;span class="err">(&lt;/span>&lt;span class="na">...params&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="na">any&lt;/span>&lt;span class="err">)&lt;/span> &lt;span class="err">=&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="kt">any&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">T&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="k">infer&lt;/span> &lt;span class="nx">U&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">...&lt;/span>&lt;span class="nx">params&lt;/span>: &lt;span class="kt">any&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="kt">any&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">?&lt;/span> &lt;span class="nx">U&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> : &lt;span class="kt">never&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link"
+href="https://www.typescriptlang.org/docs/handbook/utility-types.html#omitthisparametertype"
+target="_blank" rel="noopener"
+>
+OmitThisParameter&lt;Type>
+&lt;/a>
+&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">function&lt;/span> &lt;span class="nx">toHex&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nb">Number&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">toString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">16&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">fiveToHex&lt;/span>: &lt;span class="kt">MyOmitThisParameter&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">typeof&lt;/span> &lt;span class="na">toHex&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">toHex&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">bind&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">5&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">MyOmitThisParameter&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">T&lt;/span> &lt;span class="na">extends&lt;/span> &lt;span class="err">(&lt;/span>&lt;span class="na">...params&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="na">any&lt;/span>&lt;span class="err">)&lt;/span> &lt;span class="err">=&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="kt">any&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">T&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kt">any&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">...&lt;/span>&lt;span class="nx">params&lt;/span>: &lt;span class="kt">infer&lt;/span> &lt;span class="nx">P&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="k">infer&lt;/span> &lt;span class="nx">R&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">?&lt;/span> &lt;span class="p">(...&lt;/span>&lt;span class="nx">params&lt;/span>: &lt;span class="kt">P&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">R&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> : &lt;span class="kt">never&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
 &lt;/div>&lt;h2 id="参考">参考&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a class="link"
