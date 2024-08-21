@@ -1658,54 +1658,7 @@ ReactQuery
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h2 id="routehandlers">RouteHandlers&lt;/h2>
-&lt;p>可以使用 Next.js 提供的 &lt;a class="link"
-href="https://nextjs.org/docs/app/building-your-application/routing/route-handlers"
-target="_blank" rel="noopener"
->
-RouteHandlers
-&lt;/a>
-完成数据请求（做一层转发），避免敏感数据泄露：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// app/api/messages/route.ts
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">GET() {&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;https://...&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">headers&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;Content-Type&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;application/json&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;API-Key&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">process&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">env&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">DATA_API_KEY&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}).&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">res&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">json&lt;/span>&lt;span class="p">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">Response&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">json&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="nx">data&lt;/span> &lt;span class="p">});&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>一般 &lt;a class="link"
-href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
-target="_blank" rel="noopener"
->
-ServerComponents
-&lt;/a>
-不需要调用 &lt;a class="link"
-href="https://nextjs.org/docs/app/building-your-application/routing/route-handlers"
-target="_blank" rel="noopener"
->
-RouteHandlers
-&lt;/a>
-，因为他可以直接在服务端完成数据请求。&lt;/p>
-&lt;h2 id="并行请求与顺序请求">并行请求与顺序请求&lt;/h2>
+&lt;/div>&lt;h2 id="并行请求与顺序请求">并行请求与顺序请求&lt;/h2>
 &lt;p>&lt;img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fsequential-parallel-data-fetching.png&amp;amp;w=3840&amp;amp;q=75"
 loading="lazy"
 >
@@ -2600,7 +2553,59 @@ ServerActions
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div></description></item><item><title>Next.js 之 Rendering 与 Caching · Stay Hungry · Stay Foolish</title><link>https://ElementRef.github.io/p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/</link><pubDate>Sun, 18 Aug 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/react.png" alt="Next.js 之 Rendering 与 Caching" />&lt;h2 id="servercomponents">ServerComponents&lt;/h2>
+&lt;/div>&lt;h2 id="routehandlers">RouteHandlers&lt;/h2>
+&lt;p>可以使用 Next.js 提供的 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/routing/route-handlers"
+target="_blank" rel="noopener"
+>
+RouteHandlers
+&lt;/a>
+完成数据请求（做一层转发），避免敏感数据泄露：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// app/api/messages/route.ts
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">GET() {&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;https://...&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">headers&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;Content-Type&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;application/json&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;API-Key&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">process&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">env&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">DATA_API_KEY&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}).&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">res&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">json&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">Response&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">json&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="nx">data&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>一般 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+target="_blank" rel="noopener"
+>
+ServerComponents
+&lt;/a>
+不需要调用 &lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/routing/route-handlers"
+target="_blank" rel="noopener"
+>
+RouteHandlers
+&lt;/a>
+，因为他可以直接在服务端完成数据请求。&lt;/p>
+&lt;h3 id="serveractions-与-routehandlers-区别">ServerActions 与 RouteHandlers 区别&lt;/h3>
+&lt;ul>
+&lt;li>两者都是用来写可以在客户端调用的服务端逻辑的；&lt;/li>
+&lt;li>RouteHandlers 偏向于底层一些，可以用来写 REST API 风格的服务端代码；&lt;/li>
+&lt;li>ServerActions 更偏向于上层，主要用来创建/修改数据（从仅支持 POST 也能看出来）。&lt;/li>
+&lt;/ul></description></item><item><title>Next.js 之 Rendering 与 Caching · Stay Hungry · Stay Foolish</title><link>https://ElementRef.github.io/p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/</link><pubDate>Sun, 18 Aug 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/react.png" alt="Next.js 之 Rendering 与 Caching" />&lt;h2 id="servercomponents">ServerComponents&lt;/h2>
 &lt;p>&lt;a class="link"
 href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
 target="_blank" rel="noopener"
