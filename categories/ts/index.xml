@@ -1129,7 +1129,8 @@ React TypeScript Cheatsheet
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h2 id="undefinednullnever-与-void">undefined、null、never 与 void&lt;/h2>
+&lt;/div>&lt;p>总的来说，interface 用来描述&lt;strong>数据结构&lt;/strong>，type 用来描述&lt;strong>类型关系&lt;/strong>。&lt;/p>
+&lt;h2 id="undefinednullnever-与-void">undefined、null、never 与 void&lt;/h2>
 &lt;p>默认情况下 never、null 和 undefined 是所有类型的子类型；就是说你可以把 never、null 和 undefined 赋值给任何类型的变量。只有 never 可以赋值给 never 类型；当你指定了 strictNullChecks 标记，null 和 undefined 只能赋值给 void 和它们各自。void 表示没有任何类型，never 表示永远不存在的值的类型。&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -1655,6 +1656,13 @@ React TypeScript Cheatsheet
 &lt;/div>
 &lt;/div>&lt;h2 id="参考">参考&lt;/h2>
 &lt;ul>
+&lt;li>&lt;a class="link"
+href="https://juejin.cn/post/6844903749501059085"
+target="_blank" rel="noopener"
+>
+TypeScript 中的 interface 和 type 到底有什么区别
+&lt;/a>
+&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types"
 target="_blank" rel="noopener"
