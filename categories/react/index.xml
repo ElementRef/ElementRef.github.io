@@ -794,6 +794,7 @@ sitemap.xml
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
+&lt;p>新的 Metadata 用来取代 PageRouter 中的 next/head。&lt;/p>
 &lt;h3 id="staticmetadata">StaticMetadata&lt;/h3>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -1270,6 +1271,14 @@ loading="lazy"
 &lt;li>需要实时展示的数据（一般对 SEO 也不重要），在客户端请求比较好；&lt;/li>
 &lt;li>需要额外跑 Node 服务。&lt;/li>
 &lt;/ul>
+&lt;p>在 AppRouter 模式，不再有 getServerSideProps、getStaticProps 和 getInitialProps 了；现在，可以直接在 ServerComponents 中发起异步请求。&lt;/p>
+&lt;p>对应的 getStaticPaths 也被新的 &lt;a class="link"
+href="https://nextjs.org/docs/app/api-reference/functions/generate-static-params"
+target="_blank" rel="noopener"
+>
+generateStaticParams
+&lt;/a>
+取代。&lt;/p>
 &lt;h2 id="fetch-api">fetch API&lt;/h2>
 &lt;p>Next.js 对原生的 &lt;a class="link"
 href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API"
@@ -1316,20 +1325,18 @@ ServerActions
 &lt;/span>&lt;span class="lnt">10
 &lt;/span>&lt;span class="lnt">11
 &lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// app/page.tsx
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">Page() {&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 可以当作 PageRoute 中的 getStaticProps 函数
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">staticData&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sb">`https://...`&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">cache&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;force-cache&amp;#39;&lt;/span> &lt;span class="p">});&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 可以当作 PageRoute 中的 getServerSideProps 函数
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 可以当作 PageRouter 中的 getServerSideProps 函数
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">dynamicData&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sb">`https://...`&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">cache&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;no-store&amp;#39;&lt;/span> &lt;span class="p">});&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 可以当作 PageRoute 中的 getStaticProps 函数
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 可以当作 PageRouter 中的 getStaticProps 函数
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">staticData&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sb">`https://...`&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">cache&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;force-cache&amp;#39;&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 可以当作 PageRouter 中的 getStaticProps 函数
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">revalidatedData&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sb">`https://...`&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">next&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">revalidate&lt;/span>: &lt;span class="kt">10&lt;/span> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;...&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
@@ -1521,6 +1528,96 @@ ServerActions
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">item&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">getItem&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">id&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// ...
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="generatestaticparams">generateStaticParams&lt;/h2>
+&lt;p>和 PageRoutes 中的 getStaticPaths 作用一样，&lt;a class="link"
+href="https://nextjs.org/docs/app/api-reference/functions/generate-static-params"
+target="_blank" rel="noopener"
+>
+generateStaticParams
+&lt;/a>
+用来在打包预渲染阶段获取要渲染的路由 path：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// app/posts/[id]/page.js
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="nx">PostLayout&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;@/components/post-layout&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">generateStaticParams() {&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">[{&lt;/span> &lt;span class="nx">id&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;1&amp;#39;&lt;/span> &lt;span class="p">},&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">id&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;2&amp;#39;&lt;/span> &lt;span class="p">}];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">async&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">getPost&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">params&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">res&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sb">`https://.../posts/&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">params&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">id&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">post&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">json&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">post&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 和之前一样，generateStaticParams 的返回值会被注入到 props 中
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">Post&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="nx">params&lt;/span> &lt;span class="p">})&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">post&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">getPost&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">params&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">PostLayout&lt;/span> &lt;span class="na">post&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="nx">post&lt;/span>&lt;span class="p">}&lt;/span> &lt;span class="p">/&amp;gt;;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>getStaticPaths 中的 fallback 属性被现在的 &lt;a class="link"
+href="https://elementref.github.io/p/next.js-%E4%B9%8B-approuter/#%E8%B7%AF%E7%94%B1%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F"
+target="_blank" rel="noopener"
+>
+RouterConfig
+&lt;/a>
+取代。&lt;/p>
+&lt;p>getStaticPaths 中的 fallback 属性有三个取值：&lt;/p>
+&lt;ul>
+&lt;li>true，请求到达服务端时，动态生成新页面，并先返回 FallbackPage；&lt;/li>
+&lt;li>false，返回 404OPage，等同于 export const dynamicParams = false；&lt;/li>
+&lt;li>blocking，请求到达服务端时，动态生成新页面，不再支持。&lt;/li>
+&lt;/ul>
+&lt;p>true 和 blocking 选项被统一为 export const dynamicParams = true；同时 getStaticPaths 中的 revalidate 属性被合并到 &lt;a class="link"
+href="https://nextjs.org/docs/app/api-reference/functions/fetch"
+target="_blank" rel="noopener"
+>
+fetch
+&lt;/a>
+中：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">dynamicParams&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">async&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">getPosts() {&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">res&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sb">`https://.../posts`&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">next&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">revalidate&lt;/span>: &lt;span class="kt">60&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">json&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">data&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">posts&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">PostList() {&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">posts&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">getPosts&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">posts&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">post&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;{&lt;/span>&lt;span class="nx">post&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">}&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h2 id="数据请求库">数据请求库&lt;/h2>
@@ -3299,7 +3396,7 @@ target="_blank" rel="noopener"
 >
 layout.tsx
 &lt;/a>
-，当前路由及其子路由共享的 UI；不会被二次渲染；在页面跳转时，会被缓存和复用；&lt;/li>
+，当前路由及其子路由共享的 UI；不会被二次渲染；在页面跳转时，会被缓存和复用；app/layout.tsx 用来取代 PageRouter 中的 pages/_app.js 与 pages/_document.js；&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/file-conventions/page"
 target="_blank" rel="noopener"
@@ -3332,7 +3429,7 @@ target="_blank" rel="noopener"
 >
 not-found.tsx
 &lt;/a>
-，当前路由及其子路由共享的 404 UI，如果路由不匹配，就会渲染此组件；&lt;/li>
+，当前路由及其子路由共享的 404 UI，如果路由不匹配，就会渲染此组件；用来取代 PageRouter 中的 pages/404.js；&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/file-conventions/error"
 target="_blank" rel="noopener"
@@ -3345,7 +3442,7 @@ target="_blank" rel="noopener"
 >
 ClientComponents
 &lt;/a>
-；&lt;/li>
+；用来取代 PageRouter 中的 pages/_error.js；&lt;/li>
 &lt;li>global-error.tsx，全局 ErrorUI，必须为 &lt;a class="link"
 href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
 target="_blank" rel="noopener"
@@ -3512,7 +3609,7 @@ target="_blank" rel="noopener"
 >
 route.ts
 &lt;/a>
-相当于 PageRoute 下的 APIRoute：&lt;/p>
+相当于 PageRouter 下的 APIRoutes：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -4614,7 +4711,7 @@ loading="lazy"
 >
 &lt;/p>
 &lt;h2 id="路由处理程序">路由处理程序&lt;/h2>
-&lt;p>相当于 PagesRouter 中的 APIRoute，可以用来做 BFF、请求转发、直接操作数据库、解决跨域问题甚至做全栈开发等。&lt;/p>
+&lt;p>用来取代 PagesRouter 中的 APIRoutes，可以用来做 BFF、请求转发、直接操作数据库、解决跨域问题甚至做全栈开发等。&lt;/p>
 &lt;p>&lt;img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Froute-special-file.png&amp;amp;w=3840&amp;amp;q=75"
 loading="lazy"
 >
