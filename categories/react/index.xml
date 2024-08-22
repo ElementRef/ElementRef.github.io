@@ -13207,7 +13207,7 @@ React 技术揭秘
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>useRef 不仅用于 DOM refs，ref.current 是一个可以容纳任何值的通用容器，类似于 class 的实例属性；useRef 和自建一个 {current: &amp;hellip;} 对象的唯一区别是，useRef 会在每次渲染时返回同一个 ref 对象（当然你可以在组件外定义一个变量，效果是一样的）。&lt;/p>
+&lt;/div>&lt;p>useRef 不仅用于 DOM refs，ref.current 是一个可以容纳任何值的通用容器，类似于 class 的实例属性；useRef 和自建一个 {current: &amp;hellip;} 对象的唯一区别是，useRef 会在每次渲染时返回同一个 ref 对象（当然你可以在组件外定义一个变量，效果大致是一样的；但是外部变量是所有组件实例共享的，ref 是每个组件实例独有的）。&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1

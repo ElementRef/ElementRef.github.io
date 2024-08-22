@@ -4022,7 +4022,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">ng-template&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>模版变量可以在“包含此模板变量”的模板中的任何地方引用它；既然使用模版变量的前提是“包含此模板变量”，那么决定模版边界的“结构型指令（例如，ngIf、ngFor、&amp;lt;ng-template/&amp;gt;）”也决定了模版变量的&lt;strong>作用域&lt;/strong>。&lt;/p>
+&lt;/div>&lt;p>模版变量可以在“包含此模板变量”的模板中的任何地方引用它；既然使用模版变量的前提是“包含此模板变量”，那么决定模版边界的“结构型指令（例如，ngIf、ngFor）”也决定了模版变量的&lt;strong>作用域&lt;/strong>。&lt;/p>
 &lt;h2 id="网络请求">网络请求&lt;/h2>
 &lt;p>要使用 HttpClient，需要在模块中导入 HttpClientModule；一般情况下，在 AppModule 导入：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -5461,8 +5461,8 @@ NG100 错误
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">mySubject&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">mySubject&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 因为 20 是 subscribe 才后放入流的
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 而 10 是 subscribe 才前放入流的
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 因为 20 是 subscribe 后放入流的
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 而 10 是 subscribe 前放入流的
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 只会打印 20，没有接收到 10
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">);&lt;/span>
@@ -5625,7 +5625,7 @@ NG100 错误
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 所以结果是：
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 若干秒之后，打印 Got: First，Second 这个值被丢弃
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果 Second 是在若干秒之后才传入的，此时 First 流程已经走完
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 那么，会打印 Got:Second
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 那么，会打印 Got: Second
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">triggerEvents&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">exhaustMap&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
@@ -5633,7 +5633,7 @@ NG100 错误
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 他会同时处理传入的所有值
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 并且不保证顺序与传入顺序
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 所以结果是：
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 若干秒之后，同时打印出 Got:First、Got:Second
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 若干秒之后，同时打印出 Got: First、Got: Second
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 至于哪个在前，哪个在后，不确定
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">triggerEvents&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">mergeMap&lt;/span>&lt;span class="p">);&lt;/span>
