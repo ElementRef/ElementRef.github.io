@@ -9591,7 +9591,7 @@
 </span></span></span><span class=line><span class=cl><span class=c1></span>          <span class=nx>unmount</span><span class=p>(</span><span class=nx>prevChild</span><span class=p>,</span> <span class=nx>parentComponent</span><span class=p>,</span> <span class=nx>parentSuspense</span><span class=p>,</span> <span class=kc>true</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>        <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>          <span class=cm>/**
-</span></span></span><span class=line><span class=cl><span class=cm>           * 找到了就进行 patch（c1[i] 和 c2[newIndex]），还要更新 patched 的值
+</span></span></span><span class=line><span class=cl><span class=cm>           * 找到了就进行 patch(c1[i] 和 c2[newIndex])，还要更新 patched 的值
 </span></span></span><span class=line><span class=cl><span class=cm>           * 既然找到了可复用的元素，更新 newIndexToOldIndexMap
 </span></span></span><span class=line><span class=cl><span class=cm>           */</span>
 </span></span><span class=line><span class=cl>          <span class=nx>newIndexToOldIndexMap</span><span class=p>[</span><span class=nx>newIndex</span> <span class=o>-</span> <span class=nx>s2</span><span class=p>]</span> <span class=o>=</span> <span class=nx>i</span> <span class=o>+</span> <span class=mi>1</span><span class=p>;</span>
@@ -12577,7 +12577,7 @@
 </span></span><span class=line><span class=cl>  <span class=p>}</span>
 </span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=nx>cb</span> <span class=o>&amp;&amp;</span> <span class=nx>deep</span><span class=p>)</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=cm>/**
-</span></span></span><span class=line><span class=cl><span class=cm>     * watchEffect：深度遍历 getter 运行时访问的值
+</span></span></span><span class=line><span class=cl><span class=cm>     * watch &amp;&amp; deep：深度遍历 getter 运行时访问的值
 </span></span></span><span class=line><span class=cl><span class=cm>     * 重新生成 watchEffectGetter
 </span></span></span><span class=line><span class=cl><span class=cm>     */</span>
 </span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=nx>baseGetter</span> <span class=o>=</span> <span class=nx>getter</span><span class=p>;</span>
@@ -12597,7 +12597,7 @@
 </span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kd>let</span> <span class=nx>oldValue</span> <span class=o>=</span> <span class=nx>isArray</span><span class=p>(</span><span class=nx>source</span><span class=p>)</span> <span class=o>?</span> <span class=p>[]</span> <span class=o>:</span> <span class=nx>INITIAL_WATCHER_VALUE</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=cm>/**
 </span></span></span><span class=line><span class=cl><span class=cm>   * 被 scheduler 控制执行的 job
-</span></span></span><span class=line><span class=cl><span class=cm>   * 对于 watch 来说，先运行 runner 获得 newValue，判断和 oldValue 是否相等，在调用 cb
+</span></span></span><span class=line><span class=cl><span class=cm>   * 对于 watch 来说，先运行 runner 获得 newValue，判断和 oldValue 是否相等，再调用 cb
 </span></span></span><span class=line><span class=cl><span class=cm>   * 对于 watchEffect，直接运行 runner 即可（拿不到 oldValue）
 </span></span></span><span class=line><span class=cl><span class=cm>   */</span>
 </span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>job</span>: <span class=kt>SchedulerJob</span> <span class=o>=</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{</span>

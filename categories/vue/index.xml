@@ -11835,7 +11835,7 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">unmount&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">prevChild&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">parentComponent&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">parentSuspense&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 找到了就进行 patch（c1[i] 和 c2[newIndex]），还要更新 patched 的值
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 找到了就进行 patch(c1[i] 和 c2[newIndex])，还要更新 patched 的值
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 既然找到了可复用的元素，更新 newIndexToOldIndexMap
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">newIndexToOldIndexMap&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">newIndex&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="nx">s2&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
@@ -14879,7 +14879,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">cb&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">deep&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * watchEffect：深度遍历 getter 运行时访问的值
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * watch &amp;amp;&amp;amp; deep：深度遍历 getter 运行时访问的值
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 重新生成 watchEffectGetter
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">baseGetter&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">getter&lt;/span>&lt;span class="p">;&lt;/span>
@@ -14899,7 +14899,7 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kd">let&lt;/span> &lt;span class="nx">oldValue&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">isArray&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">source&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">?&lt;/span> &lt;span class="p">[]&lt;/span> &lt;span class="o">:&lt;/span> &lt;span class="nx">INITIAL_WATCHER_VALUE&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 被 scheduler 控制执行的 job
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 对于 watch 来说，先运行 runner 获得 newValue，判断和 oldValue 是否相等，在调用 cb
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 对于 watch 来说，先运行 runner 获得 newValue，判断和 oldValue 是否相等，再调用 cb
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 对于 watchEffect，直接运行 runner 即可（拿不到 oldValue）
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">job&lt;/span>: &lt;span class="kt">SchedulerJob&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
@@ -14995,7 +14995,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div></description></item><item><title>基于作用域插槽的 Renderless 组件 · Stay Hungry · Stay Foolish</title><link>https://ElementRef.github.io/p/%E5%9F%BA%E4%BA%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD%E7%9A%84-renderless-%E7%BB%84%E4%BB%B6/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E5%9F%BA%E4%BA%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD%E7%9A%84-renderless-%E7%BB%84%E4%BB%B6/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="基于作用域插槽的 Renderless 组件" />&lt;p>回来一查，原来是作用域插槽的高阶（算是吧）用法；插槽就插槽呗，你给我装什么大尾巴狼。&lt;/p>
+&lt;/div></description></item><item><title>基于作用域插槽的 Renderless 组件 · Stay Hungry · Stay Foolish</title><link>https://ElementRef.github.io/p/%E5%9F%BA%E4%BA%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD%E7%9A%84-renderless-%E7%BB%84%E4%BB%B6/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E5%9F%BA%E4%BA%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD%E7%9A%84-renderless-%E7%BB%84%E4%BB%B6/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="基于作用域插槽的 Renderless 组件" />&lt;p>回来一查，原来是作用域插槽的高阶（算是吧）用法。&lt;/p>
 &lt;h2 id="普通插槽与作用域插槽">普通插槽与作用域插槽&lt;/h2>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
