@@ -669,7 +669,20 @@ http://www.bank.com?name=Alice&amp;money=1000&amp;for=Badman"
 &lt;p>XSS 防范手段：&lt;/p>
 &lt;ul>
 &lt;li>对用户输入信息进行过滤，不允许用户插入 HTML 标签，对用户输入信息长度进行限制；&lt;/li>
-&lt;li>严格的 CSP（Content Security Policy）策略。&lt;/li>
+&lt;li>严格的 &lt;a class="link"
+href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP"
+target="_blank" rel="noopener"
+>
+CSP
+&lt;/a>
+（Content Security Policy）策略；&lt;/li>
+&lt;li>开启 &lt;a class="link"
+href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Subresource_Integrity"
+target="_blank" rel="noopener"
+>
+SRI
+&lt;/a>
+（Subresource Integrity）策略。&lt;/li>
 &lt;/ul>
 &lt;h2 id="http2">HTTP/2&lt;/h2>
 &lt;p>HTTP/2 的出现，相比于 HTTP/1.x，大幅度的提升了性能；在与 HTTP/1.1 完全语义兼容的基础上，进一步减少了网络延迟。&lt;/p>
@@ -751,6 +764,13 @@ href="https://zhuanlan.zhihu.com/p/46592479"
 target="_blank" rel="noopener"
 >
 前端安全系列之二：如何防止 CSRF 攻击？
+&lt;/a>
+&lt;/li>
+&lt;li>&lt;a class="link"
+href="https://www.bilibili.com/video/BV1vv4y1U77y/"
+target="_blank" rel="noopener"
+>
+HTTP/1.1，HTTP/2 和 HTTP/3 的区别
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
