@@ -945,6 +945,7 @@
 </span><span class=lnt>19
 </span><span class=lnt>20
 </span><span class=lnt>21
+</span><span class=lnt>22
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>combineLatest</span><span class=p>,</span> <span class=nx>timer</span> <span class=p>}</span> <span class=nx>from</span> <span class=s1>&#39;rxjs&#39;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=nx>combineLatest</span><span class=p>({</span>
 </span></span><span class=line><span class=cl>  <span class=nx>people1</span><span class=o>:</span> <span class=nx>timer</span><span class=p>(</span><span class=mi>1000</span><span class=p>,</span> <span class=mi>1000</span><span class=p>),</span>
@@ -955,13 +956,14 @@
 </span></span></span><span class=line><span class=cl><span class=cm>   * 可以看到，无论哪个 observer 接收到了值，都会触发这个回调
 </span></span></span><span class=line><span class=cl><span class=cm>   * 为什么不在 forkJoin 中使用 timer 呢？
 </span></span></span><span class=line><span class=cl><span class=cm>   * 因为 timer 不会自动 complete
-</span></span></span><span class=line><span class=cl><span class=cm>   * 第一秒：{people1: 2, people2: 0, people3: 0}
-</span></span></span><span class=line><span class=cl><span class=cm>   * 第二秒：{people1: 3, people2: 0, people3: 0}
-</span></span></span><span class=line><span class=cl><span class=cm>   * 第三秒：{people1: 3, people2: 1, people3: 0}
-</span></span></span><span class=line><span class=cl><span class=cm>   * 第四秒：{people1: 4, people2: 1, people3: 0}
-</span></span></span><span class=line><span class=cl><span class=cm>   * 第五秒：{people1: 5, people2: 1, people3: 0}
-</span></span></span><span class=line><span class=cl><span class=cm>   * 第六秒：{people1: 5, people2: 2, people3: 0}
-</span></span></span><span class=line><span class=cl><span class=cm>   * 第七秒：{people1: 5, people2: 2, people3: 1}
+</span></span></span><span class=line><span class=cl><span class=cm>   * 第一秒：{people1: 1, people2: 0, people3: 0}
+</span></span></span><span class=line><span class=cl><span class=cm>   * 第二秒：{people1: 2, people2: 0, people3: 0}
+</span></span></span><span class=line><span class=cl><span class=cm>   * 第三秒：{people1: 3, people2: 0, people3: 0}
+</span></span></span><span class=line><span class=cl><span class=cm>   * 第四秒：{people1: 3, people2: 1, people3: 0}
+</span></span></span><span class=line><span class=cl><span class=cm>   * 第五秒：{people1: 4, people2: 1, people3: 0}
+</span></span></span><span class=line><span class=cl><span class=cm>   * 第六秒：{people1: 5, people2: 1, people3: 0}
+</span></span></span><span class=line><span class=cl><span class=cm>   * 第七秒：{people1: 5, people2: 2, people3: 0}
+</span></span></span><span class=line><span class=cl><span class=cm>   * 第八秒：{people1: 5, people2: 2, people3: 1}
 </span></span></span><span class=line><span class=cl><span class=cm>   * ...
 </span></span></span><span class=line><span class=cl><span class=cm>   */</span>
 </span></span><span class=line><span class=cl>  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=nx>value</span><span class=p>);</span>

@@ -3092,7 +3092,7 @@
 </span></span><span class=line><span class=cl><span class=c1>// 将失效的 job 从队列中剔除（主要用来避免子组件重新渲染）
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>export</span> <span class=kd>function</span> <span class=nx>invalidateJob</span><span class=p>(</span><span class=nx>job</span>: <span class=kt>SchedulerJob</span><span class=p>)</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>i</span> <span class=o>=</span> <span class=nx>queue</span><span class=p>.</span><span class=nx>indexOf</span><span class=p>(</span><span class=nx>job</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>  <span class=nx>if</span> <span class=p>(</span><span class=nx>i</span> <span class=o>&gt;</span> <span class=o>-</span><span class=mi>1</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=nx>i</span> <span class=o>&gt;</span> <span class=o>-</span><span class=mi>1</span><span class=p>)</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=nx>queue</span><span class=p>.</span><span class=nx>splice</span><span class=p>(</span><span class=nx>i</span><span class=p>,</span> <span class=mi>1</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>  <span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
