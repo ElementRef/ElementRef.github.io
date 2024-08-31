@@ -953,7 +953,7 @@
 </span></span><span class=line><span class=cl><span class=p>}).</span><span class=nx>subscribe</span><span class=p>(</span><span class=nx>value</span> <span class=p>=&gt;</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>  <span class=cm>/**
 </span></span></span><span class=line><span class=cl><span class=cm>   * 可以看到，无论哪个 observer 接收到了值，都会触发这个回调
-</span></span></span><span class=line><span class=cl><span class=cm>   * 为什么在 forkJoin 中使用 timer 呢？
+</span></span></span><span class=line><span class=cl><span class=cm>   * 为什么不在 forkJoin 中使用 timer 呢？
 </span></span></span><span class=line><span class=cl><span class=cm>   * 因为 timer 不会自动 complete
 </span></span></span><span class=line><span class=cl><span class=cm>   * 第一秒：{people1: 2, people2: 0, people3: 0}
 </span></span></span><span class=line><span class=cl><span class=cm>   * 第二秒：{people1: 3, people2: 0, people3: 0}
