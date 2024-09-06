@@ -1,0 +1,647 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content='最近想用回 React，CRA 已经不再被推荐使用了'><title>Next.js 之 Auth.js · 终究还是错付了</title>
+<link rel=canonical href=https://ElementRef.github.io/p/next.js-%E4%B9%8B-auth.js/><link rel=stylesheet href=/scss/style.min.25d33c133ac62b31b779da6f9614c6ff632bad670ad454a2b936a66bb28581fc.css><meta property='og:title' content='Next.js 之 Auth.js'><meta property='og:description' content='最近想用回 React，CRA 已经不再被推荐使用了'><meta property='og:url' content='https://ElementRef.github.io/p/next.js-%E4%B9%8B-auth.js/'><meta property='og:site_name' content='馬腊咯稽'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:published_time' content='2024-09-06T00:00:00+00:00'><meta property='article:modified_time' content='2024-09-06T00:00:00+00:00'><meta property='og:image' content='https://ElementRef.github.io/img/cover/react.png'><meta name=twitter:title content="Next.js 之 Auth.js"><meta name=twitter:description content="最近想用回 React，CRA 已经不再被推荐使用了"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://ElementRef.github.io/img/cover/react.png'><link rel="shortcut icon" href=/favicon.ico><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><meta name=theme-color content="#ffffff"><meta name=robots content="noarchive"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hud446bf0712adb8275d321fa0b5d3aaf4_6805_300x0_resize_box_3.png width=300 height=404 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>馬腊咯稽</a></h1><h2 class=site-description>终究还是错付了</h2></div></header><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>首页</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>归档</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>搜索</span></a></li><li><a href=https://github.com/ElementRef/AboutConfig target=_blank><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M9.828 9.172a4 4 0 100 5.656A10 10 0 0012 12a10 10 0 012.172-2.828 4 4 0 110 5.656A10 10 0 0112 12 10 10 0 009.828 9.172"/></svg>
+<span>配置</span></a></li><li><a href=/%E5%90%AF%E5%8F%91/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>启发</span></a></li><li><a href=/%E5%91%BD%E4%BB%A4/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-terminal" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 7l5 5-5 5"/><line x1="12" y1="19" x2="19" y2="19"/></svg>
+<span>命令</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>关于</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>深色</span></li></div></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/next.js-%E4%B9%8B-auth.js/><img src=/img/cover/react.png loading=lazy alt="Next.js 之 Auth.js"></a></div><div class=article-details><header class=article-category><a href=/categories/react/>React</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/next.js-%E4%B9%8B-auth.js/>Next.js 之 Auth.js</a></h2><h3 class=article-subtitle>最近想用回 React，CRA 已经不再被推荐使用了</h3></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Sep 06, 2024</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长：6 分钟</time></div></footer></div></header><section class=article-content><p><a class=link href=https://authjs.dev/getting-started target=_blank rel=noopener>Auth.js
+</a>是一个用于用户身份认证的库，之前叫 <a class=link href=https://next-auth.js.org/getting-started/introduction target=_blank rel=noopener>NextAuth.js
+</a>；他提供了四种身份认证方式：</p><ol><li><a class=link href=https://oauth.net/2 target=_blank rel=noopener>OAuth
+</a>，第三方登录，用户需要跳转到可信任的第三方进行授权登录，例如 Google 登录、GitHub 登录，这种模式下，Auth.js 会将 token 保存在 cookie 中；</li><li><a class=link href=https://www.descope.com/learn/post/magic-links target=_blank rel=noopener>MagicLinks
+</a>，链接登录，用户通过电子邮件/手机短信接收登录链接进行登录；这种模式下，Auth.js 需要使用数据库来保存验证后的 token；</li><li><a class=link href=https://authjs.dev/getting-started/authentication/credentials target=_blank rel=noopener>Credentials
+</a>，密码登录，用户需要提交用户名和密码进行登录；这种模式下，Auth.js 需要使用数据库来保存用户名和密码；</li><li><a class=link href=https://baddonkey.cn/detail/39 target=_blank rel=noopener>WebAuthn
+</a>，验证器登录，用户通过 PIN、FaceID、验证器登录；这种模式对 Auth.js 来说，这是一个实验性质的功能。</li></ol><h2 id=安装>安装</h2><p>这里以 Next.js 项目为例，首先，需要安装依赖：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pnpm add next-auth@beta
+</span></span></code></pre></td></tr></table></div></div><p>然后，需要生成 <strong>AUTH_SECRET</strong>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>npx auth secret
+</span></span></code></pre></td></tr></table></div></div><p>他会在项目中生成一个 .env.local 文件，里边保存着所需要的环境变量，用来<a class=link href=https://authjs.dev/getting-started/deployment target=_blank rel=noopener>
+加密
+</a>token 和验证信息：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=l>AUTH_SECRET=&#34;5Z8A6LyP7YlODesoq7XMB2v7xziXPyuXOT8EdY5yTC0=&#34;</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>在项目根目录新建 auth.ts，这是 Auth.js 的配置文件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=nx>NextAuth</span> <span class=kr>from</span> <span class=s1>&#39;next-auth&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=p>{</span> <span class=nx>handlers</span><span class=p>,</span> <span class=nx>signIn</span><span class=p>,</span> <span class=nx>signOut</span><span class=p>,</span> <span class=nx>auth</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>NextAuth</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>providers</span><span class=o>:</span> <span class=p>[],</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 自定义日志输出形式，优先级高于 debug
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>logger</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>error</span><span class=p>(</span><span class=nx>code</span><span class=p>,</span> <span class=p>...</span><span class=nx>message</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>log</span><span class=p>.</span><span class=nx>error</span><span class=p>(</span><span class=nx>code</span><span class=p>,</span> <span class=nx>message</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nx>warn</span><span class=p>(</span><span class=nx>code</span><span class=p>,</span> <span class=p>...</span><span class=nx>message</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>log</span><span class=p>.</span><span class=nx>warn</span><span class=p>(</span><span class=nx>code</span><span class=p>,</span> <span class=nx>message</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nx>debug</span><span class=p>(</span><span class=nx>code</span><span class=p>,</span> <span class=p>...</span><span class=nx>message</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>log</span><span class=p>.</span><span class=nx>debug</span><span class=p>(</span><span class=nx>code</span><span class=p>,</span> <span class=nx>message</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 在控制台输出认证过程中的一些信息（包含敏感信息）
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>debug</span>: <span class=kt>true</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></td></tr></table></div></div><p>然后，在 app/api/auth/[&mldr;nextauth]/route.ts 路径下，新建 RouteHandlers 文件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>handlers</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@/auth&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=p>{</span> <span class=nx>GET</span><span class=p>,</span> <span class=nx>POST</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>handlers</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p>在项目根目录新建 middleware.ts：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>export</span> <span class=p>{</span> <span class=nx>auth</span> <span class=kr>as</span> <span class=nx>middleware</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@/auth&#39;</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=oauth-with-github>OAuth with GitHub</h2><p>首先，需要在 GitHub 上注册 <a class=link href=https://github.com/settings/applications/new target=_blank rel=noopener>OAuth 应用
+</a>，并提供认证回调 URL，这个回调路径对应着之前我们新建的 RouteHandlers 文件，Auth.js 内部会自动帮我们处理这个请求：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-md data-lang=md><span class=line><span class=cl>http://localhost:3000/api/auth/callback/github
+</span></span></code></pre></td></tr></table></div></div><p>在 GitHub 中，每个 OAuth 应用只能配置一个回调地址；所以，如果有需要的话，可以申请多个 OAuth 应用。</p><p>注册完成之后，GitHub 会提供 ClientID 和 ClientSecrets，我们需要将他们保存在环境变量中：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=l>AUTH_GITHUB_ID=Ov23libVOGCfpFHd1U6F</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>AUTH_GITHUB_SECRET=91bdb38df2fbd0263fe08655f3d9c64947es1778</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>AUTH_GITHUB_ID 和 AUTH_GITHUB_SECRET 是可以自定义的，你只需要将修改后的变量名传入配置文件中即可，更新配置文件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=nx>NextAuth</span> <span class=kr>from</span> <span class=s1>&#39;next-auth&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>GitHub</span> <span class=kr>from</span> <span class=s1>&#39;next-auth/providers/github&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=p>{</span> <span class=nx>handlers</span><span class=p>,</span> <span class=nx>signIn</span><span class=p>,</span> <span class=nx>signOut</span><span class=p>,</span> <span class=nx>auth</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>NextAuth</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>providers</span><span class=o>:</span> <span class=p>[</span><span class=nx>GitHub</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 等同于下面这种写法，可以实现自定义环境变量名
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>providers</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=nx>GitHub</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>clientId</span>: <span class=kt>process.env.AUTH_GITHUB_ID</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>clientSecret</span>: <span class=kt>process.env.AUTH_GITHUB_SECRET</span>
+</span></span><span class=line><span class=cl>    <span class=p>})</span>
+</span></span><span class=line><span class=cl>  <span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></td></tr></table></div></div><p>我们新建一个表单组件，用来显示登录按钮，Auth.js 会在 ServerComponents 中提供一个 ServerAction 供我们调用：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// components/sign-in.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=p>{</span> <span class=nx>signIn</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@/auth&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>SignIn() {</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>form</span>
+</span></span><span class=line><span class=cl>      <span class=na>action</span><span class=o>=</span><span class=p>{</span><span class=kr>async</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;use server&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>await</span> <span class=nx>signIn</span><span class=p>(</span><span class=s1>&#39;github&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=p>}}</span>
+</span></span><span class=line><span class=cl>    <span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>button</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;submit&#34;</span><span class=p>&gt;</span><span class=nx>Signin</span> <span class=kd>with</span> <span class=nx>GitHub</span><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>form</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>当然，你也可以在 ClientComponents 中直接调用 signIn 方法进行登录：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=s1>&#39;use client&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>signIn</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;next-auth/react&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>SignIn() {</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>&lt;</span><span class=nt>button</span> <span class=na>onClick</span><span class=o>=</span><span class=p>{()</span> <span class=o>=&gt;</span> <span class=nx>signIn</span><span class=p>(</span><span class=s1>&#39;github&#39;</span><span class=p>)}&gt;</span><span class=nx>Signin</span> <span class=kd>with</span> <span class=nx>GitHub</span><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>点击之后，我们会跳转到 GitHub 授权页面：</p><p><img src=/p/next.js-%E4%B9%8B-auth.js/login_oauth_authorize.png width=1996 height=1428 srcset="/p/next.js-%E4%B9%8B-auth.js/login_oauth_authorize_hudc13db2c9670fbb3ae3f0689ada32627_56117_480x0_resize_box_3.png 480w, /p/next.js-%E4%B9%8B-auth.js/login_oauth_authorize_hudc13db2c9670fbb3ae3f0689ada32627_56117_1024x0_resize_box_3.png 1024w" class=gallery-image data-flex-grow=139 data-flex-basis=335px loading=lazy></p><p>对应的地址是：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-md data-lang=md><span class=line><span class=cl>https://github.com/login/oauth/authorize?scope=read:user+user:email<span class=err>&amp;</span>response_type=code<span class=err>&amp;</span>client_id=Ov23libVOGCfpFHd1U6F<span class=err>&amp;</span>redirect_uri=http://localhost:3000/api/auth/callback/github<span class=err>&amp;</span>code_challenge=cl4C9yHOnx44ARlsrdBUHwesfvmRwjI8LxgR1yqZ054<span class=err>&amp;</span>code_challenge_method=S256
+</span></span></code></pre></td></tr></table></div></div><p>可以看到，他携带了一些<a class=link href=https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps target=_blank rel=noopener>
+参数
+</a>：</p><ul><li>scope=read:user+user:email，表明当前操作会读取我们的用户名和邮箱地址；</li><li>response_type=code，对应着 OAuth 授权方式中的<strong>授权码模式</strong>；</li><li>client_id=Ov23libVOGCfpFHd1U6F，对应着我们在 GitHub 申请的 OAuth 应用的 ClientID；</li><li>redirect_uri=http://localhost:3000/api/auth/callback/github，授权成功后跳转的地址，会被我们的 RouteHandlers 处理；</li><li>code_challenge=cl4C9yHOnx44ARlsrdBUHwesfvmRwjI8LxgR1yqZ054，PKCE 参数；</li><li>code_challenge_method=S256，PKCE 参数。</li></ul><p>验证通过后，会跳回我们的页面；并在 cookie 中保存认证信息：</p><ul><li>authjs.callback-url, http%3A%2F%2Flocalhost%3A3000%2F.</li><li>authjs.csrf-token, 95f7e370377acf306994d0379.</li><li>authjs.session-token, eyJhbGciOiJkaXIiLCiOi.</li></ul><h2 id=登录登出>登录/登出</h2><p>如果想让用户在登录成功之后，跳转到我们指定的页面，可以在 signIn 中传入一个对象：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>signIn</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@/auth.ts&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kd>function</span> <span class=nx>SignIn() {</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>form</span>
+</span></span><span class=line><span class=cl>      <span class=na>action</span><span class=o>=</span><span class=p>{</span><span class=kr>async</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;use server&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>await</span> <span class=nx>signIn</span><span class=p>(</span><span class=s1>&#39;github&#39;</span><span class=p>,</span> <span class=p>{</span> <span class=nx>redirectTo</span><span class=o>:</span> <span class=s1>&#39;/dashboard&#39;</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl>      <span class=p>}}</span>
+</span></span><span class=line><span class=cl>    <span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>button</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;submit&#34;</span><span class=p>&gt;</span><span class=nx>Signin</span> <span class=kd>with</span> <span class=nx>GitHub</span><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>form</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>登录成功之后，可以给用户提供一个登出的入口：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>signOut</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@/auth.ts&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kd>function</span> <span class=nx>SignOut() {</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>form</span>
+</span></span><span class=line><span class=cl>      <span class=na>action</span><span class=o>=</span><span class=p>{</span><span class=kr>async</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;use server&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>await</span> <span class=nx>signOut</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>      <span class=p>}}</span>
+</span></span><span class=line><span class=cl>    <span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>button</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;submit&#34;</span><span class=p>&gt;</span><span class=nx>Sign</span> <span class=nx>Out</span><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>form</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>同样，他也提供了 ClientComponents 的版本：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=s1>&#39;use client&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>signOut</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;next-auth/react&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kd>function</span> <span class=nx>SignOut() {</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>&lt;</span><span class=nt>button</span> <span class=na>onClick</span><span class=o>=</span><span class=p>{()</span> <span class=o>=&gt;</span> <span class=nx>signOut</span><span class=p>()}&gt;</span><span class=nx>Sign</span> <span class=nx>Out</span><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=用户信息>用户信息</h2><h3 id=servercomponents>ServerComponents</h3><p>如何判断用户的登录状态呢？可以通过获取当前用户 session 的方式来判断：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>auth</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;../auth&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>UserAvatar() {</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>session</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>auth</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;UserAvatar &gt; session&#39;</span><span class=p>,</span> <span class=nx>session</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>session</span><span class=p>.</span><span class=nx>user</span><span class=p>)</span> <span class=k>return</span> <span class=kc>null</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>img</span> <span class=na>src</span><span class=o>=</span><span class=p>{</span><span class=nx>session</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>image</span><span class=p>}</span> <span class=na>alt</span><span class=o>=</span><span class=s>&#34;User Avatar&#34;</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>session 中保存着<strong>用户信息</strong>和<strong>过期时间</strong>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;user&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;馬腊咯稽&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;email&#34;</span><span class=p>:</span> <span class=s2>&#34;malageji@xxxmail.com&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;image&#34;</span><span class=p>:</span> <span class=s2>&#34;https://avatars.githubusercontent.com/u/168389156?v=4&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;expires&#34;</span><span class=p>:</span> <span class=s2>&#34;2024-10-05T08:58:22.169Z&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=clientcomponents>ClientComponents</h3><p>如果要在 ClientComponents 中获取 session，需要使用 &lt;SessionProvider/>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// components/next-auth-provider.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s1>&#39;use client&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>SessionProvider</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;next-auth/react&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>ReactNode</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;react&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>NextAuthProvider</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>children</span>
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>children</span>: <span class=kt>ReactNode</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>&lt;</span><span class=nt>SessionProvider</span><span class=p>&gt;{</span><span class=nx>children</span><span class=p>}&lt;/</span><span class=nt>SessionProvider</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>在 RootLayout 中引入 NextAuthProvider 组件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/layout.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=nx>NextAuthProvider</span> <span class=kr>from</span> <span class=s1>&#39;@/components/next-auth-provider&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>RootLayout</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>children</span>
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=o>:</span> <span class=nx>Readonly</span><span class=o>&lt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>children</span>: <span class=kt>React.ReactNode</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=o>&gt;</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>html</span> <span class=na>lang</span><span class=o>=</span><span class=s>&#34;en&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>NextAuthProvider</span><span class=p>&gt;{</span><span class=nx>children</span><span class=p>}&lt;/</span><span class=nt>NextAuthProvider</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>之后，就可以在组件中调用 useSession 了：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=s1>&#39;use client&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>useSession</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;next-auth/react&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>UserAvatar() {</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=p>{</span> <span class=nx>data</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>useSession</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;UserAvatar &gt; data&#39;</span><span class=p>,</span> <span class=nx>data</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>data</span><span class=o>?</span><span class=p>.</span><span class=nx>user</span><span class=o>?</span><span class=p>.</span><span class=nx>image</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=kc>null</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>&lt;</span><span class=nt>img</span> <span class=na>src</span><span class=o>=</span><span class=p>{</span><span class=nx>data</span><span class=o>?</span><span class=p>.</span><span class=nx>user</span><span class=o>?</span><span class=p>.</span><span class=nx>image</span><span class=p>}</span> <span class=na>alt</span><span class=o>=</span><span class=p>{</span><span class=nx>data</span><span class=o>?</span><span class=p>.</span><span class=nx>user</span><span class=o>?</span><span class=p>.</span><span class=nx>name</span> <span class=o>||</span> <span class=s1>&#39;&#39;</span><span class=p>}</span> <span class=p>/&gt;;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=routehandlers>RouteHandlers</h3><p>对于 RouteHandlers，可以直接使用 auth 包裹请求处理函数：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>auth</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@/auth&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>NextResponse</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;next/server&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=nx>GET</span> <span class=o>=</span> <span class=nx>auth</span><span class=p>(</span><span class=kd>function</span> <span class=nx>GET</span><span class=p>(</span><span class=nx>req</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=nx>req</span><span class=o>?</span><span class=p>.</span><span class=nx>auth</span><span class=o>?</span><span class=p>.</span><span class=nx>user</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>NextResponse</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=nx>req</span><span class=o>?</span><span class=p>.</span><span class=nx>auth</span><span class=o>?</span><span class=p>.</span><span class=nx>user</span><span class=o>?</span><span class=p>.</span><span class=nx>name</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>NextResponse</span><span class=p>.</span><span class=nx>json</span><span class=p>({</span> <span class=nx>message</span><span class=o>:</span> <span class=s1>&#39;Login Needed&#39;</span> <span class=p>},</span> <span class=p>{</span> <span class=nx>status</span>: <span class=kt>401</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=nx>POST</span> <span class=o>=</span> <span class=nx>auth</span><span class=p>(</span><span class=kd>function</span> <span class=nx>POST</span><span class=p>(</span><span class=nx>req</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;POST &gt; req&#39;</span><span class=p>,</span> <span class=nx>req</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=middleware>Middleware</h3><p>首先，我们需要修改 Auth.js 的配置文件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=c1>// auth.ts
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=nx>NextAuth</span> <span class=kr>from</span> <span class=s1>&#39;next-auth&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>GitHub</span> <span class=kr>from</span> <span class=s1>&#39;next-auth/providers/github&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=p>{</span> <span class=nx>handlers</span><span class=p>,</span> <span class=nx>signIn</span><span class=p>,</span> <span class=nx>signOut</span><span class=p>,</span> <span class=nx>auth</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>NextAuth</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>providers</span><span class=o>:</span> <span class=p>[</span><span class=nx>GitHub</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 新增回调配置
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>callbacks</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>authorized</span>: <span class=kt>async</span> <span class=p>({</span> <span class=nx>auth</span> <span class=p>})</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=o>!!</span><span class=nx>auth</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></td></tr></table></div></div><p>然后，修改中间件配置：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>auth</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@/auth&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=nx>auth</span><span class=p>(</span><span class=nx>req</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;middleware.ts &gt; req&#39;</span><span class=p>,</span> <span class=nx>req</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 如果没有登录 &amp;&amp; 访问的页面不是 login，就重定向到 login
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>req</span><span class=o>?</span><span class=p>.</span><span class=nx>auth</span> <span class=o>&amp;&amp;</span> <span class=nx>req</span><span class=o>?</span><span class=p>.</span><span class=nx>nextUrl</span><span class=o>?</span><span class=p>.</span><span class=nx>pathname</span> <span class=o>!==</span> <span class=s1>&#39;/login&#39;</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=nx>newUrl</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>URL</span><span class=p>(</span><span class=s1>&#39;/login&#39;</span><span class=p>,</span> <span class=nx>req</span><span class=p>.</span><span class=nx>nextUrl</span><span class=p>.</span><span class=nx>origin</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>Response</span><span class=p>.</span><span class=nx>redirect</span><span class=p>(</span><span class=nx>newUrl</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=c1>// 排除静态资源
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>export</span> <span class=kr>const</span> <span class=nx>config</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>matcher</span><span class=o>:</span> <span class=p>[</span><span class=s1>&#39;/((?!api|_next/static|_next/image|favicon.ico).*)&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=自定义登录页>自定义登录页</h2><p>在之前的例子中，调用 signIn 时，我们都传入了一个参数来明确认证方式；如果我们不明确认证方式，点击登录时，会跳转到 Auth.js 内置的登录页面：</p><p><img src=/p/next.js-%E4%B9%8B-auth.js/inner_login_page.png width=2600 height=1950 srcset="/p/next.js-%E4%B9%8B-auth.js/inner_login_page_hud2c1b8f2bf73f3671c6b2de9d81d947c_27230_480x0_resize_box_3.png 480w, /p/next.js-%E4%B9%8B-auth.js/inner_login_page_hud2c1b8f2bf73f3671c6b2de9d81d947c_27230_1024x0_resize_box_3.png 1024w" class=gallery-image data-flex-grow=133 data-flex-basis=320px loading=lazy></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// components/sign-in.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s1>&#39;use client&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>signIn</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;next-auth/react&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>SignIn() {</span>
+</span></span><span class=line><span class=cl>  <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>   * signIn 没有传入 github、google...
+</span></span></span><span class=line><span class=cl><span class=cm>   * 此时，如果点击按钮，会跳转到内置的登录页面
+</span></span></span><span class=line><span class=cl><span class=cm>   */</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>&lt;</span><span class=nt>button</span> <span class=na>onClick</span><span class=o>=</span><span class=p>{()</span> <span class=o>=&gt;</span> <span class=nx>signIn</span><span class=p>()}&gt;</span><span class=nx>Signin</span> <span class=kd>with</span> <span class=nx>Me</span><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>此时，页面路径为：·</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-md data-lang=md><span class=line><span class=cl>http://localhost:3000/api/auth/signin?callbackUrl=http://localhost:3000/
+</span></span></code></pre></td></tr></table></div></div><p>如果业务有需要，我们可以自定义这些页面；我们需要在 auth.ts 中，添加 pages 属性：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// auth.ts
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=nx>NextAuth</span> <span class=kr>from</span> <span class=s1>&#39;next-auth&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=kr>type</span> <span class=p>{</span> <span class=nx>Provider</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;next-auth/providers&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>GitHub</span> <span class=kr>from</span> <span class=s1>&#39;next-auth/providers/github&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>Google</span> <span class=kr>from</span> <span class=s1>&#39;next-auth/providers/google&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=nx>providers</span>: <span class=kt>Provider</span><span class=p>[]</span> <span class=o>=</span> <span class=p>[</span><span class=nx>GitHub</span><span class=p>,</span> <span class=nx>Google</span><span class=p>];</span> <span class=c1>// [ [Function: GitHub], [Function: Google] ]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>export</span> <span class=kr>const</span> <span class=nx>providersMap</span> <span class=o>=</span> <span class=nx>providers</span><span class=p>.</span><span class=nx>map</span><span class=p>(</span><span class=nx>provide</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=k>typeof</span> <span class=nx>provide</span> <span class=o>===</span> <span class=s1>&#39;function&#39;</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=p>{</span> <span class=nx>id</span><span class=p>,</span> <span class=nx>name</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>provide</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span> <span class=nx>id</span><span class=p>,</span> <span class=nx>name</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>id</span>: <span class=kt>provide.id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>name</span>: <span class=kt>provide.name</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=p>{</span> <span class=nx>handlers</span><span class=p>,</span> <span class=nx>signIn</span><span class=p>,</span> <span class=nx>signOut</span><span class=p>,</span> <span class=nx>auth</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>NextAuth</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>providers</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>callbacks</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>authorized</span>: <span class=kt>async</span> <span class=p>({</span> <span class=nx>auth</span> <span class=p>})</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=o>!!</span><span class=nx>auth</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=nx>pages</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>signIn</span><span class=o>:</span> <span class=s1>&#39;/mySignIn&#39;</span> <span class=c1>// 添加自己的 signIn 页面对应的路由
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></td></tr></table></div></div><p>此时，点击登录按钮，会跳转到：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-md data-lang=md><span class=line><span class=cl>http://localhost:3000/mySignIn?callbackUrl=http://localhost:3000/
+</span></span></code></pre></td></tr></table></div></div><p>页面什么都没有，我们需要自己去实现各个按钮，并调用 signIn 方法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>providersMap</span><span class=p>,</span> <span class=nx>signIn</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@/auth&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>MySignIn() {</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span><span class=nx>providersMap</span><span class=p>.</span><span class=nx>map</span><span class=p>(({</span> <span class=nx>id</span><span class=p>,</span> <span class=nx>name</span> <span class=p>})</span> <span class=o>=&gt;</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>form</span>
+</span></span><span class=line><span class=cl>          <span class=na>action</span><span class=o>=</span><span class=p>{</span><span class=kr>async</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=s1>&#39;use server&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>await</span> <span class=nx>signIn</span><span class=p>(</span><span class=nx>id</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>          <span class=p>}}</span>
+</span></span><span class=line><span class=cl>          <span class=na>key</span><span class=o>=</span><span class=p>{</span><span class=nx>id</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>button</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;submit&#34;</span><span class=p>&gt;</span><span class=nx>Signin</span> <span class=kd>with</span> <span class=p>{</span><span class=nx>name</span><span class=p>}&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;/</span><span class=nt>form</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>))}</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=扩展-session-信息>扩展 session 信息</h2><p>从前面例子看，我们只能从 session 中获取有限的信息（name、email、image）；如果我们想获取更多的信息，我们需要修改 Auth.js 的配置：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=nx>NextAuth</span> <span class=kr>from</span> <span class=s1>&#39;next-auth&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=kr>type</span> <span class=p>{</span> <span class=nx>Provider</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;next-auth/providers&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>GitHub</span> <span class=kr>from</span> <span class=s1>&#39;next-auth/providers/github&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>Google</span> <span class=kr>from</span> <span class=s1>&#39;next-auth/providers/google&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=nx>providers</span>: <span class=kt>Provider</span><span class=p>[]</span> <span class=o>=</span> <span class=p>[</span><span class=nx>GitHub</span><span class=p>,</span> <span class=nx>Google</span><span class=p>];</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=nx>providersMap</span> <span class=o>=</span> <span class=nx>providers</span><span class=p>.</span><span class=nx>map</span><span class=p>(</span><span class=nx>provide</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=k>typeof</span> <span class=nx>provide</span> <span class=o>===</span> <span class=s1>&#39;function&#39;</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=p>{</span> <span class=nx>id</span><span class=p>,</span> <span class=nx>name</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>provide</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span> <span class=nx>id</span><span class=p>,</span> <span class=nx>name</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>id</span>: <span class=kt>provide.id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>name</span>: <span class=kt>provide.name</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=p>{</span> <span class=nx>handlers</span><span class=p>,</span> <span class=nx>signIn</span><span class=p>,</span> <span class=nx>signOut</span><span class=p>,</span> <span class=nx>auth</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>NextAuth</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>providers</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>callbacks</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>authorized</span>: <span class=kt>async</span> <span class=p>({</span> <span class=nx>auth</span> <span class=p>})</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=o>!!</span><span class=nx>auth</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 向 token 添加更多的信息
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>jwt</span><span class=p>({</span> <span class=nx>token</span><span class=p>,</span> <span class=nx>user</span> <span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=p>(</span><span class=nx>user</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>token</span><span class=p>.</span><span class=nx>id</span> <span class=o>=</span> <span class=nx>user</span><span class=p>.</span><span class=nx>id</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;jwt &gt; token&#39;</span><span class=p>,</span> <span class=nx>token</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=nx>token</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nx>session</span><span class=p>({</span> <span class=nx>session</span><span class=p>,</span> <span class=nx>token</span> <span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>session</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>id</span> <span class=o>=</span> <span class=nx>token</span><span class=p>.</span><span class=nx>id</span> <span class=kr>as</span> <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;session &gt; session&#39;</span><span class=p>,</span> <span class=nx>session</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=nx>session</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 限制用户登录，只有邮箱为 yourdomain.com 的用户才能登录
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>signIn</span><span class=p>({</span> <span class=nx>profile</span> <span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=nx>profile</span><span class=p>.</span><span class=nx>email</span><span class=p>.</span><span class=nx>endsWith</span><span class=p>(</span><span class=s1>&#39;@yourdomain.com&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=nx>pages</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>signIn</span><span class=o>:</span> <span class=s1>&#39;/mySignIn&#39;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></td></tr></table></div></div><p>此时，用户信息为：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;19b77615-e28f-4267-a988-7a7932uyu8i9&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;馬腊咯稽&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;email&#34;</span><span class=p>:</span> <span class=s2>&#34;malageji@xxxmail.com&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;image&#34;</span><span class=p>:</span> <span class=s2>&#34;https://avatars.githubusercontent.com/u/168389156?v=4&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>未完待续&mldr;</p><h2 id=参考>参考</h2><ul><li><a class=link href=https://medium.com/@rohitkumarkhatri/next-auth-in-app-router-of-next-js-7df037f7a2ad target=_blank rel=noopener>Next-Auth in App Router of Next.js</a></li></ul></section><footer class=article-footer><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA-suspense-%E6%95%B0%E6%8D%AE%E6%BA%90/><div class=article-image><img src=/img/cover/react.png loading=lazy data-key data-hash=/img/cover/react.png></div><div class=article-details><h2 class=article-title>如何构建 Suspense 数据源</h2></div></a></article><article class=has-image><a href=/p/next.js-%E4%B9%8B-optimizations/><div class=article-image><img src=/img/cover/react.png loading=lazy data-key data-hash=/img/cover/react.png></div><div class=article-details><h2 class=article-title>Next.js 之 Optimizations</h2></div></a></article><article class=has-image><a href=/p/next.js-%E4%B9%8B-datafetching/><div class=article-image><img src=/img/cover/react.png loading=lazy data-key data-hash=/img/cover/react.png></div><div class=article-details><h2 class=article-title>Next.js 之 DataFetching</h2></div></a></article><article class=has-image><a href=/p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/><div class=article-image><img src=/img/cover/react.png loading=lazy data-key data-hash=/img/cover/react.png></div><div class=article-details><h2 class=article-title>Next.js 之 Rendering 与 Caching</h2></div></a></article><article class=has-image><a href=/p/next.js-%E4%B9%8B-approuter/><div class=article-image><img src=/img/cover/react.png loading=lazy data-key data-hash=/img/cover/react.png></div><div class=article-details><h2 class=article-title>Next.js 之 AppRouter</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
+2017 -
+2024
+<a href=https://github.com/ElementRef target=_blank>馬腊咯稽</a></section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a>, Deploy by Actions<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.13.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#安装>安装</a></li><li><a href=#oauth-with-github>OAuth with GitHub</a></li><li><a href=#登录登出>登录/登出</a></li><li><a href=#用户信息>用户信息</a><ol><li><a href=#servercomponents>ServerComponents</a></li><li><a href=#clientcomponents>ClientComponents</a></li><li><a href=#routehandlers>RouteHandlers</a></li><li><a href=#middleware>Middleware</a></li></ol></li><li><a href=#自定义登录页>自定义登录页</a></li><li><a href=#扩展-session-信息>扩展 session 信息</a></li><li><a href=#参考>参考</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script></body></html>
