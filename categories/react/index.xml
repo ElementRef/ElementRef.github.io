@@ -39,7 +39,14 @@ target="_blank" rel="noopener"
 >
 WebAuthn
 &lt;/a>
-，验证器登录，用户通过 PIN、FaceID、验证器登录；这种模式对 Auth.js 来说，这是一个实验性质的功能。&lt;/li>
+，验证器登录，用户通过 PIN、FaceID、验证器登录；这种模式对 Auth.js 来说，这是一个实验性质的功能：
+&lt;ul>
+&lt;li>WebAuthn 有点类似于建立 HTTPS 连接的过程；&lt;/li>
+&lt;li>在注册过程中，FaceID 生成一对公私钥（每个用户都不同），将公钥告诉网站；&lt;/li>
+&lt;li>在验证过程中，网站将一段信息发送给 FaceID，让 FaceID 用他的私钥加密并回传给网站；&lt;/li>
+&lt;li>网站拿到加密后的信息，用已有的公钥进行解密验证，确认用户身份。&lt;/li>
+&lt;/ul>
+&lt;/li>
 &lt;/ol>
 &lt;h2 id="安装">安装&lt;/h2>
 &lt;p>这里以 Next.js 项目为例，首先，需要安装依赖：&lt;/p>
