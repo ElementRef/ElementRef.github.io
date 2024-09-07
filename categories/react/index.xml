@@ -13,12 +13,21 @@ NextAuth.js
 ；他提供了四种身份认证方式：&lt;/p>
 &lt;ol>
 &lt;li>&lt;a class="link"
-href="https://oauth.net/2"
+href="https://authjs.dev/concepts/oauth"
 target="_blank" rel="noopener"
 >
 OAuth
 &lt;/a>
-，第三方登录，用户需要跳转到可信任的第三方进行授权登录，例如 Google 登录、GitHub 登录，这种模式下，Auth.js 会将 token 保存在 cookie 中；&lt;/li>
+，第三方登录，用户需要跳转到可信任的第三方进行授权登录，例如 Google 登录、GitHub 登录，这种模式下，Auth.js 会将 token 保存在 cookie 中：
+&lt;ul>
+&lt;li>用户点击登录，网站拿着 ClientID 向 GitHub 发起认证请求；&lt;/li>
+&lt;li>网站获得 GitHub 给的一个授权许可；&lt;/li>
+&lt;li>网站拿着授权许可向 GitHub &lt;strong>授权服务器&lt;/strong>请求验证；&lt;/li>
+&lt;li>GitHub 验证通过，向网站颁发 access_token；&lt;/li>
+&lt;li>网站拿着 access_token 向 GitHub &lt;strong>资源服务器&lt;/strong>换取用户信息；&lt;/li>
+&lt;li>网站拿到用户信息，登录成功。&lt;/li>
+&lt;/ul>
+&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://www.descope.com/learn/post/magic-links"
 target="_blank" rel="noopener"
@@ -32,7 +41,7 @@ target="_blank" rel="noopener"
 >
 Credentials
 &lt;/a>
-，密码登录，用户需要提交用户名和密码进行登录；这种模式下，Auth.js 需要使用数据库来保存用户名和密码；&lt;/li>
+，账号密码登录，用户需要提交用户名和密码进行登录；这种模式下，Auth.js 需要使用数据库来保存用户名和密码；&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://baddonkey.cn/detail/39"
 target="_blank" rel="noopener"
@@ -166,7 +175,7 @@ OAuth 应用
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>在 GitHub 中，每个 OAuth 应用只能配置一个回调地址；所以，如果有需要的话，可以申请多个 OAuth 应用。&lt;/p>
-&lt;p>注册完成之后，GitHub 会提供 ClientID 和 ClientSecrets，我们需要将他们保存在环境变量中：&lt;/p>
+&lt;p>注册完成之后，GitHub 会提供 ClientID（客户端标识）和 ClientSecret（客户端密钥），我们需要将他们保存在环境变量中：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
