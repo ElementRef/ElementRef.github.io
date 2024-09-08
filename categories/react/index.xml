@@ -431,7 +431,6 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;span class="lnt">11
 &lt;/span>&lt;span class="lnt">12
 &lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">auth&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;../auth&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
@@ -441,7 +440,6 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;UserAvatar &amp;gt; session&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">session&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">session&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">user&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">img&lt;/span> &lt;span class="na">src&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="nx">session&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">user&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">image&lt;/span>&lt;span class="p">}&lt;/span> &lt;span class="na">alt&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;User Avatar&amp;#34;&lt;/span> &lt;span class="p">/&amp;gt;&lt;/span>
@@ -488,18 +486,16 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;span class="lnt"> 9
 &lt;/span>&lt;span class="lnt">10
 &lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// components/next-auth-provider.tsx
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="s1">&amp;#39;use client&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">SessionProvider&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;next-auth/react&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">ReactNode&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;react&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">NextAuthProvider&lt;/span>&lt;span class="p">({&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">children&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">children&lt;/span>: &lt;span class="kt">ReactNode&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">children&lt;/span>: &lt;span class="kt">React.ReactNode&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">SessionProvider&lt;/span>&lt;span class="p">&amp;gt;{&lt;/span>&lt;span class="nx">children&lt;/span>&lt;span class="p">}&amp;lt;/&lt;/span>&lt;span class="nt">SessionProvider&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
@@ -558,6 +554,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;span class="lnt"> 9
 &lt;/span>&lt;span class="lnt">10
 &lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="s1">&amp;#39;use client&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
@@ -566,6 +563,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">UserAvatar() {&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">data&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">useSession&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;UserAvatar &amp;gt; data&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">data&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">data&lt;/span>&lt;span class="o">?&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">user&lt;/span>&lt;span class="o">?&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">image&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
@@ -2515,7 +2513,7 @@ sitemap.xml
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;p>新的 Metadata 用来取代 PageRouter 中的 next/head。&lt;/p>
+&lt;p>新的 Metadata 用来取代 PagesRouter 中的 next/head。&lt;/p>
 &lt;h3 id="staticmetadata">StaticMetadata&lt;/h3>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -3013,7 +3011,7 @@ target="_blank" rel="noopener"
 >
 fetch
 &lt;/a>
-支持数据缓存和缓存验证功能；可以用在 &lt;a class="link"
+支持数据缓存和数据验证功能；可以用在 &lt;a class="link"
 href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
 target="_blank" rel="noopener"
 >
@@ -3050,11 +3048,11 @@ ServerActions
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// app/page.tsx
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">Page() {&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 可以当作 PageRouter 中的 getServerSideProps 函数
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 可以当作 PagesRouter 中的 getServerSideProps 函数
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">dynamicData&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sb">`https://...`&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">cache&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;no-store&amp;#39;&lt;/span> &lt;span class="p">});&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 可以当作 PageRouter 中的 getStaticProps 函数
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 可以当作 PagesRouter 中的 getStaticProps 函数
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">staticData&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sb">`https://...`&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">cache&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;force-cache&amp;#39;&lt;/span> &lt;span class="p">});&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 可以当作 PageRouter 中的 getStaticProps 函数
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 可以当作 PagesRouter 中的 getStaticProps 函数
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">revalidatedData&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sb">`https://...`&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">next&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">revalidate&lt;/span>: &lt;span class="kt">10&lt;/span> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
@@ -3142,9 +3140,9 @@ fetch
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">cache&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;no-cache&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// default, no-cache, reload, force-cache, only-if-cached
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">credentials&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;same-origin&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// include, same-origin, omit
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">headers&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;Content-Type&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;application/json&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// &amp;#39;Content-Type&amp;#39;: &amp;#39;application/x-www-form-urlencoded&amp;#39;,
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="s1">&amp;#39;Content-Type&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;application/json&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">redirect&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;follow&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// manual, follow, error
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">referrerPolicy&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;no-referrer&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// no-referrer, no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">body&lt;/span>: &lt;span class="kt">JSON.stringify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">data&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">// 需要和 &amp;#34;Content-Type&amp;#34; 匹配
@@ -3305,7 +3303,7 @@ RouterConfig
 &lt;p>getStaticPaths 中的 fallback 属性有三个取值：&lt;/p>
 &lt;ul>
 &lt;li>true，请求到达服务端时，动态生成新页面，并先返回 FallbackPage；&lt;/li>
-&lt;li>false，返回 404OPage，等同于 export const dynamicParams = false；&lt;/li>
+&lt;li>false，返回 404 页面，等同于 export const dynamicParams = false；&lt;/li>
 &lt;li>blocking，请求到达服务端时，动态生成新页面，不再支持。&lt;/li>
 &lt;/ul>
 &lt;p>true 和 blocking 选项被统一为 export const dynamicParams = true；同时 getStaticPaths 中的 revalidate 属性被合并到 &lt;a class="link"
@@ -3519,7 +3517,7 @@ page.tsx
 &lt;p>数据验证可以通过两个方式：&lt;/p>
 &lt;ul>
 &lt;li>基于时间的验证，在缓存被创建的一段时间之后，如果再次发生请求，则先对缓存进行验证；&lt;/li>
-&lt;li>按需验证，基于特定事件（例如表单提交），手动触发缓存验证。&lt;/li>
+&lt;li>按需验证，基于特定事件（例如表单提交），手动触发数据验证。&lt;/li>
 &lt;/ul>
 &lt;p>对于静态渲染的路由，如果有多个请求，并且每个请求配置了不同的 revalidate；那么对于这些请求来说，实际的 revalidate 为最小的 revalidate。&lt;/p>
 &lt;p>对于动态渲染的路由，每个请求的 revalidate 是独立的。&lt;/p>
@@ -3574,17 +3572,9 @@ ServerActions
 &lt;/span>&lt;span class="lnt"> 9
 &lt;/span>&lt;span class="lnt">10
 &lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">revalidatePath&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;next/cache&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">createPost() {&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">revalidatePath&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;/posts&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// app/page.tsx
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// app/page.tsx
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">Page() {&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">res&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;https://...&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">next&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">tags&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;collection&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="p">});&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">json&lt;/span>&lt;span class="p">();&lt;/span>
@@ -3597,7 +3587,7 @@ ServerActions
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>如果数据验证过程中出错，那么缓存不会被更新；在下一次请求中，会重新进行缓存验证。&lt;/p>
+&lt;/div>&lt;p>如果数据验证过程中出错，那么缓存不会被更新；在下一次请求中，会重新进行数据验证。&lt;/p>
 &lt;h2 id="serveractions">ServerActions&lt;/h2>
 &lt;p>&lt;a class="link"
 href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
@@ -3769,7 +3759,7 @@ target="_blank" rel="noopener"
 >
 ServerActions
 &lt;/a>
-集成了 Next.js 的缓存和缓存验证机制；&lt;/li>
+集成了 Next.js 的缓存和数据验证机制；&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
 target="_blank" rel="noopener"
@@ -4333,7 +4323,7 @@ target="_blank" rel="noopener"
 >
 ServerComponents
 &lt;/a>
-会在服务端进渲染并被缓存；Next.js 一般会基于路由进行 CodeSplit，结合 Suspense 将渲染工作尽可能的分割成更小的单位：&lt;/p>
+会在服务端进行渲染并被缓存；Next.js 一般会基于路由进行 CodeSplit，结合 Suspense 将渲染工作尽可能的分割成更小的单位：&lt;/p>
 &lt;ul>
 &lt;li>服务端组件可以直接在服务端获取数据，可以减少来自客户端的 HTTP 数据请求；&lt;/li>
 &lt;li>服务端渲染可以减少敏感数据在客户端暴露的风险；&lt;/li>
@@ -4384,7 +4374,7 @@ ClientComponents
 &lt;li>静态渲染：
 &lt;ul>
 &lt;li>适用于数据非“千人千面”而且内容都是可以被事先知道的情况下；&lt;/li>
-&lt;li>初始化渲染发生在打包阶段，并将结果进行缓存，后台会定期进行缓存验证；&lt;/li>
+&lt;li>初始化渲染发生在打包阶段，并将结果进行缓存，后台会定期进行数据验证；&lt;/li>
 &lt;li>打包的内容可以被静态部署或被部署在 CDN 上。&lt;/li>
 &lt;/ul>
 &lt;/li>
@@ -4410,8 +4400,7 @@ target="_blank" rel="noopener"
 >
 searchParams
 &lt;/a>
-这些动态 API 的函数被称为动态函数。&lt;/li>
-&lt;li>&lt;/li>
+这些动态 API 的函数（动态函数）。&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>流式渲染：借助 Suspense，将渲染工作拆分，先渲染 FallbackUI，当组件渲染好了之后，替换 FallbackUI。&lt;/li>
@@ -4429,7 +4418,13 @@ loading="lazy"
 >
 &lt;/p>
 &lt;p>但不必在所有的地方都使用 &amp;lsquo;use client&amp;rsquo; 标识；被导入 &amp;lsquo;use client&amp;rsquo; 标识的文件的模块都会运行在客户端。&lt;/p>
-&lt;p>为了提升首屏渲染性能，在页面初次加载时，Client 和 &lt;a class="link"
+&lt;p>为了提升首屏渲染性能，在页面初次加载时，&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+target="_blank" rel="noopener"
+>
+ClientComponents
+&lt;/a>
+和 &lt;a class="link"
 href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
 target="_blank" rel="noopener"
 >
@@ -4890,7 +4885,7 @@ target="_blank" rel="noopener"
 fetch
 &lt;/a>
 不适用的场景，可以使用 ReactCache；&lt;/li>
-&lt;li>缓存只存在于渲染 React 组件树的过程中，因此无需进行缓存验证。&lt;/li>
+&lt;li>缓存只存在于渲染 React 组件树的过程中，因此无需进行数据验证。&lt;/li>
 &lt;/ul>
 &lt;h3 id="datacache">DataCache&lt;/h3>
 &lt;p>DataCache 可以在服务器请求和部署之间保留数据。&lt;/p>
@@ -4934,7 +4929,7 @@ fetch
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;p>DataCache 的缓存可以配置缓存验证：&lt;/p>
+&lt;p>DataCache 的缓存可以配置数据验证：&lt;/p>
 &lt;ul>
 &lt;li>基于时间的验证，比如每隔 60 秒验证一次，适用于时效性没那么重要的数据；&lt;/li>
 &lt;li>按需验证，比如，表单提交（发生了数据的修改）之后，需要对缓存进行验证。&lt;/li>
@@ -4960,7 +4955,7 @@ loading="lazy"
 &lt;ul>
 &lt;li>仍将过期的缓存返回；&lt;/li>
 &lt;li>在后台对过期缓存进行验证，更新缓存；&lt;/li>
-&lt;li>如果缓存验证失败，接着使用过期的缓存。&lt;/li>
+&lt;li>如果数据验证失败，接着使用过期的缓存。&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
@@ -4976,7 +4971,7 @@ target="_blank" rel="noopener"
 >
 revalidateTag
 &lt;/a>
-进行缓存验证。&lt;/p>
+进行数据验证。&lt;/p>
 &lt;p>&lt;img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fon-demand-revalidation.png&amp;amp;w=3840&amp;amp;q=75"
 loading="lazy"
 >
@@ -5009,12 +5004,12 @@ ClientComponents
 loading="lazy"
 >
 &lt;/p>
-&lt;p>默认情况下，Next.js 会缓存路由对应的 ReactServerComponentPayload 和 HTML，这一步发生在打包部署/缓存验证阶段。&lt;/p>
+&lt;p>默认情况下，Next.js 会缓存路由对应的 ReactServerComponentPayload 和 HTML，这一步发生在打包部署/数据验证阶段。&lt;/p>
 &lt;p>在客户端，ReactServerComponentPayload 会按照路由配置缓存在内存里，用来提升路由导航/预加载的体验；这部分缓存被称为 RouterCache。&lt;/p>
 &lt;p>在后续的路由导航过程中，Next.js 会检查 RouterCache 中的 ReactServerComponentPayload，如果命中缓存，则不会对服务器发起请求。&lt;/p>
 &lt;p>有两种方式可以使 FullRouteCache 失效：&lt;/p>
 &lt;ul>
-&lt;li>对 DataCache 进行缓存验证，这会反过来重新渲染服务端组件，使得 RouterCache 失效；&lt;/li>
+&lt;li>对 DataCache 进行数据验证，这会反过来重新渲染服务端组件，使得 RouterCache 失效；&lt;/li>
 &lt;li>重新部署，在重新部署的过程中，FullRouteCache 会被清空并重建。&lt;/li>
 &lt;/ul>
 &lt;p>如果不想使用 FullRouteCache，每次都动态渲染，可以使用一下方法：&lt;/p>
@@ -5052,7 +5047,7 @@ ServerActions
 &lt;/ul>
 &lt;h3 id="缓存之间的影响">缓存之间的影响&lt;/h3>
 &lt;ul>
-&lt;li>对 DataCache 进行缓存验证，会使得 FullRouteCache 失效；&lt;/li>
+&lt;li>对 DataCache 进行数据验证，会使得 FullRouteCache 失效；&lt;/li>
 &lt;li>FullRouteCache 的失效，不会对 DataCache 造成影响；&lt;/li>
 &lt;li>对缓存进行按需验证，会使得 DataCache 和 RouterCache 失效；&lt;/li>
 &lt;li>在 &lt;a class="link"
@@ -5061,7 +5056,7 @@ target="_blank" rel="noopener"
 >
 RouteHandlers
 &lt;/a>
-中，对 DataCache 进行缓存验证，不会使 RouterCache 失效。&lt;/li>
+中，对 DataCache 进行数据验证，不会使 RouterCache 失效。&lt;/li>
 &lt;/ul></description></item><item><title>Next.js 之 AppRouter · 终究还是错付了</title><link>https://ElementRef.github.io/p/next.js-%E4%B9%8B-approuter/</link><pubDate>Thu, 15 Aug 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/next.js-%E4%B9%8B-approuter/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/react.png" alt="Next.js 之 AppRouter" />&lt;p>Next.js 有两种路由，官网上是这样说的：&lt;/p>
 &lt;ul>
 &lt;li>AppRouter 是一种新的路由模式，可以支持 React 最新的功能，例如：ServerComponents、StreamingWithSuspense 和 &lt;a class="link"
@@ -5122,7 +5117,7 @@ target="_blank" rel="noopener"
 >
 layout.tsx
 &lt;/a>
-，当前路由及其子路由共享的 UI；不会被二次渲染；在页面跳转时，会被缓存和复用；app/layout.tsx 用来取代 PageRouter 中的 pages/_app.js 与 pages/_document.js；&lt;/li>
+，当前路由及其子路由共享的 UI；不会被二次渲染；在页面跳转时，会被缓存和复用；app/layout.tsx 用来取代 PagesRouter 中的 pages/_app.js 与 pages/_document.js；&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/file-conventions/page"
 target="_blank" rel="noopener"
@@ -5155,7 +5150,7 @@ target="_blank" rel="noopener"
 >
 not-found.tsx
 &lt;/a>
-，当前路由及其子路由共享的 404 UI，如果路由不匹配，就会渲染此组件；用来取代 PageRouter 中的 pages/404.js；&lt;/li>
+，当前路由及其子路由共享的 404 UI，如果路由不匹配，就会渲染此组件；用来取代 PagesRouter 中的 pages/404.js；&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://nextjs.org/docs/app/api-reference/file-conventions/error"
 target="_blank" rel="noopener"
@@ -5168,8 +5163,14 @@ target="_blank" rel="noopener"
 >
 ClientComponents
 &lt;/a>
-；用来取代 PageRouter 中的 pages/_error.js；&lt;/li>
-&lt;li>global-error.tsx，全局 ErrorUI，必须为 &lt;a class="link"
+；用来取代 PagesRouter 中的 pages/_error.js；&lt;/li>
+&lt;li>&lt;a class="link"
+href="https://nextjs.org/docs/app/building-your-application/routing/error-handling#handling-global-errors"
+target="_blank" rel="noopener"
+>
+global-error.tsx
+&lt;/a>
+，全局 ErrorUI，必须为 &lt;a class="link"
 href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
 target="_blank" rel="noopener"
 >
@@ -5335,7 +5336,7 @@ target="_blank" rel="noopener"
 >
 route.ts
 &lt;/a>
-相当于 PageRouter 下的 APIRoutes：&lt;/p>
+相当于 PagesRouter 下的 APIRoutes：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -5821,9 +5822,9 @@ loading="lazy"
 &lt;li>服务端渲染出 HTMLString；&lt;/li>
 &lt;li>HTML、静态资源和 JS 被发往客户端；&lt;/li>
 &lt;li>用户看到不可交互的静态页面；&lt;/li>
-&lt;li>React 通过 Hydrates，为页面添加交互。&lt;/li>
+&lt;li>React 通过 Hydrate，为页面添加交互。&lt;/li>
 &lt;/ol>
-&lt;p>服务器必须拿到数据，才能开始渲染工作；所以，这个过程时&lt;strong>阻塞&lt;/strong>的，为了让用户尽快看到页面，而不用等到所有数据都准备好；Next.js 引入了 Streaming。&lt;/p>
+&lt;p>服务器必须拿到数据，才能开始渲染工作；所以，这个过程是&lt;strong>阻塞&lt;/strong>的；为了让用户尽快看到页面，而不用等到所有数据都准备好；Next.js 引入了 Streaming。&lt;/p>
 &lt;p>&lt;img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Floading-overview.png&amp;amp;w=3840&amp;amp;q=75"
 loading="lazy"
 >
@@ -5839,7 +5840,7 @@ loading.tsx
 loading="lazy"
 >
 &lt;/p>
-&lt;p>此时，渲染流程变成了酱紫，大的流程被拆分为多个并行的渲染任务；这样，TTFB 和 FCP 指标会更好看，也会改善 TTI。&lt;/p>
+&lt;p>此时，渲染流程变成了酱紫；大的流程被拆分为多个并行的渲染任务；这样，TTFB 和 FCP 指标会更好看，也会改善 TTI。&lt;/p>
 &lt;p>&lt;img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fserver-rendering-with-streaming-chart.png&amp;amp;w=3840&amp;amp;q=75"
 loading="lazy"
 >
@@ -6420,7 +6421,7 @@ loading="lazy"
 loading="lazy"
 >
 &lt;/p>
-&lt;p>同时当用户手动访问 /photo/flower 时，图片又以页面的形式被展示（有点像花瓣网的交互，当时是通过 History API 实现的）：&lt;/p>
+&lt;p>同时，当用户手动访问 /photo/flower 时，图片又以页面的形式被展示（有点像花瓣网的交互，当时是通过 History API 实现的）：&lt;/p>
 &lt;p>&lt;img src="https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fintercepting-routes-hard-navigate.png&amp;amp;w=3840&amp;amp;q=75"
 loading="lazy"
 >
@@ -6598,7 +6599,7 @@ target="_blank" rel="noopener"
 >
 page.tsx
 &lt;/a>
-会接管路由的所有请求。&lt;/p>
+都会接管路由的所有请求，所以不能在同目录下共存。&lt;/p>
 &lt;p>默认情况下，路由处理程序不会被缓存；可以通过 export const dynamic = &amp;lsquo;force-static&amp;rsquo; 缓存 GET 请求：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -6645,14 +6646,16 @@ page.tsx
 &lt;/span>&lt;span class="lnt">10
 &lt;/span>&lt;span class="lnt">11
 &lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">revalidate&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">60&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 也可以这样配置缓存验证
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">revalidate&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">60&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 也可以这样配置数据验证
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">GET() {&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">res&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;https://data.mongodb-api.com/...&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果当前请求距离上一次请求已经过了 60s
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 那么本次需要对缓存数据做验证
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 本次请求，还是返回之前的数据
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">next&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">revalidate&lt;/span>: &lt;span class="kt">60&lt;/span> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
@@ -7373,6 +7376,7 @@ middleware.ts
 &lt;/span>&lt;span class="lnt">26
 &lt;/span>&lt;span class="lnt">27
 &lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">match&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;@formatjs/intl-localematcher&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
@@ -7382,7 +7386,8 @@ middleware.ts
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">locales&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;en-US&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;nl-NL&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;nl&amp;#39;&lt;/span>&lt;span class="p">];&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">defaultLocale&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;en-US&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">languages&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">locales&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">defaultLocale&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// &amp;#39;en-US&amp;#39;
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">NextResponse&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;next/server&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">NextResponse&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;next/server&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">locales&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;en-US&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;nl-NL&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;nl&amp;#39;&lt;/span>&lt;span class="p">];&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">function&lt;/span> &lt;span class="nx">getLocale&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">request&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">//...
