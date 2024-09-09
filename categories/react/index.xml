@@ -34,7 +34,13 @@ target="_blank" rel="noopener"
 >
 MagicLinks
 &lt;/a>
-，链接登录，用户通过电子邮件/手机短信接收登录链接进行登录；这种模式下，Auth.js 需要使用数据库来保存验证后的 token；&lt;/li>
+，链接登录，用户通过电子邮件/手机短信接收登录链接进行登录；这种模式下，Auth.js 需要使用数据库来保存验证后的 token：
+&lt;ul>
+&lt;li>MagicLinks 一般都有时效性的要求，并且有效期都很短；&lt;/li>
+&lt;li>token 被嵌入在 MagicLinks 中，token 验证通过，用户也就登录成功了；&lt;/li>
+&lt;li>MagicLinks 的安全性更多的取决于用户的网络环境、接收设备（手机被偷、邮箱被盗）。&lt;/li>
+&lt;/ul>
+&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://authjs.dev/getting-started/authentication/credentials"
 target="_blank" rel="noopener"
@@ -1206,6 +1212,13 @@ JWT
 &lt;/ul>
 &lt;h2 id="参考">参考&lt;/h2>
 &lt;ul>
+&lt;li>&lt;a class="link"
+href="https://www.descope.com/learn/post/magic-links"
+target="_blank" rel="noopener"
+>
+What Are Magic Links and How Do They Work?
+&lt;/a>
+&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://medium.com/@rohitkumarkhatri/next-auth-in-app-router-of-next-js-7df037f7a2ad"
 target="_blank" rel="noopener"
