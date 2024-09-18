@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vue on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/vue/</link><description>Recent content in Vue on 馬腊咯稽</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 06 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/vue/index.xml" rel="self" type="application/rss+xml"/><item><title>VueRouter 2.x 源码学习 · 终究还是错付了</title><link>https://ElementRef.github.io/p/vuerouter-2.x-%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/</link><pubDate>Thu, 06 Jan 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vuerouter-2.x-%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="VueRouter 2.x 源码学习" />&lt;h2 id="vueuserouter">Vue.use(Router)&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vue on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/vue/</link><description>Recent content in Vue on 馬腊咯稽</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 06 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/vue/index.xml" rel="self" type="application/rss+xml"/><item><title>VueRouter 2.x 源码学习 · PLEASE OFFER ME A JOB</title><link>https://ElementRef.github.io/p/vuerouter-2.x-%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/</link><pubDate>Thu, 06 Jan 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vuerouter-2.x-%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="VueRouter 2.x 源码学习" />&lt;h2 id="vueuserouter">Vue.use(Router)&lt;/h2>
 &lt;p>Vue.use 会调用 Router 的静态 install 方法：&lt;/p>
 &lt;ol>
 &lt;li>保存 Vue 构造函数，方便其他组件调用 Vue 的工具函数；&lt;/li>
@@ -2022,7 +2022,7 @@
 &lt;/div>
 &lt;/div>&lt;p>总之，VueRouter 在初始化的时候，会向组件 mixin 一些钩子函数；在 beforeCreate 中，会借助 Vue.util.defineReactive API 将 vm._route 转换为 getter/setter；又因为 router-view 在调用 h 函数渲染组件的时候，会访问 vm._route.matched，router-view 所在实例的 renderWatcher 形成对 vm._route 的依赖。所以，每当 vm._route 变化，router-view 会自动匹配自己要渲染的组件。&lt;/p>
 &lt;p>router-link 默认会渲染出一个绑定了事件的 a 标签，用户点击时，会调用 transitionTo 进行导航；transitionTo 会计算出最新的 route，调用 History API 更新 URL，调用路由钩子，更新 vm._route，触发 router-view 更新。&lt;/p>
-&lt;p>至于 popstate 事件，主要用来处理浏览器的行为（history.pushState/replaceState 并不会触发 popstate）并调用 transitionTo 更新页面。&lt;/p></description></item><item><title>Vue 2.x/3.x 比较 · 终究还是错付了</title><link>https://ElementRef.github.io/p/vue-2.x/3.x-%E6%AF%94%E8%BE%83/</link><pubDate>Sun, 24 Oct 2021 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vue-2.x/3.x-%E6%AF%94%E8%BE%83/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="Vue 2.x/3.x 比较" />&lt;h2 id="响应式原理-2x">响应式原理 2.x&lt;/h2>
+&lt;p>至于 popstate 事件，主要用来处理浏览器的行为（history.pushState/replaceState 并不会触发 popstate）并调用 transitionTo 更新页面。&lt;/p></description></item><item><title>Vue 2.x/3.x 比较 · PLEASE OFFER ME A JOB</title><link>https://ElementRef.github.io/p/vue-2.x/3.x-%E6%AF%94%E8%BE%83/</link><pubDate>Sun, 24 Oct 2021 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vue-2.x/3.x-%E6%AF%94%E8%BE%83/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="Vue 2.x/3.x 比较" />&lt;h2 id="响应式原理-2x">响应式原理 2.x&lt;/h2>
 &lt;p>Dep 用来存放/管理订阅者（watcher）的对象；每个 Dep 实例都存在于&lt;strong>对象每个属性对应的 getter/setter 所在的闭包里&lt;/strong>并且都有唯一的 id。&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -15040,7 +15040,7 @@ target="_blank" rel="noopener"
 深入浅出 Vue.js
 &lt;/a>
 &lt;/li>
-&lt;/ul></description></item><item><title>基于作用域插槽的 Renderless 组件 · 终究还是错付了</title><link>https://ElementRef.github.io/p/%E5%9F%BA%E4%BA%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD%E7%9A%84-renderless-%E7%BB%84%E4%BB%B6/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E5%9F%BA%E4%BA%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD%E7%9A%84-renderless-%E7%BB%84%E4%BB%B6/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="基于作用域插槽的 Renderless 组件" />&lt;p>回来一查，原来是作用域插槽的高阶（算是吧）用法。&lt;/p>
+&lt;/ul></description></item><item><title>基于作用域插槽的 Renderless 组件 · PLEASE OFFER ME A JOB</title><link>https://ElementRef.github.io/p/%E5%9F%BA%E4%BA%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD%E7%9A%84-renderless-%E7%BB%84%E4%BB%B6/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E5%9F%BA%E4%BA%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD%E7%9A%84-renderless-%E7%BB%84%E4%BB%B6/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="基于作用域插槽的 Renderless 组件" />&lt;p>回来一查，原来是作用域插槽的高阶（算是吧）用法。&lt;/p>
 &lt;h2 id="普通插槽与作用域插槽">普通插槽与作用域插槽&lt;/h2>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -15651,7 +15651,7 @@ target="_blank" rel="noopener"
 Renderless Components In Vue.js
 &lt;/a>
 &lt;/li>
-&lt;/ul></description></item><item><title>Vue Composition API · 终究还是错付了</title><link>https://ElementRef.github.io/p/vue-composition-api/</link><pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vue-composition-api/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="Vue Composition API" />&lt;h2 id="与-hooks-的区别">与 Hooks 的区别&lt;/h2>
+&lt;/ul></description></item><item><title>Vue Composition API · PLEASE OFFER ME A JOB</title><link>https://ElementRef.github.io/p/vue-composition-api/</link><pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vue-composition-api/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="Vue Composition API" />&lt;h2 id="与-hooks-的区别">与 Hooks 的区别&lt;/h2>
 &lt;ol>
 &lt;li>更符合 JS 习惯；&lt;/li>
 &lt;li>对调用顺序不敏感；&lt;/li>
@@ -16777,7 +16777,7 @@ Renderless Components In Vue.js
 &lt;li>isReactive，判断对象是否是 reactive 创建的一个响应式代理；&lt;/li>
 &lt;li>isReadonly，判断对象是否是 readonly 创建的一个只读代理；&lt;/li>
 &lt;li>isRef，判断值是否为 ref 对象。&lt;/li>
-&lt;/ul></description></item><item><title>Vue 3.0 来了 · 终究还是错付了</title><link>https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/</link><pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="Vue 3.0 来了" />&lt;h2 id="改变">改变&lt;/h2>
+&lt;/ul></description></item><item><title>Vue 3.0 来了 · PLEASE OFFER ME A JOB</title><link>https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/</link><pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="Vue 3.0 来了" />&lt;h2 id="改变">改变&lt;/h2>
 &lt;p>Vue 新版本根据&lt;a class="link"
 href="https://github.com/vuejs/rfcs"
 target="_blank" rel="noopener"
@@ -16805,7 +16805,7 @@ target="_blank" rel="noopener"
 &lt;p>&lt;img src="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/template.png"
 width="989"
 height="329"
-srcset="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/template_hu22a1f2ea50c010ef0b589d7b9fe94809_25674_480x0_resize_box_3.png 480w, https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/template_hu22a1f2ea50c010ef0b589d7b9fe94809_25674_1024x0_resize_box_3.png 1024w"
+srcset="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/template_hu17536474750186079400.png 480w, https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/template_hu11459360621583171541.png 1024w"
 class="gallery-image"
 data-flex-grow="300"
 data-flex-basis="721px"
@@ -16816,7 +16816,7 @@ loading="lazy"
 &lt;p>&lt;img src="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/patch-flag.png"
 width="1537"
 height="962"
-srcset="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/patch-flag_huf01bca55e12aa65f50eb9b96d5dd405c_72099_480x0_resize_box_3.png 480w, https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/patch-flag_huf01bca55e12aa65f50eb9b96d5dd405c_72099_1024x0_resize_box_3.png 1024w"
+srcset="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/patch-flag_hu17698686921145733538.png 480w, https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/patch-flag_hu8618602418232669333.png 1024w"
 class="gallery-image"
 data-flex-grow="159"
 data-flex-basis="383px"
@@ -16827,7 +16827,7 @@ loading="lazy"
 &lt;p>&lt;img src="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/ssr.png"
 width="1543"
 height="667"
-srcset="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/ssr_hufedad769bf68602d418e02b77bcbf2a0_47551_480x0_resize_box_3.png 480w, https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/ssr_hufedad769bf68602d418e02b77bcbf2a0_47551_1024x0_resize_box_3.png 1024w"
+srcset="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/ssr_hu5530179918691372476.png 480w, https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/ssr_hu5754710629092467255.png 1024w"
 class="gallery-image"
 data-flex-grow="231"
 data-flex-basis="555px"
@@ -16838,7 +16838,7 @@ loading="lazy"
 &lt;p>&lt;img src="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/auto-memo.png"
 width="1521"
 height="409"
-srcset="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/auto-memo_hu874c8879124173dd9b700b63a1f812a7_22826_480x0_resize_box_3.png 480w, https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/auto-memo_hu874c8879124173dd9b700b63a1f812a7_22826_1024x0_resize_box_3.png 1024w"
+srcset="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/auto-memo_hu12431174520131621386.png 480w, https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/auto-memo_hu8432360304146324925.png 1024w"
 class="gallery-image"
 data-flex-grow="371"
 data-flex-basis="892px"
@@ -16850,7 +16850,7 @@ loading="lazy"
 &lt;p>&lt;img src="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/tree-shaking.png"
 width="1530"
 height="922"
-srcset="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/tree-shaking_huba77d5c4c92e0fe87f8044dad0318892_55084_480x0_resize_box_3.png 480w, https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/tree-shaking_huba77d5c4c92e0fe87f8044dad0318892_55084_1024x0_resize_box_3.png 1024w"
+srcset="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/tree-shaking_hu813003217168280442.png 480w, https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/tree-shaking_hu6158574500688041202.png 1024w"
 class="gallery-image"
 data-flex-grow="165"
 data-flex-basis="398px"
@@ -16869,7 +16869,7 @@ Composition API
 &lt;p>&lt;img src="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/composition.png"
 width="954"
 height="1110"
-srcset="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/composition_hu831adf467dbc8b97e2d039924b1d4549_67224_480x0_resize_box_3.png 480w, https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/composition_hu831adf467dbc8b97e2d039924b1d4549_67224_1024x0_resize_box_3.png 1024w"
+srcset="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/composition_hu18266016661741395900.png 480w, https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/composition_hu1597190903345286190.png 1024w"
 class="gallery-image"
 data-flex-grow="85"
 data-flex-basis="206px"
@@ -16880,7 +16880,7 @@ loading="lazy"
 &lt;p>&lt;img src="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/fragment-one.png"
 width="1254"
 height="242"
-srcset="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/fragment-one_hu49ba40b752b01a25f2f3d7c85fcd42df_18032_480x0_resize_box_3.png 480w, https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/fragment-one_hu49ba40b752b01a25f2f3d7c85fcd42df_18032_1024x0_resize_box_3.png 1024w"
+srcset="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/fragment-one_hu15717722743882622357.png 480w, https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/fragment-one_hu9740203463093639461.png 1024w"
 class="gallery-image"
 data-flex-grow="518"
 data-flex-basis="1243px"
@@ -16891,7 +16891,7 @@ loading="lazy"
 &lt;p>&lt;img src="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/fragment-two.png"
 width="1535"
 height="706"
-srcset="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/fragment-two_hued70ba25957a89281160b0baa49674dc_54857_480x0_resize_box_3.png 480w, https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/fragment-two_hued70ba25957a89281160b0baa49674dc_54857_1024x0_resize_box_3.png 1024w"
+srcset="https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/fragment-two_hu272233294586629799.png 480w, https://ElementRef.github.io/p/vue-3.0-%E6%9D%A5%E4%BA%86/fragment-two_hu9711071450716312053.png 1024w"
 class="gallery-image"
 data-flex-grow="217"
 data-flex-basis="521px"
@@ -16899,11 +16899,11 @@ loading="lazy"
 >
 &lt;/p>
 &lt;h2 id="ie11">IE11&lt;/h2>
-&lt;p>Vue 3.0 将为 IE11 建立专门的 build，开发者可以选择不同的版本；2.7 将会是 2.x 时代的最后一个版本，有 18 个月的支持期。&lt;/p></description></item><item><title>Vue 2.x 复习总结 · 终究还是错付了</title><link>https://ElementRef.github.io/p/vue-2.x-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93/</link><pubDate>Wed, 04 Mar 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vue-2.x-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="Vue 2.x 复习总结" />&lt;h2 id="生命周期">生命周期&lt;/h2>
+&lt;p>Vue 3.0 将为 IE11 建立专门的 build，开发者可以选择不同的版本；2.7 将会是 2.x 时代的最后一个版本，有 18 个月的支持期。&lt;/p></description></item><item><title>Vue 2.x 复习总结 · PLEASE OFFER ME A JOB</title><link>https://ElementRef.github.io/p/vue-2.x-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93/</link><pubDate>Wed, 04 Mar 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vue-2.x-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="Vue 2.x 复习总结" />&lt;h2 id="生命周期">生命周期&lt;/h2>
 &lt;p>&lt;img src="https://ElementRef.github.io/p/vue-2.x-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93/lifecycle.png"
 width="1200"
 height="3039"
-srcset="https://ElementRef.github.io/p/vue-2.x-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93/lifecycle_huc96c6b4af5dabdec16ddf54b951af939_58927_480x0_resize_box_3.png 480w, https://ElementRef.github.io/p/vue-2.x-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93/lifecycle_huc96c6b4af5dabdec16ddf54b951af939_58927_1024x0_resize_box_3.png 1024w"
+srcset="https://ElementRef.github.io/p/vue-2.x-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93/lifecycle_hu17417070418325037529.png 480w, https://ElementRef.github.io/p/vue-2.x-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93/lifecycle_hu627544724590640958.png 1024w"
 class="gallery-image"
 data-flex-grow="39"
 data-flex-basis="94px"
