@@ -721,7 +721,13 @@ HPACK
 &lt;/a>
 算法。&lt;/p>
 &lt;img style="display: block;margin: 0 auto;width: 80%;" src="server-push.jpg">
-&lt;p>服务端推送是一种在客户端请求之前发送数据的机制。在 HTTP/2 中，服务器可以对客户端的一个请求发送多个响应；Server Push 让 HTTP/1.x 时代使用内嵌资源的优化手段变得没有意义。&lt;/p>
+&lt;p>&lt;a class="link"
+href="https://developer.mozilla.org/zh-CN/docs/Web/API/Server-sent_events/Using_server-sent_events"
+target="_blank" rel="noopener"
+>
+服务端推送/SSE
+&lt;/a>
+是一种在客户端请求之前发送数据的机制。在 HTTP/2 中，服务器可以对客户端的一个请求发送多个响应；Server Push 让 HTTP/1.x 时代使用内嵌资源的优化手段变得没有意义。&lt;/p>
 &lt;p>如果一个请求是由你的主页发起的，服务器很可能会响应主页内容、Logo 以及样式表，因为它知道客户端会用到这些东西；这相当于在一个 HTML 文档内集合了所有的资源，不过与之相比，服务器推送还有一个很大的优势：可以缓存！也让在遵循同源的情况下，不同页面之间可以共享缓存资源成为可能。&lt;/p>
 &lt;h2 id="http3">HTTP/3&lt;/h2>
 &lt;p>HTTP/3 相比于之前版本的一个重要区别：是它在一种新的传输协议 QUIC 上运行；QUIC 专为移动密集型互联网使用而设计。QUIC 的使用意味着 HTTP/3 依赖于用户数据报协议（UDP），而不是传输控制协议（TCP）；切换到 UDP 将使在线浏览时的连接速度和用户体验更快。&lt;/p>
