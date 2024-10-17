@@ -11,7 +11,7 @@
 <svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
 <span>深色</span></li></div></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/typescript-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93%E4%BA%8C/><img src=/img/cover/typescript.png loading=lazy alt="TypeScript 复习总结（二）"></a></div><div class=article-details><header class=article-category><a href=/categories/ts/>TS</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/typescript-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93%E4%BA%8C/>TypeScript 复习总结（二）</a></h2><h3 class=article-subtitle>不喜欢 TS 的原因是在写业务代码时，注意力总被类型系统吸引过去</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
 <time class=article-time--published>Apr 24, 2020</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
-<time class=article-time--reading>阅读时长：9 分钟</time></div></footer></div></header><section class=article-content><h2 id=编译上下文>编译上下文</h2><p>tsconfig.json 用来给文件分组，告诉 TS 哪些文件是有效的，哪些是无效的；还包含有正在被使用的编译选项的信息。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+<time class=article-time--reading>阅读时长：11 分钟</time></div></footer></div></header><section class=article-content><h2 id=编译上下文>编译上下文</h2><p>tsconfig.json 用来给文件分组，告诉 TS 哪些文件是有效的，哪些是无效的；还包含有正在被使用的编译选项的信息。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -501,7 +501,73 @@
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>IntersectionType2</span> <span class=o>=</span> <span class=kt>unknown</span> <span class=o>&amp;</span> <span class=kc>undefined</span><span class=p>;</span> <span class=c1>// undefined
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>IntersectionType3</span> <span class=o>=</span> <span class=kt>unknown</span> <span class=o>&amp;</span> <span class=kt>string</span><span class=p>;</span> <span class=c1>// string
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>type</span> <span class=nx>IntersectionType4</span> <span class=o>=</span> <span class=kt>unknown</span> <span class=o>&amp;</span> <span class=kt>number</span><span class=p>[];</span> <span class=c1>// number[]
-</span></span></span></code></pre></td></tr></table></div></div><h2 id=private-与-protected>private 与 protected</h2><p>当成员被标记成 private 时，它就不能在声明它的类的外部访问；protected 成员在派生类中仍然可以访问。</p><p>TS 使用的是结构性类型系统；当我们比较两种不同的类型时，并不在乎它们从何处而来，如果所有成员的类型都是兼容的，我们就认为它们的类型是兼容的；当我们比较带有 private 或 protected 成员的类型的时候，如果其中一个类型里包含一个 private 成员，那么只有当另外一个类型中也存在这样一个 private 成员，并且它们都是来自同一处声明时，我们才认为这两个类型是兼容的；对于 protected 成员也使用这个规则。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></span></code></pre></td></tr></table></div></div><h2 id=as-与-satisfies>as 与 satisfies</h2><p>最近在看 Tailwind 的时候，发现配置文件末尾会添加一个 satisfies 关键字：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=kr>type</span> <span class=p>{</span> <span class=nx>Config</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;tailwindcss&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=cm>/*...*/</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> <span class=nx>satisfies</span> <span class=nx>Config</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p>为什么不用 as 断言呢？我们先看一个例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>type</span> <span class=nx>AmountType</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>amount</span>: <span class=kt>number</span> <span class=o>|</span> <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>amountObj</span>: <span class=kt>AmountType</span> <span class=o>=</span> <span class=p>{</span> <span class=nx>amount</span>: <span class=kt>100.001</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm> * TS 会报错：Argument of type &#39;string | number&#39; is not assignable to parameter of type &#39;number&#39;
+</span></span></span><span class=line><span class=cl><span class=cm> * 可是，逻辑上是行得通的，至少走到这一步时，amount 确实是 number 类型
+</span></span></span><span class=line><span class=cl><span class=cm> */</span>
+</span></span><span class=line><span class=cl><span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=nb>Math</span><span class=p>.</span><span class=nx>floor</span><span class=p>(</span><span class=nx>amountObj</span><span class=p>.</span><span class=nx>amount</span><span class=p>));</span>
+</span></span><span class=line><span class=cl><span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm> * 所以，我们可以用 as 告诉 TS，amount 在当前位置确实是 number
+</span></span></span><span class=line><span class=cl><span class=cm> * 但是，类型断言相当于让 TS 放手别管
+</span></span></span><span class=line><span class=cl><span class=cm> */</span>
+</span></span><span class=line><span class=cl><span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=nb>Math</span><span class=p>.</span><span class=nx>floor</span><span class=p>(</span><span class=nx>amountObj</span><span class=p>.</span><span class=nx>amount</span> <span class=kr>as</span> <span class=kt>number</span><span class=p>));</span>
+</span></span></code></pre></td></tr></table></div></div><p>我们把 as 换成 satisfies 呢：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>type</span> <span class=nx>AmountType</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>amount</span>: <span class=kt>number</span> <span class=o>|</span> <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>amountObj</span> <span class=o>=</span> <span class=p>{</span> <span class=nx>amount</span>: <span class=kt>100</span> <span class=p>}</span> <span class=nx>satisfies</span> <span class=nx>AmountType</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=nb>Math</span><span class=p>.</span><span class=nx>floor</span><span class=p>(</span><span class=nx>amountObj</span><span class=p>.</span><span class=nx>amount</span><span class=p>));</span>
+</span></span></code></pre></td></tr></table></div></div><p>此时，报错消失；amount 的类型可以根据具体的值的类型变化而变化。</p><p>在 TS 文档中，类型断言用来给变量声明一个更具体/宽泛的类型：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm> * document.getElementById 返回值的类型信息为 HTMLElement | null
+</span></span></span><span class=line><span class=cl><span class=cm> * 这里，我们通过 as 将其类型缩窄为 HTMLCanvasElement
+</span></span></span><span class=line><span class=cl><span class=cm> */</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>myCanvas</span> <span class=o>=</span> <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s1>&#39;main_canvas&#39;</span><span class=p>)</span> <span class=kr>as</span> <span class=nx>HTMLCanvasElement</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=c1>// 报错，断言不是万能的，你不能将类型断言为另一个完全不想干的类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>const</span> <span class=nx>x</span> <span class=o>=</span> <span class=s1>&#39;hello&#39;</span> <span class=kr>as</span> <span class=kt>number</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=c1>// 无报错，事先断言为 any 或者 unknown，将其类型宽泛化再收窄
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>const</span> <span class=nx>x</span> <span class=o>=</span> <span class=s1>&#39;hello&#39;</span> <span class=kr>as</span> <span class=kt>unknown</span> <span class=kr>as</span> <span class=kt>number</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>x</span> <span class=o>=</span> <span class=s1>&#39;hello&#39;</span> <span class=kr>as</span> <span class=kt>any</span> <span class=kr>as</span> <span class=kt>number</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p>而 satisfies 表示，当前变量的值<strong>符合</strong>给定的类型的某一种情况；某个属性到底是哪个类型，具体情况具体分析。</p><h2 id=private-与-protected>private 与 protected</h2><p>当成员被标记成 private 时，它就不能在声明它的类的外部访问；protected 成员在派生类中仍然可以访问。</p><p>TS 使用的是结构性类型系统；当我们比较两种不同的类型时，并不在乎它们从何处而来，如果所有成员的类型都是兼容的，我们就认为它们的类型是兼容的；当我们比较带有 private 或 protected 成员的类型的时候，如果其中一个类型里包含一个 private 成员，那么只有当另外一个类型中也存在这样一个 private 成员，并且它们都是来自同一处声明时，我们才认为这两个类型是兼容的；对于 protected 成员也使用这个规则。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -781,7 +847,105 @@
 </span></span><span class=line><span class=cl>  <span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=nx>example</span><span class=p>({</span> <span class=nx>bar</span>: <span class=kt>123</span><span class=p>,</span> <span class=nx>common</span><span class=o>:</span> <span class=s1>&#39;456&#39;</span> <span class=p>});</span>
-</span></span></code></pre></td></tr></table></div></div><h2 id=参考>参考</h2><ul><li><a class=link href=https://juejin.cn/post/6844903749501059085 target=_blank rel=noopener>TypeScript 中的 interface 和 type 到底有什么区别</a></li><li><a class=link href=https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types target=_blank rel=noopener>TypeScript: Interfaces VS Types</a></li><li><a class=link href=https://juejin.im/post/5d04ac745188250a8b1fd203 target=_blank rel=noopener>TypeScript 3.0: unknown 类型</a></li><li><a class=link href=https://juejin.im/post/5c2f87ce5188252593122c98 target=_blank rel=noopener>TypeScript 强大的类型别名</a></li></ul></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+</span></span></code></pre></td></tr></table></div></div><h2 id=协变与逆变>协变与逆变</h2><p>更<strong>具体</strong>的类型，总是可以赋值给更<strong>宽泛</strong>的类型，不能反过来，因为保证不了类型安全：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=c1>// 三种粉丝，会的技能越来越多，特性也越来越明显
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>interface</span> <span class=nx>BaseFans</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>call</span>: <span class=kt>any</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=c1>// BaseFans 的子类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>interface</span> <span class=nx>IKunFans</span> <span class=kr>extends</span> <span class=nx>BaseFans</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>basketball</span>: <span class=kt>any</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>dance</span>: <span class=kt>any</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>sing</span>: <span class=kt>any</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=c1>// IKunFans 的子类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>interface</span> <span class=nx>SuperIKunFans</span> <span class=kr>extends</span> <span class=nx>IKunFans</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>rap</span>: <span class=kt>any</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>let</span> <span class=nx>baseFans</span>: <span class=kt>BaseFans</span> <span class=o>=</span> <span class=p>{</span> <span class=nx>call</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{}</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm> * Type &#39;BaseFans&#39; is missing the following properties from type &#39;IKunFans&#39;: sing, dance, basketball
+</span></span></span><span class=line><span class=cl><span class=cm> * 这里，baseFans 不能赋值给 iKunFans，因为 IKunFans 类型比 BaseFans 类型更具体
+</span></span></span><span class=line><span class=cl><span class=cm> * TS 为了保证类型的安全，访问 iKunFans.sing 时，sing 并不存在，所以报错
+</span></span></span><span class=line><span class=cl><span class=cm> */</span>
+</span></span><span class=line><span class=cl><span class=kd>let</span> <span class=nx>iKunFans</span>: <span class=kt>IKunFans</span> <span class=o>=</span> <span class=nx>baseFans</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kd>let</span> <span class=nx>superIKunFans</span>: <span class=kt>SuperIKunFans</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>basketball</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{},</span>
+</span></span><span class=line><span class=cl>  <span class=nx>call</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{},</span>
+</span></span><span class=line><span class=cl>  <span class=nx>dance</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{},</span>
+</span></span><span class=line><span class=cl>  <span class=nx>rap</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{},</span>
+</span></span><span class=line><span class=cl>  <span class=nx>sing</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm> * 这里可以赋值成功，因为 iKunFans 变量上的方法都满足 IKunFans 的要求
+</span></span></span><span class=line><span class=cl><span class=cm> * 不会导致类型不安全，SuperIKunFans 类型比 IKunFans 类型更具体
+</span></span></span><span class=line><span class=cl><span class=cm> */</span>
+</span></span><span class=line><span class=cl><span class=kd>let</span> <span class=nx>iKunFans</span>: <span class=kt>IKunFans</span> <span class=o>=</span> <span class=nx>superIKunFans</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p>而函数形参恰好反了过来：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>type</span> <span class=nx>IKunFansTransform</span> <span class=o>=</span> <span class=p>(</span><span class=nx>fans</span>: <span class=kt>IKunFans</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>IKunFans</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>SuperIKunFansTransform</span> <span class=o>=</span> <span class=p>(</span><span class=nx>fans</span>: <span class=kt>SuperIKunFans</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>SuperIKunFans</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>superIKunFansTransform</span>: <span class=kt>SuperIKunFansTransform</span> <span class=o>=</span>
+</span></span><span class=line><span class=cl>  <span class=nx>superIKunFansTransformParams</span> <span class=o>=&gt;</span> <span class=nx>superIKunFansTransformParams</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm> * Type &#39;SuperIKunFansTransform&#39; is not assignable to type &#39;IKunFansTransform&#39;
+</span></span></span><span class=line><span class=cl><span class=cm> * Types of parameters &#39;fans&#39; and &#39;fans&#39; are incompatible
+</span></span></span><span class=line><span class=cl><span class=cm> * Property &#39;rap&#39; is missing in type &#39;IKunFans&#39; but required in type &#39;SuperIKunFans&#39;
+</span></span></span><span class=line><span class=cl><span class=cm> * 这里和上边的情况完全相反了，更具体的 superIKunFansTransform 不再能赋值给更宽泛的 iKunFansTransform
+</span></span></span><span class=line><span class=cl><span class=cm> * 因为变量 iKunFansTransform 虽然被定义为了 IKunFansTransform 类型，但是实际上指向了 superIKunFansTransform
+</span></span></span><span class=line><span class=cl><span class=cm> * superIKunFansTransform 的形参更为具体，有自己独有的 rap 方法
+</span></span></span><span class=line><span class=cl><span class=cm> * 通过 iKunFansTransform 调用 superIKunFansTransform 时
+</span></span></span><span class=line><span class=cl><span class=cm> * IKunFansTransform 类型并不能保证形参中有 rap 方法
+</span></span></span><span class=line><span class=cl><span class=cm> * 所以会导致形参类型不安全
+</span></span></span><span class=line><span class=cl><span class=cm> */</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>iKunFansTransform</span>: <span class=kt>IKunFansTransform</span> <span class=o>=</span> <span class=nx>superIKunFansTransform</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p>导致这种情况的原因是：TS 中，类型跟着变量走，而不是跟着值走的。</p><h2 id=参考>参考</h2><ul><li><a class=link href=https://juejin.cn/post/6844903749501059085 target=_blank rel=noopener>TypeScript 中的 interface 和 type 到底有什么区别</a></li><li><a class=link href=https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types target=_blank rel=noopener>TypeScript: Interfaces VS Types</a></li><li><a class=link href=https://juejin.im/post/5d04ac745188250a8b1fd203 target=_blank rel=noopener>TypeScript 3.0: unknown 类型</a></li><li><a class=link href=https://juejin.im/post/5c2f87ce5188252593122c98 target=_blank rel=noopener>TypeScript 强大的类型别名</a></li><li><a class=link href=https://www.bilibili.com/video/BV17N4y1e7PK/ target=_blank rel=noopener>TS 中的协变与逆变</a></li></ul></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
 <span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/ts-%E5%9C%A8-react-%E4%B8%AD%E7%9A%84%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8/><div class=article-image><img src=/img/cover/typescript.png loading=lazy data-key data-hash=/img/cover/typescript.png></div><div class=article-details><h2 class=article-title>TS 在 React 中的简单应用</h2></div></a></article><article class=has-image><a href=/p/typescript-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93%E4%B8%80/><div class=article-image><img src=/img/cover/typescript.png loading=lazy data-key data-hash=/img/cover/typescript.png></div><div class=article-details><h2 class=article-title>TypeScript 复习总结（一）</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
 2017 -
 2024
@@ -789,4 +953,4 @@
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
 <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#编译上下文>编译上下文</a></li><li><a href=#声明空间>声明空间</a></li><li><a href=#类型兼容>类型兼容</a></li><li><a href=#模块>模块</a></li><li><a href=#interface-与-type>interface 与 type</a></li><li><a href=#undefinednullnever-与-void>undefined、null、never 与 void</a></li><li><a href=#any-与-unknown>any 与 unknown</a></li><li><a href=#private-与-protected>private 与 protected</a></li><li><a href=#instanceof>instanceof</a></li><li><a href=#typeof>typeof</a></li><li><a href=#keyof>keyof</a></li><li><a href=#infer>infer</a></li><li><a href=#in>in</a></li><li><a href=#is>is</a></li><li><a href=#参考>参考</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script src=https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js></script><script>NProgress.configure({showSpinner:!1}),NProgress.start(),document.addEventListener("readystatechange",()=>{document.readyState==="interactive"&&NProgress.inc(.8),document.readyState==="complete"&&NProgress.done()})</script></body></html>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#编译上下文>编译上下文</a></li><li><a href=#声明空间>声明空间</a></li><li><a href=#类型兼容>类型兼容</a></li><li><a href=#模块>模块</a></li><li><a href=#interface-与-type>interface 与 type</a></li><li><a href=#undefinednullnever-与-void>undefined、null、never 与 void</a></li><li><a href=#any-与-unknown>any 与 unknown</a></li><li><a href=#as-与-satisfies>as 与 satisfies</a></li><li><a href=#private-与-protected>private 与 protected</a></li><li><a href=#instanceof>instanceof</a></li><li><a href=#typeof>typeof</a></li><li><a href=#keyof>keyof</a></li><li><a href=#infer>infer</a></li><li><a href=#in>in</a></li><li><a href=#is>is</a></li><li><a href=#协变与逆变>协变与逆变</a></li><li><a href=#参考>参考</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script src=https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js></script><script>NProgress.configure({showSpinner:!1}),NProgress.start(),document.addEventListener("readystatechange",()=>{document.readyState==="interactive"&&NProgress.inc(.8),document.readyState==="complete"&&NProgress.done()})</script></body></html>
