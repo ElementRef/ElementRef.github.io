@@ -2929,9 +2929,9 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 1. platform：平台级别注入，所有应用共享一个服务单例（仅适用于在一个 window 下运行多个 Angular 应用，有点微前端的意思）；
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 2. root：应用程序（AppModule）/系统/全局/根级别注入，服务可以在整个应用中使用，而且共享同一个服务实例；
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 3. [NgModule]：仅注入指定的 NgModule 中，仅可在指定的 NgModule 中使用，有 TreeShaking 加成；
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 4. any：在每个注入的模块中，提供一个唯一的实例；
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 4. any：在每个注入的模块中，提供一个模块内的唯一的实例；
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 5. null：仅仅表明可注入。
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 这种方式要优于 @NgModule({providers: [xxx]})，因为可以被 Tree Shaking
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 这种方式要优于 @NgModule({providers: [xxx]})，因为可以被 TreeShaking
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">providedIn&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;root&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
