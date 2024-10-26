@@ -1753,6 +1753,7 @@
 </span><span class=lnt>48
 </span><span class=lnt>49
 </span><span class=lnt>50
+</span><span class=lnt>51
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kd>@Component</span><span class=p>({</span>
 </span></span><span class=line><span class=cl>  <span class=cm>/**
 </span></span></span><span class=line><span class=cl><span class=cm>   * 如果不需要“独有”服务实例，就不需要 providers
@@ -1776,6 +1777,7 @@
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>      <span class=nx>provide</span>: <span class=kt>AliasService</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>      <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>       * useExisting 的意思是，复用已经存在的实例，而不是重新创建一个私有实例
 </span></span></span><span class=line><span class=cl><span class=cm>       * 为服务创建别名，提供了两种途径来访问同一服务对象
 </span></span></span><span class=line><span class=cl><span class=cm>       * 也可以用来“收窄/简化”BbService
 </span></span></span><span class=line><span class=cl><span class=cm>       */</span>

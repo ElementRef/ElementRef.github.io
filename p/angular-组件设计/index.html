@@ -766,6 +766,7 @@
 </span><span class=lnt>139
 </span><span class=lnt>140
 </span><span class=lnt>141
+</span><span class=lnt>142
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=cm>/**
 </span></span></span><span class=line><span class=cl><span class=cm> * 首先，需要明确一点
 </span></span></span><span class=line><span class=cl><span class=cm> * 无论是“模版驱动表单（ngModel）”
@@ -784,6 +785,7 @@
 </span></span></span><span class=line><span class=cl><span class=cm>     * forwardRef 的作用是“返回对‘值’的引用”
 </span></span></span><span class=line><span class=cl><span class=cm>     * 因为，“类修饰符”是在“类被定义”之后才生效的
 </span></span></span><span class=line><span class=cl><span class=cm>     * 所以，无需使用 forwardRef 将“类的引用”捕获在闭包里
+</span></span></span><span class=line><span class=cl><span class=cm>     * useExisting 的意思是，复用已经存在的实例，而不是重新创建一个私有实例
 </span></span></span><span class=line><span class=cl><span class=cm>     */</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>      <span class=c1>// useExisting: forwardRef(() =&gt; AdministrativeDivisionComponent),

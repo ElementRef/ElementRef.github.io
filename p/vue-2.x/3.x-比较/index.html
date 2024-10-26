@@ -3776,8 +3776,8 @@
 </span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>vm</span><span class=p>.</span><span class=nx>_isDestroyed</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=c1>// 将组件对应的 VNode 置为 null
 </span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>vm</span><span class=p>.</span><span class=nx>__patch__</span><span class=p>(</span><span class=nx>vm</span><span class=p>.</span><span class=nx>_vnode</span><span class=p>,</span> <span class=kc>null</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>  <span class=c1>// 我真的死了
-</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>callHook</span><span class=p>(</span><span class=nx>vm</span><span class=p>,</span> <span class=s1>&#39;destroyed&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=err>// 我真的死了</span>
+</span></span><span class=line><span class=cl>  <span class=nx>callHook</span><span class=p>(</span><span class=nx>vm</span><span class=p>,</span> <span class=s1>&#39;destroyed&#39;</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>  <span class=c1>// 移除所有事件绑定
 </span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>vm</span><span class=p>.</span><span class=nx>$off</span><span class=p>();</span>
 </span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=nx>vm</span><span class=p>.</span><span class=nx>$el</span><span class=p>)</span> <span class=p>{</span>
