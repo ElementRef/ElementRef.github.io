@@ -3614,17 +3614,33 @@ flex-basis
 &lt;li>flex:initial，等同于 flex:0 1 auto，&lt;strong>不抢&lt;/strong>多余空间，可以在空间不足时收缩；&lt;/li>
 &lt;li>flex:auto，等同于 flex:1 1 auto，子项&lt;strong>自动拉伸/收缩&lt;/strong>来填满剩余空间，在容器尺寸不足时会优先最大化内容尺寸；&lt;/li>
 &lt;li>flex:none，等同于 flex:0 0 auto，子项&lt;strong>没有弹性&lt;/strong>，子项表现为&lt;strong>最大内容宽度&lt;/strong>；&lt;/li>
-&lt;li>flex:1，等同于 flex:1 1 0%，子项&lt;strong>自动拉伸/收缩&lt;/strong>来填满剩余空间，在容器尺寸不足时会优先最小化内容尺寸；&lt;/li>
+&lt;li>flex:1，等同于 flex:1 1 0%，子项&lt;strong>自动拉伸/收缩&lt;/strong>来填满剩余空间，在容器尺寸不足时会优先最小化内容尺寸：
+&lt;ul>
+&lt;li>flex-basis 为 0%，导致 flex-shrink 形同虚设，所以只需关注 flex-grow；&lt;/li>
+&lt;li>此时，flex-grow 为 1，意思是撑满剩余空间。&lt;/li>
+&lt;/ul>
+&lt;/li>
 &lt;li>flex:0，等同于 flex:0 1 0%，子项&lt;strong>没有弹性&lt;/strong>，子项表现为&lt;strong>最小内容宽度&lt;/strong>。&lt;/li>
 &lt;/ul>
 &lt;p>flex:0 和 flex:none 的区别：&lt;/p>
 &lt;img style="display: block;margin: 0 auto;width: 70%;" src="flex-0-none.png"/>
 &lt;p>flex:1 和 flex:auto 的区别：&lt;/p>
 &lt;img style="display: block;margin: 0 auto;width: 70%;" src="flex-1-auto.png"/>
-&lt;p>弹性容器中，子项的最终尺寸是基础尺寸、弹性拉伸/收缩、最大/小尺寸共同作用的结果：&lt;/p>
+&lt;p>弹性容器中，子项的最终尺寸是基础尺寸（flex-basis|width）、弹性拉伸/收缩（flex-grow|shrink）、最大/小尺寸（max|min-width）共同作用的结果：&lt;/p>
 &lt;ul>
 &lt;li>最终尺寸的计算优先级是：最大/小尺寸&amp;gt;弹性拉伸/收缩&amp;gt;基础尺寸；&lt;/li>
-&lt;li>基础尺寸由 flex-basis 或 width，以及 box-sizing 共同决定；&lt;/li>
+&lt;li>基础尺寸由 flex-basis 或 width，以及 box-sizing 共同决定：
+&lt;ul>
+&lt;li>flex-basis 为 0%，尺寸以&lt;strong>最小内容宽度&lt;/strong>为准，无论有没有 width；&lt;/li>
+&lt;li>flex-basis 不为 auto，尺寸以 flex-basis 为准；&lt;/li>
+&lt;li>flex-basis 为 auto：
+&lt;ul>
+&lt;li>width 不存在，尺寸以&lt;strong>最小内容宽度&lt;/strong>为准；&lt;/li>
+&lt;li>width 存在，尺寸以 width 为准。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
 &lt;li>当没有设置基础尺寸时，最大内容宽度会顶替基础尺寸的角色；&lt;/li>
 &lt;li>弹性增长指的是 flex-grow，弹性收缩指的是 flex-shrink；&lt;/li>
 &lt;li>最大尺寸主要受 max-width 限制；最小尺寸则受最小内容宽度、width 和 min-width 共同影响。&lt;/li>

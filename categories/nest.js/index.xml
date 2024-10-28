@@ -2931,7 +2931,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;ul>
-&lt;li>被懒加载的模块一单加载成功，加载结果会被缓存；如果被二次加载，直接从缓存中返回；&lt;/li>
+&lt;li>被懒加载的模块一旦加载成功，加载结果会被缓存；如果被二次加载，直接从缓存中返回；&lt;/li>
 &lt;li>懒加载模块和普通模块一样，同样存在于&lt;strong>依赖图谱&lt;/strong>中；&lt;/li>
 &lt;li>Controllers 作为路由的集合不能被懒加载；&lt;/li>
 &lt;li>懒加载模块不能被 @Global 修饰符装饰。&lt;/li>
