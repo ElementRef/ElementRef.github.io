@@ -488,7 +488,7 @@
 &lt;/div>
 &lt;/div>&lt;h2 id="observable">Observable&lt;/h2>
 &lt;p>不同于创建器（调用后返回 Observable 对象），Subject 是一个实现了 Observable 接口的“类”；需要先进行 new 调用，然后将数据“手动”放入“流”中（subject.next(value)）。&lt;/p>
-&lt;p>有别于普通的 Observable 对象（单播），new Subject 返回的是一个“多播”，可以被多次 subscribe，可以将值传递给多个观察者；所以常常被用来存放应用状态。&lt;/p>
+&lt;p>有别于普通的 Observable 对象（单播），Subject 返回的是一个“多播”，可以被多次 subscribe，可以将值传递给多个观察者；所以常常被用来存放应用状态。&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1

@@ -2333,7 +2333,7 @@ target="_blank" rel="noopener"
 &lt;p>应用 update（状态变化）时：&lt;/p>
 &lt;ul>
 &lt;li>应用重新进入 render 阶段，调用组件 render 方法，重新构建 workInProgress；&lt;/li>
-&lt;li>构建 workInProgress 的过程中会和 current 进行比较，并在需要改变的节点打上&lt;strong>标记&lt;/strong>；&lt;/li>
+&lt;li>构建 workInProgress 的过程中，组件产物会和 current 对应节点进行比较，并在需要改变的节点打上&lt;strong>标记&lt;/strong>；&lt;/li>
 &lt;li>根据收集到的标记，更新视图。&lt;/li>
 &lt;/ul>
 &lt;/li>
@@ -7652,7 +7652,7 @@ React 技术揭秘
 &lt;/ul>
 &lt;h2 id="hook-使用规则">Hook 使用规则&lt;/h2>
 &lt;ul>
-&lt;li>只能在最外层调用 Hook；不要在循环、条件判断或者子函数中调用（Hook 靠的是调用顺序来确定哪个 state 对应哪个 useState）；&lt;/li>
+&lt;li>只能在最外层调用 Hook；不要在循环、条件判断或者子函数中调用（Hook 靠的是调用顺序来确定哪个 state 对应哪个 Hook）；&lt;/li>
 &lt;li>只在函数组件中调用 Hook。&lt;/li>
 &lt;/ul>
 &lt;h2 id="usestate">useState&lt;/h2>
@@ -7730,7 +7730,7 @@ React 技术揭秘
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>默认情况下，effect 将在每轮渲染结束后执行，但你可以选择让它在只有**某些值（能够触发组件重新渲染的值）**改变的时候才执行；如果想执行只运行一次的 effect（仅在组件挂载和卸载时执行），可以传递一个空数组 [] 作为第二个参数，effect 内部的 props 和 state 就会一直持有其初始值。&lt;/p>
+&lt;/div>&lt;p>默认情况下，effect 将在每轮渲染结束后执行，但你可以选择让它在只有&lt;strong>某些值&lt;/strong>（能够触发组件重新渲染的值）改变的时候才执行；如果想执行只运行一次的 effect（仅在组件挂载和卸载时执行），可以传递一个空数组 [] 作为第二个参数，effect 内部的 props 和 state 就会一直持有其初始值。&lt;/p>
 &lt;p>副作用函数还可以通过返回一个函数来指定如何“清除”副作用；通常，组件卸载时需要清除 effect 创建的诸如订阅或计时器等资源；要实现这一点，useEffect 函数需返回一个清除函数；如果组件多次渲染（通常如此），则在执行下一个 effect 之前，上一个 effect 就已被清除。&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -7950,7 +7950,7 @@ React 技术揭秘
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>注意：如果通过 createContext 将 useReducer 的 state 和 dispatch 当作 value 传递下去；你甚至可以得到一个简单的 redux。&lt;/p>
+&lt;/div>&lt;p>注意：如果通过 createContext 将 useReducer 的 state 和 dispatch 当作 value 传递下去；你甚至可以得到一个简单的状态管理。&lt;/p>
 &lt;h2 id="usecallback--usememo">useCallback &amp;amp; useMemo&lt;/h2>
 &lt;p>Memo 是一种优化技术，大体上就是缓存昂贵计算的值并在相同输入的情况下直接返回缓存值（某种程度上的 Vue.computed）；useCallback 用来缓存函数的引用，useMemo 用来缓存计算数据的引用。&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -8113,7 +8113,7 @@ React 技术揭秘
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>useRef 不仅用于 DOM refs，ref.current 是一个可以容纳任何值的通用容器，类似于 class 的实例属性；useRef 和自建一个 {current: &amp;hellip;} 对象的唯一区别是，useRef 会在每次渲染时返回同一个 ref 对象（当然你可以在组件外定义一个变量，效果大致是一样的；但是外部变量是所有组件实例共享的，ref 是每个组件实例独有的）。&lt;/p>
+&lt;/div>&lt;p>useRef 不仅用于 DOM 引用，ref.current 是一个可以容纳任何值的通用容器，类似于 class 的实例属性；useRef 和自建一个 {current: &amp;hellip;} 对象的唯一区别是，useRef 会在每次渲染时返回同一个 ref 对象（当然你可以在组件外定义一个变量，效果大致是一样的；但是外部变量是所有组件实例共享的，ref 是每个组件实例独有的）。&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
