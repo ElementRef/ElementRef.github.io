@@ -19,7 +19,7 @@
 &lt;/ul>
 &lt;h2 id="为什么是-vite">为什么是 Vite&lt;/h2>
 &lt;p>Vite 主要解决了项目启动慢、HMR 慢的问题；但是宣传上比较讨巧，实际上项目第一次启动时，会预打包并将结果缓存；HMR 也是借助了 ESM 的特性，只转换不打包。&lt;/p>
-&lt;p>在开发环境，相较于 Webpack，改变了运行策略；将&lt;strong>先编译后运行服务&lt;/strong>变为了&lt;strong>先运行服务后编译&lt;/strong>；根据页面需要，按需“编译”。所以，他提升了部分开发体验，而对生产环境的打包速度并没有质的提升。&lt;/p>
+&lt;p>在开发环境，相较于 Webpack，改变了运行策略；将&lt;strong>先编译后运行服务&lt;/strong>变为了&lt;strong>先运行服务后编译&lt;/strong>；模块之间的依赖解析工作交给了浏览器，Vite 只负责按需“编译”。所以，他提升了部分开发体验，而对生产环境的打包速度并没有质的提升。&lt;/p>
 &lt;p>为什么说是“部分”呢？因为如果页面依赖众多，还是会有可感知的“白屏”。这可能是因为 esbuild 还不够快？也可能是复杂项目的渲染触发了过多的 HTTP 请求，达到了浏览器的并发限制。可以看看&lt;a class="link"
 href="https://moonvy.com/blog/post/2024/migrate-vite-to-rsbuild/"
 target="_blank" rel="noopener"
@@ -40,6 +40,19 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>转换为浏览器能解析的代码，发送给浏览器。&lt;/p>
+&lt;p>Webpack 也可以通过 &lt;a class="link"
+href="https://webpack.js.org/plugins/dll-plugin/#dllplugin"
+target="_blank" rel="noopener"
+>
+DllPlugin
+&lt;/a>
+和 &lt;a class="link"
+href="https://webpack.js.org/plugins/dll-plugin/#dllreferenceplugin"
+target="_blank" rel="noopener"
+>
+DllReferencePlugin
+&lt;/a>
+，手动进行“预构建”，当然初衷是为了模块拆分。&lt;/p>
 &lt;h3 id="热替换">热替换&lt;/h3>
 &lt;p>Vite 提供了一套适用于 ESM 的 &lt;a class="link"
 href="https://cn.vitejs.dev/guide/api-hmr.html"
@@ -755,6 +768,7 @@ vite-plugin-inspect
 &lt;/span>&lt;span class="lnt">132
 &lt;/span>&lt;span class="lnt">133
 &lt;/span>&lt;span class="lnt">134
+&lt;/span>&lt;span class="lnt">135
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="kr">type&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Plugin&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">UserConfig&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">ResolvedConfig&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;vite&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
@@ -851,6 +865,7 @@ vite-plugin-inspect
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 用于转换 HTML 的钩子
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 接收当前 HTML 字符串
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 返回经过转换的 HTML
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 用于做代码注入
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">html&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">replace&lt;/span>&lt;span class="p">(&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;&amp;lt;!-- FOLLOW VITE BUILD INJECT --&amp;gt;&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>

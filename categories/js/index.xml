@@ -3620,7 +3620,7 @@ JS 中随机排列数组顺序（经典洗牌算法）和数组的排序方法
 &lt;img style="display: block;margin: 0 auto;width: 50%;" src="event-loop.svg"/>
 &lt;p>JS 线程运行时，产生堆 Heap 和栈 Stack，栈中的代码调用各种接口，在“任务队列”中加入各种事件；只要栈中的代码执行完毕，JS 线程就会去读取“任务队列”，依次执行那些事件所对应的回调函数。&lt;/p>
 &lt;h2 id="任务队列">任务队列&lt;/h2>
-&lt;p>JS 运行时包含了多个待处理任务的队列（宏任务队列 TaskQueue、微任务队列 JobsQueue 等）；每一个任务都关联着一个用以处理这个任务的函数。&lt;/p>
+&lt;p>JS 运行时包含了多个待处理任务的队列（宏任务队列 TaskQueue、微任务队列 JobQueue 等）；每一个任务都关联着一个用以处理这个任务的函数。&lt;/p>
 &lt;ul>
 &lt;li>宏任务队列：ScriptCode、MessageChannel、setTimeout、setInterval、setImmediate、I/O、UIRender、requestAnimationFrame、requestIdleCallback 等；&lt;/li>
 &lt;li>微任务队列：Promise、MutationObserver、process.nextTick 等。&lt;/li>

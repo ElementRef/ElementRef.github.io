@@ -1010,6 +1010,12 @@
 </span><span class=lnt>48
 </span><span class=lnt>49
 </span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=c1>// 交叉类型是将多个类型合并为一个类型
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>interface</span> <span class=nx>AnyObject</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>  <span class=p>[</span><span class=nx>prop</span>: <span class=kt>string</span><span class=p>]</span><span class=o>:</span> <span class=kt>any</span><span class=p>;</span>
@@ -1058,6 +1064,12 @@
 </span></span><span class=line><span class=cl><span class=kr>interface</span> <span class=nx>Interface</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>  <span class=nx>num</span>: <span class=kt>number</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm> * declare，用来告诉编译器，某个类型是存在的，可以在当前文件中使用
+</span></span></span><span class=line><span class=cl><span class=cm> * 让当前文件可以使用其他文件声明的类型
+</span></span></span><span class=line><span class=cl><span class=cm> * 只是通知编译器某个类型是存在的，不用给出具体实现
+</span></span></span><span class=line><span class=cl><span class=cm> * 所有 declare 语句都不会出现在编译后的文件里面
+</span></span></span><span class=line><span class=cl><span class=cm> */</span>
 </span></span><span class=line><span class=cl><span class=kr>declare</span> <span class=kd>function</span> <span class=nx>aliased</span><span class=p>(</span><span class=nx>arg</span>: <span class=kt>Alias</span><span class=p>)</span><span class=o>:</span> <span class=nx>Alias</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=kr>declare</span> <span class=kd>function</span> <span class=nx>interfaced</span><span class=p>(</span><span class=nx>arg</span>: <span class=kt>Interface</span><span class=p>)</span><span class=o>:</span> <span class=nx>Interface</span><span class=p>;</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=可辨识联合类型>可辨识联合类型</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1

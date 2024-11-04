@@ -185,7 +185,7 @@ data-flex-basis="324px"
 loading="lazy"
 >
 &lt;/p>
-&lt;p>在互联网上，域名通过 DNS 服务映射到 IP 地址；当请求发送到服务器时，已经是以 IP 地址形式访问了；在相同的 IP 地址下，由于虚拟主机可以寄存多个不同主机名和域名的 Web 网站，因此在发送 HTTP 请求时，必须在 Host 首部内完整指定主机名或域名的 URI。&lt;/p>
+&lt;p>在互联网上，域名通过 DNS 服务映射到 IP 地址；当请求发送到服务器时，已经是以 IP 地址形式访问了；在相同的 IP 地址下，由于虚拟主机可以寄存多个不同主机名和域名的 Web 网站，因此在发送 HTTP 请求时，必须&lt;strong>在 Host 首部&lt;/strong>内完整指定主机名或域名的 URI。&lt;/p>
 &lt;p>&lt;img src="https://ElementRef.github.io/p/%E5%9B%BE%E8%A7%A3-http%E7%AC%94%E8%AE%B0/host-ip.png"
 width="1148"
 height="748"
@@ -550,7 +550,7 @@ preload 表示浏览器将会永不使用非安全的方式连接到你的域名
 &lt;li>减少 HTTP 请求：任何请求都不如没有请求更快，因此要去掉页面上没有必要的资源；&lt;/li>
 &lt;li>使用 CDN：从地理上把数据放到接近客户端的地方，可以显著减少每次 TCP 连接的网络延迟，增加吞吐量；&lt;/li>
 &lt;li>添加 Expires 首部并配置 ETag 标签：相关资源应该缓存，以避免重复请求每个页面中相同的资源；&lt;/li>
-&lt;li>使用 Gzip 压缩：所有文本资源都应该使用 Gzip 压缩，然后再在客户端与服务器间传输；&lt;/li>
+&lt;li>使用 gzip 压缩：所有文本资源都应该使用 gzip 压缩，然后再在客户端与服务器间传输；&lt;/li>
 &lt;li>避免 HTTP 重定向：HTTP 重定向极其耗时，特别是把客户端定向到一个完全不同的域名的情况下，还会导致额外的 DNS 查询、TCP 连接延迟；&lt;/li>
 &lt;li>使用 HTTP 持久连接：避免第二次 TCP 连接时的三次握手、消除另一次 TCP 慢启动的往返，节约整整一次网络延迟。&lt;/li>
 &lt;/ul>
@@ -745,15 +745,15 @@ target="_blank" rel="noopener"
 &lt;h2 id="浏览器缓存">浏览器缓存&lt;/h2>
 &lt;p>缓存位置：&lt;/p>
 &lt;ul>
-&lt;li>Service Worker：传输协议必须为 HTTPS，开发者控制缓存哪些文件、如何匹配缓存、如何读取缓存；&lt;/li>
-&lt;li>Memory Cache：读取高效，缓存时间短；不受 Cache-Control 限制；Tab 关闭，缓存失效；prefetch 缓存存在于此；&lt;/li>
-&lt;li>Disk Cache：读取稍慢，缓存时间长；受到 HTTP 请求/响应头缓存字段的控制；一般存放使用频率不那么高、体积较大的文件；&lt;/li>
-&lt;li>Push Cache：只在会话（Session）中存在；并且仅适用于 HTTP/2 的连接。&lt;/li>
+&lt;li>ServiceWorker：传输协议必须为 HTTPS，开发者控制缓存哪些文件、如何匹配缓存、如何读取缓存；&lt;/li>
+&lt;li>MemoryCache：读取高效，缓存时间短；不受 Cache-Control 限制；Tab 关闭，缓存失效；prefetch 缓存存在于此；&lt;/li>
+&lt;li>DiskCache：读取稍慢，缓存时间长；受到 HTTP 请求/响应头缓存字段的控制；一般存放使用频率不那么高、体积较大的文件；&lt;/li>
+&lt;li>PushCache：只在会话（Session）中存在；并且仅适用于 HTTP/2 的连接。&lt;/li>
 &lt;/ul>
 &lt;p>用户行为：&lt;/p>
 &lt;ul>
-&lt;li>地址栏输入：查找 Disk Cache 中是否有匹配；如有则使用，如没有则发送网络请求；&lt;/li>
-&lt;li>普通刷新：因为 Tab 并没有关闭，因此优先使用 Memory Cache，其次才是 Disk Cache；&lt;/li>
+&lt;li>地址栏输入：查找 DiskCache 中是否有匹配；如有则使用，如没有则发送网络请求；&lt;/li>
+&lt;li>普通刷新：因为 Tab 并没有关闭，因此优先使用 MemoryCache，其次才是 DiskCache；&lt;/li>
 &lt;li>强制刷新：不使用缓存，因此发送的请求头部均带有 cache-control: no-cache，服务器直接返回 200 和最新内容。&lt;/li>
 &lt;/ul>
 &lt;h2 id="cookiesession-和-token">Cookie、Session 和 Token&lt;/h2>
