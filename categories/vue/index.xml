@@ -2152,7 +2152,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>Watcher 实例被称作&lt;strong>需要被收集起来的依赖者&lt;/strong>或者订阅者，它&lt;strong>依赖/观察/订阅&lt;/strong>了数据变动（在依赖收集期间，或者 watcher 被调用期间，访问了数据的 getter）；数据的 getter 被触发时，watcher 会被收集起来（Dep.target 被收集起来）；数据的 setter 被调用时，dep.notify 会触发 watcher.update，即 watcher 得到了通知，需要重新执行：&lt;/p>
+&lt;/div>&lt;p>Watcher 实例被称作&lt;strong>需要被收集起来的观察者&lt;/strong>或者订阅者，它&lt;strong>依赖/观察/订阅&lt;/strong>了数据变动（在依赖收集期间，或者 watcher 被调用期间，访问了数据的 getter）；数据的 getter 被触发时，watcher 会被收集起来（Dep.target 被收集起来）；数据的 setter 被调用时，dep.notify 会触发 watcher.update，即 watcher 得到了通知，需要重新执行：&lt;/p>
 &lt;ul>
 &lt;li>在 mountComponent 中会 new Watcher(&amp;hellip;) 作为组件的 renderWatcher；同时在组件 update 时，会调用 watcher.before 来触发 beforeUpdate 钩子；&lt;/li>
 &lt;li>每个 vm.$watch 或者 watchOptions 都会 new Watcher(&amp;hellip;)；&lt;/li>
@@ -4574,8 +4574,8 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 执行 effect 之前，需要重新构建一个 Set 来替代 depsMap.get(key)
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 因为 effect 调用的过程中，存在 cleanup 并 reTrack 的逻辑
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 在这个过程中，会对 depsMap.get(key) 对应的 set 进行“操作”
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果直接循环“原来的 set”，会导致无限循环调用
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 在这个过程中，会对 depsMap.get(key) 对应的 Set 进行“操作”
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果直接循环“原来的 Set”，会导致无限循环调用
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 究其原因，在 Set.prototype.forEach 中
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 对 Set 本身进行“操作”，会陷入死循环
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * const set = new Set([1]);
@@ -4800,6 +4800,7 @@
 &lt;/span>&lt;span class="lnt">118
 &lt;/span>&lt;span class="lnt">119
 &lt;/span>&lt;span class="lnt">120
+&lt;/span>&lt;span class="lnt">121
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">uid&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
@@ -4851,6 +4852,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">effectStack&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">includes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">effect&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 说明 effect 被卸载过，此时，重新被依赖收集
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 每次运行 fn 之前，先清除上一次被收集的结果
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 确保收集的依赖总是最新的
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
@@ -13047,6 +13049,7 @@
 &lt;/span>&lt;span class="lnt">183
 &lt;/span>&lt;span class="lnt">184
 &lt;/span>&lt;span class="lnt">185
+&lt;/span>&lt;span class="lnt">186
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 获取组件 name
@@ -13092,7 +13095,8 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">entry&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">cache&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">key&lt;/span>&lt;span class="p">];&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">entry&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">current&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="nx">entry&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">tag&lt;/span> &lt;span class="o">!==&lt;/span> &lt;span class="nx">current&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">tag&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">entry&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">componentInstance&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">$destroy&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 挨个调用 $destroy
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">entry&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">componentInstance&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">$destroy&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">cache&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">key&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">remove&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">keys&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">key&lt;/span>&lt;span class="p">);&lt;/span>
