@@ -275,6 +275,37 @@ WebPageTest
 </span><span class=lnt>216
 </span><span class=lnt>217
 </span><span class=lnt>218
+</span><span class=lnt>219
+</span><span class=lnt>220
+</span><span class=lnt>221
+</span><span class=lnt>222
+</span><span class=lnt>223
+</span><span class=lnt>224
+</span><span class=lnt>225
+</span><span class=lnt>226
+</span><span class=lnt>227
+</span><span class=lnt>228
+</span><span class=lnt>229
+</span><span class=lnt>230
+</span><span class=lnt>231
+</span><span class=lnt>232
+</span><span class=lnt>233
+</span><span class=lnt>234
+</span><span class=lnt>235
+</span><span class=lnt>236
+</span><span class=lnt>237
+</span><span class=lnt>238
+</span><span class=lnt>239
+</span><span class=lnt>240
+</span><span class=lnt>241
+</span><span class=lnt>242
+</span><span class=lnt>243
+</span><span class=lnt>244
+</span><span class=lnt>245
+</span><span class=lnt>246
+</span><span class=lnt>247
+</span><span class=lnt>248
+</span><span class=lnt>249
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>  <span class=cm>/**
 </span></span></span><span class=line><span class=cl><span class=cm>   * development  会将 DefinePlugin 中 process.env.NODE_ENV 的值设置为 development
@@ -346,7 +377,8 @@ WebPageTest
 </span></span><span class=line><span class=cl>      <span class=p>},</span>
 </span></span><span class=line><span class=cl>      <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=nx>test</span><span class=o>:</span> <span class=sr>/\.m?js$/</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>        <span class=nx>exclude</span><span class=o>:</span> <span class=sr>/(node_modules|bower_components)/</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 一般不需要对第三方依赖进行处理
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nx>exclude</span><span class=o>:</span> <span class=sr>/(node_modules|bower_components)/</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>        <span class=nx>use</span><span class=o>:</span> <span class=p>[</span>
 </span></span><span class=line><span class=cl>          <span class=p>{</span>
 </span></span><span class=line><span class=cl>            <span class=c1>// 启用多线程
@@ -358,8 +390,37 @@ WebPageTest
 </span></span><span class=line><span class=cl>            <span class=nx>options</span><span class=o>:</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>              <span class=c1>// 启用文件缓存，node_modules/.cache/babel-loader
 </span></span></span><span class=line><span class=cl><span class=c1></span>              <span class=nx>cacheDirectory</span>: <span class=kt>true</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>              <span class=nx>presets</span><span class=o>:</span> <span class=p>[</span><span class=s1>&#39;@babel/preset-env&#39;</span><span class=p>],</span>
-</span></span><span class=line><span class=cl>              <span class=nx>plugins</span><span class=o>:</span> <span class=p>[</span><span class=s1>&#39;@babel/plugin-transform-runtime&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>              <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>               * @babel/preset-env 提供语意转化，也提供 polyfill 能力
+</span></span></span><span class=line><span class=cl><span class=cm>               * @babel/preset-env 提供的 polyfill 会污染全局变量
+</span></span></span><span class=line><span class=cl><span class=cm>               * 只推荐在项目中使用，如果是开发一个库，不要使用
+</span></span></span><span class=line><span class=cl><span class=cm>               */</span>
+</span></span><span class=line><span class=cl>              <span class=nx>presets</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=s1>&#39;@babel/preset-env&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=p>{</span>
+</span></span><span class=line><span class=cl>                  <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>                   * false，@babel/preset-env 不会引入 polyfill，需要在项目中主动引入
+</span></span></span><span class=line><span class=cl><span class=cm>                   * entry，需要在项目中主动引入，babel 根据 targets 替换成浏览器不兼容的所有 polyfill
+</span></span></span><span class=line><span class=cl><span class=cm>                   * usage，无序引入 polyfill，babel 根据 targets 按需引入 polyfill
+</span></span></span><span class=line><span class=cl><span class=cm>                   */</span>
+</span></span><span class=line><span class=cl>                  <span class=nx>useBuiltIns</span><span class=o>:</span> <span class=s1>&#39;entry&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nx>corejs</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                    <span class=c1>// corejs@3 支持模块化，可以按需引入，不污染全局环境
+</span></span></span><span class=line><span class=cl><span class=c1></span>                    <span class=nx>version</span>: <span class=kt>3</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nx>proposals</span>: <span class=kt>true</span>
+</span></span><span class=line><span class=cl>                  <span class=p>}</span>
+</span></span><span class=line><span class=cl>                <span class=p>}</span>
+</span></span><span class=line><span class=cl>              <span class=p>],</span>
+</span></span><span class=line><span class=cl>              <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>               * @babel/plugin-transform-runtime 不会污染全局
+</span></span></span><span class=line><span class=cl><span class=cm>               * 并且会复用 Babel Helper
+</span></span></span><span class=line><span class=cl><span class=cm>               */</span>
+</span></span><span class=line><span class=cl>              <span class=nx>plugins</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=s1>&#39;@babel/plugin-transform-runtime&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=p>{</span>
+</span></span><span class=line><span class=cl>                  <span class=nx>corejs</span>: <span class=kt>false</span>
+</span></span><span class=line><span class=cl>                <span class=p>}</span>
+</span></span><span class=line><span class=cl>              <span class=p>]</span>
 </span></span><span class=line><span class=cl>            <span class=p>}</span>
 </span></span><span class=line><span class=cl>          <span class=p>}</span>
 </span></span><span class=line><span class=cl>        <span class=p>]</span>
@@ -376,6 +437,7 @@ WebPageTest
 </span></span><span class=line><span class=cl>    <span class=nx>sideEffects</span>: <span class=kt>true</span><span class=p>,</span> <span class=c1>// 允许跳过整个模块/文件和整个文件子树
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>usedExports</span>: <span class=kt>true</span><span class=p>,</span> <span class=c1>// 依赖于 terser 检测语句中的副作用
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>     * Webpack 打包时，存在一个 runtime
 </span></span></span><span class=line><span class=cl><span class=cm>     * 为运行时代码创建了一个额外的 chunk
 </span></span></span><span class=line><span class=cl><span class=cm>     * 防止 runtime 的变化影响构建产物的 contenthash
 </span></span></span><span class=line><span class=cl><span class=cm>     */</span>
@@ -414,9 +476,9 @@ WebPageTest
 </span></span><span class=line><span class=cl>    <span class=nx>asyncChunks</span>: <span class=kt>true</span><span class=p>,</span> <span class=c1>// 创建按需加载的异步 chunk
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>clean</span>: <span class=kt>true</span><span class=p>,</span> <span class=c1>// 在生成文件之前清空 output 目录
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=cm>/**
-</span></span></span><span class=line><span class=cl><span class=cm>     * webpack 中的 chunk 分为两种：
-</span></span></span><span class=line><span class=cl><span class=cm>     *    initial chunk      入口指定的模块及其依赖模块
-</span></span></span><span class=line><span class=cl><span class=cm>     *    non-initial chunk  异步加载的模块
+</span></span></span><span class=line><span class=cl><span class=cm>     * Webpack 中的 chunk 分为两种：
+</span></span></span><span class=line><span class=cl><span class=cm>     * initial chunk      入口指定的模块及其依赖模块
+</span></span></span><span class=line><span class=cl><span class=cm>     * non-initial chunk  异步加载的模块
 </span></span></span><span class=line><span class=cl><span class=cm>     */</span>
 </span></span><span class=line><span class=cl>    <span class=nx>path</span>: <span class=kt>path.resolve</span><span class=p>(</span><span class=nx>__dirname</span><span class=p>,</span> <span class=s1>&#39;dist&#39;</span><span class=p>),</span> <span class=c1>// output 目录，绝对路径
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=cm>/**
@@ -445,8 +507,8 @@ WebPageTest
 </span></span><span class=line><span class=cl>    <span class=c1>// 打包完成之后，将额外的文件拷贝到指定的目录
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>new</span> <span class=nx>CopyPlugin</span><span class=p>({</span>
 </span></span><span class=line><span class=cl>      <span class=kr>from</span><span class=o>:</span> <span class=nx>path</span><span class=p>.</span><span class=nx>resolve</span><span class=p>(</span><span class=nx>__dirname</span><span class=p>,</span> <span class=s1>&#39;robot.txt&#39;</span><span class=p>),</span>
-</span></span><span class=line><span class=cl>      <span class=nx>to</span>: <span class=kt>path.resolve</span><span class=p>(</span><span class=nx>__dirname</span><span class=p>,</span> <span class=s1>&#39;dist&#39;</span><span class=p>),</span>
-</span></span><span class=line><span class=cl>    <span class=p>})</span>
+</span></span><span class=line><span class=cl>      <span class=nx>to</span>: <span class=kt>path.resolve</span><span class=p>(</span><span class=nx>__dirname</span><span class=p>,</span> <span class=s1>&#39;dist&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}),</span>
 </span></span><span class=line><span class=cl>    <span class=k>new</span> <span class=nx>webpack</span><span class=p>.</span><span class=nx>IgnorePlugin</span><span class=p>(</span><span class=sr>/^\.\/locale$/</span><span class=p>,</span> <span class=sr>/moment$/</span><span class=p>),</span>
 </span></span><span class=line><span class=cl>    <span class=cm>/**
 </span></span></span><span class=line><span class=cl><span class=cm>     * v4 版本之后，不再需要显式的配置了
@@ -493,7 +555,7 @@ WebPageTest
 </span></span><span class=line><span class=cl>  <span class=p>},</span>
 </span></span><span class=line><span class=cl>  <span class=nx>target</span><span class=o>:</span> <span class=s1>&#39;web&#39;</span> <span class=c1>// 构建目标
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>};</span>
-</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+</span></span></code></pre></td></tr></table></div></div><h2 id=参考>参考</h2><ul><li><a class=link href=https://github.com/MrErHu/blog/issues/46 target=_blank rel=noopener>Babel Polyfill 常见问题总结</a></li><li><a class=link href="https://web.dev/articles/vitals?hl=zh-cn" target=_blank rel=noopener>Web Vitals</a></li><li><a class=link href="https://web.dev/articles/bfcache?hl=zh-cn" target=_blank rel=noopener>往返缓存</a></li></ul></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
 <span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/%E9%9D%A2%E5%90%91%E9%9D%A2%E8%AF%95%E7%BC%96%E7%A8%8B/><div class=article-image><img src=/img/cover/javascript.png loading=lazy data-key data-hash=/img/cover/javascript.png></div><div class=article-details><h2 class=article-title>面向面试编程</h2></div></a></article><article class=has-image><a href=/p/%E8%BD%AC%E8%B0%88%E8%B0%88%E9%80%92%E5%BD%92/><div class=article-image><img src=/img/cover/javascript.png loading=lazy data-key data-hash=/img/cover/javascript.png></div><div class=article-details><h2 class=article-title>「转」谈谈递归</h2></div></a></article><article class=has-image><a href=/p/attribute-%E4%B8%8E-property/><div class=article-image><img src=/img/cover/javascript.png loading=lazy data-key data-hash=/img/cover/javascript.png></div><div class=article-details><h2 class=article-title>attribute 与 property</h2></div></a></article><article class=has-image><a href=/p/%E8%BD%ACvirtualdom-%E7%9C%9F%E7%9A%84%E6%AF%94%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%94%9F-dom-%E5%BF%AB%E5%90%97/><div class=article-image><img src=/img/cover/javascript.png loading=lazy data-key data-hash=/img/cover/javascript.png></div><div class=article-details><h2 class=article-title>「转」VirtualDOM 真的比操作原生 DOM 快吗？</h2></div></a></article><article class=has-image><a href=/p/%E9%9A%8F%E6%9C%BA%E6%8E%92%E5%88%97%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84/><div class=article-image><img src=/img/cover/javascript.png loading=lazy data-key data-hash=/img/cover/javascript.png></div><div class=article-details><h2 class=article-title>随机排列一个数组</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
 2017 -
 2024
@@ -501,4 +563,4 @@ WebPageTest
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
 <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#核心指标>核心指标</a><ol><li><a href=#lcp>LCP</a></li><li><a href=#inp>INP</a></li><li><a href=#cls>CLS</a></li></ol></li><li><a href=#如何操作>如何操作</a></li><li><a href=#bfcache>bfcache</a></li><li><a href=#webpack>Webpack</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script src=https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js></script><script>NProgress.configure({showSpinner:!1}),NProgress.start(),document.addEventListener("readystatechange",()=>{document.readyState==="interactive"&&NProgress.inc(.8),document.readyState==="complete"&&NProgress.done()})</script></body></html>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#核心指标>核心指标</a><ol><li><a href=#lcp>LCP</a></li><li><a href=#inp>INP</a></li><li><a href=#cls>CLS</a></li></ol></li><li><a href=#如何操作>如何操作</a></li><li><a href=#bfcache>bfcache</a></li><li><a href=#webpack>Webpack</a></li><li><a href=#参考>参考</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script src=https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js></script><script>NProgress.configure({showSpinner:!1}),NProgress.start(),document.addEventListener("readystatechange",()=>{document.readyState==="interactive"&&NProgress.inc(.8),document.readyState==="complete"&&NProgress.done()})</script></body></html>
