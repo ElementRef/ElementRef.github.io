@@ -20,7 +20,7 @@
 <svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
 <span>深色</span></li></div></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/><img src=/img/cover/nestjs.png loading=lazy alt="Nest.js 学习笔记（一）"></a></div><div class=article-details><header class=article-category><a href=/categories/nest.js/>Nest.js</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/>Nest.js 学习笔记（一）</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
 <time class=article-time--published>Oct 18, 2024</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
-<time class=article-time--reading>阅读时长：23 分钟</time></div></footer></div></header><section class=article-content><h2 id=是什么>是什么</h2><p>Nest.js 是一个抽象于 Express/Fasify、参考了 Angular 设计哲学的开箱即用的后端框架。</p><h2 id=开始使用>开始使用</h2><p>需要全局安装 @nestjs/cli：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+<time class=article-time--reading>阅读时长：24 分钟</time></div></footer></div></header><section class=article-content><h2 id=是什么>是什么</h2><p>Nest.js 是一个抽象于 Express/Fasify、参考了 Angular 设计哲学的开箱即用的后端框架。</p><h2 id=开始使用>开始使用</h2><p>需要全局安装 @nestjs/cli：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -731,10 +731,10 @@
 </span><span class=lnt>9
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Module</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>DatabaseModule</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./database/database.module&#39;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>User</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./users/entities/user.entity&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>UserEntity</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./users/entities/user.entity&#39;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kd>@Module</span><span class=p>({</span>
-</span></span><span class=line><span class=cl>  <span class=nx>imports</span><span class=o>:</span> <span class=p>[</span><span class=nx>DatabaseModule</span><span class=p>.</span><span class=nx>forRoot</span><span class=p>([</span><span class=nx>User</span><span class=p>])],</span>
+</span></span><span class=line><span class=cl>  <span class=nx>imports</span><span class=o>:</span> <span class=p>[</span><span class=nx>DatabaseModule</span><span class=p>.</span><span class=nx>forRoot</span><span class=p>([</span><span class=nx>UserEntity</span><span class=p>])],</span>
 </span></span><span class=line><span class=cl>  <span class=nx>exports</span><span class=o>:</span> <span class=p>[</span><span class=nx>DatabaseModule</span><span class=p>]</span>
 </span></span><span class=line><span class=cl><span class=p>})</span>
 </span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppModule</span> <span class=p>{}</span>
@@ -1316,8 +1316,8 @@
 </span></span></span><span class=line><span class=cl><span class=cm>   * http://localhost:3000/user/2
 </span></span></span><span class=line><span class=cl><span class=cm>   * 打印 UserController &gt; id number
 </span></span></span><span class=line><span class=cl><span class=cm>   */</span>
-</span></span><span class=line><span class=cl>  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;UserController &gt; id&#39;</span><span class=p>,</span> <span class=k>typeof</span> <span class=nx>id</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=k>of</span><span class=p>(</span><span class=nx>id</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;UserController &gt; id&#39;</span><span class=p>,</span> <span class=k>typeof</span> <span class=nx>id</span><span class=p>);</span> <span class=c1>// number，数据被隐式转换
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=k>return</span> <span class=k>of</span><span class=p>(</span><span class=nx>id</span><span class=p>);</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=kd>@Get</span><span class=p>(</span><span class=s1>&#39;:id&#39;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=kr>async</span> <span class=nx>findOne</span><span class=p>(</span>
@@ -1386,11 +1386,50 @@
 </span><span class=lnt>13
 </span><span class=lnt>14
 </span><span class=lnt>15
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>CreateUserDto</span> <span class=p>{</span>
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>PartialType</span><span class=p>,</span> <span class=nx>OmitType</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/mapped-types&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>CreateUserDto</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>  <span class=nx>name</span>: <span class=kt>string</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=nx>age</span>: <span class=kt>number</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=nx>sex</span>: <span class=kt>string</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm> * 用于数据更新的 DTO 并不需要每一项都是必传的
+</span></span></span><span class=line><span class=cl><span class=cm> * 可以使用 PartialType 将 CreateUserDto 中的属性变为可选的
+</span></span></span><span class=line><span class=cl><span class=cm> */</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>UpdateUserDto</span> <span class=kr>extends</span> <span class=nx>PartialType</span><span class=p>(</span><span class=nx>CreateUserDto</span><span class=p>)</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>UpdateUserDto</span> <span class=kr>extends</span> <span class=nx>OmitType</span><span class=p>(</span><span class=nx>CreateUserDto</span><span class=p>,</span> <span class=p>[</span><span class=s1>&#39;name&#39;</span><span class=p>]</span> <span class=kr>as</span> <span class=kr>const</span><span class=p>)</span> <span class=p>{}</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kd>@Controller</span><span class=p>(</span><span class=s1>&#39;user&#39;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>UserController</span> <span class=p>{</span>
@@ -1399,6 +1438,29 @@
 </span></span><span class=line><span class=cl>  <span class=kd>@Post</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>  <span class=nx>create</span><span class=p>(</span><span class=kd>@Body</span><span class=p>()</span> <span class=nx>createUserDto</span>: <span class=kt>CreateUserDto</span><span class=p>)</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>userService</span><span class=p>.</span><span class=nx>create</span><span class=p>(</span><span class=nx>createUserDto</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>   * 使用 ParseArrayPipe 表示 CreateUserDto 数组
+</span></span></span><span class=line><span class=cl><span class=cm>   * 单靠 TS 并不能完成对入参的验证
+</span></span></span><span class=line><span class=cl><span class=cm>   */</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@Post</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>  <span class=nx>createBulk</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=kd>@Body</span><span class=p>(</span><span class=k>new</span> <span class=nx>ParseArrayPipe</span><span class=p>({</span> <span class=nx>item</span>: <span class=kt>CreateUserDto</span> <span class=p>}))</span>
+</span></span><span class=line><span class=cl>    <span class=nx>createUserDtos</span>: <span class=kt>CreateUserDto</span><span class=p>[]</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>userService</span><span class=p>.</span><span class=nx>createBulk</span><span class=p>(</span><span class=nx>createUserDtos</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>   * 假设请求 URL 为 GET /?ids=1,2,3
+</span></span></span><span class=line><span class=cl><span class=cm>   * 可以使用 separator 指定数据分割符
+</span></span></span><span class=line><span class=cl><span class=cm>   * ids 将会自动根据分割符分解为数组
+</span></span></span><span class=line><span class=cl><span class=cm>   */</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@Get</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>  <span class=nx>findByIds</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=kd>@Query</span><span class=p>(</span><span class=s1>&#39;ids&#39;</span><span class=p>,</span> <span class=k>new</span> <span class=nx>ParseArrayPipe</span><span class=p>({</span> <span class=nx>items</span>: <span class=kt>Number</span><span class=p>,</span> <span class=nx>separator</span><span class=o>:</span> <span class=s1>&#39;,&#39;</span> <span class=p>}))</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ids</span>: <span class=kt>number</span><span class=p>[]</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>userService</span><span class=p>.</span><span class=nx>findByIds</span><span class=p>(</span><span class=nx>ids</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>  <span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>最直接的，可以在 RouteHandler 中验证，但是这破坏了职责单一性原则；我们更希望数据在进入 RouteHandler 之前就完成验证。</p><h3 id=zod>Zod</h3><p>这里，我们需要使用 Zod 这个库：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -1513,15 +1575,47 @@
 </span></span><span class=line><span class=cl>  <span class=nt>&#34;error&#34;</span><span class=p>:</span> <span class=s2>&#34;Bad Request&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>  <span class=nt>&#34;statusCode&#34;</span><span class=p>:</span> <span class=mi>400</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=全局管道>全局管道</h3><p>有两种方式注册全局管道，一种是调用 useGlobalPipes 注册：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
+</span></span></code></pre></td></tr></table></div></div><h3 id=全局管道>全局管道</h3><p>有两种方式注册全局管道，一种是调用 useGlobalPipes 注册：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>async</span> <span class=kd>function</span> <span class=nx>bootstrap() {</span>
 </span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>app</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>NestFactory</span><span class=p>.</span><span class=nx>create</span><span class=p>(</span><span class=nx>AppModule</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>  <span class=nx>app</span><span class=p>.</span><span class=nx>useGlobalPipes</span><span class=p>(</span><span class=k>new</span> <span class=nx>ValidationPipe</span><span class=p>());</span>
+</span></span><span class=line><span class=cl>  <span class=nx>app</span><span class=p>.</span><span class=nx>useGlobalPipes</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=k>new</span> <span class=nx>ValidationPipe</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>       * whitelist:true 选项会对请求参数进行过滤
+</span></span></span><span class=line><span class=cl><span class=cm>       * 任何没出现在 DTO 中的参数，将入参被过滤
+</span></span></span><span class=line><span class=cl><span class=cm>       * forbidNonWhitelisted:true 更激进
+</span></span></span><span class=line><span class=cl><span class=cm>       * 如果有多余的参数，将返回错误信息
+</span></span></span><span class=line><span class=cl><span class=cm>       */</span>
+</span></span><span class=line><span class=cl>      <span class=nx>whitelist</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>forbidNonWhitelisted</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>       * 通常，请求传入的数据都是经过序列化的，所以都为字符串类型
+</span></span></span><span class=line><span class=cl><span class=cm>       * transform:true 会将入参隐式转化为符合 DTO 类型的数据
+</span></span></span><span class=line><span class=cl><span class=cm>       */</span>
+</span></span><span class=line><span class=cl>      <span class=nx>transform</span>: <span class=kt>true</span>
+</span></span><span class=line><span class=cl>    <span class=p>})</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
 </span></span><span class=line><span class=cl>  <span class=k>await</span> <span class=nx>app</span><span class=p>.</span><span class=nx>listen</span><span class=p>(</span><span class=nx>process</span><span class=p>.</span><span class=nx>env</span><span class=p>.</span><span class=nx>PORT</span> <span class=o>??</span> <span class=mi>3000</span><span class=p>);</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=nx>bootstrap</span><span class=p>();</span>
@@ -2521,12 +2615,12 @@
 </span></span><span class=line><span class=cl>UserModule &gt; onApplicationShutdown
 </span></span><span class=line><span class=cl>AppController &gt; onApplicationShutdown
 </span></span><span class=line><span class=cl>AppModule &gt; onApplicationShutdown
-</span></span></code></pre></td></tr></table></div></div><p>和<strong>开始阶段</strong>一致，也是具有<strong>冒泡</strong>特征，从里到外开始调用。</p><p>文档上提到，<strong>结束阶段</strong>的钩子可能在 Widnows 平台上不能正常工作；并且 enableShutdownHooks 内部是使用事件监听的方式实现的，可能会占用更多内存，所以没有默认开启。</p></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
-<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><footer class=site-footer><section class=copyright>&copy;
+</span></span></code></pre></td></tr></table></div></div><p>和<strong>开始阶段</strong>一致，也是具有<strong>冒泡</strong>特征，从里到外开始调用。</p><p>文档上提到，<strong>结束阶段</strong>的钩子可能在 Widnows 平台上不能正常工作；并且 enableShutdownHooks 内部是使用事件监听的方式实现的，可能会占用更多内存，所以没有默认开启。</p><h2 id=总结>总结</h2><ul><li>Module，用来划分资源/业务模块，每个 Module 包含了 Controller、Service、Entity、DTO 等等；</li><li>Guard，请求到达对应路由内部之前，检验是否满足对应的条件，保证 Handler  内部逻辑的单一性；</li><li>Controller，路由控制，对请求进行分流，交给不同的 Service 处理，并将结果返回；</li><li>Service，通过不同的方法，实现具体的业务逻辑；例如调用数据库和第三方接口；</li><li>Entity（Model），结合 ORM 使用，用来定义数据库结构和数据类型；</li><li>Decorator，一个函数，用来完成对方法的修改，实现不同的功能；</li><li>DTO，数据传输对象定义了传输数据的格式类型，用于数据验证。</li></ul></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/><div class=article-image><img src=/img/cover/nestjs.png loading=lazy data-key data-hash=/img/cover/nestjs.png></div><div class=article-details><h2 class=article-title>Nest.js 学习笔记（二）</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
 2017 -
 2024
 <a href=https://github.com/ElementRef target=_blank>馬腊咯稽</a></section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a>, Deploy by Actions<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.13.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
 <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#是什么>是什么</a></li><li><a href=#开始使用>开始使用</a></li><li><a href=#controller>Controller</a></li><li><a href=#service>Service</a></li><li><a href=#module>Module</a></li><li><a href=#中间件>中间件</a></li><li><a href=#异常过滤>异常过滤</a></li><li><a href=#管道>管道</a><ol><li><a href=#zod>Zod</a></li><li><a href=#全局管道>全局管道</a></li></ol></li><li><a href=#守卫>守卫</a><ol><li><a href=#自定义装饰器>自定义装饰器</a></li></ol></li><li><a href=#拦截器>拦截器</a></li><li><a href=#动态模块>动态模块</a></li><li><a href=#注入作用域>注入作用域</a></li><li><a href=#循环依赖>循环依赖</a></li><li><a href=#moduleref>ModuleRef</a></li><li><a href=#模块懒加载>模块懒加载</a></li><li><a href=#生命周期>生命周期</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script src=https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js></script><script>NProgress.configure({showSpinner:!1}),NProgress.start(),document.addEventListener("readystatechange",()=>{document.readyState==="interactive"&&NProgress.inc(.8),document.readyState==="complete"&&NProgress.done()})</script></body></html>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#是什么>是什么</a></li><li><a href=#开始使用>开始使用</a></li><li><a href=#controller>Controller</a></li><li><a href=#service>Service</a></li><li><a href=#module>Module</a></li><li><a href=#中间件>中间件</a></li><li><a href=#异常过滤>异常过滤</a></li><li><a href=#管道>管道</a><ol><li><a href=#zod>Zod</a></li><li><a href=#全局管道>全局管道</a></li></ol></li><li><a href=#守卫>守卫</a><ol><li><a href=#自定义装饰器>自定义装饰器</a></li></ol></li><li><a href=#拦截器>拦截器</a></li><li><a href=#动态模块>动态模块</a></li><li><a href=#注入作用域>注入作用域</a></li><li><a href=#循环依赖>循环依赖</a></li><li><a href=#moduleref>ModuleRef</a></li><li><a href=#模块懒加载>模块懒加载</a></li><li><a href=#生命周期>生命周期</a></li><li><a href=#总结>总结</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script src=https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js></script><script>NProgress.configure({showSpinner:!1}),NProgress.start(),document.addEventListener("readystatechange",()=>{document.readyState==="interactive"&&NProgress.inc(.8),document.readyState==="complete"&&NProgress.done()})</script></body></html>
