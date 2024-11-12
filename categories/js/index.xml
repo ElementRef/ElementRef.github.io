@@ -115,7 +115,7 @@ WebPageTest
 &lt;li>启用服务器压缩 Brotli|gzip，提升传输性能；&lt;/li>
 &lt;li>CSS 会阻止内容渲染，否则会导致无样式内容展示给用户；&lt;/li>
 &lt;li>JS 会阻止 HTML 解析，建议合理使用 async|defer；&lt;/li>
-&lt;li>借助 Purgecss|TreeShaking，减少无用代码；&lt;/li>
+&lt;li>借助 PurgeCSS|TreeShaking，减少无用代码；&lt;/li>
 &lt;li>合理的代码分包，每次仅加载需要的代码；&lt;/li>
 &lt;li>将重要的 CSS 写入 HTML 内部；&lt;/li>
 &lt;li>借助 srcset 优化图片资源加载。&lt;/li>
@@ -194,15 +194,14 @@ WebPageTest
 &lt;li>打包时，将 mode 置为 production，Webpack 内部会对打包产物做优化；&lt;/li>
 &lt;li>使用 MiniCssExtractPlugin 将 CSS 打包为单独的文件，提升 SEO；&lt;/li>
 &lt;li>将 node_modules 中的依赖放入 externals，并通过 CDN 引入；&lt;/li>
-&lt;li>启用 moduleIds:&amp;lsquo;deterministic&amp;rsquo;，使 contenthush 不至于失效；&lt;/li>
+&lt;li>启用 moduleIds:&amp;lsquo;deterministic&amp;rsquo;，使 contenthash 不至于失效；&lt;/li>
 &lt;li>开启 optimization.sideEffects，启用 TreeShaking；&lt;/li>
-&lt;li>配置合理的 splitChunks 策略，进行合理的分包；&lt;/li>
-&lt;li>配置合理的 devtool，生成对应的 source-map；&lt;/li>
+&lt;li>配置适合的 splitChunks 策略，进行合理的分包；&lt;/li>
+&lt;li>使用 CompressionPlugin，将构建产物压缩；&lt;/li>
 &lt;li>加载 loader 时，尽量缩小匹配范围，使 loader 执行更高效；&lt;/li>
 &lt;li>启用 cache，在开发环境下会有更快的 HMR 和构建速度；&lt;/li>
 &lt;li>启用 thread-loader/esbuild-loader，使用多线程构建；&lt;/li>
-&lt;li>配置 DllPlugin，进行预打包，提升构建速度；&lt;/li>
-&lt;li>使用 CompressionPlugin，将构建产物压缩。&lt;/li>
+&lt;li>配置 DllPlugin，进行预打包，提升构建速度。&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -506,7 +505,7 @@ WebPageTest
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * raw-loader 将文件导入为字符，asset/source
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * url-loader 将文件作为 dataURI 内联到 bundle 中，asset/inline
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * -------------------------------------------------
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 除此之外，asset 将自动选择 dataURI 还是发送到输出目录
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * asset 将自动选择 dataURI 还是发送到输出目录
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 就像之前使用 url-loader 并配置大小限制
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">type&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;asset/resource&amp;#39;&lt;/span>
@@ -551,8 +550,8 @@ WebPageTest
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * false，@babel/preset-env 不会引入 polyfill，需要在项目中主动引入
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * entry，需要在项目中主动引入，babel 根据 targets 替换成浏览器不兼容的所有 polyfill
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * usage，无序引入 polyfill，babel 根据 targets 按需引入 polyfill
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * entry，需主动引入，babel 根据 targets 对不兼容的 API 做 polyfill
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * usage，无需引入 polyfill，babel 根据 targets 按需引入 polyfill
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">useBuiltIns&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;entry&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">corejs&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>

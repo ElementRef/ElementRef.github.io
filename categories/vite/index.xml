@@ -540,8 +540,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h3 id="node_env">NODE_ENV&lt;/h3>
-&lt;p>import.meta.env.mode 和 process.env.NODE_ENV 是两个不同的东西：&lt;/p>
-&lt;p>import.meta.env.mode 是由运行 Vite 时，指定的 mode 决定的：&lt;/p>
+&lt;p>import.meta.env.mode 和 process.env.NODE_ENV 是两个不同的东西；import.meta.env.mode 是由运行 Vite 时，指定的 mode 决定的：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -964,7 +963,7 @@ vite-plugin-inspect
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">file&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 阻止 Vite 内置的 HMR，进行全局刷新
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 阻止 Vite 内置的 HMR
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="p">[];&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
@@ -1662,14 +1661,14 @@ vite-plugin-inspect
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 前端是可以通过 meta 标签设置内容安全策略的，可以让只有和页面同域名的静态资源才加载
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * &amp;lt;meta http-equiv=&amp;#34;Content-Security-Policy&amp;#34; content=&amp;#34;default-src &amp;#39;self&amp;#39;&amp;#34; /&amp;gt;
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 阻止页面上所有内联 JavaScript 的执行，可以避免 XSS 攻击
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> *
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * ----------------------------------------------------
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * &amp;lt;meta http-equiv=&amp;#34;Content-Security-Policy&amp;#34; content=&amp;#34;default-src &amp;#39;self&amp;#39; &amp;#39;unsafe-inline&amp;#39;&amp;#34; /&amp;gt;
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * unsafe-inline 会允许内联 JavaScript 执行，但是不推荐
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> *
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * --------------------------------------------------
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * &amp;lt;meta http-equiv=&amp;#34;Content-Security-Policy&amp;#34; content=&amp;#34;script-src &amp;#39;nonce-NDhkODkxMzYtNGUxZS00N2NjLTk1YTItNWMyOTM4YzdhZGJj&amp;#39;&amp;#34;&amp;gt;
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * &amp;lt;script nonce=&amp;#34;NDhkODkxMzYtNGUxZS00N2NjLTk1YTItNWMyOTM4YzdhZGJj&amp;#34;&amp;gt;&amp;lt;/script&amp;gt;
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * nonce 会允许上边的 JavaScript 代码执行
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> *
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * ------------------------------------
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * html.cspNonce 会自动帮我们生成对应的 meta 和 script 标签
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">html&lt;/span>&lt;span class="o">?:&lt;/span> &lt;span class="p">{&lt;/span>
