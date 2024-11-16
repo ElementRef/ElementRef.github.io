@@ -196,7 +196,7 @@ WebPageTest
 &lt;li>将 node_modules 中的依赖放入 externals，并通过 CDN 引入；&lt;/li>
 &lt;li>启用 moduleIds:&amp;lsquo;deterministic&amp;rsquo;，使 contenthash 不至于失效；&lt;/li>
 &lt;li>开启 optimization.sideEffects，启用 TreeShaking；&lt;/li>
-&lt;li>配置适合的 splitChunks 策略，进行合理的分包；&lt;/li>
+&lt;li>配置适合的 SplitChunks 策略，进行合理的分包；&lt;/li>
 &lt;li>使用 CompressionPlugin，将构建产物压缩；&lt;/li>
 &lt;li>加载 loader 时，尽量缩小匹配范围，使 loader 执行更高效；&lt;/li>
 &lt;li>启用 cache，在开发环境下会有更快的 HMR 和构建速度；&lt;/li>
