@@ -15,7 +15,7 @@
 <svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
 <span>深色</span></li></div></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/><img src=/img/cover/nestjs.png loading=lazy alt="Nest.js 学习笔记（二）"></a></div><div class=article-details><header class=article-category><a href=/categories/nest.js/>Nest.js</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/>Nest.js 学习笔记（二）</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
 <time class=article-time--published>Oct 28, 2024</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
-<time class=article-time--reading>阅读时长：14 分钟</time></div></footer></div></header><section class=article-content><h2 id=应用配置>应用配置</h2><p>一般来说，不同的运行环境需要有不同的应用配置；比如测试环境需要连接测试库，生产环境需要连接生产库。你肯定想到了通过 dotenv 将环境变量映射到 process.env 上；当然，在 Nest 中继续使用 dotenv 不是不可以；但是 Nest 提供了一种更为优雅的方式 @nestjs/config，当然内部还是依赖于 dotenv：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+<time class=article-time--reading>阅读时长：17 分钟</time></div></footer></div></header><section class=article-content><h2 id=应用配置>应用配置</h2><p>一般来说，不同的运行环境需要有不同的应用配置；比如测试环境需要连接测试库，生产环境需要连接生产库。你肯定想到了通过 dotenv 将环境变量映射到 process.env 上；当然，在 Nest 中继续使用 dotenv 不是不可以；但是 Nest 提供了一种更为优雅的方式 @nestjs/config，当然内部还是依赖于 dotenv：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pnpm add @nestjs/config
 </span></span></code></pre></td></tr></table></div></div><p>ConfigModule 是一个动态模块，并且需要在根模块 AppModule 中导入：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -1706,7 +1706,345 @@
 </span></span><span class=line><span class=cl>    <span class=k>this</span><span class=p>.</span><span class=nx>logger</span><span class=p>.</span><span class=nx>warn</span><span class=p>(</span><span class=sb>`计时器任务 </span><span class=si>${</span><span class=nx>name</span><span class=si>}</span><span class=sb> 已被删除`</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>  <span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><h2 id=队列>队列</h2><p>队列是一种设计模式，帮助解决应用的扩展性和性能问题：</p><ul><li>缓存资源密集型任务，控制性能波动；</li><li>拆分任务，将消耗大的任务委托给空闲进程；</li><li>作为各个服务间的信道，将任务缓存进队列，并在其他进行执行。</li></ul><p>Nest 提供了两种相关方案的集成，@nestjs/bullmq 和@nestjs/bull：</p><ul><li>BullMQ 提供了 TS 支持，并处于活跃状态；</li><li>Bull 已经转为了维护模式，仅会修复 bug；</li><li>两者都依赖 Redis 做数据持久化。</li></ul><p>啊，我需要补习 Redis 和 MQ 的知识&mldr;</p></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+</span></span></code></pre></td></tr></table></div></div><h2 id=队列>队列</h2><p>队列是一种设计模式，帮助解决应用的扩展性和性能问题：</p><ul><li>对资源密集型任务进行缓冲，减少性能波动；</li><li>拆分任务，将消耗大的任务委托给空闲进程，防止阻塞主进程；</li><li>作为各个服务间的信道，将任务缓存进队列，并在其他服务中执行。</li></ul><p>Nest 提供了两种相关方案的集成，@nestjs/bullmq 和@nestjs/bull：</p><ul><li>BullMQ 提供了 TS 支持，并处于活跃状态；</li><li>Bull 已经转为了维护模式，仅会修复 bug；</li><li>两者都依赖 Redis 做数据持久化。</li></ul><p>使用 Redis 有个好处，Redis 并不局限于某个平台，任务队列完全独立于平台之外；可以在多个服务之间共享队列。</p><p>首先，安装 BullMQ：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>brew install redis
+</span></span><span class=line><span class=cl>brew services start redis
+</span></span><span class=line><span class=cl>pnpm add @nestjs/bullmq bullmq
+</span></span></code></pre></td></tr></table></div></div><p>然后，在 AppModule 中引入 BullModule；BullModule 同样是一个动态模块，注册时需要传入一些配置：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>BullModule</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/bullmq&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Module</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>ScheduleModule</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/schedule&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>AppController</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./app.controller&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>TaskServiceService</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./task-service/task-service.service&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>TaskService</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./task/task.service&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>@Module</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>imports</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ScheduleModule</span><span class=p>.</span><span class=nx>forRoot</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>    <span class=nx>BullModule</span><span class=p>.</span><span class=nx>forRoot</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>connection</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>host</span><span class=o>:</span> <span class=s1>&#39;localhost&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>port</span>: <span class=kt>6379</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>})</span>
+</span></span><span class=line><span class=cl>  <span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=nx>controllers</span><span class=o>:</span> <span class=p>[</span><span class=nx>AppController</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=nx>providers</span><span class=o>:</span> <span class=p>[</span><span class=nx>TaskServiceService</span><span class=p>,</span> <span class=nx>TaskService</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppModule</span> <span class=p>{}</span>
+</span></span></code></pre></td></tr></table></div></div><p>使用 BullModule.registerQueue 注册队列，并且可以传入多个配置来创建多个队列；如果队列连接了同一个 Redis 并且使用了相同的连接凭证，那么这个队列会在不同的模块和进程之间共享：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>BullModule</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/bullmq&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Module</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>ScheduleModule</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/schedule&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>AppController</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./app.controller&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>TaskServiceService</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./task-service/task-service.service&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>TaskService</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./task/task.service&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>@Module</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>imports</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ScheduleModule</span><span class=p>.</span><span class=nx>forRoot</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>    <span class=nx>BullModule</span><span class=p>.</span><span class=nx>registerQueue</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>         * 每个队列需要有一个 name 属性
+</span></span></span><span class=line><span class=cl><span class=cm>         * name 将被用作 InjectionToken，需要唯一
+</span></span></span><span class=line><span class=cl><span class=cm>         * 也被用作装饰器参数，关联 consumer 和 listener
+</span></span></span><span class=line><span class=cl><span class=cm>         */</span>
+</span></span><span class=line><span class=cl>        <span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;cat&#39;</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;dog&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 可以单独设置连接配置
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nx>connection</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=nx>port</span>: <span class=kt>6380</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=nx>controllers</span><span class=o>:</span> <span class=p>[</span><span class=nx>AppController</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=nx>providers</span><span class=o>:</span> <span class=p>[</span><span class=nx>TaskServiceService</span><span class=p>,</span> <span class=nx>TaskService</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppModule</span> <span class=p>{}</span>
+</span></span></code></pre></td></tr></table></div></div><p>默认情况下，任务之间是独立的；如果要使任务之间有层级关系，可以使用 BullModule.registerFlowProducer：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>BullModule</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/bullmq&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Module</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>ScheduleModule</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/schedule&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>AppController</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./app.controller&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>TaskServiceService</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./task-service/task-service.service&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>TaskService</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./task/task.service&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>@Module</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>imports</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ScheduleModule</span><span class=p>.</span><span class=nx>forRoot</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>    <span class=nx>BullModule</span><span class=p>.</span><span class=nx>registerFlowProducer</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;relationshipJobs&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=p>})</span>
+</span></span><span class=line><span class=cl>  <span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=nx>controllers</span><span class=o>:</span> <span class=p>[</span><span class=nx>AppController</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=nx>providers</span><span class=o>:</span> <span class=p>[</span><span class=nx>TaskServiceService</span><span class=p>,</span> <span class=nx>TaskService</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppModule</span> <span class=p>{}</span>
+</span></span></code></pre></td></tr></table></div></div><p>BullModule 注册的任务存在于 Redis 中，每当队列被实例化（例如，应用重启），队列将首先尝试执行此前未完成的任务；每个队列有一个/多个 Producers、Consumers 和 Listeners；Jobs 默认按照<strong>先进先出</strong>的顺序出列，也可以<strong>后进先出</strong>或者根据任务优先级出列。</p><h2 id=日志>日志</h2><p>@nestjs/common 中内置了一个 Logger 用来在控制台输出一些提示信息，我们可以对 Logger 做一些扩展来实现一些额外的功能：</p><ul><li>完全禁用日志记录；</li><li>指定日志级别（错误、警告、调试&mldr;）；</li><li>自定义日志输出格式；</li><li>重写内置的 Logger；</li><li>继承 Logger 来扩展功能。</li></ul><p>如果要完全禁用日志输出，传入 logger:false 即可：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>const</span> <span class=nx>app</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>NestFactory</span><span class=p>.</span><span class=nx>create</span><span class=p>(</span><span class=nx>AppModule</span><span class=p>,</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 在调用 app.useLogger 之前，不会输出任何日志信息
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>logger</span>: <span class=kt>false</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果要仅输出错误日志，可以传入一个数组：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>const</span> <span class=nx>app</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>NestFactory</span><span class=p>.</span><span class=nx>create</span><span class=p>(</span><span class=nx>AppModule</span><span class=p>,</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>   * 内置了七个级别的日志：
+</span></span></span><span class=line><span class=cl><span class=cm>   * log | fatal | error | warn | debug | verbose
+</span></span></span><span class=line><span class=cl><span class=cm>   */</span>
+</span></span><span class=line><span class=cl>  <span class=nx>logger</span><span class=o>:</span> <span class=p>[</span><span class=s1>&#39;error&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果上述不能满足业务要求，可以扩展内部的 LoggerService 实现自定义日志：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=c1>// src/main.ts
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=p>{</span> <span class=nx>CustomLogger</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./custom.logger.service&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>app</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>NestFactory</span><span class=p>.</span><span class=nx>create</span><span class=p>(</span><span class=nx>AppModule</span><span class=p>,</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>   * CustomLogger 虽是一个可注入对象
+</span></span></span><span class=line><span class=cl><span class=cm>   * 但没有通过依赖注入被使用
+</span></span></span><span class=line><span class=cl><span class=cm>   */</span>
+</span></span><span class=line><span class=cl>  <span class=nx>logger</span>: <span class=kt>new</span> <span class=nx>CustomLogger</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=c1>// src/custom.logger.service.ts
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=p>{</span> <span class=nx>Injectable</span><span class=p>,</span> <span class=nx>LoggerService</span><span class=p>,</span> <span class=nx>LogLevel</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>@Injectable</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>CustomLogger</span> <span class=kr>implements</span> <span class=nx>LoggerService</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>log</span><span class=p>(</span><span class=nx>message</span>: <span class=kt>any</span><span class=p>,</span> <span class=p>...</span><span class=nx>optionalParams</span>: <span class=kt>any</span><span class=p>[])</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>  <span class=nx>error</span><span class=p>(</span><span class=nx>message</span>: <span class=kt>any</span><span class=p>,</span> <span class=p>...</span><span class=nx>optionalParams</span>: <span class=kt>any</span><span class=p>[])</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>  <span class=nx>warn</span><span class=p>(</span><span class=nx>message</span>: <span class=kt>any</span><span class=p>,</span> <span class=p>...</span><span class=nx>optionalParams</span>: <span class=kt>any</span><span class=p>[])</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>  <span class=nx>debug</span><span class=o>?</span><span class=p>(</span><span class=nx>message</span>: <span class=kt>any</span><span class=p>,</span> <span class=p>...</span><span class=nx>optionalParams</span>: <span class=kt>any</span><span class=p>[])</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>  <span class=nx>verbose</span><span class=o>?</span><span class=p>(</span><span class=nx>message</span>: <span class=kt>any</span><span class=p>,</span> <span class=p>...</span><span class=nx>optionalParams</span>: <span class=kt>any</span><span class=p>[])</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>  <span class=nx>fatal</span><span class=o>?</span><span class=p>(</span><span class=nx>message</span>: <span class=kt>any</span><span class=p>,</span> <span class=p>...</span><span class=nx>optionalParams</span>: <span class=kt>any</span><span class=p>[])</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>  <span class=nx>setLogLevels</span><span class=o>?</span><span class=p>(</span><span class=nx>levels</span>: <span class=kt>LogLevel</span><span class=p>[])</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>LoggerService 是一个比较偏低层的服务，什么功能都需要自己去实现；官方内置了一个 ConsoleLogger，是 LoggerService 的一种实现；我们可以继承 ConsoleLogger 来对日志系统的部分功能进行定制：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>ConsoleLogger</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>CustomLogger</span> <span class=kr>extends</span> <span class=nx>ConsoleLogger</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>error</span><span class=p>(</span><span class=nx>message</span>: <span class=kt>any</span><span class=p>,</span> <span class=nx>stack?</span>: <span class=kt>string</span><span class=p>,</span> <span class=nx>context?</span>: <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 实现自定义逻辑
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kr>super</span><span class=p>.</span><span class=nx>error</span><span class=p>(</span><span class=nx>message</span><span class=p>,</span> <span class=nx>stack</span><span class=p>,</span> <span class=nx>context</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>以上都是直接在应用入口直接使用 LoggerService 的，这没有利用 Nest 的依赖注入优势；当你想在 CustomLogger 中使用别的 Service 或者在别的 Service 中使用 CustomLogger 时，最好使用依赖注入；我们可以新建一个 LoggerModule：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Module</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>MyLoggerService</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./logger.service&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>@Module</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>providers</span><span class=o>:</span> <span class=p>[</span><span class=nx>MyLoggerService</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=nx>exports</span><span class=o>:</span> <span class=p>[</span><span class=nx>MyLoggerService</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>LoggerModule</span> <span class=p>{}</span>
+</span></span></code></pre></td></tr></table></div></div><p>此时，为了能在应用入口处使用 MyLoggerService，我们需要在项目中的任何一个 Module 中引入 LoggerModule：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kd>@Module</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>imports</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ScheduleModule</span><span class=p>.</span><span class=nx>forRoot</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>    <span class=nx>BullModule</span><span class=p>.</span><span class=nx>registerFlowProducer</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;relationshipJobs&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}),</span>
+</span></span><span class=line><span class=cl>    <span class=nx>LoggerModule</span>
+</span></span><span class=line><span class=cl>  <span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=nx>controllers</span><span class=o>:</span> <span class=p>[</span><span class=nx>AppController</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=nx>providers</span><span class=o>:</span> <span class=p>[</span><span class=nx>TaskServiceService</span><span class=p>,</span> <span class=nx>TaskService</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppModule</span> <span class=p>{}</span>
+</span></span></code></pre></td></tr></table></div></div><p>为什么要这么做呢？当我们启动应用时，NestFactory.create 是独立于模块系统运行的，为了让 Nest 能够帮我们实例化 LoggerModule，我们需要在任何一个 Module 中引入 LoggerModule；这么我们就可以通过 app.get 拿到存在于依赖树中的 MyLoggerService 实例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>VERSION_NEUTRAL</span><span class=p>,</span> <span class=nx>VersioningType</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>NestFactory</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/core&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>AppModule</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./app.module&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>MyLoggerService</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./logger/logger.service&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>async</span> <span class=kd>function</span> <span class=nx>bootstrap() {</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>app</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>NestFactory</span><span class=p>.</span><span class=nx>create</span><span class=p>(</span><span class=nx>AppModule</span><span class=p>,</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>     * 默认为 true，可以自动抛出缓存的日志
+</span></span></span><span class=line><span class=cl><span class=cm>     * 为 false 时，可以调用 Logger.flush 清空缓存
+</span></span></span><span class=line><span class=cl><span class=cm>     */</span>
+</span></span><span class=line><span class=cl>    <span class=nx>autoFlushLogs</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>     * 缓冲日志，直到 MyLoggerService 实例化完成
+</span></span></span><span class=line><span class=cl><span class=cm>     * 如果在此期间发生了错误，会通过 ConsoleLogger 打印日志
+</span></span></span><span class=line><span class=cl><span class=cm>     */</span>
+</span></span><span class=line><span class=cl>    <span class=nx>bufferLogs</span>: <span class=kt>true</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 通过 app.get 拿到 MyLoggerService 实例
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>app</span><span class=p>.</span><span class=nx>useLogger</span><span class=p>(</span><span class=nx>app</span><span class=p>.</span><span class=kr>get</span><span class=p>(</span><span class=nx>MyLoggerService</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>  <span class=nx>app</span><span class=p>.</span><span class=nx>enableVersioning</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=nx>defaultVersion</span>: <span class=kt>VERSION_NEUTRAL</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kr>type</span><span class=o>:</span> <span class=nx>VersioningType</span><span class=p>.</span><span class=nx>URI</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=k>await</span> <span class=nx>app</span><span class=p>.</span><span class=nx>listen</span><span class=p>(</span><span class=nx>process</span><span class=p>.</span><span class=nx>env</span><span class=p>.</span><span class=nx>PORT</span> <span class=o>??</span> <span class=mi>3000</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=nx>bootstrap</span><span class=p>();</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果想要展示当前日志距离上一条日志的时间差，可以传入 timestamp 配置：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kd>@Injectable</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>UserService</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>private</span> <span class=kr>readonly</span> <span class=nx>logger</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>MyLoggerService</span><span class=p>(</span><span class=nx>UserService</span><span class=p>.</span><span class=nx>name</span><span class=p>,</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>timestamp</span>: <span class=kt>true</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
 <span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/><div class=article-image><img src=/img/cover/nestjs.png loading=lazy data-key data-hash=/img/cover/nestjs.png></div><div class=article-details><h2 class=article-title>Nest.js 学习笔记（一）</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
 2017 -
 2024
@@ -1714,4 +2052,4 @@
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
 <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#应用配置>应用配置</a><ol><li><a href=#命名空间>命名空间</a></li><li><a href=#局部注册>局部注册</a></li><li><a href=#变量验证>变量验证</a></li><li><a href=#可扩展变量>可扩展变量</a></li><li><a href=#maints-中使用>main.ts 中使用</a></li></ol></li><li><a href=#数据库集成>数据库集成</a></li><li><a href=#缓存>缓存</a></li><li><a href=#序列化>序列化</a></li><li><a href=#版本控制>版本控制</a><ol><li><a href=#uri>URI</a></li><li><a href=#请求头>请求头</a></li><li><a href=#accept>Accept</a></li><li><a href=#自定义>自定义</a></li><li><a href=#路由适配>路由适配</a></li></ol></li><li><a href=#任务调度>任务调度</a><ol><li><a href=#动态调度>动态调度</a></li></ol></li><li><a href=#队列>队列</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script src=https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js></script><script>NProgress.configure({showSpinner:!1}),NProgress.start(),document.addEventListener("readystatechange",()=>{document.readyState==="interactive"&&NProgress.inc(.8),document.readyState==="complete"&&NProgress.done()})</script></body></html>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#应用配置>应用配置</a><ol><li><a href=#命名空间>命名空间</a></li><li><a href=#局部注册>局部注册</a></li><li><a href=#变量验证>变量验证</a></li><li><a href=#可扩展变量>可扩展变量</a></li><li><a href=#maints-中使用>main.ts 中使用</a></li></ol></li><li><a href=#数据库集成>数据库集成</a></li><li><a href=#缓存>缓存</a></li><li><a href=#序列化>序列化</a></li><li><a href=#版本控制>版本控制</a><ol><li><a href=#uri>URI</a></li><li><a href=#请求头>请求头</a></li><li><a href=#accept>Accept</a></li><li><a href=#自定义>自定义</a></li><li><a href=#路由适配>路由适配</a></li></ol></li><li><a href=#任务调度>任务调度</a><ol><li><a href=#动态调度>动态调度</a></li></ol></li><li><a href=#队列>队列</a></li><li><a href=#日志>日志</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script src=https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js></script><script>NProgress.configure({showSpinner:!1}),NProgress.start(),document.addEventListener("readystatechange",()=>{document.readyState==="interactive"&&NProgress.inc(.8),document.readyState==="complete"&&NProgress.done()})</script></body></html>
