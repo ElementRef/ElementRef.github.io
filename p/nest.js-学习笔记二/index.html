@@ -15,7 +15,7 @@
 <svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
 <span>深色</span></li></div></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/><img src=/img/cover/nestjs.png loading=lazy alt="Nest.js 学习笔记（二）"></a></div><div class=article-details><header class=article-category><a href=/categories/nest.js/>Nest.js</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/>Nest.js 学习笔记（二）</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
 <time class=article-time--published>Oct 28, 2024</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
-<time class=article-time--reading>阅读时长：17 分钟</time></div></footer></div></header><section class=article-content><h2 id=应用配置>应用配置</h2><p>一般来说，不同的运行环境需要有不同的应用配置；比如测试环境需要连接测试库，生产环境需要连接生产库。你肯定想到了通过 dotenv 将环境变量映射到 process.env 上；当然，在 Nest 中继续使用 dotenv 不是不可以；但是 Nest 提供了一种更为优雅的方式 @nestjs/config，当然内部还是依赖于 dotenv：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+<time class=article-time--reading>阅读时长：19 分钟</time></div></footer></div></header><section class=article-content><h2 id=应用配置>应用配置</h2><p>一般来说，不同的运行环境需要有不同的应用配置；比如测试环境需要连接测试库，生产环境需要连接生产库。你肯定想到了通过 dotenv 将环境变量映射到 process.env 上；当然，在 Nest 中继续使用 dotenv 不是不可以；但是 Nest 提供了一种更为优雅的方式 @nestjs/config，当然内部还是依赖于 dotenv：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pnpm add @nestjs/config
 </span></span></code></pre></td></tr></table></div></div><p>ConfigModule 是一个动态模块，并且需要在根模块 AppModule 中导入：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -2044,6 +2044,261 @@
 </span></span><span class=line><span class=cl>    <span class=nx>timestamp</span>: <span class=kt>true</span>
 </span></span><span class=line><span class=cl>  <span class=p>});</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=cookieexpress>cookie（Express）</h2><p>要在 Nest 中使用 cookie，需要安装 cookie-parser：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pnpm add cookie-parser
+</span></span><span class=line><span class=cl>pnpm add -D @types/cookie-parser
+</span></span></code></pre></td></tr></table></div></div><p>并将 cookie-parser 注册为全局中间件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>NestFactory</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/core&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=o>*</span> <span class=kr>as</span> <span class=nx>CookieParser</span> <span class=kr>from</span> <span class=s1>&#39;cookie-parser&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>AppModule</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./app.module&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>async</span> <span class=kd>function</span> <span class=nx>bootstrap() {</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>app</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>NestFactory</span><span class=p>.</span><span class=nx>create</span><span class=p>(</span><span class=nx>AppModule</span><span class=p>,</span> <span class=p>{});</span>
+</span></span><span class=line><span class=cl>  <span class=nx>app</span><span class=p>.</span><span class=nx>use</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nx>CookieParser</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// 可选参数，用来加密 cookie
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=s1>&#39;signToken&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>         * 可选参数，对 cookieValue 的解码函数
+</span></span></span><span class=line><span class=cl><span class=cm>         * 默认值为 decodeURIComponent
+</span></span></span><span class=line><span class=cl><span class=cm>         */</span>
+</span></span><span class=line><span class=cl>        <span class=nx>decode</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=s1>&#39;&#39;</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>await</span> <span class=nx>app</span><span class=p>.</span><span class=nx>listen</span><span class=p>(</span><span class=nx>process</span><span class=p>.</span><span class=nx>env</span><span class=p>.</span><span class=nx>PORT</span> <span class=o>??</span> <span class=mi>3000</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=nx>bootstrap</span><span class=p>();</span>
+</span></span></code></pre></td></tr></table></div></div><p>CookieParser 中间件将会解析请求头中的 cookie 字段，并暴露给内部的 request.cookies；如果配置了 signToken，将会通过 request.signedCookies 暴露：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Controller</span><span class=p>,</span> <span class=nx>Get</span><span class=p>,</span> <span class=nx>Req</span><span class=p>,</span> <span class=nx>Res</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Request</span><span class=p>,</span> <span class=nx>Response</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;express&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>@Controller</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@Get</span><span class=p>(</span><span class=s1>&#39;/all&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=kr>async</span> <span class=nx>findAll</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=kd>@Req</span><span class=p>()</span> <span class=nx>request</span>: <span class=kt>Request</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>@Res</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// 响应逻辑不用手动处理
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=nx>passthrough</span>: <span class=kt>true</span>
+</span></span><span class=line><span class=cl>    <span class=p>})</span>
+</span></span><span class=line><span class=cl>    <span class=nx>response</span>: <span class=kt>Response</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=nx>request</span><span class=p>.</span><span class=nx>cookies</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 向客户端的 cookie 中添加新的键值对
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>response</span><span class=p>.</span><span class=nx>cookie</span><span class=p>(</span><span class=s1>&#39;key&#39;</span><span class=p>,</span> <span class=s1>&#39;value&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=eventemitter>EventEmitter</h2><p>@nestjs/event-emitter 通过 <a class=link href=https://github.com/EventEmitter2/EventEmitter2 target=_blank rel=noopener>eventemitter2
+</a>向 Nest 提供观察者模式的实现：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Module</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>EventEmitterModule</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/event-emitter&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>AppController</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./app.controller&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>AppService</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./app.service&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>@Module</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>imports</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>     * 这个过程中，会初始化 EventEmitter 并注册对应的事件监听
+</span></span></span><span class=line><span class=cl><span class=cm>     * 注册过程发生在 onApplicationBootstrap 钩子中
+</span></span></span><span class=line><span class=cl><span class=cm>     */</span>
+</span></span><span class=line><span class=cl>    <span class=nx>EventEmitterModule</span><span class=p>.</span><span class=nx>forRoot</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>wildcard</span>: <span class=kt>false</span><span class=p>,</span> <span class=c1>// 通配符
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=nx>delimiter</span><span class=o>:</span> <span class=s1>&#39;.&#39;</span><span class=p>,</span> <span class=c1>// 命名空间分隔符
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>       * 如果要触发 newListener 事件，请置为 true
+</span></span></span><span class=line><span class=cl><span class=cm>       * this.emit(&#39;newListener&#39;, type, listener);
+</span></span></span><span class=line><span class=cl><span class=cm>       */</span>
+</span></span><span class=line><span class=cl>      <span class=nx>newListener</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>removeListener</span>: <span class=kt>false</span><span class=p>,</span> <span class=c1>// 如果要触发 removeListener 事件，请置为 true
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=nx>maxListeners</span>: <span class=kt>10</span><span class=p>,</span> <span class=c1>// 每个事件最多有几个监听器
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>       * 如果监听器的数量超过了 maxListeners
+</span></span></span><span class=line><span class=cl><span class=cm>       * 是否在【内存泄露】消息中展示 EventName
+</span></span></span><span class=line><span class=cl><span class=cm>       */</span>
+</span></span><span class=line><span class=cl>      <span class=nx>verboseMemoryLeak</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>ignoreErrors</span>: <span class=kt>false</span> <span class=c1>// 如果一个事件没有对应的监听器，是否抛出错误
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>})</span>
+</span></span><span class=line><span class=cl>  <span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=nx>controllers</span><span class=o>:</span> <span class=p>[</span><span class=nx>AppController</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=nx>providers</span><span class=o>:</span> <span class=p>[</span><span class=nx>AppService</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppModule</span> <span class=p>{}</span>
+</span></span></code></pre></td></tr></table></div></div><p>怎么触发和监听事件呢？我们在 UserController 中 emit 一个事件并带上 payload：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kd>@Controller</span><span class=p>(</span><span class=s1>&#39;user&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>UserController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>constructor</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=kr>private</span> <span class=kr>readonly</span> <span class=nx>userService</span>: <span class=kt>UserService</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kr>private</span> <span class=kr>readonly</span> <span class=nx>eventEmitter</span>: <span class=kt>EventEmitter2</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>@Get</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>  <span class=nx>findAll() {</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 当我们请求接口是，会 emit 事件 user.findAll
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>this</span><span class=p>.</span><span class=nx>eventEmitter</span><span class=p>.</span><span class=nx>emit</span><span class=p>(</span><span class=s1>&#39;user.findAll&#39;</span><span class=p>,</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>message</span><span class=o>:</span> <span class=s1>&#39;Emit From UserController.findAll Method&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>userService</span><span class=p>.</span><span class=nx>findAll</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>我们在 AppController 中监听这个事件，使用 OnEvent 修饰符：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kd>@Controller</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@OnEvent</span><span class=p>(</span><span class=s1>&#39;**&#39;</span><span class=p>)</span> <span class=c1>// 监听所有事件
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kd>@OnEvent</span><span class=p>(</span><span class=s1>&#39;user.*&#39;</span><span class=p>)</span> <span class=c1>// 监听 user 下的所有事件
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kd>@OnEvent</span><span class=p>(</span><span class=s1>&#39;user.findAll&#39;</span><span class=p>,</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// OnEvent 还可以接受这些选项
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kr>async</span><span class=o>:</span> <span class=kr>boolean</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>nextTick</span>: <span class=kt>boolean</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>objectify</span>: <span class=kt>boolean</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>promisify</span>: <span class=kt>boolean</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>prependListener</span>: <span class=kt>boolean</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>suppressErrors</span>: <span class=kt>boolean</span>
+</span></span><span class=line><span class=cl>  <span class=p>})</span>
+</span></span><span class=line><span class=cl>  <span class=nx>handleUserFindAll</span><span class=p>(</span><span class=nx>payload</span><span class=o>:</span> <span class=p>{</span> <span class=nx>message</span>: <span class=kt>string</span> <span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>     * 此时的 payload 就是 { message: &#39;Emit From UserController.findAll Method&#39; }
+</span></span></span><span class=line><span class=cl><span class=cm>     * 这个过程中，我们并没有在 UserModule 中导入 EventEmitterModule
+</span></span></span><span class=line><span class=cl><span class=cm>     */</span>
+</span></span><span class=line><span class=cl>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;AppController &gt; handleUserFindAll &gt; payload&#39;</span><span class=p>,</span> <span class=nx>payload</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>我们上边提到过，事件监听的注册发生在 AppModule 的 onApplicationBootstrap 生命周期中；这就可能导致事件回调发生遗漏，因为事件的触发可能会早于 EventSubscribersLoader 设置事件回调的时机。所以，emit 最好发生在 waitUntilReady 之后：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=k>await</span> <span class=k>this</span><span class=p>.</span><span class=nx>eventEmitterReadinessWatcher</span><span class=p>.</span><span class=nx>waitUntilReady</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=k>await</span> <span class=k>this</span><span class=p>.</span><span class=nx>eventEmitter</span><span class=p>.</span><span class=nx>emit</span><span class=p>(</span><span class=s1>&#39;order.created&#39;</span><span class=p>,</span> <span class=p>{</span> <span class=nx>message</span><span class=o>:</span> <span class=s1>&#39;blah blah...&#39;</span> <span class=p>});</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=响应压缩express>响应压缩（Express）</h2><p>Nest 支持通过中间件来压缩响应主体；当然，在生产环境下，这部分工作通常由反向代理来完成；先来安装 compression：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pnpm add compression
+</span></span></code></pre></td></tr></table></div></div><p>然后，注册 compression 中间件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>NestFactory</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/core&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=o>*</span> <span class=kr>as</span> <span class=nx>compression</span> <span class=kr>from</span> <span class=s1>&#39;compression&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>AppModule</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./app.module&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>async</span> <span class=kd>function</span> <span class=nx>bootstrap() {</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>app</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>NestFactory</span><span class=p>.</span><span class=nx>create</span><span class=p>(</span><span class=nx>AppModule</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>await</span> <span class=nx>app</span><span class=p>.</span><span class=nx>use</span><span class=p>(</span><span class=nx>compression</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>await</span> <span class=nx>app</span><span class=p>.</span><span class=nx>listen</span><span class=p>(</span><span class=nx>process</span><span class=p>.</span><span class=nx>env</span><span class=p>.</span><span class=nx>PORT</span> <span class=o>??</span> <span class=mi>3000</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=nx>bootstrap</span><span class=p>();</span>
 </span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
 <span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/><div class=article-image><img src=/img/cover/nestjs.png loading=lazy data-key data-hash=/img/cover/nestjs.png></div><div class=article-details><h2 class=article-title>Nest.js 学习笔记（一）</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
 2017 -
@@ -2052,4 +2307,4 @@
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
 <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#应用配置>应用配置</a><ol><li><a href=#命名空间>命名空间</a></li><li><a href=#局部注册>局部注册</a></li><li><a href=#变量验证>变量验证</a></li><li><a href=#可扩展变量>可扩展变量</a></li><li><a href=#maints-中使用>main.ts 中使用</a></li></ol></li><li><a href=#数据库集成>数据库集成</a></li><li><a href=#缓存>缓存</a></li><li><a href=#序列化>序列化</a></li><li><a href=#版本控制>版本控制</a><ol><li><a href=#uri>URI</a></li><li><a href=#请求头>请求头</a></li><li><a href=#accept>Accept</a></li><li><a href=#自定义>自定义</a></li><li><a href=#路由适配>路由适配</a></li></ol></li><li><a href=#任务调度>任务调度</a><ol><li><a href=#动态调度>动态调度</a></li></ol></li><li><a href=#队列>队列</a></li><li><a href=#日志>日志</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script src=https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js></script><script>NProgress.configure({showSpinner:!1}),NProgress.start(),document.addEventListener("readystatechange",()=>{document.readyState==="interactive"&&NProgress.inc(.8),document.readyState==="complete"&&NProgress.done()})</script></body></html>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#应用配置>应用配置</a><ol><li><a href=#命名空间>命名空间</a></li><li><a href=#局部注册>局部注册</a></li><li><a href=#变量验证>变量验证</a></li><li><a href=#可扩展变量>可扩展变量</a></li><li><a href=#maints-中使用>main.ts 中使用</a></li></ol></li><li><a href=#数据库集成>数据库集成</a></li><li><a href=#缓存>缓存</a></li><li><a href=#序列化>序列化</a></li><li><a href=#版本控制>版本控制</a><ol><li><a href=#uri>URI</a></li><li><a href=#请求头>请求头</a></li><li><a href=#accept>Accept</a></li><li><a href=#自定义>自定义</a></li><li><a href=#路由适配>路由适配</a></li></ol></li><li><a href=#任务调度>任务调度</a><ol><li><a href=#动态调度>动态调度</a></li></ol></li><li><a href=#队列>队列</a></li><li><a href=#日志>日志</a></li><li><a href=#cookieexpress>cookie（Express）</a></li><li><a href=#eventemitter>EventEmitter</a></li><li><a href=#响应压缩express>响应压缩（Express）</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script src=https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js></script><script>NProgress.configure({showSpinner:!1}),NProgress.start(),document.addEventListener("readystatechange",()=>{document.readyState==="interactive"&&NProgress.inc(.8),document.readyState==="complete"&&NProgress.done()})</script></body></html>
