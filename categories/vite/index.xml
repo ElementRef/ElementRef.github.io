@@ -2,7 +2,7 @@
 &lt;ul>
 &lt;li>开发环境下，借助 esbuild 和预打包缓存实现快速的 HMR：
 &lt;ul>
-&lt;li>首次启动时，esbuild 会将 node_modules 下的依赖进行预打包并缓存在 .vite 中；&lt;/li>
+&lt;li>首次启动时，esbuild 会将 node_modules 下的依赖进行预打包并缓存在 .vite 目录；&lt;/li>
 &lt;li>对 node_modules 下的依赖配置强缓存，对项目代码配置协商缓存；&lt;/li>
 &lt;li>只编译当前页面需要的依赖和项目代码；&lt;/li>
 &lt;li>不管兼容性问题，无需代码降级转换。&lt;/li>
@@ -993,8 +993,6 @@ vite-plugin-inspect
 &lt;/span>&lt;span class="lnt">17
 &lt;/span>&lt;span class="lnt">18
 &lt;/span>&lt;span class="lnt">19
-&lt;/span>&lt;span class="lnt">20
-&lt;/span>&lt;span class="lnt">21
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 会在生产打包时，被 TreeShaking
@@ -1005,16 +1003,14 @@ vite-plugin-inspect
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">resources&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">JSON&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">parse&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">content&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">i18next&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">jotaiStore&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="kr">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">i18nAtom&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">nsName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">file&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sr">/locales\/(.+?)\//&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">?&lt;/span>&lt;span class="p">.[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">];&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">nsName&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">lang&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">file&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">split&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;/&amp;#39;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">pop&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">?&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;.json&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">lang&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">i18next&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">addResourceBundle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">lang&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">nsName&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">resources&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 更新 i18nAtom
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">i18next&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">addResourceBundle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">lang&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">nsName&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">resources&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">await&lt;/span> &lt;span class="nx">i18next&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">reloadResources&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">lang&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">nsName&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">import&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">meta&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">env&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">DEV&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">EventBus&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">dispatch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;I18N_UPDATE&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 派发更新事件
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kr">import&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">meta&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">env&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">DEV&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">EventBus&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">dispatch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;I18N_UPDATE&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>

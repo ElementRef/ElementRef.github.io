@@ -563,7 +563,7 @@ WebPageTest
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">],&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * @babel/plugin-transform-runtime 不会污染全局
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 并且会复用 Babel Helper
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 并且会复用 BabelHelper
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">plugins&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;@babel/plugin-transform-runtime&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
@@ -587,9 +587,9 @@ WebPageTest
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">sideEffects&lt;/span>: &lt;span class="kt">true&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 允许跳过整个模块/文件和整个文件子树
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">usedExports&lt;/span>: &lt;span class="kt">true&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 依赖于 terser 检测语句中的副作用
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="cm">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * Webpack 打包时，存在一个 runtime
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 为运行时代码创建了一个额外的 chunk
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 防止 runtime 的变化影响构建产物的 contenthash
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * Webpack 打包时，存在一个 runtime，用于模块解析
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * single 可以为 runtime 创建了一个额外的 chunk
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 防止影响构建产物的 contenthash
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">runtimeChunk&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;single&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">minimizer&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>
@@ -608,7 +608,7 @@ WebPageTest
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果 chunk 来自 node_modules，会被拆分
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">splitChunks&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">chunks&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;all&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 默认为 async，设置为 all 时，chunk 可以在 non-initial chunk 和 initial chunk 之间共享
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">chunks&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;all&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 默认为 async；设置为 all 时，chunk 可以在 non-initial chunk 和 initial chunk 之间共享
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">cacheGroups&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 像 lodash 或 react 这样的第三方库很少像本地源代码一样频繁修改

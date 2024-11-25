@@ -414,7 +414,7 @@ WebPageTest
 </span></span><span class=line><span class=cl>              <span class=p>],</span>
 </span></span><span class=line><span class=cl>              <span class=cm>/**
 </span></span></span><span class=line><span class=cl><span class=cm>               * @babel/plugin-transform-runtime 不会污染全局
-</span></span></span><span class=line><span class=cl><span class=cm>               * 并且会复用 Babel Helper
+</span></span></span><span class=line><span class=cl><span class=cm>               * 并且会复用 BabelHelper
 </span></span></span><span class=line><span class=cl><span class=cm>               */</span>
 </span></span><span class=line><span class=cl>              <span class=nx>plugins</span><span class=o>:</span> <span class=p>[</span>
 </span></span><span class=line><span class=cl>                <span class=s1>&#39;@babel/plugin-transform-runtime&#39;</span><span class=p>,</span>
@@ -438,9 +438,9 @@ WebPageTest
 </span></span><span class=line><span class=cl>    <span class=nx>sideEffects</span>: <span class=kt>true</span><span class=p>,</span> <span class=c1>// 允许跳过整个模块/文件和整个文件子树
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>usedExports</span>: <span class=kt>true</span><span class=p>,</span> <span class=c1>// 依赖于 terser 检测语句中的副作用
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=cm>/**
-</span></span></span><span class=line><span class=cl><span class=cm>     * Webpack 打包时，存在一个 runtime
-</span></span></span><span class=line><span class=cl><span class=cm>     * 为运行时代码创建了一个额外的 chunk
-</span></span></span><span class=line><span class=cl><span class=cm>     * 防止 runtime 的变化影响构建产物的 contenthash
+</span></span></span><span class=line><span class=cl><span class=cm>     * Webpack 打包时，存在一个 runtime，用于模块解析
+</span></span></span><span class=line><span class=cl><span class=cm>     * single 可以为 runtime 创建了一个额外的 chunk
+</span></span></span><span class=line><span class=cl><span class=cm>     * 防止影响构建产物的 contenthash
 </span></span></span><span class=line><span class=cl><span class=cm>     */</span>
 </span></span><span class=line><span class=cl>    <span class=nx>runtimeChunk</span><span class=o>:</span> <span class=s1>&#39;single&#39;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>    <span class=nx>minimizer</span><span class=o>:</span> <span class=p>[</span>
@@ -459,7 +459,7 @@ WebPageTest
 </span></span></span><span class=line><span class=cl><span class=cm>     * 如果 chunk 来自 node_modules，会被拆分
 </span></span></span><span class=line><span class=cl><span class=cm>     */</span>
 </span></span><span class=line><span class=cl>    <span class=nx>splitChunks</span><span class=o>:</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>      <span class=nx>chunks</span><span class=o>:</span> <span class=s1>&#39;all&#39;</span><span class=p>,</span> <span class=c1>// 默认为 async，设置为 all 时，chunk 可以在 non-initial chunk 和 initial chunk 之间共享
+</span></span><span class=line><span class=cl>      <span class=nx>chunks</span><span class=o>:</span> <span class=s1>&#39;all&#39;</span><span class=p>,</span> <span class=c1>// 默认为 async；设置为 all 时，chunk 可以在 non-initial chunk 和 initial chunk 之间共享
 </span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=nx>cacheGroups</span><span class=o>:</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=cm>/**
 </span></span></span><span class=line><span class=cl><span class=cm>         * 像 lodash 或 react 这样的第三方库很少像本地源代码一样频繁修改
