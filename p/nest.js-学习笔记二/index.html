@@ -15,7 +15,7 @@
 <svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
 <span>深色</span></li></div></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/><img src=/img/cover/nestjs.png loading=lazy alt="Nest.js 学习笔记（二）"></a></div><div class=article-details><header class=article-category><a href=/categories/nest.js/>Nest.js</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/>Nest.js 学习笔记（二）</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
 <time class=article-time--published>Oct 28, 2024</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
-<time class=article-time--reading>阅读时长：19 分钟</time></div></footer></div></header><section class=article-content><h2 id=应用配置>应用配置</h2><p>一般来说，不同的运行环境需要有不同的应用配置；比如测试环境需要连接测试库，生产环境需要连接生产库。你肯定想到了通过 dotenv 将环境变量映射到 process.env 上；当然，在 Nest 中继续使用 dotenv 不是不可以；但是 Nest 提供了一种更为优雅的方式 @nestjs/config，当然内部还是依赖于 dotenv：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+<time class=article-time--reading>阅读时长：24 分钟</time></div></footer></div></header><section class=article-content><h2 id=应用配置>应用配置</h2><p>一般来说，不同的运行环境需要有不同的应用配置；比如测试环境需要连接测试库，生产环境需要连接生产库。你肯定想到了通过 dotenv 将环境变量映射到 process.env 上；当然，在 Nest 中继续使用 dotenv 不是不可以；但是 Nest 提供了一种更为优雅的方式 @nestjs/config，当然内部还是依赖于 dotenv：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pnpm add @nestjs/config
 </span></span></code></pre></td></tr></table></div></div><p>ConfigModule 是一个动态模块，并且需要在根模块 AppModule 中导入：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -2299,6 +2299,799 @@
 </span></span><span class=line><span class=cl>  <span class=k>await</span> <span class=nx>app</span><span class=p>.</span><span class=nx>listen</span><span class=p>(</span><span class=nx>process</span><span class=p>.</span><span class=nx>env</span><span class=p>.</span><span class=nx>PORT</span> <span class=o>??</span> <span class=mi>3000</span><span class=p>);</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=nx>bootstrap</span><span class=p>();</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=文件上传express>文件上传（Express）</h2><p>在 Express 模式下，Nest 内置了基于 <a class=link href=https://github.com/expressjs/multer target=_blank rel=noopener>multer
+</a>的模块来处理文件上传；multer <strong>仅支持</strong>处理 Content-Type:multipart/form-data 的数据：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>Controller</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>Get</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>Post</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>UploadedFile</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>UseInterceptors</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>FileInterceptor</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/platform-express&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>AppService</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./app.service&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>@Controller</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>constructor</span><span class=p>(</span><span class=kr>private</span> <span class=kr>readonly</span> <span class=nx>appService</span>: <span class=kt>AppService</span><span class=p>)</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>@Get</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>  <span class=nx>getHello</span><span class=p>()</span><span class=o>:</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>appService</span><span class=p>.</span><span class=nx>getHello</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>@Post</span><span class=p>(</span><span class=s1>&#39;upload&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@UseInterceptors</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nx>FileInterceptor</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=s1>&#39;file&#39;</span> <span class=c1>// 表单名称
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=nx>fileUpload</span><span class=p>(</span><span class=kd>@UploadedFile</span><span class=p>()</span> <span class=nx>file</span>: <span class=kt>Express.Multer.File</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;AppController &gt; fileUpload &gt; file&#39;</span><span class=p>,</span> <span class=nx>file</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>file</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果要对文件元数据进行验证，可以使用自定义管道：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>ArgumentMetadata</span><span class=p>,</span> <span class=nx>Injectable</span><span class=p>,</span> <span class=nx>PipeTransform</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>@Injectable</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>FileSizeValidationPipe</span> <span class=kr>implements</span> <span class=nx>PipeTransform</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>transform</span><span class=p>(</span><span class=nx>value</span>: <span class=kt>any</span><span class=p>,</span> <span class=nx>metadata</span>: <span class=kt>ArgumentMetadata</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>value</span><span class=p>.</span><span class=nx>size</span> <span class=o>&lt;</span> <span class=mi>1000</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>在 UploadedFile 中直接实例化 FileSizeValidationPipe：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>Controller</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>Get</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>Post</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>UploadedFile</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>UseInterceptors</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>FileInterceptor</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/platform-express&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>AppService</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./app.service&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>FileSizeValidationPipe</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./file.size.validation.pipe&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>@Controller</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>constructor</span><span class=p>(</span><span class=kr>private</span> <span class=kr>readonly</span> <span class=nx>appService</span>: <span class=kt>AppService</span><span class=p>)</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>@Get</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>  <span class=nx>getHello</span><span class=p>()</span><span class=o>:</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>appService</span><span class=p>.</span><span class=nx>getHello</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>@Post</span><span class=p>(</span><span class=s1>&#39;upload&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@UseInterceptors</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nx>FileInterceptor</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=s1>&#39;file&#39;</span> <span class=c1>// 表单名称
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=nx>fileUpload</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=kd>@UploadedFile</span><span class=p>(</span><span class=k>new</span> <span class=nx>FileSizeValidationPipe</span><span class=p>())</span> <span class=nx>file</span>: <span class=kt>Express.Multer.File</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;AppController &gt; fileUpload &gt; file&#39;</span><span class=p>,</span> <span class=nx>file</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>file</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>此外，Nest 内置了一个 ParseFilePipe 管道，它可以满足大部分业务场景：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>Controller</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>Get</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>HttpStatus</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>ParseFilePipe</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>Post</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>UploadedFile</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>UseInterceptors</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>FileInterceptor</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/platform-express&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>AppService</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./app.service&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>@Controller</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>constructor</span><span class=p>(</span><span class=kr>private</span> <span class=kr>readonly</span> <span class=nx>appService</span>: <span class=kt>AppService</span><span class=p>)</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>@Get</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>  <span class=nx>getHello</span><span class=p>()</span><span class=o>:</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>appService</span><span class=p>.</span><span class=nx>getHello</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>@Post</span><span class=p>(</span><span class=s1>&#39;upload&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@UseInterceptors</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nx>FileInterceptor</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=s1>&#39;file&#39;</span> <span class=c1>// 表单名称
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=nx>fileUpload</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=kd>@UploadedFile</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=k>new</span> <span class=nx>ParseFilePipe</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>        <span class=nx>validators</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=c1>// 需要传入验证器
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 如果验证失败，返回的状态码，默认为 400
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nx>errorHttpStatusCode</span>: <span class=kt>HttpStatus.BAD_REQUEST</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 接收错误信息并返回新的错误信息
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nx>exceptionFactory</span><span class=o>:</span> <span class=p>(</span><span class=nx>error</span>: <span class=kt>string</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>error</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 是否必传
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nx>fileIsRequired</span>: <span class=kt>true</span>
+</span></span><span class=line><span class=cl>      <span class=p>})</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>file</span>: <span class=kt>Express.Multer.File</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;AppController &gt; fileUpload &gt; file&#39;</span><span class=p>,</span> <span class=nx>file</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>file</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>对于 validators 来说，我们需要实现一个 FileValidator 构成的数组，先来看一下 FileValidator 的类型：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>export</span> <span class=kr>interface</span> <span class=nx>IFile</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>mimetype</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>size</span>: <span class=kt>number</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>declare</span> <span class=kr>abstract</span> <span class=kr>class</span> <span class=nx>FileValidator</span><span class=o>&lt;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>TValidationOptions</span> <span class=o>=</span> <span class=nx>Record</span><span class=p>&lt;</span><span class=nt>string</span><span class=err>,</span> <span class=na>any</span><span class=p>&gt;,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>TFile</span> <span class=kr>extends</span> <span class=nx>IFile</span> <span class=o>=</span> <span class=nx>IFile</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>protected</span> <span class=kr>readonly</span> <span class=nx>validationOptions</span>: <span class=kt>TValidationOptions</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kr>constructor</span><span class=p>(</span><span class=nx>validationOptions</span>: <span class=kt>TValidationOptions</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 返回 boolean，表示是否通过验证
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kr>abstract</span> <span class=nx>isValid</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nx>file?</span>: <span class=kt>TFile</span> <span class=o>|</span> <span class=nx>TFile</span><span class=p>[]</span> <span class=o>|</span> <span class=nx>Record</span><span class=p>&lt;</span><span class=nt>string</span><span class=err>,</span> <span class=na>TFile</span><span class=err>[]</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span><span class=o>:</span> <span class=kr>boolean</span> <span class=o>|</span> <span class=nx>Promise</span><span class=p>&lt;</span><span class=nt>boolean</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 用于构建错误信息
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kr>abstract</span> <span class=nx>buildErrorMessage</span><span class=p>(</span><span class=nx>file</span>: <span class=kt>any</span><span class=p>)</span><span class=o>:</span> <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>Nest 内置了两个 FileValidator，MaxFileSizeValidator 和 FileTypeValidator；正好对应了 IFile 的两个属性，用于验证文件大小和文件 MIMEtype：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>Controller</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>FileTypeValidator</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>Get</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>HttpStatus</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>MaxFileSizeValidator</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>ParseFilePipe</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>Post</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>UploadedFile</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>UseInterceptors</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>FileInterceptor</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/platform-express&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>AppService</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./app.service&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>@Controller</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>constructor</span><span class=p>(</span><span class=kr>private</span> <span class=kr>readonly</span> <span class=nx>appService</span>: <span class=kt>AppService</span><span class=p>)</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>@Get</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>  <span class=nx>getHello</span><span class=p>()</span><span class=o>:</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>appService</span><span class=p>.</span><span class=nx>getHello</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>@Post</span><span class=p>(</span><span class=s1>&#39;upload&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@UseInterceptors</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nx>FileInterceptor</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=s1>&#39;file&#39;</span> <span class=c1>// 表单名称
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=nx>fileUpload</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=kd>@UploadedFile</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=k>new</span> <span class=nx>ParseFilePipe</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>        <span class=nx>validators</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=c1>// 需要传入验证器
+</span></span></span><span class=line><span class=cl><span class=c1></span>          <span class=k>new</span> <span class=nx>MaxFileSizeValidator</span><span class=p>({</span> <span class=nx>maxSize</span>: <span class=kt>1000</span> <span class=p>}),</span>
+</span></span><span class=line><span class=cl>          <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>           * 根据文件后缀名来判断 MIMEtype
+</span></span></span><span class=line><span class=cl><span class=cm>           * 所以，可能不够可靠
+</span></span></span><span class=line><span class=cl><span class=cm>           */</span>
+</span></span><span class=line><span class=cl>          <span class=k>new</span> <span class=nx>FileTypeValidator</span><span class=p>({</span> <span class=nx>fileType</span><span class=o>:</span> <span class=s1>&#39;image/jpeg&#39;</span> <span class=p>})</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 如果验证失败，返回的状态码，默认为 400
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nx>errorHttpStatusCode</span>: <span class=kt>HttpStatus.BAD_REQUEST</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 接收错误信息并返回新的错误信息
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nx>exceptionFactory</span><span class=o>:</span> <span class=p>(</span><span class=nx>error</span>: <span class=kt>string</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>error</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 是否必传
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nx>fileIsRequired</span>: <span class=kt>true</span>
+</span></span><span class=line><span class=cl>      <span class=p>})</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>file</span>: <span class=kt>Express.Multer.File</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;AppController &gt; fileUpload &gt; file&#39;</span><span class=p>,</span> <span class=nx>file</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>file</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>ParseFilePipe 需要传入一个配置对象来完成文件验证，并且需要手动实例化验证器；如果你不想使用这种 API 风格，Nest 还提供了另一种 API 风格 ParseFilePipeBuilder；他支持链式调用：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kd>@Post</span><span class=p>(</span><span class=s1>&#39;upload&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@UseInterceptors</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nx>FileInterceptor</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=s1>&#39;file&#39;</span> <span class=c1>// 表单名称
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=nx>fileUpload</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=kd>@UploadedFile</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=k>new</span> <span class=nx>ParseFilePipeBuilder</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=nx>addFileTypeValidator</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>          <span class=nx>fileType</span><span class=o>:</span> <span class=s1>&#39;jpeg&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=p>})</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=nx>addMaxSizeValidator</span><span class=p>({</span> <span class=nx>maxSize</span>: <span class=kt>1000</span> <span class=p>})</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=nx>build</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>          <span class=nx>errorHttpStatusCode</span>: <span class=kt>HttpStatus.BAD_REQUEST</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nx>fileIsRequired</span>: <span class=kt>false</span>
+</span></span><span class=line><span class=cl>        <span class=p>})</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>file</span>: <span class=kt>Express.Multer.File</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;AppController &gt; fileUpload &gt; file&#39;</span><span class=p>,</span> <span class=nx>file</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>file</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=多文件上传>多文件上传</h3><p>如果多个文件对应一个字段，只需要将 UploadedFile 改为 UploadedFiles 即可：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kd>@Post</span><span class=p>(</span><span class=s1>&#39;upload&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@UseInterceptors</span><span class=p>(</span><span class=nx>FileInterceptor</span><span class=p>(</span><span class=s1>&#39;files&#39;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=nx>fileUpload</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=kd>@UploadedFiles</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nx>files</span>: <span class=kt>Array</span><span class=p>&lt;</span><span class=nt>Express.Multer.File</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;AppController &gt; fileUpload &gt; files&#39;</span><span class=p>,</span> <span class=nx>files</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>files</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果多个文件分别对应着不同字段，需要将 FileInterceptor 替换为 FileFieldsInterceptor，并明确每个字段名：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kd>@Post</span><span class=p>(</span><span class=s1>&#39;upload&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@UseInterceptors</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nx>FileFieldsInterceptor</span><span class=p>([</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;avatar&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>maxCount</span>: <span class=kt>1</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;background&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>maxCount</span>: <span class=kt>1</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>])</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=nx>fileUpload</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=kd>@UploadedFiles</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nx>files</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>avatar?</span>: <span class=kt>Array</span><span class=p>&lt;</span><span class=nt>Express.Multer.File</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl>      <span class=nx>background?</span>: <span class=kt>Array</span><span class=p>&lt;</span><span class=nt>Express.Multer.File</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;AppController &gt; fileUpload &gt; files&#39;</span><span class=p>,</span> <span class=nx>files</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>files</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果接收<strong>任何字段</strong>传来的文件，需要使用 AnyFilesInterceptor：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kd>@Post</span><span class=p>(</span><span class=s1>&#39;upload&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@UseInterceptors</span><span class=p>(</span><span class=nx>AnyFilesInterceptor</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>  <span class=nx>fileUpload</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=kd>@UploadedFiles</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nx>files</span>: <span class=kt>Array</span><span class=p>&lt;</span><span class=nt>Express.Multer.File</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;AppController &gt; fileUpload &gt; files&#39;</span><span class=p>,</span> <span class=nx>files</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>files</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果不接受任何文件，使用 NoFilesInterceptor：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kd>@Post</span><span class=p>(</span><span class=s1>&#39;upload&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@UseInterceptors</span><span class=p>(</span><span class=nx>NoFilesInterceptor</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>  <span class=nx>fileUpload</span><span class=p>(</span><span class=kd>@Body</span><span class=p>()</span> <span class=nx>body</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;AppController &gt; fileUpload &gt; body&#39;</span><span class=p>,</span> <span class=nx>body</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>body</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=流式传输>流式传输</h3><p>当遇到需要将文件传输至客户端的场景时，可以将数据 pipe 到 Response 中去：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Controller</span><span class=p>,</span> <span class=nx>Get</span><span class=p>,</span> <span class=nx>Res</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Response</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;express&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>createReadStream</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;fs&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>join</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;path&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>@Controller</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kd>@Get</span><span class=p>(</span><span class=s1>&#39;getRaw&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=nx>getFile</span><span class=p>(</span><span class=kd>@Res</span><span class=p>()</span> <span class=nx>res</span>: <span class=kt>Response</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=nx>stream</span> <span class=o>=</span> <span class=nx>createReadStream</span><span class=p>(</span><span class=nx>join</span><span class=p>(</span><span class=nx>process</span><span class=p>.</span><span class=nx>cwd</span><span class=p>(),</span> <span class=s1>&#39;package.json&#39;</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>    <span class=nx>stream</span><span class=p>.</span><span class=nx>pipe</span><span class=p>(</span><span class=nx>res</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这种通过 pipe 连接 Response 的方式会导致响应拦截器失效；所以，官网介绍了一种返回 StreamableFile 的写法；StreamableFile 暂存了数据流：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Controller</span><span class=p>,</span> <span class=nx>Get</span><span class=p>,</span> <span class=nx>StreamableFile</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>createReadStream</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;fs&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>join</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;path&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>@Controller</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@Get</span><span class=p>(</span><span class=s1>&#39;getRaw&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=nx>getFile</span><span class=p>()</span><span class=o>:</span> <span class=nx>StreamableFile</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=nx>stream</span> <span class=o>=</span> <span class=nx>createReadStream</span><span class=p>(</span><span class=nx>join</span><span class=p>(</span><span class=nx>process</span><span class=p>.</span><span class=nx>cwd</span><span class=p>(),</span> <span class=s1>&#39;package.json&#39;</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 直接返回 StreamableFile 实例
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>return</span> <span class=k>new</span> <span class=nx>StreamableFile</span><span class=p>(</span><span class=nx>stream</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>默认情况下，响应头中的 Content-Type 为 application/octet-stream；如果想要 Content-Type：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=c1>// 在 StreamableFile 中传入 Options
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@Get</span><span class=p>(</span><span class=s1>&#39;getRaw&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=nx>getFile</span><span class=p>()</span><span class=o>:</span> <span class=nx>StreamableFile</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=nx>stream</span> <span class=o>=</span> <span class=nx>createReadStream</span><span class=p>(</span><span class=nx>join</span><span class=p>(</span><span class=nx>process</span><span class=p>.</span><span class=nx>cwd</span><span class=p>(),</span> <span class=s1>&#39;package.json&#39;</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=k>new</span> <span class=nx>StreamableFile</span><span class=p>(</span><span class=nx>stream</span><span class=p>,</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>disposition</span><span class=o>:</span> <span class=s1>&#39;attachment; filename=&#34;package.json&#34;&#39;</span><span class=p>,</span> <span class=c1>// 自定义 Content-Disposition
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=kr>type</span><span class=o>:</span> <span class=s1>&#39;application/json&#39;</span> <span class=c1>// 自定义 Content-Type
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=c1>// 使用 Response 去设置响应头部
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@Get</span><span class=p>(</span><span class=s1>&#39;getRaw&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=nx>getFile</span><span class=p>(</span><span class=kd>@Res</span><span class=p>({</span> <span class=nx>passthrough</span>: <span class=kt>true</span> <span class=p>})</span> <span class=nx>res</span>: <span class=kt>Response</span><span class=p>)</span><span class=o>:</span> <span class=nx>StreamableFile</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=nx>stream</span> <span class=o>=</span> <span class=nx>createReadStream</span><span class=p>(</span><span class=nx>join</span><span class=p>(</span><span class=nx>process</span><span class=p>.</span><span class=nx>cwd</span><span class=p>(),</span> <span class=s1>&#39;package.json&#39;</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>    <span class=nx>res</span><span class=p>.</span><span class=kr>set</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=s1>&#39;Content-Disposition&#39;</span><span class=o>:</span> <span class=s1>&#39;attachment; filename=&#34;package.json&#34;&#39;</span>
+</span></span><span class=line><span class=cl>      <span class=s1>&#39;Content-Type&#39;</span><span class=o>:</span> <span class=s1>&#39;application/json&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=k>new</span> <span class=nx>StreamableFile</span><span class=p>(</span><span class=nx>stream</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=c1>// 使用 Header 装饰器
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@Get</span><span class=p>(</span><span class=s1>&#39;getRaw&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@Header</span><span class=p>(</span><span class=s1>&#39;Content-Type&#39;</span><span class=p>,</span> <span class=s1>&#39;application/json&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@Header</span><span class=p>(</span><span class=s1>&#39;Content-Disposition&#39;</span><span class=p>,</span> <span class=s1>&#39;attachment; filename=&#34;package.json&#34;&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=nx>getFile</span><span class=p>()</span><span class=o>:</span> <span class=nx>StreamableFile</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=nx>stream</span> <span class=o>=</span> <span class=nx>createReadStream</span><span class=p>(</span><span class=nx>join</span><span class=p>(</span><span class=nx>process</span><span class=p>.</span><span class=nx>cwd</span><span class=p>(),</span> <span class=s1>&#39;package.json&#39;</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=k>new</span> <span class=nx>StreamableFile</span><span class=p>(</span><span class=nx>stream</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=http-模块>HTTP 模块</h2><p>Nest 基于 Axios 构建了 HttpModule，HttpModule 导出了 HttpService，HttpService 会自动将响应转换为 RxJS 对象；要使用 HttpModule，需要安装@nestjs/axios：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pnpm add @nestjs/axios axios
+</span></span></code></pre></td></tr></table></div></div><p>然后，导入 HttpModule，依赖注入 HttpService 即可：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>HttpService</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/axios&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Injectable</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>AxiosResponse</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;axios&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Observable</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;rxjs&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>@Injectable</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppService</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>constructor</span><span class=p>(</span><span class=kr>private</span> <span class=kr>readonly</span> <span class=nx>httpService</span>: <span class=kt>HttpService</span><span class=p>)</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>  <span class=nx>findAll</span><span class=p>()</span><span class=o>:</span> <span class=nx>Observable</span><span class=p>&lt;</span><span class=nt>AxiosResponse</span><span class=err>&lt;</span><span class=na>any</span><span class=p>&gt;</span><span class=o>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>httpService</span><span class=p>.</span><span class=kr>get</span><span class=p>(</span><span class=s1>&#39;https://randomuser.me&#39;</span><span class=p>).</span><span class=nx>pipe</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nx>catchError</span><span class=p>((</span><span class=nx>error</span>: <span class=kt>AxiosError</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=p>.</span><span class=nx>logger</span><span class=p>.</span><span class=nx>error</span><span class=p>(</span><span class=nx>error</span><span class=p>.</span><span class=nx>response</span><span class=p>.</span><span class=nx>data</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=p>})</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果要对 HttpModule 进行配置，需要在模块导入的时候，调用 register|registerAsync 方法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=c1>// 通过 HttpModuleOptionsFactory 创建配置
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>@Injectable</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kr>class</span> <span class=nx>HttpConfigService</span> <span class=kr>implements</span> <span class=nx>HttpModuleOptionsFactory</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>createHttpOptions</span><span class=p>()</span><span class=o>:</span> <span class=nx>HttpModuleOptions</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>timeout</span>: <span class=kt>5000</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>maxRedirects</span>: <span class=kt>5</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=c1>// 在导入时，传入配置
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>@Module</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>imports</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=nx>HttpModule</span><span class=p>.</span><span class=nx>register</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>maxRedirects</span>: <span class=kt>5</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>timeout</span>: <span class=kt>5000</span>
+</span></span><span class=line><span class=cl>    <span class=p>}),</span>
+</span></span><span class=line><span class=cl>    <span class=nx>HttpModule</span><span class=p>.</span><span class=nx>registerAsync</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>useFactory</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>({</span>
+</span></span><span class=line><span class=cl>        <span class=nx>maxRedirects</span>: <span class=kt>5</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>timeout</span>: <span class=kt>5000</span>
+</span></span><span class=line><span class=cl>      <span class=p>})</span>
+</span></span><span class=line><span class=cl>    <span class=p>}),</span>
+</span></span><span class=line><span class=cl>    <span class=nx>HttpModule</span><span class=p>.</span><span class=nx>registerAsync</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>imports</span><span class=o>:</span> <span class=p>[</span><span class=nx>ConfigModule</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=nx>useFactory</span>: <span class=kt>async</span> <span class=p>(</span><span class=nx>configService</span>: <span class=kt>ConfigService</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>({</span>
+</span></span><span class=line><span class=cl>        <span class=nx>maxRedirects</span>: <span class=kt>configService.get</span><span class=p>(</span><span class=s1>&#39;HTTP_MAX_REDIRECTS&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nx>timeout</span>: <span class=kt>configService.get</span><span class=p>(</span><span class=s1>&#39;HTTP_TIMEOUT&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>}),</span>
+</span></span><span class=line><span class=cl>      <span class=nx>inject</span><span class=o>:</span> <span class=p>[</span><span class=nx>ConfigService</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=p>}),</span>
+</span></span><span class=line><span class=cl>    <span class=nx>HttpModule</span><span class=p>.</span><span class=nx>registerAsync</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>useClass</span>: <span class=kt>HttpConfigService</span>
+</span></span><span class=line><span class=cl>    <span class=p>})</span>
+</span></span><span class=line><span class=cl>  <span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=nx>controllers</span><span class=o>:</span> <span class=p>[</span><span class=nx>AppController</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=nx>providers</span><span class=o>:</span> <span class=p>[</span><span class=nx>AppService</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppModule</span> <span class=p>{}</span>
 </span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
 <span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/><div class=article-image><img src=/img/cover/nestjs.png loading=lazy data-key data-hash=/img/cover/nestjs.png></div><div class=article-details><h2 class=article-title>Nest.js 学习笔记（一）</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
 2017 -
@@ -2307,4 +3100,4 @@
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
 <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#应用配置>应用配置</a><ol><li><a href=#命名空间>命名空间</a></li><li><a href=#局部注册>局部注册</a></li><li><a href=#变量验证>变量验证</a></li><li><a href=#可扩展变量>可扩展变量</a></li><li><a href=#maints-中使用>main.ts 中使用</a></li></ol></li><li><a href=#数据库集成>数据库集成</a></li><li><a href=#缓存>缓存</a></li><li><a href=#序列化>序列化</a></li><li><a href=#版本控制>版本控制</a><ol><li><a href=#uri>URI</a></li><li><a href=#请求头>请求头</a></li><li><a href=#accept>Accept</a></li><li><a href=#自定义>自定义</a></li><li><a href=#路由适配>路由适配</a></li></ol></li><li><a href=#任务调度>任务调度</a><ol><li><a href=#动态调度>动态调度</a></li></ol></li><li><a href=#队列>队列</a></li><li><a href=#日志>日志</a></li><li><a href=#cookieexpress>cookie（Express）</a></li><li><a href=#eventemitter>EventEmitter</a></li><li><a href=#响应压缩express>响应压缩（Express）</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script src=https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js></script><script>NProgress.configure({showSpinner:!1}),NProgress.start(),document.addEventListener("readystatechange",()=>{document.readyState==="interactive"&&NProgress.inc(.8),document.readyState==="complete"&&NProgress.done()})</script></body></html>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#应用配置>应用配置</a><ol><li><a href=#命名空间>命名空间</a></li><li><a href=#局部注册>局部注册</a></li><li><a href=#变量验证>变量验证</a></li><li><a href=#可扩展变量>可扩展变量</a></li><li><a href=#maints-中使用>main.ts 中使用</a></li></ol></li><li><a href=#数据库集成>数据库集成</a></li><li><a href=#缓存>缓存</a></li><li><a href=#序列化>序列化</a></li><li><a href=#版本控制>版本控制</a><ol><li><a href=#uri>URI</a></li><li><a href=#请求头>请求头</a></li><li><a href=#accept>Accept</a></li><li><a href=#自定义>自定义</a></li><li><a href=#路由适配>路由适配</a></li></ol></li><li><a href=#任务调度>任务调度</a><ol><li><a href=#动态调度>动态调度</a></li></ol></li><li><a href=#队列>队列</a></li><li><a href=#日志>日志</a></li><li><a href=#cookieexpress>cookie（Express）</a></li><li><a href=#eventemitter>EventEmitter</a></li><li><a href=#响应压缩express>响应压缩（Express）</a></li><li><a href=#文件上传express>文件上传（Express）</a><ol><li><a href=#多文件上传>多文件上传</a></li><li><a href=#流式传输>流式传输</a></li></ol></li><li><a href=#http-模块>HTTP 模块</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script src=https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js></script><script>NProgress.configure({showSpinner:!1}),NProgress.start(),document.addEventListener("readystatechange",()=>{document.readyState==="interactive"&&NProgress.inc(.8),document.readyState==="complete"&&NProgress.done()})</script></body></html>
