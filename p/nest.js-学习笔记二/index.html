@@ -15,7 +15,7 @@
 <svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
 <span>深色</span></li></div></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/><img src=/img/cover/nestjs.png loading=lazy alt="Nest.js 学习笔记（二）"></a></div><div class=article-details><header class=article-category><a href=/categories/nest.js/>Nest.js</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/>Nest.js 学习笔记（二）</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
 <time class=article-time--published>Oct 28, 2024</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
-<time class=article-time--reading>阅读时长：24 分钟</time></div></footer></div></header><section class=article-content><h2 id=应用配置>应用配置</h2><p>一般来说，不同的运行环境需要有不同的应用配置；比如测试环境需要连接测试库，生产环境需要连接生产库。你肯定想到了通过 dotenv 将环境变量映射到 process.env 上；当然，在 Nest 中继续使用 dotenv 不是不可以；但是 Nest 提供了一种更为优雅的方式 @nestjs/config，当然内部还是依赖于 dotenv：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+<time class=article-time--reading>阅读时长：26 分钟</time></div></footer></div></header><section class=article-content><h2 id=应用配置>应用配置</h2><p>一般来说，不同的运行环境需要有不同的应用配置；比如测试环境需要连接测试库，生产环境需要连接生产库。你肯定想到了通过 dotenv 将环境变量映射到 process.env 上；当然，在 Nest 中继续使用 dotenv 不是不可以；但是 Nest 提供了一种更为优雅的方式 @nestjs/config，当然内部还是依赖于 dotenv：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pnpm add @nestjs/config
 </span></span></code></pre></td></tr></table></div></div><p>ConfigModule 是一个动态模块，并且需要在根模块 AppModule 中导入：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -3092,6 +3092,239 @@
 </span></span><span class=line><span class=cl>  <span class=nx>providers</span><span class=o>:</span> <span class=p>[</span><span class=nx>AppService</span><span class=p>]</span>
 </span></span><span class=line><span class=cl><span class=p>})</span>
 </span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppModule</span> <span class=p>{}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=sessionexpress>Session（Express）</h2><p>要在 Nest 中启用 Session，需要安装两个依赖：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pnpm add express-session
+</span></span><span class=line><span class=cl>pnpm add -D @types/express-session
+</span></span></code></pre></td></tr></table></div></div><p>并注册全局中间件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>NestFactory</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/core&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=o>*</span> <span class=kr>as</span> <span class=nx>session</span> <span class=kr>from</span> <span class=s1>&#39;express-session&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>AppModule</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./app.module&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>async</span> <span class=kd>function</span> <span class=nx>bootstrap() {</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>app</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>NestFactory</span><span class=p>.</span><span class=nx>create</span><span class=p>(</span><span class=nx>AppModule</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>await</span> <span class=nx>app</span><span class=p>.</span><span class=nx>use</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>     * 默认情况下，session 存在服务端内存中，所以这个仅限于开发调试
+</span></span></span><span class=line><span class=cl><span class=cm>     * 如果要在生产环境使用，请访问 CompatibleSessionStores
+</span></span></span><span class=line><span class=cl><span class=cm>     * 或者，直接使用 JSONWebToken 认证
+</span></span></span><span class=line><span class=cl><span class=cm>     */</span>
+</span></span><span class=line><span class=cl>    <span class=nx>session</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// 如果为 true，在每次请求过程中，都将 session 保存一次
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=nx>resave</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// 是否保存未初始化的 session，可用于实现登录会话
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=nx>saveUninitialized</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// 用来给保存了 SessionID 的 cookie 做签名
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=nx>secret</span><span class=o>:</span> <span class=s1>&#39;session-example&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=p>})</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>await</span> <span class=nx>app</span><span class=p>.</span><span class=nx>listen</span><span class=p>(</span><span class=nx>process</span><span class=p>.</span><span class=nx>env</span><span class=p>.</span><span class=nx>PORT</span> <span class=o>??</span> <span class=mi>3000</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=nx>bootstrap</span><span class=p>();</span>
+</span></span></code></pre></td></tr></table></div></div><p>配置完中间件之后，可以通过 request.session 访问 session 内容：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Controller</span><span class=p>,</span> <span class=nx>Get</span><span class=p>,</span> <span class=nx>Req</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=kr>type</span> <span class=p>{</span> <span class=nx>Request</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;express&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>@Controller</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@Get</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>  <span class=nx>getHello</span><span class=p>(</span><span class=kd>@Req</span><span class=p>()</span> <span class=nx>request</span>: <span class=kt>Request</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>request</span><span class=p>.</span><span class=nx>session</span><span class=p>.</span><span class=nx>visits</span> <span class=o>=</span> <span class=nx>request</span><span class=o>?</span><span class=p>.</span><span class=nx>session</span><span class=o>?</span><span class=p>.</span><span class=nx>visits</span>
+</span></span><span class=line><span class=cl>      <span class=o>?</span> <span class=nx>request</span><span class=o>?</span><span class=p>.</span><span class=nx>session</span><span class=o>?</span><span class=p>.</span><span class=nx>visits</span> <span class=o>+</span> <span class=nx>1</span>
+</span></span><span class=line><span class=cl>      : <span class=kt>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>此时，你会看到 TS 报错信息「Property <code>visits</code> does not exist on type <code>Session & Partial&lt;SessionData></code>」，原因是 @types/express-session 的问题；我们需要在根目录创建一个 x.d.ts 文件，使用 interface 扩展一下 SessionData 类型即可：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=c1>// ./global.d.ts
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=s1>&#39;express-session&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>declare</span> <span class=nx>module</span> <span class=s1>&#39;express-session&#39;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>interface</span> <span class=nx>SessionData</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>visits</span>: <span class=kt>number</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>或者直接使用 @Session 装饰器，这样可以不用扩展 express-session：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Controller</span><span class=p>,</span> <span class=nx>Get</span><span class=p>,</span> <span class=nx>Session</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>@Controller</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@Get</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>  <span class=nx>getHello</span><span class=p>(</span><span class=kd>@Session</span><span class=p>()</span> <span class=nx>session</span>: <span class=kt>Record</span><span class=p>&lt;</span><span class=nt>string</span><span class=err>,</span> <span class=na>any</span><span class=p>&gt;)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>session</span><span class=p>.</span><span class=nx>visits</span> <span class=o>=</span> <span class=nx>session</span><span class=o>?</span><span class=p>.</span><span class=nx>visits</span> <span class=o>?</span> <span class=nx>session</span><span class=o>?</span><span class=p>.</span><span class=nx>visits</span> <span class=o>+</span> <span class=nx>1</span> : <span class=kt>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=mvcexpress>MVC（Express）</h2><p>不用管 MVC 是什么，简单地讲，就是 Nest 调用模版引擎，渲染 HTML。Nest 推荐使用 <a class=link href=https://github.com/pillarjs/hbs target=_blank rel=noopener>hbs
+</a>模版引擎：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pnpm add hbs
+</span></span></code></pre></td></tr></table></div></div><p>配置完成之后，需要调用 setViewEngine 指定模版引擎：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>NestFactory</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/core&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>NestExpressApplication</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/platform-express&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>join</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;path&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>AppModule</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./app.module&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>async</span> <span class=kd>function</span> <span class=nx>bootstrap() {</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>app</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>NestFactory</span><span class=p>.</span><span class=nx>create</span><span class=p>&lt;</span><span class=nt>NestExpressApplication</span><span class=p>&gt;(</span><span class=nx>AppModule</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>await</span> <span class=nx>app</span><span class=p>.</span><span class=nx>useStaticAssets</span><span class=p>(</span><span class=nx>join</span><span class=p>(</span><span class=nx>__dirname</span><span class=p>,</span> <span class=s1>&#39;..&#39;</span><span class=p>,</span> <span class=s1>&#39;public&#39;</span><span class=p>));</span> <span class=c1>// 静态资源
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=k>await</span> <span class=nx>app</span><span class=p>.</span><span class=nx>setBaseViewsDir</span><span class=p>(</span><span class=nx>join</span><span class=p>(</span><span class=nx>__dirname</span><span class=p>,</span> <span class=s1>&#39;..&#39;</span><span class=p>,</span> <span class=s1>&#39;views&#39;</span><span class=p>));</span> <span class=c1>// 模版内容
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=k>await</span> <span class=nx>app</span><span class=p>.</span><span class=nx>setViewEngine</span><span class=p>(</span><span class=s1>&#39;hbs&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>await</span> <span class=nx>app</span><span class=p>.</span><span class=nx>listen</span><span class=p>(</span><span class=nx>process</span><span class=p>.</span><span class=nx>env</span><span class=p>.</span><span class=nx>PORT</span> <span class=o>??</span> <span class=mi>3000</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=nx>bootstrap</span><span class=p>();</span>
+</span></span></code></pre></td></tr></table></div></div><p>我们在 views 目录新建一个 index.hbs：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>html</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>head</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>meta</span> <span class=na>charset</span><span class=o>=</span><span class=s>&#34;utf-8&#34;</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>title</span><span class=p>&gt;</span>App<span class=p>&lt;/</span><span class=nt>title</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;/</span><span class=nt>head</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    {{message}}
+</span></span><span class=line><span class=cl>  <span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>并使用 @Render 装饰器装饰对应的方法，方法的返回值将是 index.hbs 的渲染上下文：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Controller</span><span class=p>,</span> <span class=nx>Get</span><span class=p>,</span> <span class=nx>Render</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>@Controller</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@Get</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@Render</span><span class=p>(</span><span class=s1>&#39;index&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=nx>renderRoot() {</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span> <span class=nx>message</span><span class=o>:</span> <span class=s1>&#39;Hello&#39;</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果要根据业务逻辑渲染不同的 hbs 模版，可以使用 response.render：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Get</span><span class=p>,</span> <span class=nx>Controller</span><span class=p>,</span> <span class=nx>Res</span><span class=p>,</span> <span class=nx>Render</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Response</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;express&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>AppService</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./app.service&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>@Controller</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>constructor</span><span class=p>(</span><span class=kr>private</span> <span class=nx>appService</span>: <span class=kt>AppService</span><span class=p>)</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>@Get</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>  <span class=nx>root</span><span class=p>(</span><span class=kd>@Res</span><span class=p>()</span> <span class=nx>res</span>: <span class=kt>Response</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>res</span><span class=p>.</span><span class=nx>render</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>appService</span><span class=p>.</span><span class=nx>getViewName</span><span class=p>(),</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>message</span><span class=o>:</span> <span class=s1>&#39;Hello&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=eventsource>EventSource</h2><p>Nest 也简化了 EventSource 的使用，如果直接使用 Node 处理 EventSource，需要配置 Content-Type:text/event-stream；在 Nest 中，只需要使用 @Sse 即可：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Controller</span><span class=p>,</span> <span class=nx>MessageEvent</span><span class=p>,</span> <span class=nx>Sse</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@nestjs/common&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>interval</span><span class=p>,</span> <span class=nx>map</span><span class=p>,</span> <span class=nx>Observable</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;rxjs&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>@Controller</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>class</span> <span class=nx>AppController</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>@Sse</span><span class=p>(</span><span class=s1>&#39;sse&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=nx>see</span><span class=p>()</span><span class=o>:</span> <span class=nx>Observable</span><span class=p>&lt;</span><span class=nt>MessageEvent</span><span class=p>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>interval</span><span class=p>(</span><span class=mi>1000</span><span class=p>).</span><span class=nx>pipe</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nx>map</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=p>({</span>
+</span></span><span class=line><span class=cl>        <span class=nx>data</span><span class=o>:</span> <span class=p>{</span> <span class=nx>hello</span><span class=o>:</span> <span class=s1>&#39;world&#39;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>}))</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
 <span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/><div class=article-image><img src=/img/cover/nestjs.png loading=lazy data-key data-hash=/img/cover/nestjs.png></div><div class=article-details><h2 class=article-title>Nest.js 学习笔记（一）</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
 2017 -
@@ -3100,4 +3333,4 @@
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
 <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#应用配置>应用配置</a><ol><li><a href=#命名空间>命名空间</a></li><li><a href=#局部注册>局部注册</a></li><li><a href=#变量验证>变量验证</a></li><li><a href=#可扩展变量>可扩展变量</a></li><li><a href=#maints-中使用>main.ts 中使用</a></li></ol></li><li><a href=#数据库集成>数据库集成</a></li><li><a href=#缓存>缓存</a></li><li><a href=#序列化>序列化</a></li><li><a href=#版本控制>版本控制</a><ol><li><a href=#uri>URI</a></li><li><a href=#请求头>请求头</a></li><li><a href=#accept>Accept</a></li><li><a href=#自定义>自定义</a></li><li><a href=#路由适配>路由适配</a></li></ol></li><li><a href=#任务调度>任务调度</a><ol><li><a href=#动态调度>动态调度</a></li></ol></li><li><a href=#队列>队列</a></li><li><a href=#日志>日志</a></li><li><a href=#cookieexpress>cookie（Express）</a></li><li><a href=#eventemitter>EventEmitter</a></li><li><a href=#响应压缩express>响应压缩（Express）</a></li><li><a href=#文件上传express>文件上传（Express）</a><ol><li><a href=#多文件上传>多文件上传</a></li><li><a href=#流式传输>流式传输</a></li></ol></li><li><a href=#http-模块>HTTP 模块</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script src=https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js></script><script>NProgress.configure({showSpinner:!1}),NProgress.start(),document.addEventListener("readystatechange",()=>{document.readyState==="interactive"&&NProgress.inc(.8),document.readyState==="complete"&&NProgress.done()})</script></body></html>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#应用配置>应用配置</a><ol><li><a href=#命名空间>命名空间</a></li><li><a href=#局部注册>局部注册</a></li><li><a href=#变量验证>变量验证</a></li><li><a href=#可扩展变量>可扩展变量</a></li><li><a href=#maints-中使用>main.ts 中使用</a></li></ol></li><li><a href=#数据库集成>数据库集成</a></li><li><a href=#缓存>缓存</a></li><li><a href=#序列化>序列化</a></li><li><a href=#版本控制>版本控制</a><ol><li><a href=#uri>URI</a></li><li><a href=#请求头>请求头</a></li><li><a href=#accept>Accept</a></li><li><a href=#自定义>自定义</a></li><li><a href=#路由适配>路由适配</a></li></ol></li><li><a href=#任务调度>任务调度</a><ol><li><a href=#动态调度>动态调度</a></li></ol></li><li><a href=#队列>队列</a></li><li><a href=#日志>日志</a></li><li><a href=#cookieexpress>cookie（Express）</a></li><li><a href=#eventemitter>EventEmitter</a></li><li><a href=#响应压缩express>响应压缩（Express）</a></li><li><a href=#文件上传express>文件上传（Express）</a><ol><li><a href=#多文件上传>多文件上传</a></li><li><a href=#流式传输>流式传输</a></li></ol></li><li><a href=#http-模块>HTTP 模块</a></li><li><a href=#sessionexpress>Session（Express）</a></li><li><a href=#mvcexpress>MVC（Express）</a></li><li><a href=#eventsource>EventSource</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script src=https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js></script><script>NProgress.configure({showSpinner:!1}),NProgress.start(),document.addEventListener("readystatechange",()=>{document.readyState==="interactive"&&NProgress.inc(.8),document.readyState==="complete"&&NProgress.done()})</script></body></html>
