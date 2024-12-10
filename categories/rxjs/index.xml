@@ -1,0 +1,1244 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RxJS on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/rxjs/</link><description>Recent content in RxJS on 馬腊咯稽</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Fri, 18 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/rxjs/index.xml" rel="self" type="application/rss+xml"/><item><title>RxJS 快速上手 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/rxjs-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</link><pubDate>Fri, 18 Mar 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/rxjs-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/rxjs.png" alt="RxJS 快速上手" />&lt;p>RxJS 是 ReactiveX 在 JS 中的实现，相似的还有 RxJava、RxSwift&amp;hellip;；ReactiveX 是 FRP（函数响应式编程）的践行者。&lt;/p>
+&lt;h2 id="操作符">操作符&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt"> 10
+&lt;/span>&lt;span class="lnt"> 11
+&lt;/span>&lt;span class="lnt"> 12
+&lt;/span>&lt;span class="lnt"> 13
+&lt;/span>&lt;span class="lnt"> 14
+&lt;/span>&lt;span class="lnt"> 15
+&lt;/span>&lt;span class="lnt"> 16
+&lt;/span>&lt;span class="lnt"> 17
+&lt;/span>&lt;span class="lnt"> 18
+&lt;/span>&lt;span class="lnt"> 19
+&lt;/span>&lt;span class="lnt"> 20
+&lt;/span>&lt;span class="lnt"> 21
+&lt;/span>&lt;span class="lnt"> 22
+&lt;/span>&lt;span class="lnt"> 23
+&lt;/span>&lt;span class="lnt"> 24
+&lt;/span>&lt;span class="lnt"> 25
+&lt;/span>&lt;span class="lnt"> 26
+&lt;/span>&lt;span class="lnt"> 27
+&lt;/span>&lt;span class="lnt"> 28
+&lt;/span>&lt;span class="lnt"> 29
+&lt;/span>&lt;span class="lnt"> 30
+&lt;/span>&lt;span class="lnt"> 31
+&lt;/span>&lt;span class="lnt"> 32
+&lt;/span>&lt;span class="lnt"> 33
+&lt;/span>&lt;span class="lnt"> 34
+&lt;/span>&lt;span class="lnt"> 35
+&lt;/span>&lt;span class="lnt"> 36
+&lt;/span>&lt;span class="lnt"> 37
+&lt;/span>&lt;span class="lnt"> 38
+&lt;/span>&lt;span class="lnt"> 39
+&lt;/span>&lt;span class="lnt"> 40
+&lt;/span>&lt;span class="lnt"> 41
+&lt;/span>&lt;span class="lnt"> 42
+&lt;/span>&lt;span class="lnt"> 43
+&lt;/span>&lt;span class="lnt"> 44
+&lt;/span>&lt;span class="lnt"> 45
+&lt;/span>&lt;span class="lnt"> 46
+&lt;/span>&lt;span class="lnt"> 47
+&lt;/span>&lt;span class="lnt"> 48
+&lt;/span>&lt;span class="lnt"> 49
+&lt;/span>&lt;span class="lnt"> 50
+&lt;/span>&lt;span class="lnt"> 51
+&lt;/span>&lt;span class="lnt"> 52
+&lt;/span>&lt;span class="lnt"> 53
+&lt;/span>&lt;span class="lnt"> 54
+&lt;/span>&lt;span class="lnt"> 55
+&lt;/span>&lt;span class="lnt"> 56
+&lt;/span>&lt;span class="lnt"> 57
+&lt;/span>&lt;span class="lnt"> 58
+&lt;/span>&lt;span class="lnt"> 59
+&lt;/span>&lt;span class="lnt"> 60
+&lt;/span>&lt;span class="lnt"> 61
+&lt;/span>&lt;span class="lnt"> 62
+&lt;/span>&lt;span class="lnt"> 63
+&lt;/span>&lt;span class="lnt"> 64
+&lt;/span>&lt;span class="lnt"> 65
+&lt;/span>&lt;span class="lnt"> 66
+&lt;/span>&lt;span class="lnt"> 67
+&lt;/span>&lt;span class="lnt"> 68
+&lt;/span>&lt;span class="lnt"> 69
+&lt;/span>&lt;span class="lnt"> 70
+&lt;/span>&lt;span class="lnt"> 71
+&lt;/span>&lt;span class="lnt"> 72
+&lt;/span>&lt;span class="lnt"> 73
+&lt;/span>&lt;span class="lnt"> 74
+&lt;/span>&lt;span class="lnt"> 75
+&lt;/span>&lt;span class="lnt"> 76
+&lt;/span>&lt;span class="lnt"> 77
+&lt;/span>&lt;span class="lnt"> 78
+&lt;/span>&lt;span class="lnt"> 79
+&lt;/span>&lt;span class="lnt"> 80
+&lt;/span>&lt;span class="lnt"> 81
+&lt;/span>&lt;span class="lnt"> 82
+&lt;/span>&lt;span class="lnt"> 83
+&lt;/span>&lt;span class="lnt"> 84
+&lt;/span>&lt;span class="lnt"> 85
+&lt;/span>&lt;span class="lnt"> 86
+&lt;/span>&lt;span class="lnt"> 87
+&lt;/span>&lt;span class="lnt"> 88
+&lt;/span>&lt;span class="lnt"> 89
+&lt;/span>&lt;span class="lnt"> 90
+&lt;/span>&lt;span class="lnt"> 91
+&lt;/span>&lt;span class="lnt"> 92
+&lt;/span>&lt;span class="lnt"> 93
+&lt;/span>&lt;span class="lnt"> 94
+&lt;/span>&lt;span class="lnt"> 95
+&lt;/span>&lt;span class="lnt"> 96
+&lt;/span>&lt;span class="lnt"> 97
+&lt;/span>&lt;span class="lnt"> 98
+&lt;/span>&lt;span class="lnt"> 99
+&lt;/span>&lt;span class="lnt">100
+&lt;/span>&lt;span class="lnt">101
+&lt;/span>&lt;span class="lnt">102
+&lt;/span>&lt;span class="lnt">103
+&lt;/span>&lt;span class="lnt">104
+&lt;/span>&lt;span class="lnt">105
+&lt;/span>&lt;span class="lnt">106
+&lt;/span>&lt;span class="lnt">107
+&lt;/span>&lt;span class="lnt">108
+&lt;/span>&lt;span class="lnt">109
+&lt;/span>&lt;span class="lnt">110
+&lt;/span>&lt;span class="lnt">111
+&lt;/span>&lt;span class="lnt">112
+&lt;/span>&lt;span class="lnt">113
+&lt;/span>&lt;span class="lnt">114
+&lt;/span>&lt;span class="lnt">115
+&lt;/span>&lt;span class="lnt">116
+&lt;/span>&lt;span class="lnt">117
+&lt;/span>&lt;span class="lnt">118
+&lt;/span>&lt;span class="lnt">119
+&lt;/span>&lt;span class="lnt">120
+&lt;/span>&lt;span class="lnt">121
+&lt;/span>&lt;span class="lnt">122
+&lt;/span>&lt;span class="lnt">123
+&lt;/span>&lt;span class="lnt">124
+&lt;/span>&lt;span class="lnt">125
+&lt;/span>&lt;span class="lnt">126
+&lt;/span>&lt;span class="lnt">127
+&lt;/span>&lt;span class="lnt">128
+&lt;/span>&lt;span class="lnt">129
+&lt;/span>&lt;span class="lnt">130
+&lt;/span>&lt;span class="lnt">131
+&lt;/span>&lt;span class="lnt">132
+&lt;/span>&lt;span class="lnt">133
+&lt;/span>&lt;span class="lnt">134
+&lt;/span>&lt;span class="lnt">135
+&lt;/span>&lt;span class="lnt">136
+&lt;/span>&lt;span class="lnt">137
+&lt;/span>&lt;span class="lnt">138
+&lt;/span>&lt;span class="lnt">139
+&lt;/span>&lt;span class="lnt">140
+&lt;/span>&lt;span class="lnt">141
+&lt;/span>&lt;span class="lnt">142
+&lt;/span>&lt;span class="lnt">143
+&lt;/span>&lt;span class="lnt">144
+&lt;/span>&lt;span class="lnt">145
+&lt;/span>&lt;span class="lnt">146
+&lt;/span>&lt;span class="lnt">147
+&lt;/span>&lt;span class="lnt">148
+&lt;/span>&lt;span class="lnt">149
+&lt;/span>&lt;span class="lnt">150
+&lt;/span>&lt;span class="lnt">151
+&lt;/span>&lt;span class="lnt">152
+&lt;/span>&lt;span class="lnt">153
+&lt;/span>&lt;span class="lnt">154
+&lt;/span>&lt;span class="lnt">155
+&lt;/span>&lt;span class="lnt">156
+&lt;/span>&lt;span class="lnt">157
+&lt;/span>&lt;span class="lnt">158
+&lt;/span>&lt;span class="lnt">159
+&lt;/span>&lt;span class="lnt">160
+&lt;/span>&lt;span class="lnt">161
+&lt;/span>&lt;span class="lnt">162
+&lt;/span>&lt;span class="lnt">163
+&lt;/span>&lt;span class="lnt">164
+&lt;/span>&lt;span class="lnt">165
+&lt;/span>&lt;span class="lnt">166
+&lt;/span>&lt;span class="lnt">167
+&lt;/span>&lt;span class="lnt">168
+&lt;/span>&lt;span class="lnt">169
+&lt;/span>&lt;span class="lnt">170
+&lt;/span>&lt;span class="lnt">171
+&lt;/span>&lt;span class="lnt">172
+&lt;/span>&lt;span class="lnt">173
+&lt;/span>&lt;span class="lnt">174
+&lt;/span>&lt;span class="lnt">175
+&lt;/span>&lt;span class="lnt">176
+&lt;/span>&lt;span class="lnt">177
+&lt;/span>&lt;span class="lnt">178
+&lt;/span>&lt;span class="lnt">179
+&lt;/span>&lt;span class="lnt">180
+&lt;/span>&lt;span class="lnt">181
+&lt;/span>&lt;span class="lnt">182
+&lt;/span>&lt;span class="lnt">183
+&lt;/span>&lt;span class="lnt">184
+&lt;/span>&lt;span class="lnt">185
+&lt;/span>&lt;span class="lnt">186
+&lt;/span>&lt;span class="lnt">187
+&lt;/span>&lt;span class="lnt">188
+&lt;/span>&lt;span class="lnt">189
+&lt;/span>&lt;span class="lnt">190
+&lt;/span>&lt;span class="lnt">191
+&lt;/span>&lt;span class="lnt">192
+&lt;/span>&lt;span class="lnt">193
+&lt;/span>&lt;span class="lnt">194
+&lt;/span>&lt;span class="lnt">195
+&lt;/span>&lt;span class="lnt">196
+&lt;/span>&lt;span class="lnt">197
+&lt;/span>&lt;span class="lnt">198
+&lt;/span>&lt;span class="lnt">199
+&lt;/span>&lt;span class="lnt">200
+&lt;/span>&lt;span class="lnt">201
+&lt;/span>&lt;span class="lnt">202
+&lt;/span>&lt;span class="lnt">203
+&lt;/span>&lt;span class="lnt">204
+&lt;/span>&lt;span class="lnt">205
+&lt;/span>&lt;span class="lnt">206
+&lt;/span>&lt;span class="lnt">207
+&lt;/span>&lt;span class="lnt">208
+&lt;/span>&lt;span class="lnt">209
+&lt;/span>&lt;span class="lnt">210
+&lt;/span>&lt;span class="lnt">211
+&lt;/span>&lt;span class="lnt">212
+&lt;/span>&lt;span class="lnt">213
+&lt;/span>&lt;span class="lnt">214
+&lt;/span>&lt;span class="lnt">215
+&lt;/span>&lt;span class="lnt">216
+&lt;/span>&lt;span class="lnt">217
+&lt;/span>&lt;span class="lnt">218
+&lt;/span>&lt;span class="lnt">219
+&lt;/span>&lt;span class="lnt">220
+&lt;/span>&lt;span class="lnt">221
+&lt;/span>&lt;span class="lnt">222
+&lt;/span>&lt;span class="lnt">223
+&lt;/span>&lt;span class="lnt">224
+&lt;/span>&lt;span class="lnt">225
+&lt;/span>&lt;span class="lnt">226
+&lt;/span>&lt;span class="lnt">227
+&lt;/span>&lt;span class="lnt">228
+&lt;/span>&lt;span class="lnt">229
+&lt;/span>&lt;span class="lnt">230
+&lt;/span>&lt;span class="lnt">231
+&lt;/span>&lt;span class="lnt">232
+&lt;/span>&lt;span class="lnt">233
+&lt;/span>&lt;span class="lnt">234
+&lt;/span>&lt;span class="lnt">235
+&lt;/span>&lt;span class="lnt">236
+&lt;/span>&lt;span class="lnt">237
+&lt;/span>&lt;span class="lnt">238
+&lt;/span>&lt;span class="lnt">239
+&lt;/span>&lt;span class="lnt">240
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 创建器，用来创建“流（数据序列）”，返回值是一个 Observable 对象
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">def&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kr">from&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">fromEvent&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">interval&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="k">of&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">range&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">timer&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">fromPromise&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs/internal/observable/fromPromise&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 操作符，用来处理“流”
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">buffer&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">bufferCount&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">bufferTime&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">catchError&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">combineLatest&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">concat&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">distinct&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">distinctUntilChanged&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">filter&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">finalize&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">first&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">forkJoin&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">last&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">map&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">merge&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">race&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">zip&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs/operators&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">new&lt;/span> &lt;span class="nx">Observable&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">any&lt;/span>&lt;span class="p">&amp;gt;((&lt;/span>&lt;span class="nx">observer&lt;/span>: &lt;span class="kt">Observer&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">any&lt;/span>&lt;span class="p">&amp;gt;)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">setTimeout&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 任何时间，都可以通过 next 将值传入“流”中
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">observer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1000&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span> &lt;span class="mi">1000&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * of 可以将“单一值”创建为“流”
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * “单一值”可以为任何数据类型
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">of&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">filter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">item&lt;/span> &lt;span class="o">%&lt;/span> &lt;span class="mi">2&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">item&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 冷 Observable 必须被 subscribe 之后才会“产生”数据
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果没有 subscribe，之前的 pipe 就不会执行
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 所以，在 Angular 中，对同一接口多次 subscribe 会导致发起多次请求
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * subscribe 表示“可观察对象”与“观察者”之间“建立了联系”
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span>&lt;span class="p">));&lt;/span> &lt;span class="c1">// 3 9 15
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// from 可以将数组的每一项放入“流”中
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">from&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">filter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">item&lt;/span> &lt;span class="o">%&lt;/span> &lt;span class="mi">2&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">item&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span>&lt;span class="p">));&lt;/span> &lt;span class="c1">// 3 9 15
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// fromEvent 可以替代 addEventListener，是“热”的
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">fromEvent$&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">fromEvent&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;#title&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="s1">&amp;#39;click&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">fromEvent$&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">));&lt;/span> &lt;span class="c1">// PointerEvent
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// range 可以从“范围”产生“流”
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">filter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">item&lt;/span> &lt;span class="o">%&lt;/span> &lt;span class="mi">2&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">item&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span>&lt;span class="p">));&lt;/span> &lt;span class="c1">// 3 9 15
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">p&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Promise&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">resolve&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">reject&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Promise Begin...&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">setTimeout&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">resolve&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Promise Resolved...&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="mi">1000&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * fromPromise 接受一个 Promise 实例
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 当这个 Promise 状态确定之后，将输出值放入“流”中
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 即使没有 subscribe，这个 Promise 也会执行
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 从 6.0 开始，可以使用 from 替代 fromPromise
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">fromPromise&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">p&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * defer 用来“惰性地”创建“流”
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 他接受一个“产生流”的“工厂函数”
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 当调用 defer 时，“流”还不存在，“流”会被“按需”创建
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 当“流”被“需要”的时候，才会调用“工厂函数”，产生“流”
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 只要没有 subscribe，“工厂函数”就不会执行，Promise 也就不会执行
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">defer&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="kr">from&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">p&lt;/span>&lt;span class="p">)).&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * timer(首次等待时间，重复间隔时间) 用来创建“定时器流”
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 他创建的是一种“无尽流”（务必要在适当的时候取消订阅）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 数据会不断重复的被放入“流”中
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 有点像 setInterval
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">timer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3000&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1000&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span>&lt;span class="p">));&lt;/span> &lt;span class="c1">// 等待 3 秒：0 1 2 3...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// interval（重复间隔时间），是 timer 的语法糖
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">interval&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1000&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span>&lt;span class="p">));&lt;/span> &lt;span class="c1">// 0 1 2 3...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// first 操作符
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">from&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">first&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">v&lt;/span> &lt;span class="o">!==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">complete() {&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;complete&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// last 操作符
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">from&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">last&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">v&lt;/span> &lt;span class="o">!==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 3
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">complete() {&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;complete&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// distinct 操作符（过滤之前出现过的数据，去重作用）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">from&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">distinct&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 1, 2, 3
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">complete() {&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;complete&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// distinctUntilChanged 操作符（过滤“上次”出现过的数据）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">from&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">distinctUntilChanged&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 2, 1, 2, 1, 3
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">complete() {&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;complete&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// combineLatest 操作符
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">cl1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">cl2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 一秒钟后，cl2 接收到值之后，打印 [&amp;#39;cl1&amp;#39;, &amp;#39;cl2&amp;#39;]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">combineLatest&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="nx">cl1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">cl2&lt;/span>&lt;span class="p">]).&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">cl1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;cl1&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">setTimeout&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">cl2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;cl2&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">},&lt;/span> &lt;span class="mi">1000&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// merge 操作符
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">m1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">m2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">m3&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">merge&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">m1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">m2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">m3&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">));&lt;/span> &lt;span class="c1">// m3, m1 一秒钟后 m2
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">m3&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;m3&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">setTimeout&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">m2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;m2&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">},&lt;/span> &lt;span class="mi">1000&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">m1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;m1&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// zip 操作符，强调值的数量相同
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">z1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">z2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">zip&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">z1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">z2&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">z1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 不打印
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">z1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 不打印
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">z2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// [1, 3]，z1 和 z2 里值的数量相同，打印出 z1 和 z2 里的第一个值
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">z2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// [2, 4]，z1 和 z2 里值的数量相同，打印出 z1 和 z2 里的第二个值
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// concat 操作符
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">c1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">c2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">concat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">c1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">c2&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">c1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">c2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 不打印
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">c1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">complete&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">c2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 3，c1 被 complete 之前，c2 的值被忽略
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// forkJoin 操作符
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">fj1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">fj2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">forkJoin&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">fj1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">fj2&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">fj1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 不打印
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">fj2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 不打印
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">fj1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">complete&lt;/span>&lt;span class="p">();&lt;/span> &lt;span class="c1">// 不打印
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">fj2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">complete&lt;/span>&lt;span class="p">();&lt;/span> &lt;span class="c1">// [1, 2]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// race 操作符
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">r1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">r2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">race&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">r1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">r2&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">r2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">r1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 不打印，r1 没有竞争过 r2
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">r2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 3
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">r1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 不打印
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// catchError 操作符
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nx">Observable&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">sub&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">sub&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;normal&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 会走到 subscribe
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">sub&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">error&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;error&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">catchError&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">error&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">error&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 只会打印 error
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="k">of&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;catched&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 会走到 subscribe
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 先打印 normal 再打印 catched
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// buffer 操作符，收集输出值（缓冲区）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">interval&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1000&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">buffer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">fromEvent&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">document&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;click&amp;#39;&lt;/span>&lt;span class="p">)))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * [0, 1, 2, 3]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * [4, 5, 6, 7, 8, 9, 10]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// bufferCount 操作符，收集输出值
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">interval&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1000&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">bufferCount&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="c1">// 三个三个走
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * [0, 1, 2]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * [3, 4, 5]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// bufferTime 操作符，收集输出值
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">interval&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1000&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">bufferTime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3000&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1000&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 等 3 秒 [0, 1]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 等 1 秒 [0, 1, 2, 3]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 等 1 秒 [2, 3, 4, 5]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// finalize 操作符
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">f&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">f&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">finalize&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;finalize&amp;#39;&lt;/span>&lt;span class="p">))).&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">f&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;next&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// next
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">f&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">error&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;error&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// finalize
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">f&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">complete&lt;/span>&lt;span class="p">();&lt;/span> &lt;span class="c1">// finalize
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="observable">Observable&lt;/h2>
+&lt;p>不同于创建器（调用后返回 Observable 对象），Subject 是一个实现了 Observable 接口的“类”；需要先进行 new 调用，然后将数据“手动”放入“流”中（subject.next(value)）。&lt;/p>
+&lt;p>有别于普通的 Observable 对象（单播），Subject 返回的是一个“多播”，可以被多次 subscribe，可以将值传递给多个观察者；所以常常被用来存放应用状态。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Subject&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">subject&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Subject&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">unknown&lt;/span>&lt;span class="p">&amp;gt;();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">subject&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">res&lt;/span>: &lt;span class="kt">unknown&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;one&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">subject&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">res&lt;/span>: &lt;span class="kt">unknown&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;two&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 每个 subscribe 都收到新值
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">subject&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// one 1, two 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">subject&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// one 2, two 2
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 通过 subject 将 observable 转换为“多播”
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">observable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kr">from&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">subject&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// one 1, two: 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// one 2, two: 2
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// one 3, two: 3
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>当 subscribe 被调用时，会返回一个“订阅凭证”；“订阅凭证”包含了一个 unsubscribe 方法，用来取消“订阅”（调用即可）。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Observable&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">Subscription&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">interval&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">temp&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Observable&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">o&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">o&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">performance&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">now&lt;/span>&lt;span class="p">()));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 每次调用 subscribe 后生成了新的值，next 被调用了两次（数据产生于每次订阅后）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">temp&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">value&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">value&lt;/span>&lt;span class="p">));&lt;/span> &lt;span class="c1">// 4491799.400000002
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">temp&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">value&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">value&lt;/span>&lt;span class="p">));&lt;/span> &lt;span class="c1">// 4491799.699999999
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 执行顺序：2 -&amp;gt; 0 -&amp;gt; 3 -&amp;gt; 1 -&amp;gt; 4 -&amp;gt; 0 -&amp;gt; 5 -&amp;gt; 1 -&amp;gt; 6
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">park&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Observable&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">subscriber&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 每次调用 subscribe 后，这个函数会重新执行
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 不会被放到微任务列表/下个事件循环
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;0&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">subscriber&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;1&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;2&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">park&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;3&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;4&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">park&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;5&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;6&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * subCollection.add
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * subCollection.remove
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * subCollection.unsubscribe
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">subCollection&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Subscription&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">observable1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">interval&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">400&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">observable2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">interval&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">300&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">subscription1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">observable1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">subscription2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">observable2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">subCollection&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">subscription1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">subCollection&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">subscription2&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">setTimeout&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 可以存起来，一起被取消
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">subCollection&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">unsubscribe&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">},&lt;/span> &lt;span class="mi">1000&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="冷与热">“冷”与“热”&lt;/h2>
+&lt;p>“可观察对象”的分类：&lt;/p>
+&lt;ul>
+&lt;li>“冷”可观察对象，在 &lt;strong>subscribe&lt;/strong> 之后，才将“值”添加到“流”中；有多少个订阅就会生成多少个订阅实例（单播，订阅接收到的值是相同的）；&lt;/li>
+&lt;li>“热”可观察对象，在&lt;strong>创建&lt;/strong>之后，&lt;strong>立即&lt;/strong>产生了“值”；多个订阅共享同一个实例（多播，订阅接收到的值取决于什么时间开始订阅的）。&lt;/li>
+&lt;/ul>
+&lt;p>特殊的“可观察对象”：&lt;/p>
+&lt;ul>
+&lt;li>AsyncSubject，多播；需要初始值；只有当 complete 时，才会将“最后一个值”发送给订阅者；&lt;/li>
+&lt;li>BehaviorSubject，多播；需要初始值；保存了发送出去的“最后一个值”，“新的”订阅者会接收到这个值；&lt;/li>
+&lt;li>ReplaySubject，多播；需要初始值；保存了发送出去的“所有值”，“新的”订阅者会接收到所有“旧”值；&lt;/li>
+&lt;li>Subject，多播；不需要初始值；不会保存之前的任何值。&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">AsyncSubject&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">EMPTY&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">Observable&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">Subject&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">throwError&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">mySubject&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Subject&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">number&lt;/span>&lt;span class="p">&amp;gt;();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">mySubject&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">mySubject&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 因为 20 是 subscribe 后放入流的
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 而 10 是 subscribe 前放入流的
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 只会打印 20，没有接收到 10
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">mySubject&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">20&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">outter&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">cold&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Observable&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">sub&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">outter&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">let&lt;/span> &lt;span class="nx">inner&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">sub&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="nx">inner&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">outter&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">cold&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">cold&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">hot&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">AsyncSubject&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">setInterval&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">hot&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">Math&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">random&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">},&lt;/span> &lt;span class="mi">1000&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">setTimeout&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * hot.complete 调用之后
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * hot.error 和 hot.next 的调用将被忽略
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">hot&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">complete&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">},&lt;/span> &lt;span class="mi">2000&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">setTimeout&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * hot.error 调用之后
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * subscribe 拿不到最后一个值
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * hot.complete 和 hot.next 的调用将被忽略
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">hot&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">error&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">Math&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">random&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">},&lt;/span> &lt;span class="mi">3000&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">hot&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">complete() {&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;complete&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">error&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">e&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;error&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">e&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 只有 hot.complete 被调用
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * subscribe.next 才能拿到最后一个值
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;next&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">v&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">EMPTY&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">next&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;next&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">error&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;error&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">complete&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;只会触发 complete&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">throwError&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="s1">&amp;#39;ERROR&amp;#39;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">next&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;next&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">error&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;只会触发 error&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">complete&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;complete&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="switchmapmergemapexhaustmapconcatmap">switchMap、mergeMap、exhaustMap、concatMap&lt;/h2>
+&lt;ol>
+&lt;li>switchMap：会自动帮我们处理“竞态”；在第一个请求没有完成的情况下，发起第二个请求；第一个请求将被忽略；&lt;/li>
+&lt;li>mergeMap：不会帮我们处理“竞态”；最终会使用哪个请求返回的结果，不一定；有可能新的请求使用旧的结果；&lt;/li>
+&lt;li>exhaustMap：第一个请求没处理完成，就会忽略新的请求；只有第一个求请完成的情况下，才能处理新的请求；&lt;/li>
+&lt;li>concatMap：开启队列，按&lt;strong>顺序&lt;/strong>处理所有的请求及其副作用；不会丢弃老的/新的请求。&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Subject&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">timer&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">mapTo&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">switchMap&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">mergeMap&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">concatMap&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">exhaustMap&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs/operators&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">sub&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Subject&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">string&lt;/span>&lt;span class="p">&amp;gt;();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">function&lt;/span> &lt;span class="nx">anyLongRunningOp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">value&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">timer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">Math&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">floor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">Math&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">random&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">1000&lt;/span>&lt;span class="p">)).&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">mapTo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">value&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">function&lt;/span> &lt;span class="nx">triggerEvents&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">operator&lt;/span>: &lt;span class="kt">any&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">sub&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">asObservable&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">operator&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">value&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">anyLongRunningOp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">value&lt;/span>&lt;span class="p">)))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">value&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Got:&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">value&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">sub&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;First&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">sub&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Second&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * concatMap 会开启一个队列，保存每一个传入的值以及对应的操作
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 当第一个值 First 走完所有流程之后，才会开始处理 Second
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 所以结果是：
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 若干秒之后，打印 Got: First
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 又若干秒之后，打印 Got: Second
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">triggerEvents&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">concatMap&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * exhaustMap 只关心传入的第一个值 First，并忽略后续传入的所有值
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 除非第一个值的流程已经走完，第二个值才传入
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 所以结果是：
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 若干秒之后，打印 Got: First，Second 这个值被丢弃
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果 Second 是在若干秒之后才传入的，此时 First 流程已经走完
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 那么，会打印 Got: Second
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">triggerEvents&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">exhaustMap&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * mergeMap 不会等待上次流程的结束
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 他会同时处理传入的所有值
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 并且不保证顺序与传入顺序
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 所以结果是：
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 若干秒之后，同时打印出 Got: First、Got: Second
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 至于哪个在前，哪个在后，不确定
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">triggerEvents&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">mergeMap&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果第二个值 Second 在两秒之内传给 switchMap
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * switchMap 会丢弃对第一个值 First 的处理
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 所以结果是：
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 若干秒之后，只会打印 Got: Second
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * First 这个值被丢弃
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">triggerEvents&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">switchMap&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>mergeMap 可以传入第二个参数，用来控制请求并发数：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">from&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">map&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">mergeMap&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">reduce&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">requestArr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">Array&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">from&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="nx">length&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">30&lt;/span> &lt;span class="p">},&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nb">Math&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">random&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">100&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">requestFn&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="nx">randomKey&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">response&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kr">await&lt;/span> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="sb">`https://randomuser.me/api/?key=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">randomKey&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb">&amp;amp;ref=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">randomKey&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb">&amp;amp;speed=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">randomKey&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">cache&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;no-store&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">headers&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;Content-Type&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;application/json&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">response&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">ok&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">results&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[{&lt;/span> &lt;span class="nx">email&lt;/span> &lt;span class="p">}]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kr">await&lt;/span> &lt;span class="nx">response&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">json&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">email&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kr">await&lt;/span> &lt;span class="nx">response&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">status&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">resPool&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">from&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">requestArr&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">mergeMap&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">id&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">from&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">requestFn&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">id&lt;/span>&lt;span class="p">)).&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">res&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">({&lt;/span> &lt;span class="nx">id&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">res&lt;/span> &lt;span class="p">}))),&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">reduce&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">acc&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">id&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">result&lt;/span> &lt;span class="p">})&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">acc&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">id&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">result&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Map&lt;/span>&lt;span class="p">()),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">resMap&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">requestArr&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">id&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">resMap&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">id&lt;/span>&lt;span class="p">)))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">resPool&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="forkjoin-与-combinelatest">forkJoin 与 combineLatest&lt;/h2>
+&lt;p>&lt;a class="link"
+href="https://www.learnrxjs.io/learn-rxjs/operators/combination/forkjoin"
+target="_blank" rel="noopener"
+>
+forkJoin
+&lt;/a>
+，当传入的所有 observer 对象都 complete 时，将这些 observer 对象的最后一个值抛出；有点像 &lt;a class="link"
+href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/all"
+target="_blank" rel="noopener"
+>
+Promise.all
+&lt;/a>
+。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">delay&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">forkJoin&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">requestFn&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="nx">randomKey&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">response&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kr">await&lt;/span> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="sb">`https://randomuser.me/api/?key=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">randomKey&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb">&amp;amp;ref=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">randomKey&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb">&amp;amp;speed=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">randomKey&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">cache&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;no-store&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">headers&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;Content-Type&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;application/json&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">response&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">ok&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">results&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[{&lt;/span> &lt;span class="nx">email&lt;/span> &lt;span class="p">}]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kr">await&lt;/span> &lt;span class="nx">response&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">json&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">email&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kr">await&lt;/span> &lt;span class="nx">response&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">status&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">forkJoin&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">people1&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">from&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">requestFn&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;53C4BD59AB229086&amp;#39;&lt;/span>&lt;span class="p">)).&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">delay&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1000&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">people2&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">from&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">requestFn&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;FEA12EE8FCC453B4&amp;#39;&lt;/span>&lt;span class="p">)).&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">delay&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2000&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">people3&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">from&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">requestFn&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;219C6D9AE6169200&amp;#39;&lt;/span>&lt;span class="p">)).&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">delay&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3000&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}).&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">value&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 过了三秒多，当三个请求都返回结果时：只会打印一次，而不是三次
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * {
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * people1: &amp;#34;sarita.saniel@example.com&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * people2: &amp;#34;lucas.candelaria@example.com&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * people3: &amp;#34;ross.brown@example.com&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * }
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">value&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link"
+href="https://www.learnrxjs.io/learn-rxjs/operators/combination/combinelatest"
+target="_blank" rel="noopener"
+>
+combineLatest
+&lt;/a>
+每当传入的任何一个 observer 抛出一个值的时候，将这些 observer 对象的最后一个值抛出；传入几个值就会抛出多少次，直到所有的 observer 都 complete。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">combineLatest&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">timer&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">combineLatest&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">people1&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">timer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1000&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1000&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">people2&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">timer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2000&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2000&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">people3&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">timer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3000&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3000&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}).&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">value&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 可以看到，无论哪个 observer 接收到了值，都会触发这个回调
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 为什么不在 forkJoin 中使用 timer 呢？
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 因为 timer 不会自动 complete
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 第一秒：{people1: 1, people2: 0, people3: 0}
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 第二秒：{people1: 2, people2: 0, people3: 0}
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 第三秒：{people1: 3, people2: 0, people3: 0}
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 第四秒：{people1: 3, people2: 1, people3: 0}
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 第五秒：{people1: 4, people2: 1, people3: 0}
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 第六秒：{people1: 5, people2: 1, people3: 0}
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 第七秒：{people1: 5, people2: 2, people3: 0}
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 第八秒：{people1: 5, people2: 2, people3: 1}
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">value&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="filter-与-takewhile">filter 与 takeWhile&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">of&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">takeWhile&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">filter&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs/operators&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">source&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">of&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">9&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">8&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">96&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">66&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// takeWhile 遇到不满足条件的数据，就 complete
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">source&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">takeWhile&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">it&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">it&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">val&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;takeWhile&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">val&lt;/span>&lt;span class="p">));&lt;/span> &lt;span class="c1">// 3 3 3
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// filter 遇到不满足条件的数据，过滤掉，没有 complete
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">source&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">filter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">it&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">it&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">val&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;filter&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">val&lt;/span>&lt;span class="p">));&lt;/span> &lt;span class="c1">// 3 3 3 3 3 3 3
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="first-与-take1">first 与 take(1)&lt;/h2>
+&lt;ol>
+&lt;li>当 first &lt;strong>可以&lt;/strong>从数据流中取得一个值的时候，等同于 take(1)；&lt;/li>
+&lt;li>当 first &lt;strong>不能&lt;/strong>从数据流中取得一个值的时候，会直接抛错误，而 take(1) 不会。&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">EMPTY&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">range&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">first&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">take&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs/operators&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// first 遇上 EMPTY 打印 error
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">EMPTY&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">first&lt;/span>&lt;span class="p">()).&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">next&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;next&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">error&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;error&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">complete&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;complete&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 打印 next complete
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">first&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">next&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;next&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">error&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;error&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">complete&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;complete&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 不满足条件，打印 error
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">first&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">val&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">val&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">next&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;next&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">error&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;error&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">complete&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;complete&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// take(1) 遇上 EMPTY 打印 complete
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">EMPTY&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">take&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)).&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">next&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;next&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">error&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;error&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">complete&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;complete&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 打印 next complete
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">pipe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">take&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">next&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;next&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">error&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;error&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">complete&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;complete&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="参考">参考&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a class="link"
+href="https://medium.com/@rk-tech/simplified-explanation-of-switchmap-concatmap-mergemap-and-exhaustmap-bceb98081714"
+target="_blank" rel="noopener"
+>
+Simplified Explanation of switchMap, concatMap, mergeMap, and exhaustMap
+&lt;/a>
+&lt;/li>
+&lt;li>&lt;a class="link"
+href="https://blog.thoughtram.io/angular/2016/06/16/cold-vs-hot-observables.html"
+target="_blank" rel="noopener"
+>
+Cold vs Hot Observables
+&lt;/a>
+&lt;/li>
+&lt;li>&lt;a class="link"
+href="https://blog.ralph.wang/articles/23a34d9e_RxJS_%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"
+target="_blank" rel="noopener"
+>
+RxJS 快速入门
+&lt;/a>
+&lt;/li>
+&lt;/ul></description></item></channel></rss>

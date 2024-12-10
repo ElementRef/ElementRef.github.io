@@ -1,0 +1,857 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1,user-scalable=no'><meta name=description content='在不需要实时更新数据的场景下，使用 ServerComponents 在服务端完成数据获取比较好：
+请求来的数据会被缓存（在 Next 15 中，缓存行为 有变 ），并在适当的时候验证缓存； 避免敏感信息（token、APIKeys）被暴露在客户端 减少客户端数据请求的次数（数据请求瀑布）； 减少数据获取延迟。 相应的，他也有一些缺点：
+'><title>Next.js 之 DataFetching · I AM BEA, I DRINK TEA</title>
+<link rel=canonical href=https://ElementRef.github.io/p/next.js-%E4%B9%8B-datafetching/><link rel=stylesheet href=/scss/style.min.37673cc3106c9f9d851f1515c2e43d2c143b76dbfc2b0a496282fcdecb4614c7.css><meta property='og:title' content='Next.js 之 DataFetching'><meta property='og:description' content='在不需要实时更新数据的场景下，使用 ServerComponents 在服务端完成数据获取比较好：
+请求来的数据会被缓存（在 Next 15 中，缓存行为 有变 ），并在适当的时候验证缓存； 避免敏感信息（token、APIKeys）被暴露在客户端 减少客户端数据请求的次数（数据请求瀑布）； 减少数据获取延迟。 相应的，他也有一些缺点：
+'><meta property='og:url' content='https://ElementRef.github.io/p/next.js-%E4%B9%8B-datafetching/'><meta property='og:site_name' content='馬腊咯稽'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:published_time' content='2024-08-18T00:00:00+00:00'><meta property='article:modified_time' content='2024-08-18T00:00:00+00:00'><meta property='og:image' content='https://ElementRef.github.io/img/cover/nextjs.png'><meta name=twitter:title content="Next.js 之 DataFetching"><meta name=twitter:description content="在不需要实时更新数据的场景下，使用 ServerComponents 在服务端完成数据获取比较好：
+请求来的数据会被缓存（在 Next 15 中，缓存行为 有变 ），并在适当的时候验证缓存； 避免敏感信息（token、APIKeys）被暴露在客户端 减少客户端数据请求的次数（数据请求瀑布）； 减少数据获取延迟。 相应的，他也有一些缺点：
+"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://ElementRef.github.io/img/cover/nextjs.png'><link rel="shortcut icon" href=/favicon.ico><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><meta name=robots content="noarchive, noindex, nofollow"><meta name=theme-color content="#ffffff"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu7590466716559688570.png width=300 height=404 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>馬腊咯稽</a></h1><h2 class=site-description>I AM BEA, I DRINK TEA</h2></div></header><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>首页</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>归档</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>搜索</span></a></li><li><a href=/index.xml target=_blank><svg class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="5" cy="19" r="1"/><path d="M4 4a16 16 0 0116 16"/><path d="M4 11a9 9 0 019 9"/></svg>
+<span>订阅</span></a></li><li><a href=https://github.com/ElementRef/AboutConfig target=_blank><svg class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M9.828 9.172a4 4 0 100 5.656A10 10 0 0012 12a10 10 0 012.172-2.828 4 4 0 110 5.656A10 10 0 0112 12 10 10 0 009.828 9.172"/></svg>
+<span>配置</span></a></li><li><a href=/%E5%90%AF%E5%8F%91/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>启发</span></a></li><li><a href=/%E5%91%BD%E4%BB%A4/><svg class="icon icon-tabler icon-tabler-terminal" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 7l5 5-5 5"/><line x1="12" y1="19" x2="19" y2="19"/></svg>
+<span>命令</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>关于</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>深色</span></li></div></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/next.js-%E4%B9%8B-datafetching/><img src=/img/cover/nextjs.png loading=lazy alt="Next.js 之 DataFetching"></a></div><div class=article-details><header class=article-category><a href=/categories/next.js/>Next.js</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/next.js-%E4%B9%8B-datafetching/>Next.js 之 DataFetching</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Aug 18, 2024</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长：7 分钟</time></div></footer></div></header><section class=article-content><p>在不需要实时更新数据的场景下，使用 ServerComponents 在服务端完成数据获取比较好：</p><ul><li>请求来的数据会被缓存（在 Next 15 中，缓存行为<a class=link href=https://nextjs.org/blog/next-15-rc#fetch-requests-are-no-longer-cached-by-default target=_blank rel=noopener>
+有变
+</a>），并在适当的时候验证缓存；</li><li>避免敏感信息（token、APIKeys）被暴露在客户端</li><li>减少客户端数据请求的次数（数据请求瀑布）；</li><li>减少数据获取延迟。</li></ul><p>相应的，他也有一些缺点：</p><ul><li>需要实时展示的数据（一般对 SEO 也不重要），在客户端请求比较好；</li><li>需要额外跑 Node 服务。</li></ul><p>在 AppRouter 模式，不再有 getServerSideProps、getStaticProps 和 getInitialProps 了；现在，可以直接在 ServerComponents 中发起异步请求。</p><p>对应的 getStaticPaths 也被新的 <a class=link href=https://nextjs.org/docs/app/api-reference/functions/generate-static-params target=_blank rel=noopener>generateStaticParams
+</a>取代。</p><h2 id=fetch-api>fetch API</h2><p>Next.js 对原生的 <a class=link href=https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API target=_blank rel=noopener>fetch
+</a>做了扩展，服务端的 <a class=link href=https://nextjs.org/docs/app/api-reference/functions/fetch target=_blank rel=noopener>fetch
+</a>支持数据缓存和数据验证功能；可以用在 <a class=link href=https://nextjs.org/docs/app/building-your-application/rendering/server-components target=_blank rel=noopener>ServerComponents
+</a>、<a class=link href=https://nextjs.org/docs/app/building-your-application/routing/route-handlers target=_blank rel=noopener>
+RouteHandlers
+</a>、<a class=link href=https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations target=_blank rel=noopener>
+ServerActions
+</a>中：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/page.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>export</span> <span class=k>default</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>Page() {</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 可以当作 PagesRouter 中的 getServerSideProps 函数
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kr>const</span> <span class=nx>dynamicData</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>fetch</span><span class=p>(</span><span class=sb>`https://...`</span><span class=p>,</span> <span class=p>{</span> <span class=nx>cache</span><span class=o>:</span> <span class=s1>&#39;no-store&#39;</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 可以当作 PagesRouter 中的 getStaticProps 函数
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kr>const</span> <span class=nx>staticData</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>fetch</span><span class=p>(</span><span class=sb>`https://...`</span><span class=p>,</span> <span class=p>{</span> <span class=nx>cache</span><span class=o>:</span> <span class=s1>&#39;force-cache&#39;</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 可以当作 PagesRouter 中的 getStaticProps 函数
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kr>const</span> <span class=nx>revalidatedData</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>fetch</span><span class=p>(</span><span class=sb>`https://...`</span><span class=p>,</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>next</span><span class=o>:</span> <span class=p>{</span> <span class=nx>revalidate</span>: <span class=kt>10</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;...&lt;/</span><span class=nt>div</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>一般不推荐直接在 <a class=link href=https://nextjs.org/docs/app/api-reference/file-conventions/page target=_blank rel=noopener>page.tsx
+</a>中直接获取数据，可以将数据获取移到需要数据的组件中，并搭配 Suspense 进行流式渲染：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Suspense</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;react&#39;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>Cart() {</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>res</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>fetch</span><span class=p>(</span><span class=s1>&#39;https://api.example.com/...&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=s1>&#39;...&#39;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>Navigation() {</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>Suspense</span> <span class=na>fallback</span><span class=o>=</span><span class=p>{&lt;</span><span class=nt>LoadingIcon</span> <span class=p>/&gt;}&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>Cart</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>Suspense</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果在多个组件中，获取相同的数据，不必担心会发起多个相同的数据请求；如果请求的 URL 和 payload 相同，Next.js 会做 <a class=link href=https://nextjs.org/docs/app/building-your-application/caching#request-memoization target=_blank rel=noopener>RequestMemoization
+</a>。</p><p>在 Next 15 中，<a class=link href=https://nextjs.org/docs/app/api-reference/functions/fetch target=_blank rel=noopener>
+fetch
+</a>默认不会缓存请求数据，缓存配置默认为 { cache: &rsquo;no-store&rsquo; }；可以使用 { cache: &lsquo;force-cache&rsquo; } 开启缓存：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=nx>fetch</span><span class=p>(</span><span class=s1>&#39;https://...&#39;</span><span class=p>,</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>method</span><span class=o>:</span> <span class=s1>&#39;POST&#39;</span><span class=p>,</span> <span class=c1>// GET, POST, PUT, DELETE
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>mode</span><span class=o>:</span> <span class=s1>&#39;cors&#39;</span><span class=p>,</span> <span class=c1>// no-cors, cors, same-origin
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>cache</span><span class=o>:</span> <span class=s1>&#39;no-cache&#39;</span><span class=p>,</span> <span class=c1>// default, no-cache, reload, force-cache, only-if-cached
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>credentials</span><span class=o>:</span> <span class=s1>&#39;same-origin&#39;</span><span class=p>,</span> <span class=c1>// include, same-origin, omit
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>headers</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39;,
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=s1>&#39;Content-Type&#39;</span><span class=o>:</span> <span class=s1>&#39;application/json&#39;</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=nx>redirect</span><span class=o>:</span> <span class=s1>&#39;follow&#39;</span><span class=p>,</span> <span class=c1>// manual, follow, error
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>referrerPolicy</span><span class=o>:</span> <span class=s1>&#39;no-referrer&#39;</span><span class=p>,</span> <span class=c1>// no-referrer, no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>body</span>: <span class=kt>JSON.stringify</span><span class=p>(</span><span class=nx>data</span><span class=p>)</span> <span class=c1>// 需要和 &#34;Content-Type&#34; 匹配
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=nx>fetch</span><span class=p>(</span><span class=s1>&#39;https://...&#39;</span><span class=p>,</span> <span class=p>{</span> <span class=nx>next</span><span class=o>:</span> <span class=p>{</span> <span class=nx>revalidate</span>: <span class=kt>60</span> <span class=p>}</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=nx>fetch</span><span class=p>(</span><span class=s1>&#39;https://...&#39;</span><span class=p>,</span> <span class=p>{</span> <span class=nx>next</span><span class=o>:</span> <span class=p>{</span> <span class=nx>tags</span><span class=o>:</span> <span class=p>[</span><span class=s1>&#39;collection&#39;</span><span class=p>]</span> <span class=p>}</span> <span class=p>});</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=orms-或数据库客户端>ORMS 或数据库客户端</h2><p>ORMS（<a class=link href=https://sequelize.org target=_blank rel=noopener>
+Sequelize
+</a>、<a class=link href=https://www.prisma.io/docs/getting-started/quickstart target=_blank rel=noopener>
+Prisma
+</a>等）或数据库客户端（<a class=link href=https://www.mongodb.com/zh-cn/docs/drivers/node/current/quick-start/download-and-install/#install-the-node.js-driver target=_blank rel=noopener>
+mongodb
+</a>等）可以直接用在 <a class=link href=https://nextjs.org/docs/app/building-your-application/rendering/server-components target=_blank rel=noopener>ServerComponents
+</a>、<a class=link href=https://nextjs.org/docs/app/building-your-application/routing/route-handlers target=_blank rel=noopener>
+RouteHandlers
+</a>、<a class=link href=https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations target=_blank rel=noopener>
+ServerActions
+</a>中：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/utils.ts
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=p>{</span> <span class=nx>cache</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;react&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=c1>// 使用 cache 缓存渲染过程中的数据
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>export</span> <span class=kr>const</span> <span class=nx>getItem</span> <span class=o>=</span> <span class=nx>cache</span><span class=p>(</span><span class=kr>async</span> <span class=p>(</span><span class=nx>id</span>: <span class=kt>string</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>item</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>db</span><span class=p>.</span><span class=nx>item</span><span class=p>.</span><span class=nx>findUnique</span><span class=p>({</span> <span class=nx>id</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>item</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=c1>// app/item/[id]/layout.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=p>{</span> <span class=nx>getItem</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@/utils/get-item&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>Layout</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>params</span><span class=o>:</span> <span class=p>{</span> <span class=nx>id</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>params</span><span class=o>:</span> <span class=p>{</span> <span class=nx>id</span>: <span class=kt>string</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>item</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>getItem</span><span class=p>(</span><span class=nx>id</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=c1>// app/item/[id]/page.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=p>{</span> <span class=nx>getItem</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@/utils/get-item&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>Page</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>params</span><span class=o>:</span> <span class=p>{</span> <span class=nx>id</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>params</span><span class=o>:</span> <span class=p>{</span> <span class=nx>id</span>: <span class=kt>string</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>item</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>getItem</span><span class=p>(</span><span class=nx>id</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=generatestaticparams>generateStaticParams</h2><p>和 PageRoutes 中的 getStaticPaths 作用一样，<a class=link href=https://nextjs.org/docs/app/api-reference/functions/generate-static-params target=_blank rel=noopener>
+generateStaticParams
+</a>用来在打包预渲染阶段获取要渲染的路由 path：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/posts/[id]/page.js
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=nx>PostLayout</span> <span class=kr>from</span> <span class=s1>&#39;@/components/post-layout&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>generateStaticParams() {</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>[{</span> <span class=nx>id</span><span class=o>:</span> <span class=s1>&#39;1&#39;</span> <span class=p>},</span> <span class=p>{</span> <span class=nx>id</span><span class=o>:</span> <span class=s1>&#39;2&#39;</span> <span class=p>}];</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kr>async</span> <span class=kd>function</span> <span class=nx>getPost</span><span class=p>(</span><span class=nx>params</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>res</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>fetch</span><span class=p>(</span><span class=sb>`https://.../posts/</span><span class=si>${</span><span class=nx>params</span><span class=p>.</span><span class=nx>id</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>post</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>res</span><span class=p>.</span><span class=nx>json</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>post</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=c1>// 和之前一样，generateStaticParams 的返回值会被注入到 props 中
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>export</span> <span class=k>default</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>Post</span><span class=p>({</span> <span class=nx>params</span> <span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>post</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>getPost</span><span class=p>(</span><span class=nx>params</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>&lt;</span><span class=nt>PostLayout</span> <span class=na>post</span><span class=o>=</span><span class=p>{</span><span class=nx>post</span><span class=p>}</span> <span class=p>/&gt;;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>getStaticPaths 中的 fallback 属性被现在的 <a class=link href=https://elementref.github.io/p/next.js-%E4%B9%8B-approuter/#%E8%B7%AF%E7%94%B1%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F target=_blank rel=noopener>RouterConfig
+</a>取代。</p><p>getStaticPaths 中的 fallback 属性有三个取值：</p><ul><li>true，请求到达服务端时，动态生成新页面，并先返回 FallbackPage；</li><li>false，返回 404 页面，等同于 export const dynamicParams = false；</li><li>blocking，请求到达服务端时，动态生成新页面，不再支持。</li></ul><p>true 和 blocking 选项被统一为 export const dynamicParams = true；同时 getStaticPaths 中的 revalidate 属性被合并到 <a class=link href=https://nextjs.org/docs/app/api-reference/functions/fetch target=_blank rel=noopener>fetch
+</a>中：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=nx>dynamicParams</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>async</span> <span class=kd>function</span> <span class=nx>getPosts() {</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>res</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>fetch</span><span class=p>(</span><span class=sb>`https://.../posts`</span><span class=p>,</span> <span class=p>{</span> <span class=nx>next</span><span class=o>:</span> <span class=p>{</span> <span class=nx>revalidate</span>: <span class=kt>60</span> <span class=p>}</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>data</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>res</span><span class=p>.</span><span class=nx>json</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>data</span><span class=p>.</span><span class=nx>posts</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>PostList() {</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>posts</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>getPosts</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>posts</span><span class=p>.</span><span class=nx>map</span><span class=p>(</span><span class=nx>post</span> <span class=o>=&gt;</span> <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;{</span><span class=nx>post</span><span class=p>.</span><span class=nx>name</span><span class=p>}&lt;/</span><span class=nt>div</span><span class=p>&gt;);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=数据请求库>数据请求库</h2><p>在 <a class=link href=https://nextjs.org/docs/app/building-your-application/rendering/client-components target=_blank rel=noopener>ClientComponents
+</a>中可以使用例如 <a class=link href=https://swr.vercel.app target=_blank rel=noopener>SWR
+</a>、<a class=link href=https://tanstack.com/query/latest target=_blank rel=noopener>
+ReactQuery
+</a>获取数据：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=kr>import</span> <span class=nx>useSWR</span> <span class=kr>from</span> <span class=s1>&#39;swr&#39;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>fetcher</span> <span class=kr>from</span> <span class=s1>&#39;@/utils/fetcher&#39;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>PollingComponent</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=p>{</span> <span class=nx>data</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>useSWR</span><span class=p>(</span><span class=s1>&#39;/api/data&#39;</span><span class=p>,</span> <span class=nx>fetcher</span><span class=p>,</span> <span class=p>{</span> <span class=nx>refreshInterval</span>: <span class=kt>2000</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=s1>&#39;...&#39;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=并行请求与顺序请求>并行请求与顺序请求</h2><p><img src=/p/next.js-%E4%B9%8B-datafetching/sequential-parallel-data-fetching.png width=1600 height=525 srcset="/p/next.js-%E4%B9%8B-datafetching/sequential-parallel-data-fetching_hu12581096211310141414.png 480w, /p/next.js-%E4%B9%8B-datafetching/sequential-parallel-data-fetching_hu10918379328697885725.png 1024w" class=gallery-image data-flex-grow=304 data-flex-basis=731px loading=lazy></p><ul><li>顺序请求，最常见的场景就是，一个请求依赖于上一个请求的结果，这会导致长时间的 Loading 状态；</li><li>并行请求，请求之间相互独立，没有依赖关系；可以极大的减少请求时间。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/artist/[username]/page.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>export</span> <span class=k>default</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>Page</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>params</span><span class=o>:</span> <span class=p>{</span> <span class=nx>username</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>params</span><span class=o>:</span> <span class=p>{</span> <span class=nx>username</span>: <span class=kt>string</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>artist</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>getArtist</span><span class=p>(</span><span class=nx>username</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>h1</span><span class=p>&gt;{</span><span class=nx>artist</span><span class=p>.</span><span class=nx>name</span><span class=p>}&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>Suspense</span> <span class=na>fallback</span><span class=o>=</span><span class=p>{&lt;</span><span class=nt>div</span><span class=p>&gt;</span><span class=nx>Loading</span><span class=p>...&lt;/</span><span class=nt>div</span><span class=p>&gt;}&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>Playlists</span> <span class=na>artistID</span><span class=o>=</span><span class=p>{</span><span class=nx>artist</span><span class=p>.</span><span class=nx>id</span><span class=p>}</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>Suspense</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kr>async</span> <span class=kd>function</span> <span class=nx>Playlists</span><span class=p>({</span> <span class=nx>artistID</span> <span class=p>}</span><span class=o>:</span> <span class=p>{</span> <span class=nx>artistID</span>: <span class=kt>string</span> <span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>playlists</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>getArtistPlaylists</span><span class=p>(</span><span class=nx>artistID</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span><span class=nx>playlists</span><span class=p>.</span><span class=nx>map</span><span class=p>(</span><span class=nx>playlist</span> <span class=o>=&gt;</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>li</span> <span class=na>key</span><span class=o>=</span><span class=p>{</span><span class=nx>playlist</span><span class=p>.</span><span class=nx>id</span><span class=p>}&gt;{</span><span class=nx>playlist</span><span class=p>.</span><span class=nx>name</span><span class=p>}&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>))}</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>默认情况下，<a class=link href=https://nextjs.org/docs/app/api-reference/file-conventions/layout target=_blank rel=noopener>
+layout.tsx
+</a>和 <a class=link href=https://nextjs.org/docs/app/api-reference/file-conventions/page target=_blank rel=noopener>page.tsx
+</a>是并行渲染的，这意味着组件中的数据请求也是并行的：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/artist/[username]/page.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=nx>Albums</span> <span class=kr>from</span> <span class=s1>&#39;./albums&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>async</span> <span class=kd>function</span> <span class=nx>getArtist</span><span class=p>(</span><span class=nx>username</span>: <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>res</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>fetch</span><span class=p>(</span><span class=sb>`https://api.example.com/artist/</span><span class=si>${</span><span class=nx>username</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>res</span><span class=p>.</span><span class=nx>json</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kr>async</span> <span class=kd>function</span> <span class=nx>getAlbums</span><span class=p>(</span><span class=nx>username</span>: <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>res</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>fetch</span><span class=p>(</span><span class=sb>`https://api.example.com/artist/</span><span class=si>${</span><span class=nx>username</span><span class=si>}</span><span class=sb>/albums`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>res</span><span class=p>.</span><span class=nx>json</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>Page</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>params</span><span class=o>:</span> <span class=p>{</span> <span class=nx>username</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>params</span><span class=o>:</span> <span class=p>{</span> <span class=nx>username</span>: <span class=kt>string</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>artistData</span> <span class=o>=</span> <span class=nx>getArtist</span><span class=p>(</span><span class=nx>username</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>albumsData</span> <span class=o>=</span> <span class=nx>getAlbums</span><span class=p>(</span><span class=nx>username</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=p>[</span><span class=nx>artist</span><span class=p>,</span> <span class=nx>albums</span><span class=p>]</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>Promise</span><span class=p>.</span><span class=nx>all</span><span class=p>([</span><span class=nx>artistData</span><span class=p>,</span> <span class=nx>albumsData</span><span class=p>]);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>h1</span><span class=p>&gt;{</span><span class=nx>artist</span><span class=p>.</span><span class=nx>name</span><span class=p>}&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>Albums</span> <span class=na>list</span><span class=o>=</span><span class=p>{</span><span class=nx>albums</span><span class=p>}</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=数据验证>数据验证</h2><p>数据验证可以通过两个方式：</p><ul><li>基于时间的验证，在缓存被创建的一段时间之后，如果再次发生请求，则先对缓存进行验证；</li><li>按需验证，基于特定事件（例如表单提交），手动触发数据验证。</li></ul><p>对于静态渲染的路由，如果有多个请求，并且每个请求配置了不同的 revalidate；那么对于这些请求来说，实际的 revalidate 为最小的 revalidate。</p><p>对于动态渲染的路由，每个请求的 revalidate 是独立的。</p><p>如果数据时效性不强，可以配置尽可能长的 revalidate 以节省服务器资源；如果数据时效性比较强，可以改为客户端渲染。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=nx>fetch</span><span class=p>(</span><span class=s1>&#39;https://...&#39;</span><span class=p>,</span> <span class=p>{</span> <span class=nx>next</span><span class=o>:</span> <span class=p>{</span> <span class=nx>revalidate</span>: <span class=kt>3600</span> <span class=p>}</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=c1>// 或者在 layout.js | page.js 中导出 revalidate
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>export</span> <span class=kr>const</span> <span class=nx>revalidate</span> <span class=o>=</span> <span class=mi>3600</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p>可以使用 <a class=link href=https://nextjs.org/docs/app/api-reference/functions/revalidatePath target=_blank rel=noopener>revalidatePath
+</a>和 <a class=link href=https://nextjs.org/docs/app/api-reference/functions/revalidateTag target=_blank rel=noopener>revalidateTag
+</a>来完成按需验证；这两个 API 适用于 <a class=link href=https://nextjs.org/docs/app/building-your-application/routing/route-handlers target=_blank rel=noopener>RouteHandlers
+</a>和 <a class=link href=https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations target=_blank rel=noopener>ServerActions
+</a>中（这不就是 ReactQuery 做的事情吗？）。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/page.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>export</span> <span class=k>default</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>Page() {</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>res</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>fetch</span><span class=p>(</span><span class=s1>&#39;https://...&#39;</span><span class=p>,</span> <span class=p>{</span> <span class=nx>next</span><span class=o>:</span> <span class=p>{</span> <span class=nx>tags</span><span class=o>:</span> <span class=p>[</span><span class=s1>&#39;collection&#39;</span><span class=p>]</span> <span class=p>}</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>data</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>res</span><span class=p>.</span><span class=nx>json</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=c1>// @/app/actions.ts
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=p>{</span> <span class=nx>revalidateTag</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;next/cache&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>action() {</span>
+</span></span><span class=line><span class=cl>  <span class=nx>revalidateTag</span><span class=p>(</span><span class=s1>&#39;collection&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果数据验证过程中出错，那么缓存不会被更新；在下一次请求中，会重新进行数据验证。</p><h2 id=serveractions>ServerActions</h2><p><a class=link href=https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations target=_blank rel=noopener>ServerActions
+</a>是一个在服务器上执行的异步函数，可以在 <a class=link href=https://nextjs.org/docs/app/building-your-application/rendering/server-components target=_blank rel=noopener>ServerComponents
+</a>和 <a class=link href=https://nextjs.org/docs/app/building-your-application/rendering/client-components target=_blank rel=noopener>ClientComponents
+</a>中调用；用来处理表单提交和数据修改逻辑；使用 &lsquo;use server&rsquo; 声明。</p><p>在 <a class=link href=https://nextjs.org/docs/app/building-your-application/rendering/server-components target=_blank rel=noopener>ServerComponents
+</a>中使用：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/page.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>Page() {</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 这是一个 ServerActions
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kr>async</span> <span class=kd>function</span> <span class=nx>create() {</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;use server&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=s1>&#39;...&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>在 <a class=link href=https://nextjs.org/docs/app/building-your-application/rendering/client-components target=_blank rel=noopener>ClientComponents
+</a>中使用，需要将 <a class=link href=https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations target=_blank rel=noopener>ServerActions
+</a>单独提出来：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/actions.ts
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s1>&#39;use server&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=c1>// 这是一个 ServerActions
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>create() {</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=c1>// app/ui/button.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>(</span><span class=s1>&#39;use client&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>create</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@/app/actions&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kd>function</span> <span class=nx>Button() {</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>&lt;</span><span class=nt>Button</span> <span class=na>onClick</span><span class=o>=</span><span class=p>{</span><span class=nx>create</span><span class=p>}</span> <span class=p>/&gt;;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>可以将 <a class=link href=https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations target=_blank rel=noopener>ServerActions
+</a>作为 props 传入 <a class=link href=https://nextjs.org/docs/app/building-your-application/rendering/client-components target=_blank rel=noopener>ClientComponents
+</a>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// 传入的 props 需要以 action/Action 结尾
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>&lt;</span><span class=nt>ClientComponent</span> <span class=na>updateItemAction</span><span class=o>=</span><span class=p>{</span><span class=nx>updateItem</span><span class=p>}</span> <span class=p>/&gt;;</span>
+</span></span><span class=line><span class=cl><span class=c1>// app/client-component.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>(</span><span class=s1>&#39;use client&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>ClientComponent</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>updateItemAction</span>
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>updateItemAction</span><span class=o>:</span> <span class=p>(</span><span class=nx>formData</span>: <span class=kt>FormData</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=k>void</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>&lt;</span><span class=nt>form</span> <span class=na>action</span><span class=o>=</span><span class=p>{</span><span class=nx>updateItemAction</span><span class=p>}&gt;{</span><span class=cm>/* ... */</span><span class=p>}&lt;/</span><span class=nt>form</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li><a class=link href=https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations target=_blank rel=noopener>ServerActions
+</a>可以直接绑定在 form 表单（React 对 form 做了扩展）的 action 属性上，并且在表单提交时，不会刷新页面；</li><li><a class=link href=https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations target=_blank rel=noopener>ServerActions
+</a>可以绑定在事件处理器、useEffect、任何表单元素（例如 button）上；</li><li><a class=link href=https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations target=_blank rel=noopener>ServerActions
+</a>从 <a class=link href=https://nextjs.org/docs/app/api-reference/file-conventions/layout target=_blank rel=noopener>layout.tsx
+</a>/<a class=link href=https://nextjs.org/docs/app/api-reference/file-conventions/page target=_blank rel=noopener>
+page.tsx
+</a>中继承路由配置；</li><li><a class=link href=https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations target=_blank rel=noopener>ServerActions
+</a>集成了 Next.js 的缓存和数据验证机制；</li><li><a class=link href=https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations target=_blank rel=noopener>ServerActions
+</a>的入/出参必须可以被<a class=link href=https://zh-hans.react.dev/reference/rsc/use-server#serializable-parameters-and-return-values target=_blank rel=noopener>
+序列化
+</a>；</li><li><a class=link href=https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations target=_blank rel=noopener>ServerActions
+</a>仅支持 POST 方法。</li></ul><p>绑定在 form 上的 <a class=link href=https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations target=_blank rel=noopener>ServerActions
+</a>可以接收到 FormData 对象：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/invoices/page.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>Page() {</span>
+</span></span><span class=line><span class=cl>  <span class=kr>async</span> <span class=kd>function</span> <span class=nx>createInvoice</span><span class=p>(</span><span class=nx>formData</span>: <span class=kt>FormData</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;use server&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=nx>rawFormData</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>customerId</span>: <span class=kt>formData.get</span><span class=p>(</span><span class=s1>&#39;customerId&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nx>amount</span>: <span class=kt>formData.get</span><span class=p>(</span><span class=s1>&#39;amount&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nx>status</span>: <span class=kt>formData.get</span><span class=p>(</span><span class=s1>&#39;status&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;createInvoice &gt; rawFormData&#39;</span><span class=p>,</span> <span class=nx>rawFormData</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>&lt;</span><span class=nt>form</span> <span class=na>action</span><span class=o>=</span><span class=p>{</span><span class=nx>createInvoice</span><span class=p>}&gt;...&lt;/</span><span class=nt>form</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>通过 bind 使 <a class=link href=https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations target=_blank rel=noopener>ServerActions
+</a>接收额外的参数：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/client-component.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s1>&#39;use client&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>updateUser</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./actions&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kd>function</span> <span class=nx>UserProfile</span><span class=p>({</span> <span class=nx>userId</span> <span class=p>}</span><span class=o>:</span> <span class=p>{</span> <span class=nx>userId</span>: <span class=kt>string</span> <span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>updateUserWithId</span> <span class=o>=</span> <span class=nx>updateUser</span><span class=p>.</span><span class=nx>bind</span><span class=p>(</span><span class=kc>null</span><span class=p>,</span> <span class=nx>userId</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>form</span> <span class=na>action</span><span class=o>=</span><span class=p>{</span><span class=nx>updateUserWithId</span><span class=p>}&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span><span class=cm>/* 也可以通过 hidden 表单传递额外的参数 */</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;hidden&#34;</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;userId&#34;</span> <span class=na>value</span><span class=o>=</span><span class=p>{</span><span class=nx>userId</span><span class=p>}</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text&#34;</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;name&#34;</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>button</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;submit&#34;</span><span class=p>&gt;</span><span class=nx>Update</span> <span class=nx>User</span> <span class=nx>Name</span><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>form</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=c1>// app/actions.js
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>(</span><span class=s1>&#39;use server&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>updateUser</span><span class=p>(</span><span class=nx>userId</span><span class=p>,</span> <span class=nx>formData</span><span class=p>)</span> <span class=p>{}</span>
+</span></span></code></pre></td></tr></table></div></div><p>使用 <a class=link href=https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLFormElement/requestSubmit target=_blank rel=noopener>requestSubmit
+</a>进行表单提交：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=s1>&#39;use client&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kd>function</span> <span class=nx>Entry() {</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>handleKeyDown</span> <span class=o>=</span> <span class=p>(</span><span class=nx>e</span>: <span class=kt>React.KeyboardEvent</span><span class=p>&lt;</span><span class=nt>HTMLTextAreaElement</span><span class=p>&gt;)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nx>e</span><span class=p>.</span><span class=nx>ctrlKey</span> <span class=o>||</span> <span class=nx>e</span><span class=p>.</span><span class=nx>metaKey</span><span class=p>)</span> <span class=o>&amp;&amp;</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nx>e</span><span class=p>.</span><span class=nx>key</span> <span class=o>===</span> <span class=s1>&#39;Enter&#39;</span> <span class=o>||</span> <span class=nx>e</span><span class=p>.</span><span class=nx>key</span> <span class=o>===</span> <span class=s1>&#39;NumpadEnter&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>e</span><span class=p>.</span><span class=nx>preventDefault</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>      <span class=nx>e</span><span class=p>.</span><span class=nx>currentTarget</span><span class=p>.</span><span class=nx>form</span><span class=o>?</span><span class=p>.</span><span class=nx>requestSubmit</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>textarea</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;entry&#34;</span> <span class=na>rows</span><span class=o>=</span><span class=p>{</span><span class=mi>20</span><span class=p>}</span> <span class=na>required</span> <span class=na>onKeyDown</span><span class=o>=</span><span class=p>{</span><span class=nx>handleKeyDown</span><span class=p>}</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这会触发最近的祖先 form 表单的提交，触发绑定的 <a class=link href=https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations target=_blank rel=noopener>ServerActions
+</a>。</p><p>服务器端表单验证：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/actions.ts
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s1>&#39;use server&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>z</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;zod&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>schema</span> <span class=o>=</span> <span class=nx>z</span><span class=p>.</span><span class=kt>object</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>email</span>: <span class=kt>z.string</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=nx>invalid_type_error</span><span class=o>:</span> <span class=s1>&#39;Invalid Email&#39;</span>
+</span></span><span class=line><span class=cl>  <span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>createUser</span><span class=p>(</span><span class=nx>formData</span>: <span class=kt>FormData</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>validatedFields</span> <span class=o>=</span> <span class=nx>schema</span><span class=p>.</span><span class=nx>safeParse</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=nx>email</span>: <span class=kt>formData.get</span><span class=p>(</span><span class=s1>&#39;email&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>validatedFields</span><span class=p>.</span><span class=nx>success</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>errors</span>: <span class=kt>validatedFields.error.flatten</span><span class=p>().</span><span class=nx>fieldErrors</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>在客户端使用 useActionState/<a class=link href=https://zh-hans.react.dev/reference/react-dom/hooks/useFormStatus target=_blank rel=noopener>
+useFormState
+</a>接收 <a class=link href=https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations target=_blank rel=noopener>ServerActions
+</a>的验证结果：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/submit-button.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s1>&#39;use client&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>useActionState</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;react&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>createUser</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@/app/actions&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>initialState</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>message</span><span class=o>:</span> <span class=s1>&#39;&#39;</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kd>function</span> <span class=nx>Signup() {</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=p>[</span><span class=nx>state</span><span class=p>,</span> <span class=nx>formAction</span><span class=p>,</span> <span class=nx>pending</span><span class=p>]</span> <span class=o>=</span> <span class=nx>useActionState</span><span class=p>(</span><span class=nx>createUser</span><span class=p>,</span> <span class=nx>initialState</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>form</span> <span class=na>action</span><span class=o>=</span><span class=p>{</span><span class=nx>formAction</span><span class=p>}&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>label</span> <span class=na>htmlFor</span><span class=o>=</span><span class=s>&#34;email&#34;</span><span class=p>&gt;</span><span class=nx>Email</span><span class=p>&lt;/</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text&#34;</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;email&#34;</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;email&#34;</span> <span class=na>required</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span><span class=cm>/* ... */</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>p</span> <span class=na>aria-live</span><span class=o>=</span><span class=s>&#34;polite&#34;</span> <span class=na>className</span><span class=o>=</span><span class=s>&#34;sr-only&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span><span class=nx>state</span><span class=o>?</span><span class=p>.</span><span class=nx>message</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>button</span> <span class=na>aria-disabled</span><span class=o>=</span><span class=p>{</span><span class=nx>pending</span><span class=p>}</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;submit&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span><span class=nx>pending</span> <span class=o>?</span> <span class=s1>&#39;Submitting...&#39;</span> <span class=o>:</span> <span class=s1>&#39;Sign up&#39;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>form</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>在事件回调中使用：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/like-button.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s1>&#39;use client&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>incrementLike</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./actions&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>useState</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;react&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>LikeButton</span><span class=p>({</span> <span class=nx>initialLikes</span> <span class=p>}</span><span class=o>:</span> <span class=p>{</span> <span class=nx>initialLikes</span>: <span class=kt>number</span> <span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=p>[</span><span class=nx>likes</span><span class=p>,</span> <span class=nx>setLikes</span><span class=p>]</span> <span class=o>=</span> <span class=nx>useState</span><span class=p>(</span><span class=nx>initialLikes</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;</span><span class=nx>Total</span> <span class=nx>Likes</span><span class=o>:</span> <span class=p>{</span><span class=nx>likes</span><span class=p>}&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>button</span>
+</span></span><span class=line><span class=cl>        <span class=na>onClick</span><span class=o>=</span><span class=p>{</span><span class=kr>async</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=kr>const</span> <span class=nx>updatedLikes</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>incrementLike</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>          <span class=nx>setLikes</span><span class=p>(</span><span class=nx>updatedLikes</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>}}</span>
+</span></span><span class=line><span class=cl>      <span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nx>Like</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=c1>// app/ui/edit-post.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>(</span><span class=s1>&#39;use client&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>publishPost</span><span class=p>,</span> <span class=nx>saveDraft</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./actions&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>EditPost() {</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>form</span> <span class=na>action</span><span class=o>=</span><span class=p>{</span><span class=nx>publishPost</span><span class=p>}&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>textarea</span>
+</span></span><span class=line><span class=cl>        <span class=na>name</span><span class=o>=</span><span class=s>&#34;content&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=na>onChange</span><span class=o>=</span><span class=p>{</span><span class=kr>async</span> <span class=nx>e</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=k>await</span> <span class=nx>saveDraft</span><span class=p>(</span><span class=nx>e</span><span class=p>.</span><span class=nx>target</span><span class=p>.</span><span class=nx>value</span><span class=p>);</span> <span class=c1>// 保存草稿
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=p>}}</span>
+</span></span><span class=line><span class=cl>      <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>button</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;submit&#34;</span><span class=p>&gt;</span><span class=nx>Publish</span><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>form</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>在 useEffect 中使用：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/view-count.tsx
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s1>&#39;use client&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>incrementViews</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./actions&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>useState</span><span class=p>,</span> <span class=nx>useEffect</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;react&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kd>function</span> <span class=nx>ViewCount</span><span class=p>({</span> <span class=nx>initialViews</span> <span class=p>}</span><span class=o>:</span> <span class=p>{</span> <span class=nx>initialViews</span>: <span class=kt>number</span> <span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=p>[</span><span class=nx>views</span><span class=p>,</span> <span class=nx>setViews</span><span class=p>]</span> <span class=o>=</span> <span class=nx>useState</span><span class=p>(</span><span class=nx>initialViews</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nx>useEffect</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=nx>updateViews</span> <span class=o>=</span> <span class=kr>async</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=kr>const</span> <span class=nx>updatedViews</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>incrementViews</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>      <span class=nx>setViews</span><span class=p>(</span><span class=nx>updatedViews</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>    <span class=nx>updateViews</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span> <span class=p>[]);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;</span><span class=nx>Total</span> <span class=nx>Views</span><span class=o>:</span> <span class=p>{</span><span class=nx>views</span><span class=p>}&lt;/</span><span class=nt>p</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><a class=link href=https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations target=_blank rel=noopener>ServerActions
+</a>可以直接抛出错误，错误会被 <a class=link href=https://nextjs.org/docs/app/api-reference/file-conventions/error target=_blank rel=noopener>error.tsx
+</a>或错误边界捕获到：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/actions.ts
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s1>&#39;use server&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>createTodo</span><span class=p>(</span><span class=nx>prevState</span>: <span class=kt>any</span><span class=p>,</span> <span class=nx>formData</span>: <span class=kt>FormData</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>try</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=nx>e</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>throw</span> <span class=k>new</span> <span class=nb>Error</span><span class=p>(</span><span class=s1>&#39;Failed to create task&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>在 <a class=link href=https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations target=_blank rel=noopener>ServerActions
+</a>中，可以直接调用 <a class=link href=https://nextjs.org/docs/app/api-reference/functions/redirect target=_blank rel=noopener>redirect
+</a>进行重定向：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/actions.ts
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s1>&#39;use server&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>redirect</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;next/navigation&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>revalidateTag</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;next/cache&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>createPost</span><span class=p>(</span><span class=nx>id</span>: <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>try</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=nx>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=nx>revalidateTag</span><span class=p>(</span><span class=s1>&#39;posts&#39;</span><span class=p>);</span> <span class=c1>// 更新缓存
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>redirect</span><span class=p>(</span><span class=sb>`/post/</span><span class=si>${</span><span class=nx>id</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span> <span class=c1>// 重定向
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>在 <a class=link href=https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations target=_blank rel=noopener>ServerActions
+</a>中，可以直接操作 cookie：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/actions.ts
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s1>&#39;use server&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>cookies</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;next/headers&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>exampleAction() {</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// Get cookie
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kr>const</span> <span class=nx>value</span> <span class=o>=</span> <span class=nx>cookies</span><span class=p>().</span><span class=kr>get</span><span class=p>(</span><span class=s1>&#39;name&#39;</span><span class=p>)</span><span class=o>?</span><span class=p>.</span><span class=nx>value</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// Set cookie
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>cookies</span><span class=p>().</span><span class=kr>set</span><span class=p>(</span><span class=s1>&#39;name&#39;</span><span class=p>,</span> <span class=s1>&#39;Delba&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// Delete cookie
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>cookies</span><span class=p>().</span><span class=k>delete</span><span class=p>(</span><span class=s1>&#39;name&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=routehandlers>RouteHandlers</h2><p>可以使用 Next.js 提供的 <a class=link href=https://nextjs.org/docs/app/building-your-application/routing/route-handlers target=_blank rel=noopener>RouteHandlers
+</a>完成数据请求（做一层转发），避免敏感数据泄露：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-tsx data-lang=tsx><span class=line><span class=cl><span class=c1>// app/api/messages/route.ts
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>GET() {</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>data</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>fetch</span><span class=p>(</span><span class=s1>&#39;https://...&#39;</span><span class=p>,</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>headers</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=s1>&#39;Content-Type&#39;</span><span class=o>:</span> <span class=s1>&#39;application/json&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=s1>&#39;API-Key&#39;</span><span class=o>:</span> <span class=nx>process</span><span class=p>.</span><span class=nx>env</span><span class=p>.</span><span class=nx>DATA_API_KEY</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}).</span><span class=nx>then</span><span class=p>(</span><span class=nx>res</span> <span class=o>=&gt;</span> <span class=nx>res</span><span class=p>.</span><span class=nx>json</span><span class=p>());</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>Response</span><span class=p>.</span><span class=nx>json</span><span class=p>({</span> <span class=nx>data</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>一般 <a class=link href=https://nextjs.org/docs/app/building-your-application/rendering/server-components target=_blank rel=noopener>ServerComponents
+</a>不需要调用 <a class=link href=https://nextjs.org/docs/app/building-your-application/routing/route-handlers target=_blank rel=noopener>RouteHandlers
+</a>，因为他可以直接在服务端完成数据请求。</p><h3 id=serveractions-与-routehandlers-区别>ServerActions 与 RouteHandlers 区别</h3><ul><li>两者都是用来写可以在客户端调用的服务端逻辑的；</li><li>RouteHandlers 偏向于底层一些，可以用来写 RESTful 风格的服务端代码；</li><li>ServerActions 更偏向于上层，主要用来创建/修改数据（从仅支持 POST 也能看出来）。</li></ul></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/next.js-%E4%B9%8B-auth.js/><div class=article-image><img src=/img/cover/nextjs.png loading=lazy data-key data-hash=/img/cover/nextjs.png></div><div class=article-details><h2 class=article-title>Next.js 之 Auth.js</h2></div></a></article><article class=has-image><a href=/p/next.js-%E4%B9%8B-optimizations/><div class=article-image><img src=/img/cover/nextjs.png loading=lazy data-key data-hash=/img/cover/nextjs.png></div><div class=article-details><h2 class=article-title>Next.js 之 Optimizations</h2></div></a></article><article class=has-image><a href=/p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/><div class=article-image><img src=/img/cover/nextjs.png loading=lazy data-key data-hash=/img/cover/nextjs.png></div><div class=article-details><h2 class=article-title>Next.js 之 Rendering 与 Caching</h2></div></a></article><article class=has-image><a href=/p/next.js-%E4%B9%8B-approuter/><div class=article-image><img src=/img/cover/nextjs.png loading=lazy data-key data-hash=/img/cover/nextjs.png></div><div class=article-details><h2 class=article-title>Next.js 之 AppRouter</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
+2017 -
+2024
+<a href=https://github.com/ElementRef target=_blank>馬腊咯稽</a></section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a>, Deploy by Actions<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.13.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#fetch-api>fetch API</a></li><li><a href=#orms-或数据库客户端>ORMS 或数据库客户端</a></li><li><a href=#generatestaticparams>generateStaticParams</a></li><li><a href=#数据请求库>数据请求库</a></li><li><a href=#并行请求与顺序请求>并行请求与顺序请求</a></li><li><a href=#数据验证>数据验证</a></li><li><a href=#serveractions>ServerActions</a></li><li><a href=#routehandlers>RouteHandlers</a><ol><li><a href=#serveractions-与-routehandlers-区别>ServerActions 与 RouteHandlers 区别</a></li></ol></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script src=https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js></script><script>NProgress.configure({showSpinner:!1}),NProgress.start(),document.addEventListener("readystatechange",()=>{document.readyState==="interactive"&&NProgress.inc(.8),document.readyState==="complete"&&NProgress.done()})</script></body></html>

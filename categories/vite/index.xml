@@ -1,0 +1,1978 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vite on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/vite/</link><description>Recent content in Vite on 馬腊咯稽</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 29 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/vite/index.xml" rel="self" type="application/rss+xml"/><item><title>Vite 学习笔记 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/vite-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Tue, 29 Oct 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vite-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vite.png" alt="Vite 学习笔记" />&lt;p>Vite 内部有两套实现：&lt;/p>
+&lt;ul>
+&lt;li>开发环境下，借助 esbuild 和预打包缓存实现快速的 HMR：
+&lt;ul>
+&lt;li>首次启动时，esbuild 会将 node_modules 下的依赖进行预打包并缓存在 .vite 目录；&lt;/li>
+&lt;li>对 node_modules 下的依赖配置强缓存，对项目代码配置协商缓存；&lt;/li>
+&lt;li>只编译当前页面需要的依赖和项目代码；&lt;/li>
+&lt;li>不管兼容性问题，无需代码降级转换。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>生产环境下，借助 Rollup 打包，输出优化后的静态文件：
+&lt;ul>
+&lt;li>需要 tree-shaking、懒加载、代码分割、缓存配置来实现更好的访问速度；&lt;/li>
+&lt;li>不是所有的网络环境都升级到了 HTTP/2|3，ESM 可能会产生大量请求；&lt;/li>
+&lt;li>可以借助插件对更多资源（CSS|SVG|IMAGE）做针对性处理；&lt;/li>
+&lt;li>需要解决产物的兼容性问题，例如客户端较低版本的浏览器。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="为什么是-vite">为什么是 Vite&lt;/h2>
+&lt;p>Vite 主要解决了项目启动慢、HMR 慢的问题；但是宣传上比较讨巧，实际上项目第一次启动时，会预打包并将结果缓存；HMR 也是借助了 ESM 的特性，只转换不打包。&lt;/p>
+&lt;p>在开发环境，相较于 Webpack，改变了运行策略；将&lt;strong>先编译后运行服务&lt;/strong>变为了&lt;strong>先运行服务后编译&lt;/strong>；模块之间的依赖解析工作交给了浏览器，Vite 只负责按需“编译”。所以，他提升了部分开发体验，而对生产环境的打包速度并没有质的提升。&lt;/p>
+&lt;p>为什么说是“部分”呢？因为如果页面依赖众多，还是会有可感知的“白屏”。这可能是因为 esbuild 还不够快？也可能是复杂项目的渲染触发了过多的 HTTP 请求，达到了浏览器的并发限制。可以看看&lt;a class="link"
+href="https://moonvy.com/blog/post/2024/migrate-vite-to-rsbuild/"
+target="_blank" rel="noopener"
+>
+这篇文章
+&lt;/a>
+。&lt;/p>
+&lt;p>不过，哪有那么多超大型的项目呢？Webpack 对超大型项目的处理就更好吗？再说了，超大型项目根本就不会冒着巨大的风险更换脚手架。&lt;/p>
+&lt;h2 id="功能">功能&lt;/h2>
+&lt;h3 id="预构建">预构建&lt;/h3>
+&lt;p>在项目启动时，Vite 通过 esbuild 对 node_modules 下的依赖进行预打包，将 CJS|UMD 规范的包转换为 ESM 规范；然后解析页面引用，将：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">someMethod&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;my-dep&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>转换为浏览器能解析的代码，发送给浏览器。&lt;/p>
+&lt;p>Webpack 也可以通过 &lt;a class="link"
+href="https://webpack.js.org/plugins/dll-plugin/#dllplugin"
+target="_blank" rel="noopener"
+>
+DllPlugin
+&lt;/a>
+和 &lt;a class="link"
+href="https://webpack.js.org/plugins/dll-plugin/#dllreferenceplugin"
+target="_blank" rel="noopener"
+>
+DllReferencePlugin
+&lt;/a>
+，手动进行“预构建”，当然初衷是为了模块拆分。&lt;/p>
+&lt;h3 id="热替换">热替换&lt;/h3>
+&lt;p>Vite 提供了一套适用于 ESM 的 &lt;a class="link"
+href="https://cn.vitejs.dev/guide/api-hmr.html"
+target="_blank" rel="noopener"
+>
+HMR API
+&lt;/a>
+，可以实现精准的 HMR。Vite 已经集成了 &lt;a class="link"
+href="https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue"
+target="_blank" rel="noopener"
+>
+Vue
+&lt;/a>
+、&lt;a class="link"
+href="https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react"
+target="_blank" rel="noopener"
+>
+React
+&lt;/a>
+的 HMR 方案。&lt;/p>
+&lt;h3 id="typescript">TypeScript&lt;/h3>
+&lt;p>Vite 对 TS 文件进行转换而不进行类型检查，它希望类型检查由 IDE 完成。因为类型检查需要解析整个项目的依赖关系，和 Vite 的按需编译模式不匹配。&lt;/p>
+&lt;p>如果需要进行类型检查，可以借助 tsc --noEmit，或者借助 &lt;a class="link"
+href="https://github.com/fi3ework/vite-plugin-checker"
+target="_blank" rel="noopener"
+>
+vite-plugin-checker
+&lt;/a>
+插件。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">someType&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;someModule&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">someType&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>这段代码在 Vite 下可能不会正常工作，因为 someType 仅仅是一个类型；所以最好采用下边这种写法：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="kr">type&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">someType&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;someModule&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kr">type&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">someType&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>import|export type 是 TS 在 3.8 引入的语法，用来确保导入导出的仅仅是类型，可以在编译时去掉。&lt;/p>
+&lt;p>Vite 建议使用以下 compilerOptions：&lt;/p>
+&lt;ul>
+&lt;li>isolatedModules:true
+&lt;ul>
+&lt;li>除了 tsc，其他编译工具在编译 TS 时，都不会有类型系统的介入；&lt;/li>
+&lt;li>如果第三方依赖不兼容这个选项，可是使用 skipLibCheck:true；&lt;/li>
+&lt;li>这个选项用来保证，每个文件都可以被单独编译。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>useDefineForClassFields
+&lt;ul>
+&lt;li>target:ESNext|ES2022+ 时，应为 true；&lt;/li>
+&lt;li>target 为其他版本时，应为 false。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>target
+&lt;ul>
+&lt;li>Vite 会忽略这项设置，而读取 esbuild.target；&lt;/li>
+&lt;li>可以在 vite.config 中配置 esbuild.target。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>types:[&amp;ldquo;vite/client&amp;rdquo;] 可以为编辑器提供以下类型提示：
+&lt;ul>
+&lt;li>import.meta.env；&lt;/li>
+&lt;li>import.meta.hot；&lt;/li>
+&lt;li>资源导入。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="glob-导入">Glob 导入&lt;/h3>
+&lt;p>Vite 扩展（不属于 ES 标准）了 import.meta，用来从文件系统中导入多个模块：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">modules&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kr">import&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">meta&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">glob&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;./dir/*.js&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>默认会被转换为异步导入：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">modules&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;./dir/foo.js&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="kr">import&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;./dir/foo.js&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;./dir/bar.js&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="kr">import&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;./dir/bar.js&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>如果需要转换为同步导入，传入第二个参数即可：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">modules&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kr">import&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">meta&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">glob&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;./dir/*.js&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">eager&lt;/span>: &lt;span class="kt">true&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>会被转换为同步导入：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="kr">as&lt;/span> &lt;span class="nx">__glob__0_0&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;./dir/foo.js&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="kr">as&lt;/span> &lt;span class="nx">__glob__0_1&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;./dir/bar.js&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">modules&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;./dir/foo.js&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">__glob__0_0&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;./dir/bar.js&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">__glob__0_1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>可以通过遍历 modules 拿到对应的模块：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">path&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="nx">modules&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">modules&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">path&lt;/span>&lt;span class="p">]().&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">mod&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">path&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">mod&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>import.meta.glob 也支持更多导入模式：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 导入多个目录下的模块
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">modules&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kr">import&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">meta&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">glob&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="s1">&amp;#39;./dir/*.js&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;./another/*.js&amp;#39;&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 不导入 ./dir/bar.js
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">modules&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kr">import&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">meta&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">glob&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="s1">&amp;#39;./dir/*.js&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;!**/bar.js&amp;#39;&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 导入模块内的部分内容，仅导入 setup 变量
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">modules&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kr">import&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">meta&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">glob&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;./dir/*.js&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="kr">import&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;setup&amp;#39;&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 仅导入默认导出的变量
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">modules&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kr">import&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">meta&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">glob&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;./dir/*.js&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="kr">import&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;default&amp;#39;&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 将模块作为字符串导入
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">moduleStrings&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kr">import&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">meta&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">glob&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;./dir/*.svg&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">query&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;?raw&amp;#39;&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="缓存">缓存&lt;/h2>
+&lt;p>Vite 会基于以下条件来判断是否要重新进行预打包：&lt;/p>
+&lt;ol>
+&lt;li>包管理器依赖锁：package-lock.json，yarn.lock，pnpm-lock.yaml；&lt;/li>
+&lt;li>patch 文件夹的修改时间；&lt;/li>
+&lt;li>vite.config.js 文件配置；&lt;/li>
+&lt;li>NODE_ENV 的值；&lt;/li>
+&lt;li>--force 参数。&lt;/li>
+&lt;/ol>
+&lt;h2 id="静态资源">静态资源&lt;/h2>
+&lt;p>Vite 对静态资源的处理就像是 file-loader：&lt;/p>
+&lt;ul>
+&lt;li>模块中引入的静态资源，根据 assetsInlineLimit 配置，在构建后被移动到资源目录，或是被 base64 处理；&lt;/li>
+&lt;li>如果有引入不常见的静态资源，可以在 assetsInclude 中配置；&lt;/li>
+&lt;li>静态资源在打包后，也会以 hash 值命名。&lt;/li>
+&lt;/ul>
+&lt;p>文件被导入的时候，可以通过 ?url、?raw、?worker 来声明资源导入方式：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 作为一个 url 导入
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="nx">workletURL&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;extra-scalloped-border/worklet.js?url&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 作为字符串导入
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="nx">shaderString&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;./shader.glsl?raw&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 作为 WebWorker 导入
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="nx">Worker&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;./shader.js?worker&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>特别的，public 目录下的资源应该符合以下特点：&lt;/p>
+&lt;ul>
+&lt;li>打包后名称不会改变；&lt;/li>
+&lt;li>没有被模块引入。&lt;/li>
+&lt;/ul>
+&lt;p>import.meta.url 属于 ESM 规范，返回值为当前模块的绝对路径：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">imgUrl&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">URL&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;./img.png&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kr">import&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">meta&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">url&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">href&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getElementById&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;hero-img&amp;#39;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">src&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">imgUrl&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>但是，如果 build.target 不支持 import.meta.url，构建将会失败；同时，也不应该在为 SSR 打包的情况下使用，因为服务器和浏览器的语意不同。&lt;/p>
+&lt;h2 id="打包">打包&lt;/h2>
+&lt;p>Vite 默认的打包产物仅支持兼容 ESM 规范的浏览器：&lt;/p>
+&lt;ul>
+&lt;li>Chrome &amp;gt;=87&lt;/li>
+&lt;li>Firefox &amp;gt;=78&lt;/li>
+&lt;li>Safari &amp;gt;=14&lt;/li>
+&lt;li>Edge &amp;gt;=88&lt;/li>
+&lt;/ul>
+&lt;p>可以通过 build.target 指定构建目标，最低为 es2015。如果要兼容更低版本的浏览器，需要使用&lt;a class="link"
+href="https://github.com/vitejs/vite/tree/main/packages/plugin-legacy"
+target="_blank" rel="noopener"
+>
+@vitejs/plugin-legacy
+&lt;/a>
+。&lt;/p>
+&lt;p>如果需要自定义构建，可以配置 build.rollupOptions；如果需要自定义分包，可以配置 build.rollupOptions.output.manualChunks。&lt;/p>
+&lt;h3 id="处理加载出错">处理加载出错&lt;/h3>
+&lt;p>当应用重新部署时，服务器可能会将之前的构建产物删除，导致用户电脑上未关闭的页面报错；我们可以监听 vite:preloadError 事件，来刷新页面：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">addEventListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;vite:preloadError&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">event&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">location&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">reload&lt;/span>&lt;span class="p">();&lt;/span> &lt;span class="c1">// 刷新页面
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="库打包">库打包&lt;/h3>
+&lt;p>如果要给组件库打包，需要配置 build.lib：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">resolve&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;path&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">defineConfig&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;vite&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="nx">defineConfig&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">build&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">lib&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 单入口
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">entry&lt;/span>: &lt;span class="kt">resolve&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">__dirname&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;lib/main.js&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 多入口
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">entry&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;my-lib&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">resolve&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">__dirname&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;lib/main.js&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">secondary&lt;/span>: &lt;span class="kt">resolve&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">__dirname&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;lib/secondary.js&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">name&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;MyLib&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 将添加适当的扩展名后缀
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">fileName&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;my-lib&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">rollupOptions&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 你不想打包进库的依赖，例如 peerDependencies
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">external&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;vue&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">output&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 在 UMD 构建模式下为这些外部化的依赖，提供一个全局变量
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">globals&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">vue&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;Vue&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>还需要配置对应的 package.json：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;name&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;my-lib&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">/**&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*&lt;/span> &lt;span class="err">如果不包含&lt;/span> &lt;span class="s2">&amp;#34;type&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="s2">&amp;#34;module&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*&lt;/span> &lt;span class="n">Vite&lt;/span> &lt;span class="err">会生成不同的文件后缀名以兼容&lt;/span> &lt;span class="ne">Node&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">js&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*&lt;/span> &lt;span class="o">.&lt;/span>&lt;span class="n">js&lt;/span> &lt;span class="err">会变为&lt;/span> &lt;span class="o">.&lt;/span>&lt;span class="n">mjs&lt;/span> &lt;span class="err">而&lt;/span> &lt;span class="o">.&lt;/span>&lt;span class="n">cjs&lt;/span> &lt;span class="err">会变为&lt;/span> &lt;span class="o">.&lt;/span>&lt;span class="n">js&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;type&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;module&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;files&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;dist&amp;#34;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;main&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;./dist/my-lib.cjs&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;module&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;./dist/my-lib.js&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;exports&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;.&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;import&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;./dist/my-lib.js&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;require&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;./dist/my-lib.cjs&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;./secondary&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;import&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;./dist/secondary.js&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;require&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;./dist/secondary.cjs&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>注意：在库模式中，所有 import.meta.env._ 都会在构建时被&lt;strong>静态替换&lt;/strong>；但是，process.env._ 则&lt;strong>不会&lt;/strong>。&lt;/p>
+&lt;h2 id="环境变量">环境变量&lt;/h2>
+&lt;p>Vite 在 import.meta.env 上暴露了一些环境变量，会在编译时被静态替换掉：&lt;/p>
+&lt;ul>
+&lt;li>import.meta.env.MODE，运行的模式（development|production），可以通过 --mode 指定为别的值，比如 staging；&lt;/li>
+&lt;li>import.meta.env.BASE_URL，部署应用时的 base 路径；&lt;/li>
+&lt;li>import.meta.env.PROD，是否运行在生产环境；&lt;/li>
+&lt;li>import.meta.env.DEV，是否运行在开发环境；&lt;/li>
+&lt;li>import.meta.env.SSR，是否运行在 server 上。&lt;/li>
+&lt;/ul>
+&lt;p>Vite 会使用 dotenv 从项目目录中加载 .env 文件：&lt;/p>
+&lt;ul>
+&lt;li>.env，所有情况下都会加载；&lt;/li>
+&lt;li>.env.local，所有情况下都会加载，但会被 git 忽略；&lt;/li>
+&lt;li>.env.[mode]，只在指定模式下加载；&lt;/li>
+&lt;li>.env.[mode].local，只在指定模式下加载，但会被 git 忽略。&lt;/li>
+&lt;/ul>
+&lt;p>.env 中的内容会通过 import.meta.env 暴露：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="l">VITE_SOME_KEY=123&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="l">DB_PASSWORD=foobar&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>默认情况下，Vite 仅会暴露以 VITE_开头的属性：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * VITE_SOME_KEY 在被定义时，是 number 类型
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 实际被解析为了字符串，boolean 类型也一样
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 要注意类型转换
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kr">import&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">meta&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">env&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">VITE_SOME_KEY&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kr">import&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">meta&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">env&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">DB_PASSWORD&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// undefined
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>如果要在 .env 文件中使用 $，要进行转译：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="l">KEY=123&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="l">NEW_KEY1=test$foo &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># test&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="l">NEW_KEY2=test$KEY &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># test123&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="l">NEW_KEY3=test\$foo &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># test$foo&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="类型提示">类型提示&lt;/h3>
+&lt;p>如果要使得 .env 中的变量有类型提示，需要在 src 目录下创建 vite-env.d.ts 文件并增加 ImportMetaEnv 定义：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">/// &amp;lt;reference types=&amp;#34;vite/client&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">interface&lt;/span> &lt;span class="nx">ImportMetaEnv&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">readonly&lt;/span> &lt;span class="nx">VITE_APP_TITLE&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 更多环境变量...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">interface&lt;/span> &lt;span class="nx">ImportMeta&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">readonly&lt;/span> &lt;span class="nx">env&lt;/span>: &lt;span class="kt">ImportMetaEnv&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="在-html-中使用">在 HTML 中使用&lt;/h3>
+&lt;p>import.meta.env 中的任何属性都可以通过特殊的 %ENV_NAME% 语法在 HTML 文件中使用：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">h1&lt;/span> &lt;span class="na">alt&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;如果 import.meta.env.MODE 不存在，将不会替换&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Vite is running in %MODE%
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">h1&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span> &lt;span class="na">alt&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;在 JS 中，则不同，将会按 undefined 处理&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Using data from %VITE_API_URL%
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="node_env">NODE_ENV&lt;/h3>
+&lt;p>import.meta.env.mode 和 process.env.NODE_ENV 是两个不同的东西；import.meta.env.mode 是由运行 Vite 时，指定的 mode 决定的：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">vite build &lt;span class="c1"># import.meta.env.mode 为 production&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">vite build --mode development &lt;span class="c1"># import.meta.env.mode 为 development&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>而 process.env.NODE_ENV 是由运行命令时，指定的 NODE_ENV 决定的：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">vite build --mode development &lt;span class="c1"># NODE_ENV 为 production&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">NODE_ENV&lt;/span>&lt;span class="o">=&lt;/span>development vite build --mode development &lt;span class="c1"># NODE_ENV 为 development&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>但是 NODE_ENV 和 import.meta.env.PROD ｜ import.meta.env.DEV 有关：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">vite build --mode development &lt;span class="c1"># import.meta.env.PROD 为 true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">NODE_ENV&lt;/span>&lt;span class="o">=&lt;/span>development vite build --mode development &lt;span class="c1"># import.meta.env.PROD 为 false&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="插件">插件&lt;/h2>
+&lt;p>如果要写插件，推荐使用 &lt;a class="link"
+href="https://github.com/antfu/vite-plugin-inspect"
+target="_blank" rel="noopener"
+>
+vite-plugin-inspect
+&lt;/a>
+，可以帮助调试插件。&lt;/p>
+&lt;h3 id="约定">约定&lt;/h3>
+&lt;p>如果要开发&lt;strong>兼容 Rollup&lt;/strong> 的插件，插件名称请以 rollup-plugin- 作为前缀；如果要开发&lt;strong>Vite 独有&lt;/strong> 的插件，插件名称请以 vite-plugin- 作为前缀。&lt;/p>
+&lt;p>如果插件仅适用于某些框架，应该遵循以下前缀：&lt;/p>
+&lt;ul>
+&lt;li>vite-plugin-svelte- 前缀作为 Svelte 插件；&lt;/li>
+&lt;li>vite-plugin-react- 前缀作为 React 插件；&lt;/li>
+&lt;li>vite-plugin-vue- 前缀作为 Vue 插件。&lt;/li>
+&lt;/ul>
+&lt;p>Vite 插件一般为一个返回实际插件对象的工厂函数；插件的逻辑调用主要被放在了钩子函数中，Vite 会在合适的时候调用这些钩子；文档上列举了一些通用钩子函数：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="kr">type&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Plugin&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;vite&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">example&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">Plugin&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">name&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;vite-plugin-example&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Vite 启动时调用
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">options() {&lt;/span>&lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">buildStart() {&lt;/span>&lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 模块请求时调用
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">resolveId() {&lt;/span>&lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">load() {&lt;/span>&lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">transform() {&lt;/span>&lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Vite 退出时调用
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">buildEnd() {&lt;/span>&lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">closeBundle() {&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Vite 还提供了一些独有的钩子函数：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt"> 10
+&lt;/span>&lt;span class="lnt"> 11
+&lt;/span>&lt;span class="lnt"> 12
+&lt;/span>&lt;span class="lnt"> 13
+&lt;/span>&lt;span class="lnt"> 14
+&lt;/span>&lt;span class="lnt"> 15
+&lt;/span>&lt;span class="lnt"> 16
+&lt;/span>&lt;span class="lnt"> 17
+&lt;/span>&lt;span class="lnt"> 18
+&lt;/span>&lt;span class="lnt"> 19
+&lt;/span>&lt;span class="lnt"> 20
+&lt;/span>&lt;span class="lnt"> 21
+&lt;/span>&lt;span class="lnt"> 22
+&lt;/span>&lt;span class="lnt"> 23
+&lt;/span>&lt;span class="lnt"> 24
+&lt;/span>&lt;span class="lnt"> 25
+&lt;/span>&lt;span class="lnt"> 26
+&lt;/span>&lt;span class="lnt"> 27
+&lt;/span>&lt;span class="lnt"> 28
+&lt;/span>&lt;span class="lnt"> 29
+&lt;/span>&lt;span class="lnt"> 30
+&lt;/span>&lt;span class="lnt"> 31
+&lt;/span>&lt;span class="lnt"> 32
+&lt;/span>&lt;span class="lnt"> 33
+&lt;/span>&lt;span class="lnt"> 34
+&lt;/span>&lt;span class="lnt"> 35
+&lt;/span>&lt;span class="lnt"> 36
+&lt;/span>&lt;span class="lnt"> 37
+&lt;/span>&lt;span class="lnt"> 38
+&lt;/span>&lt;span class="lnt"> 39
+&lt;/span>&lt;span class="lnt"> 40
+&lt;/span>&lt;span class="lnt"> 41
+&lt;/span>&lt;span class="lnt"> 42
+&lt;/span>&lt;span class="lnt"> 43
+&lt;/span>&lt;span class="lnt"> 44
+&lt;/span>&lt;span class="lnt"> 45
+&lt;/span>&lt;span class="lnt"> 46
+&lt;/span>&lt;span class="lnt"> 47
+&lt;/span>&lt;span class="lnt"> 48
+&lt;/span>&lt;span class="lnt"> 49
+&lt;/span>&lt;span class="lnt"> 50
+&lt;/span>&lt;span class="lnt"> 51
+&lt;/span>&lt;span class="lnt"> 52
+&lt;/span>&lt;span class="lnt"> 53
+&lt;/span>&lt;span class="lnt"> 54
+&lt;/span>&lt;span class="lnt"> 55
+&lt;/span>&lt;span class="lnt"> 56
+&lt;/span>&lt;span class="lnt"> 57
+&lt;/span>&lt;span class="lnt"> 58
+&lt;/span>&lt;span class="lnt"> 59
+&lt;/span>&lt;span class="lnt"> 60
+&lt;/span>&lt;span class="lnt"> 61
+&lt;/span>&lt;span class="lnt"> 62
+&lt;/span>&lt;span class="lnt"> 63
+&lt;/span>&lt;span class="lnt"> 64
+&lt;/span>&lt;span class="lnt"> 65
+&lt;/span>&lt;span class="lnt"> 66
+&lt;/span>&lt;span class="lnt"> 67
+&lt;/span>&lt;span class="lnt"> 68
+&lt;/span>&lt;span class="lnt"> 69
+&lt;/span>&lt;span class="lnt"> 70
+&lt;/span>&lt;span class="lnt"> 71
+&lt;/span>&lt;span class="lnt"> 72
+&lt;/span>&lt;span class="lnt"> 73
+&lt;/span>&lt;span class="lnt"> 74
+&lt;/span>&lt;span class="lnt"> 75
+&lt;/span>&lt;span class="lnt"> 76
+&lt;/span>&lt;span class="lnt"> 77
+&lt;/span>&lt;span class="lnt"> 78
+&lt;/span>&lt;span class="lnt"> 79
+&lt;/span>&lt;span class="lnt"> 80
+&lt;/span>&lt;span class="lnt"> 81
+&lt;/span>&lt;span class="lnt"> 82
+&lt;/span>&lt;span class="lnt"> 83
+&lt;/span>&lt;span class="lnt"> 84
+&lt;/span>&lt;span class="lnt"> 85
+&lt;/span>&lt;span class="lnt"> 86
+&lt;/span>&lt;span class="lnt"> 87
+&lt;/span>&lt;span class="lnt"> 88
+&lt;/span>&lt;span class="lnt"> 89
+&lt;/span>&lt;span class="lnt"> 90
+&lt;/span>&lt;span class="lnt"> 91
+&lt;/span>&lt;span class="lnt"> 92
+&lt;/span>&lt;span class="lnt"> 93
+&lt;/span>&lt;span class="lnt"> 94
+&lt;/span>&lt;span class="lnt"> 95
+&lt;/span>&lt;span class="lnt"> 96
+&lt;/span>&lt;span class="lnt"> 97
+&lt;/span>&lt;span class="lnt"> 98
+&lt;/span>&lt;span class="lnt"> 99
+&lt;/span>&lt;span class="lnt">100
+&lt;/span>&lt;span class="lnt">101
+&lt;/span>&lt;span class="lnt">102
+&lt;/span>&lt;span class="lnt">103
+&lt;/span>&lt;span class="lnt">104
+&lt;/span>&lt;span class="lnt">105
+&lt;/span>&lt;span class="lnt">106
+&lt;/span>&lt;span class="lnt">107
+&lt;/span>&lt;span class="lnt">108
+&lt;/span>&lt;span class="lnt">109
+&lt;/span>&lt;span class="lnt">110
+&lt;/span>&lt;span class="lnt">111
+&lt;/span>&lt;span class="lnt">112
+&lt;/span>&lt;span class="lnt">113
+&lt;/span>&lt;span class="lnt">114
+&lt;/span>&lt;span class="lnt">115
+&lt;/span>&lt;span class="lnt">116
+&lt;/span>&lt;span class="lnt">117
+&lt;/span>&lt;span class="lnt">118
+&lt;/span>&lt;span class="lnt">119
+&lt;/span>&lt;span class="lnt">120
+&lt;/span>&lt;span class="lnt">121
+&lt;/span>&lt;span class="lnt">122
+&lt;/span>&lt;span class="lnt">123
+&lt;/span>&lt;span class="lnt">124
+&lt;/span>&lt;span class="lnt">125
+&lt;/span>&lt;span class="lnt">126
+&lt;/span>&lt;span class="lnt">127
+&lt;/span>&lt;span class="lnt">128
+&lt;/span>&lt;span class="lnt">129
+&lt;/span>&lt;span class="lnt">130
+&lt;/span>&lt;span class="lnt">131
+&lt;/span>&lt;span class="lnt">132
+&lt;/span>&lt;span class="lnt">133
+&lt;/span>&lt;span class="lnt">134
+&lt;/span>&lt;span class="lnt">135
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="kr">type&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Plugin&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">UserConfig&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">ResolvedConfig&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;vite&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">example&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">Plugin&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果不指明 apply
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 开发和构建过程中都会调用
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">apply&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;build&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 或 &amp;#39;serve&amp;#39;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">apply&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">config&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">command&lt;/span> &lt;span class="p">})&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 非 SSR 打包时运行
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="nx">command&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;build&amp;#39;&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="o">!&lt;/span>&lt;span class="nx">config&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">build&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">ssr&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">name&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;vite-plugin-example&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// alias
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">enforce&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;pre&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 核心插件
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// 无 enforce 配置的插件
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// 构建用的插件
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">enforce&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;post&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 后置构建插件
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">config&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">config&lt;/span>: &lt;span class="kt">UserConfig&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">env&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">mode&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">command&lt;/span>: &lt;span class="kt">string&lt;/span> &lt;span class="p">})&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 解析 Vite 配置前调用
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 接收一份原始配置和环境描述
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 返回合并后的配置。或者直接改变原始配置
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">config&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">build&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">config&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">build&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="p">{};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">config&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">build&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">rollupOptions&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">config&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">build&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">rollupOptions&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="p">{};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">config&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">build&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">rollupOptions&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">output&lt;/span> &lt;span class="o">=&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">config&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">build&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">rollupOptions&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">output&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="p">{};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">output&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">config&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">build&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">rollupOptions&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">outputConfig&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">Array&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">isArray&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">output&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">?&lt;/span> &lt;span class="nx">output&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">:&lt;/span> &lt;span class="nx">output&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">outputConfig&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">manualChunks&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">outputConfig&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">manualChunks&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="p">{};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">outputConfig&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">assetFileNames&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;assets/[name].[hash:6][extname]&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">outputConfig&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">chunkFileNames&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">chunkInfo&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">chunkInfo&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">startsWith&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;vendor/&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">?&lt;/span> &lt;span class="s1">&amp;#39;[name]-[hash].js&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;assets/[name]-[hash].js&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">manualChunks&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">Array&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">isArray&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">output&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">?&lt;/span> &lt;span class="nx">output&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="nx">manualChunks&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> : &lt;span class="kt">output.manualChunks&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">typeof&lt;/span> &lt;span class="nx">manualChunks&lt;/span> &lt;span class="o">!==&lt;/span> &lt;span class="s1">&amp;#39;object&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">dependencies&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">forEach&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">dep&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">index&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nb">Array&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">isArray&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">dep&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">chunkName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sb">`vendor/&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">index&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">manualChunks&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">chunkName&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">dep&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">manualChunks&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="sb">`vendor/&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">dep&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="nx">dep&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">configResolved&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">config&lt;/span>: &lt;span class="kt">ResolvedConfig&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 解析 Vite 配置后调用
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 用来读取“Vite 最终配置”
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">configureServer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">server&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 用于配置开发服务器 ViteDevServer
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 将在内部中间件被安装前调用
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 在生产环境时不会运行
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">server&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">middlewares&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">use&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">req&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">next&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 自定义中间件，早于内部中间件
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">server&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">ws&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">on&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;message&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">message&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 输出 WebSocket 信息
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">info&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">message&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">server&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">middlewares&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">use&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">req&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">next&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 晚于内部中间件调用
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">configurePreviewServer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">server&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 预览服务器配置，其他同 configResolved
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">transformIndexHtml&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">html&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 用于转换 HTML 的钩子
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 接收当前 HTML 字符串
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 返回经过转换的 HTML
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 用于做代码注入
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">html&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">replace&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;&amp;lt;!-- FOLLOW VITE BUILD INJECT --&amp;gt;&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="sb">`&amp;lt;script id=&amp;#34;env_injection&amp;#34; type=&amp;#34;module&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> &lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="kd">function&lt;/span> &lt;span class="nx">injectEnv&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">env&lt;/span>: &lt;span class="kt">any&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">key&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="nx">env&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">env&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">key&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="kc">undefined&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">continue&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">globalThis&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;__followEnv&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">??=&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb">;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> globalThis[&amp;#39;__followEnv&amp;#39;][key] = env[key];
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> }
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> }.toString()}
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> // 将 .env 文件中的内容暴露到前端 __followEnv 变量中
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> injectEnv(&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">JSON&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">stringify&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">VITE_API_URL&lt;/span>: &lt;span class="kt">env.VITE_API_URL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">VITE_WEB_URL&lt;/span>: &lt;span class="kt">env.VITE_WEB_URL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">VITE_IMGPROXY_URL&lt;/span>: &lt;span class="kt">env.VITE_IMGPROXY_URL&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="si">}&lt;/span>&lt;span class="sb">)})
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> &amp;lt;/script&amp;gt;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">handleHotUpdate&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="nx">file&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">timestamp&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">modules&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">read&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">server&lt;/span> &lt;span class="p">})&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 自定义模块热更新逻辑
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 可以更精确的控制 HMR
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">invalidatedModules&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Set&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">mod&lt;/span> &lt;span class="k">of&lt;/span> &lt;span class="nx">modules&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 手动使模块失效
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">server&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">moduleGraph&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">invalidateModule&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">mod&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">invalidatedModules&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">timestamp&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">server&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">ws&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">send&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="kr">type&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;full-reload&amp;#39;&lt;/span> &lt;span class="p">});&lt;/span> &lt;span class="c1">// 发送全局刷新事件
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="p">[];&lt;/span> &lt;span class="c1">// 如果返回的是 []，表示全局刷新而不是用 HMR
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="服务端到客户端">服务端到客户端&lt;/h3>
+&lt;p>服务端通过 server.ws.send 向客户端发送自定义事件：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 例子来自 Follow，apps/server/client/i18n.ts
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">readFileSync&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;node:fs&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="kr">type&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Plugin&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;vite&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">customI18nHmrPlugin&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">Plugin&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">name&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;custom-i18n-hmr&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">handleHotUpdate&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="nx">file&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">server&lt;/span> &lt;span class="p">})&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">file&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">endsWith&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;.json&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">file&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">includes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;locales&amp;#39;&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 使用 WebSocket 发送一个 i18n-update 事件
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">server&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">ws&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">send&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">type&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;custom&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 可以直接在项目代码中监听 i18n-update 事件
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * import.meta.hot.on(&amp;#39;i18n-update&amp;#39;, () =&amp;gt; {})
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">event&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;i18n-update&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">data&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">content&lt;/span>: &lt;span class="kt">readFileSync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">file&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;utf-8&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">file&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 阻止 Vite 内置的 HMR
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>前端通过 import.meta.hot.on 监听自定义事件：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 会在生产打包时，被 TreeShaking
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kr">import&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">meta&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">hot&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">import&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">meta&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">hot&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">on&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;i18n-update&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">async&lt;/span> &lt;span class="p">({&lt;/span> &lt;span class="nx">file&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">content&lt;/span> &lt;span class="p">}&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">file&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">content&lt;/span>: &lt;span class="kt">string&lt;/span> &lt;span class="p">})&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">resources&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">JSON&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">parse&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">content&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">i18next&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">jotaiStore&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="kr">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">i18nAtom&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">nsName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">file&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sr">/locales\/(.+?)\//&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">?&lt;/span>&lt;span class="p">.[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">nsName&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">lang&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">file&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">split&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;/&amp;#39;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">pop&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">?&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;.json&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">lang&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 更新 i18nAtom
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">i18next&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">addResourceBundle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">lang&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">nsName&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">resources&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">await&lt;/span> &lt;span class="nx">i18next&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">reloadResources&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">lang&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">nsName&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 派发更新事件
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kr">import&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">meta&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">env&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">DEV&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">EventBus&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">dispatch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;I18N_UPDATE&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="客户端到服务端">客户端到服务端&lt;/h3>
+&lt;p>客户端通过 import.meta.hot.send 向服务端发送事件：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 会在生产打包时，被 TreeShaking
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kr">import&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">meta&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">hot&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">import&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">meta&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">hot&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">send&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;my:from-client&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">msg&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;Hey!&amp;#39;&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>服务端通过 server.ws.on 监听客户端事件：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="nx">defineConfig&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">plugins&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">configureServer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">server&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">server&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">ws&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">on&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;my:from-client&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">data&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">client&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Message from client:&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">data&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">msg&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">client&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">send&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;my:ack&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">msg&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;Hi! I got your message!&amp;#39;&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>如果想要自定义事件有 TS 类型提示，可以在 .d.ts 文件中声明类型：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="s1">&amp;#39;vite/types/customEvent.d.ts&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">declare&lt;/span> &lt;span class="nx">module&lt;/span> &lt;span class="s1">&amp;#39;vite/types/customEvent.d.ts&amp;#39;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">interface&lt;/span> &lt;span class="nx">CustomEventMap&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;custom:foo&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">msg&lt;/span>: &lt;span class="kt">string&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// &amp;#39;event-key&amp;#39;: payload
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="配置">配置&lt;/h2>
+&lt;p>Vite 运行时，会查找项目根目录下的 vite.config.js|ts，也可以通过 --config 指定配置文件：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">vite&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="nx">config&lt;/span> &lt;span class="nx">src&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="nx">config&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">js&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="类型提示-1">类型提示&lt;/h3>
+&lt;p>如果配置文件是 .js，可以通过 JSDoc/defineConfig 获取类型提示：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/** @type {import(&amp;#39;vite&amp;#39;).UserConfig} */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 或者借助工具函数
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">defineConfig&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;vite&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="nx">defineConfig&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>或者是 .ts 的配置文件，并使用 satisfies 关键字：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="kr">type&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">UserConfig&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;vite&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">}&lt;/span> &lt;span class="nx">satisfies&lt;/span> &lt;span class="nx">UserConfig&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="情景配置">情景配置&lt;/h3>
+&lt;p>如果要基于不同的命令/模式返回不同的配置，可以使用函数形式：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">defineConfig&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;vite&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 配置可以是异步的
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="p">({&lt;/span> &lt;span class="nx">mode&lt;/span> &lt;span class="p">})&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 根据 mode 加载 .env 文件中所有变量
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">env&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">loadEnv&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">mode&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">process&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">cwd&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;env&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">env&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">mode&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;production&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">defineConfig&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">define&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">__APP_ENV__&lt;/span>: &lt;span class="kt">JSON.stringify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">env&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">APP_ENV&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">defineConfig&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">define&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">__APP_ENV__&lt;/span>: &lt;span class="kt">JSON.stringify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">env&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">APP_ENV&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="配置选项">配置选项&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt"> 10
+&lt;/span>&lt;span class="lnt"> 11
+&lt;/span>&lt;span class="lnt"> 12
+&lt;/span>&lt;span class="lnt"> 13
+&lt;/span>&lt;span class="lnt"> 14
+&lt;/span>&lt;span class="lnt"> 15
+&lt;/span>&lt;span class="lnt"> 16
+&lt;/span>&lt;span class="lnt"> 17
+&lt;/span>&lt;span class="lnt"> 18
+&lt;/span>&lt;span class="lnt"> 19
+&lt;/span>&lt;span class="lnt"> 20
+&lt;/span>&lt;span class="lnt"> 21
+&lt;/span>&lt;span class="lnt"> 22
+&lt;/span>&lt;span class="lnt"> 23
+&lt;/span>&lt;span class="lnt"> 24
+&lt;/span>&lt;span class="lnt"> 25
+&lt;/span>&lt;span class="lnt"> 26
+&lt;/span>&lt;span class="lnt"> 27
+&lt;/span>&lt;span class="lnt"> 28
+&lt;/span>&lt;span class="lnt"> 29
+&lt;/span>&lt;span class="lnt"> 30
+&lt;/span>&lt;span class="lnt"> 31
+&lt;/span>&lt;span class="lnt"> 32
+&lt;/span>&lt;span class="lnt"> 33
+&lt;/span>&lt;span class="lnt"> 34
+&lt;/span>&lt;span class="lnt"> 35
+&lt;/span>&lt;span class="lnt"> 36
+&lt;/span>&lt;span class="lnt"> 37
+&lt;/span>&lt;span class="lnt"> 38
+&lt;/span>&lt;span class="lnt"> 39
+&lt;/span>&lt;span class="lnt"> 40
+&lt;/span>&lt;span class="lnt"> 41
+&lt;/span>&lt;span class="lnt"> 42
+&lt;/span>&lt;span class="lnt"> 43
+&lt;/span>&lt;span class="lnt"> 44
+&lt;/span>&lt;span class="lnt"> 45
+&lt;/span>&lt;span class="lnt"> 46
+&lt;/span>&lt;span class="lnt"> 47
+&lt;/span>&lt;span class="lnt"> 48
+&lt;/span>&lt;span class="lnt"> 49
+&lt;/span>&lt;span class="lnt"> 50
+&lt;/span>&lt;span class="lnt"> 51
+&lt;/span>&lt;span class="lnt"> 52
+&lt;/span>&lt;span class="lnt"> 53
+&lt;/span>&lt;span class="lnt"> 54
+&lt;/span>&lt;span class="lnt"> 55
+&lt;/span>&lt;span class="lnt"> 56
+&lt;/span>&lt;span class="lnt"> 57
+&lt;/span>&lt;span class="lnt"> 58
+&lt;/span>&lt;span class="lnt"> 59
+&lt;/span>&lt;span class="lnt"> 60
+&lt;/span>&lt;span class="lnt"> 61
+&lt;/span>&lt;span class="lnt"> 62
+&lt;/span>&lt;span class="lnt"> 63
+&lt;/span>&lt;span class="lnt"> 64
+&lt;/span>&lt;span class="lnt"> 65
+&lt;/span>&lt;span class="lnt"> 66
+&lt;/span>&lt;span class="lnt"> 67
+&lt;/span>&lt;span class="lnt"> 68
+&lt;/span>&lt;span class="lnt"> 69
+&lt;/span>&lt;span class="lnt"> 70
+&lt;/span>&lt;span class="lnt"> 71
+&lt;/span>&lt;span class="lnt"> 72
+&lt;/span>&lt;span class="lnt"> 73
+&lt;/span>&lt;span class="lnt"> 74
+&lt;/span>&lt;span class="lnt"> 75
+&lt;/span>&lt;span class="lnt"> 76
+&lt;/span>&lt;span class="lnt"> 77
+&lt;/span>&lt;span class="lnt"> 78
+&lt;/span>&lt;span class="lnt"> 79
+&lt;/span>&lt;span class="lnt"> 80
+&lt;/span>&lt;span class="lnt"> 81
+&lt;/span>&lt;span class="lnt"> 82
+&lt;/span>&lt;span class="lnt"> 83
+&lt;/span>&lt;span class="lnt"> 84
+&lt;/span>&lt;span class="lnt"> 85
+&lt;/span>&lt;span class="lnt"> 86
+&lt;/span>&lt;span class="lnt"> 87
+&lt;/span>&lt;span class="lnt"> 88
+&lt;/span>&lt;span class="lnt"> 89
+&lt;/span>&lt;span class="lnt"> 90
+&lt;/span>&lt;span class="lnt"> 91
+&lt;/span>&lt;span class="lnt"> 92
+&lt;/span>&lt;span class="lnt"> 93
+&lt;/span>&lt;span class="lnt"> 94
+&lt;/span>&lt;span class="lnt"> 95
+&lt;/span>&lt;span class="lnt"> 96
+&lt;/span>&lt;span class="lnt"> 97
+&lt;/span>&lt;span class="lnt"> 98
+&lt;/span>&lt;span class="lnt"> 99
+&lt;/span>&lt;span class="lnt">100
+&lt;/span>&lt;span class="lnt">101
+&lt;/span>&lt;span class="lnt">102
+&lt;/span>&lt;span class="lnt">103
+&lt;/span>&lt;span class="lnt">104
+&lt;/span>&lt;span class="lnt">105
+&lt;/span>&lt;span class="lnt">106
+&lt;/span>&lt;span class="lnt">107
+&lt;/span>&lt;span class="lnt">108
+&lt;/span>&lt;span class="lnt">109
+&lt;/span>&lt;span class="lnt">110
+&lt;/span>&lt;span class="lnt">111
+&lt;/span>&lt;span class="lnt">112
+&lt;/span>&lt;span class="lnt">113
+&lt;/span>&lt;span class="lnt">114
+&lt;/span>&lt;span class="lnt">115
+&lt;/span>&lt;span class="lnt">116
+&lt;/span>&lt;span class="lnt">117
+&lt;/span>&lt;span class="lnt">118
+&lt;/span>&lt;span class="lnt">119
+&lt;/span>&lt;span class="lnt">120
+&lt;/span>&lt;span class="lnt">121
+&lt;/span>&lt;span class="lnt">122
+&lt;/span>&lt;span class="lnt">123
+&lt;/span>&lt;span class="lnt">124
+&lt;/span>&lt;span class="lnt">125
+&lt;/span>&lt;span class="lnt">126
+&lt;/span>&lt;span class="lnt">127
+&lt;/span>&lt;span class="lnt">128
+&lt;/span>&lt;span class="lnt">129
+&lt;/span>&lt;span class="lnt">130
+&lt;/span>&lt;span class="lnt">131
+&lt;/span>&lt;span class="lnt">132
+&lt;/span>&lt;span class="lnt">133
+&lt;/span>&lt;span class="lnt">134
+&lt;/span>&lt;span class="lnt">135
+&lt;/span>&lt;span class="lnt">136
+&lt;/span>&lt;span class="lnt">137
+&lt;/span>&lt;span class="lnt">138
+&lt;/span>&lt;span class="lnt">139
+&lt;/span>&lt;span class="lnt">140
+&lt;/span>&lt;span class="lnt">141
+&lt;/span>&lt;span class="lnt">142
+&lt;/span>&lt;span class="lnt">143
+&lt;/span>&lt;span class="lnt">144
+&lt;/span>&lt;span class="lnt">145
+&lt;/span>&lt;span class="lnt">146
+&lt;/span>&lt;span class="lnt">147
+&lt;/span>&lt;span class="lnt">148
+&lt;/span>&lt;span class="lnt">149
+&lt;/span>&lt;span class="lnt">150
+&lt;/span>&lt;span class="lnt">151
+&lt;/span>&lt;span class="lnt">152
+&lt;/span>&lt;span class="lnt">153
+&lt;/span>&lt;span class="lnt">154
+&lt;/span>&lt;span class="lnt">155
+&lt;/span>&lt;span class="lnt">156
+&lt;/span>&lt;span class="lnt">157
+&lt;/span>&lt;span class="lnt">158
+&lt;/span>&lt;span class="lnt">159
+&lt;/span>&lt;span class="lnt">160
+&lt;/span>&lt;span class="lnt">161
+&lt;/span>&lt;span class="lnt">162
+&lt;/span>&lt;span class="lnt">163
+&lt;/span>&lt;span class="lnt">164
+&lt;/span>&lt;span class="lnt">165
+&lt;/span>&lt;span class="lnt">166
+&lt;/span>&lt;span class="lnt">167
+&lt;/span>&lt;span class="lnt">168
+&lt;/span>&lt;span class="lnt">169
+&lt;/span>&lt;span class="lnt">170
+&lt;/span>&lt;span class="lnt">171
+&lt;/span>&lt;span class="lnt">172
+&lt;/span>&lt;span class="lnt">173
+&lt;/span>&lt;span class="lnt">174
+&lt;/span>&lt;span class="lnt">175
+&lt;/span>&lt;span class="lnt">176
+&lt;/span>&lt;span class="lnt">177
+&lt;/span>&lt;span class="lnt">178
+&lt;/span>&lt;span class="lnt">179
+&lt;/span>&lt;span class="lnt">180
+&lt;/span>&lt;span class="lnt">181
+&lt;/span>&lt;span class="lnt">182
+&lt;/span>&lt;span class="lnt">183
+&lt;/span>&lt;span class="lnt">184
+&lt;/span>&lt;span class="lnt">185
+&lt;/span>&lt;span class="lnt">186
+&lt;/span>&lt;span class="lnt">187
+&lt;/span>&lt;span class="lnt">188
+&lt;/span>&lt;span class="lnt">189
+&lt;/span>&lt;span class="lnt">190
+&lt;/span>&lt;span class="lnt">191
+&lt;/span>&lt;span class="lnt">192
+&lt;/span>&lt;span class="lnt">193
+&lt;/span>&lt;span class="lnt">194
+&lt;/span>&lt;span class="lnt">195
+&lt;/span>&lt;span class="lnt">196
+&lt;/span>&lt;span class="lnt">197
+&lt;/span>&lt;span class="lnt">198
+&lt;/span>&lt;span class="lnt">199
+&lt;/span>&lt;span class="lnt">200
+&lt;/span>&lt;span class="lnt">201
+&lt;/span>&lt;span class="lnt">202
+&lt;/span>&lt;span class="lnt">203
+&lt;/span>&lt;span class="lnt">204
+&lt;/span>&lt;span class="lnt">205
+&lt;/span>&lt;span class="lnt">206
+&lt;/span>&lt;span class="lnt">207
+&lt;/span>&lt;span class="lnt">208
+&lt;/span>&lt;span class="lnt">209
+&lt;/span>&lt;span class="lnt">210
+&lt;/span>&lt;span class="lnt">211
+&lt;/span>&lt;span class="lnt">212
+&lt;/span>&lt;span class="lnt">213
+&lt;/span>&lt;span class="lnt">214
+&lt;/span>&lt;span class="lnt">215
+&lt;/span>&lt;span class="lnt">216
+&lt;/span>&lt;span class="lnt">217
+&lt;/span>&lt;span class="lnt">218
+&lt;/span>&lt;span class="lnt">219
+&lt;/span>&lt;span class="lnt">220
+&lt;/span>&lt;span class="lnt">221
+&lt;/span>&lt;span class="lnt">222
+&lt;/span>&lt;span class="lnt">223
+&lt;/span>&lt;span class="lnt">224
+&lt;/span>&lt;span class="lnt">225
+&lt;/span>&lt;span class="lnt">226
+&lt;/span>&lt;span class="lnt">227
+&lt;/span>&lt;span class="lnt">228
+&lt;/span>&lt;span class="lnt">229
+&lt;/span>&lt;span class="lnt">230
+&lt;/span>&lt;span class="lnt">231
+&lt;/span>&lt;span class="lnt">232
+&lt;/span>&lt;span class="lnt">233
+&lt;/span>&lt;span class="lnt">234
+&lt;/span>&lt;span class="lnt">235
+&lt;/span>&lt;span class="lnt">236
+&lt;/span>&lt;span class="lnt">237
+&lt;/span>&lt;span class="lnt">238
+&lt;/span>&lt;span class="lnt">239
+&lt;/span>&lt;span class="lnt">240
+&lt;/span>&lt;span class="lnt">241
+&lt;/span>&lt;span class="lnt">242
+&lt;/span>&lt;span class="lnt">243
+&lt;/span>&lt;span class="lnt">244
+&lt;/span>&lt;span class="lnt">245
+&lt;/span>&lt;span class="lnt">246
+&lt;/span>&lt;span class="lnt">247
+&lt;/span>&lt;span class="lnt">248
+&lt;/span>&lt;span class="lnt">249
+&lt;/span>&lt;span class="lnt">250
+&lt;/span>&lt;span class="lnt">251
+&lt;/span>&lt;span class="lnt">252
+&lt;/span>&lt;span class="lnt">253
+&lt;/span>&lt;span class="lnt">254
+&lt;/span>&lt;span class="lnt">255
+&lt;/span>&lt;span class="lnt">256
+&lt;/span>&lt;span class="lnt">257
+&lt;/span>&lt;span class="lnt">258
+&lt;/span>&lt;span class="lnt">259
+&lt;/span>&lt;span class="lnt">260
+&lt;/span>&lt;span class="lnt">261
+&lt;/span>&lt;span class="lnt">262
+&lt;/span>&lt;span class="lnt">263
+&lt;/span>&lt;span class="lnt">264
+&lt;/span>&lt;span class="lnt">265
+&lt;/span>&lt;span class="lnt">266
+&lt;/span>&lt;span class="lnt">267
+&lt;/span>&lt;span class="lnt">268
+&lt;/span>&lt;span class="lnt">269
+&lt;/span>&lt;span class="lnt">270
+&lt;/span>&lt;span class="lnt">271
+&lt;/span>&lt;span class="lnt">272
+&lt;/span>&lt;span class="lnt">273
+&lt;/span>&lt;span class="lnt">274
+&lt;/span>&lt;span class="lnt">275
+&lt;/span>&lt;span class="lnt">276
+&lt;/span>&lt;span class="lnt">277
+&lt;/span>&lt;span class="lnt">278
+&lt;/span>&lt;span class="lnt">279
+&lt;/span>&lt;span class="lnt">280
+&lt;/span>&lt;span class="lnt">281
+&lt;/span>&lt;span class="lnt">282
+&lt;/span>&lt;span class="lnt">283
+&lt;/span>&lt;span class="lnt">284
+&lt;/span>&lt;span class="lnt">285
+&lt;/span>&lt;span class="lnt">286
+&lt;/span>&lt;span class="lnt">287
+&lt;/span>&lt;span class="lnt">288
+&lt;/span>&lt;span class="lnt">289
+&lt;/span>&lt;span class="lnt">290
+&lt;/span>&lt;span class="lnt">291
+&lt;/span>&lt;span class="lnt">292
+&lt;/span>&lt;span class="lnt">293
+&lt;/span>&lt;span class="lnt">294
+&lt;/span>&lt;span class="lnt">295
+&lt;/span>&lt;span class="lnt">296
+&lt;/span>&lt;span class="lnt">297
+&lt;/span>&lt;span class="lnt">298
+&lt;/span>&lt;span class="lnt">299
+&lt;/span>&lt;span class="lnt">300
+&lt;/span>&lt;span class="lnt">301
+&lt;/span>&lt;span class="lnt">302
+&lt;/span>&lt;span class="lnt">303
+&lt;/span>&lt;span class="lnt">304
+&lt;/span>&lt;span class="lnt">305
+&lt;/span>&lt;span class="lnt">306
+&lt;/span>&lt;span class="lnt">307
+&lt;/span>&lt;span class="lnt">308
+&lt;/span>&lt;span class="lnt">309
+&lt;/span>&lt;span class="lnt">310
+&lt;/span>&lt;span class="lnt">311
+&lt;/span>&lt;span class="lnt">312
+&lt;/span>&lt;span class="lnt">313
+&lt;/span>&lt;span class="lnt">314
+&lt;/span>&lt;span class="lnt">315
+&lt;/span>&lt;span class="lnt">316
+&lt;/span>&lt;span class="lnt">317
+&lt;/span>&lt;span class="lnt">318
+&lt;/span>&lt;span class="lnt">319
+&lt;/span>&lt;span class="lnt">320
+&lt;/span>&lt;span class="lnt">321
+&lt;/span>&lt;span class="lnt">322
+&lt;/span>&lt;span class="lnt">323
+&lt;/span>&lt;span class="lnt">324
+&lt;/span>&lt;span class="lnt">325
+&lt;/span>&lt;span class="lnt">326
+&lt;/span>&lt;span class="lnt">327
+&lt;/span>&lt;span class="lnt">328
+&lt;/span>&lt;span class="lnt">329
+&lt;/span>&lt;span class="lnt">330
+&lt;/span>&lt;span class="lnt">331
+&lt;/span>&lt;span class="lnt">332
+&lt;/span>&lt;span class="lnt">333
+&lt;/span>&lt;span class="lnt">334
+&lt;/span>&lt;span class="lnt">335
+&lt;/span>&lt;span class="lnt">336
+&lt;/span>&lt;span class="lnt">337
+&lt;/span>&lt;span class="lnt">338
+&lt;/span>&lt;span class="lnt">339
+&lt;/span>&lt;span class="lnt">340
+&lt;/span>&lt;span class="lnt">341
+&lt;/span>&lt;span class="lnt">342
+&lt;/span>&lt;span class="lnt">343
+&lt;/span>&lt;span class="lnt">344
+&lt;/span>&lt;span class="lnt">345
+&lt;/span>&lt;span class="lnt">346
+&lt;/span>&lt;span class="lnt">347
+&lt;/span>&lt;span class="lnt">348
+&lt;/span>&lt;span class="lnt">349
+&lt;/span>&lt;span class="lnt">350
+&lt;/span>&lt;span class="lnt">351
+&lt;/span>&lt;span class="lnt">352
+&lt;/span>&lt;span class="lnt">353
+&lt;/span>&lt;span class="lnt">354
+&lt;/span>&lt;span class="lnt">355
+&lt;/span>&lt;span class="lnt">356
+&lt;/span>&lt;span class="lnt">357
+&lt;/span>&lt;span class="lnt">358
+&lt;/span>&lt;span class="lnt">359
+&lt;/span>&lt;span class="lnt">360
+&lt;/span>&lt;span class="lnt">361
+&lt;/span>&lt;span class="lnt">362
+&lt;/span>&lt;span class="lnt">363
+&lt;/span>&lt;span class="lnt">364
+&lt;/span>&lt;span class="lnt">365
+&lt;/span>&lt;span class="lnt">366
+&lt;/span>&lt;span class="lnt">367
+&lt;/span>&lt;span class="lnt">368
+&lt;/span>&lt;span class="lnt">369
+&lt;/span>&lt;span class="lnt">370
+&lt;/span>&lt;span class="lnt">371
+&lt;/span>&lt;span class="lnt">372
+&lt;/span>&lt;span class="lnt">373
+&lt;/span>&lt;span class="lnt">374
+&lt;/span>&lt;span class="lnt">375
+&lt;/span>&lt;span class="lnt">376
+&lt;/span>&lt;span class="lnt">377
+&lt;/span>&lt;span class="lnt">378
+&lt;/span>&lt;span class="lnt">379
+&lt;/span>&lt;span class="lnt">380
+&lt;/span>&lt;span class="lnt">381
+&lt;/span>&lt;span class="lnt">382
+&lt;/span>&lt;span class="lnt">383
+&lt;/span>&lt;span class="lnt">384
+&lt;/span>&lt;span class="lnt">385
+&lt;/span>&lt;span class="lnt">386
+&lt;/span>&lt;span class="lnt">387
+&lt;/span>&lt;span class="lnt">388
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">interface&lt;/span> &lt;span class="nx">UserConfig&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 项目根目录，index.html 所在的目录
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 配置文件需要和 HTML 文件在同一个目录下
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">root?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 基础路径：
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * /foo/，绝对路径
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * ./，相对路径，默认为 /
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * https://bar.com/foo/，URL，开发模式下等同于 /foo/
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">base?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 默认为 public
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 静态资源路径，不会被打包
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 打包之后会被复制到 outDir
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">publicDir?&lt;/span>: &lt;span class="kt">string&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 缓存目录
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 保存着 Vite 的预构建缓存
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 默认为 node_modules/.vite
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">cacheDir?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 默认情况下，mode 为 development|production
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 可以在运行 Vite 时，使用 --mode 指定为其他值
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">mode?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 定义全局变量
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 在开发模式下会被定义在全局
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 在生产打包时，会被静态替换
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * APP_VERSION: JSON.stringify(pkg.version)
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * APP_NAME: JSON.stringify(pkg.name)
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">define?&lt;/span>: &lt;span class="kt">Record&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">string&lt;/span>&lt;span class="err">,&lt;/span> &lt;span class="na">any&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 插件配置
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">plugins?&lt;/span>: &lt;span class="kt">PluginOption&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 定义模块解析配置
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">resolve&lt;/span>&lt;span class="o">?:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * [&amp;#39;browser&amp;#39;, &amp;#39;module&amp;#39;, &amp;#39;jsnext:main&amp;#39;, &amp;#39;jsnext&amp;#39;]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 解析包的入口时，尝试的字段列表
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">mainFields?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 因为现在的第三方包会在 package.json 中导出对应 CJS、ESM、UMD 等规范的不同文件
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 对模块进行解析的过程中，匹配那些“情景导出”
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * [import, module, browser, default]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">conditions?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * [&amp;#39;.mjs&amp;#39;, &amp;#39;.js&amp;#39;, &amp;#39;.mts&amp;#39;, &amp;#39;.ts&amp;#39;, &amp;#39;.jsx&amp;#39;, &amp;#39;.tsx&amp;#39;, &amp;#39;.json&amp;#39;]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 解析模块导入时，匹配哪些扩展名
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">extensions?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * https://github.com/vitejs/vite/issues/5384
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 在 monorepo 中，如果项目有相同的依赖
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 应该将这个依赖配置于此
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 防止解析为多个副本
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">dedupe?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 针对 npm link 模块解析时
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 使用真实文件地址（false）还是符号连接地址（true）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">preserveSymlinks?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 定义文件系统路径别名，只能使用绝对路径
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * &amp;#34;@pkg&amp;#34;: resolve(__dirname, &amp;#34;../../package.json&amp;#34;),
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * &amp;#34;@client&amp;#34;: resolve(__dirname, &amp;#34;./client&amp;#34;)
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">alias?&lt;/span>: &lt;span class="kt">AliasOptions&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 前端是可以通过 meta 标签设置内容安全策略的，可以让只有和页面同域名的静态资源才加载
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * &amp;lt;meta http-equiv=&amp;#34;Content-Security-Policy&amp;#34; content=&amp;#34;default-src &amp;#39;self&amp;#39;&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 阻止页面上所有内联 JavaScript 的执行，可以避免 XSS 攻击
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * ----------------------------------------------------
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * &amp;lt;meta http-equiv=&amp;#34;Content-Security-Policy&amp;#34; content=&amp;#34;default-src &amp;#39;self&amp;#39; &amp;#39;unsafe-inline&amp;#39;&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * unsafe-inline 会允许内联 JavaScript 执行，但是不推荐
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * --------------------------------------------------
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * &amp;lt;meta http-equiv=&amp;#34;Content-Security-Policy&amp;#34; content=&amp;#34;script-src &amp;#39;nonce-NDhkODkxMzYtNGUxZS00N2NjLTk1YTItNWMyOTM4YzdhZGJj&amp;#39;&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * &amp;lt;script nonce=&amp;#34;NDhkODkxMzYtNGUxZS00N2NjLTk1YTItNWMyOTM4YzdhZGJj&amp;#34;&amp;gt;&amp;lt;/script&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * nonce 会允许上边的 JavaScript 代码执行
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * ------------------------------------
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * html.cspNonce 会自动帮我们生成对应的 meta 和 script 标签
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">html&lt;/span>&lt;span class="o">?:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">cspNonce?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// CSS 配置
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">css&lt;/span>&lt;span class="o">?:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// CSS 转换器配置
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">transformer&lt;/span>&lt;span class="o">?:&lt;/span> &lt;span class="s1">&amp;#39;postcss&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;lightningcss&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 控制 CSS modules 行为
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * https://github.com/madyankin/postcss-modules
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果使用了 LightningCSS，参考如下链接
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * https://lightningcss.dev/css-modules.html
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">modules?&lt;/span>: &lt;span class="kt">CSSModulesOptions&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// CSS 预处理器配置
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">preprocessorOptions?&lt;/span>: &lt;span class="kt">Record&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">string&lt;/span>&lt;span class="err">,&lt;/span> &lt;span class="na">any&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 是否在 Worker 线程运行预处理器
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">preprocessorMaxWorkers?&lt;/span>: &lt;span class="kt">number&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">postcss&lt;/span>&lt;span class="o">?:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="kt">string&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">PostCSS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">ProcessOptions&lt;/span> &lt;span class="o">&amp;amp;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">plugins?&lt;/span>: &lt;span class="kt">PostCSS.AcceptedPlugin&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 在开发环境下是否启用 sourcemap
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">devSourcemap?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">lightningcss?&lt;/span>: &lt;span class="kt">LightningCSSOptions&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * json.namedExports 是否支持从 JSON 中按名称导入
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * json.stringify 导入的 JSON 按照字面量处理还是模块处理
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">json?&lt;/span>: &lt;span class="kt">JsonOptions&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// esbuild 配置
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">esbuild?&lt;/span>: &lt;span class="kt">ESBuildOptions&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">assetsInclude?&lt;/span>: &lt;span class="kt">string&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="nb">RegExp&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">string&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="nb">RegExp&lt;/span>&lt;span class="p">)[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 服务器配置
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">server&lt;/span>&lt;span class="o">?:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 禁用或配置 HMR
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">hmr?&lt;/span>: &lt;span class="kt">HmrOptions&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kr">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">ws?&lt;/span>: &lt;span class="kt">false&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 文件预热配置，提前对配置的文件进行转换和缓存
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 用来提高页面加载速度，防止转换｜请求瀑布
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 仅把常用的文件添加至此，防止 Vite 过载
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">warmup&lt;/span>&lt;span class="o">?:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 客户端渲染中，要使用的文件
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">clientFiles&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;./src/components/*.vue&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;./src/utils/big-utils.js&amp;#39;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 服务端渲染中，要使用的文件
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">ssrFiles&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;./src/server/modules/*.js&amp;#39;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 使用 chokidar 监听文件变动，https://github.com/paulmillr/chokidar#api
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * Vite 会监听项目目录，并跳过 .git、node_modules、cacheDir、build.outDir
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果设置为 null，则不监听任何目录
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">watch?&lt;/span>: &lt;span class="kt">WatchOptions&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * https://vite.vuejs.ac.cn/guide/ssr/
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 将 Vite 作为中间件来运行
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 一般用作服务端渲染
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">middlewareMode&lt;/span>&lt;span class="o">?:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="kr">boolean&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">server&lt;/span>: &lt;span class="kt">HttpServer&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// /\@fs/ 配置
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">fs&lt;/span>&lt;span class="o">?:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 不能通过 Vite 访问项目根目录路径以外的文件访问
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">strict?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 哪些文件可以通过 /@fs/ 路径提供服务
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">allow?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 默认值为 [&amp;#39;.env&amp;#39;, &amp;#39;.env.*&amp;#39;, &amp;#39;*.crt&amp;#39;, &amp;#39;*.pem&amp;#39;]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * Vite 将不会为配置的文件提供文件服务
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 防止敏感信息意外泄露
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 优先级高于 allow
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">deny?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">cachedChecks?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">origin?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">preTransformRequests?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">sourcemapIgnoreList&lt;/span>&lt;span class="o">?:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="kc">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="p">((&lt;/span>&lt;span class="nx">sourcePath&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">sourcemapPath&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="kr">boolean&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 开发服务器端口，如果被占用，会尝试下一个端口
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">port?&lt;/span>: &lt;span class="kt">number&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 如果端口被占用，退出进程
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">strictPort?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 监听 IP
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">host?&lt;/span>: &lt;span class="kt">string&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kr">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 启用 TLS + HTTP/2
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">https?&lt;/span>: &lt;span class="kt">HttpsServerOptions&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 是否自动打开浏览器
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">open?&lt;/span>: &lt;span class="kt">boolean&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * export default defineConfig({
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * server: {
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * proxy: {
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * // http://localhost:5173/foo -&amp;gt; http://localhost:4567/foo
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * &amp;#39;/foo&amp;#39;: &amp;#39;http://localhost:4567&amp;#39;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> *
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * // http://localhost:5173/api/bar -&amp;gt; http://jsonplaceholder.typicode.com/bar
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * &amp;#39;/api&amp;#39;: {
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * target: &amp;#39;http://jsonplaceholder.typicode.com&amp;#39;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * changeOrigin: true,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * rewrite: (path) =&amp;gt; path.replace(/^\/api/, &amp;#39;&amp;#39;), // 将多余的 api 去除
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * },
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> *
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * // http://localhost:5173/fallback/ -&amp;gt; http://jsonplaceholder.typicode.com/
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * &amp;#39;^/fallback/.*&amp;#39;: {
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * target: &amp;#39;http://jsonplaceholder.typicode.com&amp;#39;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * changeOrigin: true,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * rewrite: (path) =&amp;gt; path.replace(/^\/fallback/, &amp;#39;&amp;#39;), // 将多余的 fallback 去除
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * },
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> *
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * // 使用 proxy 实例
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * &amp;#39;/api&amp;#39;: {
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * target: &amp;#39;http://jsonplaceholder.typicode.com&amp;#39;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * changeOrigin: true,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * configure: (proxy, options) =&amp;gt; {
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * // proxy 是 &amp;#39;http-proxy&amp;#39; 的实例
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * }
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * },
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> *
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * // ws://localhost:5173/socket.io -&amp;gt; ws://localhost:5174/socket.io
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * &amp;#39;/socket.io&amp;#39;: {
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * target: &amp;#39;ws://localhost:5174&amp;#39;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * rewriteWsOrigin: true,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * ws: true,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * },
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * },
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * },
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * })
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">proxy?&lt;/span>: &lt;span class="kt">Record&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">string&lt;/span>&lt;span class="err">,&lt;/span> &lt;span class="na">string&lt;/span> &lt;span class="err">|&lt;/span> &lt;span class="na">ProxyOptions&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 跨域配置
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">cors?&lt;/span>: &lt;span class="kt">CorsOptions&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kr">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 指定响应头部信息
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">headers?&lt;/span>: &lt;span class="kt">OutgoingHttpHeaders&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">build&lt;/span>&lt;span class="o">?:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 设置打包产物（JS）的浏览器兼容性
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 默认值 modules 仅支持完整实现 ESM 规范的浏览器，[&amp;#39;es2020&amp;#39;, &amp;#39;edge88&amp;#39;, &amp;#39;firefox78&amp;#39;, &amp;#39;chrome87&amp;#39;, &amp;#39;safari14&amp;#39;]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">target&lt;/span>&lt;span class="o">?:&lt;/span> &lt;span class="s1">&amp;#39;modules&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="nx">esbuild_TransformOptions&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;target&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 是否将“模块动态加载 polyfill”注入 HTML
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">polyfillModulePreload?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * https://guybedford.com/es-module-preloading-integrity#modulepreload-polyfill
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 默认情况下，会自动注入一个模块动态加载的 polyfill
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如是是对库进行打包，则置为 false
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">modulePreload?&lt;/span>: &lt;span class="kt">boolean&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="nx">ModulePreloadOptions&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 打包输出目录，默认 dist
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">outDir?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 静态资源目录，默认 assets
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">assetsDir?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 小于此阈值的资源将被编译为 base64，内联进模块内部
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">assetsInlineLimit&lt;/span>&lt;span class="o">?:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="kt">number&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="p">((&lt;/span>&lt;span class="nx">filePath&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">content&lt;/span>: &lt;span class="kt">Buffer&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="kr">boolean&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kc">undefined&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 是否对 CSS 进行代码拆分操作
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果为 false，整个项目的 CSS 将被打包进一个文件
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">cssCodeSplit?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 同 build.target
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 设置打包产物（CSS）的浏览器兼容性
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">cssTarget?&lt;/span>: &lt;span class="kt">esbuild_TransformOptions&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;target&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// CSS 压缩配置
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">cssMinify?&lt;/span>: &lt;span class="kt">boolean&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;esbuild&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;lightningcss&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 是否生成 sourcemap
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * true，创建独立的 sourcemap
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * hidden，同 true，代码注释不再保留
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * inline，生成 sourcemap 并附加到输出文件内
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">sourcemap?&lt;/span>: &lt;span class="kt">boolean&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;inline&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;hidden&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 文件压缩配置
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">minify?&lt;/span>: &lt;span class="kt">boolean&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;terser&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;esbuild&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// https://terser.org/docs/api-reference#minify-options
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">terserOptions?&lt;/span>: &lt;span class="kt">TerserOptions&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// https://rollupjs.org/configuration-options/
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">rollupOptions?&lt;/span>: &lt;span class="kt">RollupOptions&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// @rollup/plugin-commonjs
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">commonjsOptions?&lt;/span>: &lt;span class="kt">RollupCommonJSOptions&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// @rollup/plugin-dynamic-import-vars
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">dynamicImportVarsOptions?&lt;/span>: &lt;span class="kt">RollupDynamicImportVarsOptions&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 是否将打包产物写入磁盘
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">write?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 打包之前，是否清空打包目录
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">emptyOutDir?&lt;/span>: &lt;span class="kt">boolean&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 是否将 publicDir 复制到 outDir
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">copyPublicDir?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 是否生成 manifest 文件，其中包含了没有被 hash 过的资源文件名和 hash 后版本的映射
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 可以为一些服务器框架渲染时提供正确的资源引入链接
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">manifest?&lt;/span>: &lt;span class="kt">boolean&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 库模式，默认为 false
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果使用库模式：
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * entry 是必需的，因为库不能使用 HTML 作为入口
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * name 则是暴露的全局变量，并且在 formats 包含 &amp;#39;umd&amp;#39; 或 &amp;#39;iife&amp;#39; 时是必需的
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * formats 是 [&amp;#39;es&amp;#39;, &amp;#39;umd&amp;#39;]，如果使用了多个配置入口，则是 [&amp;#39;es&amp;#39;, &amp;#39;cjs&amp;#39;]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * fileName 是输出的包文件名，默认 fileName 是 package.json 的 name 选项
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">lib?&lt;/span>: &lt;span class="kt">LibraryOptions&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 生成面向 SSR 的构建
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">ssr?&lt;/span>: &lt;span class="kt">boolean&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 当设置为 true 时，构建也将生成 SSR 的 manifest 文件
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">ssrManifest?&lt;/span>: &lt;span class="kt">boolean&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">ssrEmitAssets?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 启用/禁用 gzip 压缩大小报告
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">reportCompressedSize?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// chunk 大小警告
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">chunkSizeWarningLimit?&lt;/span>: &lt;span class="kt">number&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 启用 rollup 的监听器。对于只在构建阶段或者集成流程使用的插件很常用
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">watch?&lt;/span>: &lt;span class="kt">WatcherOptions&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">preview?&lt;/span>: &lt;span class="kt">PreviewOptions&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 依赖优化，仅在开发环境中使用
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">optimizeDeps&lt;/span>&lt;span class="o">?:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 强制预构建 node_modules 之外的包
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">include&lt;/span>&lt;span class="o">?:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;my-lib/components/**/*.vue&amp;#39;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 在预构建中强制排除的依赖项，CommonJS 依赖应当总是被预构建
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">exclude?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">needsInterop?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// https://esbuild.github.io/api
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">esbuildOptions?&lt;/span>: &lt;span class="kt">Omit&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">esbuild_BuildOptions&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;bundle&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;entryPoints&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;external&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;write&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;watch&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;outdir&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;outfile&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;outbase&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;outExtension&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;metafile&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">extensions?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">disabled?&lt;/span>: &lt;span class="kt">boolean&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;build&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;dev&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 不要主动进行预构建，除非 include 了依赖
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">noDiscovery?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">holdUntilCrawlEnd?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 默认情况下，Vite 会分析 index.html 来检测需要预构建的依赖项
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果指定了 build.rollupOptions.input，就去检测这个配置的文件
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果都不满足要求，使用这个配置来自定义
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">entries?&lt;/span>: &lt;span class="kt">string&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kt">string&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 忽略缓存，强制进行预构建
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">force?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">ssr&lt;/span>&lt;span class="o">?:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">noExternal?&lt;/span>: &lt;span class="kt">string&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="nb">RegExp&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">string&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="nb">RegExp&lt;/span>&lt;span class="p">)[]&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">external?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">[]&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">target?&lt;/span>: &lt;span class="kt">SSRTarget&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">optimizeDeps?&lt;/span>: &lt;span class="kt">SsrDepOptimizationOptions&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">resolve&lt;/span>&lt;span class="o">?:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">conditions?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">externalConditions?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">experimental?&lt;/span>: &lt;span class="kt">ExperimentalOptions&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">legacy?&lt;/span>: &lt;span class="kt">LegacyOptions&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">logLevel&lt;/span>&lt;span class="o">?:&lt;/span> &lt;span class="s1">&amp;#39;error&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;warn&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;info&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;silent&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">customLogger?&lt;/span>: &lt;span class="kt">Logger&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 避免 Vite 清屏而错过在终端中打印某些关键信息
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">clearScreen?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// .env 文件目录，默认为根目录
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">envDir?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * .env 文件中，以 envPrefix 开头的变量，会暴露在 import.meta.env 中
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果设置为 &amp;#39;&amp;#39;，将暴露所有变量；并且 Vite 会报错
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 默认只暴露 VITE_ 开头的环境变量
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">envPrefix?&lt;/span>: &lt;span class="kt">string&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kt">string&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">worker&lt;/span>&lt;span class="o">?:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">format&lt;/span>&lt;span class="o">?:&lt;/span> &lt;span class="s1">&amp;#39;es&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;iife&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">plugins&lt;/span>&lt;span class="o">?:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">PluginOption&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">rollupOptions?&lt;/span>: &lt;span class="kt">Omit&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">RollupOptions&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;plugins&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;input&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;onwarn&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;preserveEntrySignatures&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 应用类型
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">appType&lt;/span>&lt;span class="o">?:&lt;/span> &lt;span class="s1">&amp;#39;spa&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;mpa&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;custom&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="参考">参考&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a class="link"
+href="https://www.zhangxinxu.com/wordpress/2023/08/html-attribute-nonce-translate/"
+target="_blank" rel="noopener"
+>
+查漏补缺，我仍未知道的 HTML nonce 和 popover 属性
+&lt;/a>
+&lt;/li>
+&lt;/ul></description></item></channel></rss>
