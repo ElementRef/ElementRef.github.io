@@ -407,8 +407,8 @@ WebPageTest
 </span></span><span class=line><span class=cl>                  <span class=nx>useBuiltIns</span><span class=o>:</span> <span class=s1>&#39;entry&#39;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>                  <span class=nx>corejs</span><span class=o>:</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>                    <span class=c1>// corejs@3 支持模块化，可以按需引入，不污染全局环境
-</span></span></span><span class=line><span class=cl><span class=c1></span>                    <span class=nx>version</span>: <span class=kt>3</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>                    <span class=nx>proposals</span>: <span class=kt>true</span>
+</span></span></span><span class=line><span class=cl><span class=c1></span>                    <span class=nx>proposals</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nx>version</span>: <span class=kt>3</span>
 </span></span><span class=line><span class=cl>                  <span class=p>}</span>
 </span></span><span class=line><span class=cl>                <span class=p>}</span>
 </span></span><span class=line><span class=cl>              <span class=p>],</span>
@@ -439,7 +439,7 @@ WebPageTest
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>usedExports</span>: <span class=kt>true</span><span class=p>,</span> <span class=c1>// 依赖于 terser 检测语句中的副作用
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=cm>/**
 </span></span></span><span class=line><span class=cl><span class=cm>     * Webpack 打包时，存在一个 runtime，用于模块解析
-</span></span></span><span class=line><span class=cl><span class=cm>     * single 可以为 runtime 创建了一个额外的 chunk
+</span></span></span><span class=line><span class=cl><span class=cm>     * single 可以为 runtime 创建一个额外的 chunk
 </span></span></span><span class=line><span class=cl><span class=cm>     * 防止影响构建产物的 contenthash
 </span></span></span><span class=line><span class=cl><span class=cm>     */</span>
 </span></span><span class=line><span class=cl>    <span class=nx>runtimeChunk</span><span class=o>:</span> <span class=s1>&#39;single&#39;</span><span class=p>,</span>

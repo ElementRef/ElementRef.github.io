@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vite on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/vite/</link><description>Recent content in Vite on 馬腊咯稽</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 29 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/vite/index.xml" rel="self" type="application/rss+xml"/><item><title>Vite 学习笔记 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/vite-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Tue, 29 Oct 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vite-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vite.png" alt="Vite 学习笔记" />&lt;p>Vite 内部有两套实现：&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vite on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/vite/</link><description>Recent content in Vite on 馬腊咯稽</description><description>feedId:80533990418010112+userId:56003584240037888</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 29 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/vite/index.xml" rel="self" type="application/rss+xml"/><item><title>Vite 学习笔记 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/vite-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Tue, 29 Oct 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vite-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vite.png" alt="Vite 学习笔记" />&lt;p>Vite 内部有两套实现：&lt;/p>
 &lt;ul>
 &lt;li>开发环境下，借助 esbuild 和预打包缓存实现快速的 HMR：
 &lt;ul>
@@ -27,7 +27,6 @@ target="_blank" rel="noopener"
 这篇文章
 &lt;/a>
 。&lt;/p>
-&lt;p>不过，哪有那么多超大型的项目呢？Webpack 对超大型项目的处理就更好吗？再说了，超大型项目根本就不会冒着巨大的风险更换脚手架。&lt;/p>
 &lt;h2 id="功能">功能&lt;/h2>
 &lt;h3 id="预构建">预构建&lt;/h3>
 &lt;p>在项目启动时，Vite 通过 esbuild 对 node_modules 下的依赖进行预打包，将 CJS|UMD 规范的包转换为 ESM 规范；然后解析页面引用，将：&lt;/p>
@@ -40,19 +39,6 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>转换为浏览器能解析的代码，发送给浏览器。&lt;/p>
-&lt;p>Webpack 也可以通过 &lt;a class="link"
-href="https://webpack.js.org/plugins/dll-plugin/#dllplugin"
-target="_blank" rel="noopener"
->
-DllPlugin
-&lt;/a>
-和 &lt;a class="link"
-href="https://webpack.js.org/plugins/dll-plugin/#dllreferenceplugin"
-target="_blank" rel="noopener"
->
-DllReferencePlugin
-&lt;/a>
-，手动进行“预构建”，当然初衷是为了模块拆分。&lt;/p>
 &lt;h3 id="热替换">热替换&lt;/h3>
 &lt;p>Vite 提供了一套适用于 ESM 的 &lt;a class="link"
 href="https://cn.vitejs.dev/guide/api-hmr.html"
@@ -285,10 +271,10 @@ vite-plugin-checker
 &lt;h2 id="打包">打包&lt;/h2>
 &lt;p>Vite 默认的打包产物仅支持兼容 ESM 规范的浏览器：&lt;/p>
 &lt;ul>
-&lt;li>Chrome &amp;gt;=87&lt;/li>
-&lt;li>Firefox &amp;gt;=78&lt;/li>
-&lt;li>Safari &amp;gt;=14&lt;/li>
-&lt;li>Edge &amp;gt;=88&lt;/li>
+&lt;li>Chrome &amp;gt;= 87&lt;/li>
+&lt;li>Firefox &amp;gt;= 78&lt;/li>
+&lt;li>Safari &amp;gt;= 14&lt;/li>
+&lt;li>Edge &amp;gt;= 88&lt;/li>
 &lt;/ul>
 &lt;p>可以通过 build.target 指定构建目标，最低为 es2015。如果要兼容更低版本的浏览器，需要使用&lt;a class="link"
 href="https://github.com/vitejs/vite/tree/main/packages/plugin-legacy"
@@ -405,31 +391,31 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;span class="lnt">22
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;name&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;my-lib&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">/**&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*&lt;/span> &lt;span class="err">如果不包含&lt;/span> &lt;span class="s2">&amp;#34;type&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="s2">&amp;#34;module&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*&lt;/span> &lt;span class="n">Vite&lt;/span> &lt;span class="err">会生成不同的文件后缀名以兼容&lt;/span> &lt;span class="ne">Node&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">js&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*&lt;/span> &lt;span class="o">.&lt;/span>&lt;span class="n">js&lt;/span> &lt;span class="err">会变为&lt;/span> &lt;span class="o">.&lt;/span>&lt;span class="n">mjs&lt;/span> &lt;span class="err">而&lt;/span> &lt;span class="o">.&lt;/span>&lt;span class="n">cjs&lt;/span> &lt;span class="err">会变为&lt;/span> &lt;span class="o">.&lt;/span>&lt;span class="n">js&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*/&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;type&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;module&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;files&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;dist&amp;#34;&lt;/span>&lt;span class="p">],&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;main&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;./dist/my-lib.cjs&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;module&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;./dist/my-lib.js&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;exports&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;.&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;import&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;./dist/my-lib.js&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;require&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;./dist/my-lib.cjs&amp;#34;&lt;/span>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;name&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;my-lib&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果不包含 &amp;#34;type&amp;#34;:&amp;#34;module&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * Vite 会生成不同的文件后缀名以兼容 Node.js
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * .js 会变为 .mjs 而 .cjs 会变为 .js
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;type&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;module&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;files&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;dist&amp;#34;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;main&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;./dist/my-lib.cjs&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;module&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;./dist/my-lib.js&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;exports&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;.&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;import&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;./dist/my-lib.js&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;require&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;./dist/my-lib.cjs&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;./secondary&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;import&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;./dist/secondary.js&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;require&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;./dist/secondary.cjs&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;./secondary&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;import&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;./dist/secondary.js&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;require&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;./dist/secondary.cjs&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>注意：在库模式中，所有 import.meta.env._ 都会在构建时被&lt;strong>静态替换&lt;/strong>；但是，process.env._ 则&lt;strong>不会&lt;/strong>。&lt;/p>
+&lt;/div>&lt;p>注意：在库模式中，所有 import.meta.env._ 都会在构建时被&lt;strong>静态替换&lt;/strong>；但是，process.env._ &lt;strong>不会&lt;/strong>。&lt;/p>
 &lt;h2 id="环境变量">环境变量&lt;/h2>
 &lt;p>Vite 在 import.meta.env 上暴露了一些环境变量，会在编译时被静态替换掉：&lt;/p>
 &lt;ul>
@@ -1890,7 +1876,7 @@ vite-plugin-inspect
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">reportCompressedSize?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// chunk 大小警告
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">chunkSizeWarningLimit?&lt;/span>: &lt;span class="kt">number&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 启用 rollup 的监听器。对于只在构建阶段或者集成流程使用的插件很常用
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 启用 Rollup 的监听器。对于只在构建阶段或者集成流程使用的插件很常用
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">watch?&lt;/span>: &lt;span class="kt">WatcherOptions&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">preview?&lt;/span>: &lt;span class="kt">PreviewOptions&lt;/span>&lt;span class="p">;&lt;/span>
