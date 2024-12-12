@@ -473,7 +473,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h3 id="渲染自定义表单">渲染自定义表单&lt;/h3>
-&lt;p>最后，还有一种常见的情况；如果 ProSearch 内置的表单都不能满足需求时，ProSearch 应该有渲染一段 templateRef 的能力；我们将通过 renderSelfSearch 提供这种能力：&lt;/p>
+&lt;p>最后，还有一种常见的情况；如果 ProSearch 内置的表单都不能满足需求时，ProSearch 应该有渲染一段 TemplateRef 的能力；我们将通过 renderSelfSearch 提供这种能力：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -514,7 +514,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">ng-container&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>外部代码段通过 templateRef 提供，为了保证外部代码能和 validateForm 产生关联，需要将 validateForm 暴露出去；为了能够渲染到正确的位置，需要将 item.renderSearchType 暴露出去；使用时，直接在插槽中做判断即可：&lt;/p>
+&lt;/div>&lt;p>外部代码段通过 TemplateRef 提供，为了保证外部代码能和 validateForm 产生关联，需要将 validateForm 暴露出去；为了能够渲染到正确的位置，需要将 item.renderSearchType 暴露出去；使用时，直接在插槽中做判断即可：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -830,7 +830,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">ng-template&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>thead 的情况很简单，我们只需要渲染 title 就可以了；如果不能满足要求，可以通过 templateRef 来自定义渲染内容：&lt;/p>
+&lt;/div>&lt;p>thead 的情况很简单，我们只需要渲染 title 就可以了；如果不能满足要求，可以通过 TemplateRef 来自定义渲染内容：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -879,7 +879,7 @@
 &lt;/div>
 &lt;/div>&lt;p>这里需要拿 type 做一层判断，判断渲染到 thead 还是 tbody。&lt;/p>
 &lt;h3 id="封装-tbody">封装 tbody&lt;/h3>
-&lt;p>和 thead 类似，tbody 同样要循环 columns，并在 templateRef 中渲染自定义内容：&lt;/p>
+&lt;p>和 thead 类似，tbody 同样要循环 columns，并在 TemplateRef 中渲染自定义内容：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1

@@ -430,7 +430,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">raw&lt;/span>: &lt;span class="kt">RawLocation&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">current?&lt;/span>: &lt;span class="kt">Route&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">redirectedFrom?&lt;/span>: &lt;span class="kt">Location&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">Route&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">matcher&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">raw&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">current&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">redirectedFrom&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">get&lt;/span> &lt;span class="nx">currentRoute&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="o">?&lt;/span>&lt;span class="nx">Route&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">get&lt;/span> &lt;span class="nx">currentRoute() {&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">history&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">history&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">current&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 每个组件的 beforeCreate 会调用 init 方法，将当前实例传进来
@@ -15236,7 +15236,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">navigation-link&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>作用域插槽就是给普通插槽添加了传递参数的能力；作用域插槽会被编译为一个返回 VNode 的函数，通过函数调用，可以将子组件的变量传递到父组件；很像 React 的 RenderProps 模式：&lt;/p>
+&lt;/div>&lt;p>作用域插槽就是给普通插槽添加了传递参数的能力；作用域插槽会被编译为一个返回 VNode 的函数，通过函数调用，可以将子组件的变量传递到父组件；很像 React 的 renderProps 模式：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -16716,7 +16716,7 @@ Renderless Components In Vue.js
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>在 VirtualDOM 的 patch 算法中，如果一个 VNode 的 ref 和渲染上下文中的 ref 对应，那么 VNode 对应的元素或组件实例会赋值给这个 ref；这发生在 VDOM 挂载/更新的过程中，所以 templateRefs 只会在渲染时被赋值。&lt;/p>
+&lt;/div>&lt;p>在 VirtualDOM 的 patch 算法中，如果一个 VNode 的 ref 和渲染上下文中的 ref 对应，那么 VNode 对应的元素或组件实例会赋值给这个 ref；这发生在 VDOM 挂载/更新的过程中，所以 TemplateRefs 只会在渲染时被赋值。&lt;/p>
 &lt;p>和 JSX/渲染函数 一起使用：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
