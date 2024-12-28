@@ -1069,8 +1069,272 @@ data-flex-basis="576px"
 loading="lazy"
 >
 &lt;/p>
+&lt;h2 id="docker-网络">Docker 网络&lt;/h2>
+&lt;p>狂神视频中使用的是阿里云 Linux 做演示的，我的电脑是跑的是 macOS，使用 ip addr 命令时，没有 docker0 网卡。这和 macOS&amp;rsquo;s Docker 实现方式有关，macOS&amp;rsquo;s Docker 跑在一个轻量化的 &lt;a class="link"
+href="https://github.com/linuxkit/linuxkit"
+target="_blank" rel="noopener"
+>
+LinuxKit
+&lt;/a>
+虚拟机上，在 Linux 上不需要这层虚拟机；所以，在 macOS 中看不到 docker0 网卡。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 拉取 Tomcat 7.0 镜像，最新版的镜像不包含 ip addr&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker pull tomcat:7.0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 运行一个 tomcat01 容器，端口随机&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --detach --publish-all --name tomcat01 tomcat:7.0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看 tomcat01 内的网络信息&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat01 ip addr
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 运行一个 MySQL 端口随机&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat01.png"
+width="1700"
+height="1574"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat01_hu10262943524525080989.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat01_hu14807094654166247678.png 1024w"
+class="gallery-image"
+data-flex-grow="108"
+data-flex-basis="259px"
+loading="lazy"
+>
+&lt;/p>
+&lt;p>我们再启动后一个容器 tomcat02 来 ping 容器 tomcat01：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 运行一个 tomcat02 容器，**端口随机**&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --detach --publish-all --name tomcat02 tomcat:7.0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 使用 tomcat02 来 ping 容器 tomcat01 的 IP&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat02 ping 192.168.215.2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看 tomcat02 内的网络信息&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat02 ip addr
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 使用 tomcat01 来 ping 容器 tomcat02 的 IP&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat01 ping 192.168.215.3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat02.png"
+width="1700"
+height="1340"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat02_hu5038677167207258342.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat02_hu11934341217026182688.png 1024w"
+class="gallery-image"
+data-flex-grow="126"
+data-flex-basis="304px"
+loading="lazy"
+>
+&lt;/p>
+&lt;p>在 Linux 环境下，容器是如何访问网络的？&lt;/p>
+&lt;ul>
+&lt;li>宿主创建一个 docker0 网卡，随机分配一个本地未占用的私有网段；例如，172.17.0.1/16；&lt;/li>
+&lt;li>Docker 容器会增加一个 eth0 的网卡，随机（不指定的情况下）分配同一网段；例如，172.17.0.0/16 中的一个 IP；&lt;/li>
+&lt;li>当 Docker 创建一个容器时，同时会创建了一对 veth-pair 接口（当数据包发送到一个接口时，另外一个接口也可以收到相同的数据包）；这对 veth-pair 接口一端在容器内，即 eth0；另一端在本地并&lt;strong>被挂载到 docker0 网桥&lt;/strong>。通过这种方式，&lt;strong>主机可以跟容器通信，容器之间也可以相互通信&lt;/strong>。Docker 就创建了在主机和所有容器之间一个虚拟共享网络；&lt;/li>
+&lt;li>Docker 中，所有的网络接口都是虚拟的，虚拟接口效率较高。&lt;/li>
+&lt;/ul>
+&lt;h3 id="容器互联之---link">容器互联之 &amp;ndash;link&lt;/h3>
+&lt;p>在之前，我们都是通过 IP 直接去 ping 另一个容器的；这很不方便，我们能否通过容器名称来 ping 呢？可以通过 &amp;ndash;link 来连接容器：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 启动 tomcat03 容器，并通过 --link 连接 tomcat01 和 tomcat02&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --detach --publish-all --name tomcat03 --link tomcat01 --link tomcat02 tomcat:7.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.link.png"
+width="1700"
+height="2744"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.link_hu8965723300105529358.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.link_hu15781171311744801705.png 1024w"
+class="gallery-image"
+data-flex-grow="61"
+data-flex-basis="148px"
+loading="lazy"
+>
+&lt;/p>
+&lt;p>我们再来看一下三个容器的 host 文件：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat03 cat /etc/hosts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat01 cat /etc/hosts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat02 cat /etc/hosts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.host.png"
+width="1700"
+height="1054"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.host_hu11063126565670194133.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.host_hu7867335970020973769.png 1024w"
+class="gallery-image"
+data-flex-grow="161"
+data-flex-basis="387px"
+loading="lazy"
+>
+&lt;/p>
+&lt;p>&amp;ndash;link 是通过修改容器内的 host 配置实现的，已经不建议使用了。&lt;/p>
+&lt;h3 id="容器互联之自定义网络">容器互联之“自定义网络”&lt;/h3>
+&lt;p>查看所有的 Docker 网络：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker network ls
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mode.png"
+width="1700"
+height="1054"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mode_hu9471330051988932938.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mode_hu7266496137896123455.png 1024w"
+class="gallery-image"
+data-flex-grow="161"
+data-flex-basis="387px"
+loading="lazy"
+>
+&lt;/p>
+&lt;p>我们创建一个网络并启动一个容器：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 使用 network 创建一个名为 mynet 网络&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># --driver bridge 表示桥接模式&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># --subnet 192.168.0.0/16 表示子网配置&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># --gateway 192.168.0.8 表示网关配置&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 如果遇到了报错，可以使用 docker network prune 命令&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker network create --driver bridge --subnet 192.168.0.0/24 --gateway 192.168.0.8 mynet
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看一下网络列表&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker network ls
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看一下 mynet 细节&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker network inspect mynet
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># docker run --detach --publish-all --name tomcat01 tomcat:7.0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 如果不配置 --net 选项，默认就是 --net bridge，只是之前我们都没写罢了&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --detach --publish-all --name tomcat-mynet-01 --net mynet tomcat:7.0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --detach --publish-all --name tomcat-mynet-02 --net mynet tomcat:7.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet.png"
+width="1700"
+height="1574"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet_hu11298617083618406267.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet_hu10894847791458996773.png 1024w"
+class="gallery-image"
+data-flex-grow="108"
+data-flex-basis="259px"
+loading="lazy"
+>
+&lt;/p>
+&lt;p>此时，我们就可以直接通过容器名称来建立连接：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat-mynet-01 ping tomcat-mynet-02
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat-mynet-02 ping tomcat-mynet-01
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet.ping.png"
+width="1700"
+height="742"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet.ping_hu2976743111714246755.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet.ping_hu14943416844372236695.png 1024w"
+class="gallery-image"
+data-flex-grow="229"
+data-flex-basis="549px"
+loading="lazy"
+>
+&lt;/p>
+&lt;h3 id="容器互联之网络联通">容器互联之“网络联通”&lt;/h3>
+&lt;p>如何让 docker0 下的容器和 mynet 下的容器联通呢？例如 tomcat01 ping tomcat-mynet-01；首先，不能直接打通 docker0 和 mynet，因为他们不属于一个网段，只能尝试将容器同时接入 docker0 和 mynet：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 我们看一下 network 命令的帮助信息&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker network --help
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 他有一个 connect 命令，来将容器接入到一个网络中&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker network connect --help
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.help.png"
+width="1700"
+height="1080"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.help_hu2032243246659791679.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.help_hu11794285603407735765.png 1024w"
+class="gallery-image"
+data-flex-grow="157"
+data-flex-basis="377px"
+loading="lazy"
+>
+&lt;/p>
+&lt;p>我们尝试将 tomcat01 连入 mynet 网络：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># tomcat01 加入了 mynet&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker network connect mynet tomcat01
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 相互 ping 一下&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat-mynet-02 ping tomcat01
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat01 ping tomcat-mynet-01
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.tomcat01.png"
+width="1700"
+height="2146"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.tomcat01_hu597914568250479848.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.tomcat01_hu166383030928141788.png 1024w"
+class="gallery-image"
+data-flex-grow="79"
+data-flex-basis="190px"
+loading="lazy"
+>
+&lt;/p>
 &lt;!--
-## Docker 网络
 ## Docker 整合
 ## Docker Compose
 ## Docker Swarm
@@ -1082,7 +1346,28 @@ loading="lazy"
 href="https://www.bilibili.com/video/BV1og4y1q7M4"
 target="_blank" rel="noopener"
 >
-【狂神说 Java】Docker 最新超详细版教程通俗易懂
+狂神说 Java - Docker 最新超详细版教程通俗易懂
+&lt;/a>
+&lt;/li>
+&lt;li>&lt;a class="link"
+href="https://yuanmomo.net/2019/06/13/docker-network"
+target="_blank" rel="noopener"
+>
+Docker 的 (Linux/Mac OS) 网络配置问题
+&lt;/a>
+&lt;/li>
+&lt;li>&lt;a class="link"
+href="https://www.haoyizebo.com/posts/fd0b9bd8"
+target="_blank" rel="noopener"
+>
+Docker for Mac 的网络问题及解决办法
+&lt;/a>
+&lt;/li>
+&lt;li>&lt;a class="link"
+href="https://morningspace.github.io/tech/k8s-net-docker0"
+target="_blank" rel="noopener"
+>
+Kubernetes 网络篇 - 从 docker0 开始
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
