@@ -164,9 +164,11 @@ loading="lazy"
 &lt;/span>&lt;span class="lnt">5
 &lt;/span>&lt;span class="lnt">6
 &lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker rmi --help
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看镜像删除帮助信息&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker rmi --help
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 删除指定镜像&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker rmi --force a86cd5b7fd4c
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 删除多个镜像&lt;/span>
@@ -683,7 +685,7 @@ loading="lazy"
 &lt;/p>
 &lt;p>&amp;ndash;volumes-from dataVolume 的意思是，将 dataVolume 的目录挂载到当前容器。即使数据卷容器 dataVolume 被删除，数据也不会被销毁，除非数据不再被任何容器所使用。或者说，dataVolume 的存在与否不影响 dataVolume 的挂载状态，当 dataVolume 没有被任何容器挂载时，数据状态才被释放。&lt;/p>
 &lt;h2 id="dockerfile">Dockerfile&lt;/h2>
-&lt;p>Dockerfile 是用来构建 docker 镜像的脚本文件；镜像是一层一层的，所以文件中的每条命令都是一层镜像：&lt;/p>
+&lt;p>Dockerfile 是用来构建 Docker 镜像的脚本文件；镜像是一层一层的，所以文件中的每条命令都是一层镜像：&lt;/p>
 &lt;ul>
 &lt;li>每行只支持一条指令，指令可以带多个参数；&lt;/li>
 &lt;li>每个&lt;strong>保留关键字/指令&lt;/strong>最好使用大写；&lt;/li>
@@ -922,7 +924,7 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">CMD&lt;/span> /bin/bash&lt;span class="err">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>通过 docker build 进行构建：&lt;/p>
+&lt;/div>&lt;p>通过 build 进行构建：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -945,7 +947,7 @@ data-flex-basis="194px"
 loading="lazy"
 >
 &lt;/p>
-&lt;p>通过 docker history 查看构建历史：&lt;/p>
+&lt;p>通过 history 查看构建历史：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -1036,7 +1038,7 @@ loading="lazy"
 >
 &lt;/p>
 &lt;h3 id="发布镜像">发布镜像&lt;/h3>
-&lt;p>使用 docker login 命令登录：&lt;/p>
+&lt;p>使用 login 命令登录：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -1070,6 +1072,8 @@ loading="lazy"
 >
 &lt;/p>
 &lt;h2 id="docker-网络">Docker 网络&lt;/h2>
+&lt;p>网络名字空间 NetworkNamespace 是 Linux 内核提供的一项非常重要的功能，它是网络虚拟化技术的基础，也是 Kubernetes 和以 Docker 为代表的容器技术在实现它们各自的网络时所依赖的基础。当运行多个 Docker 容器的时候，Docker 会在每个容器内部创建相应的 NetworkNamespace，从而实现不同容器之间的网络隔离。&lt;/p>
+&lt;p>光有隔离还不行，因为容器还要和外界进行网络联通，所以除了 NetworkNamespace 以外，另一个重要的概念是网桥 NetworkBridge。它是由 Linux 内核提供的一种链路层设备，用于在不同网段之间转发数据包。Docker 就是利用网桥来实现容器和外界之间的通信的。默认情况下，Docker 服务会在它所在的机器上创建一个名为 docker0 的网桥。&lt;/p>
 &lt;p>狂神视频中使用的是阿里云 Linux 做演示的，我的电脑是跑的是 macOS，使用 ip addr 命令时，没有 docker0 网卡。这和 macOS&amp;rsquo;s Docker 实现方式有关，macOS&amp;rsquo;s Docker 跑在一个轻量化的 &lt;a class="link"
 href="https://github.com/linuxkit/linuxkit"
 target="_blank" rel="noopener"
@@ -1144,11 +1148,11 @@ loading="lazy"
 &lt;ul>
 &lt;li>宿主创建一个 docker0 网卡，随机分配一个本地未占用的私有网段；例如，172.17.0.1/16；&lt;/li>
 &lt;li>Docker 容器会增加一个 eth0 的网卡，随机（不指定的情况下）分配同一网段；例如，172.17.0.0/16 中的一个 IP；&lt;/li>
-&lt;li>当 Docker 创建一个容器时，同时会创建了一对 veth-pair 接口（当数据包发送到一个接口时，另外一个接口也可以收到相同的数据包）；这对 veth-pair 接口一端在容器内，即 eth0；另一端在本地并&lt;strong>被挂载到 docker0 网桥&lt;/strong>。通过这种方式，&lt;strong>主机可以跟容器通信，容器之间也可以相互通信&lt;/strong>。Docker 就创建了在主机和所有容器之间一个虚拟共享网络；&lt;/li>
-&lt;li>Docker 中，所有的网络接口都是虚拟的，虚拟接口效率较高。&lt;/li>
+&lt;li>Docker 容器在启动时，如果没有显式指定加入任何网络，就会默认加入到名为 bridge 的网络。而这个 bridge 网络就是基于 docker0 实现的；&lt;/li>
+&lt;li>当 Docker 创建一个容器时，同时会创建了一对 veth-pair 接口（当数据包发送到一个接口时，另外一个接口也可以收到相同的数据包）；这对 veth-pair 接口一端在容器内，即 eth0；另一端在本地并&lt;strong>被挂载到 docker0 网桥&lt;/strong>。通过这种方式，&lt;strong>主机可以跟容器通信，容器之间也可以相互通信&lt;/strong>。Docker 就创建了在主机和所有容器之间一个虚拟共享网络。&lt;/li>
 &lt;/ul>
-&lt;h3 id="容器互联之---link">容器互联之 &amp;ndash;link&lt;/h3>
-&lt;p>在之前，我们都是通过 IP 直接去 ping 另一个容器的；这很不方便，我们能否通过容器名称来 ping 呢？可以通过 &amp;ndash;link 来连接容器：&lt;/p>
+&lt;h3 id="容器互联之--link">容器互联之&amp;quot;--link&amp;quot;&lt;/h3>
+&lt;p>在之前，我们都是通过 IP 直接去 ping 另一个容器的；这很不方便，我们能否通过容器名称来 ping 呢？可以通过 --link 来连接容器：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -1192,7 +1196,7 @@ data-flex-basis="387px"
 loading="lazy"
 >
 &lt;/p>
-&lt;p>&amp;ndash;link 是通过修改容器内的 host 配置实现的，已经不建议使用了。&lt;/p>
+&lt;p>--link 是通过修改容器内的 host 配置实现的，已经不建议使用了。&lt;/p>
 &lt;h3 id="容器互联之自定义网络">容器互联之“自定义网络”&lt;/h3>
 &lt;p>查看所有的 Docker 网络：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
