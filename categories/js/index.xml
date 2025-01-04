@@ -48,7 +48,7 @@ WebPageTest
 &lt;h3 id="lcp">LCP&lt;/h3>
 &lt;p>LCP 主要受到这四个部分的影响：&lt;/p>
 &lt;ul>
-&lt;li>加载第一个字节所需时间（TTFB），从发起网页加载到浏览器收到 HTML 文档响应的&lt;strong>第一个个字节&lt;/strong>的时间：
+&lt;li>加载第一个字节所需时间（TTFB），从发起网页加载到浏览器收到 HTML 文档响应的&lt;strong>第一个字节&lt;/strong>的时间：
 &lt;ul>
 &lt;li>加载的过程中，避免发生重定向；&lt;/li>
 &lt;li>将网站托管到服务提供商上；&lt;/li>
@@ -549,8 +549,8 @@ WebPageTest
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;@babel/preset-env&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * entry，需主动引入 polyfill，babel 根据 targets 对不兼容的 API 做 polyfill
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * false，@babel/preset-env 不会引入 polyfill，需要在项目中主动引入
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * entry，需主动引入，babel 根据 targets 对不兼容的 API 做 polyfill
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * usage，无需引入 polyfill，babel 根据 targets 按需引入 polyfill
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">useBuiltIns&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;entry&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
@@ -623,14 +623,14 @@ WebPageTest
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">output&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">asyncChunks&lt;/span>: &lt;span class="kt">true&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 创建按需加载的异步 chunk
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">clean&lt;/span>: &lt;span class="kt">true&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 在生成文件之前清空 output 目录
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * Webpack 中的 chunk 分为两种：
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * initial chunk 入口指定的模块及其依赖模块
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * non-initial chunk 异步加载的模块
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">path&lt;/span>: &lt;span class="kt">path.resolve&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">__dirname&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;dist&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="c1">// output 目录，绝对路径
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">asyncChunks&lt;/span>: &lt;span class="kt">true&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 创建按需加载的异步 chunk
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">clean&lt;/span>: &lt;span class="kt">true&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 在生成文件之前清空 output 目录
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">path&lt;/span>: &lt;span class="kt">path.resolve&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">__dirname&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;dist&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="c1">// output 目录，绝对路径
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="cm">/**
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 使用 contenthash，即使文件内容没有修改，构建之后，名称还是发生了改变
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 这是因为 chunk 中还包含了一些引导模版（runtime、manifest）

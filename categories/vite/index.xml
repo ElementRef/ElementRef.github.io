@@ -8,10 +8,10 @@
 &lt;li>不管兼容性问题，无需代码降级转换。&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>生产环境下，借助 Rollup 打包，输出优化后的静态文件：
+&lt;li>生产环境下，借助 Rollup 打包，输出优化后的文件：
 &lt;ul>
 &lt;li>需要 tree-shaking、懒加载、代码分割、缓存配置来实现更好的访问速度；&lt;/li>
-&lt;li>不是所有的网络环境都升级到了 HTTP/2|3，ESM 可能会产生大量请求；&lt;/li>
+&lt;li>不是所有的环境都升级到了 HTTP/2|3，不优化可能会产生大量请求；&lt;/li>
 &lt;li>可以借助插件对更多资源（CSS|SVG|IMAGE）做针对性处理；&lt;/li>
 &lt;li>需要解决产物的兼容性问题，例如客户端较低版本的浏览器。&lt;/li>
 &lt;/ul>
@@ -29,7 +29,7 @@ target="_blank" rel="noopener"
 。&lt;/p>
 &lt;h2 id="功能">功能&lt;/h2>
 &lt;h3 id="预构建">预构建&lt;/h3>
-&lt;p>在项目启动时，Vite 通过 esbuild 对 node_modules 下的依赖进行预打包，将 CJS|UMD 规范的包转换为 ESM 规范；然后解析页面引用，将：&lt;/p>
+&lt;p>在项目第一次启动时，Vite 通过 esbuild 对 node_modules 下的依赖进行预打包，将 CJS|UMD 规范的包转换为 ESM 规范；然后解析页面引用，将：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
