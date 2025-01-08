@@ -211,6 +211,7 @@ loading="lazy"
 &lt;/span>&lt;span class="lnt">19
 &lt;/span>&lt;span class="lnt">20
 &lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 创建容器并启动&lt;/span>
@@ -225,7 +226,8 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --name --detach --interactive --publish --publish-all
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 以交互方式运行 centos 镜像，并调用 centos 下的 bash&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --interactive centos /bin/bash
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 后台启动容器；如果一个容器以「后台运行」的方式被启动，当容器没有对应的「前台进程」时，会被 docker 自动停止&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 后台启动容器；如果一个容器以「后台运行」的方式被启动&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 当容器没有对应的「前台进程」时，会被 Docker 自动停止&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --detach centos
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 后台启动容器 nginx-exp 并将容器的 80 端口映射到宿主环境的 2323 端口&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 宿主机通过 localhost:2323 就能访问到容器内部运行的 nginx 服务&lt;/span>
@@ -706,7 +708,7 @@ loading="lazy"
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 文件名称建议使用 Dockerfile&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="c"># 指令都是大写的，每条指令都是镜像中的一层&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="c"># 每条指令都是镜像中的一层&lt;/span>&lt;span class="err">
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">FROM&lt;/span>&lt;span class="s"> centos&lt;/span>&lt;span class="err">
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">VOLUME&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;volume01&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;volume02&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="err">
@@ -929,12 +931,10 @@ loading="lazy"
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
 &lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 通过 Dockerfile 构建镜像 centos/example&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker build --file /Users/spicicomic/Desktop/docker_volume/Dockerfile --tag centos/example:1.0 .
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 测试 centos/example 镜像&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.dockerfile.png"
@@ -1072,7 +1072,7 @@ loading="lazy"
 >
 &lt;/p>
 &lt;h2 id="docker-网络">Docker 网络&lt;/h2>
-&lt;p>网络名字空间 NetworkNamespace 是 Linux 内核提供的一项非常重要的功能，它是网络虚拟化技术的基础，也是 Kubernetes 和以 Docker 为代表的容器技术在实现它们各自的网络时所依赖的基础。当运行多个 Docker 容器的时候，Docker 会在每个容器内部创建相应的 NetworkNamespace，从而实现不同容器之间的网络隔离。&lt;/p>
+&lt;p>网络命名空间 NetworkNamespace 是 Linux 内核提供的一项非常重要的功能，它是网络虚拟化技术的基础，也是 Kubernetes 和以 Docker 为代表的容器技术在实现它们各自的网络时所依赖的基础。当运行多个 Docker 容器的时候，Docker 会在每个容器内部创建相应的 NetworkNamespace，从而实现不同容器之间的网络隔离。&lt;/p>
 &lt;p>光有隔离还不行，因为容器还要和外界进行网络联通，所以除了 NetworkNamespace 以外，另一个重要的概念是网桥 NetworkBridge。它是由 Linux 内核提供的一种链路层设备，用于在不同网段之间转发数据包。Docker 就是利用网桥来实现容器和外界之间的通信的。默认情况下，Docker 服务会在它所在的机器上创建一个名为 docker0 的网桥。&lt;/p>
 &lt;p>狂神视频中使用的是阿里云 Linux 做演示的，我的电脑是跑的是 macOS，使用 &lt;a class="link"
 href="https://formulae.brew.sh/formula/iproute2mac"
@@ -1153,7 +1153,7 @@ loading="lazy"
 &lt;li>宿主创建一个 docker0 网卡，随机分配一个本地未占用的私有网段；例如，172.17.0.1/16；&lt;/li>
 &lt;li>Docker 容器会增加一个 eth0 的网卡，随机（不指定的情况下）分配同一网段；例如，172.17.0.0/16 中的一个 IP；&lt;/li>
 &lt;li>Docker 容器在启动时，如果没有显式指定加入任何网络，就会默认加入到名为 bridge 的网络。而这个 bridge 网络就是基于 docker0 实现的；&lt;/li>
-&lt;li>当 Docker 创建一个容器时，同时会创建了一对 veth-pair 接口（当数据包发送到一个接口时，另外一个接口也可以收到相同的数据包）；这对 veth-pair 接口一端在容器内，即 eth0；另一端在本地并&lt;strong>被挂载到 docker0 网桥&lt;/strong>。通过这种方式，&lt;strong>主机可以跟容器通信，容器之间也可以相互通信&lt;/strong>。Docker 就创建了在主机和所有容器之间一个虚拟共享网络。&lt;/li>
+&lt;li>当 Docker 创建一个容器时，同时会创建了一对 veth-pair 接口（当数据包发送到一个接口时，另外一个接口也可以收到相同的数据包）；这对 veth-pair 接口一端在容器内，即 eth0；另一端在本地并&lt;strong>被挂载到 docker0 网桥&lt;/strong>。通过这种方式，Docker 就创建了在主机和所有容器之间一个虚拟共享网络；&lt;strong>主机可以跟容器通信，容器之间也可以相互通信&lt;/strong>。&lt;/li>
 &lt;/ul>
 &lt;h3 id="容器互联之--link">容器互联之&amp;quot;--link&amp;quot;&lt;/h3>
 &lt;p>在之前，我们都是通过 IP 直接去 ping 另一个容器的；这很不方便，我们能否通过容器名称来 ping 呢？可以通过 --link 来连接容器：&lt;/p>
@@ -1238,22 +1238,20 @@ loading="lazy"
 &lt;/span>&lt;span class="lnt">12
 &lt;/span>&lt;span class="lnt">13
 &lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 使用 network 创建一个名为 mynet 网络&lt;/span>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 使用 network 创建一个名为 mynet 网络&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># --driver bridge 表示桥接模式&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># --subnet 192.168.0.0/16 表示子网配置&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># --gateway 192.168.0.8 表示网关配置&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># --subnet 192.168.0.0/16 表示子网配置&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 如果遇到了报错，可以使用 docker network prune 命令&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker network create --driver bridge --subnet 192.168.0.0/24 --gateway 192.168.0.8 mynet
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看一下网络列表&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker network ls
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看一下 mynet 细节&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker network inspect mynet
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># docker run --detach --publish-all --name tomcat01 tomcat:7.0&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 如果不配置 --net 选项，默认就是 --net bridge，只是之前我们都没写罢了&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># docker run --detach --publish-all --name tomcat01 tomcat:7.0&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --detach --publish-all --name tomcat-mynet-01 --net mynet tomcat:7.0
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --detach --publish-all --name tomcat-mynet-02 --net mynet tomcat:7.0
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
@@ -1325,7 +1323,7 @@ loading="lazy"
 &lt;/span>&lt;span class="lnt">5
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># tomcat01 加入了 mynet&lt;/span>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 将 tomcat01 加入 mynet&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker network connect mynet tomcat01
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 相互 ping 一下&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat-mynet-02 ping tomcat01
