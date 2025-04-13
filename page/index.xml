@@ -166,6 +166,16 @@
 &lt;/span>&lt;span class="lnt">35
 &lt;/span>&lt;span class="lnt">36
 &lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 0 = 默认浏览器行为&lt;/span>
@@ -187,6 +197,11 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write company.thebrowser.Browser.plist ClearBrowsingDataOnExitList -array &lt;span class="s2">&amp;#34;browsing_history&amp;#34;&lt;/span> &lt;span class="s2">&amp;#34;download_history&amp;#34;&lt;/span> &lt;span class="s2">&amp;#34;cached_images_and_files&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write company.thebrowser.Browser.plist HistorySearchSettings -int &lt;span class="m">2&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write company.thebrowser.Browser.plist SavingBrowserHistoryDisabled -bool &lt;span class="nb">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用搜索边栏&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write company.thebrowser.Browser.plist GoogleSearchSidePanelEnabled -bool &lt;span class="nb">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用搜索建议&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write company.thebrowser.Browser.plist SearchSuggestEnabled -bool &lt;span class="nb">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write company.thebrowser.Browser.plist SuggestedContentEnabled -bool &lt;span class="nb">false&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Chrome，会出现“您的浏览器由贵单位管理”&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist ExtensionManifestV2Availability -int &lt;span class="m">2&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用自动播放&lt;/span>
@@ -202,6 +217,11 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist ClearBrowsingDataOnExitList -array &lt;span class="s2">&amp;#34;browsing_history&amp;#34;&lt;/span> &lt;span class="s2">&amp;#34;download_history&amp;#34;&lt;/span> &lt;span class="s2">&amp;#34;cached_images_and_files&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist HistorySearchSettings -int &lt;span class="m">2&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist SavingBrowserHistoryDisabled -bool &lt;span class="nb">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用搜索边栏&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist GoogleSearchSidePanelEnabled -bool &lt;span class="nb">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用搜索建议&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist SearchSuggestEnabled -bool &lt;span class="nb">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist SuggestedContentEnabled -bool &lt;span class="nb">false&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用掉以下两个 flags&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># extension-manifest-v2-deprecation-disabled&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># extension-manifest-v2-deprecation-warning&lt;/span>
