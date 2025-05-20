@@ -341,6 +341,17 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults delete -g NSRequiresAquaSystemAppearance
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
+&lt;/div>&lt;h2 id="查看电池容量">查看电池容量&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># https://www.mintimate.cn/2025/05/12/ioregBattery/&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ioreg -rn AppleSmartBattery &lt;span class="p">|&lt;/span> awk &lt;span class="s1">&amp;#39;/AppleRawMaxCapacity/{raw=$NF} /DesignCapacity/{design=$NF} /CycleCount/{cycle=$NF} END{printf &amp;#34;当前最大容量: %d mAh | 设计容量: %d mAh | 循环次数 %d 次 | 健康度: %.1f%%\n&amp;#34;, raw, design, cycle, (raw/design)*100}&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
 &lt;/div>&lt;h2 id="移除文件属性">移除文件属性&lt;/h2>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
