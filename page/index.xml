@@ -204,6 +204,12 @@
 &lt;/span>&lt;span class="lnt">73
 &lt;/span>&lt;span class="lnt">74
 &lt;/span>&lt;span class="lnt">75
+&lt;/span>&lt;span class="lnt">76
+&lt;/span>&lt;span class="lnt">77
+&lt;/span>&lt;span class="lnt">78
+&lt;/span>&lt;span class="lnt">79
+&lt;/span>&lt;span class="lnt">80
+&lt;/span>&lt;span class="lnt">81
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 0 = 默认浏览器行为&lt;/span>
@@ -212,6 +218,9 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 3 = 部分启用 Manifest V2&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Arc，会出现“您的浏览器由贵单位管理”&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write company.thebrowser.Browser.plist ExtensionManifestV2Availability -int &lt;span class="m">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用 AI&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write company.thebrowser.Browser.plist DevToolsGenAiSettings -int &lt;span class="m">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write company.thebrowser.Browser.plist HistorySearchSettings -int &lt;span class="m">2&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用自动播放&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write company.thebrowser.Browser.plist AutoplayAllowed -bool &lt;span class="nb">false&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用虚拟键盘&lt;/span>
@@ -246,6 +255,9 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write company.thebrowser.Browser.plist WebRtcTextLogCollectionAllowed -bool &lt;span class="nb">false&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Chrome，会出现“您的浏览器由贵单位管理”&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist ExtensionManifestV2Availability -int &lt;span class="m">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用 AI&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist DevToolsGenAiSettings -int &lt;span class="m">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist HistorySearchSettings -int &lt;span class="m">2&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用自动播放&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist AutoplayAllowed -bool &lt;span class="nb">false&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用虚拟键盘&lt;/span>
