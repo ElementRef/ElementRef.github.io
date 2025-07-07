@@ -1,4 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pages on 馬腊咯稽</title><link>https://ElementRef.github.io/page/</link><description>Recent content in Pages on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/page/index.xml" rel="self" type="application/rss+xml"/><item><title>命令 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/%E5%91%BD%E4%BB%A4/</link><pubDate>Thu, 28 Oct 2021 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/%E5%91%BD%E4%BB%A4/</guid><description>&lt;h2 id="创建可引导的-macos-安装器">创建可引导的 macOS 安装器&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pages on 馬腊咯稽</title><link>https://ElementRef.github.io/page/</link><description>Recent content in Pages on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/page/index.xml" rel="self" type="application/rss+xml"/><item><title>命令 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/%E5%91%BD%E4%BB%A4/</link><pubDate>Thu, 28 Oct 2021 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/%E5%91%BD%E4%BB%A4/</guid><description>&lt;h2 id="每个应用最低支持的系统版本">每个应用最低支持的系统版本&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">find /Applications -maxdepth &lt;span class="m">2&lt;/span> -name &lt;span class="s2">&amp;#34;*.app&amp;#34;&lt;/span> -exec sh -c &lt;span class="s1">&amp;#39;for app; do name=$(basename &amp;#34;$app&amp;#34; .app); ver=$(/usr/libexec/PlistBuddy -c &amp;#34;Print :LSMinimumSystemVersion&amp;#34; &amp;#34;$app/Contents/Info.plist&amp;#34; 2&amp;gt;/dev/null || echo N/A); echo &amp;#34;$name: $ver&amp;#34;; done&amp;#39;&lt;/span> _ &lt;span class="o">{}&lt;/span> + &lt;span class="p">|&lt;/span> sort
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="创建可引导的-macos-安装器">创建可引导的 macOS 安装器&lt;/h2>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
