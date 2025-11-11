@@ -37,23 +37,13 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">chsh -s /bin/zsh
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h2 id="不检查-monterey-更新">不检查 Monterey 更新&lt;/h2>
+&lt;/div>&lt;h2 id="清除-github-幽灵通知">清除 GitHub 幽灵通知&lt;/h2>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 重置忽略的更新&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo softwareupdate --reset-ignored
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 忽略软件的更新&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo softwareupdate --ignore &lt;span class="s2">&amp;#34;macOS Monterey&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 清除菜单小红点&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.apple.systempreferences AttentionPrefBundleIDs &lt;span class="m">0&lt;/span>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">gh api --method PUT -H &lt;span class="s2">&amp;#34;Accept: application/vnd.github+json&amp;#34;&lt;/span> -H &lt;span class="s2">&amp;#34;X-GitHub-Api-Version: 2022-11-28&amp;#34;&lt;/span> /notifications -f &lt;span class="nv">last_read_at&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span>date -u +&lt;span class="s1">&amp;#39;%Y-%m-%dT%H:%M:%SZ&amp;#39;&lt;/span>&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> -F &lt;span class="nv">read&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nb">true&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h2 id="查看-mac-内网-ip-地址">查看 Mac 内网 IP 地址&lt;/h2>
@@ -113,6 +103,15 @@
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">defaults write -g NSColorSimulateHardwareAccent -bool YES
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 3-Yellow、4-Green、5-Blue、6-Pink、7-Purple、8-Orange&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write -g NSColorSimulatedHardwareEnclosureNumber -int &lt;span class="m">3&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="查找-electron-应用">查找 Electron 应用&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">find /Applications -name &lt;span class="s2">&amp;#34;Electron Framework.framework&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h2 id="获取项目目录结构">获取项目目录结构&lt;/h2>
@@ -182,50 +181,13 @@
 &lt;/span>&lt;span class="lnt">42
 &lt;/span>&lt;span class="lnt">43
 &lt;/span>&lt;span class="lnt">44
-&lt;/span>&lt;span class="lnt">45
-&lt;/span>&lt;span class="lnt">46
-&lt;/span>&lt;span class="lnt">47
-&lt;/span>&lt;span class="lnt">48
-&lt;/span>&lt;span class="lnt">49
-&lt;/span>&lt;span class="lnt">50
-&lt;/span>&lt;span class="lnt">51
-&lt;/span>&lt;span class="lnt">52
-&lt;/span>&lt;span class="lnt">53
-&lt;/span>&lt;span class="lnt">54
-&lt;/span>&lt;span class="lnt">55
-&lt;/span>&lt;span class="lnt">56
-&lt;/span>&lt;span class="lnt">57
-&lt;/span>&lt;span class="lnt">58
-&lt;/span>&lt;span class="lnt">59
-&lt;/span>&lt;span class="lnt">60
-&lt;/span>&lt;span class="lnt">61
-&lt;/span>&lt;span class="lnt">62
-&lt;/span>&lt;span class="lnt">63
-&lt;/span>&lt;span class="lnt">64
-&lt;/span>&lt;span class="lnt">65
-&lt;/span>&lt;span class="lnt">66
-&lt;/span>&lt;span class="lnt">67
-&lt;/span>&lt;span class="lnt">68
-&lt;/span>&lt;span class="lnt">69
-&lt;/span>&lt;span class="lnt">70
-&lt;/span>&lt;span class="lnt">71
-&lt;/span>&lt;span class="lnt">72
-&lt;/span>&lt;span class="lnt">73
-&lt;/span>&lt;span class="lnt">74
-&lt;/span>&lt;span class="lnt">75
-&lt;/span>&lt;span class="lnt">76
-&lt;/span>&lt;span class="lnt">77
-&lt;/span>&lt;span class="lnt">78
-&lt;/span>&lt;span class="lnt">79
-&lt;/span>&lt;span class="lnt">80
-&lt;/span>&lt;span class="lnt">81
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 0 = 默认浏览器行为&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 1 = 禁用 Manifest V2&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 2 = 启用 Manifest V2&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 3 = 部分启用 Manifest V2&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Arc，会出现“您的浏览器由贵单位管理”&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 会出现“您的浏览器由贵单位管理”&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write company.thebrowser.Browser.plist ExtensionManifestV2Availability -int &lt;span class="m">2&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用 AI&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write company.thebrowser.Browser.plist DevToolsGenAiSettings -int &lt;span class="m">2&lt;/span>
@@ -262,65 +224,9 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write company.thebrowser.Browser.plist UrlKeyedAnonymizedDataCollectionEnabled -bool &lt;span class="nb">false&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write company.thebrowser.Browser.plist WebRtcEventLogCollectionAllowed -bool &lt;span class="nb">false&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write company.thebrowser.Browser.plist WebRtcTextLogCollectionAllowed -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Chrome，会出现“您的浏览器由贵单位管理”&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist ExtensionManifestV2Availability -int &lt;span class="m">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用 AI&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist DevToolsGenAiSettings -int &lt;span class="m">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist HistorySearchSettings -int &lt;span class="m">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用自动播放&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist AutoplayAllowed -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用虚拟键盘&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist VirtualKeyboardEnabled -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist VirtualKeyboardFeatures -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用云端上报&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist GoogleWorkspaceCloudUpload -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist MicrosoftOfficeCloudUpload -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 浏览记录相关&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist ClearBrowsingDataOnExitList -array &lt;span class="s2">&amp;#34;browsing_history&amp;#34;&lt;/span> &lt;span class="s2">&amp;#34;download_history&amp;#34;&lt;/span> &lt;span class="s2">&amp;#34;cached_images_and_files&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist HistorySearchSettings -int &lt;span class="m">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist SavingBrowserHistoryDisabled -bool &lt;span class="nb">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用搜索边栏&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist GoogleSearchSidePanelEnabled -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用搜索建议&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist SearchSuggestEnabled -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist SuggestedContentEnabled -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用隐私收集&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist DeviceExtensionsSystemLogEnabled -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist DeviceMetricsReportingEnabled -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist DeviceSystemWideTracingEnabled -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist DomainReliabilityAllowed -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist FeedbackSurveysEnabled -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist LogUploadEnabled -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist PluginVmDataCollectionAllowed -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist ReportDeviceSystemInfo -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist ReportDeviceVpdInfo -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist SafeBrowsingExtendedReportingEnabled -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist ShoppingListEnabled -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist UrlKeyedAnonymizedDataCollectionEnabled -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist WebRtcEventLogCollectionAllowed -bool &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">defaults write com.google.Chrome.plist WebRtcTextLogCollectionAllowed -bool &lt;span class="nb">false&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 禁用掉以下两个 flags&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># extension-manifest-v2-deprecation-disabled&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># extension-manifest-v2-deprecation-warning&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h2 id="安装-hugo64056">安装 hugo@0.56&lt;/h2>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 1. brew tap &amp;lt;org&amp;gt;/&amp;lt;repo&amp;gt; https://github.com/&amp;lt;org&amp;gt;/&amp;lt;repo&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">brew tap gohugoio/hugo https://github.com/gohugoio/hugo
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 2. brew extract --version &amp;lt;version&amp;gt; &amp;lt;module name&amp;gt; &amp;lt;org&amp;gt;/&amp;lt;repo&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">brew extract --version 0.56.0 hugo gohugoio/hugo
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 3. brew install &amp;lt;module name&amp;gt;@&amp;lt;version&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">brew install hugo@0.56.0
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h2 id="系统完整性保护">系统完整性保护&lt;/h2>
