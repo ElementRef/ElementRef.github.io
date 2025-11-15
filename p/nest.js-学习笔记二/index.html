@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="zh-cn" dir="ltr"><head><meta charset="utf-8"><style>:where(img[jampack-sized]){max-width:100%;height:auto}</style><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><meta name="description" content="应用配置 一般来说，不同的运行环境需要有不同的应用配置；比如测试环境需要连接测试库，生产环境需要连接生产库。你肯定想到了通过 dotenv 将环境变量映射到 process.env 上；当然，在 Nest 中继续使用 dotenv 不是不可以；但是 Nest 提供了一种更为优雅的方式 @nestjs/config，当然内部还是依赖于 dotenv：
 "><title>Nest.js 学习笔记（二） · I AM BEA, I DRINK TEA</title>
-<link rel="canonical" href="https://ElementRef.github.io/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/"><link rel="stylesheet" href="/scss/style.min.71af184584791a9daf2008fabd318cb741ad5c3fc04b7c5ca044dbbc69190e9b.css"><meta property="og:title" content="Nest.js 学习笔记（二）"><meta property="og:description" content="应用配置 一般来说，不同的运行环境需要有不同的应用配置；比如测试环境需要连接测试库，生产环境需要连接生产库。你肯定想到了通过 dotenv 将环境变量映射到 process.env 上；当然，在 Nest 中继续使用 dotenv 不是不可以；但是 Nest 提供了一种更为优雅的方式 @nestjs/config，当然内部还是依赖于 dotenv：
+<link rel="canonical" href="https://ElementRef.github.io/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/"><link rel="stylesheet" href="/scss/style.min.49a542c0449d2ab7de17e0bb72f035d22a011f1361d304a0ff6dc68951166f07.css"><meta property="og:title" content="Nest.js 学习笔记（二）"><meta property="og:description" content="应用配置 一般来说，不同的运行环境需要有不同的应用配置；比如测试环境需要连接测试库，生产环境需要连接生产库。你肯定想到了通过 dotenv 将环境变量映射到 process.env 上；当然，在 Nest 中继续使用 dotenv 不是不可以；但是 Nest 提供了一种更为优雅的方式 @nestjs/config，当然内部还是依赖于 dotenv：
 "><meta property="og:url" content="https://ElementRef.github.io/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/"><meta property="og:site_name" content="馬腊咯稽"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:published_time" content="2024-10-28T00:00:00+00:00"><meta property="article:modified_time" content="2024-10-28T00:00:00+00:00"><meta property="og:image" content="https://ElementRef.github.io/img/cover/nestjs.png"><meta property="og:logo" content="/og-logo.png"><meta name="twitter:title" content="Nest.js 学习笔记（二）"><meta name="twitter:description" content="应用配置 一般来说，不同的运行环境需要有不同的应用配置；比如测试环境需要连接测试库，生产环境需要连接生产库。你肯定想到了通过 dotenv 将环境变量映射到 process.env 上；当然，在 Nest 中继续使用 dotenv 不是不可以；但是 Nest 提供了一种更为优雅的方式 @nestjs/config，当然内部还是依赖于 dotenv：
 "><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://ElementRef.github.io/img/cover/nestjs.png"><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><meta name="robots" content="noarchive, noindex, nofollow"><meta name="theme-color" content="#ffffff"><script defer="" src="https://umami.pavilion0321907.workers.dev/elementref.js" data-website-id="87868be0-a9cf-4f8c-8fee-e3cbb99e6cf2"></script></head><body class="article-page"><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="flex container extended main-container on-phone--column"><aside class="sidebar sticky left-sidebar"><button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
 <span class="hamburger-box"><span class="hamburger-inner"></span></span></button><header><figure class="site-avatar"><a href="/"><img src="/img/avatar_hu15751654176150258532.webp" width="300" height="404" class="site-logo" alt="Avatar" fetchpriority="high" decoding="async"></a></figure><div class="site-meta"><h1 class="site-name"><a href="/">馬腊咯稽</a></h1><h2 class="site-description">I AM BEA, I DRINK TEA</h2></div></header><ol class="social-menu"><li><a href="https://space.bilibili.com/593541941" target="_blank" title="Bilibili"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M3 10a4 4 0 014-4h10a4 4 0 014 4v6a4 4 0 01-4 4H7a4 4 0 01-4-4v-6z"></path><path d="M8 3l2 3"></path><path d="M16 3l-2 3"></path><path d="M9 13v-2"></path><path d="M15 11v2"></path></svg></a></li><li><a href="https://x.com/SpiciComic" target="_blank" title="Twitter"><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"></path></svg></a></li><li><a href="https://github.com/ElementRef" target="_blank" title="GitHub"><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"></path></svg></a></li><li><a href="https://m.weibo.cn/u/6447635754" target="_blank" title="Weibo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-weibo"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M19 14.127C19 17.2 15.498 20 11 20c-4.126.0-8-2.224-8-5.565.0-1.78.984-3.737 2.7-5.567 2.362-2.51 5.193-3.687 6.551-2.238.415.44.752 1.39.749 2.062 2-1.615 4.308.387 3.5 2.693 1.26.557 2.5.538 2.5 2.742z"></path><path d="M15 4h1a5 5 0 015 5v1"></path></svg></a></li><li><a href="https://last.fm/zh/user/SpiciComic/listening-report" target="_blank" title="Last.fm"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-lastfm"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M20 8c-.83-1-1.388-1-2-1-.612.0-2 .271-2 2s1.384 2.233 3 3 2.125 1.812 2 3-1 2-3 2-3-1-3.5-2-1.585-4.78-2.497-6a5 5 0 10-1 7"></path></svg></a></li></ol><ol class="menu" id="main-menu"><li><a href="/"><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><polyline points="5 12 3 12 12 3 21 12 19 12"></polyline><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"></path></svg>
@@ -47,7 +47,7 @@
 </span><span class="lnt">30
 </span><span class="lnt">31
 </span><span class="lnt">32
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Module</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Module</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ConfigModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/config'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppController</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.controller'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.service'</span><span class="p">;</span>
@@ -115,7 +115,7 @@
 </span><span class="lnt">34
 </span><span class="lnt">35
 </span><span class="lnt">36
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">ConfigModule</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">ConfigModule</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// ...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">static</span> <span class="kr">async</span> <span class="nx">forRoot</span><span class="p">(</span><span class="nx">options</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="cm">/**
@@ -173,7 +173,7 @@
 </span><span class="lnt">20
 </span><span class="lnt">21
 </span><span class="lnt">22
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ConfigService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/config'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.service'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -201,7 +201,7 @@
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">registerAs</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/config'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">registerAs</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/config'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="nx">registerAs</span><span class="p">(</span><span class="s1">'database'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">host</span><span class="o">:</span> <span class="s1">'localhost'</span><span class="p">,</span>
@@ -223,7 +223,7 @@
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Module</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Module</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ConfigModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/config'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">databaseConfig</span> <span class="kr">from</span> <span class="s1">'../config'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppController</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.controller'</span><span class="p">;</span>
@@ -257,7 +257,7 @@
 </span><span class="lnt">16
 </span><span class="lnt">17
 </span><span class="lnt">18
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ConfigService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/config'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.service'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -286,7 +286,7 @@
 </span><span class="lnt"> 9
 </span><span class="lnt">10
 </span><span class="lnt">11
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Module</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Module</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ConfigModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/config'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">databaseConfig</span> <span class="kr">from</span> <span class="s1">'../config'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -329,7 +329,7 @@
 </span><span class="lnt">27
 </span><span class="lnt">28
 </span><span class="lnt">29
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Module</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Module</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ConfigModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/config'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">Joi</span> <span class="kr">from</span> <span class="s1">'joi'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">databaseConfig</span> <span class="kr">from</span> <span class="s1">'../config'</span><span class="p">;</span>
@@ -372,7 +372,7 @@
 </span><span class="lnt">6
 </span><span class="lnt">7
 </span><span class="lnt">8
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">@Module</span><span class="p">({</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@Module</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">imports</span><span class="o">:</span> <span class="p">[</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">ConfigModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">expandVariables</span>: <span class="kt">true</span>
@@ -391,7 +391,7 @@
 </span><span class="lnt"> 9
 </span><span class="lnt">10
 </span><span class="lnt">11
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ConfigService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/config'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ConfigService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/config'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">NestFactory</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/core'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.module'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -503,7 +503,7 @@
 </span><span class="lnt"> 9
 </span><span class="lnt">10
 </span><span class="lnt">11
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// src/prisma.service.ts
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// src/prisma.service.ts
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">Injectable</span><span class="p">,</span> <span class="nx">OnModuleInit</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">PrismaClient</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@prisma/client'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -586,7 +586,7 @@
 </span><span class="lnt">70
 </span><span class="lnt">71
 </span><span class="lnt">72
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// src/post/post.module.ts
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// src/post/post.module.ts
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">Module</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">PrismaService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'src/prisma.service'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">PostController</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./post.controller'</span><span class="p">;</span>
@@ -737,7 +737,7 @@
 </span><span class="lnt">77
 </span><span class="lnt">78
 </span><span class="lnt">79
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">Body</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">Controller</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">Delete</span><span class="p">,</span>
@@ -833,7 +833,7 @@
 </span><span class="lnt"> 9
 </span><span class="lnt">10
 </span><span class="lnt">11
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">CacheModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/cache-manager'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">CacheModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/cache-manager'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Module</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppController</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.controller'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.service'</span><span class="p">;</span>
@@ -867,7 +867,7 @@
 </span><span class="lnt">21
 </span><span class="lnt">22
 </span><span class="lnt">23
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">CACHE_MANAGER</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/cache-manager'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">CACHE_MANAGER</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/cache-manager'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span><span class="p">,</span> <span class="nx">Inject</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Cache</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'cache-manager'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -908,7 +908,7 @@
 </span><span class="lnt">16
 </span><span class="lnt">17
 </span><span class="lnt">18
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">CACHE_MANAGER</span><span class="p">,</span> <span class="nx">CacheInterceptor</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/cache-manager'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">CACHE_MANAGER</span><span class="p">,</span> <span class="nx">CacheInterceptor</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/cache-manager'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span><span class="p">,</span> <span class="nx">Inject</span><span class="p">,</span> <span class="nx">UseInterceptors</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Cache</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'cache-manager'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -942,7 +942,7 @@
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">CacheInterceptor</span><span class="p">,</span> <span class="nx">CacheModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/cache-manager'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">CacheInterceptor</span><span class="p">,</span> <span class="nx">CacheModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/cache-manager'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Module</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">APP_INTERCEPTOR</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/core'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppController</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.controller'</span><span class="p">;</span>
@@ -967,7 +967,7 @@
 </span><span class="lnt">7
 </span><span class="lnt">8
 </span><span class="lnt">9
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="nx">CacheModule</span><span class="p">.</span><span class="nx">register</span><span class="p">({</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="nx">CacheModule</span><span class="p">.</span><span class="nx">register</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 默认，缓存仅存在于当前 module 内
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 可以通过设置，让其他 module 访问
@@ -988,7 +988,7 @@
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">CacheKey</span><span class="p">,</span> <span class="nx">CacheTTL</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/cache-manager'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">CacheKey</span><span class="p">,</span> <span class="nx">CacheTTL</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/cache-manager'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">@Controller</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="kd">@CacheTTL</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
@@ -1036,7 +1036,7 @@
 </span><span class="lnt">34
 </span><span class="lnt">35
 </span><span class="lnt">36
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">CacheInterceptor</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">CacheModule</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">CacheStore</span>
@@ -1094,7 +1094,7 @@
 </span><span class="lnt">20
 </span><span class="lnt">21
 </span><span class="lnt">22
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Exclude</span><span class="p">,</span> <span class="nx">Expose</span><span class="p">,</span> <span class="nx">Transform</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'class-transformer'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Exclude</span><span class="p">,</span> <span class="nx">Expose</span><span class="p">,</span> <span class="nx">Transform</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'class-transformer'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">UserEntity</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">id</span>: <span class="kt">number</span><span class="p">;</span>
@@ -1147,7 +1147,7 @@
 </span><span class="lnt">29
 </span><span class="lnt">30
 </span><span class="lnt">31
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">UserEntity</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./entities/user.entity'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">UserEntity</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./entities/user.entity'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">ClassSerializerInterceptor</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">SerializeOptions</span><span class="p">,</span>
@@ -1199,7 +1199,7 @@
 </span><span class="lnt">19
 </span><span class="lnt">20
 </span><span class="lnt">21
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl">
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">@UseInterceptors</span><span class="p">(</span><span class="nx">ClassSerializerInterceptor</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 确保返回值满足 UserEntity 类型
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">@SerializeOptions</span><span class="p">({</span> <span class="kr">type</span><span class="o">:</span> <span class="nx">UserEntity</span> <span class="p">})</span>
@@ -1232,7 +1232,7 @@
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">VersioningType</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">VersioningType</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">NestFactory</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/core'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.module'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -1258,7 +1258,7 @@
 </span><span class="lnt">12
 </span><span class="lnt">13
 </span><span class="lnt">14
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">VersioningType</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">VersioningType</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">NestFactory</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/core'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.module'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -1286,7 +1286,7 @@
 </span><span class="lnt">12
 </span><span class="lnt">13
 </span><span class="lnt">14
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">VersioningType</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">VersioningType</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">NestFactory</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/core'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.module'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -1326,7 +1326,7 @@
 </span><span class="lnt">24
 </span><span class="lnt">25
 </span><span class="lnt">26
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">VersioningType</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">VersioningType</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">NestFactory</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/core'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Request</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'express'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.module'</span><span class="p">;</span>
@@ -1368,7 +1368,7 @@
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">@Controller</span><span class="p">({</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@Controller</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">path</span><span class="o">:</span> <span class="s1">'user'</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">version</span><span class="o">:</span> <span class="s1">'1'</span> <span class="c1">// 仅适配一个版本
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">version</span><span class="o">:</span> <span class="p">[</span><span class="s1">'1'</span><span class="p">,</span><span class="s1">'2'</span><span class="p">]</span> <span class="c1">// 适配多个版本
@@ -1397,7 +1397,7 @@
 </span><span class="lnt">11
 </span><span class="lnt">12
 </span><span class="lnt">13
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">VERSION_NEUTRAL</span><span class="p">,</span> <span class="nx">VersioningType</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">VERSION_NEUTRAL</span><span class="p">,</span> <span class="nx">VersioningType</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">NestFactory</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/core'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.module'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -1432,7 +1432,7 @@
 </span><span class="lnt">20
 </span><span class="lnt">21
 </span><span class="lnt">22
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">MiddlewareConsumer</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">Module</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">NestModule</span><span class="p">,</span>
@@ -1468,7 +1468,7 @@
 </span><span class="lnt">12
 </span><span class="lnt">13
 </span><span class="lnt">14
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Module</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Module</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ScheduleModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/schedule'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppController</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.controller'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -1515,7 +1515,7 @@
 </span><span class="lnt">29
 </span><span class="lnt">30
 </span><span class="lnt">31
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Injectable</span><span class="p">,</span> <span class="nx">Logger</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Injectable</span><span class="p">,</span> <span class="nx">Logger</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Cron</span><span class="p">,</span> <span class="nx">CronExpression</span><span class="p">,</span> <span class="nx">Interval</span><span class="p">,</span> <span class="nx">Timeout</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/schedule'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">@Injectable</span><span class="p">()</span>
@@ -1570,7 +1570,7 @@
 </span><span class="lnt">22
 </span><span class="lnt">23
 </span><span class="lnt">24
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">SchedulerRegistry</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/schedule'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">@Controller</span><span class="p">()</span>
@@ -1622,7 +1622,7 @@
 </span><span class="lnt">26
 </span><span class="lnt">27
 </span><span class="lnt">28
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Injectable</span><span class="p">,</span> <span class="nx">Logger</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Injectable</span><span class="p">,</span> <span class="nx">Logger</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">SchedulerRegistry</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/schedule'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">CronJob</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'cron'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -1677,7 +1677,7 @@
 </span><span class="lnt">25
 </span><span class="lnt">26
 </span><span class="lnt">27
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Injectable</span><span class="p">,</span> <span class="nx">Logger</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Injectable</span><span class="p">,</span> <span class="nx">Logger</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">SchedulerRegistry</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/schedule'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">@Injectable</span><span class="p">()</span>
@@ -1731,7 +1731,7 @@
 </span><span class="lnt">19
 </span><span class="lnt">20
 </span><span class="lnt">21
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">BullModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/bullmq'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">BullModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/bullmq'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Module</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ScheduleModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/schedule'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppController</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.controller'</span><span class="p">;</span>
@@ -1784,7 +1784,7 @@
 </span><span class="lnt">30
 </span><span class="lnt">31
 </span><span class="lnt">32
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">BullModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/bullmq'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">BullModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/bullmq'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Module</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ScheduleModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/schedule'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppController</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.controller'</span><span class="p">;</span>
@@ -1834,7 +1834,7 @@
 </span><span class="lnt">16
 </span><span class="lnt">17
 </span><span class="lnt">18
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">BullModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/bullmq'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">BullModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/bullmq'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Module</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ScheduleModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/schedule'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppController</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.controller'</span><span class="p">;</span>
@@ -1856,7 +1856,7 @@
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">NestFactory</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">AppModule</span><span class="p">,</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">NestFactory</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">AppModule</span><span class="p">,</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// 在调用 app.useLogger 之前，不会输出任何日志信息
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">logger</span>: <span class="kt">false</span>
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
@@ -1867,7 +1867,7 @@
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">NestFactory</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">AppModule</span><span class="p">,</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">NestFactory</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">AppModule</span><span class="p">,</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 内置了七个级别的日志：
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * log | fatal | error | warn | debug | verbose
@@ -1897,7 +1897,7 @@
 </span><span class="lnt">21
 </span><span class="lnt">22
 </span><span class="lnt">23
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// src/main.ts
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// src/main.ts
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">CustomLogger</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./custom.logger.service'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">NestFactory</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">AppModule</span><span class="p">,</span> <span class="p">{</span>
@@ -1928,7 +1928,7 @@
 </span><span class="lnt">6
 </span><span class="lnt">7
 </span><span class="lnt">8
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ConsoleLogger</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ConsoleLogger</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">CustomLogger</span> <span class="kr">extends</span> <span class="nx">ConsoleLogger</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">error</span><span class="p">(</span><span class="nx">message</span>: <span class="kt">any</span><span class="p">,</span> <span class="nx">stack?</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">context?</span>: <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
@@ -1944,7 +1944,7 @@
 </span><span class="lnt">6
 </span><span class="lnt">7
 </span><span class="lnt">8
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Module</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Module</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">MyLoggerService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./logger.service'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">@Module</span><span class="p">({</span>
@@ -1964,7 +1964,7 @@
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">@Module</span><span class="p">({</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@Module</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">imports</span><span class="o">:</span> <span class="p">[</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">ScheduleModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">(),</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">BullModule</span><span class="p">.</span><span class="nx">registerFlowProducer</span><span class="p">({</span>
@@ -2003,7 +2003,7 @@
 </span><span class="lnt">25
 </span><span class="lnt">26
 </span><span class="lnt">27
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">VERSION_NEUTRAL</span><span class="p">,</span> <span class="nx">VersioningType</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">VERSION_NEUTRAL</span><span class="p">,</span> <span class="nx">VersioningType</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">NestFactory</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/core'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.module'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">MyLoggerService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./logger/logger.service'</span><span class="p">;</span>
@@ -2036,7 +2036,7 @@
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">@Injectable</span><span class="p">()</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@Injectable</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">UserService</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="kr">readonly</span> <span class="nx">logger</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyLoggerService</span><span class="p">(</span><span class="nx">UserService</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">timestamp</span>: <span class="kt">true</span>
@@ -2068,7 +2068,7 @@
 </span><span class="lnt">20
 </span><span class="lnt">21
 </span><span class="lnt">22
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">NestFactory</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/core'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">NestFactory</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/core'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">CookieParser</span> <span class="kr">from</span> <span class="s1">'cookie-parser'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.module'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -2109,7 +2109,7 @@
 </span><span class="lnt">17
 </span><span class="lnt">18
 </span><span class="lnt">19
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span><span class="p">,</span> <span class="nx">Req</span><span class="p">,</span> <span class="nx">Res</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span><span class="p">,</span> <span class="nx">Req</span><span class="p">,</span> <span class="nx">Res</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Request</span><span class="p">,</span> <span class="nx">Response</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'express'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">@Controller</span><span class="p">()</span>
@@ -2162,7 +2162,7 @@
 </span><span class="lnt">31
 </span><span class="lnt">32
 </span><span class="lnt">33
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Module</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Module</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">EventEmitterModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/event-emitter'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppController</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.controller'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.service'</span><span class="p">;</span>
@@ -2212,7 +2212,7 @@
 </span><span class="lnt">15
 </span><span class="lnt">16
 </span><span class="lnt">17
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">@Controller</span><span class="p">(</span><span class="s1">'user'</span><span class="p">)</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@Controller</span><span class="p">(</span><span class="s1">'user'</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">UserController</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="kr">readonly</span> <span class="nx">userService</span>: <span class="kt">UserService</span><span class="p">,</span>
@@ -2250,7 +2250,7 @@
 </span><span class="lnt">19
 </span><span class="lnt">20
 </span><span class="lnt">21
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">@Controller</span><span class="p">()</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@Controller</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">AppController</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">@OnEvent</span><span class="p">(</span><span class="s1">'**'</span><span class="p">)</span> <span class="c1">// 监听所有事件
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kd">@OnEvent</span><span class="p">(</span><span class="s1">'user.*'</span><span class="p">)</span> <span class="c1">// 监听 user 下的所有事件
@@ -2273,7 +2273,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>我们上边提到过，事件监听的注册发生在 AppModule 的 onApplicationBootstrap 生命周期中；这就可能导致事件回调发生遗漏，因为事件的触发可能会早于 EventSubscribersLoader 设置事件回调的时机。所以，emit 最好发生在 waitUntilReady 之后：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">eventEmitterReadinessWatcher</span><span class="p">.</span><span class="nx">waitUntilReady</span><span class="p">();</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">eventEmitterReadinessWatcher</span><span class="p">.</span><span class="nx">waitUntilReady</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">eventEmitter</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">'order.created'</span><span class="p">,</span> <span class="p">{</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">'blah blah...'</span> <span class="p">});</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><h2 id="响应压缩express">响应压缩（Express）</h2><p>Nest 支持通过中间件来压缩响应主体；当然，在生产环境下，这部分工作通常由反向代理来完成；先来安装 compression：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pnpm add compression
@@ -2287,7 +2287,7 @@
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">NestFactory</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/core'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">NestFactory</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/core'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">compression</span> <span class="kr">from</span> <span class="s1">'compression'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.module'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -2328,7 +2328,7 @@
 </span><span class="lnt">28
 </span><span class="lnt">29
 </span><span class="lnt">30
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">Controller</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">Get</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">Post</span><span class="p">,</span>
@@ -2366,7 +2366,7 @@
 </span><span class="lnt">6
 </span><span class="lnt">7
 </span><span class="lnt">8
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ArgumentMetadata</span><span class="p">,</span> <span class="nx">Injectable</span><span class="p">,</span> <span class="nx">PipeTransform</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ArgumentMetadata</span><span class="p">,</span> <span class="nx">Injectable</span><span class="p">,</span> <span class="nx">PipeTransform</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">@Injectable</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">FileSizeValidationPipe</span> <span class="kr">implements</span> <span class="nx">PipeTransform</span> <span class="p">{</span>
@@ -2407,7 +2407,7 @@
 </span><span class="lnt">31
 </span><span class="lnt">32
 </span><span class="lnt">33
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">Controller</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">Get</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">Post</span><span class="p">,</span>
@@ -2487,7 +2487,7 @@
 </span><span class="lnt">45
 </span><span class="lnt">46
 </span><span class="lnt">47
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">Controller</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">Get</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">HttpStatus</span><span class="p">,</span>
@@ -2551,7 +2551,7 @@
 </span><span class="lnt">15
 </span><span class="lnt">16
 </span><span class="lnt">17
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">IFile</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">IFile</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">mimetype</span>: <span class="kt">string</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">size</span>: <span class="kt">number</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -2623,7 +2623,7 @@
 </span><span class="lnt">53
 </span><span class="lnt">54
 </span><span class="lnt">55
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">Controller</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">FileTypeValidator</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">Get</span><span class="p">,</span>
@@ -2705,7 +2705,7 @@
 </span><span class="lnt">25
 </span><span class="lnt">26
 </span><span class="lnt">27
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">AppController</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">AppController</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// ...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kd">@Post</span><span class="p">(</span><span class="s1">'upload'</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">@UseInterceptors</span><span class="p">(</span>
@@ -2745,7 +2745,7 @@
 </span><span class="lnt">11
 </span><span class="lnt">12
 </span><span class="lnt">13
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">AppController</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">AppController</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// ...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kd">@Post</span><span class="p">(</span><span class="s1">'upload'</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">@UseInterceptors</span><span class="p">(</span><span class="nx">FileInterceptor</span><span class="p">(</span><span class="s1">'files'</span><span class="p">))</span>
@@ -2785,7 +2785,7 @@
 </span><span class="lnt">25
 </span><span class="lnt">26
 </span><span class="lnt">27
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">AppController</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">AppController</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// ...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kd">@Post</span><span class="p">(</span><span class="s1">'upload'</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">@UseInterceptors</span><span class="p">(</span>
@@ -2825,7 +2825,7 @@
 </span><span class="lnt">11
 </span><span class="lnt">12
 </span><span class="lnt">13
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">AppController</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">AppController</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// ...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kd">@Post</span><span class="p">(</span><span class="s1">'upload'</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">@UseInterceptors</span><span class="p">(</span><span class="nx">AnyFilesInterceptor</span><span class="p">())</span>
@@ -2848,7 +2848,7 @@
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">AppController</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">AppController</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// ...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kd">@Post</span><span class="p">(</span><span class="s1">'upload'</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">@UseInterceptors</span><span class="p">(</span><span class="nx">NoFilesInterceptor</span><span class="p">())</span>
@@ -2872,7 +2872,7 @@
 </span><span class="lnt">12
 </span><span class="lnt">13
 </span><span class="lnt">14
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span><span class="p">,</span> <span class="nx">Res</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span><span class="p">,</span> <span class="nx">Res</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Response</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'express'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">createReadStream</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'fs'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">join</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'path'</span><span class="p">;</span>
@@ -2899,7 +2899,7 @@
 </span><span class="lnt">11
 </span><span class="lnt">12
 </span><span class="lnt">13
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span><span class="p">,</span> <span class="nx">StreamableFile</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span><span class="p">,</span> <span class="nx">StreamableFile</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">createReadStream</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'fs'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">join</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'path'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -2945,7 +2945,7 @@
 </span><span class="lnt">31
 </span><span class="lnt">32
 </span><span class="lnt">33
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// 在 StreamableFile 中传入 Options
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 在 StreamableFile 中传入 Options
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kr">class</span> <span class="nx">AppController</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">@Get</span><span class="p">(</span><span class="s1">'getRaw'</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">getFile</span><span class="p">()</span><span class="o">:</span> <span class="nx">StreamableFile</span> <span class="p">{</span>
@@ -2996,7 +2996,7 @@
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">HttpService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/axios'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">HttpService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/axios'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AxiosResponse</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'axios'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'rxjs'</span><span class="p">;</span>
@@ -3051,7 +3051,7 @@
 </span><span class="lnt">37
 </span><span class="lnt">38
 </span><span class="lnt">39
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// 通过 HttpModuleOptionsFactory 创建配置
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 通过 HttpModuleOptionsFactory 创建配置
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">@Injectable</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">HttpConfigService</span> <span class="kr">implements</span> <span class="nx">HttpModuleOptionsFactory</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">createHttpOptions</span><span class="p">()</span><span class="o">:</span> <span class="nx">HttpModuleOptions</span> <span class="p">{</span>
@@ -3118,7 +3118,7 @@
 </span><span class="lnt">22
 </span><span class="lnt">23
 </span><span class="lnt">24
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">NestFactory</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/core'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">NestFactory</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/core'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">session</span> <span class="kr">from</span> <span class="s1">'express-session'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.module'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -3154,7 +3154,7 @@
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span><span class="p">,</span> <span class="nx">Req</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span><span class="p">,</span> <span class="nx">Req</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="kr">type</span> <span class="p">{</span> <span class="nx">Request</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'express'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">@Controller</span><span class="p">()</span>
@@ -3173,7 +3173,7 @@
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// ./global.d.ts
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// ./global.d.ts
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="s1">'express-session'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">declare</span> <span class="nx">module</span> <span class="s1">'express-session'</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">interface</span> <span class="nx">SessionData</span> <span class="p">{</span>
@@ -3189,7 +3189,7 @@
 </span><span class="lnt">7
 </span><span class="lnt">8
 </span><span class="lnt">9
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span><span class="p">,</span> <span class="nx">Session</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span><span class="p">,</span> <span class="nx">Session</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">@Controller</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">AppController</span> <span class="p">{</span>
@@ -3214,7 +3214,7 @@
 </span><span class="lnt">11
 </span><span class="lnt">12
 </span><span class="lnt">13
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">NestFactory</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/core'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">NestFactory</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/core'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">NestExpressApplication</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/platform-express'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">join</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'path'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.module'</span><span class="p">;</span>
@@ -3255,7 +3255,7 @@
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span><span class="p">,</span> <span class="nx">Render</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span><span class="p">,</span> <span class="nx">Render</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">@Controller</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">AppController</span> <span class="p">{</span>
@@ -3280,7 +3280,7 @@
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Get</span><span class="p">,</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Res</span><span class="p">,</span> <span class="nx">Render</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Get</span><span class="p">,</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">Res</span><span class="p">,</span> <span class="nx">Render</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Response</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'express'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AppService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./app.service'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -3309,7 +3309,7 @@
 </span><span class="lnt">12
 </span><span class="lnt">13
 </span><span class="lnt">14
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">MessageEvent</span><span class="p">,</span> <span class="nx">Sse</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Controller</span><span class="p">,</span> <span class="nx">MessageEvent</span><span class="p">,</span> <span class="nx">Sse</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@nestjs/common'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">interval</span><span class="p">,</span> <span class="nx">map</span><span class="p">,</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'rxjs'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">@Controller</span><span class="p">()</span>

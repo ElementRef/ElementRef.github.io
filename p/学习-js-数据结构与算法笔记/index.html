@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="zh-cn" dir="ltr"><head><meta charset="utf-8"><style>:where(img[jampack-sized]){max-width:100%;height:auto}</style><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><meta name="description" content="数组 数组存储一系列同一种数据类型的值；虽然在 JS 里，数组中可以保存不同类型的值，但大多数语言都没这个能力：
 JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0、1、2、3… 的字符串； 数组有两种模式：快速（fast）和缓慢（slow）; 快速的后备存储结构是 FixedArray（V8 实现的一个类似于数组的类，它表示一段固定长度的连续的内存）； 缓慢的后备存储结构是一个以数字为键的哈希表（根据键 key 而直接访问在内存存储位置的数据结构）； ArrayBuffer 是可以按照需要分配连续内存的数组。 栈 栈是一种遵从后进先出（LIFO）原则的有序集合；新添加的元素都保存在栈顶，另一端就叫栈底。
 "><title>《学习 JS 数据结构与算法》笔记 · I AM BEA, I DRINK TEA</title>
-<link rel="canonical" href="https://ElementRef.github.io/p/%E5%AD%A6%E4%B9%A0-js-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"><link rel="stylesheet" href="/scss/style.min.71af184584791a9daf2008fabd318cb741ad5c3fc04b7c5ca044dbbc69190e9b.css"><meta property="og:title" content="《学习 JS 数据结构与算法》笔记"><meta property="og:description" content="数组 数组存储一系列同一种数据类型的值；虽然在 JS 里，数组中可以保存不同类型的值，但大多数语言都没这个能力：
+<link rel="canonical" href="https://ElementRef.github.io/p/%E5%AD%A6%E4%B9%A0-js-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"><link rel="stylesheet" href="/scss/style.min.49a542c0449d2ab7de17e0bb72f035d22a011f1361d304a0ff6dc68951166f07.css"><meta property="og:title" content="《学习 JS 数据结构与算法》笔记"><meta property="og:description" content="数组 数组存储一系列同一种数据类型的值；虽然在 JS 里，数组中可以保存不同类型的值，但大多数语言都没这个能力：
 JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0、1、2、3… 的字符串； 数组有两种模式：快速（fast）和缓慢（slow）; 快速的后备存储结构是 FixedArray（V8 实现的一个类似于数组的类，它表示一段固定长度的连续的内存）； 缓慢的后备存储结构是一个以数字为键的哈希表（根据键 key 而直接访问在内存存储位置的数据结构）； ArrayBuffer 是可以按照需要分配连续内存的数组。 栈 栈是一种遵从后进先出（LIFO）原则的有序集合；新添加的元素都保存在栈顶，另一端就叫栈底。
 "><meta property="og:url" content="https://ElementRef.github.io/p/%E5%AD%A6%E4%B9%A0-js-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"><meta property="og:site_name" content="馬腊咯稽"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:published_time" content="2020-10-01T00:00:00+00:00"><meta property="article:modified_time" content="2020-10-01T00:00:00+00:00"><meta property="og:image" content="https://ElementRef.github.io/img/cover/datastructure.png"><meta property="og:logo" content="/og-logo.png"><meta name="twitter:title" content="《学习 JS 数据结构与算法》笔记"><meta name="twitter:description" content="数组 数组存储一系列同一种数据类型的值；虽然在 JS 里，数组中可以保存不同类型的值，但大多数语言都没这个能力：
 JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0、1、2、3… 的字符串； 数组有两种模式：快速（fast）和缓慢（slow）; 快速的后备存储结构是 FixedArray（V8 实现的一个类似于数组的类，它表示一段固定长度的连续的内存）； 缓慢的后备存储结构是一个以数字为键的哈希表（根据键 key 而直接访问在内存存储位置的数据结构）； ArrayBuffer 是可以按照需要分配连续内存的数组。 栈 栈是一种遵从后进先出（LIFO）原则的有序集合；新添加的元素都保存在栈顶，另一端就叫栈底。
@@ -45,7 +45,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">27
 </span><span class="lnt">28
 </span><span class="lnt">29
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">StackBasedOnArray</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">StackBasedOnArray</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">temp</span> <span class="o">=</span> <span class="p">[];</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
@@ -112,7 +112,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">36
 </span><span class="lnt">37
 </span><span class="lnt">38
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">StackBasedOnObject</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">StackBasedOnObject</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">temp</span> <span class="o">=</span> <span class="p">{};</span>
@@ -196,7 +196,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">44
 </span><span class="lnt">45
 </span><span class="lnt">46
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">StackBasedOnMap</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">StackBasedOnMap</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 这里使用 WeakMap 是因为它只能使用对象作为“键”
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 并且是弱引用，删除的“键”可以被垃圾回收
@@ -281,7 +281,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">37
 </span><span class="lnt">38
 </span><span class="lnt">39
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Queue</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Queue</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">arrow</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 指向头部第一个元素
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">tail</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 指向尾部最后一个元素
@@ -378,7 +378,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">56
 </span><span class="lnt">57
 </span><span class="lnt">58
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">DoubleEndedQueue</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">DoubleEndedQueue</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">arrow</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">tail</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -576,7 +576,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">138
 </span><span class="lnt">139
 </span><span class="lnt">140
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// 比较是否相等
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 比较是否相等
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">defaultEquals</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">a</span> <span class="o">===</span> <span class="nx">b</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -830,7 +830,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">112
 </span><span class="lnt">113
 </span><span class="lnt">114
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">DoublyNode</span> <span class="kr">extends</span> <span class="nx">Node</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">DoublyNode</span> <span class="kr">extends</span> <span class="nx">Node</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">constructor</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">next</span><span class="p">,</span> <span class="nx">prev</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">super</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">next</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">prev</span> <span class="o">=</span> <span class="nx">prev</span><span class="p">;</span>
@@ -1007,7 +1007,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">61
 </span><span class="lnt">62
 </span><span class="lnt">63
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">CircularLinkedList</span> <span class="kr">extends</span> <span class="nx">LinkedList</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">CircularLinkedList</span> <span class="kr">extends</span> <span class="nx">LinkedList</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">constructor</span><span class="p">(</span><span class="nx">equalsFn</span> <span class="o">=</span> <span class="nx">defaultEquals</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">super</span><span class="p">(</span><span class="nx">equalsFn</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
@@ -1101,7 +1101,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">29
 </span><span class="lnt">30
 </span><span class="lnt">31
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">defaultCompare</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">defaultCompare</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">a</span> <span class="o">===</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
@@ -1210,7 +1210,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">76
 </span><span class="lnt">77
 </span><span class="lnt">78
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">MySet</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">MySet</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 同样的 key 不会有两个 value，所以这里使用对象
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">items</span> <span class="o">=</span> <span class="p">{};</span>
@@ -1368,7 +1368,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">78
 </span><span class="lnt">79
 </span><span class="lnt">80
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">defaultToString</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">defaultToString</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">s</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s1">'NULL'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">s</span> <span class="o">==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
@@ -1524,7 +1524,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">73
 </span><span class="lnt">74
 </span><span class="lnt">75
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">HashMap</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">HashMap</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">constructor</span><span class="p">(</span><span class="nx">toStr</span> <span class="o">=</span> <span class="nx">defaultToString</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">toStr</span> <span class="o">=</span> <span class="nx">toStr</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">table</span> <span class="o">=</span> <span class="p">{};</span>
@@ -1738,7 +1738,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">137
 </span><span class="lnt">138
 </span><span class="lnt">139
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">Compare</span> <span class="o">=</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">Compare</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">LESS_THAN</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">BIGGER_THAN</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">EQUALS</span><span class="o">:</span> <span class="mi">0</span>
@@ -1892,7 +1892,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">BinarySearchTree</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">BinarySearchTree</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// ...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">preOrderTraverse</span><span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 通过先序遍历（以优先于后代节点的顺序访问每个节点）方式遍历所有节点
@@ -1923,7 +1923,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">BinarySearchTree</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">BinarySearchTree</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// ...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">inOrderTraverse</span><span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 通过中序遍历（以从最小到最大的顺序访问所有节点）方式遍历所有节点
@@ -1953,7 +1953,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">BinarySearchTree</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">BinarySearchTree</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// ...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">postOrderTraverse</span><span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 通过后序遍历（先访问节点的后代节点，再访问节点本身）方式遍历所有节点
@@ -1988,7 +1988,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">18
 </span><span class="lnt">19
 </span><span class="lnt">20
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">example</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">from</span><span class="p">({</span> <span class="nx">length</span><span class="o">:</span> <span class="mi">100</span> <span class="p">},</span> <span class="p">()</span> <span class="p">=&gt;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">example</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">from</span><span class="p">({</span> <span class="nx">length</span><span class="o">:</span> <span class="mi">100</span> <span class="p">},</span> <span class="p">()</span> <span class="p">=&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">parseInt</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">bubbleSort</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
@@ -2029,7 +2029,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">19
 </span><span class="lnt">20
 </span><span class="lnt">21
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">selectSort</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">selectSort</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="nx">array</span><span class="p">.</span><span class="nx">concat</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">minIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -2066,7 +2066,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">insertionSort</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">insertionSort</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">array</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">target</span> <span class="o">=</span> <span class="nx">i</span><span class="p">;</span> <span class="c1">// 从第二个元素开始
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 从当前元素向前扫描
@@ -2098,7 +2098,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">quickSort</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">quickSort</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="nx">array</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// 这个是随便选的，这里为了便于理解，选了中间位置
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kd">let</span> <span class="nx">pivotIndex</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
@@ -2140,7 +2140,7 @@ JS 中的数组继承自对象，内部是 key-value 的存储形式；key 为 0
 </span><span class="lnt">24
 </span><span class="lnt">25
 </span><span class="lnt">26
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">merge</span><span class="p">(</span><span class="nx">arr1</span><span class="p">,</span> <span class="nx">arr2</span><span class="p">)</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">merge</span><span class="p">(</span><span class="nx">arr1</span><span class="p">,</span> <span class="nx">arr2</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// arr* 是两个已经按升序排列好的数组
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[];</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">index1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>

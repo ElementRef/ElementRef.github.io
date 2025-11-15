@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="zh-cn" dir="ltr"><head><meta charset="utf-8"><style>:where(img[jampack-sized]){max-width:100%;height:auto}</style><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><meta name="description" content="词法作用域 传统编译语言的源代码在执行前会经历三个步骤，统称为编译：
 词法分析，将源代码分解为词法单元； 语法分析，将词法单元流转换为抽象语法树（AST）； 代码生成，将 AST 转换为可执行代码（一组机器指令）。 JS 是一门解释型语言，在执行前也需要进行编译，不过它的编译不是发生在构建前而是在运行时。
 "><title>再读《你不知道的 JavaScript》 · I AM BEA, I DRINK TEA</title>
-<link rel="canonical" href="https://ElementRef.github.io/p/%E5%86%8D%E8%AF%BB%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-javascript/"><link rel="stylesheet" href="/scss/style.min.71af184584791a9daf2008fabd318cb741ad5c3fc04b7c5ca044dbbc69190e9b.css"><meta property="og:title" content="再读《你不知道的 JavaScript》"><meta property="og:description" content="词法作用域 传统编译语言的源代码在执行前会经历三个步骤，统称为编译：
+<link rel="canonical" href="https://ElementRef.github.io/p/%E5%86%8D%E8%AF%BB%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-javascript/"><link rel="stylesheet" href="/scss/style.min.49a542c0449d2ab7de17e0bb72f035d22a011f1361d304a0ff6dc68951166f07.css"><meta property="og:title" content="再读《你不知道的 JavaScript》"><meta property="og:description" content="词法作用域 传统编译语言的源代码在执行前会经历三个步骤，统称为编译：
 词法分析，将源代码分解为词法单元； 语法分析，将词法单元流转换为抽象语法树（AST）； 代码生成，将 AST 转换为可执行代码（一组机器指令）。 JS 是一门解释型语言，在执行前也需要进行编译，不过它的编译不是发生在构建前而是在运行时。
 "><meta property="og:url" content="https://ElementRef.github.io/p/%E5%86%8D%E8%AF%BB%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-javascript/"><meta property="og:site_name" content="馬腊咯稽"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:published_time" content="2020-02-05T00:00:00+00:00"><meta property="article:modified_time" content="2020-02-05T00:00:00+00:00"><meta property="og:image" content="https://ElementRef.github.io/img/cover/javascript.png"><meta property="og:logo" content="/og-logo.png"><meta name="twitter:title" content="再读《你不知道的 JavaScript》"><meta name="twitter:description" content="词法作用域 传统编译语言的源代码在执行前会经历三个步骤，统称为编译：
 词法分析，将源代码分解为词法单元； 语法分析，将词法单元流转换为抽象语法树（AST）； 代码生成，将 AST 转换为可执行代码（一组机器指令）。 JS 是一门解释型语言，在执行前也需要进行编译，不过它的编译不是发生在构建前而是在运行时。
@@ -46,7 +46,7 @@
 </span><span class="lnt">28
 </span><span class="lnt">29
 </span><span class="lnt">30
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">eval</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span> <span class="c1">// 欺骗，修改词法作用域并对全局变量 a 进行遮蔽
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -86,7 +86,7 @@
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nx">bar</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 拥有涵盖 foo 内部作用域的闭包，bar 可以在之后任何时间位置引用
@@ -129,7 +129,7 @@
 </span><span class="lnt">31
 </span><span class="lnt">32
 </span><span class="lnt">33
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// 默认绑定在 window 上
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 默认绑定在 window 上
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">);</span> <span class="c1">// window
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
@@ -165,7 +165,7 @@
 </span></span></span></code></pre></td></tr></tbody></table></div></div><p>在箭头函数中，放弃了 this 的绑定规则，用当前的词法作用域取代了 this 机制。</p><h2 id="-与-">== 与 ===</h2><p>常见的误区是：“== 检查值是否相等，=== 检查值和类型是否相等”；正确的解释是：“== 允许在相等比较中进行强制类型转换，而 === 不允许”。实际上 == 的工作量要大一些。</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// == 最容易出错的一个地方是 true 和 false 与其他类型之间的相等比较，要避免布尔值的宽松相等
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// == 最容易出错的一个地方是 true 和 false 与其他类型之间的相等比较，要避免布尔值的宽松相等
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'42'</span> <span class="o">==</span> <span class="kc">true</span><span class="p">);</span> <span class="c1">// false
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'42'</span> <span class="o">==</span> <span class="kc">false</span><span class="p">);</span> <span class="c1">// false
 </span></span></span></code></pre></td></tr></tbody></table></div></div><h2 id="子类构造器">子类构造器</h2><p>对于类，构造器不是必须的，如果省略，二者都会提供默认的构造器；默认子类构造器自动调用父类构造器并传递所有参数。</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -178,7 +178,7 @@
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Child</span> <span class="kr">extends</span> <span class="nx">Parent</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Child</span> <span class="kr">extends</span> <span class="nx">Parent</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">constructor</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// super 指向 Parent 的构造函数
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">super</span><span class="p">(...</span><span class="nx">args</span><span class="p">);</span>

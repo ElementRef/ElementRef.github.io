@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="zh-cn" dir="ltr"><head><meta charset="utf-8"><style>:where(img[jampack-sized]){max-width:100%;height:auto}</style><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><meta name="description" content="组件 在 Angular 中，组件是用来定义视图的，一个应用至少有一个根组件（属于根模块的一部分）；组件由三部分组成：组件类（控制组件模板渲染）、组件模板、组件样式（默认仅对当前组件生效，不会污染全局）；可以使用 ng generate 命令或 编辑器扩展 快速新建组件（服务、管道…）：
 "><title>Angular 快速上手 · I AM BEA, I DRINK TEA</title>
-<link rel="canonical" href="https://ElementRef.github.io/p/angular-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/"><link rel="stylesheet" href="/scss/style.min.71af184584791a9daf2008fabd318cb741ad5c3fc04b7c5ca044dbbc69190e9b.css"><meta property="og:title" content="Angular 快速上手"><meta property="og:description" content="组件 在 Angular 中，组件是用来定义视图的，一个应用至少有一个根组件（属于根模块的一部分）；组件由三部分组成：组件类（控制组件模板渲染）、组件模板、组件样式（默认仅对当前组件生效，不会污染全局）；可以使用 ng generate 命令或 编辑器扩展 快速新建组件（服务、管道…）：
+<link rel="canonical" href="https://ElementRef.github.io/p/angular-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/"><link rel="stylesheet" href="/scss/style.min.49a542c0449d2ab7de17e0bb72f035d22a011f1361d304a0ff6dc68951166f07.css"><meta property="og:title" content="Angular 快速上手"><meta property="og:description" content="组件 在 Angular 中，组件是用来定义视图的，一个应用至少有一个根组件（属于根模块的一部分）；组件由三部分组成：组件类（控制组件模板渲染）、组件模板、组件样式（默认仅对当前组件生效，不会污染全局）；可以使用 ng generate 命令或 编辑器扩展 快速新建组件（服务、管道…）：
 "><meta property="og:url" content="https://ElementRef.github.io/p/angular-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/"><meta property="og:site_name" content="馬腊咯稽"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:published_time" content="2022-03-16T00:00:00+00:00"><meta property="article:modified_time" content="2022-03-16T00:00:00+00:00"><meta property="og:image" content="https://ElementRef.github.io/img/cover/angular.png"><meta property="og:logo" content="/og-logo.png"><meta name="twitter:title" content="Angular 快速上手"><meta name="twitter:description" content="组件 在 Angular 中，组件是用来定义视图的，一个应用至少有一个根组件（属于根模块的一部分）；组件由三部分组成：组件类（控制组件模板渲染）、组件模板、组件样式（默认仅对当前组件生效，不会污染全局）；可以使用 ng generate 命令或 编辑器扩展 快速新建组件（服务、管道…）：
 "><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://ElementRef.github.io/img/cover/angular.png"><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><meta name="robots" content="noarchive, noindex, nofollow"><meta name="theme-color" content="#ffffff"><script defer="" src="https://umami.pavilion0321907.workers.dev/elementref.js" data-website-id="87868be0-a9cf-4f8c-8fee-e3cbb99e6cf2"></script></head><body class="article-page"><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="flex container extended main-container on-phone--column"><aside class="sidebar sticky left-sidebar"><button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
 <span class="hamburger-box"><span class="hamburger-inner"></span></span></button><header><figure class="site-avatar"><a href="/"><img src="/img/avatar_hu15751654176150258532.webp" width="300" height="404" class="site-logo" alt="Avatar" fetchpriority="high" decoding="async"></a></figure><div class="site-meta"><h1 class="site-name"><a href="/">馬腊咯稽</a></h1><h2 class="site-description">I AM BEA, I DRINK TEA</h2></div></header><ol class="social-menu"><li><a href="https://space.bilibili.com/593541941" target="_blank" title="Bilibili"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M3 10a4 4 0 014-4h10a4 4 0 014 4v6a4 4 0 01-4 4H7a4 4 0 01-4-4v-6z"></path><path d="M8 3l2 3"></path><path d="M16 3l-2 3"></path><path d="M9 13v-2"></path><path d="M15 11v2"></path></svg></a></li><li><a href="https://x.com/SpiciComic" target="_blank" title="Twitter"><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"></path></svg></a></li><li><a href="https://github.com/ElementRef" target="_blank" title="GitHub"><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"></path></svg></a></li><li><a href="https://m.weibo.cn/u/6447635754" target="_blank" title="Weibo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-weibo"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M19 14.127C19 17.2 15.498 20 11 20c-4.126.0-8-2.224-8-5.565.0-1.78.984-3.737 2.7-5.567 2.362-2.51 5.193-3.687 6.551-2.238.415.44.752 1.39.749 2.062 2-1.615 4.308.387 3.5 2.693 1.26.557 2.5.538 2.5 2.742z"></path><path d="M15 4h1a5 5 0 015 5v1"></path></svg></a></li><li><a href="https://last.fm/zh/user/SpiciComic/listening-report" target="_blank" title="Last.fm"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-lastfm"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M20 8c-.83-1-1.388-1-2-1-.612.0-2 .271-2 2s1.384 2.233 3 3 2.125 1.812 2 3-1 2-3 2-3-1-3.5-2-1.585-4.78-2.497-6a5 5 0 10-1 7"></path></svg></a></li></ol><ol class="menu" id="main-menu"><li><a href="/"><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><polyline points="5 12 3 12 12 3 21 12 19 12"></polyline><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"></path></svg>
@@ -264,7 +264,7 @@
 </span><span class="lnt">247
 </span><span class="lnt">248
 </span><span class="lnt">249
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">slideMotion</span> <span class="o">=</span> <span class="nx">trigger</span><span class="p">(</span><span class="s1">'slideMotion'</span><span class="p">,</span> <span class="p">[</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">slideMotion</span> <span class="o">=</span> <span class="nx">trigger</span><span class="p">(</span><span class="s1">'slideMotion'</span><span class="p">,</span> <span class="p">[</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// 创建一组有名字的 CSS 样式，它会在成功转换到指定的状态时应用到元素上
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">state</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="s1">'void'</span><span class="p">,</span>
@@ -565,7 +565,7 @@
 </span><span class="lnt">50
 </span><span class="lnt">51
 </span><span class="lnt">52
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">@Directive</span><span class="p">({</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@Directive</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * &lt;div [app-example] #exampleRef="example"&gt;&lt;/div&gt;
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 可以通过 exampleRef 获取到“当前指令的引用”
@@ -634,7 +634,7 @@
 </span><span class="lnt">15
 </span><span class="lnt">16
 </span><span class="lnt">17
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// 一个“延迟渲染”的例子
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 一个“延迟渲染”的例子
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">@Directive</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">selector</span><span class="o">:</span> <span class="s1">'[delayRender]'</span>
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
@@ -694,7 +694,7 @@
 </span><span class="lnt">41
 </span><span class="lnt">42
 </span><span class="lnt">43
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">DomSanitizerType</span> <span class="o">=</span> <span class="s1">'html'</span> <span class="o">|</span> <span class="s1">'style'</span> <span class="o">|</span> <span class="s1">'js'</span> <span class="o">|</span> <span class="s1">'url'</span> <span class="o">|</span> <span class="s1">'resourceUrl'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">DomSanitizerType</span> <span class="o">=</span> <span class="s1">'html'</span> <span class="o">|</span> <span class="s1">'style'</span> <span class="o">|</span> <span class="s1">'js'</span> <span class="o">|</span> <span class="s1">'url'</span> <span class="o">|</span> <span class="s1">'resourceUrl'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">NzSafeAny</span> <span class="o">=</span> <span class="kt">any</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">@Pipe</span><span class="p">({</span>
@@ -755,7 +755,7 @@
 </span><span class="lnt">16
 </span><span class="lnt">17
 </span><span class="lnt">18
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">TicketListComponent</span> <span class="kr">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">TicketListComponent</span> <span class="kr">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">data</span>: <span class="kt">Array</span><span class="o">&lt;</span><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">id</span>: <span class="kt">number</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">title</span>: <span class="kt">srting</span><span class="p">;</span>
@@ -807,7 +807,7 @@
 </span><span class="lnt">32
 </span><span class="lnt">33
 </span><span class="lnt">34
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">Seller</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">Seller</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">id</span>: <span class="kt">number</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">name</span>: <span class="kt">srting</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -880,7 +880,7 @@
 </span><span class="lnt">37
 </span><span class="lnt">38
 </span><span class="lnt">39
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">@Component</span><span class="p">({</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@Component</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">template</span><span class="o">:</span> <span class="sb">`
 </span></span></span><span class="line"><span class="cl"><span class="sb">    &lt;ng-container *ngIf="vm$ | async as vm"&gt;
 </span></span></span><span class="line"><span class="cl"><span class="sb">      &lt;ul&gt;
@@ -985,7 +985,7 @@
 </span><span class="lnt">64
 </span><span class="lnt">65
 </span><span class="lnt">66
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">@Injectable</span><span class="p">({</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@Injectable</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * providedIn 有四种取值：
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 1. platform：平台级别注入，所有应用共享一个服务单例（仅适用于在一个 window 下运行多个 Angular 应用，有点微前端的意思）；
@@ -1101,7 +1101,7 @@
 </span><span class="lnt">48
 </span><span class="lnt">49
 </span><span class="lnt">50
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">@NgModule</span><span class="p">({</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@NgModule</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 使用：platformBrowserDynamic().bootstrapModule(AppModule) 启动根模块
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 只有根模块（一个应用只有一个）才设置这个属性
@@ -1298,7 +1298,7 @@
 </span><span class="lnt">145
 </span><span class="lnt">146
 </span><span class="lnt">147
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="cm">/**
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * 使用“响应式表单”，需要在 NgModule 中导入 ReactiveFormsModule 和 FormsModule：
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * ReactiveFormsModule：提供 formControl、ngFormGroup 等指令；
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * FormsModule：提供 ngForm、ngModel 等模版驱动指令。
@@ -1503,7 +1503,7 @@
 </span><span class="lnt">56
 </span><span class="lnt">57
 </span><span class="lnt">58
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">Route</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">Route</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">canActivate?</span>: <span class="kt">any</span><span class="p">[];</span> <span class="c1">// 调用 canActivate 钩子来确定“是否激活匹配到的路由”
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">canActivateChild?</span>: <span class="kt">any</span><span class="p">[];</span> <span class="c1">// 调用 canActivateChild 钩子来确定“路径参数的变化时，是否激活匹配到的子路由”
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">canDeactivate?</span>: <span class="kt">any</span><span class="p">[];</span> <span class="c1">// 调用 canDeactivate 钩子来确定“是否允许离开当前路由”
@@ -1579,7 +1579,7 @@
 </span><span class="lnt">16
 </span><span class="lnt">17
 </span><span class="lnt">18
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">@Injectable</span><span class="p">({</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@Injectable</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">providedIn</span><span class="o">:</span> <span class="s1">'root'</span>
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
 </span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">LoginGuard</span> <span class="kr">implements</span> <span class="nx">CanActive</span><span class="p">,</span> <span class="nx">CanActiveChild</span> <span class="p">{</span>
@@ -1650,7 +1650,7 @@
 </span><span class="lnt">51
 </span><span class="lnt">52
 </span><span class="lnt">53
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ActivatedRoute</span><span class="p">,</span> <span class="nx">NavigationEnd</span><span class="p">,</span> <span class="nx">Router</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@angular/router'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ActivatedRoute</span><span class="p">,</span> <span class="nx">NavigationEnd</span><span class="p">,</span> <span class="nx">Router</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@angular/router'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">@Component</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">selector</span><span class="o">:</span> <span class="s1">'app-general'</span>
@@ -1756,7 +1756,7 @@
 </span><span class="lnt">49
 </span><span class="lnt">50
 </span><span class="lnt">51
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">@Component</span><span class="p">({</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@Component</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 如果不需要“独有”服务实例，就不需要 providers
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 在每个 @Component({providers:[xxx]}) 中单独声明
@@ -1828,7 +1828,7 @@
 </span><span class="lnt">19
 </span><span class="lnt">20
 </span><span class="lnt">21
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">@Component</span><span class="p">({</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@Component</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">template</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">    <span class="s1">'&lt;div&gt;&lt;app-input-model [(example)]="exampleValue"&gt;&lt;/app-input-model&gt;&lt;span&gt;{{ exampleValue }}&lt;/span&gt;&lt;/div&gt;'</span>
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
@@ -1924,7 +1924,7 @@
 </span><span class="lnt">23
 </span><span class="lnt">24
 </span><span class="lnt">25
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">BrowserModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@angular/platform-browser'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">BrowserModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@angular/platform-browser'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">HttpClientModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@angular/common/http'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">@NgModule</span><span class="p">({</span>
@@ -2019,7 +2019,7 @@
 </span><span class="lnt">68
 </span><span class="lnt">69
 </span><span class="lnt">70
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">HttpClient</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">HttpErrorResponse</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">HttpHeaders</span><span class="p">,</span>
@@ -2207,7 +2207,7 @@
 </span><span class="lnt">82
 </span><span class="lnt">83
 </span><span class="lnt">84
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// 封装逻辑
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 封装逻辑
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">@Component</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">selector</span><span class="o">:</span> <span class="s1">'app-user-list-slot'</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">template</span><span class="o">:</span> <span class="sb">`
@@ -2338,7 +2338,7 @@
 </span><span class="lnt">17
 </span><span class="lnt">18
 </span><span class="lnt">19
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">@Component</span><span class="p">({</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@Component</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">selector</span><span class="o">:</span> <span class="s1">'user-list'</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">template</span><span class="o">:</span> <span class="s1">'&lt;nz-spin&gt;&lt;form #form&gt;&lt;/form&gt;&lt;user-detail&gt;&lt;/user-detail&gt;&lt;/nz-spin&gt;'</span>
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
@@ -2384,7 +2384,7 @@
 </span><span class="lnt">25
 </span><span class="lnt">26
 </span><span class="lnt">27
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">@Component</span><span class="p">({</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@Component</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">selector</span><span class="o">:</span> <span class="s1">'user-list'</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">template</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">    <span class="s1">'&lt;user-detail&gt;&lt;span #span&gt;用户交易&lt;/span&gt;&lt;user-trade&gt;&lt;/user-trade&gt;&lt;/user-detail&gt;'</span>
@@ -2436,7 +2436,7 @@
 </span><span class="lnt">23
 </span><span class="lnt">24
 </span><span class="lnt">25
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">DataListProvider</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">DataListProvider</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">get</span> <span class="nx">data() {</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 假设数据量很大，并且变化频繁
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
@@ -2489,7 +2489,7 @@ NG100 错误
 </span><span class="lnt">24
 </span><span class="lnt">25
 </span><span class="lnt">26
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">@Component</span><span class="p">({</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@Component</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">template</span><span class="o">:</span> <span class="sb">`
 </span></span></span><span class="line"><span class="cl"><span class="sb">    &lt;ng-container #vcf&gt;&lt;/ng-container&gt;
 </span></span></span><span class="line"><span class="cl"><span class="sb">  `</span>
@@ -2530,7 +2530,7 @@ NG100 错误
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">@Component</span><span class="p">({</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@Component</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">template</span><span class="o">:</span> <span class="sb">`
 </span></span></span><span class="line"><span class="cl"><span class="sb">    &lt;!-- {{ 插值中的内容总会被“无害化”}} --&gt;
 </span></span></span><span class="line"><span class="cl"><span class="sb">    &lt;p class="e2e-inner-html-interpolated"&gt;{{ htmlSnippet }}&lt;/p&gt;
@@ -2559,7 +2559,7 @@ NG100 错误
 </span><span class="lnt">11
 </span><span class="lnt">12
 </span><span class="lnt">13
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">@Component</span><span class="p">({</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@Component</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">template</span><span class="o">:</span> <span class="sb">`
 </span></span></span><span class="line"><span class="cl"><span class="sb">    &lt;h4&gt;自动无害化处理&lt;/h4&gt;
 </span></span></span><span class="line"><span class="cl"><span class="sb">    &lt;p&gt;&lt;a [href]="dangerousUrl"&gt;Click Me&lt;/a&gt;&lt;/p&gt;

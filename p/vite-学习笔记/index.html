@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="zh-cn" dir="ltr"><head><meta charset="utf-8"><style>:where(img[jampack-sized]){max-width:100%;height:auto}</style><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><meta name="description" content="Vite 内部有两套实现：
 开发环境下，借助 esbuild 和预打包缓存实现快速的 HMR： 首次启动时，esbuild 会将 node_modules 下的依赖进行预打包并缓存在 .vite 目录； 对 node_modules 下的依赖配置强缓存，对项目代码配置协商缓存； 只编译当前页面需要的依赖和项目代码； 不管兼容性问题，无需代码降级转换。 生产环境下，借助 Rollup 打包，输出优化后的文件： 需要 tree-shaking、懒加载、代码分割、缓存配置来实现更好的访问速度； 不是所有的环境都升级到了 HTTP/2|3，不优化可能会产生大量请求； 可以借助插件对更多资源（CSS|SVG|IMAGE）做针对性处理； 需要解决产物的兼容性问题，例如客户端较低版本的浏览器。 为什么是 Vite Vite 主要解决了项目启动慢、HMR 慢的问题；但是宣传上比较讨巧，实际上项目第一次启动时，会预打包并将结果缓存；HMR 也是借助了 ESM 的特性，只转换不打包。
 "><title>Vite 学习笔记 · I AM BEA, I DRINK TEA</title>
-<link rel="canonical" href="https://ElementRef.github.io/p/vite-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><link rel="stylesheet" href="/scss/style.min.71af184584791a9daf2008fabd318cb741ad5c3fc04b7c5ca044dbbc69190e9b.css"><meta property="og:title" content="Vite 学习笔记"><meta property="og:description" content="Vite 内部有两套实现：
+<link rel="canonical" href="https://ElementRef.github.io/p/vite-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><link rel="stylesheet" href="/scss/style.min.49a542c0449d2ab7de17e0bb72f035d22a011f1361d304a0ff6dc68951166f07.css"><meta property="og:title" content="Vite 学习笔记"><meta property="og:description" content="Vite 内部有两套实现：
 开发环境下，借助 esbuild 和预打包缓存实现快速的 HMR： 首次启动时，esbuild 会将 node_modules 下的依赖进行预打包并缓存在 .vite 目录； 对 node_modules 下的依赖配置强缓存，对项目代码配置协商缓存； 只编译当前页面需要的依赖和项目代码； 不管兼容性问题，无需代码降级转换。 生产环境下，借助 Rollup 打包，输出优化后的文件： 需要 tree-shaking、懒加载、代码分割、缓存配置来实现更好的访问速度； 不是所有的环境都升级到了 HTTP/2|3，不优化可能会产生大量请求； 可以借助插件对更多资源（CSS|SVG|IMAGE）做针对性处理； 需要解决产物的兼容性问题，例如客户端较低版本的浏览器。 为什么是 Vite Vite 主要解决了项目启动慢、HMR 慢的问题；但是宣传上比较讨巧，实际上项目第一次启动时，会预打包并将结果缓存；HMR 也是借助了 ESM 的特性，只转换不打包。
 "><meta property="og:url" content="https://ElementRef.github.io/p/vite-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><meta property="og:site_name" content="馬腊咯稽"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:published_time" content="2024-10-29T00:00:00+00:00"><meta property="article:modified_time" content="2024-10-29T00:00:00+00:00"><meta property="og:image" content="https://ElementRef.github.io/img/cover/vite.png"><meta property="og:logo" content="/og-logo.png"><meta name="twitter:title" content="Vite 学习笔记"><meta name="twitter:description" content="Vite 内部有两套实现：
 开发环境下，借助 esbuild 和预打包缓存实现快速的 HMR： 首次启动时，esbuild 会将 node_modules 下的依赖进行预打包并缓存在 .vite 目录； 对 node_modules 下的依赖配置强缓存，对项目代码配置协商缓存； 只编译当前页面需要的依赖和项目代码； 不管兼容性问题，无需代码降级转换。 生产环境下，借助 Rollup 打包，输出优化后的文件： 需要 tree-shaking、懒加载、代码分割、缓存配置来实现更好的访问速度； 不是所有的环境都升级到了 HTTP/2|3，不优化可能会产生大量请求； 可以借助插件对更多资源（CSS|SVG|IMAGE）做针对性处理； 需要解决产物的兼容性问题，例如客户端较低版本的浏览器。 为什么是 Vite Vite 主要解决了项目启动慢、HMR 慢的问题；但是宣传上比较讨巧，实际上项目第一次启动时，会预打包并将结果缓存；HMR 也是借助了 ESM 的特性，只转换不打包。
@@ -21,7 +21,7 @@
 </a>和<a class="link" href="https://github.com/vitejs/vite/discussions/13697" target="_blank" rel="noopener">
 相关 issue
 </a>。</p><h2 id="功能">功能</h2><h3 id="预构建">预构建</h3><p>在项目第一次启动时，Vite 通过 esbuild 对 node_modules 下的依赖进行预打包，将 CJS|UMD 规范的包转换为 ESM 规范；然后解析页面引用，将：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">someMethod</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'my-dep'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">someMethod</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'my-dep'</span><span class="p">;</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>转换为浏览器能解析的代码，发送给浏览器。</p><h3 id="热替换">热替换</h3><p>Vite 提供了一套适用于 ESM 的 <a class="link" href="https://cn.vitejs.dev/guide/api-hmr.html" target="_blank" rel="noopener">HMR API
 </a>，可以实现精准的 HMR。Vite 已经集成了 <a class="link" href="https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue" target="_blank" rel="noopener">Vue
 </a>、<a class="link" href="https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react" target="_blank" rel="noopener">
@@ -29,31 +29,31 @@ React
 </a>的 HMR 方案。</p><h3 id="typescript">TypeScript</h3><p>Vite 对 TS 文件进行转换而不进行类型检查，它希望类型检查由 IDE 完成。因为类型检查需要解析整个项目的依赖关系，和 Vite 的按需编译模式不匹配。</p><p>如果需要进行类型检查，可以借助 tsc --noEmit，或者借助 <a class="link" href="https://github.com/fi3ework/vite-plugin-checker" target="_blank" rel="noopener">vite-plugin-checker
 </a>插件。</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">someType</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'someModule'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">someType</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'someModule'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="p">{</span> <span class="nx">someType</span> <span class="p">};</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>这段代码在 Vite 下可能不会正常工作，因为 someType 仅仅是一个类型；所以最好采用下边这种写法：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="kr">type</span> <span class="p">{</span> <span class="nx">someType</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'someModule'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="kr">type</span> <span class="p">{</span> <span class="nx">someType</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'someModule'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">type</span> <span class="p">{</span> <span class="nx">someType</span> <span class="p">};</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>import|export type 是 TS 在 3.8 引入的语法，用来确保导入导出的仅仅是类型，可以在编译时去掉。</p><p>Vite 建议使用以下 compilerOptions：</p><ul><li>isolatedModules:true<ul><li>除了 tsc，其他编译工具在编译 TS 时，都不会有类型系统的介入；</li><li>如果第三方依赖不兼容这个选项，可是使用 skipLibCheck:true；</li><li>这个选项用来保证，每个文件都可以被单独编译。</li></ul></li><li>useDefineForClassFields<ul><li>target:ESNext|ES2022+ 时，应为 true；</li><li>target 为其他版本时，应为 false。</li></ul></li><li>target<ul><li>Vite 会忽略这项设置，而读取 esbuild.target；</li><li>可以在 vite.config 中配置 esbuild.target。</li></ul></li><li>types:[“vite/client”] 可以为编辑器提供以下类型提示：<ul><li>import.meta.env；</li><li>import.meta.hot；</li><li>资源导入。</li></ul></li></ul><h3 id="glob-导入">Glob 导入</h3><p>Vite 扩展（不属于 ES 标准）了 import.meta，用来从文件系统中导入多个模块：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">modules</span> <span class="o">=</span> <span class="kr">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">glob</span><span class="p">(</span><span class="s1">'./dir/*.js'</span><span class="p">);</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">modules</span> <span class="o">=</span> <span class="kr">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">glob</span><span class="p">(</span><span class="s1">'./dir/*.js'</span><span class="p">);</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>默认会被转换为异步导入：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">modules</span> <span class="o">=</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">modules</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="s1">'./dir/foo.js'</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="kr">import</span><span class="p">(</span><span class="s1">'./dir/foo.js'</span><span class="p">),</span>
 </span></span><span class="line"><span class="cl">  <span class="s1">'./dir/bar.js'</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="kr">import</span><span class="p">(</span><span class="s1">'./dir/bar.js'</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>如果需要转换为同步导入，传入第二个参数即可：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">modules</span> <span class="o">=</span> <span class="kr">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">glob</span><span class="p">(</span><span class="s1">'./dir/*.js'</span><span class="p">,</span> <span class="p">{</span> <span class="nx">eager</span>: <span class="kt">true</span> <span class="p">});</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">modules</span> <span class="o">=</span> <span class="kr">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">glob</span><span class="p">(</span><span class="s1">'./dir/*.js'</span><span class="p">,</span> <span class="p">{</span> <span class="nx">eager</span>: <span class="kt">true</span> <span class="p">});</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>会被转换为同步导入：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">__glob__0_0</span> <span class="kr">from</span> <span class="s1">'./dir/foo.js'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">__glob__0_0</span> <span class="kr">from</span> <span class="s1">'./dir/foo.js'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">__glob__0_1</span> <span class="kr">from</span> <span class="s1">'./dir/bar.js'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">modules</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="s1">'./dir/foo.js'</span><span class="o">:</span> <span class="nx">__glob__0_0</span><span class="p">,</span>
@@ -64,7 +64,7 @@ React
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">path</span> <span class="k">in</span> <span class="nx">modules</span><span class="p">)</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">path</span> <span class="k">in</span> <span class="nx">modules</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">modules</span><span class="p">[</span><span class="nx">path</span><span class="p">]().</span><span class="nx">then</span><span class="p">(</span><span class="nx">mod</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">mod</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">});</span>
@@ -79,7 +79,7 @@ React
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// 导入多个目录下的模块
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 导入多个目录下的模块
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">modules</span> <span class="o">=</span> <span class="kr">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">glob</span><span class="p">([</span><span class="s1">'./dir/*.js'</span><span class="p">,</span> <span class="s1">'./another/*.js'</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 不导入 ./dir/bar.js
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">modules</span> <span class="o">=</span> <span class="kr">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">glob</span><span class="p">([</span><span class="s1">'./dir/*.js'</span><span class="p">,</span> <span class="s1">'!**/bar.js'</span><span class="p">]);</span>
@@ -95,7 +95,7 @@ React
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// 作为一个 url 导入
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 作为一个 url 导入
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="nx">workletURL</span> <span class="kr">from</span> <span class="s1">'extra-scalloped-border/worklet.js?url'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 作为字符串导入
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="nx">shaderString</span> <span class="kr">from</span> <span class="s1">'./shader.glsl?raw'</span><span class="p">;</span>
@@ -103,14 +103,14 @@ React
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="nx">Worker</span> <span class="kr">from</span> <span class="s1">'./shader.js?worker'</span><span class="p">;</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>特别的，public 目录下的资源应该符合以下特点：</p><ul><li>打包后名称不会改变；</li><li>没有被模块引入。</li></ul><p>import.meta.url 属于 ESM 规范，返回值为当前模块的绝对路径：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">imgUrl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URL</span><span class="p">(</span><span class="s1">'./img.png'</span><span class="p">,</span> <span class="kr">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">url</span><span class="p">).</span><span class="nx">href</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">imgUrl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URL</span><span class="p">(</span><span class="s1">'./img.png'</span><span class="p">,</span> <span class="kr">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">url</span><span class="p">).</span><span class="nx">href</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'hero-img'</span><span class="p">).</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">imgUrl</span><span class="p">;</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>但是，如果 build.target 不支持 import.meta.url，构建将会失败；同时，也不应该在为 SSR 打包的情况下使用，因为服务器和浏览器的语意不同。</p><h2 id="打包">打包</h2><p>Vite 默认的打包产物仅支持兼容 ESM 规范的浏览器：</p><ul><li>Chrome &gt;= 87</li><li>Firefox &gt;= 78</li><li>Safari &gt;= 14</li><li>Edge &gt;= 88</li></ul><p>可以通过 build.target 指定构建目标，最低为 es2015。如果要兼容更低版本的浏览器，需要使用<a class="link" href="https://github.com/vitejs/vite/tree/main/packages/plugin-legacy" target="_blank" rel="noopener">
 @vitejs/plugin-legacy
 </a>。</p><p>如果需要自定义构建，可以配置 build.rollupOptions；如果需要自定义分包，可以配置 build.rollupOptions.output.manualChunks。</p><h3 id="处理加载出错">处理加载出错</h3><p>当应用重新部署时，服务器可能会将之前的构建产物删除，导致用户电脑上未关闭的页面报错；我们可以监听 vite:preloadError 事件，来刷新页面：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'vite:preloadError'</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'vite:preloadError'</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">reload</span><span class="p">();</span> <span class="c1">// 刷新页面
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">});</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><h3 id="库打包">库打包</h3><p>如果要给组件库打包，需要配置 build.lib：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -142,7 +142,7 @@ React
 </span><span class="lnt">27
 </span><span class="lnt">28
 </span><span class="lnt">29
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">resolve</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'path'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">resolve</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'path'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">defineConfig</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'vite'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
@@ -193,7 +193,7 @@ React
 </span><span class="lnt">20
 </span><span class="lnt">21
 </span><span class="lnt">22
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my-lib"</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 如果不包含 "type":"module"
@@ -226,7 +226,7 @@ React
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="cm">/**
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * VITE_SOME_KEY 在被定义时，是 number 类型
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * 实际被解析为了字符串，boolean 类型也一样
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * 要注意类型转换
@@ -250,7 +250,7 @@ React
 </span><span class="lnt">7
 </span><span class="lnt">8
 </span><span class="lnt">9
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">/// &lt;reference types="vite/client" /&gt;
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">/// &lt;reference types="vite/client" /&gt;
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>
 </span></span><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">ImportMetaEnv</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">readonly</span> <span class="nx">VITE_APP_TITLE</span>: <span class="kt">string</span><span class="p">;</span>
@@ -301,7 +301,7 @@ React
 </span><span class="lnt">15
 </span><span class="lnt">16
 </span><span class="lnt">17
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="kr">type</span> <span class="p">{</span> <span class="nx">Plugin</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'vite'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="kr">type</span> <span class="p">{</span> <span class="nx">Plugin</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'vite'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">example</span><span class="p">()</span><span class="o">:</span> <span class="nx">Plugin</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">{</span>
@@ -453,7 +453,7 @@ React
 </span><span class="lnt">133
 </span><span class="lnt">134
 </span><span class="lnt">135
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="kr">type</span> <span class="p">{</span> <span class="nx">Plugin</span><span class="p">,</span> <span class="nx">UserConfig</span><span class="p">,</span> <span class="nx">ResolvedConfig</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'vite'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="kr">type</span> <span class="p">{</span> <span class="nx">Plugin</span><span class="p">,</span> <span class="nx">UserConfig</span><span class="p">,</span> <span class="nx">ResolvedConfig</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'vite'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">example</span><span class="p">()</span><span class="o">:</span> <span class="nx">Plugin</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">{</span>
@@ -616,7 +616,7 @@ React
 </span><span class="lnt">26
 </span><span class="lnt">27
 </span><span class="lnt">28
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// 例子来自 Follow，apps/server/client/i18n.ts
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 例子来自 Follow，apps/server/client/i18n.ts
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">readFileSync</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'node:fs'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="kr">type</span> <span class="p">{</span> <span class="nx">Plugin</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'vite'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -663,7 +663,7 @@ React
 </span><span class="lnt">17
 </span><span class="lnt">18
 </span><span class="lnt">19
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// 会在生产打包时，被 TreeShaking
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 会在生产打包时，被 TreeShaking
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="kr">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">hot</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">hot</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="s1">'i18n-update'</span><span class="p">,</span>
@@ -686,7 +686,7 @@ React
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// 会在生产打包时，被 TreeShaking
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 会在生产打包时，被 TreeShaking
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="kr">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">hot</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">hot</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">'my:from-client'</span><span class="p">,</span> <span class="p">{</span> <span class="nx">msg</span><span class="o">:</span> <span class="s1">'Hey!'</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -702,7 +702,7 @@ React
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">plugins</span><span class="o">:</span> <span class="p">[</span>
 </span></span><span class="line"><span class="cl">    <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">configureServer</span><span class="p">(</span><span class="nx">server</span><span class="p">)</span> <span class="p">{</span>
@@ -722,7 +722,7 @@ React
 </span><span class="lnt">6
 </span><span class="lnt">7
 </span><span class="lnt">8
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="s1">'vite/types/customEvent.d.ts'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="s1">'vite/types/customEvent.d.ts'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">declare</span> <span class="nx">module</span> <span class="s1">'vite/types/customEvent.d.ts'</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">interface</span> <span class="nx">CustomEventMap</span> <span class="p">{</span>
@@ -731,7 +731,7 @@ React
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><h2 id="配置">配置</h2><p>Vite 运行时，会查找项目根目录下的 vite.config.js|ts，也可以通过 --config 指定配置文件：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="nx">vite</span> <span class="o">--</span><span class="nx">config</span> <span class="nx">src</span><span class="o">/</span><span class="nx">config</span><span class="p">.</span><span class="nx">js</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="nx">vite</span> <span class="o">--</span><span class="nx">config</span> <span class="nx">src</span><span class="o">/</span><span class="nx">config</span><span class="p">.</span><span class="nx">js</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><h3 id="类型提示-1">类型提示</h3><p>如果配置文件是 .js，可以通过 JSDoc/defineConfig 获取类型提示：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
@@ -741,7 +741,7 @@ React
 </span><span class="lnt">7
 </span><span class="lnt">8
 </span><span class="lnt">9
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="cm">/** @type {import('vite').UserConfig} */</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="cm">/** @type {import('vite').UserConfig} */</span>
 </span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// ...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
@@ -754,7 +754,7 @@ React
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="kr">type</span> <span class="p">{</span> <span class="nx">UserConfig</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'vite'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="kr">type</span> <span class="p">{</span> <span class="nx">UserConfig</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'vite'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// ...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span> <span class="nx">satisfies</span> <span class="nx">UserConfig</span><span class="p">;</span>
@@ -777,7 +777,7 @@ React
 </span><span class="lnt">17
 </span><span class="lnt">18
 </span><span class="lnt">19
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">defineConfig</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'vite'</span><span class="p">;</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">defineConfig</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'vite'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 配置可以是异步的
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="k">default</span> <span class="kr">async</span> <span class="p">({</span> <span class="nx">mode</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// 根据 mode 加载 .env 文件中所有变量
@@ -1184,7 +1184,7 @@ React
 </span><span class="lnt">386
 </span><span class="lnt">387
 </span><span class="lnt">388
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">UserConfig</span> <span class="p">{</span>
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">UserConfig</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 项目根目录，index.html 所在的目录
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 配置文件需要和 HTML 文件在同一个目录下
