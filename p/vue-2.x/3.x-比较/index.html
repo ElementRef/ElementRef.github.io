@@ -4331,7 +4331,7 @@
 </span></span><span class="line"><span class="cl">    <span class="c1">// 判断 computed 属性是否和 vm.$data、vm.$options.methods、vm.$options.props 冲突
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">vm</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">defineComputed</span><span class="p">(</span><span class="nx">vm</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">userDef</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="nx">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 冲突的话，抛出警告
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">vm</span><span class="p">.</span><span class="nx">$data</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">warn</span><span class="p">(</span><span class="sb">`already defined in data`</span><span class="p">);</span>
