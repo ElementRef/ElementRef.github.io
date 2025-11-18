@@ -1617,7 +1617,7 @@ vite-plugin-inspect
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">mainFields?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">[];&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 因为现在的第三方包会在 package.json 中导出对应 CJS、ESM、UMD 等规范的不同文件
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 对模块进行解析的过程中，匹配那些“情景导出”
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 对模块进行解析的过程中，匹配那些“条件导出”
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * [import, module, browser, default]
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">conditions?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">[];&lt;/span>
