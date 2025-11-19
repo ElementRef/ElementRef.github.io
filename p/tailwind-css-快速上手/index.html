@@ -1,0 +1,1572 @@
+<!DOCTYPE html><html lang="zh-cn" dir="ltr"><head><meta charset="utf-8"><style>:where(img[jampack-sized]){max-width:100%;height:auto}</style><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><meta name="description" content="是什么 借助于 JIT，Tailwind CSS 会在编译期间，扫描你的 HTML、Components 或者其他用来描述 HTML 的模版，收集其中的 class，然后生成对应的 CSS 文件。他是为了解决：CSS 冗余、CSS 耦合等问题。
+"><title>Tailwind CSS 快速上手 · I AM BEA, I DRINK TEA</title>
+<link rel="canonical" href="https://ElementRef.github.io/p/tailwind-css-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/"><link rel="stylesheet" href="/scss/style.min.49a542c0449d2ab7de17e0bb72f035d22a011f1361d304a0ff6dc68951166f07.css"><meta property="og:title" content="Tailwind CSS 快速上手"><meta property="og:description" content="是什么 借助于 JIT，Tailwind CSS 会在编译期间，扫描你的 HTML、Components 或者其他用来描述 HTML 的模版，收集其中的 class，然后生成对应的 CSS 文件。他是为了解决：CSS 冗余、CSS 耦合等问题。
+"><meta property="og:url" content="https://ElementRef.github.io/p/tailwind-css-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/"><meta property="og:site_name" content="馬腊咯稽"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:published_time" content="2024-10-07T00:00:00+00:00"><meta property="article:modified_time" content="2024-10-07T00:00:00+00:00"><meta property="og:image" content="https://ElementRef.github.io/img/cover/tailwind-css.png"><meta property="og:logo" content="/og-logo.png"><meta name="twitter:title" content="Tailwind CSS 快速上手"><meta name="twitter:description" content="是什么 借助于 JIT，Tailwind CSS 会在编译期间，扫描你的 HTML、Components 或者其他用来描述 HTML 的模版，收集其中的 class，然后生成对应的 CSS 文件。他是为了解决：CSS 冗余、CSS 耦合等问题。
+"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://ElementRef.github.io/img/cover/tailwind-css.png"><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><meta name="robots" content="noarchive, noindex, nofollow"><meta name="theme-color" content="#ffffff"><script defer="" src="https://umami.pavilion0321907.workers.dev/elementref.js" data-website-id="87868be0-a9cf-4f8c-8fee-e3cbb99e6cf2"></script></head><body class="article-page"><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="flex container extended main-container on-phone--column"><aside class="sidebar sticky left-sidebar"><button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+<span class="hamburger-box"><span class="hamburger-inner"></span></span></button><header><figure class="site-avatar"><a href="/"><img src="/img/avatar_hu15751654176150258532.webp" width="300" height="404" class="site-logo" alt="Avatar" fetchpriority="high" decoding="async"></a></figure><div class="site-meta"><h1 class="site-name"><a href="/">馬腊咯稽</a></h1><h2 class="site-description">I AM BEA, I DRINK TEA</h2></div></header><ol class="social-menu"><li><a href="https://douban.com/people/nicknoonan" target="_blank" title="DouBan"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-douban"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 20h16"></path><path d="M5 4h14"></path><path d="M8 8h8a2 2 0 012 2v2a2 2 0 01-2 2H8a2 2 0 01-2-2v-2a2 2 0 012-2z"></path><path d="M16 14l-2 6"></path><path d="M8 17l1 3"></path></svg></a></li><li><a href="https://x.com/SpiciComic" target="_blank" title="Twitter"><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"></path></svg></a></li><li><a href="https://github.com/ElementRef" target="_blank" title="GitHub"><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"></path></svg></a></li><li><a href="https://m.weibo.cn/u/6447635754" target="_blank" title="Weibo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-weibo"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M19 14.127C19 17.2 15.498 20 11 20c-4.126.0-8-2.224-8-5.565.0-1.78.984-3.737 2.7-5.567 2.362-2.51 5.193-3.687 6.551-2.238.415.44.752 1.39.749 2.062 2-1.615 4.308.387 3.5 2.693 1.26.557 2.5.538 2.5 2.742z"></path><path d="M15 4h1a5 5 0 015 5v1"></path></svg></a></li><li><a href="https://last.fm/zh/user/SpiciComic/listening-report" target="_blank" title="Last.fm"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-lastfm"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M20 8c-.83-1-1.388-1-2-1-.612.0-2 .271-2 2s1.384 2.233 3 3 2.125 1.812 2 3-1 2-3 2-3-1-3.5-2-1.585-4.78-2.497-6a5 5 0 10-1 7"></path></svg></a></li></ol><ol class="menu" id="main-menu"><li><a href="/"><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><polyline points="5 12 3 12 12 3 21 12 19 12"></polyline><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"></path></svg>
+<span>首页</span></a></li><li><a href="/archives/"><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><rect x="3" y="4" width="18" height="4" rx="2"></rect><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"></path><line x1="10" y1="12" x2="14" y2="12"></line></svg>
+<span>归档</span></a></li><li><a href="/search/"><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg>
+<span>搜索</span></a></li><li><a href="/%E5%90%AF%E5%8F%91/"><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"></path><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"></path></svg>
+<span>启发</span></a></li><li><a href="/%E5%91%BD%E4%BB%A4/"><svg class="icon icon-tabler icon-tabler-terminal" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M5 7l5 5-5 5"></path><line x1="12" y1="19" x2="19" y2="19"></line></svg>
+<span>命令</span></a></li><li><a href="/%E5%85%B3%E4%BA%8E/"><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><circle cx="12" cy="7" r="4"></circle><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"></path></svg>
+<span>关于</span></a></li><div class="menu-bottom-section"><li id="dark-mode-toggle"><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><circle cx="8" cy="12" r="2"></circle><rect x="2" y="6" width="20" height="12" rx="6"></rect></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><circle cx="16" cy="12" r="2"></circle><rect x="2" y="6" width="20" height="12" rx="6"></rect></svg>
+<span>深色</span></li></div></ol></aside><main class="full-width main"><article class="has-image main-article"><header class="article-header"><div class="article-image"><a href="/p/tailwind-css-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/"><img src="/img/cover/tailwind-css.png" alt="Tailwind CSS 快速上手" fetchpriority="high" decoding="async"></a></div><div class="article-details"><header class="article-category"><a href="/categories/css/">CSS
+</a><a href="/categories/tailwind-css/">Tailwind CSS</a></header><div class="article-title-wrapper"><h2 class="article-title"><a href="/p/tailwind-css-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/">Tailwind CSS 快速上手</a></h2></div><footer class="article-time"><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"></path><circle cx="18" cy="18" r="4"></circle><path d="M15 3v4"></path><path d="M7 3v4"></path><path d="M3 11h16"></path><path d="M18 16.496V18l1 1"></path></svg>
+<time class="article-time--published">Oct 07, 2024</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
+<time class="article-time--reading">阅读时长：14 分钟</time></div></footer></div></header><section class="article-content"><h2 id="是什么">是什么</h2><p>借助于 JIT，Tailwind CSS 会在编译期间，扫描你的 HTML、Components 或者其他用来描述 HTML 的模版，收集其中的 class，然后生成对应的 CSS 文件。他是为了解决：CSS 冗余、CSS 耦合等问题。</p><h2 id="怎么用">怎么用</h2><p>使用 TailwindCLI:</p><ol><li>安装 TailwindCLI；</li><li>在 CSS 中添加 @tailwind 指令；</li><li>运行 tailwindcss –watch 命令；</li><li>将输出的 CSS 文件引入到 HTML 中。</li></ol><p>作为 PostCSS 插件使用：</p><ol><li>安装 Tailwind CSS 和 PostCSS；</li><li>在 postcss.config.js 文件中配置 Tailwind CSS 作为一个 plugin；</li><li>在 tailwind.config.js 中配置 Tailwind CSS 要扫描的文件类型和目录；</li><li>在 CSS 文件中添加 @tailwind 指令；</li><li>项目运行/打包时，Tailwind CSS 会自动编译输出。</li></ol><p>对于 VSCode 用户，推荐使用 <a class="link" href="https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss" target="_blank" rel="noopener">Tailwind CSS IntelliSense
+</a>来获得代码提示和自动补全；官方还维护了一个 <a class="link" href="https://github.com/tailwindlabs/prettier-plugin-tailwindcss" target="_blank" rel="noopener">Prettier 插件
+</a>来确保项目中的 class 顺序符合 <a class="link" href="https://tailwindcss.com/blog/automatic-class-sorting-with-prettier#how-classes-are-sorted" target="_blank" rel="noopener">Tailwind CSS 建议
+</a>。</p><h2 id="预处理">预处理</h2><p>Tailwind CSS 可以作为 PostCSS 的一个插件；所以，如果你的项目恰好使用了 PostCSS 并且没有使用 Sass/Less/Stylus；那是再好不过的了；官方文档上推荐了几个 PostCSS 插件：</p><ul><li><a class="link" href="https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting" target="_blank" rel="noopener">postcss-nesting
+</a>，用来支持嵌套语法；</li><li><a class="link" href="https://github.com/postcss/postcss-import" target="_blank" rel="noopener">postcss-import
+</a>，用来支持 @import 语法；</li><li><a class="link" href="https://github.com/postcss/autoprefixer" target="_blank" rel="noopener">autoprefixer
+</a>，用来自动添加浏览器前缀。</li></ul><p>对于 Sass/Less/Stylus 这些，官方持消极态度；因为项目中的大部分 CSS 会由 Tailwind 生成；你甚至都不用额外的写 CSS；所以，这些预处理器的使用并不会带来太多的好处。</p><h2 id="修饰符">修饰符</h2><h3 id="伪类">伪类</h3><p>在传统的 CSS 中，我们会把不同的状态绑定到同一个 class 上；而在 Tailwind CSS 中，我们使用不同的 class 来描述不同状态下的样式：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">"bg-sky-500 hover:bg-sky-700 ..."</span><span class="p">&gt;</span>Save Changes<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">style</span> <span class="na">data-exp</span><span class="o">=</span><span class="s">"传统样式"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nc">btn-primary</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">background-color</span><span class="p">:</span> <span class="mh">#0ea5e9</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nc">btn-primary</span><span class="p">:</span><span class="nd">hover</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">background-color</span><span class="p">:</span> <span class="mh">#0369a1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">style</span> <span class="na">data-exp</span><span class="o">=</span><span class="s">"Tailwind 样式"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nc">bg-sky-500</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">background-color</span><span class="p">:</span> <span class="mh">#0ea5e9</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c">/* hover + 冒号 -&gt; 在 hover 状态下 */</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nc">hover</span><span class="err">\</span><span class="p">:</span><span class="nd">bg-sky-700</span><span class="p">:</span><span class="nd">hover</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">background-color</span><span class="p">:</span> <span class="mh">#0369a1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>Tailwind CSS 支持将多种状态进行叠加：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">button</span>
+</span></span><span class="line"><span class="cl">  <span class="na">class</span><span class="o">=</span><span class="s">"bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 ..."</span>
+</span></span><span class="line"><span class="cl"><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  这里包含了 hover、active、focus 等状态
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    {#each people as person}
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">tr</span>
+</span></span><span class="line"><span class="cl">      <span class="na">class</span><span class="o">=</span><span class="s">"odd:bg-white even:bg-slate-50"</span>
+</span></span><span class="line"><span class="cl">      <span class="na">data-exp</span><span class="o">=</span><span class="s">"这里包含了 :nth-of-type(even|odd)"</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{person.name}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{person.title}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{person.email}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    {/each}
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="伪元素">伪元素</h3><p>当需要定义 ::before 和 ::after 的样式时，可以使用 before|after 修饰符：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">label</span> <span class="na">class</span><span class="o">=</span><span class="s">"block"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">span</span>
+</span></span><span class="line"><span class="cl">    <span class="na">class</span><span class="o">=</span><span class="s">"after:content-['*'] after:ml-0.5 after:text-red-500 ..."</span>
+</span></span><span class="line"><span class="cl">    <span class="na">data-exp</span><span class="o">=</span><span class="s">"默认情况下，如果没有 after:content-['*']，Tailwind CSS 会自动添加 after:content-['']"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    Email
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"email"</span> <span class="na">name</span><span class="o">=</span><span class="s">"email"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"you@example.com"</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>当需要定义 placeholder 的样式时，可以使用 placeholder 修饰符：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">label</span> <span class="na">class</span><span class="o">=</span><span class="s">"relative block"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">input</span>
+</span></span><span class="line"><span class="cl">    <span class="na">class</span><span class="o">=</span><span class="s">"placeholder:italic placeholder:text-slate-400 ..."</span>
+</span></span><span class="line"><span class="cl">    <span class="na">placeholder</span><span class="o">=</span><span class="s">"Search for Anything..."</span>
+</span></span><span class="line"><span class="cl">    <span class="na">name</span><span class="o">=</span><span class="s">"search"</span>
+</span></span><span class="line"><span class="cl">    <span class="na">type</span><span class="o">=</span><span class="s">"text"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>当需要定义 fileInput 的样式时，可以使用 file 修饰符：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">label</span> <span class="na">class</span><span class="o">=</span><span class="s">"block"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">"sr-only"</span><span class="p">&gt;</span>Choose Profile Photo<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">input</span>
+</span></span><span class="line"><span class="cl">    <span class="na">type</span><span class="o">=</span><span class="s">"file"</span>
+</span></span><span class="line"><span class="cl">    <span class="na">class</span><span class="o">=</span><span class="s">"block w-full text-sm text-slate-500
+</span></span></span><span class="line"><span class="cl"><span class="s">      file:mr-4 file:py-2 file:px-4
+</span></span></span><span class="line"><span class="cl"><span class="s">      file:rounded-full file:border-0
+</span></span></span><span class="line"><span class="cl"><span class="s">      file:text-sm file:font-semibold
+</span></span></span><span class="line"><span class="cl"><span class="s">      file:bg-violet-50 file:text-violet-700
+</span></span></span><span class="line"><span class="cl"><span class="s">      hover:file:bg-violet-100
+</span></span></span><span class="line"><span class="cl"><span class="s">    "</span>
+</span></span><span class="line"><span class="cl">  <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>当需要定义 ol|ul 内部的符号样式时，可以使用 marker 修饰符：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">ul</span>
+</span></span><span class="line"><span class="cl">  <span class="na">data-exp</span><span class="o">=</span><span class="s">"相当于 list-style"</span>
+</span></span><span class="line"><span class="cl">  <span class="na">class</span><span class="o">=</span><span class="s">"marker:text-sky-400 list-disc pl-5 space-y-3 text-slate-500"</span>
+</span></span><span class="line"><span class="cl"><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>5 Cups Chopped Porcini Mushrooms<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>1/2 Cup of Olive Oil<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>3lb of Celery<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>当需要定义选中文字的样式时，可以使用 selection 修饰符：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"selection:bg-fuchsia-300 selection:text-fuchsia-900"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    So I started to walk into the water. I won't lie to you boys, I was
+</span></span><span class="line"><span class="cl">    terrified. But I pressed on, and as I made my way past the breakers a
+</span></span><span class="line"><span class="cl">    strange calm came over me. I don't know if it was divine intervention or the
+</span></span><span class="line"><span class="cl">    kinship of all living things but I tell you Jerry at that moment...
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>当需要定义首行或首字的样式时，可以使用 first-line|first-letter 修饰符：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">p</span>
+</span></span><span class="line"><span class="cl">  <span class="na">class</span><span class="o">=</span><span class="s">"first-line:uppercase first-line:tracking-widest
+</span></span></span><span class="line"><span class="cl"><span class="s">  first-letter:text-7xl first-letter:font-bold first-letter:text-slate-900
+</span></span></span><span class="line"><span class="cl"><span class="s">  first-letter:mr-3 first-letter:float-left
+</span></span></span><span class="line"><span class="cl"><span class="s">"</span>
+</span></span><span class="line"><span class="cl"><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  Well, let me tell you something, funny boy. Y'know that little stamp, the one
+</span></span><span class="line"><span class="cl">  that says "New York Public Library"? Well that may not mean anything to you,
+</span></span><span class="line"><span class="cl">  but that means a lot to me. One whole hell of a lot...
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>当需要定义 &lt;dialog&gt; 的背景样式时，可以使用 backdrop 修饰符：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">dialog</span> <span class="na">class</span><span class="o">=</span><span class="s">"backdrop:bg-gray-50"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">"dialog"</span><span class="p">&gt;&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">dialog</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="元素标记">元素标记</h3><p>当想要基于<strong>上层元素</strong>的状态而改变自身样式时，可以给上层元素一个 group 标记：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">a</span>
+</span></span><span class="line"><span class="cl">  <span class="na">class</span><span class="o">=</span><span class="s">"group hover:bg-sky-500 hover:ring-sky-500 ..."</span>
+</span></span><span class="line"><span class="cl">  <span class="na">data-exp</span><span class="o">=</span><span class="s">"这里给当前元素起了一个名字【group】"</span>
+</span></span><span class="line"><span class="cl"><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"flex items-center space-x-3"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">svg</span>
+</span></span><span class="line"><span class="cl">      <span class="na">class</span><span class="o">=</span><span class="s">"h-6 w-6 stroke-sky-500 group-hover:stroke-white"</span>
+</span></span><span class="line"><span class="cl">      <span class="na">data-exp</span><span class="o">=</span><span class="s">"当【group】被 hover 时，自身想变成白色，使用【group-hover:】修饰符"</span>
+</span></span><span class="line"><span class="cl">      <span class="na">viewBox</span><span class="o">=</span><span class="s">"0 0 24 24"</span>
+</span></span><span class="line"><span class="cl">      <span class="na">fill</span><span class="o">=</span><span class="s">"none"</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&gt;&lt;/</span><span class="nt">svg</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">role</span><span class="o">=</span><span class="s">"list"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  {#each people as person}
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">li</span>
+</span></span><span class="line"><span class="cl">    <span class="na">class</span><span class="o">=</span><span class="s">"group/item hover:bg-slate-100 ..."</span>
+</span></span><span class="line"><span class="cl">    <span class="na">data-exp</span><span class="o">=</span><span class="s">"使用【group/item】给元素进行细分"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">"{person.imageUrl}"</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">a</span>
+</span></span><span class="line"><span class="cl">      <span class="na">href</span><span class="o">=</span><span class="s">"tel:{person.phone}"</span>
+</span></span><span class="line"><span class="cl">      <span class="na">class</span><span class="o">=</span><span class="s">"group/edit invisible hover:bg-slate-200 group-hover/item:visible ..."</span>
+</span></span><span class="line"><span class="cl">      <span class="na">data-exp</span><span class="o">=</span><span class="s">"使用【group/edit】给元素进行细分，使用【group-hover/item:】修饰符定义【group/item】被 hover 的状态"</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">svg</span>
+</span></span><span class="line"><span class="cl">        <span class="na">class</span><span class="o">=</span><span class="s">"group-hover/edit:translate-x-0.5 group-hover/edit:text-slate-500 ..."</span>
+</span></span><span class="line"><span class="cl">        <span class="na">data-exp</span><span class="o">=</span><span class="s">"使用【group-hover/edit:】修饰符定义【group/edit】被 hover 的状态"</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&gt;&lt;/</span><span class="nt">svg</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  {/each}
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"group is-published"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span>
+</span></span><span class="line"><span class="cl">    <span class="na">class</span><span class="o">=</span><span class="s">"hidden group-[.is-published]:block"</span>
+</span></span><span class="line"><span class="cl">    <span class="na">data-exp</span><span class="o">=</span><span class="s">"当【group】的 class 含有 is-published 时，添加 display:block"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    Published
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">style</span> <span class="na">data-exp</span><span class="o">=</span><span class="s">"生成的样式"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nc">group</span><span class="p">.</span><span class="nc">is-published</span> <span class="p">.</span><span class="nc">group-</span><span class="err">\</span><span class="o">[</span><span class="err">\</span><span class="p">.</span><span class="nc">is-published</span><span class="err">\</span><span class="o">]</span><span class="err">\</span><span class="p">:</span><span class="nd">block</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>当想要基于<strong>同级兄弟元素</strong>的状态而改变自身样式时，可以给同级兄弟元素一个 peer 标记：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">label</span> <span class="na">class</span><span class="o">=</span><span class="s">"block"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">input</span>
+</span></span><span class="line"><span class="cl">    <span class="na">type</span><span class="o">=</span><span class="s">"email"</span>
+</span></span><span class="line"><span class="cl">    <span class="na">class</span><span class="o">=</span><span class="s">"peer ..."</span>
+</span></span><span class="line"><span class="cl">    <span class="na">data-exp</span><span class="o">=</span><span class="s">"这里给当前元素起了一个名字【peer】"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">p</span>
+</span></span><span class="line"><span class="cl">    <span class="na">class</span><span class="o">=</span><span class="s">"invisible peer-invalid:visible ..."</span>
+</span></span><span class="line"><span class="cl">    <span class="na">data-exp</span><span class="o">=</span><span class="s">"当【peer】invalid 时，自身想变的可见，使用【peer-invalid:】修饰符"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    Please provide a valid email address.
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">label</span> <span class="na">data-exp</span><span class="o">=</span><span class="s">"不起作用，【peer】必须在前"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">"peer-invalid:text-red-500 ..."</span><span class="p">&gt;</span>Email<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"email"</span> <span class="na">class</span><span class="o">=</span><span class="s">"peer ..."</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>当想要基于<strong>后代元素</strong>的状态而改变自身样式时，可以使用 has-* 修饰符：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">label</span>
+</span></span><span class="line"><span class="cl">  <span class="na">class</span><span class="o">=</span><span class="s">"has-[:checked]:bg-indigo-50 has-[:checked]:text-indigo-900 has-[:checked]:ring-indigo-200 ..."</span>
+</span></span><span class="line"><span class="cl">  <span class="na">data-exp</span><span class="o">=</span><span class="s">"当子元素 :checked 时，当前元素就应用这些样式；当然 has 不仅可以结合伪类使用，还可以 has-[img]、has-[a]"</span>
+</span></span><span class="line"><span class="cl"><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  Google Pay
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"radio"</span> <span class="na">class</span><span class="o">=</span><span class="s">"checked:border-indigo-500 ..."</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>group|peer|has 修饰符可以结合使用：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"group ..."</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">svg</span>
+</span></span><span class="line"><span class="cl">    <span class="na">class</span><span class="o">=</span><span class="s">"hidden group-has-[a]:block ..."</span>
+</span></span><span class="line"><span class="cl">    <span class="na">data-exp</span><span class="o">=</span><span class="s">"当父级元素 group 的后代元素中存在 a 元素，则 display:block"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&gt;&lt;/</span><span class="nt">svg</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">fieldset</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">class</span><span class="o">=</span><span class="s">"peer ..."</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"checkbox"</span> <span class="na">name</span><span class="o">=</span><span class="s">"todo[1]"</span> <span class="na">checked</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">      Create a Todo List
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">svg</span>
+</span></span><span class="line"><span class="cl">      <span class="na">class</span><span class="o">=</span><span class="s">"peer-has-[:checked]:hidden ..."</span>
+</span></span><span class="line"><span class="cl">      <span class="na">data-exp</span><span class="o">=</span><span class="s">"当同级元素 peer 的后代元素中存在 checked 状态的元素时，则 display:hidden"</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&gt;&lt;/</span><span class="nt">svg</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">fieldset</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>* 修饰符匹配<strong>子元素</strong>，就像<a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Universal_selectors" target="_blank" rel="noopener">
+通配选择器
+</a>一样，作用域略有不同：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">ul</span>
+</span></span><span class="line"><span class="cl">    <span class="na">class</span><span class="o">=</span><span class="s">"*:rounded-full *:border *:border-sky-100 *:bg-sky-50 *:px-2 *:py-0.5 dark:text-sky-300 dark:*:border-sky-500/15 dark:*:bg-sky-500/10 ..."</span>
+</span></span><span class="line"><span class="cl">    <span class="na">data-exp</span><span class="o">=</span><span class="s">"子元素 li 的样式被定义在了 ul 上"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span>
+</span></span><span class="line"><span class="cl">      <span class="na">class</span><span class="o">=</span><span class="s">"bg-red-50 ..."</span>
+</span></span><span class="line"><span class="cl">      <span class="na">data-exp</span><span class="o">=</span><span class="s">"子元素不能重写自己的样式，这和【通配选择器】的作用域相悖"</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      Sales
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Marketing<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>SEO<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="媒体查询">媒体查询</h3><p>响应式 <strong>md</strong>、<strong>lg</strong>…：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"grid grid-cols-3 md:grid-cols-4 grid-cols-6"</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>黑暗模式 <strong>dark</strong>：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span>
+</span></span><span class="line"><span class="cl">  <span class="na">class</span><span class="o">=</span><span class="s">"bg-white dark:bg-slate-900 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl"</span>
+</span></span><span class="line"><span class="cl"><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">span</span>
+</span></span><span class="line"><span class="cl">      <span class="na">class</span><span class="o">=</span><span class="s">"inline-flex items-center justify-center p-2 bg-indigo-500 rounded-md shadow-lg"</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">svg</span>
+</span></span><span class="line"><span class="cl">        <span class="na">aria-hidden</span><span class="o">=</span><span class="s">"true"</span>
+</span></span><span class="line"><span class="cl">        <span class="na">class</span><span class="o">=</span><span class="s">"h-6 w-6 text-white"</span>
+</span></span><span class="line"><span class="cl">        <span class="na">fill</span><span class="o">=</span><span class="s">"none"</span>
+</span></span><span class="line"><span class="cl">        <span class="na">stroke</span><span class="o">=</span><span class="s">"currentColor"</span>
+</span></span><span class="line"><span class="cl">        <span class="na">viewBox</span><span class="o">=</span><span class="s">"0 0 24 24"</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&gt;&lt;/</span><span class="nt">svg</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">h3</span>
+</span></span><span class="line"><span class="cl">    <span class="na">class</span><span class="o">=</span><span class="s">"text-slate-900 dark:text-white mt-5 text-base font-medium tracking-tight"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    Writes Upside-Down
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">"text-slate-500 dark:text-slate-400 mt-2 text-sm"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    The Zero Gravity Pen can be used to write in any orientation, including
+</span></span><span class="line"><span class="cl">    upside-down. It even works in outer space.
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>减弱动态效果 <strong>motion-reduce</strong>：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">"button"</span> <span class="na">class</span><span class="o">=</span><span class="s">"bg-indigo-500 ..."</span> <span class="na">disabled</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">svg</span> <span class="na">class</span><span class="o">=</span><span class="s">"motion-reduce:hidden animate-spin ..."</span> <span class="na">viewBox</span><span class="o">=</span><span class="s">"0 0 24 24"</span><span class="p">&gt;&lt;/</span><span class="nt">svg</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  Processing...
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>高对比度模式 <strong>contrast-more</strong>：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">label</span> <span class="na">class</span><span class="o">=</span><span class="s">"block"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">"block text-sm font-medium text-slate-700"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      Social Security Number
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">input</span>
+</span></span><span class="line"><span class="cl">      <span class="na">class</span><span class="o">=</span><span class="s">"border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"</span>
+</span></span><span class="line"><span class="cl">    <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">"mt-2 opacity-10 contrast-more:opacity-100 text-slate-600 text-sm"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      We need this to steal your identity.
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>强制颜色模式 <strong>forced-colors</strong>：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">legend</span><span class="p">&gt;</span>Choose a theme:<span class="p">&lt;/</span><span class="nt">legend</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"radio"</span> <span class="na">class</span><span class="o">=</span><span class="s">"forced-colors:appearance-auto appearance-none"</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">"forced-colors:block hidden"</span><span class="p">&gt;</span>Cyan<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span>
+</span></span><span class="line"><span class="cl">      <span class="na">class</span><span class="o">=</span><span class="s">"forced-colors:hidden h-6 w-6 rounded-full bg-cyan-200 ..."</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span>
+</span></span><span class="line"><span class="cl">      <span class="na">class</span><span class="o">=</span><span class="s">"forced-colors:hidden h-6 w-6 rounded-full bg-cyan-500 ..."</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>屏幕方向 <strong>portrait</strong>、<strong>landscape</strong>：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"portrait:hidden"</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"landscape:hidden"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      This experience is designed to be viewed in landscape. Please rotate your
+</span></span><span class="line"><span class="cl">      device to view the site.
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>打印模式 <strong>print</strong>：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">article</span> <span class="na">class</span><span class="o">=</span><span class="s">"print:hidden"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>My Secret Pizza Recipe<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>This recipe is a secret, and must not be shared with anyone<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">article</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"hidden print:block"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    Are you seriously trying to print this? It's secret!
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>规则检测 <strong>supports-</strong>：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"flex supports-[display:grid]:grid ..."</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="属性选择">属性选择</h3><p><strong>ltr|rtl</strong> 用来匹配 HTML 元素的 dir 属性：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span> <span class="na">dir</span><span class="o">=</span><span class="s">"ltr"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"group flex items-center"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">class</span><span class="o">=</span><span class="s">"shrink-0 h-12 w-12 rounded-full"</span> <span class="na">src</span><span class="o">=</span><span class="s">"..."</span> <span class="na">alt</span><span class="o">=</span><span class="s">""</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"ltr:ml-3 rtl:mr-3"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">"text-sm font-medium text-slate-700 group-hover:text-slate-900"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        ...
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">"text-sm font-medium text-slate-500 group-hover:text-slate-700"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        ...
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p><strong>open</strong> 用来匹配 &lt;dialog&gt;|&lt;details&gt; 元素的 open 状态：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"max-w-lg mx-auto p-8"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">details</span>
+</span></span><span class="line"><span class="cl">    <span class="na">class</span><span class="o">=</span><span class="s">"open:bg-white dark:open:bg-slate-900 open:ring-1 open:ring-black/5 dark:open:ring-white/10 open:shadow-lg p-6 rounded-lg"</span>
+</span></span><span class="line"><span class="cl">    <span class="na">open</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">summary</span>
+</span></span><span class="line"><span class="cl">      <span class="na">class</span><span class="o">=</span><span class="s">"text-sm leading-6 text-slate-900 dark:text-white font-semibold select-none"</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      Why do they call it Ovaltine?
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">summary</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>The mug is round. The jar is round. They should call it Roundtine.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">details</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="自定义修饰符">自定义修饰符</h3><p>官方的例子中，使用 &amp; 匹配当前元素，使用 @ 匹配媒体查询；基本和 CSS 规范和 Sass|Less|Stylus 保持一致：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"[&amp;_p]:mt-4"</span> <span class="na">data-exp</span><span class="o">=</span><span class="s">"选中当前元素下的 p 元素"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Lorem ipsum...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Lorem ipsum...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="err">\</span><span class="o">[</span><span class="err">\</span><span class="o">&amp;</span><span class="nt">_p</span><span class="err">\</span><span class="o">]</span><span class="err">\</span><span class="p">:</span><span class="nd">mt-4</span> <span class="nt">p</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">margin-top</span><span class="p">:</span> <span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span>
+</span></span><span class="line"><span class="cl">  <span class="na">class</span><span class="o">=</span><span class="s">"flex [@supports(display:grid)]:grid"</span>
+</span></span><span class="line"><span class="cl">  <span class="na">data-exp</span><span class="o">=</span><span class="s">"如果浏览器支持 Grid，使用 display:grid"</span>
+</span></span><span class="line"><span class="cl"><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="c">&lt;!-- ... --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">@</span><span class="k">supports</span> <span class="o">(</span><span class="nt">display</span><span class="o">:</span> <span class="nt">grid</span><span class="o">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="err">\</span><span class="o">[</span><span class="err">\</span><span class="p">@</span><span class="k">supports</span><span class="err">\</span><span class="o">(</span><span class="nt">display</span><span class="err">\</span><span class="p">:</span><span class="nd">grid</span><span class="err">\</span><span class="o">)</span><span class="err">\</span><span class="o">]</span><span class="err">\</span><span class="p">:</span><span class="nd">grid</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">display</span><span class="o">:</span> <span class="nt">grid</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>当然，你可以在配置文件中使用 <strong>addVariant</strong> 添加自定义修饰符：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="cm">/** @type {import('tailwindcss').Config} */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">plugin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'tailwindcss/plugin'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">plugins</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">plugin</span><span class="p">(</span><span class="kd">function</span> <span class="p">({</span> <span class="nx">addVariant</span> <span class="p">})</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">addVariant</span><span class="p">(</span><span class="s1">'third'</span><span class="p">,</span> <span class="s1">'&amp;:nth-child(3)'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">addVariant</span><span class="p">(</span><span class="s1">'f-motion-reduce'</span><span class="p">,</span> <span class="s1">'[data-motion-reduce="true"] &amp;'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>更多修饰符<a class="link" href="https://tailwindcss.com/docs/hover-focus-and-other-states#appendix" target="_blank" rel="noopener">
+详见
+</a>。</p><h2 id="响应式">响应式</h2><p>Tailwind CSS 默认提供了以下响应断点，分别是：</p><ul><li>sm，对应 @media (min-width: 640px)；</li><li>md，对应 @media (min-width: 768px)；</li><li>lg，对应 @media (min-width: 1024px)；</li><li>xl，对应 @media (min-width: 1280px)；</li><li>2xl，对应 @media (min-width: 1536px)；</li><li>max-sm，对应 @media not all and (min-width: 640px)；</li><li>max-md，对应 @media not all and (min-width: 768px)；</li><li>max-lg，对应 @media not all and (min-width: 1024px)；</li><li>max-xl，对应 @media not all and (min-width: 1280px)；</li><li>max-2xl，对应 @media not all and (min-width: 1536px)。</li></ul><p>Tailwind 遵循了<strong>移动设备优先</strong>的设计原则，不被断点修饰的类名会在所有尺寸的设备上生效；被断点修饰的类名，会在对应尺寸及以上的设备上生效：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span>
+</span></span><span class="line"><span class="cl">  <span class="na">class</span><span class="o">=</span><span class="s">"sm:text-center"</span>
+</span></span><span class="line"><span class="cl">  <span class="na">data-exp</span><span class="o">=</span><span class="s">"这只会在尺寸大于等于 640px 的设备上生效"</span>
+</span></span><span class="line"><span class="cl"><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span>
+</span></span><span class="line"><span class="cl">  <span class="na">class</span><span class="o">=</span><span class="s">"text-center sm:text-left"</span>
+</span></span><span class="line"><span class="cl">  <span class="na">data-exp</span><span class="o">=</span><span class="s">"在尺寸小于 640px 的设备上居中，在尺寸大于等于 640px 的设备上左对齐"</span>
+</span></span><span class="line"><span class="cl"><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span>
+</span></span><span class="line"><span class="cl">  <span class="na">class</span><span class="o">=</span><span class="s">"md:max-xl:flex"</span>
+</span></span><span class="line"><span class="cl">  <span class="na">data-exp</span><span class="o">=</span><span class="s">"在尺寸大于等于 768px 小于 1280px 的设备上使用弹性布局"</span>
+</span></span><span class="line"><span class="cl"><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span>
+</span></span><span class="line"><span class="cl">  <span class="na">class</span><span class="o">=</span><span class="s">"min-[320px]:text-center max-[600px]:bg-sky-300"</span>
+</span></span><span class="line"><span class="cl">  <span class="na">data-exp</span><span class="o">=</span><span class="s">"也可以直接在 class 里写明断点数值"</span>
+</span></span><span class="line"><span class="cl"><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>可以在配置文件中修改这些断点：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="cm">/** @type {import('tailwindcss').Config} */</span>
+</span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">theme</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 给断点起一些别名/自定义断点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">screens</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">tablet</span><span class="o">:</span> <span class="s1">'640px'</span><span class="p">,</span> <span class="c1">// =&gt; @media (min-width: 640px) { ... }
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">laptop</span><span class="o">:</span> <span class="s1">'1024px'</span><span class="p">,</span> <span class="c1">// =&gt; @media (min-width: 1024px) { ... }
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">desktop</span><span class="o">:</span> <span class="s1">'1280px'</span> <span class="c1">// =&gt; @media (min-width: 1280px) { ... }
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="黑暗模式">黑暗模式</h2><p>Tailwind CSS 使用 prefers-color-scheme 媒体查询来切换黑暗模式（media 策略）；如果想要手动切换，可以使用 selector 策略：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="cm">/** @type {import('tailwindcss').Config} */</span>
+</span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">darkMode</span><span class="o">:</span> <span class="s1">'selector'</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>dark:{class} 将不再根据 prefers-color-scheme 切换，而是根据 &lt;html&gt; 上是否有 class=‘dark’ 来切换：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span> <span class="na">data-exp</span><span class="o">=</span><span class="s">"正常模式"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"bg-white dark:bg-black"</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span> <span class="na">class</span><span class="o">=</span><span class="s">"dark"</span> <span class="na">data-exp</span><span class="o">=</span><span class="s">"黑暗模式"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"bg-white dark:bg-black"</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>这样，你就可以通过 JavaScript 控制 class=‘dark’ 来切换黑暗模式：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">localStorage</span><span class="p">.</span><span class="nx">theme</span> <span class="o">===</span> <span class="s1">'dark'</span> <span class="o">||</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="s1">'theme'</span> <span class="k">in</span> <span class="nx">localStorage</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span><span class="p">(</span><span class="s1">'(prefers-color-scheme: dark)'</span><span class="p">).</span><span class="nx">matches</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'dark'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">'dark'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="样式复用">样式复用</h2><p>在使用 Tailwind CSS 时，你可能会遇到一些样式重复的情况，比如下方的 &lt;img&gt;：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"mt-3 flex -space-x-2 overflow-hidden"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">img</span>
+</span></span><span class="line"><span class="cl">      <span class="na">class</span><span class="o">=</span><span class="s">"inline-block h-12 w-12 rounded-full ring-2 ring-white"</span>
+</span></span><span class="line"><span class="cl">      <span class="na">src</span><span class="o">=</span><span class="s">"https://images.unsplash.com/photo-1491528323818-fdd1faba62cc"</span>
+</span></span><span class="line"><span class="cl">    <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">img</span>
+</span></span><span class="line"><span class="cl">      <span class="na">class</span><span class="o">=</span><span class="s">"inline-block h-12 w-12 rounded-full ring-2 ring-white"</span>
+</span></span><span class="line"><span class="cl">      <span class="na">src</span><span class="o">=</span><span class="s">"https://images.unsplash.com/photo-1550525811-e5869dd03032"</span>
+</span></span><span class="line"><span class="cl">    <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">img</span>
+</span></span><span class="line"><span class="cl">      <span class="na">class</span><span class="o">=</span><span class="s">"inline-block h-12 w-12 rounded-full ring-2 ring-white"</span>
+</span></span><span class="line"><span class="cl">      <span class="na">src</span><span class="o">=</span><span class="s">"https://images.unsplash.com/photo-1500648767791-00dcc994a43e"</span>
+</span></span><span class="line"><span class="cl">    <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">img</span>
+</span></span><span class="line"><span class="cl">      <span class="na">class</span><span class="o">=</span><span class="s">"inline-block h-12 w-12 rounded-full ring-2 ring-white"</span>
+</span></span><span class="line"><span class="cl">      <span class="na">src</span><span class="o">=</span><span class="s">"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e"</span>
+</span></span><span class="line"><span class="cl">    <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">img</span>
+</span></span><span class="line"><span class="cl">      <span class="na">class</span><span class="o">=</span><span class="s">"inline-block h-12 w-12 rounded-full ring-2 ring-white"</span>
+</span></span><span class="line"><span class="cl">      <span class="na">src</span><span class="o">=</span><span class="s">"https://images.unsplash.com/photo-1517365830460-955ce3ccd263"</span>
+</span></span><span class="line"><span class="cl">    <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"mt-3 text-sm font-medium"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"#"</span> <span class="na">class</span><span class="o">=</span><span class="s">"text-blue-500"</span><span class="p">&gt;</span>+ 198 Others<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>如果能通过模版循环、组件等方式复用，那将是极好的；如果不能，Tailwind CSS 提供了 <a class="link" href="https://tailwindcss.com/docs/functions-and-directives#apply" target="_blank" rel="noopener">@apply
+</a>方法来提取公共样式：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">@</span><span class="k">tailwind</span> <span class="nt">base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">tailwind</span> <span class="nt">components</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">tailwind</span> <span class="nt">utilities</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">layer</span> <span class="nt">components</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nc">avatar</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c">/* @apply 应该只用于抽取公共样式，不要滥用 */</span>
+</span></span><span class="line"><span class="cl">    <span class="err">@apply</span> <span class="err">inline-block</span> <span class="err">h-12</span> <span class="err">w-12</span> <span class="err">rounded-full</span> <span class="err">ring-2</span> <span class="err">ring-white</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="自定义样式配置">自定义样式配置</h2><h3 id="主题自定义">主题自定义</h3><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="cm">/** @type {import('tailwindcss').Config} */</span>
+</span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">theme</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 自定义断点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">screens</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">sm</span><span class="o">:</span> <span class="s1">'480px'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">md</span><span class="o">:</span> <span class="s1">'768px'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">lg</span><span class="o">:</span> <span class="s1">'976px'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">xl</span><span class="o">:</span> <span class="s1">'1440px'</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 自定义颜色
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">colors</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">gray</span><span class="o">:</span> <span class="s1">'#8492a6'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'gray-dark'</span><span class="o">:</span> <span class="s1">'#273444'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'gray-light'</span><span class="o">:</span> <span class="s1">'#d3dce6'</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 自定义字体
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">fontFamily</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">sans</span><span class="o">:</span> <span class="p">[</span><span class="s1">'Graphik'</span><span class="p">,</span> <span class="s1">'sans-serif'</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">serif</span><span class="o">:</span> <span class="p">[</span><span class="s1">'Merriweather'</span><span class="p">,</span> <span class="s1">'serif'</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 自定义尺寸
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">extend</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">spacing</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">128</span><span class="o">:</span> <span class="s1">'32rem'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">144</span><span class="o">:</span> <span class="s1">'36rem'</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">borderRadius</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'4xl'</span><span class="o">:</span> <span class="s1">'2rem'</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="使用自由值">使用自由值</h3><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span>
+</span></span><span class="line"><span class="cl">  <span class="na">class</span><span class="o">=</span><span class="s">"
+</span></span></span><span class="line"><span class="cl"><span class="s">    grid grid-cols-[fit-content(theme(spacing.32))]
+</span></span></span><span class="line"><span class="cl"><span class="s">    top-[var(--my-top)] lg:top-[344px]
+</span></span></span><span class="line"><span class="cl"><span class="s">    &lt;!-- 使用 _ 代替空格 --&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">    bg-[url('/what_a_rush.png')]
+</span></span></span><span class="line"><span class="cl"><span class="s">    text-[#bada55]
+</span></span></span><span class="line"><span class="cl"><span class="s">    &lt;!-- 如果内容中有 _ 需要使用 \ 做转译 --&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">    before:content-['hello\_world']
+</span></span></span><span class="line"><span class="cl"><span class="s">    [mask-type:luminance] hover:[mask-type:alpha]
+</span></span></span><span class="line"><span class="cl"><span class="s">    [--scroll-offset:56px] lg:[--scroll-offset:44px]
+</span></span></span><span class="line"><span class="cl"><span class="s">  "</span>
+</span></span><span class="line"><span class="cl"><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="basecomponentsutilities">base、components、utilities</h2><p>在 CSS 中，相同权重的规则定义的<strong>先后顺序</strong>决定了它们之间的优先级；如果规则的权重相同，则后边定义的规则会覆盖前边定义的规则：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nc">btn</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">background</span><span class="p">:</span> <span class="kc">blue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">/* ... */</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nc">bg-black</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">background</span><span class="p">:</span> <span class="kc">black</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!--
+</span></span></span><span class="line"><span class="cl"><span class="c">  这两个按钮都将会是黑色
+</span></span></span><span class="line"><span class="cl"><span class="c">  因为 .bg-black 在代码中比较靠后，权重更高
+</span></span></span><span class="line"><span class="cl"><span class="c">  --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">"btn bg-black"</span><span class="p">&gt;&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">"bg-black btn"</span><span class="p">&gt;&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>所以，Tailwind CSS 基于 <a class="link" href="https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/#what-is-itcss" target="_blank" rel="noopener">ITCSS
+</a>将样式分成了三层：base、components 和 utilities：</p><ul><li>base 层包含所有的<a class="link" href="https://tailwindcss.com/docs/preflight" target="_blank" rel="noopener">
+基础样式
+</a>，比如样式重置、元素默认样式等，优先级最低；</li><li>components 层开放给开发者或第三方样式库，用来自定义组件样式，优先级次之；</li><li>utilities 层包含工具类样式，比如 flex、grid、ml-* 等，优先级最高。</li></ul><p>如果你想自定义这些层，可以在配置文件中修改：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="cm">/** @type {import('tailwindcss').Config} */</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">plugin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'tailwindcss/plugin'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 修改层顺序
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">layerOrder</span><span class="o">:</span> <span class="p">[</span><span class="s1">'base'</span><span class="p">,</span> <span class="s1">'components'</span><span class="p">,</span> <span class="s1">'utilities'</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 扩展或覆盖层
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">plugins</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">plugin</span><span class="p">(</span><span class="kd">function</span> <span class="p">({</span> <span class="nx">addBase</span><span class="p">,</span> <span class="nx">addComponents</span><span class="p">,</span> <span class="nx">addUtilities</span><span class="p">,</span> <span class="nx">theme</span> <span class="p">})</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">addBase</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">h1</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">fontSize</span><span class="o">:</span> <span class="nx">theme</span><span class="p">(</span><span class="s1">'fontSize.2xl'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">h2</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">fontSize</span><span class="o">:</span> <span class="nx">theme</span><span class="p">(</span><span class="s1">'fontSize.xl'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">});</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">addComponents</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'.card'</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">backgroundColor</span><span class="o">:</span> <span class="nx">theme</span><span class="p">(</span><span class="s1">'colors.white'</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">borderRadius</span><span class="o">:</span> <span class="nx">theme</span><span class="p">(</span><span class="s1">'borderRadius.lg'</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">padding</span><span class="o">:</span> <span class="nx">theme</span><span class="p">(</span><span class="s1">'spacing.6'</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">boxShadow</span><span class="o">:</span> <span class="nx">theme</span><span class="p">(</span><span class="s1">'boxShadow.xl'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">});</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">addUtilities</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'.content-auto'</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">contentVisibility</span><span class="o">:</span> <span class="s1">'auto'</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>也可以在 CSS 中使用 @layer：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">@</span><span class="k">tailwind</span> <span class="nt">base</span><span class="p">;</span> <span class="c">/* 注入 Tailwind CSS 和 plugins 注册的的基础样式 */</span>
+</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">tailwind</span> <span class="nt">components</span><span class="p">;</span> <span class="c">/* 注入 Tailwind CSS 和 plugins 注册的的组件类名 */</span>
+</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">tailwind</span> <span class="nt">utilities</span><span class="p">;</span> <span class="c">/* 注入 Tailwind CSS 和 plugins 注册的的工具类名 */</span>
+</span></span><span class="line"><span class="cl"><span class="c">/* 扩展 base，@layer 用来告诉 Tailwind CSS，这些自定义样式需要被注入在哪一层 */</span>
+</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">layer</span> <span class="nt">base</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c">/* 定义类型变量 */</span>
+</span></span><span class="line"><span class="cl">  <span class="p">:</span><span class="nd">root</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">--radius</span><span class="p">:</span> <span class="mf">0.5</span><span class="kt">rem</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">--a</span><span class="p">:</span> <span class="nf">theme</span><span class="p">(</span><span class="s1">'colors.theme.accent.DEFAULT'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c">/* 重写 h1、h2 样式 */</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">h1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">@apply</span> <span class="err">text-2xl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">h2</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">@apply</span> <span class="err">text-xl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c">/* 扩展 components */</span>
+</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">layer</span> <span class="nt">components</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c">/* 定义一个上下文菜单阴影 */</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nc">shadow-context-menu</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">box-shadow</span><span class="p">:</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.067</span><span class="p">)</span> <span class="mi">0</span><span class="kt">px</span> <span class="mi">3</span><span class="kt">px</span> <span class="mi">8</span><span class="kt">px</span><span class="p">,</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.067</span><span class="p">)</span> <span class="mi">0</span><span class="kt">px</span> <span class="mi">2</span><span class="kt">px</span> <span class="mi">5</span><span class="kt">px</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.067</span><span class="p">)</span> <span class="mi">0</span><span class="kt">px</span> <span class="mi">1</span><span class="kt">px</span> <span class="mi">1</span><span class="kt">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c">/* 定义一个卡片 UI */</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nc">card</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">background-color</span><span class="p">:</span> <span class="nf">theme</span><span class="p">(</span><span class="s1">'colors.white'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">border-radius</span><span class="p">:</span> <span class="nf">theme</span><span class="p">(</span><span class="s1">'borderRadius.lg'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">box-shadow</span><span class="p">:</span> <span class="nf">theme</span><span class="p">(</span><span class="s1">'boxShadow.xl'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">padding</span><span class="p">:</span> <span class="nf">theme</span><span class="p">(</span><span class="s1">'spacing.6'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c">/* 扩展 utilities */</span>
+</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">layer</span> <span class="nt">utilities</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nc">scrollbar-none</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">scrollbar-width</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kp">-ms-</span><span class="k">overflow-style</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nc">scrollbar-none</span><span class="p">::</span><span class="nd">-webkit-scrollbar</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">display</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>使用 @layer 扩展出来的样式只有真的用到才会被编译到 CSS 中，所以不用担心打包体积问题；而且 @layer 扩展出来的样式可以被修饰符修饰：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">@</span><span class="k">tailwind</span> <span class="nt">base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">tailwind</span> <span class="nt">components</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">tailwind</span> <span class="nt">utilities</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c">/* 文件中存在 @tailwind 时，才可用 @layer */</span>
+</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">layer</span> <span class="nt">components</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c">/* 如果没有被使用，将不会出现在编译产物中 */</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nc">card</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c">/* ... */</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c">/*
+</span></span></span><span class="line"><span class="cl"><span class="c">  始终会出现在编译产物中，不能被修饰符修饰
+</span></span></span><span class="line"><span class="cl"><span class="c">  这种用法主要用来处理第三方库的样式
+</span></span></span><span class="line"><span class="cl"><span class="c"> */</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">card</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c">/* ... */</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>需要注意的是，@layer 扩展出来的样式，不会受到 <a class="link" href="https://tailwindcss.com/docs/configuration#prefix" target="_blank" rel="noopener">​Prefix
+</a>配置的影响。</p><h2 id="配置文件">配置文件</h2><p>默认的配置文件为项目目录下的 tailwind.config.js|ts，也可以通过命令行参数指定配置文件：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 使用 TailwindCLI 初始化项目时指定配置文件</span>
+</span></span><span class="line"><span class="cl">npx tailwindcss init tailwindcss-config.js
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用 -c|--config 指定配置文件</span>
+</span></span><span class="line"><span class="cl">npx tailwindcss -c ./config/tailwind.js
+</span></span></code></pre></td></tr></tbody></table></div></div><p>每个 CSS 文件都可以指定不同的配置文件：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">@</span><span class="k">config</span> <span class="s2">"./tailwindcss-config.js"</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">tailwind</span> <span class="nt">base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">tailwind</span> <span class="nt">components</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">tailwind</span> <span class="nt">utilities</span><span class="p">;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>配置文件也可以是 ESM 规范：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="kr">type</span> <span class="p">{</span> <span class="nx">Config</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'tailwindcss'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">colors</span> <span class="kr">from</span> <span class="s1">'tailwindcss/colors'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">plugin</span> <span class="kr">from</span> <span class="s1">'tailwindcss/plugin'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * 为了使 Tailwind CSS 能够准确解析 class
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * 不要使用字符串拼接出 class
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * class 应该能被静态解析
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">content</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 最好排除 node_modules 下的文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="s1">'./components/**/*.{html,js}'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">'./pages/**/*.{html,js}'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">'./public/index.html'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 可以直接传入 HTML 字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">{</span> <span class="nx">raw</span><span class="o">:</span> <span class="s1">'&lt;div class="font-bold"&gt;'</span><span class="p">,</span> <span class="nx">extension</span><span class="o">:</span> <span class="s1">'html'</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * prefix 可以避免样式冲突，如果和其他框架共存的话
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * 但是不会主动给 @layer 扩展的样式添加 prefix
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">prefix</span><span class="o">:</span> <span class="s1">'tw-'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">important</span>: <span class="kt">true</span><span class="p">,</span> <span class="c1">// 控制 Tailwind CSS 生成的样式是否添加 !important
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">separator</span><span class="o">:</span> <span class="s1">'_'</span><span class="p">,</span> <span class="c1">// 默认是 `:`；如果某些模版语言不兼容，可以自行修改
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">theme</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 覆盖默认主题颜色配置，因为被其他插件继承了
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 所以同时会影响 backgroundColor、borderColor、textColor...
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">colors</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">transparent</span><span class="o">:</span> <span class="s1">'transparent'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">current</span><span class="o">:</span> <span class="s1">'currentColor'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">tahiti</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">DEFAULT</span><span class="o">:</span> <span class="s1">'#06b6d4'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">100</span><span class="o">:</span> <span class="s1">'#cffafe'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">200</span><span class="o">:</span> <span class="s1">'#a5f3fc'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">300</span><span class="o">:</span> <span class="s1">'#67e8f9'</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">blue</span><span class="o">:</span> <span class="s1">'#1fb6ff'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">gray</span><span class="o">:</span> <span class="s1">'#8492a6'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">pink</span><span class="o">:</span> <span class="s1">'#ff49db'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 给内置颜色起别名
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">green</span>: <span class="kt">colors.emerald</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">purple</span>: <span class="kt">colors.violet</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 语义化颜色
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">primary</span>: <span class="kt">colors.indigo</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">neutral</span>: <span class="kt">colors.gray</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 可以直接从 CSS 变量中获取颜色
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">secondary</span><span class="o">:</span> <span class="s1">'rgb(var(--color-secondary))'</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 覆盖默认主题字体配置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">fontFamily</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">sans</span><span class="o">:</span> <span class="p">[</span><span class="s1">'Graphik'</span><span class="p">,</span> <span class="s1">'sans-serif'</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">serif</span><span class="o">:</span> <span class="p">[</span><span class="s1">'Merriweather'</span><span class="p">,</span> <span class="s1">'serif'</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 扩展默认主题配置，不发生覆盖行为
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">extend</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">screens</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'3xl'</span><span class="o">:</span> <span class="s1">'1600px'</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">       * 会影响继承了 spacing 的样式
+</span></span></span><span class="line"><span class="cl"><span class="cm">       * padding、margin、width、height...
+</span></span></span><span class="line"><span class="cl"><span class="cm">       */</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">spacing</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'8xl'</span><span class="o">:</span> <span class="s1">'96rem'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'9xl'</span><span class="o">:</span> <span class="s1">'128rem'</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">keyframes</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">wiggle</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="s1">'0%, 100%'</span><span class="o">:</span> <span class="p">{</span> <span class="nx">transform</span><span class="o">:</span> <span class="s1">'rotate(-3deg)'</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">          <span class="s1">'50%'</span><span class="o">:</span> <span class="p">{</span> <span class="nx">transform</span><span class="o">:</span> <span class="s1">'rotate(3deg)'</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">borderRadius</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">DEFAULT</span><span class="o">:</span> <span class="s1">'.25rem'</span><span class="p">,</span> <span class="c1">// .rounded -&gt; { border-radius: .25rem }
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s1">'4xl'</span><span class="o">:</span> <span class="s1">'2rem'</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 基于 theme 函数生成自定义样式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">backgroundSize</span><span class="o">:</span> <span class="p">({</span> <span class="nx">theme</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">auto</span><span class="o">:</span> <span class="s1">'auto'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">cover</span><span class="o">:</span> <span class="s1">'cover'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">contain</span><span class="o">:</span> <span class="s1">'contain'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">...</span><span class="nx">theme</span><span class="p">(</span><span class="s1">'spacing'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">animation</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'spin-slow'</span><span class="o">:</span> <span class="s1">'spin 3s linear infinite'</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 注册插件，包含了额外的 base|components|utilities|variants 样式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">plugins</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">require</span><span class="p">(</span><span class="s1">'@tailwindcss/aspect-ratio'</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">require</span><span class="p">(</span><span class="s1">'@tailwindcss/typography'</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">plugin</span><span class="p">(</span><span class="kd">function</span> <span class="p">({</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">addUtilities</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">matchUtilities</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">addComponents</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">matchComponents</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">addBase</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">addVariant</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">matchVariant</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">theme</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">config</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">corePlugins</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">e</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// &lt;div class="content-auto lg:content-visible"&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">addUtilities</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'.content-auto'</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="s1">'content-visibility'</span><span class="o">:</span> <span class="s1">'auto'</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'.content-visible'</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="s1">'content-visibility'</span><span class="o">:</span> <span class="s1">'visible'</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">});</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// &lt;div class="tab-[13]"&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">matchUtilities</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">tab</span>: <span class="kt">value</span> <span class="o">=&gt;</span> <span class="p">({</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">tabSize</span>: <span class="kt">value</span>
+</span></span><span class="line"><span class="cl">          <span class="p">})</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span> <span class="nx">values</span>: <span class="kt">theme</span><span class="p">(</span><span class="s1">'tabSize'</span><span class="p">)</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">addBase</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">h1</span><span class="o">:</span> <span class="p">{</span> <span class="nx">fontSize</span>: <span class="kt">theme</span><span class="p">(</span><span class="s1">'fontSize.2xl'</span><span class="p">)</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">h2</span><span class="o">:</span> <span class="p">{</span> <span class="nx">fontSize</span>: <span class="kt">theme</span><span class="p">(</span><span class="s1">'fontSize.xl'</span><span class="p">)</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">h3</span><span class="o">:</span> <span class="p">{</span> <span class="nx">fontSize</span>: <span class="kt">theme</span><span class="p">(</span><span class="s1">'fontSize.lg'</span><span class="p">)</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">});</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">addComponents</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'.btn'</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">padding</span><span class="o">:</span> <span class="s1">'.5rem 1rem'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">borderRadius</span><span class="o">:</span> <span class="s1">'.25rem'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">fontWeight</span><span class="o">:</span> <span class="s1">'600'</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">});</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// &lt;button class="bg-blue-500 hocus:bg-blue-600"&gt;&lt;/button&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">addVariant</span><span class="p">(</span><span class="s1">'hocus'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'&amp;:hover'</span><span class="p">,</span> <span class="s1">'&amp;:focus'</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// &lt;div class="nth-[3n+1]:bg-blue-500"&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">matchVariant</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'nth'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">value</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="k">return</span> <span class="sb">`&amp;:nth-child(</span><span class="si">${</span><span class="nx">value</span><span class="si">}</span><span class="sb">)`</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">values</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">1</span><span class="o">:</span> <span class="s1">'1'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">2</span><span class="o">:</span> <span class="s1">'2'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">3</span><span class="o">:</span> <span class="s1">'3'</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 预设配置，当前配置基于其他配置文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">presets</span><span class="o">:</span> <span class="p">[</span><span class="kr">require</span><span class="p">(</span><span class="s1">'@acmecorp/base-tailwind-config'</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="nx">satisfies</span> <span class="nx">Config</span><span class="p">;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="常用插件">常用插件</h2><ul><li><a class="link" href="https://github.com/tailwindlabs/tailwindcss-container-queries" target="_blank" rel="noopener">@tailwindcss/container-queries
+</a>，可以基于 @container 的尺寸，在当前元素应用不同的样式；</li><li><a class="link" href="https://github.com/tailwindlabs/tailwindcss-typography" target="_blank" rel="noopener">@tailwindcss/typography
+</a>，用于修饰 Markdown 或富文本生成的 HTML 内容；</li><li><a class="link" href="https://github.com/jamiebuilds/tailwindcss-animate" target="_blank" rel="noopener">tailwindcss-animate
+</a>，动画插件，内置了一些动画类名；</li><li><a class="link" href="https://github.com/tailwindlabs/tailwindcss-aspect-ratio" target="_blank" rel="noopener">tailwindcss-aspect-ratio
+</a>，方便设置元素的宽高比；</li><li><a class="link" href="https://github.com/tailwindlabs/tailwindcss-forms" target="_blank" rel="noopener">tailwindcss-forms
+</a>，对表单元素的样式进行重置；</li><li><a class="link" href="https://github.com/dcastil/tailwind-merge" target="_blank" rel="noopener">tailwind-merge
+</a>，用于合并多个 class。</li></ul><h2 id="优势">优势</h2><p>Tailwind CSS 生成的 CSS 文件体积很小，即使不做代码分割，也能获得不错的加载性能。Tailwind 推荐使用 <a class="link" href="https://cssnano.github.io/cssnano" target="_blank" rel="noopener">cssnano
+</a>压缩 CSS，可以获得更小的体积。</p><h2 id="质疑">质疑</h2><p>在阅读文档的时候，被下边这个官方实例吓到过：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">label</span> <span class="na">class</span><span class="o">=</span><span class="s">"block"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">"block text-sm font-medium text-slate-700"</span><span class="p">&gt;</span>Username<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">input</span>
+</span></span><span class="line"><span class="cl">      <span class="na">value</span><span class="o">=</span><span class="s">"tbone"</span>
+</span></span><span class="line"><span class="cl">      <span class="na">type</span><span class="o">=</span><span class="s">"text"</span>
+</span></span><span class="line"><span class="cl">      <span class="na">disabled</span>
+</span></span><span class="line"><span class="cl">      <span class="na">class</span><span class="o">=</span><span class="s">"mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+</span></span></span><span class="line"><span class="cl"><span class="s">      focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+</span></span></span><span class="line"><span class="cl"><span class="s">      disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+</span></span></span><span class="line"><span class="cl"><span class="s">      invalid:border-pink-500 invalid:text-pink-600
+</span></span></span><span class="line"><span class="cl"><span class="s">      focus:invalid:border-pink-500 focus:invalid:ring-pink-500
+</span></span></span><span class="line"><span class="cl"><span class="s">    "</span>
+</span></span><span class="line"><span class="cl">    <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>这确实达到了“不用写一行 CSS”的目的，但需要写很多行 class；这看起来和行内样式没什么区别。</p><p>当然，官方文档也毫不避讳地提到了这一点“你可能认为这是一场灾难，你是感觉对的，是有点丑陋”：</p><ul><li>不用费劲脑汁地给 class 起名字，每个类名已经指明了所对应的样式信息；</li><li>不用担心 CSS 会越来越大，Tailwind CSS 总是会根据 class 生成 CSS；</li><li>不用担心样式共用导致的项目维护成本增加，不会发生 CSS 污染。</li></ul><p>官方文档也对“这不就是行内样式？”做了回应：</p><ul><li>更有约束性，在没有约束的情况下，行内样式的取值你可以随便写；而 Tailwind CSS 可以根据设计规范，对取值做一些约束；</li><li>行内样式不能使用伪类/伪元素，而 Tailwind CSS 借助于修饰符，支持在 class 中使用伪类/伪元素；</li><li>行内样式不能使用媒体查询，而 Tailwind CSS 借助于修饰符，支持在 class 中使用媒体查询；</li><li>在组件化开发的趋势下，超长的 class 被封装在组件内部，不至于难于维护。</li></ul></section><footer class="article-footer"><section class="article-not-by-ai-badge"><a href="https://notbyai.fyi/cn/" target="_blank" title="Not By AI"><svg width="131" height="42" viewBox="0 0 131 42" fill="none"><path d="M.5.5H116c8.008.0 14.5 6.49187 14.5 14.5V41.5H15C6.99187 41.5.5 35.0081.5 27V.5z" fill="#fff" stroke="#000"></path><path d="M17.9605 24.1575c3.4661 2.8068 8.4231 2.8068 11.8892.0l-1.3402-1.6549c-2.6847 2.174-6.5241 2.174-9.2088.0l-1.3402 1.6549z" fill="#000"></path><path d="M19.404 20.5134V17.6365h2.1296v2.8769H19.404z" fill="#000"></path><path d="M26.012 17.6365v2.8769h2.1295V17.6365H26.012z" fill="#000"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M35 21.5C35 27.8513 29.8513 33 23.5 33S12 27.8513 12 21.5C12 15.1487 17.1487 10 23.5 10S35 15.1487 35 21.5zm-2.1295.0c0 5.1752-4.1953 9.3705-9.3705 9.3705S14.1295 26.6752 14.1295 21.5s4.1953-9.3705 9.3705-9.3705 9.3705 4.1953 9.3705 9.3705z" fill="#000"></path><path d="M61.844 12.1721l.1995.711L62.2294 12.8197C62.5169 12.7216 62.8276 12.6155 63.1503 12.5052v2.55C63.1503 15.1818 63.1005 15.2208 62.9709 15.2208 62.8612 15.2208 62.4922 15.2208 62.0634 15.211 62.1631 15.4156 62.2628 15.7273 62.2928 15.9123 62.901 15.9123 63.28 15.8929 63.5293 15.776 63.7686 15.6591 63.8583 15.4545 63.8583 15.0455V12.2629C64.2106 12.1421 64.5673 12.0195 64.9154 11.8994L64.8057 11.2273C64.4898 11.3348 64.1706 11.4415 63.8583 11.5441V9.63961H64.8057V8.95779H63.8583V7H63.1503V8.95779H61.9936v.68182h1.1567V11.7732C62.6577 11.9301 62.2064 12.0683 61.844 12.1721z" fill="#000"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M66.0322 10.7695C65.3142 10.7695 65.1347 10.5162 65.1347 9.8052V7.39935h2.6127V9.32792H65.763V9.81494C65.763 10.1169 65.8128 10.2045 66.0322 10.2045H67.2986C67.4781 10.2045 67.7474 10.1948 67.9069 10.1656 67.9134 10.2165 67.92 10.2777 67.9268 10.3422 67.941 10.4754 67.9566 10.6224 67.9767 10.7208 67.8371 10.7597 67.5779 10.7695 67.3086 10.7695H66.0322zM65.763 7.90584H67.1391V8.82143H65.763V7.90584z" fill="#000"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M69.0736 10.7208C68.3656 10.7208 68.1861 10.4773 68.1861 9.76623V7.39935H70.8087V9.2987H68.8144V9.77597C68.8144 10.0682 68.8642 10.1656 69.0936 10.1656h1.3262C70.5993 10.1656 70.8985 10.1461 71.058 10.1071 71.068 10.2825 71.0979 10.5357 71.1179 10.6721 70.9783 10.7208 70.709 10.7208 70.4298 10.7208H69.0736zM68.8144 7.90584h1.396v.88637h-1.396V7.90584z" fill="#000"></path><path d="M66.83 14.1299C66.2715 14.6753 65.3142 15.1818 64.4567 15.5032 64.6262 15.6201 64.9054 15.8539 65.035 15.9805 65.8727 15.6104 66.8898 14.9968 67.5081 14.3831L66.83 14.1299z" fill="#000"></path><path d="M68.4554 14.4513C69.2132 14.9091 70.1905 15.5812 70.6791 16L71.2974 15.6104C70.7788 15.1818 69.7916 14.539 69.0437 14.1007L68.4554 14.4513z" fill="#000"></path><path d="M50.4761 15.9318C49.798 15.5617 48.6612 15.0942 47.5344 14.7338L48.0031 14.2468C49.1299 14.5974 50.3564 15.0552 51.0844 15.4253L50.4761 15.9318z" fill="#000"></path><path d="M42 15.4156C43.067 15.1623 44.4032 14.6656 45.0713 14.2468L45.7594 14.6753C44.9218 15.1721 43.5855 15.6786 42.5185 15.9513 42.4088 15.8052 42.1596 15.5519 42 15.4156z" fill="#000"></path><path d="M56.1556 7.21693C56.1571 7.15007 56.1585 7.0868 56.1601 7.02922H56.9877L56.9868 7.0714C56.9788 7.4194 56.968 7.88942 56.9233 8.43665 57.0639 9.58208 57.6711 13.7136 61.2258 15.2597 61.0064 15.4253 60.787 15.6786 60.6773 15.8831c-2.5071-1.144-3.5872-3.5484-4.0775-5.3684C56.13 12.4644 55.0681 14.6445 52.63 15.9221 52.5004 15.7273 52.2511 15.5032 52.0217 15.3474c3.9976-1.9757 4.0968-6.45452 4.1339-8.13047z" fill="#000"></path><path d="M75.0586 9.43506C75.1376 9.06022 75.2116 8.69288 75.2761 8.3539L74.5283 8.27597C74.3089 9.50325 73.9299 11.1688 73.6408 12.1623L74.3986 12.2305C74.4264 12.1301 74.4552 12.0226 74.4848 11.9091H78.3699C78.3296 12.3408 78.2883 12.7224 78.2455 13.0584H72.0851V13.7403h6.0611C78.0034 14.5883 77.8408 15.0239 77.6395 15.1916 77.5198 15.289 77.4002 15.2987 77.1708 15.2987 76.9215 15.2987 76.2334 15.2987 75.5454 15.2305 75.675 15.4253 75.7747 15.7175 75.7947 15.9221 76.4429 15.961 77.091 15.9708 77.4201 15.9513 77.799 15.9318 78.0284 15.8636 78.2677 15.6396 78.532 15.3814 78.7263 14.8409 78.8969 13.7403H81V13.0584H78.991C79.0434 12.6344 79.0943 12.1472 79.1452 11.5877 79.1552 11.4805 79.1751 11.2565 79.1751 11.2565H74.6483C74.7379 10.8862 74.8303 10.4846 74.92 10.0779H79.2948V9.43506H75.0586z" fill="#000"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M65.1746 11.6266V12.25H66.5109v1.1299H64.7558v.6233H71.1079v-.6233H69.5523V12.25h1.3262v-.6234H69.5523v-.6623H68.8642v.6623H67.189V10.9838H66.5109V11.6266H65.1746zm2.0144 1.7533V12.25h1.6752v1.1299H67.189z" fill="#000"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M42.1895 14.0909v-.6234h1.4359V9.06494h2.5129V8.4513H42.4687V7.81818h3.6696V7.00974H46.8762v.80844H50.7852V8.4513H46.8762v.61364h2.7623V13.4675h1.406v.6234h-8.855zm2.1539-.6234h4.5472V12.7857H44.3434V13.4675zm0-1.1493h4.5472V11.7338H44.3434V12.3182zm0-1.0617h4.5472v-.5747H44.3434v.5747zm0-1.0325h4.5472V9.58117H44.3434V10.224z" fill="#000"></path><path d="M72.3245 9.65909V7.52597h8.4362V9.65909H79.9829V8.20779H73.0624v1.4513H72.3245z" fill="#000"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M105.32 26.2505C105.32 25.9898 105.336 25.4196 105.336 25.4196H101.424V23.8717H105.573C105.764 26.2238 106.11 28.471 106.651 30.2984c-.875.9892-1.892 1.8173-3.039 2.4531C104.107 33.2077 104.953 34.2016 105.288 34.7067 106.138 34.1597 106.93 33.5082 107.658 32.7639 108.338 33.9391 109.193 34.6415 110.254 34.6415 111.898 34.6415 112.649 33.9572 113 30.78 112.377 30.5356 111.563 29.9817 111.036 29.4277 110.956 31.4155 110.765 32.2301 110.445 32.2301 110.06 32.2301 109.67 31.686 109.312 30.7655 110.465 29.1244 111.389 27.1985 112.058 25.0611L109.711 24.4908C109.396 25.6095 108.983 26.659 108.478 27.6243 108.264 26.4884 108.09 25.2105 107.974 23.8717h4.866V21.5418H111.142L111.946 20.6945C111.387 20.1568 110.27 19.4399 109.455 19l-1.405 1.4175C108.553 20.7329 109.148 21.1437 109.647 21.5418H107.835C107.811 20.7923 107.808 20.0385 107.827 19.2933h-2.443C105.387 20.0364 105.403 20.7892 105.433 21.5418H98.9812v4.8879C98.9812 28.5642 98.9014 31.4481 97.7199 33.3707 98.2468 33.6477 99.3006 34.5275 99.6997 35 100.514 33.7498 100.957 32.0088 101.189 30.2753 101.506 30.8638 101.745 31.7506 101.775 32.4257 102.51 32.4257 103.18 32.4094 103.612 32.3279 104.091 32.2301 104.458 32.0672 104.809 31.5947 105.192 31.0733 105.272 29.5743 105.32 26.2505zM101.197 30.2141C101.316 29.3052 101.378 28.4 101.406 27.5703h1.652C103.023 29.1922 102.963 29.8644 102.829 30.0631 102.701 30.2261 102.558 30.2749 102.35 30.2749 102.102 30.2749 101.674 30.2596 101.197 30.2141z" fill="#000"></path><path d="M86.8673 22.112C87.1314 21.4187 87.3672 20.705 87.565 19.9939L85.1541 19.4399C84.6112 21.6395 83.5893 23.8717 82.3599 25.2077 82.9507 25.5336 83.9885 26.2342 84.4515 26.6415 84.9297 26.0332 85.4007 25.2744 85.839 24.4257h3.0672v2.4928H84.7709v2.2811h4.1353V32.002H82.8708v2.3137H97.4005V32.002H91.3332V29.1996H95.9156V26.9185H91.3332V24.4257H96.5543V22.112H91.3332V19.277H88.9062v2.835H86.8673z" fill="#000"></path><path d="M47.3436 28.4645C47.4377 28.0285 47.4856 27.6141 47.4988 27.2444H43.8462V25.11h3.6564V23.4807h-3.816V21.2811h3.816V19.3585h2.2992V27c0 2.8513-.862200000000001 6.0611-4.774 7.9837C44.6446 34.4134 43.9261 33.6802 43.3672 33.224 44.7784 32.6761 45.7414 31.786 46.3804 30.8057 45.6568 30.9237 44.9507 31.0375 44.2921 31.1436L43.4151 31.2851 43 28.9226C44.1273 28.8236 45.7056 28.6496 47.3436 28.4645z" fill="#000"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M72.6755 34.3305 67.632 19.7976H64.2697L59.1875 34.3305h3.1111L63.2841 31.3431H68.5306l.9178 2.9874H72.6755zM65.9218 23.1202l1.7778 5.7186H64.0861l1.8357-5.7186z" fill="#000"></path><path d="M53.7456 19.3585v1.9226h4.1833v2.1996H53.7456V25.11H57.5457v2.1344H53.7456v1.6619H58.2163v2.1996H53.7456v3.6497H51.4144V19.3585h2.3312z" fill="#000"></path><path d="M75.2125 22.2696v9.5922H73.4582v2.4721H79.719V31.8618h-1.55V22.2696h1.55v-2.472H73.4582v2.472h1.7543z" fill="#000"></path></svg></a></section></footer></article><aside class="related-content--wrapper"><h2 class="section-title">相关文章</h2><div class="related-content"><div class="flex article-list--tile"><article class="has-image"><a href="/p/css-%E6%96%B0%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/"><div class="article-image"><img src="/img/cover/css.webp" loading="lazy" data-key="" data-hash="/img/cover/css.png" alt="" decoding="async" width="1200" height="720" jampack-sized="true"></div><div class="article-details"><h2 class="article-title">《CSS 新世界》笔记</h2></div></a></article><article class="has-image"><a href="/p/css-%E9%80%89%E6%8B%A9%E5%99%A8%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/"><div class="article-image"><img src="/img/cover/css.webp" loading="lazy" data-key="" data-hash="/img/cover/css.png" alt="" decoding="async" width="1200" height="720" jampack-sized="true"></div><div class="article-details"><h2 class="article-title">《CSS 选择器世界》笔记</h2></div></a></article><article class="has-image"><a href="/p/css-%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/"><div class="article-image"><img src="/img/cover/css.webp" loading="lazy" data-key="" data-hash="/img/cover/css.png" alt="" decoding="async" width="1200" height="720" jampack-sized="true"></div><div class="article-details"><h2 class="article-title">《CSS 世界》笔记</h2></div></a></article></div></div></aside><footer class="site-footer"><section class="copyright" style="display:flex;justify-content:flex-start;align-items:center">©
+2017 -
+2025
+<a href="https://github.com/ElementRef" target="_blank">馬腊咯稽
+</a><a href="https://ipw.cn/ipv6webcheck/?site=elementref.github.io" target="_blank" title="本站支持 IPv6 访问"><img style="display:inline-block;vertical-align:middle" src="https://static.ipw.cn/icon/ipv6-certified-lite-s1.svg" alt="本站支持 IPv6 访问" loading="lazy" decoding="async"></a></section><section class="powerby">Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>, Deploy by Actions<br>主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计</section></footer><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="关闭"></button>
+<button class="pswp__button pswp__button--fs" title="全屏"></button>
+<button class="pswp__button pswp__button--zoom" title="缩放"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arrow--left" title="上一张"></button>
+<button class="pswp__button pswp__button--arrow--right" title="下一张"></button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div><script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js" integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin="anonymous" defer=""></script><script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js" integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin="anonymous" defer=""></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css" crossorigin="anonymous"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css" crossorigin="anonymous"></main><aside class="sidebar sticky right-sidebar"><section class="archives widget"><div class="widget-icon"><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><line x1="5" y1="9" x2="19" y2="9"></line><line x1="5" y1="15" x2="19" y2="15"></line><line x1="11" y1="4" x2="7" y2="20"></line><line x1="17" y1="4" x2="13" y2="20"></line></svg></div><h2 class="section-title widget-title">目录</h2><div class="widget--toc"><nav id="TableOfContents"><ol><li><a href="#是什么">是什么</a></li><li><a href="#怎么用">怎么用</a></li><li><a href="#预处理">预处理</a></li><li><a href="#修饰符">修饰符</a><ol><li><a href="#伪类">伪类</a></li><li><a href="#伪元素">伪元素</a></li><li><a href="#元素标记">元素标记</a></li><li><a href="#媒体查询">媒体查询</a></li><li><a href="#属性选择">属性选择</a></li><li><a href="#自定义修饰符">自定义修饰符</a></li></ol></li><li><a href="#响应式">响应式</a></li><li><a href="#黑暗模式">黑暗模式</a></li><li><a href="#样式复用">样式复用</a></li><li><a href="#自定义样式配置">自定义样式配置</a><ol><li><a href="#主题自定义">主题自定义</a></li><li><a href="#使用自由值">使用自由值</a></li></ol></li><li><a href="#basecomponentsutilities">base、components、utilities</a></li><li><a href="#配置文件">配置文件</a></li><li><a href="#常用插件">常用插件</a></li><li><a href="#优势">优势</a></li><li><a href="#质疑">质疑</a></li></ol></nav></div></section></aside></div><script src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js" integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin="anonymous"></script><script type="text/javascript" src="/ts/main.js" defer=""></script><script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script><script>NProgress.configure({showSpinner:!1}),NProgress.start(),document.addEventListener("readystatechange",()=>{document.readyState==="interactive"&&NProgress.inc(.8),document.readyState==="complete"&&NProgress.done()})</script></body></html>

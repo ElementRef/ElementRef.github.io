@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CSS on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/css/</link><description>Recent content in CSS on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 07 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/css/index.xml" rel="self" type="application/rss+xml"/><item><title>Tailwind 快速上手 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/tailwind-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</link><pubDate>Mon, 07 Oct 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/tailwind-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/tailwind.png" alt="Tailwind 快速上手" />&lt;h2 id="是什么">是什么&lt;/h2>
-&lt;p>借助于 JIT，Tailwind 会在编译期间，扫描你的 HTML、Components 或者其他用来描述 HTML 的模版，收集其中的 class，然后生成对应的 CSS 文件。他是为了解决：CSS 冗余、CSS 耦合等问题。&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CSS on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/css/</link><description>Recent content in CSS on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 07 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/css/index.xml" rel="self" type="application/rss+xml"/><item><title>Tailwind CSS 快速上手 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/tailwind-css-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</link><pubDate>Mon, 07 Oct 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/tailwind-css-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/tailwind-css.png" alt="Tailwind CSS 快速上手" />&lt;h2 id="是什么">是什么&lt;/h2>
+&lt;p>借助于 JIT，Tailwind CSS 会在编译期间，扫描你的 HTML、Components 或者其他用来描述 HTML 的模版，收集其中的 class，然后生成对应的 CSS 文件。他是为了解决：CSS 冗余、CSS 耦合等问题。&lt;/p>
 &lt;h2 id="怎么用">怎么用&lt;/h2>
 &lt;p>使用 TailwindCLI:&lt;/p>
 &lt;ol>
@@ -10,11 +10,11 @@
 &lt;/ol>
 &lt;p>作为 PostCSS 插件使用：&lt;/p>
 &lt;ol>
-&lt;li>安装 Tailwind 和 PostCSS；&lt;/li>
-&lt;li>在 postcss.config.js 文件中配置 Tailwind 作为一个 plugin；&lt;/li>
-&lt;li>在 tailwind.config.js 中配置 Tailwind 要扫描的文件类型和目录；&lt;/li>
+&lt;li>安装 Tailwind CSS 和 PostCSS；&lt;/li>
+&lt;li>在 postcss.config.js 文件中配置 Tailwind CSS 作为一个 plugin；&lt;/li>
+&lt;li>在 tailwind.config.js 中配置 Tailwind CSS 要扫描的文件类型和目录；&lt;/li>
 &lt;li>在 CSS 文件中添加 @tailwind 指令；&lt;/li>
-&lt;li>项目运行/打包时，Tailwind 会自动编译输出。&lt;/li>
+&lt;li>项目运行/打包时，Tailwind CSS 会自动编译输出。&lt;/li>
 &lt;/ol>
 &lt;p>对于 VSCode 用户，推荐使用 &lt;a class="link"
 href="https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss"
@@ -32,11 +32,11 @@ Prettier 插件
 href="https://tailwindcss.com/blog/automatic-class-sorting-with-prettier#how-classes-are-sorted"
 target="_blank" rel="noopener"
 >
-Tailwind 建议
+Tailwind CSS 建议
 &lt;/a>
 。&lt;/p>
 &lt;h2 id="预处理">预处理&lt;/h2>
-&lt;p>Tailwind 可以作为 PostCSS 的一个插件；所以，如果你的项目恰好使用了 PostCSS 并且没有使用 Sass/Less/Stylus；那是再好不过的了；官方文档上推荐了几个 PostCSS 插件：&lt;/p>
+&lt;p>Tailwind CSS 可以作为 PostCSS 的一个插件；所以，如果你的项目恰好使用了 PostCSS 并且没有使用 Sass/Less/Stylus；那是再好不过的了；官方文档上推荐了几个 PostCSS 插件：&lt;/p>
 &lt;ul>
 &lt;li>&lt;a class="link"
 href="https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting"
@@ -63,7 +63,7 @@ autoprefixer
 &lt;p>对于 Sass/Less/Stylus 这些，官方持消极态度；因为项目中的大部分 CSS 会由 Tailwind 生成；你甚至都不用额外的写 CSS；所以，这些预处理器的使用并不会带来太多的好处。&lt;/p>
 &lt;h2 id="修饰符">修饰符&lt;/h2>
 &lt;h3 id="伪类">伪类&lt;/h3>
-&lt;p>在传统的 CSS 中，我们会把不同的状态绑定到同一个 class 上；而在 Tailwind 中，我们使用不同的 class 来描述不同状态下的样式：&lt;/p>
+&lt;p>在传统的 CSS 中，我们会把不同的状态绑定到同一个 class 上；而在 Tailwind CSS 中，我们使用不同的 class 来描述不同状态下的样式：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -106,7 +106,7 @@ autoprefixer
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">style&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>Tailwind 支持将多种状态进行叠加：&lt;/p>
+&lt;/div>&lt;p>Tailwind CSS 支持将多种状态进行叠加：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -169,7 +169,7 @@ autoprefixer
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">label&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;block&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">span&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;after:content-[&amp;#39;*&amp;#39;] after:ml-0.5 after:text-red-500 ...&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">data-exp&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;默认情况下，如果没有 after:content-[&amp;#39;*&amp;#39;]，Tailwind 会自动添加 after:content-[&amp;#39;&amp;#39;]&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">data-exp&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;默认情况下，如果没有 after:content-[&amp;#39;*&amp;#39;]，Tailwind CSS 会自动添加 after:content-[&amp;#39;&amp;#39;]&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Email
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">span&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
@@ -944,7 +944,7 @@ target="_blank" rel="noopener"
 &lt;/a>
 。&lt;/p>
 &lt;h2 id="响应式">响应式&lt;/h2>
-&lt;p>Tailwind 默认提供了以下响应断点，分别是：&lt;/p>
+&lt;p>Tailwind CSS 默认提供了以下响应断点，分别是：&lt;/p>
 &lt;ul>
 &lt;li>sm，对应 @media (min-width: 640px)；&lt;/li>
 &lt;li>md，对应 @media (min-width: 768px)；&lt;/li>
@@ -1026,7 +1026,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h2 id="黑暗模式">黑暗模式&lt;/h2>
-&lt;p>Tailwind 使用 prefers-color-scheme 媒体查询来切换黑暗模式（media 策略）；如果想要手动切换，可以使用 selector 策略：&lt;/p>
+&lt;p>Tailwind CSS 使用 prefers-color-scheme 媒体查询来切换黑暗模式（media 策略）；如果想要手动切换，可以使用 selector 策略：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -1094,7 +1094,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h2 id="样式复用">样式复用&lt;/h2>
-&lt;p>在使用 Tailwind 时，你可能会遇到一些样式重复的情况，比如下方的 &amp;lt;img&amp;gt;：&lt;/p>
+&lt;p>在使用 Tailwind CSS 时，你可能会遇到一些样式重复的情况，比如下方的 &amp;lt;img&amp;gt;：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -1155,7 +1155,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>如果能通过模版循环、组件等方式复用，那将是极好的；如果不能，Tailwind 提供了 &lt;a class="link"
+&lt;/div>&lt;p>如果能通过模版循环、组件等方式复用，那将是极好的；如果不能，Tailwind CSS 提供了 &lt;a class="link"
 href="https://tailwindcss.com/docs/functions-and-directives#apply"
 target="_blank" rel="noopener"
 >
@@ -1333,7 +1333,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">button&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;bg-black btn&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">button&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>所以，Tailwind 基于 &lt;a class="link"
+&lt;/div>&lt;p>所以，Tailwind CSS 基于 &lt;a class="link"
 href="https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/#what-is-itcss"
 target="_blank" rel="noopener"
 >
@@ -1470,10 +1470,10 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;span class="lnt">43
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="line">&lt;span class="cl">&lt;span class="p">@&lt;/span>&lt;span class="k">tailwind&lt;/span> &lt;span class="nt">base&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c">/* 注入 Tailwind 和 plugins 注册的的基础样式 */&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">@&lt;/span>&lt;span class="k">tailwind&lt;/span> &lt;span class="nt">components&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c">/* 注入 Tailwind 和 plugins 注册的的组件类名 */&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">@&lt;/span>&lt;span class="k">tailwind&lt;/span> &lt;span class="nt">utilities&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c">/* 注入 Tailwind 和 plugins 注册的的工具类名 */&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c">/* 扩展 base，@layer 用来告诉 Tailwind，这些自定义样式需要被注入在哪一层 */&lt;/span>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="line">&lt;span class="cl">&lt;span class="p">@&lt;/span>&lt;span class="k">tailwind&lt;/span> &lt;span class="nt">base&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c">/* 注入 Tailwind CSS 和 plugins 注册的的基础样式 */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">@&lt;/span>&lt;span class="k">tailwind&lt;/span> &lt;span class="nt">components&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c">/* 注入 Tailwind CSS 和 plugins 注册的的组件类名 */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">@&lt;/span>&lt;span class="k">tailwind&lt;/span> &lt;span class="nt">utilities&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c">/* 注入 Tailwind CSS 和 plugins 注册的的工具类名 */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c">/* 扩展 base，@layer 用来告诉 Tailwind CSS，这些自定义样式需要被注入在哪一层 */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">@&lt;/span>&lt;span class="k">layer&lt;/span> &lt;span class="nt">base&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c">/* 定义类型变量 */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">:&lt;/span>&lt;span class="nd">root&lt;/span> &lt;span class="p">{&lt;/span>
@@ -1764,7 +1764,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 为了使 Tailwind 能够准确解析 class
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 为了使 Tailwind CSS 能够准确解析 class
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 不要使用字符串拼接出 class
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * class 应该能被静态解析
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
@@ -1781,7 +1781,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 但是不会主动给 @layer 扩展的样式添加 prefix
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">prefix&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;tw-&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">important&lt;/span>: &lt;span class="kt">true&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 控制 Tailwind 生成的样式是否添加 !important
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">important&lt;/span>: &lt;span class="kt">true&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 控制 Tailwind CSS 生成的样式是否添加 !important
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">separator&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;_&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 默认是 `:`；如果某些模版语言不兼容，可以自行修改
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">theme&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
@@ -1965,7 +1965,7 @@ tailwind-merge
 ，用于合并多个 class。&lt;/li>
 &lt;/ul>
 &lt;h2 id="优势">优势&lt;/h2>
-&lt;p>Tailwind 生成的 CSS 文件体积很小，即使不做代码分割，也能获得不错的加载性能。Tailwind 推荐使用 &lt;a class="link"
+&lt;p>Tailwind CSS 生成的 CSS 文件体积很小，即使不做代码分割，也能获得不错的加载性能。Tailwind 推荐使用 &lt;a class="link"
 href="https://cssnano.github.io/cssnano"
 target="_blank" rel="noopener"
 >
@@ -2016,14 +2016,14 @@ cssnano
 &lt;p>当然，官方文档也毫不避讳地提到了这一点“你可能认为这是一场灾难，你是感觉对的，是有点丑陋”：&lt;/p>
 &lt;ul>
 &lt;li>不用费劲脑汁地给 class 起名字，每个类名已经指明了所对应的样式信息；&lt;/li>
-&lt;li>不用担心 CSS 会越来越大，Tailwind 总是会根据 class 生成 CSS；&lt;/li>
+&lt;li>不用担心 CSS 会越来越大，Tailwind CSS 总是会根据 class 生成 CSS；&lt;/li>
 &lt;li>不用担心样式共用导致的项目维护成本增加，不会发生 CSS 污染。&lt;/li>
 &lt;/ul>
 &lt;p>官方文档也对“这不就是行内样式？”做了回应：&lt;/p>
 &lt;ul>
-&lt;li>更有约束性，在没有约束的情况下，行内样式的取值你可以随便写；而 Tailwind 可以根据设计规范，对取值做一些约束；&lt;/li>
-&lt;li>行内样式不能使用伪类/伪元素，而 Tailwind 借助于修饰符，支持在 class 中使用伪类/伪元素；&lt;/li>
-&lt;li>行内样式不能使用媒体查询，而 Tailwind 借助于修饰符，支持在 class 中使用媒体查询；&lt;/li>
+&lt;li>更有约束性，在没有约束的情况下，行内样式的取值你可以随便写；而 Tailwind CSS 可以根据设计规范，对取值做一些约束；&lt;/li>
+&lt;li>行内样式不能使用伪类/伪元素，而 Tailwind CSS 借助于修饰符，支持在 class 中使用伪类/伪元素；&lt;/li>
+&lt;li>行内样式不能使用媒体查询，而 Tailwind CSS 借助于修饰符，支持在 class 中使用媒体查询；&lt;/li>
 &lt;li>在组件化开发的趋势下，超长的 class 被封装在组件内部，不至于难于维护。&lt;/li>
 &lt;/ul></description></item><item><title>《CSS 新世界》笔记 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/css-%E6%96%B0%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/</link><pubDate>Mon, 28 Feb 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/css-%E6%96%B0%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/css.png" alt="《CSS 新世界》笔记" />&lt;h2 id="前置知识">前置知识&lt;/h2>
 &lt;p>&lt;a class="link"

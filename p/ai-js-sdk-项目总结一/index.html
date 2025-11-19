@@ -20,7 +20,7 @@
 Turborepo
 </a>、<a class="link" href="https://cn.vite.dev/guide/" target="_blank" rel="noopener">
 Vite
-</a>搭建一个 monorepo 项目。</p><h3 id="目录结构">目录结构</h3><ul><li>主应用 Admin 和 Web 放在 apps 目录下，每个应用都是完整的 Vite 项目；</li><li>JS-SDK、shared 公共代码和 types 类型共享等子包，放在 packages 目录下；</li><li>SVG 图标文件放在根目录的 icons 文件夹下，根据「应用名称｜子包名称｜是否保留颜色」进行分类；</li><li>env 文件、Lint 配置、Deploy 配置、Turborepo 配置、workspace 配置、TailwindCSS 配置等，均放在根目录下；</li><li>Admin、Web、JS-SDK、Shared 都有自己独立的 tsconfig.json，根目录 tsconfig.json 仅匹配根目录的 *.config.ts|js。</li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</a>搭建一个 monorepo 项目。</p><h3 id="目录结构">目录结构</h3><ul><li>主应用 Admin 和 Web 放在 apps 目录下，每个应用都是完整的 Vite 项目；</li><li>JS-SDK、shared 公共代码和 types 类型共享等子包，放在 packages 目录下；</li><li>SVG 图标文件放在根目录的 icons 文件夹下，根据「应用名称｜子包名称｜是否保留颜色」进行分类；</li><li>env 文件、Lint 配置、Deploy 配置、Turborepo 配置、workspace 配置、Tailwind CSS 配置等，均放在根目录下；</li><li>Admin、Web、JS-SDK、Shared 都有自己独立的 tsconfig.json，根目录 tsconfig.json 仅匹配根目录的 *.config.ts|js。</li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -201,7 +201,7 @@ Vite
 </span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">commitlint</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">js</span>          <span class="n">commitlint</span> <span class="err">配置</span>
 </span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">eslint</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">js</span>              <span class="n">ESLint</span> <span class="err">配置</span>
 </span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">stylelint</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">js</span>           <span class="n">Stylelint</span> <span class="err">配置</span>
-</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">tailwind</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">js</span>            <span class="n">TailwindCSS</span> <span class="err">配置</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">tailwind</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">js</span>            <span class="n">Tailwind</span> <span class="n">CSS</span> <span class="err">配置</span>
 </span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">pnpm</span><span class="o">-</span><span class="n">lock</span><span class="o">.</span><span class="n">yaml</span>                <span class="err">依赖锁</span>
 </span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">pnpm</span><span class="o">-</span><span class="n">workspace</span><span class="o">.</span><span class="n">yaml</span>           <span class="n">workspace</span> <span class="err">配置：</span><span class="n">packages</span><span class="err">、</span><span class="n">patchedDependencies</span><span class="err">、</span><span class="n">catalog</span> <span class="err">等</span>
 </span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">package</span><span class="o">.</span><span class="n">json</span>                  <span class="n">npm</span><span class="o">-</span><span class="n">script</span><span class="err">、</span><span class="n">git</span><span class="o">-</span><span class="n">hooks</span><span class="err">、</span><span class="n">lint</span><span class="o">-</span><span class="n">staged</span><span class="err">、</span><span class="n">engines</span><span class="err">、</span><span class="n">cli</span><span class="o">-</span><span class="n">dependencies</span> <span class="err">等</span>
@@ -477,7 +477,7 @@ no-new
 </span></span><span class="line"><span class="cl"><span class="p">);</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>在后续的新项目中尝试了 Biome，决定以后<strong>弃用 ESLint</strong>；ESLint 太慢了，而且很容易损坏大文件。</p><h3 id="stylelintconfigjs">stylelint.config.js</h3><p>Stylelint 需要使用 <a class="link" href="https://github.com/43081j/postcss-lit" target="_blank" rel="noopener">postcss-lit
 </a>才能完成对 js(x)、ts(x) 的正确解析；需要使用 <a class="link" href="https://github.com/zhilidali/stylelint-config-tailwindcss" target="_blank" rel="noopener">stylelint-config-tailwindcss
-</a>完成对 TailwindCSS 的支持。</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</a>完成对 Tailwind CSS 的支持。</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -527,10 +527,10 @@ no-new
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">]</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// ...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>Stylelint 比较<strong>疯癫</strong>的一点是，他竟然会对<strong>二进制文件</strong>进行校验；最好在 ignoreFiles 中排出项目中的二进制文件。</p><img style="display:block;margin:0 auto;width:100%" src="stylelint.crazy.webp" alt="" loading="lazy" decoding="async" width="643" height="272" jampack-sized="true"><h3 id="tailwindconfigjs">tailwind.config.js</h3><p>虽然 TailwindCSS 4 已经不需要单独的 tailwind.config.js 了；但是，如果有使用第三方插件，还是独立的配置文件比较方便；这里使用了几个插件：</p><ul><li><a class="link" href="https://github.com/egoist/tailwindcss-icons" target="_blank" rel="noopener">@egoist/tailwindcss-icons
-</a>，将 Iconify 映射到 TailwindCSS；</li><li><a class="link" href="https://github.com/iconify/tools" target="_blank" rel="noopener">@iconify/tools
+</span></span></code></pre></td></tr></tbody></table></div></div><p>Stylelint 比较<strong>疯癫</strong>的一点是，他竟然会对<strong>二进制文件</strong>进行校验；最好在 ignoreFiles 中排出项目中的二进制文件。</p><img style="display:block;margin:0 auto;width:100%" src="stylelint.crazy.webp" alt="" loading="lazy" decoding="async" width="643" height="272" jampack-sized="true"><h3 id="tailwindconfigjs">tailwind.config.js</h3><p>虽然 Tailwind CSS 4 已经不需要单独的 tailwind.config.js 了；但是，如果有使用第三方插件，还是独立的配置文件比较方便；这里使用了几个插件：</p><ul><li><a class="link" href="https://github.com/egoist/tailwindcss-icons" target="_blank" rel="noopener">@egoist/tailwindcss-icons
+</a>，将 Iconify 映射到 Tailwind CSS；</li><li><a class="link" href="https://github.com/iconify/tools" target="_blank" rel="noopener">@iconify/tools
 </a>，解析本地 SVG 文件并映射为 IconifyJSON；</li><li><a class="link" href="https://github.com/jamiebuilds/tailwindcss-animate" target="_blank" rel="noopener">tailwindcss-animate
-</a>，补足动画类名，TailwindCSS 内置的动画比较贫瘠；</li><li><a class="link" href="https://github.com/the-lemonboy/tailwindcss-px-to-viewport" target="_blank" rel="noopener">tailwindcss-px-to-viewport
+</a>，补足动画类名，Tailwind CSS 内置的动画比较贫瘠；</li><li><a class="link" href="https://github.com/the-lemonboy/tailwindcss-px-to-viewport" target="_blank" rel="noopener">tailwindcss-px-to-viewport
 </a>，不使用 PostCSS 的情况下，将 px 转换为 vw/vh。</li></ul><p><a class="link" href="https://github.com/egoist/tailwindcss-icons" target="_blank" rel="noopener">@egoist/tailwindcss-icons
 </a>怎么用，可以查看这个<a class="link" href="https://github.com/egoist/tailwindcss-icons/issues/37" target="_blank" rel="noopener">
 栗子
@@ -704,7 +704,7 @@ no-new
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>但是，这个配置在子包中，没有了图标类名提示；并且如果 SVG 由更新，需要重启 Vite。</p><p>除此之外，还有两个辅助函数：</p><ul><li><a class="link" href="https://github.com/lukeed/clsx" target="_blank" rel="noopener">clsx
 </a>，提升基于条件的 JSX 类名书写体验；</li><li><a class="link" href="https://github.com/dcastil/tailwind-merge" target="_blank" rel="noopener">tailwind-merge
-</a>，解决 TailwindCSS 类名合并优先级问题。</li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</a>，解决 Tailwind CSS 类名合并优先级问题。</li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -751,7 +751,7 @@ no-new
 </span></span><span class="line"><span class="cl">  <span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>在 monorepo 项目中，<a class="link" href="https://github.com/tailwindlabs/tailwindcss-intellisense" target="_blank" rel="noopener">
-TailwindCSS IntelliSense
+Tailwind CSS IntelliSense
 </a>会有一些<a class="link" href="https://github.com/tailwindlabs/tailwindcss-intellisense/issues/1139" target="_blank" rel="noopener">
 类名提示的问题
 </a>；需要<a class="link" href="https://github.com/tailwindlabs/tailwindcss/issues/13136" target="_blank" rel="noopener">
