@@ -440,7 +440,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git remote -v
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git reset --mixed HEAD^
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 删除当前分支上所有 commit 并生成『删除所有 commit』这一个 commit&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 删除当前分支上所有 commit 并生成「删除所有 commit」这一个 commit&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git reset --hard &lt;span class="k">$(&lt;/span>git commit-tree HEAD^&lt;span class="o">{&lt;/span>tree&lt;span class="o">}&lt;/span> -m &lt;span class="s2">&amp;#34;删除所有 commit&amp;#34;&lt;/span>&lt;span class="k">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 删除最近一个 commit，不保留更改&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git reset --hard HEAD^

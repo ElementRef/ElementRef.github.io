@@ -3157,7 +3157,7 @@ target="_blank" rel="noopener"
 &lt;/ul>
 &lt;p>animation-fill-mode 动画填充模式，主要用来定义动画在执行时间之外应用的值：&lt;/p>
 &lt;ul>
-&lt;li>none，表示动画开始之前和动画结束之后不会对元素应用 @keyframes 规则中定义的任何样式，可能会有『突变』的糟糕体验；&lt;/li>
+&lt;li>none，表示动画开始之前和动画结束之后不会对元素应用 @keyframes 规则中定义的任何样式，可能会有「突变」的糟糕体验；&lt;/li>
 &lt;li>both，让元素的动画在延时等待时保持第一帧的样式，在动画结束后保持最后一帧的样式，适用于绝大多数的开发场景；&lt;/li>
 &lt;li>forwards，表示动画结束后（由 animation-iterationcount 属性决定），元素将应用当前动画结束时的属性值；&lt;/li>
 &lt;li>backwards，表示在动画开始之前，元素将应用当前动画第一轮播放的第一帧的属性值。&lt;/li>
@@ -3300,8 +3300,8 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">style&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c">&amp;lt;!--
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c"> 这里的 2 就是『匿名内联元素』
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c"> 在弹性容器中，2 变成了『匿名块级元素』
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c"> 这里的 2 就是「匿名内联元素」
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c"> 在弹性容器中，2 变成了「匿名块级元素」
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c">--&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">section&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;container&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;content&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>1&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
@@ -4222,7 +4222,7 @@ flex-basis
 &lt;li>dark，系统当前使用了深色模式。&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>prefers-reduced-motion，用来检测用户是否配置了没有必要的动画选项（类似于 iOS 中的『减弱动态效果』）：
+&lt;li>prefers-reduced-motion，用来检测用户是否配置了没有必要的动画选项（类似于 iOS 中的「减弱动态效果」）：
 &lt;ul>
 &lt;li>no-preference，用户没有通知系统任何首选项；&lt;/li>
 &lt;li>reduced，用户已通知系统，需要减弱动态效果。&lt;/li>
@@ -4244,7 +4244,7 @@ flex-basis
 &lt;/span>&lt;span class="lnt">10
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="line">&lt;span class="cl">&lt;span class="c">/* 这种『偷懒的技巧』在 Safari 中可能有渲染问题 */&lt;/span>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="line">&lt;span class="cl">&lt;span class="c">/* 这种「偷懒的技巧」在 Safari 中可能有渲染问题 */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">@&lt;/span>&lt;span class="k">media&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="nt">prefers-color-scheme&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nt">dark&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">body&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">filter&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">invert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">hue-rotate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">180&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">);&lt;/span>
@@ -5408,7 +5408,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>a 标签的伪类要遵守『爱恨原则』，定义的顺序必须是 :link→:visited→:hover→:active：&lt;/p>
+&lt;/div>&lt;p>a 标签的伪类要遵守「爱恨原则」，定义的顺序必须是 :link→:visited→:hover→:active：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -6581,9 +6581,9 @@ target="_blank" rel="noopener"
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">pre&lt;/span> &lt;span class="na">alt&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;传统版本&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> @font-face {
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> font-family: ICON;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /* eot 是 IE 的私有格式，兼容模式的 IE 不认识『?』，所以才有了这一行多余的 src */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /* eot 是 IE 的私有格式，兼容模式的 IE 不认识「?」，所以才有了这一行多余的 src */
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> src: url(&amp;#39;icon.eot&amp;#39;) format(&amp;#39;eot&amp;#39;);
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /* #iefix 没什么用，有用的是『?』，防止 IE 对地址的错误解析 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /* #iefix 没什么用，有用的是「?」，防止 IE 对地址的错误解析 */
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> src: url(&amp;#39;icon.eot?#iefix&amp;#39;) format(&amp;#39;embedded-opentype&amp;#39;),
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /* woff2 比 woff 体积更小，Web 开发首选，仅 Chrome 和 Firefox 支持比较好 */
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> url(&amp;#39;icon.woff2&amp;#39;) format(&amp;#34;woff2&amp;#34;),

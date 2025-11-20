@@ -101,8 +101,8 @@
 </span><span class="lnt">6
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">rss</span><span class="o">:</span> <span class="mi">27152384</span><span class="p">,</span> <span class="c1">// 常驻内存，为进程分配了多少物理内存，包含所有的 C++ 和 JS 对象与代码
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">heapTotal</span><span class="o">:</span> <span class="mi">5959680</span><span class="p">,</span> <span class="c1">// 堆中总共『申请』的内存量
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">heapUsed</span><span class="o">:</span> <span class="mi">3728776</span><span class="p">,</span> <span class="c1">// 堆中『使用中』的内存量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">heapTotal</span><span class="o">:</span> <span class="mi">5959680</span><span class="p">,</span> <span class="c1">// 堆中总共「申请」的内存量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">heapUsed</span><span class="o">:</span> <span class="mi">3728776</span><span class="p">,</span> <span class="c1">// 堆中「使用中」的内存量
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">external</span><span class="o">:</span> <span class="mi">1393760</span> <span class="c1">// V8 管理的、绑定到 JS 的 C++ 对象的内存量
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>当在代码中声明变量并赋值时，所使用对象的内存就分配在堆中。如果已申请的堆空闲内存不够分配新的对象，将继续申请堆内存，直到堆的大小超过 V8 的限制为止。V8 限制堆的大小的原因是 V8 的垃圾回收机制的限制；V8 做一次小的垃圾回收需要 50 毫秒以上，做一次非增量式的垃圾回收甚至要 1 秒以上；这是垃圾回收中引起 JS 线程暂停执行的时间，在这样的时间花销下，应用的性能和响应能力都会直线下降；因此，在当时的考虑下直接限制堆内存是一个好的选择。</p><p>V8 提供了选项让我们使用更多的内存；Node 在启动时可以传递 max_old_space_size 或 max_new_space_size 来调整内存限制的大小：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -306,7 +306,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 如果得到的数值大于 255，就逐次减 256，直到得到一个 0 到 255 之间的整数
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">buf</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">256</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span> <span class="c1">// 0
-</span></span></span></code></pre></td></tr></tbody></table></div></div><p>Node 在内存的使用上应用的是<strong>在 C++ 层面『申请』内存、在 JS 中『分配』内存</strong>的策略；Node 采用动态内存管理机制（slab）高效地使用申请来的内存；slab 是一块申请好的固定大小的内存区域，具有如下 3 种状态：</p><ul><li>full，完全分配状态；</li><li>partial，部分分配状态；</li><li>empty，没有被分配状态。</li></ul><p>Buffer 的内存分配是在 Node 的 C++ 层面实现的；Node 以 8KB（每个 slab 的大小）为界限来区分 Buffer 是大对象还是小对象。</p><p>Buffer 对象可以与字符串之间相互转换，Node 当前支持 utf8、utf16le、latin1、base64、hex、ascii、binary（latin1 的别名）、ucs2（utf16le 的别名）字符编码。</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></span></span></code></pre></td></tr></tbody></table></div></div><p>Node 在内存的使用上应用的是<strong>在 C++ 层面「申请」内存、在 JS 中「分配」内存</strong>的策略；Node 采用动态内存管理机制（slab）高效地使用申请来的内存；slab 是一块申请好的固定大小的内存区域，具有如下 3 种状态：</p><ul><li>full，完全分配状态；</li><li>partial，部分分配状态；</li><li>empty，没有被分配状态。</li></ul><p>Buffer 的内存分配是在 Node 的 C++ 层面实现的；Node 以 8KB（每个 slab 的大小）为界限来区分 Buffer 是大对象还是小对象。</p><p>Buffer 对象可以与字符串之间相互转换，Node 当前支持 utf8、utf16le、latin1、base64、hex、ascii、binary（latin1 的别名）、ucs2（utf16le 的别名）字符编码。</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -364,7 +364,7 @@
 </span></span><span class="line"><span class="cl">  <span class="c1">// toString 方法默认以 UTF-8 为编码，中文字在 UTF-8 下占 3 个字节，Buffer 大小可能会造成乱码
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span> <span class="c1">// 床前明���光，疑���地上霜；举头���明月，���头思故乡。
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">});</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>Buffer 正确的拼接方式并不是『+=』，而是使用 Buffer.concat(Array) 的方式：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span></span></code></pre></td></tr></tbody></table></div></div><p>Buffer 正确的拼接方式并不是「+=」，而是使用 Buffer.concat(Array) 的方式：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -505,10 +505,10 @@
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">isVisit</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">isVisit</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'欢迎『首次』访问'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'欢迎「首次」访问'</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'欢迎『再次』访问'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'欢迎「再次」访问'</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 响应请求时，设置 Session
@@ -556,7 +556,7 @@
 </span></span><span class="line"><span class="cl">    <span class="c1">// ...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="restful">RESTful</h2><p>RESTful 设计哲学是将服务器端提供的内容实体看作一个资源，并表现在 URL 上；一个用户的地址『/users/jacksontian』代表了一个资源，对这个资源的操作，主要体现在 HTTP 请求方法上，不是体现在 URL 上：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="restful">RESTful</h2><p>RESTful 设计哲学是将服务器端提供的内容实体看作一个资源，并表现在 URL 上；一个用户的地址「/users/jacksontian」代表了一个资源，对这个资源的操作，主要体现在 HTTP 请求方法上，不是体现在 URL 上：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -602,7 +602,7 @@
 </span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">'/pages/:id'</span><span class="p">,</span> <span class="nx">routes</span><span class="p">.</span><span class="nx">pages</span><span class="p">.</span><span class="nx">update</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">del</span><span class="p">(</span><span class="s1">'/pages/:id'</span><span class="p">,</span> <span class="nx">routes</span><span class="p">.</span><span class="nx">pages</span><span class="p">.</span><span class="nx">remove</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="nx">modules</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">app</span><span class="p">;</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="中间件">中间件</h2><p>中间件的行为比较类似 Java 中的过滤器，在进入具体的业务处理之前，先让过滤器处理一些与业务无关的技术细节；由于 Node 异步的原因，我们需要提供一种机制，在当前中间件处理完成后，通知下一个中间件执行：</p><p><img src="/p/%E9%87%8D%E8%AF%BB%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA-node.js/middleware-model.webp" width="2566" height="1406" srcset="/p/%E9%87%8D%E8%AF%BB%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA-node.js/middleware-model_hu2556986041332231045.png 480w, /p/%E9%87%8D%E8%AF%BB%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA-node.js/middleware-model_hu7749169019602145467.png 1024w" class="gallery-image" data-flex-grow="182" data-flex-basis="438px" loading="lazy" alt="" decoding="async"></p><p>中间件往往先于业务逻辑执行，为了让业务逻辑提早执行，中间件的编写和使用需要注意两点：</p><ul><li>编写高效的中间件：尽早调用 next 执行后续逻辑、缓存需要重复计算的结果、避免不必要的计算（比如『报文体解析』对于 GET 是不必要的）；</li><li>合理利用路由，避免不必要的中间件执行。</li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="中间件">中间件</h2><p>中间件的行为比较类似 Java 中的过滤器，在进入具体的业务处理之前，先让过滤器处理一些与业务无关的技术细节；由于 Node 异步的原因，我们需要提供一种机制，在当前中间件处理完成后，通知下一个中间件执行：</p><p><img src="/p/%E9%87%8D%E8%AF%BB%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA-node.js/middleware-model.webp" width="2566" height="1406" srcset="/p/%E9%87%8D%E8%AF%BB%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA-node.js/middleware-model_hu2556986041332231045.png 480w, /p/%E9%87%8D%E8%AF%BB%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA-node.js/middleware-model_hu7749169019602145467.png 1024w" class="gallery-image" data-flex-grow="182" data-flex-basis="438px" loading="lazy" alt="" decoding="async"></p><p>中间件往往先于业务逻辑执行，为了让业务逻辑提早执行，中间件的编写和使用需要注意两点：</p><ul><li>编写高效的中间件：尽早调用 next 执行后续逻辑、缓存需要重复计算的结果、避免不必要的计算（比如「报文体解析」对于 GET 是不必要的）；</li><li>合理利用路由，避免不必要的中间件执行。</li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4

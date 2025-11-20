@@ -3166,7 +3166,7 @@
 </span></span><span class="line"><span class="cl">      : <span class="kt">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>此时，你会看到 TS 报错信息『Property visits does not exist on type Session &amp; Partial&lt;SessionData&gt;』，原因是 @types/express-session 的问题；我们需要在根目录创建一个 x.d.ts 文件，使用 interface 扩展一下 SessionData 类型即可：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></span></code></pre></td></tr></tbody></table></div></div><p>此时，你会看到 TS 报错信息「Property visits does not exist on type Session &amp; Partial&lt;SessionData&gt;」，原因是 @types/express-session 的问题；我们需要在根目录创建一个 x.d.ts 文件，使用 interface 扩展一下 SessionData 类型即可：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4

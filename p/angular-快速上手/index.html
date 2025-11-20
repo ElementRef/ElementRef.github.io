@@ -316,7 +316,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">encapsulation</span>: <span class="kt">ViewEncapsulation.Emulated</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="cm">/**
-</span></span></span><span class="line"><span class="cl"><span class="cm">   * 放置一些『被动态调用』的组件，这些组件没有“直接”在模板中使用，Ng 是不知道是否应该对这些组件进行编译的
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * 放置一些「被动态调用」的组件，这些组件没有“直接”在模板中使用，Ng 是不知道是否应该对这些组件进行编译的
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * entryComponents 引入的组件会通过 ViewContainerRef.createComponent 方法被动态调用
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 编译器会将这些组件编译并为他们创建“工厂函数”
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 比如，一些在 Modal 中展示的组件
@@ -406,7 +406,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 此时，还不能访问组件 DOM（ngOnInit 可以访问 DOM）
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 组件初始化需要在生命周期函数中进行
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 这里仅仅用来注入一些组件需要依赖的服务
-</span></span></span><span class="line"><span class="cl"><span class="cm">   * 『依赖注入』机制会分析构造函数的『形参』
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * 「依赖注入」机制会分析构造函数的「形参」
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 调用时，已经处理好根/父级 injectors 了
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 在 class 实例化的过程中，会向上查找 providers
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 并将查找的结果传递回构造函数，在构造完成之后才会设置指令的数据绑定输入属性
@@ -439,13 +439,13 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm">   * 在“脏检查”阶段，Angular 会根据组件的 NodeFlags 来调用对应的“钩子”
 </span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">ngOnChanges</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// changes 仅包含了每个『发生变化』的属性
+</span></span><span class="line"><span class="cl">    <span class="c1">// changes 仅包含了每个「发生变化」的属性
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">changes</span>: <span class="kt">SimpleChanges</span>
 </span></span><span class="line"><span class="cl">  <span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * 1. 如果组件绑定过输入属性，所绑定的一个或多个输入属性的值发生变化时都会调用
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * 2. 如果绑定的是一个对象，如果对象的引用没变，ngOnChanges 就不会执行
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * 3. 如果你的组件『没有输入属性』，框架就『不会调用该方法』
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 3. 如果你的组件「没有输入属性」，框架就「不会调用该方法」
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * 4. 在 ngOnInit 之前调用
 </span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
 </span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">propName</span> <span class="k">in</span> <span class="nx">changes</span><span class="p">)</span> <span class="p">{</span>

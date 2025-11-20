@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>React on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/react/</link><description>Recent content in React on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 02 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/react/index.xml" rel="self" type="application/rss+xml"/><item><title>AI JS-SDK 项目总结（二） · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%BA%8C/</link><pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%BA%8C/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/react.png" alt="AI JS-SDK 项目总结（二）" />&lt;h2 id="antdesign">AntDesign&lt;/h2>
-&lt;p>因为存在 Admin 端，并且『对话组件』需要同时在 Admin|Web|JS-SDK 三个环境中使用；索性使用 AntDesign 作为组件库，恰好 AntDesign 也为 AI 应用推出了 &lt;a class="link"
+&lt;p>因为存在 Admin 端，并且「对话组件」需要同时在 Admin|Web|JS-SDK 三个环境中使用；索性使用 AntDesign 作为组件库，恰好 AntDesign 也为 AI 应用推出了 &lt;a class="link"
 href="https://x.ant.design/"
 target="_blank" rel="noopener"
 >
@@ -15,11 +15,11 @@ target="_blank" rel="noopener"
 &lt;/a>
 解答了我的疑惑：&lt;/p>
 &lt;ul>
-&lt;li>Tooltip 是从标签的 title 属性衍生过来的，用来展示『完整信息』，内部不包含用户交互；&lt;/li>
-&lt;li>Popover 起源于『漫画对话框』，在 macOS Lion 成为系统控件：
+&lt;li>Tooltip 是从标签的 title 属性衍生过来的，用来展示「完整信息」，内部不包含用户交互；&lt;/li>
+&lt;li>Popover 起源于「漫画对话框」，在 macOS Lion 成为系统控件：
 &lt;ul>
 &lt;li>可以承载更多的图文信息，提供详情预览的功能；&lt;/li>
-&lt;li>内部包含简单的用户交互，功能向『弹窗』靠拢。&lt;/li>
+&lt;li>内部包含简单的用户交互，功能向「弹窗」靠拢。&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
@@ -419,7 +419,7 @@ target="_blank" rel="noopener"
 >
 文档
 &lt;/a>
-设置 StyleProvider；同时为了保证弹出框（Select, Tooltip, Menu 等等）的正确渲染，需要指定全局的 getPopupContainer，否则会得到『trigger element and popup element should in same shadow root』的错误信息：&lt;/p>
+设置 StyleProvider；同时为了保证弹出框（Select, Tooltip, Menu 等等）的正确渲染，需要指定全局的 getPopupContainer，否则会得到「trigger element and popup element should in same shadow root」的错误信息：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -740,7 +740,7 @@ unicode-bidi:normal
 &lt;/ul>
 &lt;p>这样设置之后，宿主就不能通过 ShadowRoot 间接改变 ShadowDOM 内部的样式了。&lt;/p>
 &lt;h3 id="宿主通信">宿主通信&lt;/h3>
-&lt;p>产品需要支持划词菜单；当用户在划词菜单中选中某条命令时，需要使用『命令 + 选中内容』直接发起对话；这就涉及到了 JS-SDK 和宿主环境通信，如果两者不属于用一个执行上下文，就需要跨上下文通信，那么『桥』这种东西就不可避免；而 ShadowDOM 恰好可以避免跨上下文通信，而 iframe 需要借助 postMessage 等 API 和宿主环境通信：&lt;/p>
+&lt;p>产品需要支持划词菜单；当用户在划词菜单中选中某条命令时，需要使用「命令 + 选中内容」直接发起对话；这就涉及到了 JS-SDK 和宿主环境通信，如果两者不属于用一个执行上下文，就需要跨上下文通信，那么「桥」这种东西就不可避免；而 ShadowDOM 恰好可以避免跨上下文通信，而 iframe 需要借助 postMessage 等 API 和宿主环境通信：&lt;/p>
 &lt;ul>
 &lt;li>同源场景：iframe.contentWindow，top.window；&lt;/li>
 &lt;li>跨域场景：
@@ -760,10 +760,10 @@ target="_blank" rel="noopener"
 &lt;/a>
 ：&lt;/p>
 &lt;ul>
-&lt;li>./index.css?inline，经过编译，作为『内联样式』处理，不会生成单独的 CSS 文件；&lt;/li>
+&lt;li>./index.css?inline，经过编译，作为「内联样式」处理，不会生成单独的 CSS 文件；&lt;/li>
 &lt;li>./index.css?raw，未经编译，获取到的是 index.css 的原始文本；&lt;/li>
 &lt;li>./index.css?url，未经编译，获取到的是 index.css 的路径信息；&lt;/li>
-&lt;li>./index.css?worker，作为『WebWorker』处理。&lt;/li>
+&lt;li>./index.css?worker，作为「WebWorker」处理。&lt;/li>
 &lt;/ul>
 &lt;p>显然，只有第一种 ?inline 最合适，未经 Tailwind CSS 编译的原始文件没什么价值。&lt;/p>
 &lt;p>有了样式代码，怎么将 CSS 注入到 ShadowDOM 中呢？需要借助 &lt;a class="link"
@@ -995,7 +995,7 @@ target="_blank" rel="noopener"
 >
 &lt;strong>创建模式&lt;/strong>
 &lt;/a>
-：open 和 closed；起初没怎么在意，因为两种模式下，React 组件都能被正常渲染；而且 MDN 也提到『当 mode:closed 时，JS 将无法访问及修改 ShadowDOM 内部』，所以理论上，mode:closed 的安全性更高，隔离的也更彻底。&lt;/p>
+：open 和 closed；起初没怎么在意，因为两种模式下，React 组件都能被正常渲染；而且 MDN 也提到「当 mode:closed 时，JS 将无法访问及修改 ShadowDOM 内部」，所以理论上，mode:closed 的安全性更高，隔离的也更彻底。&lt;/p>
 &lt;p>后来，写到&lt;strong>划词需求&lt;/strong>时，才发现两种模式的差别；由于我有意想在&lt;strong>表单元素&lt;/strong>和 &lt;strong>ShadowDOM&lt;/strong> 上禁用划词：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -1081,13 +1081,13 @@ target="_blank" rel="noopener"
 &lt;/a>
 罢了；对于处于上帝视角的浏览器扩展来说，mode:closed 的 ShadowDOM 是可以被修改的。&lt;/p>
 &lt;h2 id="typescript">TypeScript&lt;/h2>
-&lt;p>开发过程中，出现了项目本地正常运行，VSCode 没有报红，tsc &amp;ndash;noEmit 正常执行，tsc &amp;ndash;build 编译出错的问题；经过排查，发现『&lt;a class="link"
+&lt;p>开发过程中，出现了项目本地正常运行，VSCode 没有报红，tsc &amp;ndash;noEmit 正常执行，tsc &amp;ndash;build 编译出错的问题；经过排查，发现「&lt;a class="link"
 href="https://github.com/microsoft/TypeScript/issues/30128"
 target="_blank" rel="noopener"
 >
 编辑器对 setTimeout 的类型定义和 tsc 对 setTimeout 的类型定义不一致
 &lt;/a>
-』，最简单的解决方法是：&lt;/p>
+」，最简单的解决方法是：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -1254,7 +1254,7 @@ getReader
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>这种方式，onMessageInner 接收到的数据有小概率是&lt;strong>不完整的 JSON&lt;/strong>，导致『SyntaxError: Unexpected non-whitespace character after JSON at position』报错；后来不得已切换到了 &lt;a class="link"
+&lt;/div>&lt;p>这种方式，onMessageInner 接收到的数据有小概率是&lt;strong>不完整的 JSON&lt;/strong>，导致「SyntaxError: Unexpected non-whitespace character after JSON at position」报错；后来不得已切换到了 &lt;a class="link"
 href="https://github.com/Azure/fetch-event-source"
 target="_blank" rel="noopener"
 >
@@ -1562,7 +1562,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;CoSec-Device-Id&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">getId&lt;/span>&lt;span class="p">()&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">onopen&lt;/span>: &lt;span class="kt">async&lt;/span> &lt;span class="nx">response&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 获取 RequestId，将展示在『错误信息』中
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 获取 RequestId，将展示在「错误信息」中
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">cosecRequestId&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">current&lt;/span> &lt;span class="o">=&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">response&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">headers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="kr">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;cosec-request-id&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>
@@ -2576,7 +2576,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">setRootOffsetHeight&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">body&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">offsetHeight&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">showChat&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 划词区域 &amp;amp;&amp;amp; 菜单展示区域需要避开『对话框』
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 划词区域 &amp;amp;&amp;amp; 菜单展示区域需要避开「对话框」
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * ChatContainer 的宽度是定死的 1152px
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">setRootOffsetWidth&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">body&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">offsetWidth&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1152&lt;/span>&lt;span class="p">);&lt;/span>
@@ -2865,7 +2865,7 @@ Vite
 &lt;ul>
 &lt;li>主应用 Admin 和 Web 放在 apps 目录下，每个应用都是完整的 Vite 项目；&lt;/li>
 &lt;li>JS-SDK、shared 公共代码和 types 类型共享等子包，放在 packages 目录下；&lt;/li>
-&lt;li>SVG 图标文件放在根目录的 icons 文件夹下，根据『应用名称｜子包名称｜是否保留颜色』进行分类；&lt;/li>
+&lt;li>SVG 图标文件放在根目录的 icons 文件夹下，根据「应用名称｜子包名称｜是否保留颜色」进行分类；&lt;/li>
 &lt;li>env 文件、Lint 配置、Deploy 配置、Turborepo 配置、workspace 配置、Tailwind CSS 配置等，均放在根目录下；&lt;/li>
 &lt;li>Admin、Web、JS-SDK、Shared 都有自己独立的 tsconfig.json，根目录 tsconfig.json 仅匹配根目录的 *.config.ts|js。&lt;/li>
 &lt;/ul>
@@ -4004,7 +4004,7 @@ target="_blank" rel="noopener"
 &lt;/a>
 ，跳过未修改子包的命令执行；&lt;/li>
 &lt;/ul>
-&lt;p>有一点令人费解：outputs 属性值，是相对于『子包根目录』的；不是『turbo.json 所在的目录』，也不是『项目根目录』；下面是&lt;strong>非完整配置&lt;/strong>：&lt;/p>
+&lt;p>有一点令人费解：outputs 属性值，是相对于「子包根目录」的；不是「turbo.json 所在的目录」，也不是「项目根目录」；下面是&lt;strong>非完整配置&lt;/strong>：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -4539,7 +4539,7 @@ use-context-selector
 &lt;/li>
 &lt;li>SDK 输入框 placeholder 能够让宿主环境自定义；
 &lt;ul>
-&lt;li>这算是一种『品牌化』需求，公司想 SDK 向 SaaS 服务方向发展。&lt;/li>
+&lt;li>这算是一种「品牌化」需求，公司想 SDK 向 SaaS 服务方向发展。&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>SDK 入口按钮能够自定义/显隐控制/位置记忆；
@@ -4624,13 +4624,13 @@ use-context-selector
 &lt;ol>
 &lt;li>构造函数接收 SDK 的配置，并构造 SDK 实例，需要做两件事：
 &lt;ol>
-&lt;li>保存 this 实例，确保 SDK 运行在『单例模式』；&lt;/li>
+&lt;li>保存 this 实例，确保 SDK 运行在「单例模式」；&lt;/li>
 &lt;li>在 try&amp;hellip;catch 中调用 mount，完成渲染节点的初始化。&lt;/li>
 &lt;/ol>
 &lt;/li>
 &lt;li>mount 用来完成渲染节点的初始化，需要做三件事：
 &lt;ol>
-&lt;li>调用 configProduce 校验『用户配置』并标准化输出；&lt;/li>
+&lt;li>调用 configProduce 校验「用户配置」并标准化输出；&lt;/li>
 &lt;li>通过 container.attachShadow 创建 ShadowDOM 节点；&lt;/li>
 &lt;li>调用 linkStyle 将样式注入到 ShadowDOM 内部；&lt;/li>
 &lt;li>调用 render 函数，完成 React 组件渲染。&lt;/li>
@@ -4817,7 +4817,7 @@ use-context-selector
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span> &lt;span class="na">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;module&amp;#34;&lt;/span> &lt;span class="na">src&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;./index.tsx&amp;#34;&lt;/span> &lt;span class="na">crossorigin&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>SDK 是通过 Vite 的『库』模式进行打包的，这样引入不方便拿到 ChatSdk 构造函数。后来切换到了下面这种：&lt;/p>
+&lt;/div>&lt;p>SDK 是通过 Vite 的「库」模式进行打包的，这样引入不方便拿到 ChatSdk 构造函数。后来切换到了下面这种：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -4946,7 +4946,7 @@ target="_blank" rel="noopener"
 Load SVGs from Filesystem
 &lt;/a>
 &lt;/li>
-&lt;/ul></description></item><item><title>『转』我在函数组件中可以随便写，最通俗异步组件原理 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E8%BD%AC%E6%88%91%E5%9C%A8%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E4%B8%AD%E5%8F%AF%E4%BB%A5%E9%9A%8F%E4%BE%BF%E5%86%99%E6%9C%80%E9%80%9A%E4%BF%97%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%E5%8E%9F%E7%90%86/</link><pubDate>Fri, 31 Dec 2021 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E8%BD%AC%E6%88%91%E5%9C%A8%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E4%B8%AD%E5%8F%AF%E4%BB%A5%E9%9A%8F%E4%BE%BF%E5%86%99%E6%9C%80%E9%80%9A%E4%BF%97%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%E5%8E%9F%E7%90%86/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/react.png" alt="『转』我在函数组件中可以随便写，最通俗异步组件原理" />&lt;h2 id="不可能的事">不可能的事&lt;/h2>
+&lt;/ul></description></item><item><title>「转」我在函数组件中可以随便写，最通俗异步组件原理 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E8%BD%AC%E6%88%91%E5%9C%A8%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E4%B8%AD%E5%8F%AF%E4%BB%A5%E9%9A%8F%E4%BE%BF%E5%86%99%E6%9C%80%E9%80%9A%E4%BF%97%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%E5%8E%9F%E7%90%86/</link><pubDate>Fri, 31 Dec 2021 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E8%BD%AC%E6%88%91%E5%9C%A8%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E4%B8%AD%E5%8F%AF%E4%BB%A5%E9%9A%8F%E4%BE%BF%E5%86%99%E6%9C%80%E9%80%9A%E4%BF%97%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%E5%8E%9F%E7%90%86/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/react.png" alt="「转」我在函数组件中可以随便写，最通俗异步组件原理" />&lt;h2 id="不可能的事">不可能的事&lt;/h2>
 &lt;p>我的函数组件中里可以随便写，很多同学看到这句话的时候，脑海里应该浮现的四个字是：怎么可能？因为我们印象中的函数组件，是不能直接使用异步的，而且必须返回一段 JSX 代码。&lt;/p>
 &lt;p>那么今天我将打破这个规定，在我们认为是组件的函数里做一些意想不到的事情。接下来跟着我的思路往下看吧。&lt;/p>
 &lt;p>首先先来看一下 JSX，在 JSX 中 &amp;lt;div/&amp;gt; 代表 DOM 元素，而 &amp;lt;Index/&amp;gt; 代表组件，Index 本质是函数组件或类组件。&lt;/p>
@@ -5414,7 +5414,7 @@ loading="lazy"
 &lt;/div>
 &lt;/div>&lt;p>通过 componentDidCatch 捕获错误，然后进行第二次渲染。&lt;/p>
 &lt;h2 id="飞翔版实现一个简单-suspense">飞翔版，实现一个简单 Suspense&lt;/h2>
-&lt;p>Suspense 是什么？Suspense 英文翻译『悬停』。在 React 中 Suspense 是什么呢？那么正常情况下组件渲染是一气呵成的，在 Suspense 模式下的组件渲染就变成了可以先悬停下来。&lt;/p>
+&lt;p>Suspense 是什么？Suspense 英文翻译「悬停」。在 React 中 Suspense 是什么呢？那么正常情况下组件渲染是一气呵成的，在 Suspense 模式下的组件渲染就变成了可以先悬停下来。&lt;/p>
 &lt;p>首先解释为什么悬停？Suspense 在 React 生态中的位置，重点体现在以下方面：&lt;/p>
 &lt;ul>
 &lt;li>codeSplitting（代码分割）：哪个组件加载，就加载哪个组件的代码；听上去挺拗口，可确实打实的解决了主文件体积过大的问题，间接优化了项目的首屏加载时间，我们知道过浏览器加载资源也是耗时的，这些时间给用户造成的影响就是白屏效果；&lt;/li>
@@ -7092,7 +7092,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * commit 阶段被分成了几个阶段，每个阶段都会遍历一遍 effectList
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 所有的 MutationEffects 都会在所有的 LayoutEffects 前执行
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 第一个阶段『before mutation』：
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 第一个阶段「before mutation」：
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 在修改之前，读取主树的 state
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 调用 getSnapshotBeforeUpdate
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 调度 useEffect
@@ -7111,7 +7111,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 不再需要追踪激活的 fiber 实例
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">focusedInstanceHandle&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 第二个阶段『mutation』：
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 第二个阶段「mutation」：
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 更新 DOM
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 调用 componentWillUnmount
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 调用 useLayoutEffect 销毁回调
@@ -7136,7 +7136,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">root&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">current&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">finishedWork&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// fiberRoot 的 current 指针指向了 finishedWork 所指向的 WIP
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="cm">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 第三个阶段『layout』：
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 第三个阶段「layout」：
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 调用主树修改之后需要执行的副作用 setState 第二个参数
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 类组件的生命周期也会在这里调用 componentDidMount/Update
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
@@ -8469,7 +8469,7 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">stateNode&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 对应的 DOM、FiberRoot、ComponentInstance；保存了 fiber 相关的局部状态
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">tag&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">tag&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 对应的组件类型：字符串、函数、class、portal、context、fragment...
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 对于函数组件，指函数本身；对于类组件，指 class；对于原生组件，指 DOM 节点的 tagName；用来描述与 FiberNode 相关的 React 元素
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// 用于连接其他 FiberNode 生成『树』形结构
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// 用于连接其他 FiberNode 生成「树」形结构
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">child&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 指向第一个子级 FiberNode
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">index&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 当前 FiberNode 在同级 FiberNode 中的索引
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">return&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 指向父级 FiberNode
@@ -8785,11 +8785,11 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">siblingFiber&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">completedWork&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">sibling&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">siblingFiber&lt;/span> &lt;span class="o">!==&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 指向兄弟节点，开始兄弟节点的『递和归』
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 指向兄弟节点，开始兄弟节点的「递和归」
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">workInProgress&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">siblingFiber&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 指向父节点，完成父节点的『归』
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 指向父节点，完成父节点的「归」
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">completedWork&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">returnFiber&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">workInProgress&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">completedWork&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">completedWork&lt;/span> &lt;span class="o">!==&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">);&lt;/span>
@@ -10176,9 +10176,9 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 上次还没处理完的待处理更新
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">pendingQueue&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">queue&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">pending&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">pendingQueue&lt;/span> &lt;span class="o">!==&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 还没来得及处理的新的更新，将他们添加到『基』队列
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 还没来得及处理的新的更新，将他们添加到「基」队列
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">baseQueue&lt;/span> &lt;span class="o">!==&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 合并待处理队列和『基』队列
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 合并待处理队列和「基」队列
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">baseFirst&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">baseQueue&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">pendingFirst&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">pendingQueue&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">baseQueue&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">pendingFirst&lt;/span>&lt;span class="p">;&lt;/span>
@@ -10901,7 +10901,7 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果渲染中间，收到了对树的更新
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 那就是说，对于树，有交错更新的任务
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 除非『推迟渲染阶段更新到下一个批处理』是 off，并且是渲染阶段的更新
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 除非「推迟渲染阶段更新到下一个批处理」是 off，并且是渲染阶段的更新
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 在这种情况下，出于向后兼容的原因
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 不会将渲染阶段的更新视为要交错进行的任务
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
@@ -10917,7 +10917,7 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">workInProgressRootExitStatus&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nx">RootSuspendedWithDelay&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * root 已经挂起，渲染肯定没有结束
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 既然有一个更新，在被标记为新的更新之前，那就先标记为『挂起』
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 既然有一个更新，在被标记为新的更新之前，那就先标记为「挂起」
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 这会中断当前渲染并切换到新的更新
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">markRootSuspended&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">root&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">workInProgressRootRenderLanes&lt;/span>&lt;span class="p">);&lt;/span>
@@ -10926,7 +10926,7 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">priorityLevel&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">getCurrentPriorityLevel&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">lane&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nx">SyncLane&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 检查是否在『unbatchedUpdates』
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 检查是否在「unbatchedUpdates」
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">executionContext&lt;/span> &lt;span class="o">&amp;amp;&lt;/span> &lt;span class="nx">LegacyUnbatchedContext&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">!==&lt;/span> &lt;span class="nx">NoContext&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 检查是否已经在渲染
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">executionContext&lt;/span> &lt;span class="o">&amp;amp;&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">RenderContext&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="nx">CommitContext&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nx">NoContext&lt;/span>
@@ -10940,7 +10940,7 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">executionContext&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nx">NoContext&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 刷新同步工作，除非正在进行刷新或在批处理内
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 这在『scheduleUpdateOnFiber』而不是在 scheduleCallbackForFiber 是故意的
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 这在「scheduleUpdateOnFiber」而不是在 scheduleCallbackForFiber 是故意的
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 这会保留调度但不刷新回调的能力
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 仅对用户发起的更新执行此操作，以保留传统模式的历史行为
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
@@ -11021,7 +11021,7 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">updateLane&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">update&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">lane&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">updateEventTime&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">update&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">eventTime&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">isSubsetOfLanes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">renderLanes&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">updateLane&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 优先级不够，跳过更新，跳过的更新的前一个状态就是新的『基态』
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 优先级不够，跳过更新，跳过的更新的前一个状态就是新的「基态」
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">clone&lt;/span>: &lt;span class="kt">Update&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">State&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">eventTime&lt;/span>: &lt;span class="kt">updateEventTime&lt;/span>&lt;span class="p">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">lane&lt;/span>: &lt;span class="kt">updateLane&lt;/span>&lt;span class="p">,&lt;/span>

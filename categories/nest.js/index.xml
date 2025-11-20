@@ -3861,7 +3861,7 @@ multer
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>此时，你会看到 TS 报错信息『Property visits does not exist on type Session &amp;amp; Partial&amp;lt;SessionData&amp;gt;』，原因是 @types/express-session 的问题；我们需要在根目录创建一个 x.d.ts 文件，使用 interface 扩展一下 SessionData 类型即可：&lt;/p>
+&lt;/div>&lt;p>此时，你会看到 TS 报错信息「Property visits does not exist on type Session &amp;amp; Partial&amp;lt;SessionData&amp;gt;」，原因是 @types/express-session 的问题；我们需要在根目录创建一个 x.d.ts 文件，使用 interface 扩展一下 SessionData 类型即可：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1

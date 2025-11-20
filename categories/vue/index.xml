@@ -2403,7 +2403,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">active&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// watcher 是否存活，teardown 之后被置为 false
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">cb&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">cb&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 保存回调
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">dirty&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">lazy&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// computedGetter 被触发时，会判断数据『是否&amp;#34;脏&amp;#34;了』，脏了的话，就会重新求最新值
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">dirty&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">lazy&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// computedGetter 被触发时，会判断数据「是否&amp;#34;脏&amp;#34;了」，脏了的话，就会重新求最新值
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">id&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">++&lt;/span>&lt;span class="nx">uid&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 唯一的标识，批处理用的
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="cm">/**
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 为什么会有 deps、newDeps、depIds、newDepIds？
@@ -2573,7 +2573,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 给 computed 惰性求值用的
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">evaluate() {&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">value&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="kr">get&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">dirty&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 求值完了之后，会标记为『干净』
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">dirty&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 求值完了之后，会标记为「干净」
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
@@ -4675,7 +4675,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>effect 很像之前的 watcher；每次调用 effect（如果不 lazy 的话），会调用 createReactiveEffect 创建 reactiveEffect 并设置为 activeEffect（就像 2.x 的 watcher 在被收集之前，会将自己赋值给 Dep.target 一样）；之后会调用传入的 fn（componentEffect 内部的 renderComponentRoot 方法会执行组件的 render 方法、computedGetter、&amp;hellip;），如果在 fn 调用的过程中，访问到了『响应式』数据；Proxy 会通过 track 将 activeEffect 收集起来（响应式数据与 effect 建立联系），放到 Set(dep) 里（dep.add(activeEffect)）；同时，activeEffect 也会保存一份 dep（activeEffect.deps.push(dep)）。&lt;/p>
+&lt;/div>&lt;p>effect 很像之前的 watcher；每次调用 effect（如果不 lazy 的话），会调用 createReactiveEffect 创建 reactiveEffect 并设置为 activeEffect（就像 2.x 的 watcher 在被收集之前，会将自己赋值给 Dep.target 一样）；之后会调用传入的 fn（componentEffect 内部的 renderComponentRoot 方法会执行组件的 render 方法、computedGetter、&amp;hellip;），如果在 fn 调用的过程中，访问到了「响应式」数据；Proxy 会通过 track 将 activeEffect 收集起来（响应式数据与 effect 建立联系），放到 Set(dep) 里（dep.add(activeEffect)）；同时，activeEffect 也会保存一份 dep（activeEffect.deps.push(dep)）。&lt;/p>
 &lt;p>cleanup 流程就是通知 effect.deps 里保存的 dep，调用 dep.delete 方法。&lt;/p>
 &lt;p>stop 流程就是在 cleanup 的基础上，调用传入的 onStop 钩子。&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -5319,7 +5319,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">resolvedPromise&lt;/span>: &lt;span class="kt">Promise&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">any&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">Promise&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">resolve&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 在下个事件循环刷新 job 队列
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kd">function&lt;/span> &lt;span class="nx">queueFlush() {&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 在没有刷新队列和没有等待刷新队列的情况下，进入『刷新 job 队列』任务
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 在没有刷新队列和没有等待刷新队列的情况下，进入「刷新 job 队列」任务
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">isFlushing&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="o">!&lt;/span>&lt;span class="nx">isFlushPending&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">isFlushPending&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 正在等待刷新
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">currentFlushPromise&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">resolvedPromise&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">flushJobs&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 使用微任务
@@ -5418,16 +5418,16 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">queueFlush&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 将『渲染之“前”要执行的回调』入列（flush: pre）
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 将「渲染之“前”要执行的回调」入列（flush: pre）
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">queuePreFlushCb&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">cb&lt;/span>: &lt;span class="kt">SchedulerCb&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">queueCb&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">cb&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">activePreFlushCbs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">pendingPreFlushCbs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">preFlushIndex&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 将『渲染之“后”要执行的回调』入列
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 将「渲染之“后”要执行的回调」入列
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">queuePostFlushCb&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">cb&lt;/span>: &lt;span class="kt">SchedulerCbs&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">queueCb&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">cb&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">activePostFlushCbs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">pendingPostFlushCbs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">postFlushIndex&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 刷新『渲染之“前”要执行的回调』
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 刷新「渲染之“前”要执行的回调」
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 渲染更新之前，触发因为 props 更新而运行的 watcher（flush: pre）
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">flushPreFlushCbs&lt;/span>&lt;span class="p">(&lt;/span>
@@ -5452,7 +5452,7 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">flushPreFlushCbs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">seen&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">parentJob&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 刷新『渲染之“后”要执行的回调』
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 刷新「渲染之“后”要执行的回调」
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">flushPostFlushCbs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">seen?&lt;/span>: &lt;span class="kt">CountMap&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">pendingPostFlushCbs&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">length&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">deduped&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[...&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nx">Set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">pendingPostFlushCbs&lt;/span>&lt;span class="p">)];&lt;/span>
@@ -17612,9 +17612,9 @@ loading="lazy"
 &lt;p>混入提供了一种非常灵活的方式，来分发 Vue 组件中的可复用功能；一个混入对象可以包含任意组件选项；当组件使用混入对象时，所有混入对象的选项将被“混合”进入该组件本身的选项。&lt;/p>
 &lt;p>混入原则：&lt;/p>
 &lt;ul>
-&lt;li>数据对象在内部会进行递归合并，并在发生冲突时以『组件数据优先』；&lt;/li>
-&lt;li>同名钩子函数将合并为一个数组，因此都将被调用；『混入对象』的钩子将在『组件自身』钩子『之前』调用；&lt;/li>
-&lt;li>值为对象的选项，例如 methods、components 和 directives，将被合并为同一个对象；『组件对象』优先级较高。&lt;/li>
+&lt;li>数据对象在内部会进行递归合并，并在发生冲突时以「组件数据优先」；&lt;/li>
+&lt;li>同名钩子函数将合并为一个数组，因此都将被调用；「混入对象」的钩子将在「组件自身」钩子「之前」调用；&lt;/li>
+&lt;li>值为对象的选项，例如 methods、components 和 directives，将被合并为同一个对象；「组件对象」优先级较高。&lt;/li>
 &lt;/ul>
 &lt;p>Vue.extend 也使用同样的合并策略。&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">

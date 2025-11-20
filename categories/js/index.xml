@@ -4064,10 +4064,10 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div></description></item><item><title>『转』谈谈递归 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E8%BD%AC%E8%B0%88%E8%B0%88%E9%80%92%E5%BD%92/</link><pubDate>Fri, 14 Jun 2019 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E8%BD%AC%E8%B0%88%E8%B0%88%E9%80%92%E5%BD%92/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/javascript.png" alt="『转』谈谈递归" />&lt;h2 id="什么是递归">什么是递归&lt;/h2>
+&lt;/div></description></item><item><title>「转」谈谈递归 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E8%BD%AC%E8%B0%88%E8%B0%88%E9%80%92%E5%BD%92/</link><pubDate>Fri, 14 Jun 2019 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E8%BD%AC%E8%B0%88%E8%B0%88%E9%80%92%E5%BD%92/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/javascript.png" alt="「转」谈谈递归" />&lt;h2 id="什么是递归">什么是递归&lt;/h2>
 &lt;p>小时候，我们都听过下面这则故事：&lt;/p>
 &lt;blockquote>
-&lt;p>从前有座山，山里有个庙，庙里有个老和尚在给小和尚讲故事，讲的什么呢？『从前有座山，山里有个庙，庙里有个老和尚在给小和尚讲故事，讲的什么呢？『从前有座山，山里有个庙，庙里有个老和尚在给小和尚讲故事，讲的什么呢？&amp;hellip;』』&lt;/p>
+&lt;p>从前有座山，山里有个庙，庙里有个老和尚在给小和尚讲故事，讲的什么呢？「从前有座山，山里有个庙，庙里有个老和尚在给小和尚讲故事，讲的什么呢？「从前有座山，山里有个庙，庙里有个老和尚在给小和尚讲故事，讲的什么呢？&amp;hellip;」」&lt;/p>
 &lt;/blockquote>
 &lt;p>这个故事自己套着自己，没完没了，像是某种特征在不断地重复，这就是递归了。&lt;/p>
 &lt;p>在计算机科学里，递归指的是一种通过重复将问题分解为同类的子问题而解决问题的方法。套用程序的概念，就是函数执行过程中直接或间接地调用自身。&lt;/p>
@@ -4167,7 +4167,7 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>简单分析一下，这个函数每执行一次，参数 n 就少 1，最终它会到达 0，之后还会进一步到负数，看起来好像永远都得不到结果。&lt;/p>
-&lt;p>我们回到命题，当 n 到达 0 时，f(0) 指的就是『在 0 个人、0 个座位时的位置分布情况』，没有意义，是 Empty Product，值为 1。而 n 是负数时就更没有意义了，所以 n 应该是一个自然数：&lt;/p>
+&lt;p>我们回到命题，当 n 到达 0 时，f(0) 指的就是「在 0 个人、0 个座位时的位置分布情况」，没有意义，是 Empty Product，值为 1。而 n 是负数时就更没有意义了，所以 n 应该是一个自然数：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -4235,7 +4235,7 @@ target="_blank" rel="noopener"
 Stack Overflow
 &lt;/a>
 。&lt;/p>
-&lt;p>我们思考一下另一种方案，刚才的执行是从 n 开始，一步步计算，直到临界条件 0 为止。现在试着倒过来，由 1 开始，一步步计算，直到 n 为止，当然，此时的临界条件也相应的变为『超过 n』。&lt;/p>
+&lt;p>我们思考一下另一种方案，刚才的执行是从 n 开始，一步步计算，直到临界条件 0 为止。现在试着倒过来，由 1 开始，一步步计算，直到 n 为止，当然，此时的临界条件也相应的变为「超过 n」。&lt;/p>
 &lt;p>实现起来应该就是这样：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -4363,7 +4363,7 @@ loading="lazy"
 &lt;h2 id="总结">总结&lt;/h2>
 &lt;p>可以看到 attribute 只是 DOM 对象的 property 之一，保存着对应元素在 HTML 代码中的所有属性；其中 attribute 的值全部为字符串，而 property 的值可以为字符串、对象、数组、布尔值、null、undefined 等。&lt;/p>
 &lt;p>为了操作 DOM 的简便，除了自定义属性，大部分 attribute 在 property 里都有对应的映射；修改其一等价于修改另一个。其中 for 和 class 为 JS 的保留字，所以 attribute 的 for/class 属性映射到了 property 的 htmlFor/className。&lt;/p>
-&lt;p>因为 attribute 的属性值只能为字符串，所以当我们在 HTML 中加上‘checked=&amp;ldquo;false&amp;rdquo;’时，false 会被当作是长度为 5 的字符串，被隐式转换为 true，所以默认“man”被选中。因此 在设置“以非字符串为属性值”的属性时，应该在 JS 中设置 property。&lt;/p></description></item><item><title>『转』VirtualDOM 真的比操作原生 DOM 快吗？ · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E8%BD%ACvirtualdom-%E7%9C%9F%E7%9A%84%E6%AF%94%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%94%9F-dom-%E5%BF%AB%E5%90%97/</link><pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E8%BD%ACvirtualdom-%E7%9C%9F%E7%9A%84%E6%AF%94%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%94%9F-dom-%E5%BF%AB%E5%90%97/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/javascript.png" alt="『转』VirtualDOM 真的比操作原生 DOM 快吗？" />&lt;h2 id="原生-dom-操作-vs-通过框架封装操作">原生 DOM 操作 vs 通过框架封装操作&lt;/h2>
+&lt;p>因为 attribute 的属性值只能为字符串，所以当我们在 HTML 中加上‘checked=&amp;ldquo;false&amp;rdquo;’时，false 会被当作是长度为 5 的字符串，被隐式转换为 true，所以默认“man”被选中。因此 在设置“以非字符串为属性值”的属性时，应该在 JS 中设置 property。&lt;/p></description></item><item><title>「转」VirtualDOM 真的比操作原生 DOM 快吗？ · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E8%BD%ACvirtualdom-%E7%9C%9F%E7%9A%84%E6%AF%94%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%94%9F-dom-%E5%BF%AB%E5%90%97/</link><pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E8%BD%ACvirtualdom-%E7%9C%9F%E7%9A%84%E6%AF%94%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%94%9F-dom-%E5%BF%AB%E5%90%97/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/javascript.png" alt="「转」VirtualDOM 真的比操作原生 DOM 快吗？" />&lt;h2 id="原生-dom-操作-vs-通过框架封装操作">原生 DOM 操作 vs 通过框架封装操作&lt;/h2>
 &lt;p>这是一个性能 vs 可维护性的取舍。&lt;/p>
 &lt;p>框架的意义在于为你掩盖底层的 DOM 操作，让你用更声明式的方式来描述你的目的，从而让你的代码更容易维护。&lt;/p>
 &lt;p>没有任何框架可以比纯手动的优化 DOM 操作更快，因为框架的 DOM 操作层需要应对任何上层 API 可能产生的操作，它的实现必须是普适的。&lt;/p>
