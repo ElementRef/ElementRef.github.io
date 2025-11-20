@@ -226,8 +226,8 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --name --detach --interactive --publish --publish-all
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 以交互方式运行 centos 镜像，并调用 centos 下的 bash&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --interactive centos /bin/bash
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 后台启动容器；如果一个容器以「后台运行」的方式被启动&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 当容器没有对应的「前台进程」时，会被 Docker 自动停止&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 后台启动容器；如果一个容器以『后台运行』的方式被启动&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 当容器没有对应的『前台进程』时，会被 Docker 自动停止&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --detach centos
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 后台启动容器 nginx-exp 并将容器的 80 端口映射到宿主环境的 2323 端口&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 宿主机通过 localhost:2323 就能访问到容器内部运行的 nginx 服务&lt;/span>
@@ -520,7 +520,7 @@ loading="lazy"
 &lt;/span>&lt;span class="lnt">6
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看「未指定挂载位置的」容器内挂载目录&lt;/span>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看『未指定挂载位置的』容器内挂载目录&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker volume ls
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看名称为 centos_home 的容器内挂载目录的详细信息&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker volume inspect centos_home
@@ -542,7 +542,7 @@ loading="lazy"
 >
 &lt;/p>
 &lt;h3 id="镜像加载流程">镜像加载流程&lt;/h3>
-&lt;p>Docker 使用&lt;strong>联合文件系统&lt;/strong>，UnionFS 是一种分层、轻量、高性能的文件系统；他支持「对文件系统的修改」作为一次「提交」来层层叠加，同时将不同目录挂载到同一个虚拟文件系统下。&lt;/p>
+&lt;p>Docker 使用&lt;strong>联合文件系统&lt;/strong>，UnionFS 是一种分层、轻量、高性能的文件系统；他支持『对文件系统的修改』作为一次『提交』来层层叠加，同时将不同目录挂载到同一个虚拟文件系统下。&lt;/p>
 &lt;p>UnionFS 是 Docker 镜像的根基，镜像可以通过分层来进行继承，基于基础镜像制作各种具体的应用镜像。每次可以同时加载多个文件系统；这样，最终的镜像会包含所有底层的文件和目录。&lt;/p>
 &lt;p>和 Linux 一样，镜像的最底层是 bootfs，包含了：&lt;/p>
 &lt;ul>
@@ -765,7 +765,7 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">FROM&lt;/span>&lt;span class="s"> image # 默认使用 latest 版本&lt;/span>&lt;span class="err">
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">FROM&lt;/span>&lt;span class="s"> image:tag # 支持指定版本&lt;/span>&lt;span class="err">
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">FROM&lt;/span>&lt;span class="s"> scratch # 99% 以上的基础镜像都是从 scratch 开始的&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span> &lt;span class="c1"># 代表着一个「空」操作，不会创建额外的镜像层&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span> &lt;span class="c1"># 代表着一个『空』操作，不会创建额外的镜像层&lt;/span>&lt;span class="err">
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">MAINTAINER&lt;/span>&lt;span class="s"> # 镜像创建者信息（姓名 + 邮箱）&lt;/span>&lt;span class="err">
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
@@ -776,7 +776,7 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span> &lt;span class="c1"># 通过 docker run –env key=value 设置或修改环境变量&lt;/span>&lt;span class="err">
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ENV&lt;/span> JAVA_HOME /path/to/java/dirent&lt;span class="err">
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ADD&lt;/span> &lt;span class="c1"># 添加文件（压缩包「会」自动解压）&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ADD&lt;/span> &lt;span class="c1"># 添加文件（压缩包『会』自动解压）&lt;/span>&lt;span class="err">
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ADD&lt;/span> 源路径 目标路径&lt;span class="err">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
@@ -818,7 +818,7 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">USER&lt;/span>&lt;span class="s"> # 设置启动容器的用户，默认为 root&lt;/span>&lt;span class="err">
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">COPY&lt;/span> &lt;span class="c1"># 将文件拷贝到镜像中（压缩包「不会」自动解压）&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">COPY&lt;/span> &lt;span class="c1"># 将文件拷贝到镜像中（压缩包『不会』自动解压）&lt;/span>&lt;span class="err">
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">WORKDIR&lt;/span>&lt;span class="s"> # 设置镜像的工作目录&lt;/span>&lt;span class="err">
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span> &lt;span class="c1"># 相当于 cd 命令，可以多次切换目录&lt;/span>&lt;span class="err">
@@ -1053,7 +1053,7 @@ loading="lazy"
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 首先要登录 DockerHub 账号&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker login --username spicicomic
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 将要发布的镜像打上自己的「账号」标签&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 将要发布的镜像打上自己的『账号』标签&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker tag tomcat/java:1.0 spicicomic/tomcat_java:1.0
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 或者使用镜像 ID 打标签&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker tag b23b7e343dc5 spicicomic/tomcat_java:1.0

@@ -831,7 +831,7 @@ ComponentFactory
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">form&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>我们需要实现 submitForm 和 refresh 来提供「查询」和「刷新」功能，并通过 EventEmitter 将相关事件抛出：&lt;/p>
+&lt;/div>&lt;p>我们需要实现 submitForm 和 refresh 来提供『查询』和『刷新』功能，并通过 EventEmitter 将相关事件抛出：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -1018,7 +1018,7 @@ ComponentFactory
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">ng-container&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>这里的「配置」指的是 SearchFormListItem，组件会根据 searchFormList 渲染对应的表单：&lt;/p>
+&lt;/div>&lt;p>这里的『配置』指的是 SearchFormListItem，组件会根据 searchFormList 渲染对应的表单：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -1091,7 +1091,7 @@ ComponentFactory
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">nzShowTime?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// type=&amp;#34;range-picker&amp;#34;时，是否显示时间选择
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">nzMode?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// nz-date-picker 属性
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">nzAllowClear?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 是否显示清除按钮
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">noShowSelectAll?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 是否显示「全部」选项
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">noShowSelectAll?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 是否显示『全部』选项
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">label&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 表单描述，label=&amp;#34;商户名称&amp;#34;
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">isNumber?&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 是否将 option 中的 value 转换为数字
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">initValidate?&lt;/span>: &lt;span class="kt">Function&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 表单初始值，initValidate=()=&amp;gt;&amp;#39;&amp;#39;
@@ -1386,7 +1386,7 @@ ComponentFactory
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>当依赖项变动时，我们可以根据依赖项上的 _reset 列表执行一些动作，比如重置「依赖于当前表单值的表单」的值；重新拉取「依赖于当前表单值的表单」options：&lt;/p>
+&lt;/div>&lt;p>当依赖项变动时，我们可以根据依赖项上的 _reset 列表执行一些动作，比如重置『依赖于当前表单值的表单』的值；重新拉取『依赖于当前表单值的表单』options：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -1447,7 +1447,7 @@ ComponentFactory
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 如果处于「无按钮」模式，每次修改都需要重新查询
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 如果处于『无按钮』模式，每次修改都需要重新查询
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">noButton&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">submitForm&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>

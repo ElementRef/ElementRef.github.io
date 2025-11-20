@@ -69,7 +69,7 @@ TypeScript@5.8.2
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">function&lt;/span> &lt;span class="nx">ClassDecoratorFn&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">target&lt;/span>: &lt;span class="kt">Function&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="k">void&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * [Function: DecoratorsExample]
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * target 指向「构造函数」
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * target 指向『构造函数』
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;ClassDecoratorFn &amp;gt; target&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">target&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nx">DecoratorsExample&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// true
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// 可以添加｜修改｜删除原型上的属性和方法
@@ -252,15 +252,15 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;InstanceMethodDecoratorFn &amp;gt; target&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">target&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 指向实例 DecoratorsExample: {}
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;InstanceMethodDecoratorFn &amp;gt; propertyKey&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">propertyKey&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 指向方法名称 getSex
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="cm">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 返回对应的「元数据」信息：
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 返回对应的『元数据』信息：
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * {
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * &amp;#34;configurable&amp;#34;: true,
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * &amp;#34;enumerable&amp;#34;: false,
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * &amp;#34;writable&amp;#34;: true
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * }
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;InstanceMethodDecoratorFn &amp;gt; descriptor&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">descriptor&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 返回「数据属性」
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// 修改「数据属性」
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;InstanceMethodDecoratorFn &amp;gt; descriptor&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">descriptor&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 返回『数据属性』
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// 修改『数据属性』
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">configurable&lt;/span>: &lt;span class="kt">false&lt;/span>&lt;span class="p">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">enumerable&lt;/span>: &lt;span class="kt">false&lt;/span>&lt;span class="p">,&lt;/span>
@@ -272,10 +272,10 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">propertyKey&lt;/span>: &lt;span class="kt">string&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kt">symbol&lt;/span>&lt;span class="p">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">descriptor&lt;/span>: &lt;span class="kt">PropertyDescriptor&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">PropertyDescriptor&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="k">void&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;StaticMethodDecoratorFn &amp;gt; target&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">target&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 指向「构造函数」
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;StaticMethodDecoratorFn &amp;gt; target&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">target&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 指向『构造函数』
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;StaticMethodDecoratorFn &amp;gt; propertyKey&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">propertyKey&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 指向方法名称 getInfo
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="cm">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 返回对应的「元数据」信息：
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 返回对应的『元数据』信息：
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * {
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * &amp;#34;configurable&amp;#34;: true,
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * &amp;#34;enumerable&amp;#34;: false,
@@ -285,7 +285,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;StaticMethodDecoratorFn &amp;gt; descriptor&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">descriptor&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">example&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">DecoratorsExample&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 会在运行时报错，因为修改「数据属性」之后，getSex 不能被修改
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 会在运行时报错，因为修改『数据属性』之后，getSex 不能被修改
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">example&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getSex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="s1">&amp;#39;male&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
@@ -803,7 +803,7 @@ target="_blank" rel="noopener"
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * target 指向实例
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * propertyKey 指向被装饰的方法
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * target[propertyKey] 永远指向「未被装饰器修改」的原始方法
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * target[propertyKey] 永远指向『未被装饰器修改』的原始方法
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">originalMethod&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">target&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">propertyKey&lt;/span>&lt;span class="p">];&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**

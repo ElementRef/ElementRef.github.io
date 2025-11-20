@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>React on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/react/</link><description>Recent content in React on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 02 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/react/index.xml" rel="self" type="application/rss+xml"/><item><title>AI JS-SDK 项目总结（二） · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%BA%8C/</link><pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%BA%8C/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/react.png" alt="AI JS-SDK 项目总结（二）" />&lt;h2 id="antdesign">AntDesign&lt;/h2>
-&lt;p>因为存在 Admin 端，并且「对话组件」需要同时在 Admin|Web|JS-SDK 三个环境中使用；索性使用 AntDesign 作为组件库，恰好 AntDesign 也为 AI 应用推出了 &lt;a class="link"
+&lt;p>因为存在 Admin 端，并且『对话组件』需要同时在 Admin|Web|JS-SDK 三个环境中使用；索性使用 AntDesign 作为组件库，恰好 AntDesign 也为 AI 应用推出了 &lt;a class="link"
 href="https://x.ant.design/"
 target="_blank" rel="noopener"
 >
@@ -15,11 +15,11 @@ target="_blank" rel="noopener"
 &lt;/a>
 解答了我的疑惑：&lt;/p>
 &lt;ul>
-&lt;li>Tooltip 是从标签的 title 属性衍生过来的，用来展示「完整信息」，内部不包含用户交互；&lt;/li>
-&lt;li>Popover 起源于「漫画对话框」，在 macOS Lion 成为系统控件：
+&lt;li>Tooltip 是从标签的 title 属性衍生过来的，用来展示『完整信息』，内部不包含用户交互；&lt;/li>
+&lt;li>Popover 起源于『漫画对话框』，在 macOS Lion 成为系统控件：
 &lt;ul>
 &lt;li>可以承载更多的图文信息，提供详情预览的功能；&lt;/li>
-&lt;li>内部包含简单的用户交互，功能向「弹窗」靠拢。&lt;/li>
+&lt;li>内部包含简单的用户交互，功能向『弹窗』靠拢。&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
@@ -419,7 +419,7 @@ target="_blank" rel="noopener"
 >
 文档
 &lt;/a>
-设置 StyleProvider；同时为了保证弹出框（Select, Tooltip, Menu 等等）的正确渲染，需要指定全局的 getPopupContainer，否则会得到「trigger element and popup element should in same shadow root」的错误信息：&lt;/p>
+设置 StyleProvider；同时为了保证弹出框（Select, Tooltip, Menu 等等）的正确渲染，需要指定全局的 getPopupContainer，否则会得到『trigger element and popup element should in same shadow root』的错误信息：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -740,7 +740,7 @@ unicode-bidi:normal
 &lt;/ul>
 &lt;p>这样设置之后，宿主就不能通过 ShadowRoot 间接改变 ShadowDOM 内部的样式了。&lt;/p>
 &lt;h3 id="宿主通信">宿主通信&lt;/h3>
-&lt;p>产品需要支持划词菜单；当用户在划词菜单中选中某条命令时，需要使用「命令 + 选中内容」直接发起对话；这就涉及到了 JS-SDK 和宿主环境通信，如果两者不属于用一个执行上下文，就需要跨上下文通信，那么「桥」这种东西就不可避免；而 ShadowDOM 恰好可以避免跨上下文通信，而 iframe 需要借助 postMessage 等 API 和宿主环境通信：&lt;/p>
+&lt;p>产品需要支持划词菜单；当用户在划词菜单中选中某条命令时，需要使用『命令 + 选中内容』直接发起对话；这就涉及到了 JS-SDK 和宿主环境通信，如果两者不属于用一个执行上下文，就需要跨上下文通信，那么『桥』这种东西就不可避免；而 ShadowDOM 恰好可以避免跨上下文通信，而 iframe 需要借助 postMessage 等 API 和宿主环境通信：&lt;/p>
 &lt;ul>
 &lt;li>同源场景：iframe.contentWindow，top.window；&lt;/li>
 &lt;li>跨域场景：
@@ -760,10 +760,10 @@ target="_blank" rel="noopener"
 &lt;/a>
 ：&lt;/p>
 &lt;ul>
-&lt;li>./index.css?inline，经过编译，作为「内联样式」处理，不会生成单独的 CSS 文件；&lt;/li>
+&lt;li>./index.css?inline，经过编译，作为『内联样式』处理，不会生成单独的 CSS 文件；&lt;/li>
 &lt;li>./index.css?raw，未经编译，获取到的是 index.css 的原始文本；&lt;/li>
 &lt;li>./index.css?url，未经编译，获取到的是 index.css 的路径信息；&lt;/li>
-&lt;li>./index.css?worker，作为「WebWorker」处理。&lt;/li>
+&lt;li>./index.css?worker，作为『WebWorker』处理。&lt;/li>
 &lt;/ul>
 &lt;p>显然，只有第一种 ?inline 最合适，未经 Tailwind CSS 编译的原始文件没什么价值。&lt;/p>
 &lt;p>有了样式代码，怎么将 CSS 注入到 ShadowDOM 中呢？需要借助 &lt;a class="link"
@@ -995,7 +995,7 @@ target="_blank" rel="noopener"
 >
 &lt;strong>创建模式&lt;/strong>
 &lt;/a>
-：open 和 closed；起初没怎么在意，因为两种模式下，React 组件都能被正常渲染；而且 MDN 也提到「当 mode:closed 时，JS 将无法访问及修改 ShadowDOM 内部」，所以理论上，mode:closed 的安全性更高，隔离的也更彻底。&lt;/p>
+：open 和 closed；起初没怎么在意，因为两种模式下，React 组件都能被正常渲染；而且 MDN 也提到『当 mode:closed 时，JS 将无法访问及修改 ShadowDOM 内部』，所以理论上，mode:closed 的安全性更高，隔离的也更彻底。&lt;/p>
 &lt;p>后来，写到&lt;strong>划词需求&lt;/strong>时，才发现两种模式的差别；由于我有意想在&lt;strong>表单元素&lt;/strong>和 &lt;strong>ShadowDOM&lt;/strong> 上禁用划词：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -1081,13 +1081,13 @@ target="_blank" rel="noopener"
 &lt;/a>
 罢了；对于处于上帝视角的浏览器扩展来说，mode:closed 的 ShadowDOM 是可以被修改的。&lt;/p>
 &lt;h2 id="typescript">TypeScript&lt;/h2>
-&lt;p>开发过程中，出现了项目本地正常运行，VSCode 没有报红，tsc &amp;ndash;noEmit 正常执行，tsc &amp;ndash;build 编译出错的问题；经过排查，发现「&lt;a class="link"
+&lt;p>开发过程中，出现了项目本地正常运行，VSCode 没有报红，tsc &amp;ndash;noEmit 正常执行，tsc &amp;ndash;build 编译出错的问题；经过排查，发现『&lt;a class="link"
 href="https://github.com/microsoft/TypeScript/issues/30128"
 target="_blank" rel="noopener"
 >
 编辑器对 setTimeout 的类型定义和 tsc 对 setTimeout 的类型定义不一致
 &lt;/a>
-」，最简单的解决方法是：&lt;/p>
+』，最简单的解决方法是：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -1254,7 +1254,7 @@ getReader
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>这种方式，onMessageInner 接收到的数据有小概率是&lt;strong>不完整的 JSON&lt;/strong>，导致「SyntaxError: Unexpected non-whitespace character after JSON at position」报错；后来不得已切换到了 &lt;a class="link"
+&lt;/div>&lt;p>这种方式，onMessageInner 接收到的数据有小概率是&lt;strong>不完整的 JSON&lt;/strong>，导致『SyntaxError: Unexpected non-whitespace character after JSON at position』报错；后来不得已切换到了 &lt;a class="link"
 href="https://github.com/Azure/fetch-event-source"
 target="_blank" rel="noopener"
 >
@@ -1562,7 +1562,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;CoSec-Device-Id&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">getId&lt;/span>&lt;span class="p">()&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">onopen&lt;/span>: &lt;span class="kt">async&lt;/span> &lt;span class="nx">response&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 获取 RequestId，将展示在「错误信息」中
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 获取 RequestId，将展示在『错误信息』中
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">cosecRequestId&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">current&lt;/span> &lt;span class="o">=&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">response&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">headers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="kr">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;cosec-request-id&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>
@@ -2576,7 +2576,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">setRootOffsetHeight&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">body&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">offsetHeight&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">showChat&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 划词区域 &amp;amp;&amp;amp; 菜单展示区域需要避开「对话框」
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 划词区域 &amp;amp;&amp;amp; 菜单展示区域需要避开『对话框』
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * ChatContainer 的宽度是定死的 1152px
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">setRootOffsetWidth&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">body&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">offsetWidth&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1152&lt;/span>&lt;span class="p">);&lt;/span>
@@ -2865,7 +2865,7 @@ Vite
 &lt;ul>
 &lt;li>主应用 Admin 和 Web 放在 apps 目录下，每个应用都是完整的 Vite 项目；&lt;/li>
 &lt;li>JS-SDK、shared 公共代码和 types 类型共享等子包，放在 packages 目录下；&lt;/li>
-&lt;li>SVG 图标文件放在根目录的 icons 文件夹下，根据「应用名称｜子包名称｜是否保留颜色」进行分类；&lt;/li>
+&lt;li>SVG 图标文件放在根目录的 icons 文件夹下，根据『应用名称｜子包名称｜是否保留颜色』进行分类；&lt;/li>
 &lt;li>env 文件、Lint 配置、Deploy 配置、Turborepo 配置、workspace 配置、Tailwind CSS 配置等，均放在根目录下；&lt;/li>
 &lt;li>Admin、Web、JS-SDK、Shared 都有自己独立的 tsconfig.json，根目录 tsconfig.json 仅匹配根目录的 *.config.ts|js。&lt;/li>
 &lt;/ul>
@@ -4004,7 +4004,7 @@ target="_blank" rel="noopener"
 &lt;/a>
 ，跳过未修改子包的命令执行；&lt;/li>
 &lt;/ul>
-&lt;p>有一点令人费解：outputs 属性值，是相对于「子包根目录」的；不是「turbo.json 所在的目录」，也不是「项目根目录」；下面是&lt;strong>非完整配置&lt;/strong>：&lt;/p>
+&lt;p>有一点令人费解：outputs 属性值，是相对于『子包根目录』的；不是『turbo.json 所在的目录』，也不是『项目根目录』；下面是&lt;strong>非完整配置&lt;/strong>：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -4539,7 +4539,7 @@ use-context-selector
 &lt;/li>
 &lt;li>SDK 输入框 placeholder 能够让宿主环境自定义；
 &lt;ul>
-&lt;li>这算是一种「品牌化」需求，公司想 SDK 向 SaaS 服务方向发展。&lt;/li>
+&lt;li>这算是一种『品牌化』需求，公司想 SDK 向 SaaS 服务方向发展。&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>SDK 入口按钮能够自定义/显隐控制/位置记忆；
@@ -4624,13 +4624,13 @@ use-context-selector
 &lt;ol>
 &lt;li>构造函数接收 SDK 的配置，并构造 SDK 实例，需要做两件事：
 &lt;ol>
-&lt;li>保存 this 实例，确保 SDK 运行在「单例模式」；&lt;/li>
+&lt;li>保存 this 实例，确保 SDK 运行在『单例模式』；&lt;/li>
 &lt;li>在 try&amp;hellip;catch 中调用 mount，完成渲染节点的初始化。&lt;/li>
 &lt;/ol>
 &lt;/li>
 &lt;li>mount 用来完成渲染节点的初始化，需要做三件事：
 &lt;ol>
-&lt;li>调用 configProduce 校验「用户配置」并标准化输出；&lt;/li>
+&lt;li>调用 configProduce 校验『用户配置』并标准化输出；&lt;/li>
 &lt;li>通过 container.attachShadow 创建 ShadowDOM 节点；&lt;/li>
 &lt;li>调用 linkStyle 将样式注入到 ShadowDOM 内部；&lt;/li>
 &lt;li>调用 render 函数，完成 React 组件渲染。&lt;/li>
@@ -4817,7 +4817,7 @@ use-context-selector
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span> &lt;span class="na">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;module&amp;#34;&lt;/span> &lt;span class="na">src&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;./index.tsx&amp;#34;&lt;/span> &lt;span class="na">crossorigin&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>SDK 是通过 Vite 的「库」模式进行打包的，这样引入不方便拿到 ChatSdk 构造函数。后来切换到了下面这种：&lt;/p>
+&lt;/div>&lt;p>SDK 是通过 Vite 的『库』模式进行打包的，这样引入不方便拿到 ChatSdk 构造函数。后来切换到了下面这种：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -4946,538 +4946,7 @@ target="_blank" rel="noopener"
 Load SVGs from Filesystem
 &lt;/a>
 &lt;/li>
-&lt;/ul></description></item><item><title>如何构建 Suspense 数据源 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA-suspense-%E6%95%B0%E6%8D%AE%E6%BA%90/</link><pubDate>Tue, 27 Aug 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA-suspense-%E6%95%B0%E6%8D%AE%E6%BA%90/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/react.png" alt="如何构建 Suspense 数据源" />&lt;p>之前，在没有 Suspense 的时候，是用 &lt;a class="link"
-href="https://github.com/jamiebuilds/react-loadable"
-target="_blank" rel="noopener"
->
-ReactLoadable
-&lt;/a>
-做异步路由 CodeSplit 并加载 FallbackUI 的；后来，React.lazy 的推出，搭配 Suspense 可以实现同样的功能。&lt;/p>
-&lt;p>在接触 Next.js 之后，发现服务端异步组件同样可以搭配 Suspense 做代码分割，并实现页面流式渲染。&lt;/p>
-&lt;p>前段时间，看文档的时候；文档上说【只有启用了 Suspense 的数据源才会激活 Suspense 组件】：&lt;/p>
-&lt;ul>
-&lt;li>支持 Suspense 的框架如 Relay 和 Next.js；&lt;/li>
-&lt;li>使用 React.lazy 懒加载组件代码；&lt;/li>
-&lt;li>使用 use 读取 Promise 的值。&lt;/li>
-&lt;/ul>
-&lt;h2 id="什么是-suspense-数据源">什么是 Suspense 数据源&lt;/h2>
-&lt;p>Next.js 不用多说，ServerComponents 可以直接使用 async 定义异步组件；那么什么是&lt;strong>Suspense 数据源&lt;/strong>呢？我们先看看 React.lazy 和使用 React.use 组件的返回值：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;span class="lnt">17
-&lt;/span>&lt;span class="lnt">18
-&lt;/span>&lt;span class="lnt">19
-&lt;/span>&lt;span class="lnt">20
-&lt;/span>&lt;span class="lnt">21
-&lt;/span>&lt;span class="lnt">22
-&lt;/span>&lt;span class="lnt">23
-&lt;/span>&lt;span class="lnt">24
-&lt;/span>&lt;span class="lnt">25
-&lt;/span>&lt;span class="lnt">26
-&lt;/span>&lt;span class="lnt">27
-&lt;/span>&lt;span class="lnt">28
-&lt;/span>&lt;span class="lnt">29
-&lt;/span>&lt;span class="lnt">30
-&lt;/span>&lt;span class="lnt">31
-&lt;/span>&lt;span class="lnt">32
-&lt;/span>&lt;span class="lnt">33
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// page.tsx
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">lazy&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">Suspense&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;react&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">UseExample&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;./UseExample&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">Home() {&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">LazyExample&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">lazy&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="kr">import&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;./LazyExample&amp;#39;&lt;/span>&lt;span class="p">));&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Home &amp;gt; lazyExample&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">LazyExample&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">useExample&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">UseExample&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">UseExample&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Home &amp;gt; useExample&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">useExample&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">main&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Suspense&lt;/span> &lt;span class="na">fallback&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>&lt;span class="nx">Loading&lt;/span>&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;}&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">LazyExample&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">LazyExample&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">Suspense&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Suspense&lt;/span> &lt;span class="na">fallback&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>&lt;span class="nx">Loading&lt;/span>&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;}&amp;gt;{&lt;/span>&lt;span class="nx">useExample&lt;/span>&lt;span class="p">}&amp;lt;/&lt;/span>&lt;span class="nt">Suspense&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">main&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// ./LazyExample.tsx
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">LazyExample() {&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>&lt;span class="nx">LazyExample&lt;/span>&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// ./UseExample.tsx
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">use&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;react&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">UseExample() {&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">data&lt;/span>: &lt;span class="kt">string&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">use&lt;/span>&lt;span class="p">(&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">new&lt;/span> &lt;span class="nx">Promise&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">resolve&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">setTimeout&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">resolve&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;UseExample&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span> &lt;span class="mi">3000&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;{&lt;/span>&lt;span class="nx">data&lt;/span>&lt;span class="p">}&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>控制台打印出：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">Home&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">lazyExample&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;$$typeof&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Symbol&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">react&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">lazy&lt;/span>&lt;span class="p">),&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">_payload&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">_status&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">_result&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">Function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">anonymous&lt;/span>&lt;span class="p">)]&lt;/span> &lt;span class="p">},&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">_init&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">Function&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">eS&lt;/span>&lt;span class="p">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Home&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">useExample&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;$$typeof&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Symbol&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">react&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">element&lt;/span>&lt;span class="p">),&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">type&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">Function&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">UseExample&lt;/span>&lt;span class="p">],&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">key&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">null&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ref&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">null&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">props&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{},&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">_owner&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">null&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">_store&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>然而，并没有什么端倪；打个断点，看一下：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt"> 10
-&lt;/span>&lt;span class="lnt"> 11
-&lt;/span>&lt;span class="lnt"> 12
-&lt;/span>&lt;span class="lnt"> 13
-&lt;/span>&lt;span class="lnt"> 14
-&lt;/span>&lt;span class="lnt"> 15
-&lt;/span>&lt;span class="lnt"> 16
-&lt;/span>&lt;span class="lnt"> 17
-&lt;/span>&lt;span class="lnt"> 18
-&lt;/span>&lt;span class="lnt"> 19
-&lt;/span>&lt;span class="lnt"> 20
-&lt;/span>&lt;span class="lnt"> 21
-&lt;/span>&lt;span class="lnt"> 22
-&lt;/span>&lt;span class="lnt"> 23
-&lt;/span>&lt;span class="lnt"> 24
-&lt;/span>&lt;span class="lnt"> 25
-&lt;/span>&lt;span class="lnt"> 26
-&lt;/span>&lt;span class="lnt"> 27
-&lt;/span>&lt;span class="lnt"> 28
-&lt;/span>&lt;span class="lnt"> 29
-&lt;/span>&lt;span class="lnt"> 30
-&lt;/span>&lt;span class="lnt"> 31
-&lt;/span>&lt;span class="lnt"> 32
-&lt;/span>&lt;span class="lnt"> 33
-&lt;/span>&lt;span class="lnt"> 34
-&lt;/span>&lt;span class="lnt"> 35
-&lt;/span>&lt;span class="lnt"> 36
-&lt;/span>&lt;span class="lnt"> 37
-&lt;/span>&lt;span class="lnt"> 38
-&lt;/span>&lt;span class="lnt"> 39
-&lt;/span>&lt;span class="lnt"> 40
-&lt;/span>&lt;span class="lnt"> 41
-&lt;/span>&lt;span class="lnt"> 42
-&lt;/span>&lt;span class="lnt"> 43
-&lt;/span>&lt;span class="lnt"> 44
-&lt;/span>&lt;span class="lnt"> 45
-&lt;/span>&lt;span class="lnt"> 46
-&lt;/span>&lt;span class="lnt"> 47
-&lt;/span>&lt;span class="lnt"> 48
-&lt;/span>&lt;span class="lnt"> 49
-&lt;/span>&lt;span class="lnt"> 50
-&lt;/span>&lt;span class="lnt"> 51
-&lt;/span>&lt;span class="lnt"> 52
-&lt;/span>&lt;span class="lnt"> 53
-&lt;/span>&lt;span class="lnt"> 54
-&lt;/span>&lt;span class="lnt"> 55
-&lt;/span>&lt;span class="lnt"> 56
-&lt;/span>&lt;span class="lnt"> 57
-&lt;/span>&lt;span class="lnt"> 58
-&lt;/span>&lt;span class="lnt"> 59
-&lt;/span>&lt;span class="lnt"> 60
-&lt;/span>&lt;span class="lnt"> 61
-&lt;/span>&lt;span class="lnt"> 62
-&lt;/span>&lt;span class="lnt"> 63
-&lt;/span>&lt;span class="lnt"> 64
-&lt;/span>&lt;span class="lnt"> 65
-&lt;/span>&lt;span class="lnt"> 66
-&lt;/span>&lt;span class="lnt"> 67
-&lt;/span>&lt;span class="lnt"> 68
-&lt;/span>&lt;span class="lnt"> 69
-&lt;/span>&lt;span class="lnt"> 70
-&lt;/span>&lt;span class="lnt"> 71
-&lt;/span>&lt;span class="lnt"> 72
-&lt;/span>&lt;span class="lnt"> 73
-&lt;/span>&lt;span class="lnt"> 74
-&lt;/span>&lt;span class="lnt"> 75
-&lt;/span>&lt;span class="lnt"> 76
-&lt;/span>&lt;span class="lnt"> 77
-&lt;/span>&lt;span class="lnt"> 78
-&lt;/span>&lt;span class="lnt"> 79
-&lt;/span>&lt;span class="lnt"> 80
-&lt;/span>&lt;span class="lnt"> 81
-&lt;/span>&lt;span class="lnt"> 82
-&lt;/span>&lt;span class="lnt"> 83
-&lt;/span>&lt;span class="lnt"> 84
-&lt;/span>&lt;span class="lnt"> 85
-&lt;/span>&lt;span class="lnt"> 86
-&lt;/span>&lt;span class="lnt"> 87
-&lt;/span>&lt;span class="lnt"> 88
-&lt;/span>&lt;span class="lnt"> 89
-&lt;/span>&lt;span class="lnt"> 90
-&lt;/span>&lt;span class="lnt"> 91
-&lt;/span>&lt;span class="lnt"> 92
-&lt;/span>&lt;span class="lnt"> 93
-&lt;/span>&lt;span class="lnt"> 94
-&lt;/span>&lt;span class="lnt"> 95
-&lt;/span>&lt;span class="lnt"> 96
-&lt;/span>&lt;span class="lnt"> 97
-&lt;/span>&lt;span class="lnt"> 98
-&lt;/span>&lt;span class="lnt"> 99
-&lt;/span>&lt;span class="lnt">100
-&lt;/span>&lt;span class="lnt">101
-&lt;/span>&lt;span class="lnt">102
-&lt;/span>&lt;span class="lnt">103
-&lt;/span>&lt;span class="lnt">104
-&lt;/span>&lt;span class="lnt">105
-&lt;/span>&lt;span class="lnt">106
-&lt;/span>&lt;span class="lnt">107
-&lt;/span>&lt;span class="lnt">108
-&lt;/span>&lt;span class="lnt">109
-&lt;/span>&lt;span class="lnt">110
-&lt;/span>&lt;span class="lnt">111
-&lt;/span>&lt;span class="lnt">112
-&lt;/span>&lt;span class="lnt">113
-&lt;/span>&lt;span class="lnt">114
-&lt;/span>&lt;span class="lnt">115
-&lt;/span>&lt;span class="lnt">116
-&lt;/span>&lt;span class="lnt">117
-&lt;/span>&lt;span class="lnt">118
-&lt;/span>&lt;span class="lnt">119
-&lt;/span>&lt;span class="lnt">120
-&lt;/span>&lt;span class="lnt">121
-&lt;/span>&lt;span class="lnt">122
-&lt;/span>&lt;span class="lnt">123
-&lt;/span>&lt;span class="lnt">124
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// react.development.js，此时 usable 就是我们传入的 Promise
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kd">function&lt;/span> &lt;span class="nx">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">usable&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">dispatcher&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">resolveDispatcher&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">dispatcher&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">usable&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">function&lt;/span> &lt;span class="nx">resolveDispatcher() {&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">dispatcher&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">ReactCurrentDispatcher$1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">current&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">dispatcher&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// react-dom.development.js，此时 usable 就是我们传入的 Promise
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kd">function&lt;/span> &lt;span class="nx">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">usable&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">usable&lt;/span> &lt;span class="o">!==&lt;/span> &lt;span class="kc">null&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="k">typeof&lt;/span> &lt;span class="nx">usable&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;object&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">typeof&lt;/span> &lt;span class="nx">usable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">then&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;function&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">thenable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">usable&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">useThenable&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">thenable&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 会走到这里
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">usable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">$$typeof&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nx">REACT_CONTEXT_TYPE&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">context&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">usable&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">readContext&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">context&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">function&lt;/span> &lt;span class="nx">useThenable&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">thenable&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 跟踪 Fiber 内 thenable 的位置
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nx">index&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">thenableIndexCounter&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">thenableIndexCounter&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">thenableState&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">thenableState&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">createThenableState&lt;/span>&lt;span class="p">();&lt;/span> &lt;span class="c1">// 会走到这里
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">trackUsedThenable&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">thenableState&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">thenable&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">index&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">currentlyRenderingFiber$1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">alternate&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="kc">null&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">(&lt;/span>&lt;span class="nx">workInProgressHook&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="kc">null&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">?&lt;/span> &lt;span class="nx">currentlyRenderingFiber$1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">memoizedState&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="kc">null&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">:&lt;/span> &lt;span class="nx">workInProgressHook&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">ReactCurrentDispatcher$1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">current&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">HooksDispatcherOnMountInDEV&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">result&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">function&lt;/span> &lt;span class="nx">createThenableState() {&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">didWarnAboutUncachedPromise&lt;/span>: &lt;span class="kt">false&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">thenables&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[]&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 此时 thenable 为 Promise
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kd">function&lt;/span> &lt;span class="nx">trackUsedThenable&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">thenableState&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">thenable&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">index&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">ReactCurrentActQueue$2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">current&lt;/span> &lt;span class="o">!==&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">ReactCurrentActQueue$2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">didUsePromise&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">trackedThenables&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">getThenablesFromState&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">thenableState&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">previous&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">trackedThenables&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">index&lt;/span>&lt;span class="p">];&lt;/span> &lt;span class="c1">// 此时 previous 为 undefined，index 为 0
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">previous&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="kc">undefined&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">trackedThenables&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">push&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">thenable&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">previous&lt;/span> &lt;span class="o">!==&lt;/span> &lt;span class="nx">thenable&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 复用之前的 thenable；因为组件是幂等的
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">thenable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">noop$2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">noop$2&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">thenable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">previous&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 如果 thenable 没有 status，将它设置为 pending，并监听状态变化
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">switch&lt;/span> &lt;span class="p">(&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">thenable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">status&lt;/span> &lt;span class="c1">// 此时为 pending
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 其他状态，直接返回 fulfilledValue 或 rejectedError
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">case&lt;/span> &lt;span class="s1">&amp;#39;fulfilled&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">fulfilledValue&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">thenable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">value&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">fulfilledValue&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="s1">&amp;#39;rejected&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">rejectedError&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">thenable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">reason&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">checkIfUseWrappedInAsyncCatch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">rejectedError&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">throw&lt;/span> &lt;span class="nx">rejectedError&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">default&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 此时，thenable 为 Promise&amp;lt;pending&amp;gt;
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">typeof&lt;/span> &lt;span class="nx">thenable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">status&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;string&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">thenable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">noop$2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">noop$2&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">root&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">getWorkInProgressRoot&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 走到这里，通过 then 对 thenable 进行取值
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nx">pendingThenable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">thenable&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">pendingThenable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">status&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;pending&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">pendingThenable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">(&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">fulfilledValue&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">thenable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">status&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;pending&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">fulfilledThenable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">thenable&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">fulfilledThenable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">status&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;fulfilled&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">fulfilledThenable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">value&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">fulfilledValue&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">error&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">thenable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">status&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;pending&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">rejectedThenable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">thenable&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">rejectedThenable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">status&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;rejected&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">rejectedThenable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">reason&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">error&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 再做一次检查
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">switch&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">thenable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">status&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="s1">&amp;#39;fulfilled&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">fulfilledThenable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">thenable&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">fulfilledThenable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">value&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="s1">&amp;#39;rejected&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">rejectedThenable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">thenable&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">_rejectedError&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">rejectedThenable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">reason&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">checkIfUseWrappedInAsyncCatch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">_rejectedError&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">throw&lt;/span> &lt;span class="nx">_rejectedError&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 触发 Suspense
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">suspendedThenable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">thenable&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">throw&lt;/span> &lt;span class="nx">SuspenseException&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>从 trackUsedThenable 可以看出，能够触发 Suspense 的数据结构应该是一个对象，这个对象的属性应该能够根据 thenable.status 的值的不同而不同；其实，社区里早有了&lt;a class="link"
-href="https://blog.logrocket.com/data-fetching-react-suspense"
-target="_blank" rel="noopener"
->
-解决方案
-&lt;/a>
-：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;span class="lnt">17
-&lt;/span>&lt;span class="lnt">18
-&lt;/span>&lt;span class="lnt">19
-&lt;/span>&lt;span class="lnt">20
-&lt;/span>&lt;span class="lnt">21
-&lt;/span>&lt;span class="lnt">22
-&lt;/span>&lt;span class="lnt">23
-&lt;/span>&lt;span class="lnt">24
-&lt;/span>&lt;span class="lnt">25
-&lt;/span>&lt;span class="lnt">26
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">function&lt;/span> &lt;span class="nx">wrapPromise&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">promise&lt;/span>: &lt;span class="kt">Promise&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">any&lt;/span>&lt;span class="p">&amp;gt;)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">let&lt;/span> &lt;span class="nx">status&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;pending&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">let&lt;/span> &lt;span class="nx">resolvedValue&lt;/span>: &lt;span class="kt">unknown&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">let&lt;/span> &lt;span class="nx">rejectedError&lt;/span>: &lt;span class="kt">unknown&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">let&lt;/span> &lt;span class="nx">suspender&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">Promise&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">resolve&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">promise&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">res&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">status&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;fulfilled&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">resolvedValue&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="k">catch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">err&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">status&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;rejected&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">rejectedError&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">err&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">getValue() {&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">switch&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">status&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="s1">&amp;#39;pending&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">throw&lt;/span> &lt;span class="nx">suspender&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="s1">&amp;#39;rejected&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">throw&lt;/span> &lt;span class="nx">rejectedError&lt;/span> &lt;span class="kr">as&lt;/span> &lt;span class="kt">any&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">default&lt;/span>&lt;span class="o">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">resolvedValue&lt;/span> &lt;span class="kr">as&lt;/span> &lt;span class="kt">any&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>至于，为什么要用 throw 而不是 return；可以看&lt;a class="link"
-href="https://elementref.github.io/p/%E8%BD%AC%E6%88%91%E5%9C%A8%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E4%B8%AD%E5%8F%AF%E4%BB%A5%E9%9A%8F%E4%BE%BF%E5%86%99%E6%9C%80%E9%80%9A%E4%BF%97%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%E5%8E%9F%E7%90%86"
-target="_blank" rel="noopener"
->
-这篇
-&lt;/a>
-。&lt;/p>
-&lt;h2 id="如何使用-wrappromise">如何使用 wrapPromise&lt;/h2>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;span class="lnt">17
-&lt;/span>&lt;span class="lnt">18
-&lt;/span>&lt;span class="lnt">19
-&lt;/span>&lt;span class="lnt">20
-&lt;/span>&lt;span class="lnt">21
-&lt;/span>&lt;span class="lnt">22
-&lt;/span>&lt;span class="lnt">23
-&lt;/span>&lt;span class="lnt">24
-&lt;/span>&lt;span class="lnt">25
-&lt;/span>&lt;span class="lnt">26
-&lt;/span>&lt;span class="lnt">27
-&lt;/span>&lt;span class="lnt">28
-&lt;/span>&lt;span class="lnt">29
-&lt;/span>&lt;span class="lnt">30
-&lt;/span>&lt;span class="lnt">31
-&lt;/span>&lt;span class="lnt">32
-&lt;/span>&lt;span class="lnt">33
-&lt;/span>&lt;span class="lnt">34
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">fetchData() {&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">user&lt;/span>: &lt;span class="kt">wrapPromise&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">fetchUser&lt;/span>&lt;span class="p">())&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">function&lt;/span> &lt;span class="nx">fetchUser() {&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;https://randomuser.me/api&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">x&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">x&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">json&lt;/span>&lt;span class="p">())&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">x&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">x&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">results&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 在组件里使用
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">resource&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">fetchData&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">User() {&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * const resource = fetchData();
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 不可以在组件内部调用
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 否则，会出错
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">user&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">resource&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">user&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getValue&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">className&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;border&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;{&lt;/span>&lt;span class="nx">user&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">first&lt;/span>&lt;span class="p">}&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">SuspensePage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">props&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Suspense&lt;/span> &lt;span class="na">fallback&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>&lt;span class="nx">Loading&lt;/span>&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;}&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">User&lt;/span> &lt;span class="p">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">Suspense&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>如今，可以直接使用 React.use 取代 wrapPromise。&lt;/p></description></item><item><title>「转」我在函数组件中可以随便写，最通俗异步组件原理 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E8%BD%AC%E6%88%91%E5%9C%A8%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E4%B8%AD%E5%8F%AF%E4%BB%A5%E9%9A%8F%E4%BE%BF%E5%86%99%E6%9C%80%E9%80%9A%E4%BF%97%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%E5%8E%9F%E7%90%86/</link><pubDate>Fri, 31 Dec 2021 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E8%BD%AC%E6%88%91%E5%9C%A8%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E4%B8%AD%E5%8F%AF%E4%BB%A5%E9%9A%8F%E4%BE%BF%E5%86%99%E6%9C%80%E9%80%9A%E4%BF%97%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%E5%8E%9F%E7%90%86/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/react.png" alt="「转」我在函数组件中可以随便写，最通俗异步组件原理" />&lt;p>看完这篇文章，你将掌握：&lt;/p>
-&lt;ol>
-&lt;li>componentDidCatch 原理；&lt;/li>
-&lt;li>Suspense 原理；&lt;/li>
-&lt;li>异步组件原理。&lt;/li>
-&lt;/ol>
-&lt;h2 id="不可能的事">不可能的事&lt;/h2>
+&lt;/ul></description></item><item><title>『转』我在函数组件中可以随便写，最通俗异步组件原理 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E8%BD%AC%E6%88%91%E5%9C%A8%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E4%B8%AD%E5%8F%AF%E4%BB%A5%E9%9A%8F%E4%BE%BF%E5%86%99%E6%9C%80%E9%80%9A%E4%BF%97%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%E5%8E%9F%E7%90%86/</link><pubDate>Fri, 31 Dec 2021 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E8%BD%AC%E6%88%91%E5%9C%A8%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E4%B8%AD%E5%8F%AF%E4%BB%A5%E9%9A%8F%E4%BE%BF%E5%86%99%E6%9C%80%E9%80%9A%E4%BF%97%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%E5%8E%9F%E7%90%86/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/react.png" alt="『转』我在函数组件中可以随便写，最通俗异步组件原理" />&lt;h2 id="不可能的事">不可能的事&lt;/h2>
 &lt;p>我的函数组件中里可以随便写，很多同学看到这句话的时候，脑海里应该浮现的四个字是：怎么可能？因为我们印象中的函数组件，是不能直接使用异步的，而且必须返回一段 JSX 代码。&lt;/p>
 &lt;p>那么今天我将打破这个规定，在我们认为是组件的函数里做一些意想不到的事情。接下来跟着我的思路往下看吧。&lt;/p>
 &lt;p>首先先来看一下 JSX，在 JSX 中 &amp;lt;div/&amp;gt; 代表 DOM 元素，而 &amp;lt;Index/&amp;gt; 代表组件，Index 本质是函数组件或类组件。&lt;/p>

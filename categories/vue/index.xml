@@ -5319,7 +5319,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">resolvedPromise&lt;/span>: &lt;span class="kt">Promise&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">any&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">Promise&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">resolve&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 在下个事件循环刷新 job 队列
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kd">function&lt;/span> &lt;span class="nx">queueFlush() {&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 在没有刷新队列和没有等待刷新队列的情况下，进入「刷新 job 队列」任务
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 在没有刷新队列和没有等待刷新队列的情况下，进入『刷新 job 队列』任务
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">isFlushing&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="o">!&lt;/span>&lt;span class="nx">isFlushPending&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">isFlushPending&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 正在等待刷新
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">currentFlushPromise&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">resolvedPromise&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">flushJobs&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 使用微任务
@@ -5418,16 +5418,16 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">queueFlush&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 将「渲染之“前”要执行的回调」入列（flush: pre）
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 将『渲染之“前”要执行的回调』入列（flush: pre）
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">queuePreFlushCb&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">cb&lt;/span>: &lt;span class="kt">SchedulerCb&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">queueCb&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">cb&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">activePreFlushCbs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">pendingPreFlushCbs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">preFlushIndex&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 将「渲染之“后”要执行的回调」入列
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 将『渲染之“后”要执行的回调』入列
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">queuePostFlushCb&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">cb&lt;/span>: &lt;span class="kt">SchedulerCbs&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">queueCb&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">cb&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">activePostFlushCbs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">pendingPostFlushCbs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">postFlushIndex&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 刷新「渲染之“前”要执行的回调」
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 刷新『渲染之“前”要执行的回调』
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 渲染更新之前，触发因为 props 更新而运行的 watcher（flush: pre）
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">flushPreFlushCbs&lt;/span>&lt;span class="p">(&lt;/span>
@@ -5452,7 +5452,7 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">flushPreFlushCbs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">seen&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">parentJob&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 刷新「渲染之“后”要执行的回调」
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 刷新『渲染之“后”要执行的回调』
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">flushPostFlushCbs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">seen?&lt;/span>: &lt;span class="kt">CountMap&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">pendingPostFlushCbs&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">length&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">deduped&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[...&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nx">Set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">pendingPostFlushCbs&lt;/span>&lt;span class="p">)];&lt;/span>
