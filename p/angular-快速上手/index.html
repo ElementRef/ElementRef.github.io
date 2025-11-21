@@ -1705,7 +1705,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><h2 id="依赖注入">依赖注入</h2><p>依赖是指系统中的各个组成部分之间的相互关系；具体到 Angular，是指某个 class 执行其功能“所需的”服务（@Injectable）或对象。</p><p>在传统模式中，如果组件 A 依赖服务 B，A 会在内部创建一个 B 的实例；在依赖注入模式中，依赖项 B 会通过 A 的 constructor 注入（默认行为是 new 调用），保存在 A 的私有属性上。</p><p>当 class 需要某个依赖时，该依赖就会作为参数添加到 class 的构造函数中。当 Angular 实例化 class 时，DI 会在“注入器树”中查找（从局部开始，向上冒泡，直到 root）provider；如果没有找到 provider，会报错。</p><p>如果要保证外部注入的服务是自己（当前 class）独有的（<a class="link" href="https://angular.cn/guide/dependency-injection-in-action#multiple-service-instances-sandboxing" target="_blank" rel="noopener">
 沙箱式隔离
-</a>），只需在自己的元数据 providers 中列出 Service 即可（就能拥有自己独有的服务实例）。</p><p>如果“允许依赖缺失”或者需要“限制依赖查找范围”，可以使用修饰符更改默认的依赖查找机制：</p><ul><li>@Host 表示禁止在“请求该依赖的组件”以上查找依赖；</li><li>@Self 表示只在该组件的注入器中查找提供者，就是仅在 @Component({providers:[]}) 中查找，找不到就报错；</li><li>@SkipSelf 表示跳过局部注入器，向上查找，与 @Self 相反；</li><li>@Optional 表示找不到依赖就返回 null，即使找不到，也不报错。</li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</a>），只需在自己的元数据 providers 中列出 Service 即可（就能拥有自己独有的服务实例）。</p><p>如果“允许依赖缺失”或者需要“限制依赖查找范围”，可以使用修饰符更改默认的依赖查找机制：</p><ul><li>@Host 将依赖查找范围限定在宿主组件（包含当前指令的组件，或当前组件的宿主元素所属的组件）的注入器中；</li><li>@Self 只在当前组件 / 指令自己的注入器中查找依赖，不会向上游（父组件、模块等）的注入器查找；</li><li>@SkipSelf 跳过当前组件 / 指令自己的注入器，直接从父组件或祖先组件的注入器中查找依赖；</li><li>@Optional 标记依赖为可选的。如果依赖找不到，Angular 不会抛出错误，而是注入 null。</li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
