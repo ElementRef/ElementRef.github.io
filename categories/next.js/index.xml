@@ -2698,10 +2698,16 @@ target="_blank" rel="noopener"
 Sequelize
 &lt;/a>
 、&lt;a class="link"
-href="https://www.prisma.io/docs/getting-started/quickstart"
+href="https://www.prisma.io"
 target="_blank" rel="noopener"
 >
 Prisma
+&lt;/a>
+、&lt;a class="link"
+href="https://orm.drizzle.team/"
+target="_blank" rel="noopener"
+>
+Drizzle
 &lt;/a>
 等）或数据库客户端（&lt;a class="link"
 href="https://www.mongodb.com/zh-cn/docs/drivers/node/current/quick-start/download-and-install/#install-the-node.js-driver"
@@ -3810,13 +3816,13 @@ ServerActions
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h2 id="routehandlers">RouteHandlers&lt;/h2>
-&lt;p>可以使用 Next.js 提供的 &lt;a class="link"
+&lt;p>&lt;a class="link"
 href="https://nextjs.org/docs/app/building-your-application/routing/route-handlers"
 target="_blank" rel="noopener"
 >
 RouteHandlers
 &lt;/a>
-完成数据请求（做一层转发），避免敏感数据泄露：&lt;/p>
+可以做数据转发，避免敏感数据泄露：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -4333,7 +4339,7 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>酱紫，当前路由及其子级路由都将启用&lt;strong>部分预渲染&lt;/strong>；如果子路由不需要部分预渲染，需要导出 experimental_ppr = false。&lt;/p>
+&lt;/div>&lt;p>酱紫，当前路由及其子级路由都将启用&lt;strong>部分预渲染&lt;/strong>；如果子路由不需要部分预渲染，需要导出 experimental_ppr=false。&lt;/p>
 &lt;h2 id="缓存">缓存&lt;/h2>
 &lt;p>Next.js 通过对渲染内容和请求数据加缓存来提高性能，下图列出了 Next.js 用到的缓存。&lt;/p>
 &lt;p>&lt;img src="https://ElementRef.github.io/p/next.js-%E4%B9%8B-rendering-%E4%B8%8E-caching/caching.png"
@@ -5078,7 +5084,7 @@ target="_blank" rel="noopener"
 >
 useRouter
 &lt;/a>
-Hook，用在 &lt;a class="link"
+，用在 &lt;a class="link"
 href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
 target="_blank" rel="noopener"
 >

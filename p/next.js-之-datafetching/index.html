@@ -114,8 +114,10 @@ fetch
 </span></span><span class="line"><span class="cl"><span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://...'</span><span class="p">,</span> <span class="p">{</span> <span class="nx">next</span><span class="o">:</span> <span class="p">{</span> <span class="nx">tags</span><span class="o">:</span> <span class="p">[</span><span class="s1">'collection'</span><span class="p">]</span> <span class="p">}</span> <span class="p">});</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><h2 id="orms-或数据库客户端">ORMS 或数据库客户端</h2><p>ORMS（<a class="link" href="https://sequelize.org" target="_blank" rel="noopener">
 Sequelize
-</a>、<a class="link" href="https://www.prisma.io/docs/getting-started/quickstart" target="_blank" rel="noopener">
+</a>、<a class="link" href="https://www.prisma.io" target="_blank" rel="noopener">
 Prisma
+</a>、<a class="link" href="https://orm.drizzle.team/" target="_blank" rel="noopener">
+Drizzle
 </a>等）或数据库客户端（<a class="link" href="https://www.mongodb.com/zh-cn/docs/drivers/node/current/quick-start/download-and-install/#install-the-node.js-driver" target="_blank" rel="noopener">
 mongodb
 </a>等）可以直接用在 <a class="link" href="https://nextjs.org/docs/app/building-your-application/rendering/server-components" target="_blank" rel="noopener">ServerComponents
@@ -821,8 +823,8 @@ useFormState
 </span></span><span class="line"><span class="cl">  <span class="c1">// Delete cookie
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">cookies</span><span class="p">().</span><span class="k">delete</span><span class="p">(</span><span class="s1">'name'</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="routehandlers">RouteHandlers</h2><p>可以使用 Next.js 提供的 <a class="link" href="https://nextjs.org/docs/app/building-your-application/routing/route-handlers" target="_blank" rel="noopener">RouteHandlers
-</a>完成数据请求（做一层转发），避免敏感数据泄露：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="routehandlers">RouteHandlers</h2><p><a class="link" href="https://nextjs.org/docs/app/building-your-application/routing/route-handlers" target="_blank" rel="noopener">RouteHandlers
+</a>可以做数据转发，避免敏感数据泄露：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
