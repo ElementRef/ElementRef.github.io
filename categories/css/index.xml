@@ -5389,7 +5389,7 @@ target="_blank" rel="noopener"
 &lt;p>:focus 默认只能匹配特定的元素：&lt;/p>
 &lt;ol>
 &lt;li>设置了 contenteditable 属性的普通元素；&lt;/li>
-&lt;li>设置了 tabindex 属性的普通元素&lt;/li>
+&lt;li>设置了 tabindex 属性的普通元素；&lt;/li>
 &lt;li>非 disabled 状态的表单元素；&lt;/li>
 &lt;li>包含 href 属性的 a 元素；&lt;/li>
 &lt;li>area、summary 元素。&lt;/li>
@@ -5658,13 +5658,19 @@ target="_blank" rel="noopener"
 &lt;h2 id="minmax-width-与-minmax-height">min/max-width 与 min/max-height&lt;/h2>
 &lt;ol>
 &lt;li>min-* 的初始值是 none，max-* 的初始值是 auto；&lt;/li>
-&lt;li>如果 width &amp;gt; max-width，width 的值会被 max-width 的值覆盖（即使 width 的权重是 !important）；&lt;/li>
+&lt;li>如果 width &amp;gt; max-width，width 的值会被 max-width 的值覆盖（即使 width 的权重是 !important，因为 !important 只解决相同属性的优先级问题）；&lt;/li>
 &lt;li>如果 min-width &amp;gt; max-width，min-width 会覆盖 max-width 的值；&lt;/li>
 &lt;li>对于任意高度元素的展开收起动画，不妨试试 max-height（height:auto 不会触发过渡动画）。&lt;/li>
 &lt;/ol>
 &lt;h2 id="margin">margin&lt;/h2>
 &lt;ol>
-&lt;li>margin 与 padding 百分比值无论是水平方向还是垂直方向都是&lt;strong>相对于宽度&lt;/strong>计算的；&lt;/li>
+&lt;li>margin 与 padding 百分比值无论是水平方向还是垂直方向都是&lt;strong>相对于其&lt;a class="link"
+href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Guides/Display/Containing_block"
+target="_blank" rel="noopener"
+>
+包含块
+&lt;/a>
+宽度&lt;/strong>计算的；&lt;/li>
 &lt;li>块级元素（不包括浮动和绝对定位元素）的上下外边距（margin-top/bottom）有时会合并为单个外边距；
 &lt;ol>
 &lt;li>第一个/最后一个子元素与父元素；&lt;/li>
@@ -5672,8 +5678,14 @@ target="_blank" rel="noopener"
 &lt;li>空的块级元素。&lt;/li>
 &lt;/ol>
 &lt;/li>
-&lt;li>margin 的合并只发生在和当前文档流方向的相&lt;strong>垂直&lt;/strong>的方向上（默认文档流是水平流，可用 writing-mode 改写）；&lt;/li>
-&lt;li>阻止 margin 合并的方法：触发 BFC、设置 border、设置 padding、设置 height。&lt;/li>
+&lt;li>margin 的合并只发生在和当前文档流方向的相&lt;strong>垂直&lt;/strong>的方向上（默认文档流是水平流，可用 &lt;a class="link"
+href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference/Properties/writing-mode"
+target="_blank" rel="noopener"
+>
+writing-mode
+&lt;/a>
+改写）；&lt;/li>
+&lt;li>阻止 margin 合并的方法：触发 BFC、设置 border（border:0 不行）、设置 padding、设置 height。&lt;/li>
 &lt;/ol>
 &lt;h2 id="line-height">line-height&lt;/h2>
 &lt;ol>

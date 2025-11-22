@@ -849,19 +849,17 @@ target="_blank" rel="noopener"
 >
 CSS 变量
 &lt;/a>
-上；其实，这些变量已经被写入到了 ShadowDOM 中，但浏览器还未完全支持 &lt;a class="link"
-href="https://github.com/tailwindlabs/tailwindcss/issues/15005"
-target="_blank" rel="noopener"
->
-ShadowDOM 中的 CSS 自定义属性
-&lt;/a>
-；我们需要&lt;a class="link"
+上；其实，这些变量已经被写入到了 ShadowDOM 中，但未生效：&lt;/p>
+&lt;ol>
+&lt;li>Tailwind CSS 默认会将变量写到 :root 选择器中，但因为样式隔离，:root 在 ShadowDOM 中是不生效的，也没有这个选择器；&lt;/li>
+&lt;li>需要&lt;a class="link"
 href="https://github.com/tailwindlabs/tailwindcss/issues/15005#issuecomment-2737489813"
 target="_blank" rel="noopener"
 >
 将这些 CSS 变量挂载到全局
 &lt;/a>
-：&lt;/p>
+：&lt;/li>
+&lt;/ol>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
