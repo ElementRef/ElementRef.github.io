@@ -2810,19 +2810,19 @@ target="_blank" rel="noopener"
 &lt;li>Web 端 &amp;amp; JS-SDK 插件端（仅交互差别）；&lt;/li>
 &lt;li>Admin 管理端中的智能体调试以及提示词对比。&lt;/li>
 &lt;/ul>
-&lt;p>&lt;img src="https://ElementRef.github.io/p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%B8%80/ai.web.png"
+&lt;p>&lt;img src="https://ElementRef.github.io/p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%B8%80/ai.sdk.png"
 width="1915"
-height="1075"
-srcset="https://ElementRef.github.io/p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%B8%80/ai.web_hu9900128593854838171.png 480w, https://ElementRef.github.io/p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%B8%80/ai.web_hu2887561524651910195.png 1024w"
+height="1074"
+srcset="https://ElementRef.github.io/p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%B8%80/ai.sdk_hu16446031288834576891.png 480w, https://ElementRef.github.io/p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%B8%80/ai.sdk_hu12074412435234648201.png 1024w"
 class="gallery-image"
 data-flex-grow="178"
 data-flex-basis="427px"
 loading="lazy"
 >
-&lt;img src="https://ElementRef.github.io/p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%B8%80/ai.sdk.png"
+&lt;img src="https://ElementRef.github.io/p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%B8%80/ai.web.png"
 width="1915"
-height="1074"
-srcset="https://ElementRef.github.io/p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%B8%80/ai.sdk_hu16446031288834576891.png 480w, https://ElementRef.github.io/p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%B8%80/ai.sdk_hu12074412435234648201.png 1024w"
+height="1075"
+srcset="https://ElementRef.github.io/p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%B8%80/ai.web_hu9900128593854838171.png 480w, https://ElementRef.github.io/p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%B8%80/ai.web_hu2887561524651910195.png 1024w"
 class="gallery-image"
 data-flex-grow="178"
 data-flex-basis="427px"
@@ -3073,7 +3073,13 @@ target="_blank" rel="noopener"
 &lt;strong>条件导出&lt;/strong>
 &lt;/a>
 ，别的 package 就能直接引用到当前最新的代码；&lt;/li>
-&lt;li>支持 publishConfig，可以在发布时自动修改 package 的导出配置，方便将 package 发布到私有 npm；&lt;/li>
+&lt;li>支持 &lt;a class="link"
+href="https://pnpm.io/zh/package_json#publishconfig"
+target="_blank" rel="noopener"
+>
+publishConfig
+&lt;/a>
+，可以在发布时自动替换 package 的条件导出配置，方便将 package 发布到私有 npm；&lt;/li>
 &lt;li>通过 --filter、--recursive、--workspace-root，很方便对 package 进行管理；&lt;/li>
 &lt;li>仅暴露 package.json 中声明的依赖，杜绝幽灵依赖问题。&lt;/li>
 &lt;/ul>
@@ -3754,7 +3760,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>但是，这个配置在子包中，没有了图标类名提示；并且如果 SVG 由更新，需要重启 Vite。&lt;/p>
+&lt;/div>&lt;p>但是，这个配置在子包中，没有了图标类名提示（在非 monorepo 中正常）；并且如果 SVG 更新，需要重启 Vite。&lt;/p>
 &lt;p>除此之外，还有两个辅助函数：&lt;/p>
 &lt;ul>
 &lt;li>&lt;a class="link"
@@ -3786,13 +3792,19 @@ tailwind-merge
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="kr">type&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">ClassValue&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;clsx&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="nx">clsx&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;clsx&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">twMerge&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;tailwind-merge&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// https://dev.to/sheraz4194/mastering-tailwind-css-overcome-styling-conflicts-with-tailwind-merge-and-clsx-1dol
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">cn&lt;/span>&lt;span class="p">(...&lt;/span>&lt;span class="nx">inputs&lt;/span>: &lt;span class="kt">ClassValue&lt;/span>&lt;span class="p">[])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">cn&lt;/span>&lt;span class="p">(...&lt;/span>&lt;span class="nx">inputs&lt;/span>: &lt;span class="kt">ClassValue&lt;/span>&lt;span class="p">[])&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">twMerge&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">clsx&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">inputs&lt;/span>&lt;span class="p">));&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>有了 cn 工具函数，可以提升 JSX 类名的书写体验：&lt;/p>
+&lt;/div>&lt;p>有了 &lt;a class="link"
+href="https://dev.to/sheraz4194/mastering-tailwind-css-overcome-styling-conflicts-with-tailwind-merge-and-clsx-1dol"
+target="_blank" rel="noopener"
+>
+cn
+&lt;/a>
+工具函数，可以提升 JSX 类名的书写体验：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
