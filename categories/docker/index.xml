@@ -542,7 +542,7 @@ loading="lazy"
 >
 &lt;/p>
 &lt;h3 id="镜像加载流程">镜像加载流程&lt;/h3>
-&lt;p>Docker 使用&lt;strong>联合文件系统&lt;/strong>，UnionFS 是一种分层、轻量、高性能的文件系统；他支持「对文件系统的修改」作为一次「提交」来层层叠加，同时将不同目录挂载到同一个虚拟文件系统下。&lt;/p>
+&lt;p>Docker 使用&lt;strong>联合文件系统&lt;/strong>，UnionFS 是一种分层、轻量、高性能的文件系统；他支持&lt;strong>对文件系统的修改&lt;/strong>作为一次&lt;strong>提交&lt;/strong>来层层叠加，同时将不同目录挂载到同一个虚拟文件系统下。&lt;/p>
 &lt;p>UnionFS 是 Docker 镜像的根基，镜像可以通过分层来进行继承，基于基础镜像制作各种具体的应用镜像。每次可以同时加载多个文件系统；这样，最终的镜像会包含所有底层的文件和目录。&lt;/p>
 &lt;p>和 Linux 一样，镜像的最底层是 bootfs，包含了：&lt;/p>
 &lt;ul>

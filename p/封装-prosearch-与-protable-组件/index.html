@@ -63,7 +63,7 @@
 </span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>我们需要实现 submitForm 和 refresh 来提供「查询」和「刷新」功能，并通过 EventEmitter 将相关事件抛出：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span></span></code></pre></td></tr></tbody></table></div></div><p>我们需要实现 submitForm 和 refresh 来提供<strong>查询</strong>和<strong>刷新</strong>功能，并通过 EventEmitter 将相关事件抛出：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -235,7 +235,7 @@
 </span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>这里的「配置」指的是 SearchFormListItem，组件会根据 searchFormList 渲染对应的表单：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span></span></code></pre></td></tr></tbody></table></div></div><p>这里的<strong>配置</strong>指的是 SearchFormListItem，组件会根据 searchFormList 渲染对应的表单：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -565,7 +565,7 @@
 </span></span><span class="line"><span class="cl">    <span class="p">...</span><span class="nx">params</span>
 </span></span><span class="line"><span class="cl">  <span class="p">});</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>当依赖项变动时，我们可以根据依赖项上的 _reset 列表执行一些动作，比如重置「依赖于当前表单值的表单」的值；重新拉取「依赖于当前表单值的表单」options：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span></span></code></pre></td></tr></tbody></table></div></div><p>当依赖项变动时，我们可以根据依赖项上的 _reset 列表执行一些动作，比如重置<strong>依赖于当前表单值的表单</strong>的值；重新拉取<strong>依赖于当前表单值的表单</strong> options：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
