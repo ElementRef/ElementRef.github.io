@@ -620,7 +620,7 @@ pnpm patch
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="nx">shadowSheet</span><span class="p">.</span><span class="nx">insertRule</span><span class="p">(</span><span class="sb">`:host { </span><span class="si">${</span><span class="nx">properties</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">'; '</span><span class="p">)</span><span class="si">}</span><span class="sb"> }`</span><span class="p">);</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>这样，颜色就能正常渲染了。</p><p>尝试修改 JSX 代码中的类名，发现新的样式并没有生效；起初以为是 Tailwind CSS 配置的问题，但是手动刷新页面后，样式生效了；说明新的 CSS 没能热更新到页面。</p><p>因为 ./index.css?inline 被 Vite 当做静态资源（永远不变的资源）了，HMR 会略过对静态资源的检查；所以，需要借助 <a class="link" href="https://cn.vite.dev/guide/api-hmr#hot-accept-cb" target="_blank" rel="noopener">import.meta.hot.accept
+</span></span></code></pre></td></tr></tbody></table></div></div><p>这样，颜色就能正常渲染了；这也说明了，CSS 变量是可以穿透到 ShadowDOM 内部的。</p><p>尝试修改 JSX 代码中的类名，发现新的样式并没有生效；起初以为是 Tailwind CSS 配置的问题，但是手动刷新页面后，样式生效了；说明新的 CSS 没能热更新到页面。</p><p>因为 ./index.css?inline 被 Vite 当做静态资源（永远不变的资源）了，HMR 会略过对静态资源的检查；所以，需要借助 <a class="link" href="https://cn.vite.dev/guide/api-hmr#hot-accept-cb" target="_blank" rel="noopener">import.meta.hot.accept
 </a>对 CSS 做单独处理：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
@@ -1942,7 +1942,7 @@ getBoundingClientRect
 </span></span><span class="line"><span class="cl">    <span class="nx">left</span>
 </span></span><span class="line"><span class="cl">  <span class="p">};</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="文本发送">文本发送</h3><p>选中网页上的一段文字，如果鼠标点击了页面的任何一个地方，选区会消失；我们知道，指针事件的触发顺序是 pointerdown -&gt; pointerup -&gt; click；在 useSelection 中，每次 pointerdown 时，重置了选区（这也是浏览器的默认行为）；所以，需要在选区消失之前，将选区内容发送出去；也就是说我们只能通过 ContextMenu 内部的 pointerdown 发送内容，click 有点太迟了：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="文本发送">文本发送</h3><p>选中网页上的一段文字，如果鼠标点击了页面的任何一个地方，选区会消失；我们知道，指针事件的触发顺序是 pointerdown -&gt; pointerup -&gt; click；在 useSelection 中，每次 pointerdown 之后，重置了选区（这也是浏览器的默认行为，所有事件冒泡结束之后，有一个特殊的<strong>默认行为阶段</strong>）；所以，需要在选区消失之前，将选区内容发送出去；也就是说我们只能通过 ContextMenu 内部的 pointerdown 发送内容，click 有点太迟了：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
