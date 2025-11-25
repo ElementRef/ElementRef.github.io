@@ -751,6 +751,7 @@ unicode-bidi:normal
 &lt;/li>
 &lt;/ul>
 &lt;p>跨域通信的复杂性，是放弃 iframe 的原因之一；如果采用 iframe，还需要再单独部署一个前端项目，还是算了。&lt;/p>
+&lt;p>还有就是，iframe 中发起的请求的 Origin 不是&lt;strong>宿主&lt;/strong>的，这就给接口权限验证增加了难度。&lt;/p>
 &lt;h3 id="样式加载">样式加载&lt;/h3>
 &lt;p>由于组件渲染在 ShadowDOM，为了使样式不被 ShadowDOM 隔离；需要将 CSS 注入到 ShadowDOM 内部，这需要用到 Vite 对&lt;a class="link"
 href="https://cn.vite.dev/guide/assets#importing-asset-as-url"
