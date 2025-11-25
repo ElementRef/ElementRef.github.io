@@ -703,7 +703,9 @@ no-new
 </span></span><span class="line"><span class="cl">  <span class="c1">// 导出 icon
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">return</span> <span class="nx">iconSet</span><span class="p">.</span><span class="kr">export</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>但是，这个配置在子包中，没有了图标类名提示（在非 monorepo 中正常）；并且如果 SVG 更新，需要重启 Vite。</p><p>除此之外，还有两个辅助函数：</p><ul><li><a class="link" href="https://github.com/lukeed/clsx" target="_blank" rel="noopener">clsx
+</span></span></code></pre></td></tr></tbody></table></div></div><p>但是，这个配置在子包中，没有了图标类名提示（在非 monorepo 中正常）；并且如果 SVG 更新，需要<a class="link" href="https://github.com/antfu/vite-plugin-restart" target="_blank" rel="noopener">
+重启
+</a>Vite。</p><p>除此之外，还有两个辅助函数：</p><ul><li><a class="link" href="https://github.com/lukeed/clsx" target="_blank" rel="noopener">clsx
 </a>，提升基于条件的 JSX 类名书写体验；</li><li><a class="link" href="https://github.com/dcastil/tailwind-merge" target="_blank" rel="noopener">tailwind-merge
 </a>，解决 Tailwind CSS 类名合并优先级问题。</li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
