@@ -4896,7 +4896,11 @@ use-context-selector
 &lt;li>onCustomEvent 是一个 AI 向宿主发送消息时，通知宿主的渠道，宿主可以拿到事件类型、事件载荷；返回值决定了 AI 面板的显示｜隐藏；&lt;/li>
 &lt;li>onEntranceInterceptor 是一个拦截器，当宿主尝试调用 SDK 的能力时，SDK 内部都会先调用拦截器；通过返回值，判断宿主当前是否允许使用 AI；&lt;/li>
 &lt;li>userInfo 和 toolContext 都会在 SDK 内部转换成函数的形式；每次向 AI 提问时，都会作为 SSE 的 payload 的一部分；&lt;/li>
-&lt;li>senderPlaceholder、title、entranceButton 是用来自定义 SDK 的 UI 的，entranceButton 通过 dangerouslySetInnerHTML 渲染，并经过了 DOMPurify 净化；&lt;/li>
+&lt;li>senderPlaceholder、title、entranceButton 是用来自定义 SDK 的 UI 的，entranceButton 通过 dangerouslySetInnerHTML 渲染，并经过了 DOMPurify 净化：
+&lt;ul>
+&lt;li>如果要最大化自定义 entranceButton，entranceButton 应由&lt;strong>宿主&lt;/strong>实现，通过 SDK 暴露的方法调用 SDK 的功能；SDK 隐藏自带的入口。&lt;/li>
+&lt;/ul>
+&lt;/li>
 &lt;li>renderContext 是 SDK 实例，不需要宿主提供；React 将向 renderContext 绑定一些方法，这样宿主通过 SDK 实例，可以调用内部方法。&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;div class="chroma">

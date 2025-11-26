@@ -5939,6 +5939,21 @@ writing-mode
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;img style="display: block;margin: 0 auto;width: 70%;" src="bfc.png"/>
+&lt;p>注意：&lt;/p>
+&lt;ul>
+&lt;li>clear:both 也能阻止浮动元素的父级塌陷，但不是触发了 BFC，而是在浮动元素最后放置了一个块级元素；&lt;/li>
+&lt;li>border 也能阻止 margin 合并，但不是触发了 BFC，而是&lt;strong>物理隔断&lt;/strong>两个 margin；&lt;/li>
+&lt;li>层级上下文不会创建 BFC；一个是三维的概念，而 BFC 是个二维的概念；&lt;/li>
+&lt;li>以下属性既可以创建层级上下文又可以创建 BFC：
+&lt;ul>
+&lt;li>contain:paint；&lt;/li>
+&lt;li>filter；&lt;/li>
+&lt;li>perspective；&lt;/li>
+&lt;li>position:fixed/sticky；&lt;/li>
+&lt;li>transform。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
 &lt;h2 id="overflow">overflow&lt;/h2>
 &lt;p>overflow 原本的作用指定了块容器元素的内容溢出时是否需要裁剪，“BFC”只是其衍生出来的特性，“剪裁”才是其本职工作；当子元素内容超出容器宽度高度限制的时候，剪裁的边界是 border-box 的内边缘，而非 padding-box 的内边缘。&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
