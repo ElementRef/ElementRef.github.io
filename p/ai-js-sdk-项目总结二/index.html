@@ -1226,7 +1226,7 @@ pnpm patch
 </span></span><span class="line"><span class="cl">    <span class="nx">isProcessing</span>
 </span></span><span class="line"><span class="cl">  <span class="p">};</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>这里有一个细节，我们需要获取请求头中的一个自定义属性（cosec-request-id），当报错时，需要展示给用户；但是在<strong>跨域</strong>的情况下，仅会暴露<a class="link" href="https://developer.mozilla.org/zh-CN/docs/Glossary/CORS-safelisted_response_header" target="_blank" rel="noopener">
+</span></span></code></pre></td></tr></tbody></table></div></div><p>这里有一个细节，我们需要获取响应头中的一个自定义属性（cosec-request-id），当报错时，需要作为 ReauestID 展示给用户；但是在<strong>跨域</strong>的情况下，仅会暴露<a class="link" href="https://developer.mozilla.org/zh-CN/docs/Glossary/CORS-safelisted_response_header" target="_blank" rel="noopener">
 白名单
 </a>内的头部信息；需要服务端添加 <a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Reference/Headers/Access-Control-Expose-Headers" target="_blank" rel="noopener">Access-Control-Expose-Headers
 </a>响应头。</p><h2 id="markdown-渲染">Markdown 渲染</h2><p>AI 返回的消息是 md 格式，需要借助第三方渲染插件；这里使用的是 <a class="link" href="https://github.com/remarkjs/react-markdown" target="_blank" rel="noopener">react-markdown
