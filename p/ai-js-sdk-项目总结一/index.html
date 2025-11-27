@@ -204,7 +204,7 @@ Vite
 </span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">tailwind</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">js</span>            <span class="n">Tailwind</span> <span class="n">CSS</span> <span class="err">配置</span>
 </span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">pnpm</span><span class="o">-</span><span class="n">lock</span><span class="o">.</span><span class="n">yaml</span>                <span class="err">依赖锁</span>
 </span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">pnpm</span><span class="o">-</span><span class="n">workspace</span><span class="o">.</span><span class="n">yaml</span>           <span class="n">workspace</span> <span class="err">配置：</span><span class="n">packages</span><span class="err">、</span><span class="n">patchedDependencies</span><span class="err">、</span><span class="n">catalog</span> <span class="err">等</span>
-</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">package</span><span class="o">.</span><span class="n">json</span>                  <span class="n">npm</span><span class="o">-</span><span class="n">script</span><span class="err">、</span><span class="n">git</span><span class="o">-</span><span class="n">hooks</span><span class="err">、</span><span class="n">lint</span><span class="o">-</span><span class="n">staged</span><span class="err">、</span><span class="n">engines</span><span class="err">、</span><span class="n">cli</span><span class="o">-</span><span class="n">dependencies</span> <span class="err">等</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">package</span><span class="o">.</span><span class="n">json</span>                  <span class="n">npm</span><span class="o">-</span><span class="n">scripts</span><span class="err">、</span><span class="n">git</span><span class="o">-</span><span class="n">hooks</span><span class="err">、</span><span class="n">lint</span><span class="o">-</span><span class="n">staged</span><span class="err">、</span><span class="n">engines</span><span class="err">、</span><span class="n">cli</span><span class="o">-</span><span class="n">dependencies</span> <span class="err">等</span>
 </span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">tsconfig</span><span class="o">.</span><span class="n">json</span>                 <span class="n">TypeScript</span> <span class="err">配置</span>
 </span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">turbo</span><span class="o">.</span><span class="n">json</span>                    <span class="n">Turborepo</span> <span class="err">配置</span>
 </span></span><span class="line"><span class="cl"><span class="err">└──</span> <span class="n">README</span><span class="o">.</span><span class="n">md</span>                     <span class="err">说明文件</span>
@@ -478,7 +478,7 @@ no-new
 </span></span><span class="line"><span class="cl"><span class="p">);</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>在后续的新项目中尝试了 Biome，决定以后<strong>弃用 ESLint</strong>；ESLint 太慢了，而且很容易损坏大文件。</p><h3 id="stylelintconfigjs">stylelint.config.js</h3><p>Stylelint 需要使用 <a class="link" href="https://github.com/43081j/postcss-lit" target="_blank" rel="noopener">postcss-lit
 </a>才能完成对 js(x)、ts(x) 的正确解析；需要使用 <a class="link" href="https://github.com/zhilidali/stylelint-config-tailwindcss" target="_blank" rel="noopener">stylelint-config-tailwindcss
-</a>完成对 Tailwind CSS 的支持。</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</a>完成对 Tailwind CSS 的支持：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -872,11 +872,11 @@ Tailwind CSS IntelliSense
 </span></span><span class="line"><span class="cl">    <span class="c1"># 启用 gzip 压缩的最低 HTTP 协议版本</span>
 </span></span><span class="line"><span class="cl">    <span class="n">gzip_http_version</span> <span class="mf">1.1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="turbojson">turbo.json</h3><p>Turborepo 可以帮助我们：</p><ul><li>并行执行 npm-script；不然，每次打包都需要单独执行每个子包的命令；</li><li>通过 dependsOn 字段，调整命令执行<a class="link" href="https://turborepo.com/docs/crafting-your-repository/configuring-tasks#running-tasks-in-the-right-order" target="_blank" rel="noopener">
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="turbojson">turbo.json</h3><p>Turborepo 可以帮助我们：</p><ul><li>并行执行 npm-scripts；不然，每次打包都需要单独执行每个子包的命令；</li><li>通过 dependsOn 字段，调整命令执行<a class="link" href="https://turborepo.com/docs/crafting-your-repository/configuring-tasks#running-tasks-in-the-right-order" target="_blank" rel="noopener">
 顺序
 </a>，先编译<strong>依赖</strong>，再编译<strong>应用</strong>；</li><li>利用<a class="link" href="https://turborepo.com/docs/crafting-your-repository/caching#remote-caching" target="_blank" rel="noopener">
 缓存
-</a>，跳过未修改子包的命令执行；</li></ul><p>有一点令人费解：outputs 属性值，是相对于<strong>子包根目录</strong>的；不是<strong>turbo.json 所在的目录</strong>，也不是<strong>项目根目录</strong>；下面是非完整配置：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</a>，跳过未修改子包的命令执行。</li></ul><p>有一点令人费解：outputs 属性值，是相对于<strong>子包根目录</strong>的；不是<strong>turbo.json 所在的目录</strong>，也不是<strong>项目根目录</strong>；下面是非完整配置：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -932,7 +932,7 @@ Tailwind CSS IntelliSense
 </span></span><span class="line"><span class="cl">    <span class="c1">// ...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>这样，只需要在项目根目录配置好 npm-script，就可以很方便的执行子包中的命令：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span></span></code></pre></td></tr></tbody></table></div></div><p>这样，只需要在项目根目录配置好 npm-scripts，就可以很方便的执行子包中的命令：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4

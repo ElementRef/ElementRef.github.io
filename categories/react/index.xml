@@ -3211,7 +3211,7 @@ Vite
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">├──&lt;/span> &lt;span class="n">tailwind&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">config&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">js&lt;/span> &lt;span class="n">Tailwind&lt;/span> &lt;span class="n">CSS&lt;/span> &lt;span class="err">配置&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">├──&lt;/span> &lt;span class="n">pnpm&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">lock&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">yaml&lt;/span> &lt;span class="err">依赖锁&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">├──&lt;/span> &lt;span class="n">pnpm&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">workspace&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">yaml&lt;/span> &lt;span class="n">workspace&lt;/span> &lt;span class="err">配置：&lt;/span>&lt;span class="n">packages&lt;/span>&lt;span class="err">、&lt;/span>&lt;span class="n">patchedDependencies&lt;/span>&lt;span class="err">、&lt;/span>&lt;span class="n">catalog&lt;/span> &lt;span class="err">等&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">├──&lt;/span> &lt;span class="n">package&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">json&lt;/span> &lt;span class="n">npm&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">script&lt;/span>&lt;span class="err">、&lt;/span>&lt;span class="n">git&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">hooks&lt;/span>&lt;span class="err">、&lt;/span>&lt;span class="n">lint&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">staged&lt;/span>&lt;span class="err">、&lt;/span>&lt;span class="n">engines&lt;/span>&lt;span class="err">、&lt;/span>&lt;span class="n">cli&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">dependencies&lt;/span> &lt;span class="err">等&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">├──&lt;/span> &lt;span class="n">package&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">json&lt;/span> &lt;span class="n">npm&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">scripts&lt;/span>&lt;span class="err">、&lt;/span>&lt;span class="n">git&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">hooks&lt;/span>&lt;span class="err">、&lt;/span>&lt;span class="n">lint&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">staged&lt;/span>&lt;span class="err">、&lt;/span>&lt;span class="n">engines&lt;/span>&lt;span class="err">、&lt;/span>&lt;span class="n">cli&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">dependencies&lt;/span> &lt;span class="err">等&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">├──&lt;/span> &lt;span class="n">tsconfig&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">json&lt;/span> &lt;span class="n">TypeScript&lt;/span> &lt;span class="err">配置&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">├──&lt;/span> &lt;span class="n">turbo&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">json&lt;/span> &lt;span class="n">Turborepo&lt;/span> &lt;span class="err">配置&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">└──&lt;/span> &lt;span class="n">README&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">md&lt;/span> &lt;span class="err">说明文件&lt;/span>
@@ -3638,7 +3638,7 @@ target="_blank" rel="noopener"
 >
 stylelint-config-tailwindcss
 &lt;/a>
-完成对 Tailwind CSS 的支持。&lt;/p>
+完成对 Tailwind CSS 的支持：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -4160,7 +4160,7 @@ target="_blank" rel="noopener"
 &lt;/div>&lt;h3 id="turbojson">turbo.json&lt;/h3>
 &lt;p>Turborepo 可以帮助我们：&lt;/p>
 &lt;ul>
-&lt;li>并行执行 npm-script；不然，每次打包都需要单独执行每个子包的命令；&lt;/li>
+&lt;li>并行执行 npm-scripts；不然，每次打包都需要单独执行每个子包的命令；&lt;/li>
 &lt;li>通过 dependsOn 字段，调整命令执行&lt;a class="link"
 href="https://turborepo.com/docs/crafting-your-repository/configuring-tasks#running-tasks-in-the-right-order"
 target="_blank" rel="noopener"
@@ -4174,7 +4174,7 @@ target="_blank" rel="noopener"
 >
 缓存
 &lt;/a>
-，跳过未修改子包的命令执行；&lt;/li>
+，跳过未修改子包的命令执行。&lt;/li>
 &lt;/ul>
 &lt;p>有一点令人费解：outputs 属性值，是相对于&lt;strong>子包根目录&lt;/strong>的；不是&lt;strong>turbo.json 所在的目录&lt;/strong>，也不是&lt;strong>项目根目录&lt;/strong>；下面是非完整配置：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -4239,7 +4239,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>这样，只需要在项目根目录配置好 npm-script，就可以很方便的执行子包中的命令：&lt;/p>
+&lt;/div>&lt;p>这样，只需要在项目根目录配置好 npm-scripts，就可以很方便的执行子包中的命令：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
