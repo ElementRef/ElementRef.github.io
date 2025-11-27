@@ -862,7 +862,7 @@ CSS 变量
 &lt;/a>
 上；其实，这些变量已经被写入到了 ShadowDOM 中，但未生效：&lt;/p>
 &lt;ol>
-&lt;li>Tailwind CSS 默认会将变量写到 :root 选择器中，但因为样式隔离，:root 在 ShadowDOM 中是不生效的，也没有这个选择器；&lt;/li>
+&lt;li>Tailwind CSS 默认会将变量写到 :root 选择器中，但在 ShadowDOM 中没有这个选择器，只有 :host；&lt;/li>
 &lt;li>需要&lt;a class="link"
 href="https://github.com/tailwindlabs/tailwindcss/issues/15005#issuecomment-2737489813"
 target="_blank" rel="noopener"
