@@ -537,6 +537,14 @@
 </span><span class="lnt">26
 </span><span class="lnt">27
 </span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 处理表单之间的依赖关系
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">dependence</span><span class="o">?</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{};</span>
@@ -555,13 +563,21 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">currentDependence</span><span class="p">.</span><span class="nx">_reset</span> <span class="o">=</span> <span class="p">[</span><span class="nx">item</span><span class="p">.</span><span class="nx">formControlName</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * this.searchParams.echoParams 是一个公共方法
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 用来从 URL 中获取数据
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">params</span><span class="p">[</span><span class="nx">currentDependence</span><span class="p">.</span><span class="nx">formControlName</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">searchParams</span><span class="p">.</span><span class="nx">echoParams</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">currentDependence</span><span class="p">.</span><span class="nx">formControlName</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">currentDependence</span><span class="p">.</span><span class="nx">isNumber</span>
 </span></span><span class="line"><span class="cl">    <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">// 获取 options 数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">this</span><span class="p">[</span><span class="sb">`get</span><span class="si">${</span><span class="nx">item</span><span class="p">.</span><span class="kr">type</span><span class="si">}</span><span class="sb">`</span><span class="p">]</span><span class="o">?</span><span class="p">.({</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * 获取 options 数据（params 是查询参数）
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * item.type 会比较令人迷惑，它可以是普通的表单类型：date-picker、input...
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * 但在这里，它和业务产生了关联：SelectOrgId、SelectMainstayId...
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">[</span><span class="sb">`get</span><span class="si">${</span><span class="nx">item</span><span class="p">.</span><span class="kr">type</span><span class="si">}</span><span class="sb">`</span><span class="p">]</span><span class="o">?</span><span class="p">.({</span>
 </span></span><span class="line"><span class="cl">    <span class="p">...</span><span class="nx">params</span>
 </span></span><span class="line"><span class="cl">  <span class="p">});</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
