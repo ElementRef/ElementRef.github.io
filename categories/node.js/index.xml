@@ -247,8 +247,8 @@ loading="lazy"
 &lt;/p>
 &lt;p>Scavenge 的缺点是只能使用堆内存中的一半，但在时间效率上有优异的表现。&lt;/p>
 &lt;p>当一个对象经过多次复制依然存活时，它将会被认为是生命周期较长的对象；这种对象随后会被移动到老生代中，采用新的算法进行管理；对象从新生代中移动到老生代中的过程称为晋升。对象晋升的条件主要有两个：一个是对象是否经历过 Scavenge 回收，一个是 To 空间的内存占用比超过限制。&lt;/p>
-&lt;img style="width: 48%;" src="promote-one.png"/>
-&lt;img style="width: 48%;" src="promote-two.png"/>
+&lt;img alt="Scavenge 回收" title="Scavenge 回收" style="width: 48%;" src="promote-one.png"/>
+&lt;img alt="To 空间" title="To 空间" style="width: 48%;" src="promote-two.png"/>
 &lt;p>对于老生代中的对象，采用标记清除算法；在标记阶段遍历堆中的所有对象，并标记活着的对象，在随后的清除阶段中，只清除没有被标记的对象。Scavenge 中只复制活着的对象，而 Mark-Sweep 只清理死亡对象；活对象在新生代中只占较小部分，死对象在老生代中只占较小部分。&lt;/p>
 &lt;p>&lt;img src="https://ElementRef.github.io/p/%E9%87%8D%E8%AF%BB%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA-node.js/mark-sweep.png"
 width="2098"
@@ -1417,8 +1417,8 @@ loading="lazy"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;img style="display: inline-block;margin: 0 auto;width: 49%;" src="9-5.png">
-&lt;img style="display: inline-block;margin: 0 auto;width: 49%;" src="9-6.png">
+&lt;/div>&lt;img alt="句柄" title="句柄" style="display: inline-block;margin: 0 auto;width: 49%;" src="9-5.png">
+&lt;img alt="句柄" title="句柄" style="display: inline-block;margin: 0 auto;width: 49%;" src="9-6.png">
 &lt;p>子进程对象 send 方法可以发送的句柄类型包括如下几种：&lt;/p>
 &lt;ul>
 &lt;li>net.Socket TCP 套接字；&lt;/li>
@@ -1742,7 +1742,7 @@ target="_blank" rel="noopener"
 &lt;/a>
 &lt;/li>
 &lt;/ul></description></item><item><title>NodeSchool 之 LearnYouNode · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/nodeschool-%E4%B9%8B-learnyounode/</link><pubDate>Thu, 26 Dec 2019 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/nodeschool-%E4%B9%8B-learnyounode/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/node.png" alt="NodeSchool 之 LearnYouNode" />&lt;p>跟着教程走还是比较顺畅的，虽然没有面面俱到，但是入门还是可以的。&lt;/p>
-&lt;img src="index.png" style="display: block;margin: 0 auto;width: 100%;"/>
+&lt;img alt="NodeSchool" title="NodeSchool" src="index.png" style="display: block;margin: 0 auto;width: 100%;"/>
 &lt;h2 id="婴儿学步">婴儿学步&lt;/h2>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">

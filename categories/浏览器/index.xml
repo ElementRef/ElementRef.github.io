@@ -20,7 +20,7 @@
 &lt;li>GPU 进程：最多一个，用于 3D 绘制；&lt;/li>
 &lt;li>浏览器渲染进程（内核）：默认每个 Tab 页一个进程，互不影响，控制页面渲染，脚本执行，事件处理等（有时候会优化，如多个空白 Tab 会合并成一个进程）。&lt;/li>
 &lt;/ul>
-&lt;img src="task-mamager.png" style="display: block;margin: 0 auto;width: 80%;"/>
+&lt;img alt="任务管理器" title="任务管理器" src="task-mamager.png" style="display: block;margin: 0 auto;width: 80%;"/>
 &lt;h3 id="二多线程的浏览器内核">二、多线程的浏览器内核&lt;/h3>
 &lt;p>每一个 Tab 页可以看作是浏览器内核进程，然后这个进程是多线程的，它有几大类子线程：&lt;/p>
 &lt;ul>
@@ -282,7 +282,7 @@ dns-prefetch
 &lt;li>协商缓存（304）时，浏览器会向服务端发起 HTTP 请求，然后服务端告诉浏览器文件未改变，让浏览器使用本地缓存。&lt;/li>
 &lt;/ul>
 &lt;p>对于协商缓存，强制刷新可以使得缓存无效；对于强缓存，在未过期时，必须更新资源路径才能发起新的请求。各大缓存头部的整体关系如下图：&lt;/p>
-&lt;img src="http-cache.png" style="display: block;margin: 0 auto;width: 80%;"/>
+&lt;img alt="HTTP 缓存" title="HTTP 缓存" src="http-cache.png" style="display: block;margin: 0 auto;width: 80%;"/>
 &lt;h2 id="解析页面流程">解析页面流程&lt;/h2>
 &lt;p>浏览器内核拿到内容后，渲染步骤大致可以分为以下几步：&lt;/p>
 &lt;ol>
@@ -293,27 +293,27 @@ dns-prefetch
 &lt;li>绘制 render 树（paint），绘制页面像素信息；&lt;/li>
 &lt;li>浏览器会将各层的信息发送给 GPU，GPU 会将各层合成（composite），显示在屏幕上。&lt;/li>
 &lt;/ol>
-&lt;img src="browser-rending.png" style="display: block;margin: 0 auto;width: 80%;"/>
+&lt;img alt="渲染步骤" title="渲染步骤" src="browser-rending.png" style="display: block;margin: 0 auto;width: 80%;"/>
 &lt;h3 id="一解析-html构建-dom-树">一、解析 HTML，构建 DOM 树&lt;/h3>
 &lt;p>这个过程可以简述如下：bytes → characters → tokens → nodes → DOM；列举一些重点过程：&lt;/p>
-&lt;img src="parse-html.png" style="display: block;margin: 0 auto;width: 100%;"/>
+&lt;img alt="解析 HTML" title="解析 HTML" src="parse-html.png" style="display: block;margin: 0 auto;width: 100%;"/>
 &lt;ol>
 &lt;li>Conversion 转换：浏览器将获得的 HTML 内容（bytes）基于他的编码转换为单个字符；&lt;/li>
 &lt;li>Tokenizing 分词：浏览器按照 HTML 规范标准将这些字符转换为不同的标记 token；每个 token 都有自己独特的含义以及规则集；&lt;/li>
 &lt;li>Lexing 词法分析：分词的结果是得到一堆的 token，此时把他们转换为对象，这些对象分别定义他们的属性和规则；&lt;/li>
 &lt;li>DOM 构建：因为 HTML 标记定义的就是不同标签之间的关系，这个关系就像是一个树形结构一样。&lt;/li>
 &lt;/ol>
-&lt;img src="parse-dom.png" style="display: block;margin: 0 auto;width: 80%;"/>
+&lt;img alt="构建 DOM 树" title="构建 DOM 树" src="parse-dom.png" style="display: block;margin: 0 auto;width: 80%;"/>
 &lt;h3 id="二生成-css-规则">二、生成 CSS 规则&lt;/h3>
 &lt;p>CSS 规则树的生成也是类似；简述为：bytes → characters → tokens → nodes → CSSOM。&lt;/p>
-&lt;img src="parse-cssom.png" style="display: block;margin: 0 auto;width: 80%;"/>
+&lt;img alt="CSS 规则树" title="CSS 规则树" src="parse-cssom.png" style="display: block;margin: 0 auto;width: 80%;"/>
 &lt;h3 id="三构建渲染树">三、构建渲染树&lt;/h3>
 &lt;p>当 DOM 树和 CSSOM 都有了后，就要开始构建渲染树了；一般来说，渲染树和 DOM 树相对应的，但不是严格意义上的一一对应；有一些不可见的 DOM 元素不会插入到渲染树中，如 head 这种不可见的标签或者 display:none 等。&lt;/p>
-&lt;img src="parse-rendertree.png" style="display: block;margin: 0 auto;width: 100%;"/>
+&lt;img alt="渲染树" title="渲染树" src="parse-rendertree.png" style="display: block;margin: 0 auto;width: 100%;"/>
 &lt;p>注意：DOM 解析和 CSS 解析是两个并行的进程，所以 CSS 加载不会阻塞 DOM 树的解析；RenderTree 是依赖于 DOMTree 和 CSSOMTree 的，所以无论 DOMTree 是否已经完成，它都必须等待到 CSSOMTree 构建完成，即 CSS 加载完成（或 CSS 加载失败）后，才能开始渲染。&lt;/p>
 &lt;h3 id="四渲染">四、渲染&lt;/h3>
 &lt;p>有了渲染树，接下来就是开始渲染，基本流程如下：&lt;/p>
-&lt;img src="rending-process.jpg" style="display: block;margin: 0 auto;width: 80%;"/>
+&lt;img alt="开始渲染" title="开始渲染" src="rending-process.jpg" style="display: block;margin: 0 auto;width: 80%;"/>
 &lt;p>图中的线与箭头代表通过 JS 动态修改了 DOM 或 CSS，导致了 Reflow 或 Repaint：&lt;/p>
 &lt;ul>
 &lt;li>Reflow（Layout），即回流；一般意味着元素的内容、结构、位置或尺寸发生了变化，需要重新计算样式和渲染树；&lt;/li>
@@ -580,14 +580,14 @@ target="_blank" rel="noopener"
 &lt;li>这样依次执行（最终都会回到全局执行上下文）。&lt;/li>
 &lt;/ol>
 &lt;p>如果程序执行完毕，被弹出执行栈，然后又没有被引用（没有形成闭包），那么这个函数中用到的内存就会被垃圾处理器自动回收。&lt;/p>
-&lt;img src="context-stack.png" style="display: block;margin: 0 auto;width: 70%;"/>
+&lt;img alt="执行栈" title="执行栈" src="context-stack.png" style="display: block;margin: 0 auto;width: 70%;"/>
 &lt;p>每一个执行上下文，都有三个重要属性：&lt;/p>
 &lt;ul>
 &lt;li>变量对象（Variable Object）；&lt;/li>
 &lt;li>作用域链（Scope Chain）；&lt;/li>
 &lt;li>this。&lt;/li>
 &lt;/ul>
-&lt;img src="execution-context.png" style="display: block;margin: 0 auto;width: 50%;"/>
+&lt;img alt="执行上下文" title="执行上下文" src="execution-context.png" style="display: block;margin: 0 auto;width: 50%;"/>
 &lt;h4 id="2-变量对象与活动对象">2. 变量对象与活动对象&lt;/h4>
 &lt;p>只有全局上下文的变量对象允许通过 VO 的属性名称来间接访问（因为在全局上下文里，全局对象自身就是变量对象）；AO（Activation Object），当函数被调用者激活，AO 就被创建了。&lt;/p>
 &lt;ul>
@@ -596,7 +596,7 @@ target="_blank" rel="noopener"
 &lt;/ul>
 &lt;h4 id="3-作用域链">3. 作用域链&lt;/h4>
 &lt;p>它是执行上下文中的一个属性，原理和原型链很相似，作用很重要，譬如流程简述：在函数上下文中，查找一个变量 foo；如果在函数的 VO 中找到了，就直接使用；否则去它的父级作用域链中找；如果父级中没找到，继续往上找；直到全局上下文中也没找到就报错。&lt;/p>
-&lt;img src="scope-chain.png" style="display: block;margin: 0 auto;width: 30%;"/>
+&lt;img alt="作用域链" title="作用域链" src="scope-chain.png" style="display: block;margin: 0 auto;width: 30%;"/>
 &lt;h4 id="4-this-指针">4. this 指针&lt;/h4>
 &lt;p>this 是执行上下文环境的一个属性，而不是某个变量对象的属性：&lt;/p>
 &lt;ul>

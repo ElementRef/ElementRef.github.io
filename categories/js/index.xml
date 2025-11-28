@@ -4554,7 +4554,7 @@ JS 中随机排列数组顺序（经典洗牌算法）和数组的排序方法
 &lt;h2 id="事件驱动">事件驱动&lt;/h2>
 &lt;p>所谓的事件驱动，就是将一切抽象为事件。I/O 操作完成是一个事件，用户点击是一个事件，一个图片加载完成是一个事件；当这些事件发生时对应的代码逻辑就会&lt;strong>进入&lt;/strong>任务队列，等待 JS 线程读取。&lt;/p>
 &lt;p>事件驱动的实现过程主要靠“事件循环”完成；JS 线程不停的从任务队列里读取事件。如果事件有关联的处理函数，就执行函数。&lt;/p>
-&lt;img style="display: block;margin: 0 auto;width: 50%;" src="event-loop.svg"/>
+&lt;img alt="堆和栈" title="堆和栈" style="display: block;margin: 0 auto;width: 50%;" src="event-loop.svg"/>
 &lt;p>JS 线程运行时，产生堆 Heap 和栈 Stack，栈中的代码调用各种接口，在“任务队列”中加入各种事件；只要栈中的代码执行完毕，JS 线程就会去读取“任务队列”，依次执行那些事件所对应的回调函数。&lt;/p>
 &lt;h2 id="任务队列">任务队列&lt;/h2>
 &lt;p>JS 运行时包含了多个待处理任务的队列（宏任务队列 TaskQueue、微任务队列 JobQueue 等）；每一个任务都关联着一个用以处理这个任务的函数。&lt;/p>

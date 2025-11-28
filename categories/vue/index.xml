@@ -15824,7 +15824,7 @@ Renderless Components In Vue.js
 &lt;li>不需要像 useEffect 和 useMemo 那样需要正确的设置依赖，Vue 会自动的追踪。&lt;/li>
 &lt;/ol>
 &lt;h2 id="值传递与引用传递">值传递与引用传递&lt;/h2>
-&lt;img style="display: block;margin: 0 auto;width: 70%;" src="reference.gif"/>
+&lt;img alt="值传递与引用传递" title="值传递与引用传递" style="display: block;margin: 0 auto;width: 70%;" src="reference.gif"/>
 &lt;p>新的 API 非常依赖引用传递，这样 Vue 才能及时捕获数据变化；这也是为什么 toRef 会将普通类型数据包装成对象的原因；reactive 包装的对象在解构时为了保持响应性需要用 toRefs 包装也是这个原因。&lt;/p>
 &lt;h2 id="setup">setup&lt;/h2>
 &lt;p>作为 Composition API 在 Vue 组件中的入口；它会在组件实例被创建，props 完成初始化之后调用；和模板一起使用时，返回的对象会自动合并到渲染上下文中。&lt;/p>
