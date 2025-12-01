@@ -926,15 +926,15 @@ target="_blank" rel="noopener"
 &lt;p>尝试修改 JSX 代码中的类名，发现新的样式并没有生效；起初以为是 Tailwind CSS 配置的问题，但是手动刷新页面后，样式生效了；说明新的 CSS 没能热更新到页面：&lt;/p>
 &lt;ul>
 &lt;li>import &amp;lsquo;./index.css&amp;rsquo; Vite 将 CSS 视为&lt;strong>模块依赖&lt;/strong>；CSS 将被编译并注入到 HTML；&lt;/li>
-&lt;li>import innerStyle from &amp;lsquo;./index.css?inline&amp;rsquo; Vite 将 CSS 视为&lt;strong>静态资源&lt;/strong>，但不知道如何使用资源。&lt;/li>
+&lt;li>import innerStyle from &amp;lsquo;./index.css?inline&amp;rsquo; Vite 将 CSS 视为&lt;strong>静态资源&lt;/strong>。&lt;/li>
 &lt;/ul>
-&lt;p>此时，需要借助 &lt;a class="link"
+&lt;p>此时，Vite 是知道 ./index.css?inline 有更新的，但是不知道如何&lt;strong>应用更新&lt;/strong>，毕竟 CSS 不再是一个模块依赖了；需要借助 &lt;a class="link"
 href="https://cn.vite.dev/guide/api-hmr#hot-accept-cb"
 target="_blank" rel="noopener"
 >
 import.meta.hot.accept
 &lt;/a>
-对 CSS 做单独处理；告知 Vite 在 CSS 更新时，如何应用更新：&lt;/p>
+告知 Vite 在 CSS 更新时，如何应用更新：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
