@@ -800,6 +800,7 @@ Tailwind CSS IntelliSense
 </span><span class="lnt">24
 </span><span class="lnt">25
 </span><span class="lnt">26
+</span><span class="lnt">27
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">server {
 </span></span><span class="line"><span class="cl">    listen  80;
 </span></span><span class="line"><span class="cl">    server_name localhost;
@@ -820,6 +821,7 @@ Tailwind CSS IntelliSense
 </span></span><span class="line"><span class="cl">    location /sdk/ {
 </span></span><span class="line"><span class="cl">        alias /usr/share/nginx/html/sdk/;
 </span></span><span class="line"><span class="cl">        add_header Access-Control-Allow-Origin *;
+</span></span><span class="line"><span class="cl">        add_header Access-Control-Allow-Methods GET;
 </span></span><span class="line"><span class="cl">        # add_header Cache-Control "no-cache, no-store, must-revalidate";
 </span></span><span class="line"><span class="cl">        # add_header Pragma "no-cache";
 </span></span><span class="line"><span class="cl">        # add_header Expires "0";
@@ -1536,9 +1538,11 @@ Zustand
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
+</span><span class="lnt">17
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">loadSDKJS</span> <span class="o">=</span> <span class="p">(</span><span class="nx">src</span><span class="p">,</span> <span class="nx">onLoaded</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">window</span><span class="o">?</span><span class="p">.</span><span class="nx">Example</span><span class="o">?</span><span class="p">.</span><span class="nx">ChatSdk</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">scriptEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'script'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">scriptEle</span><span class="p">.</span><span class="nx">crossorigin</span> <span class="o">=</span> <span class="s1">'anonymous'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">scriptEle</span><span class="p">.</span><span class="kr">type</span> <span class="o">=</span> <span class="s1">'module'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">scriptEle</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">src</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">scriptEle</span><span class="p">);</span>
