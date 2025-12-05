@@ -3222,7 +3222,7 @@
 </span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">job</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">[</span><span class="nx">flushIndex</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">job</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 将 job 放到 try...catch 里执行
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">callWithErrorHandling</span><span class="p">(</span><span class="nx">job</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">ErrorCodes</span><span class="p">.</span><span class="nx">SCHEDULER</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">callWithErrorHandling</span><span class="p">(</span><span class="nx">job</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">ErrorCodes</span><span class="p">.</span><span class="nx">SCHEDULER</span><span class="p">)</span><span class="err">;</span>
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
