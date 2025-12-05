@@ -5035,9 +5035,9 @@ use-context-selector
 &lt;ol>
 &lt;li>在第三方宿主环境使用 ESM 格式的包，是不明智的：
 &lt;ol>
-&lt;li>crossorigin 作用对于 type=&amp;ldquo;module&amp;rdquo; 没那么大；&lt;/li>
-&lt;li>受同源策略限制，且限制比普通脚本更严格；&lt;/li>
-&lt;li>type=&amp;ldquo;module&amp;rdquo; 的 SRI 配置难度较大。&lt;/li>
+&lt;li>type=&amp;ldquo;module&amp;rdquo; 脚本必须通过 CORS 校验；&lt;/li>
+&lt;li>必须添加 crossorigin=&amp;ldquo;anonymous&amp;rdquo;；&lt;/li>
+&lt;li>脚本服务器必须添加 CORS 响应头。&lt;/li>
 &lt;/ol>
 &lt;/li>
 &lt;li>体积较大，打包 UMD 格式时，会将所有依赖打包为一个 JS：
