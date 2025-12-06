@@ -16,7 +16,7 @@ Popover 与 Tooltip 在写业务的时候，发现 Popover 与 Tooltip 的使用
 <svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><circle cx="16" cy="12" r="2"></circle><rect x="2" y="6" width="20" height="12" rx="6"></rect></svg>
 <span>深色</span></li></div></ol></aside><main class="full-width main"><article class="has-image main-article"><header class="article-header"><div class="article-image"><a href="/p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%BA%8C/"><img src="/img/cover/react.webp" alt="AI JS-SDK 项目总结（二）" fetchpriority="high" decoding="async" width="1200" height="720" jampack-sized="true"></a></div><div class="article-details"><header class="article-category"><a href="/categories/react/">React</a></header><div class="article-title-wrapper"><h2 class="article-title"><a href="/p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%BA%8C/">AI JS-SDK 项目总结（二）</a></h2></div><footer class="article-time"><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"></path><circle cx="18" cy="18" r="4"></circle><path d="M15 3v4"></path><path d="M7 3v4"></path><path d="M3 11h16"></path><path d="M18 16.496V18l1 1"></path></svg>
 <time class="article-time--published">Aug 02, 2025</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-<time class="article-time--reading">阅读时长：22 分钟</time></div></footer></div></header><section class="article-content"><h2 id="antdesign">AntDesign</h2><p>因为存在 Admin 端，并且<strong>对话组件</strong>需要同时在 Admin|Web|JS-SDK 三个环境中使用；索性使用 AntDesign 作为组件库，恰好 AntDesign 也为 AI 应用推出了 <a class="link" href="https://x.ant.design/" target="_blank" rel="noopener">AntDesign X
+<time class="article-time--reading">阅读时长：23 分钟</time></div></footer></div></header><section class="article-content"><h2 id="antdesign">AntDesign</h2><p>因为存在 Admin 端，并且<strong>对话组件</strong>需要同时在 Admin|Web|JS-SDK 三个环境中使用；索性使用 AntDesign 作为组件库，恰好 AntDesign 也为 AI 应用推出了 <a class="link" href="https://x.ant.design/" target="_blank" rel="noopener">AntDesign X
 </a>。</p><h3 id="popover-与-tooltip">Popover 与 Tooltip</h3><p>在写业务的时候，发现 Popover 与 Tooltip 的使用界限很模糊；<a class="link" href="https://www.leadwhite.net/tooltip/" target="_blank" rel="noopener">
 《文字提示与气泡弹窗有什么区别？怎么用？》
 </a>解答了我的疑惑：</p><ul><li>Tooltip 是从标签的 title 属性衍生过来的，用来展示<strong>完整信息</strong>，内部不包含用户交互；</li><li>Popover 起源于<strong>漫画对话框</strong>，在 macOS Lion 成为系统控件：<ul><li>可以承载更多的图文信息，提供详情预览的功能；</li><li>内部包含简单的用户交互，功能向<strong>弹窗</strong>靠拢。</li></ul></li></ul><h3 id="usemessage">useMessage</h3><p>AntDesign 的 <a class="link" href="https://ant.design/components/message-cn" target="_blank" rel="noopener">message
@@ -473,7 +473,8 @@ pnpm patch
 </span><span class="lnt">2
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">patchedDependencies</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">'@ant-design/x'</span><span class="p">:</span><span class="w"> </span><span class="l">patches/@ant-design__x.patch</span><span class="w">
-</span></span></span></code></pre></td></tr></tbody></table></div></div><h3 id="rolldown">Rolldown</h3><p>在后续项目中，尝试了 rolldown-vite，发现 AntDesign 的语言配置<a class="link" href="https://github.com/rolldown/rolldown/issues/6655" target="_blank" rel="noopener">
+</span></span></span></code></pre></td></tr></tbody></table></div></div><h3 id="rolldown">Rolldown</h3><p>在后续项目中，尝试了 <a class="link" href="https://github.com/vitejs/rolldown-vite" target="_blank" rel="noopener">rolldown-vite
+</a>，发现 AntDesign 的语言配置<a class="link" href="https://github.com/rolldown/rolldown/issues/6655" target="_blank" rel="noopener">
 失效
 </a>了，需要修改 Vite 配置：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -491,11 +492,11 @@ pnpm patch
 </span></span><span class="line"><span class="cl">    <span class="c1">// ...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">};</span>
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>原因是 rolldown-vite 为了统一开发与编译阶段的<a class="link" href="https://github.com/vitejs/rolldown-vite/issues/490" target="_blank" rel="noopener">
+</span></span></code></pre></td></tr></tbody></table></div></div><p>原因是 CJS 没有<strong>默认导出</strong>的概念，当在 ESM 导入 CJS 模块时：</p><ul><li>import * as cjsModule from ‘cjs-module’ 时，cjsModule.default === module.exports；</li><li>import cjsModule from ‘cjs-module’ 时，cjsModule === module.exports；</li><li>没有<strong>命名导出</strong>，import { foo } from ‘cjs-module’ 需要工具链处理。</li></ul><p>rolldown-vite 为了统一开发与编译阶段的<a class="link" href="https://github.com/vitejs/rolldown-vite/issues/490" target="_blank" rel="noopener">
 模块解析行为
 </a>，对 CJS 的默认导出处理做出了<a class="link" href="https://rolldown.rs/in-depth/bundling-cjs#ambiguous-default-import-from-cjs-modules" target="_blank" rel="noopener">
 调整
-</a>，antd/locale/zh_CN 是通过 module.exports 导出的：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</a>；antd/locale/zh_CN 是通过 module.exports 导出的：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -506,7 +507,16 @@ pnpm patch
 </span><span class="lnt"> 9
 </span><span class="lnt">10
 </span><span class="lnt">11
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// node_modules/antd/locale/zh_CN.js
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 在项目中使用时
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="nx">zhCN</span> <span class="nx">from</span> <span class="s1">'antd/locale/zh_CN'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// node_modules/antd/locale/zh_CN.js
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../lib/locale/zh_CN'</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// node_modules/antd/lib/locale/zh_CN.js
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">exports</span><span class="p">,</span> <span class="s1">'__esModule'</span><span class="p">,</span> <span class="p">{</span>
@@ -516,6 +526,11 @@ pnpm patch
 </span></span><span class="line"><span class="cl">  <span class="nx">locale</span><span class="o">:</span> <span class="s1">'zh-cn'</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// ...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * exports.__esModule 为 true，rolldown-vite 会去 module.exports 找 localeValues
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 而 localeValues 被绑定到了 module.exports.default
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 模块找不到，语言配置 zhCN 失效
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
 </span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">_default</span> <span class="o">=</span> <span class="p">(</span><span class="nx">exports</span><span class="p">.</span><span class="k">default</span> <span class="o">=</span> <span class="nx">localeValues</span><span class="p">);</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>虽然在 antd/lib/locale/zh_CN 中，exports.__esModule 的值为 true；此时默认导出是 module.exports，但用户实际使用的是 antd/locale/zh_CN；此时 rolldown-vite 会去 module.exports.default 上查找 zh_CN 模块，但未找到；导致了语言配置<a class="link" href="https://www.doubao.com/thread/w5999ff7c72b65da5" target="_blank" rel="noopener">
 不起作用

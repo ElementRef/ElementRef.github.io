@@ -575,7 +575,13 @@ pnpm patch
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h3 id="rolldown">Rolldown&lt;/h3>
-&lt;p>在后续项目中，尝试了 rolldown-vite，发现 AntDesign 的语言配置&lt;a class="link"
+&lt;p>在后续项目中，尝试了 &lt;a class="link"
+href="https://github.com/vitejs/rolldown-vite"
+target="_blank" rel="noopener"
+>
+rolldown-vite
+&lt;/a>
+，发现 AntDesign 的语言配置&lt;a class="link"
 href="https://github.com/rolldown/rolldown/issues/6655"
 target="_blank" rel="noopener"
 >
@@ -604,7 +610,13 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>原因是 rolldown-vite 为了统一开发与编译阶段的&lt;a class="link"
+&lt;/div>&lt;p>原因是 CJS 没有&lt;strong>默认导出&lt;/strong>的概念，当在 ESM 导入 CJS 模块时：&lt;/p>
+&lt;ul>
+&lt;li>import * as cjsModule from &amp;lsquo;cjs-module&amp;rsquo; 时，cjsModule.default === module.exports；&lt;/li>
+&lt;li>import cjsModule from &amp;lsquo;cjs-module&amp;rsquo; 时，cjsModule === module.exports；&lt;/li>
+&lt;li>没有&lt;strong>命名导出&lt;/strong>，import { foo } from &amp;lsquo;cjs-module&amp;rsquo; 需要工具链处理。&lt;/li>
+&lt;/ul>
+&lt;p>rolldown-vite 为了统一开发与编译阶段的&lt;a class="link"
 href="https://github.com/vitejs/rolldown-vite/issues/490"
 target="_blank" rel="noopener"
 >
@@ -616,7 +628,7 @@ target="_blank" rel="noopener"
 >
 调整
 &lt;/a>
-，antd/locale/zh_CN 是通过 module.exports 导出的：&lt;/p>
+；antd/locale/zh_CN 是通过 module.exports 导出的：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -630,9 +642,18 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;span class="lnt"> 9
 &lt;/span>&lt;span class="lnt">10
 &lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// node_modules/antd/locale/zh_CN.js
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 在项目中使用时
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="nx">zhCN&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s1">&amp;#39;antd/locale/zh_CN&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// node_modules/antd/locale/zh_CN.js
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">module&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">exports&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;../lib/locale/zh_CN&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// node_modules/antd/lib/locale/zh_CN.js
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">defineProperty&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">exports&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;__esModule&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>
@@ -642,6 +663,11 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">locale&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;zh-cn&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// ...
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * exports.__esModule 为 true，rolldown-vite 会去 module.exports 找 localeValues
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 而 localeValues 被绑定到了 module.exports.default
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 模块找不到，语言配置 zhCN 失效
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">var&lt;/span> &lt;span class="nx">_default&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">exports&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">default&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">localeValues&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
