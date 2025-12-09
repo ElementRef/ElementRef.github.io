@@ -731,14 +731,25 @@ target="_blank" rel="noopener"
 >
 all:initial
 &lt;/a>
-，用来将元素的所有属性都更改为它们的初始值，忽略继承值（unset 会保留继承）；&lt;/li>
+，用来将元素的所有属性都更改为它们的初始值（不是浏览器默认值 UserAgentStyleSheet），忽略继承值（unset 会保留继承）；&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference/Properties/contain"
 target="_blank" rel="noopener"
 >
 contain:strict
 &lt;/a>
-，表示 ShadowDOM 尽可能独立于文档树的其余部分，内部的重绘不影响宿主性能；&lt;/li>
+，表示 ShadowDOM 尽可能独立于文档树的其余部分，内部的重绘不影响宿主性能：
+&lt;ul>
+&lt;li>等同于 contain:size layout paint style，尺寸隔离、布局隔离、绘制隔离、样式隔离：
+&lt;ul>
+&lt;li>size，元素内部内容的尺寸变化，不会影响其外部父级或兄弟元素的布局；&lt;/li>
+&lt;li>layout，元素内部的任何 DOM 变动，不会触发元素外部的重新布局；&lt;/li>
+&lt;li>paint，保证元素内部的内容不会在元素的边界框之外绘制或溢出；&lt;/li>
+&lt;li>style，保证某些 CSS 属性及其副作用不会传播到该元素之外。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference/Properties/direction"
 target="_blank" rel="noopener"
