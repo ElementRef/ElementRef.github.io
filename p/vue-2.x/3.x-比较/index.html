@@ -1191,7 +1191,7 @@
 </span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="o">===</span> <span class="s1">'__v_raw'</span> <span class="o">&amp;&amp;</span> <span class="nx">receiver</span> <span class="o">===</span> <span class="nx">reactiveMap</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">target</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">          <span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm">           * 如果 key 是 __v_raw
-</span></span></span><span class="line"><span class="cl"><span class="cm">           * receiver 是 target 的代理副本
+</span></span></span><span class="line"><span class="cl"><span class="cm">           * receiver 是 target 的代理副本 this
 </span></span></span><span class="line"><span class="cl"><span class="cm">           */</span>
 </span></span><span class="line"><span class="cl">          <span class="k">return</span> <span class="nx">target</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
