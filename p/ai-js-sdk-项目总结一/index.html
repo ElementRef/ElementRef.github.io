@@ -18,7 +18,7 @@
 <img src="/p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%B8%80/ai.admin.webp" width="1916" height="1075" srcset="/p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%B8%80/ai.admin_hu12181920454560598798.png 480w, /p/ai-js-sdk-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E4%B8%80/ai.admin_hu6346343709861102356.png 1024w" alt="Admin" class="gallery-image" data-flex-grow="178" data-flex-basis="427px" fetchpriority="high" decoding="async"></p><p>这三个任务都指向了一个功能模块 - AI 对话框；这篇文章就对开发过程做一下简单的记录。</p><h2 id="项目搭建">项目搭建</h2><p>为了最大化的组件复用，提高开发效率，决定基于 <a class="link" href="https://pnpm.io/zh/workspaces" target="_blank" rel="noopener">pnpm workspace
 </a>、<a class="link" href="https://turborepo.com/docs" target="_blank" rel="noopener">
 Turborepo
-</a>、<a class="link" href="https://cn.vite.dev/guide/" target="_blank" rel="noopener">
+</a>、<a class="link" href="https://cn.vite.dev/guide" target="_blank" rel="noopener">
 Vite
 </a>搭建一个 monorepo 项目。</p><h3 id="目录结构">目录结构</h3><ul><li>主应用 Admin 和 Web 放在 apps 目录下，每个应用都是完整的 Vite 项目；</li><li>JS-SDK、shared 公共代码和 types 类型共享等子包，放在 packages 目录下；</li><li>SVG 图标文件放在根目录的 icons 文件夹下，根据<strong>应用名称｜子包名称｜是否保留颜色</strong>进行分类；</li><li>env 文件、Lint 配置、Deploy 配置、Turborepo 配置、workspace 配置、Tailwind CSS 配置等，均放在根目录下；</li><li>Admin、Web、JS-SDK、Shared 都有自己独立的 tsconfig.json，根目录 tsconfig.json 仅匹配根目录的 *.config.ts|js。</li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -292,7 +292,7 @@ PNPM Catalog Lens
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>此时，commitlint 将 scope 限制为 admin、web、js-sdk、shared、types、root。</p><h3 id="eslintconfigjs">eslint.config.js</h3><p>ESLint 规则使用的是 <a class="link" href="https://eslint-config.antfu.me/" target="_blank" rel="noopener">@antfu/eslint-config
+</span></span></code></pre></td></tr></tbody></table></div></div><p>此时，commitlint 将 scope 限制为 admin、web、js-sdk、shared、types、root。</p><h3 id="eslintconfigjs">eslint.config.js</h3><p>ESLint 规则使用的是 <a class="link" href="https://eslint-config.antfu.me" target="_blank" rel="noopener">@antfu/eslint-config
 </a>，规则非常全面；我做了一些规则修改：</p><ul><li>使用 <a class="link" href="https://github.com/JoshuaKGoldberg/eslint-plugin-package-json" target="_blank" rel="noopener">eslint-plugin-package-json
 </a>搭配 <a class="link" href="https://github.com/keithamus/sort-package-json" target="_blank" rel="noopener">sort-package-json
 </a>对 package.json 做格式化，同时关闭 <a class="link" href="https://ota-meshi.github.io/eslint-plugin-jsonc/rules/sort-keys.html" target="_blank" rel="noopener">jsonc/sort-keys
@@ -1158,7 +1158,7 @@ Tailwind CSS IntelliSense
 </span></span><span class="line"><span class="cl">  <span class="p">},</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">treeshake</span>: <span class="kt">true</span>
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="状态管理">状态管理</h2><p>项目中使用了两个状态库，<a class="link" href="https://zustand-demo.pmnd.rs/" target="_blank" rel="noopener">
+</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="状态管理">状态管理</h2><p>项目中使用了两个状态库，<a class="link" href="https://zustand-demo.pmnd.rs" target="_blank" rel="noopener">
 Zustand
 </a>和 <a class="link" href="https://github.com/dai-shi/use-context-selector" target="_blank" rel="noopener">use-context-selector
 </a>；Zustand 存放需要<strong>持久化</strong>的状态，包括：快捷指令列表、入口按钮位置、面板展开状态等；context 存放<strong>不能被序列化</strong>的状态，包括：SDK 认证配置、流式调用方法等。</p><p><a class="link" href="https://github.com/dai-shi/use-context-selector" target="_blank" rel="noopener">use-context-selector
