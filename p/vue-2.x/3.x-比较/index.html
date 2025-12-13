@@ -4519,7 +4519,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * 渲染开始时，当 .value 真正被访问，computedValueGetter&nbsp;才被触发
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * 调用 this.effect，getter 副作用运行，track 被调用，依赖被收集
 </span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="err">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_dirty</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_dirty</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 值是通过调用 effect 获得的，缓存在 this._value 上
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">this</span><span class="p">.</span><span class="nx">_value</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">effect</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 当被外界 get 之后，数据不再“脏”了（因为刚刚进行求值，值还是新的）
