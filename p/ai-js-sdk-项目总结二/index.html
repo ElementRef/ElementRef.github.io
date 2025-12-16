@@ -535,7 +535,7 @@ pnpm patch
 </a>建立一个规则列表，并调用 <a class="link" href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/replaceSync" target="_blank" rel="noopener">replaceSync
 </a>完成对规则列表的替换更新（清空旧样式，注入新样式）。</p><p>ShadowRoot 有一个 <a class="link" href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/adoptedStyleSheets" target="_blank" rel="noopener">adoptedStyleSheets
 </a>属性，用来将 <a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/CSSStyleSheet" target="_blank" rel="noopener">CSSStyleSheet
-</a>应用到 ShadowDOM 内部，比在 ShadowDOM 中 append &lt;style/&gt; 更方便高效：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</a>应用到 ShadowDOM 内部，比在 ShadowDOM 中追加 &lt;style/&gt; 更方便高效：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -610,7 +610,7 @@ pnpm patch
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="nx">shadowSheet</span><span class="p">.</span><span class="nx">insertRule</span><span class="p">(</span><span class="sb">`:host { </span><span class="si">${</span><span class="nx">properties</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">'; '</span><span class="p">)</span><span class="si">}</span><span class="sb"> }`</span><span class="p">);</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>这样，颜色就能正常渲染了；这也说明了，CSS 变量是可以穿透到 ShadowDOM 内部的。</p><p>尝试修改 JSX 代码中的类名，发现新的样式并没有生效；起初以为是 Tailwind CSS 配置的问题，但是手动刷新页面后，样式生效了；说明新的 CSS 没能热更新到页面：</p><ul><li>import ‘./index.css’ Vite 将 CSS 视为<strong>模块依赖</strong>；CSS 将被编译并注入到 HTML；</li><li>import innerStyle from ‘./index.css?inline’ Vite 将 CSS 视为<strong>静态资源</strong>。</li></ul><p>此时，Vite 是知道 ./index.css?inline 有更新的，但是不知道如何<strong>应用更新</strong>，毕竟 CSS 不再是一个模块依赖了；需要借助 <a class="link" href="https://cn.vite.dev/guide/api-hmr#hot-accept-cb" target="_blank" rel="noopener">import.meta.hot.accept
+</span></span></code></pre></td></tr></tbody></table></div></div><p>这样，颜色就能正常渲染了；这也说明了，CSS 变量是可以穿透到 ShadowDOM 内部的。</p><p>尝试修改 JSX 代码中的类名，发现新的样式并没有生效；起初以为是 Tailwind CSS 配置的问题，但是手动刷新页面后，样式生效了；说明新的 CSS 没能热更新到页面：</p><ul><li>import ‘./index.css’ 将被视为<strong>模块依赖</strong>；CSS 将被编译并注入到 HTML；</li><li>import innerStyle from ‘./index.css?inline’ 将被视为<strong>静态资源</strong>。</li></ul><p>此时，Vite 是知道 ./index.css?inline 有更新的，但是不知道如何<strong>应用更新</strong>，毕竟 CSS 不再是一个模块依赖了；需要借助 <a class="link" href="https://cn.vite.dev/guide/api-hmr#hot-accept-cb" target="_blank" rel="noopener">import.meta.hot.accept
 </a>告知 Vite 如何应用更新：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
@@ -790,6 +790,8 @@ pnpm patch
 </span><span class="lnt">38
 </span><span class="lnt">39
 </span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">onMessageInner</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span>: <span class="kt">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">content</span>: <span class="kt">string</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span>
@@ -827,7 +829,9 @@ pnpm patch
 </span></span><span class="line"><span class="cl">    <span class="nx">setIsThinking</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">await</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">decoder</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">value</span> <span class="kr">as</span> <span class="kt">any</span> <span class="kr">as</span> <span class="nx">ArrayBuffer</span><span class="p">,</span> <span class="p">{</span> <span class="nx">stream</span>: <span class="kt">true</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">decoder</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">value</span> <span class="kr">as</span> <span class="kt">unknown</span> <span class="kr">as</span> <span class="nx">ArrayBuffer</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">stream</span>: <span class="kt">true</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">onMessageInner</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>这种方式，onMessageInner 接收到的数据有小概率是<strong>不完整的 JSON</strong>，导致<strong>SyntaxError: Unexpected non-whitespace character after JSON at position</strong>报错；后来不得已切换到了 <a class="link" href="https://github.com/Azure/fetch-event-source" target="_blank" rel="noopener">@microsoft/fetch-event-source
@@ -1211,7 +1215,7 @@ pnpm patch
 </span></span><span class="line"><span class="cl">    <span class="nx">isProcessing</span>
 </span></span><span class="line"><span class="cl">  <span class="p">};</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>这里有一个细节，我们需要获取响应头中的一个自定义属性（cosec-request-id），当报错时，需要作为 requestId 展示给用户；但是在<strong>跨域</strong>的情况下，仅会暴露<a class="link" href="https://developer.mozilla.org/zh-CN/docs/Glossary/CORS-safelisted_response_header" target="_blank" rel="noopener">
+</span></span></code></pre></td></tr></tbody></table></div></div><p>这里有一个细节，我们需要获取响应头中的一个自定义 cosec-request-id 头部信息，当报错时，需要作为 requestId 展示给用户；但是在<strong>跨域</strong>的情况下，仅会暴露<a class="link" href="https://developer.mozilla.org/zh-CN/docs/Glossary/CORS-safelisted_response_header" target="_blank" rel="noopener">
 白名单
 </a>内的头部信息；需要服务端添加 <a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Reference/Headers/Access-Control-Expose-Headers" target="_blank" rel="noopener">Access-Control-Expose-Headers
 </a>响应头。</p><h2 id="markdown-渲染">Markdown 渲染</h2><p>AI 返回的消息是 md 格式，需要借助第三方渲染插件；这里使用的是 <a class="link" href="https://github.com/remarkjs/react-markdown" target="_blank" rel="noopener">react-markdown
@@ -1310,7 +1314,8 @@ pnpm patch
 </span></span><span class="line"><span class="cl"><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">{</span><span class="nx">children</span><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">Markdown</span><span class="p">&gt;;</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>这样，图片都被替换为了 AntDesign.Image。</p><h3 id="自定义元素">自定义元素</h3><p>有一个场景，我们和 AI 约定，某种情况下，请返回 &lt;custom-event event-type=‘order’ event-payload=“8186340”&gt;自定义元素&lt;/custom-event&gt;；用户点击之后，可以将 eventType 和 eventPayload 发送给<strong>宿主</strong>，让宿主执行后续逻辑：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span></span></code></pre></td></tr></tbody></table></div></div><p>这样，图片都被替换为了 <a class="link" href="https://ant.design/components/image" target="_blank" rel="noopener">AntDesign.Image
+</a>。</p><h3 id="自定义元素">自定义元素</h3><p>有一个场景，我们和 AI 约定，某种情况下，请返回 &lt;custom-event event-type=‘order’ event-payload=“8186340”&gt;自定义元素&lt;/custom-event&gt;；用户点击之后，可以将 eventType 和 eventPayload 发送给<strong>宿主</strong>，让宿主执行后续逻辑：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1819,6 +1824,11 @@ getBoundingClientRect
 </span><span class="lnt">107
 </span><span class="lnt">108
 </span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">usePosition</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">selectionPosition</span>: <span class="kt">Partial</span><span class="p">&lt;</span><span class="nt">DOMRect</span><span class="p">&gt;,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">contextMenuEle</span>: <span class="kt">RefObject</span><span class="p">&lt;</span><span class="nt">HTMLElement</span><span class="p">&gt;</span>
@@ -1830,7 +1840,8 @@ getBoundingClientRect
 </span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="p">[</span><span class="nx">rootOffsetHeight</span><span class="p">,</span> <span class="nx">setRootOffsetHeight</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="p">[</span><span class="nx">top</span><span class="p">,</span> <span class="nx">setTop</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="p">[</span><span class="nx">left</span><span class="p">,</span> <span class="nx">setLeft</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">useLayoutEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 确认边界
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">useLayoutEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">setRootOffset</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">setRootOffsetHeight</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">offsetHeight</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">showChat</span><span class="p">)</span> <span class="p">{</span>
@@ -1862,17 +1873,21 @@ getBoundingClientRect
 </span></span><span class="line"><span class="cl">      <span class="nx">setLeft</span><span class="p">(</span><span class="o">-</span><span class="mi">999999999999999</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">isLeftSpaceEnough</span> <span class="o">=</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">selectionPosition</span><span class="p">.</span><span class="nx">left</span> <span class="o">-</span> <span class="mi">20</span> <span class="o">&gt;=</span> <span class="nx">contextMenuEle</span><span class="p">.</span><span class="nx">current</span><span class="o">?</span><span class="p">.</span><span class="nx">offsetWidth</span><span class="p">;</span> <span class="c1">// 左侧是否够用
+</span></span><span class="line"><span class="cl">    <span class="c1">// 左侧是否够用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">isLeftSpaceEnough</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">selectionPosition</span><span class="p">.</span><span class="nx">left</span> <span class="o">-</span> <span class="mi">20</span> <span class="o">&gt;=</span> <span class="nx">contextMenuEle</span><span class="p">.</span><span class="nx">current</span><span class="o">?</span><span class="p">.</span><span class="nx">offsetWidth</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 右侧是否够用
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">isRightSpaceEnough</span> <span class="o">=</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">selectionPosition</span><span class="p">.</span><span class="nx">right</span> <span class="o">+</span> <span class="mi">20</span> <span class="o">+</span> <span class="nx">contextMenuEle</span><span class="p">.</span><span class="nx">current</span><span class="o">?</span><span class="p">.</span><span class="nx">offsetWidth</span> <span class="o">&lt;=</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">rootOffsetWidth</span><span class="p">;</span> <span class="c1">// 右侧是否够用
+</span></span><span class="line"><span class="cl">      <span class="nx">rootOffsetWidth</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 顶部是否够用
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">isTopSpaceEnough</span> <span class="o">=</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">selectionPosition</span><span class="p">.</span><span class="nx">top</span> <span class="o">&gt;=</span> <span class="nx">contextMenuEle</span><span class="p">.</span><span class="nx">current</span><span class="o">?</span><span class="p">.</span><span class="nx">offsetHeight</span><span class="p">;</span> <span class="c1">// 顶部是否够用
+</span></span><span class="line"><span class="cl">      <span class="nx">selectionPosition</span><span class="p">.</span><span class="nx">top</span> <span class="o">&gt;=</span> <span class="nx">contextMenuEle</span><span class="p">.</span><span class="nx">current</span><span class="o">?</span><span class="p">.</span><span class="nx">offsetHeight</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 底部是否够用
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">isBottomSpaceEnough</span> <span class="o">=</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">selectionPosition</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">+</span> <span class="nx">contextMenuEle</span><span class="p">.</span><span class="nx">current</span><span class="o">?</span><span class="p">.</span><span class="nx">offsetHeight</span> <span class="o">&lt;=</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">rootOffsetHeight</span><span class="p">;</span> <span class="c1">// 底部是否够用
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">isRightSpaceEnough</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">rootOffsetHeight</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">isRightSpaceEnough</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">setLeft</span><span class="p">(</span><span class="nx">selectionPosition</span><span class="p">.</span><span class="nx">right</span> <span class="o">+</span> <span class="mi">20</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">isTopSpaceEnough</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'右侧空间足够，顶部空间足够，理想情况下'</span><span class="p">);</span>

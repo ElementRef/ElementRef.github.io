@@ -818,7 +818,7 @@ target="_blank" rel="noopener"
 >
 CSSStyleSheet
 &lt;/a>
-应用到 ShadowDOM 内部，比在 ShadowDOM 中 append &amp;lt;style/&amp;gt; 更方便高效：&lt;/p>
+应用到 ShadowDOM 内部，比在 ShadowDOM 中追加 &amp;lt;style/&amp;gt; 更方便高效：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -941,8 +941,8 @@ target="_blank" rel="noopener"
 &lt;/div>&lt;p>这样，颜色就能正常渲染了；这也说明了，CSS 变量是可以穿透到 ShadowDOM 内部的。&lt;/p>
 &lt;p>尝试修改 JSX 代码中的类名，发现新的样式并没有生效；起初以为是 Tailwind CSS 配置的问题，但是手动刷新页面后，样式生效了；说明新的 CSS 没能热更新到页面：&lt;/p>
 &lt;ul>
-&lt;li>import &amp;lsquo;./index.css&amp;rsquo; Vite 将 CSS 视为&lt;strong>模块依赖&lt;/strong>；CSS 将被编译并注入到 HTML；&lt;/li>
-&lt;li>import innerStyle from &amp;lsquo;./index.css?inline&amp;rsquo; Vite 将 CSS 视为&lt;strong>静态资源&lt;/strong>。&lt;/li>
+&lt;li>import &amp;lsquo;./index.css&amp;rsquo; 将被视为&lt;strong>模块依赖&lt;/strong>；CSS 将被编译并注入到 HTML；&lt;/li>
+&lt;li>import innerStyle from &amp;lsquo;./index.css?inline&amp;rsquo; 将被视为&lt;strong>静态资源&lt;/strong>。&lt;/li>
 &lt;/ul>
 &lt;p>此时，Vite 是知道 ./index.css?inline 有更新的，但是不知道如何&lt;strong>应用更新&lt;/strong>，毕竟 CSS 不再是一个模块依赖了；需要借助 &lt;a class="link"
 href="https://cn.vite.dev/guide/api-hmr#hot-accept-cb"
@@ -1229,6 +1229,8 @@ getReader
 &lt;/span>&lt;span class="lnt">38
 &lt;/span>&lt;span class="lnt">39
 &lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">onMessageInner&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">data&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
@@ -1268,7 +1270,9 @@ getReader
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">setIsThinking&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">Promise&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">resolve&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">done&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">text&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">decoder&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">decode&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">value&lt;/span> &lt;span class="kr">as&lt;/span> &lt;span class="kt">any&lt;/span> &lt;span class="kr">as&lt;/span> &lt;span class="nx">ArrayBuffer&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">stream&lt;/span>: &lt;span class="kt">true&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">text&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">decoder&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">decode&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">value&lt;/span> &lt;span class="kr">as&lt;/span> &lt;span class="kt">unknown&lt;/span> &lt;span class="kr">as&lt;/span> &lt;span class="nx">ArrayBuffer&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">stream&lt;/span>: &lt;span class="kt">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">onMessageInner&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">text&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
@@ -1666,7 +1670,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>这里有一个细节，我们需要获取响应头中的一个自定义属性（cosec-request-id），当报错时，需要作为 requestId 展示给用户；但是在&lt;strong>跨域&lt;/strong>的情况下，仅会暴露&lt;a class="link"
+&lt;/div>&lt;p>这里有一个细节，我们需要获取响应头中的一个自定义 cosec-request-id 头部信息，当报错时，需要作为 requestId 展示给用户；但是在&lt;strong>跨域&lt;/strong>的情况下，仅会暴露&lt;a class="link"
 href="https://developer.mozilla.org/zh-CN/docs/Glossary/CORS-safelisted_response_header"
 target="_blank" rel="noopener"
 >
@@ -1878,7 +1882,13 @@ rehype-class-names
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">Markdown&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>这样，图片都被替换为了 AntDesign.Image。&lt;/p>
+&lt;/div>&lt;p>这样，图片都被替换为了 &lt;a class="link"
+href="https://ant.design/components/image"
+target="_blank" rel="noopener"
+>
+AntDesign.Image
+&lt;/a>
+。&lt;/p>
 &lt;h3 id="自定义元素">自定义元素&lt;/h3>
 &lt;p>有一个场景，我们和 AI 约定，某种情况下，请返回 &amp;lt;custom-event event-type=&amp;lsquo;order&amp;rsquo; event-payload=&amp;ldquo;8186340&amp;rdquo;&amp;gt;自定义元素&amp;lt;/custom-event&amp;gt;；用户点击之后，可以将 eventType 和 eventPayload 发送给&lt;strong>宿主&lt;/strong>，让宿主执行后续逻辑：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -2579,6 +2589,11 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;span class="lnt">107
 &lt;/span>&lt;span class="lnt">108
 &lt;/span>&lt;span class="lnt">109
+&lt;/span>&lt;span class="lnt">110
+&lt;/span>&lt;span class="lnt">111
+&lt;/span>&lt;span class="lnt">112
+&lt;/span>&lt;span class="lnt">113
+&lt;/span>&lt;span class="lnt">114
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">usePosition&lt;/span>&lt;span class="p">(&lt;/span>
@@ -2592,7 +2607,8 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="nx">rootOffsetHeight&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">setRootOffsetHeight&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">useState&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="nx">top&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">setTop&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">useState&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="nx">left&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">setLeft&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">useState&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">useLayoutEffect&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 确认边界
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">useLayoutEffect&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">setRootOffset&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">setRootOffsetHeight&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">body&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">offsetHeight&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">showChat&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
@@ -2624,17 +2640,21 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">setLeft&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">999999999999999&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">isLeftSpaceEnough&lt;/span> &lt;span class="o">=&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">selectionPosition&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">left&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">20&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="nx">contextMenuEle&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">current&lt;/span>&lt;span class="o">?&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">offsetWidth&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 左侧是否够用
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 左侧是否够用
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">isLeftSpaceEnough&lt;/span> &lt;span class="o">=&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">selectionPosition&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">left&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">20&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="nx">contextMenuEle&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">current&lt;/span>&lt;span class="o">?&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">offsetWidth&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 右侧是否够用
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">isRightSpaceEnough&lt;/span> &lt;span class="o">=&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">selectionPosition&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">right&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">20&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="nx">contextMenuEle&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">current&lt;/span>&lt;span class="o">?&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">offsetWidth&lt;/span> &lt;span class="o">&amp;lt;=&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">rootOffsetWidth&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 右侧是否够用
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">rootOffsetWidth&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 顶部是否够用
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">isTopSpaceEnough&lt;/span> &lt;span class="o">=&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">selectionPosition&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">top&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="nx">contextMenuEle&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">current&lt;/span>&lt;span class="o">?&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">offsetHeight&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 顶部是否够用
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">selectionPosition&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">top&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="nx">contextMenuEle&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">current&lt;/span>&lt;span class="o">?&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">offsetHeight&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 底部是否够用
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">isBottomSpaceEnough&lt;/span> &lt;span class="o">=&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">selectionPosition&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">bottom&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="nx">contextMenuEle&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">current&lt;/span>&lt;span class="o">?&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">offsetHeight&lt;/span> &lt;span class="o">&amp;lt;=&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">rootOffsetHeight&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 底部是否够用
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">isRightSpaceEnough&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">rootOffsetHeight&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">isRightSpaceEnough&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">setLeft&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">selectionPosition&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">right&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">20&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">isTopSpaceEnough&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;右侧空间足够，顶部空间足够，理想情况下&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
