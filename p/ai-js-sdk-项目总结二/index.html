@@ -164,7 +164,7 @@ Popover 与 Tooltip 在写业务的时候，发现 Popover 与 Tooltip 的使用
 </span></span><span class="line"><span class="cl">  <span class="nx">onClose?</span>: <span class="kt">VoidFunction</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">messageType</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">current</span>: <span class="kt">null</span> <span class="kr">as</span> <span class="kt">unknown</span> <span class="kr">as</span> <span class="nx">MessageType</span> <span class="p">};</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">element</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">current</span>: <span class="kt">null</span> <span class="kr">as</span> <span class="nx">JointContent</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">element</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">current</span>: <span class="kt">null</span> <span class="kr">as</span> <span class="kt">unknown</span> <span class="kr">as</span> <span class="nx">JointContent</span> <span class="p">};</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span> <span class="o">===</span> <span class="s1">'[object Object]'</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 此时 content 为 ReactElement | ArgsProps
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">isValidElement</span><span class="p">(</span><span class="nx">content</span><span class="p">))</span> <span class="p">{</span>
@@ -391,7 +391,7 @@ Popover 与 Tooltip 在写业务的时候，发现 Popover 与 Tooltip 的使用
 </span></span><span class="line"><span class="cl">    <span class="err">业务组件</span>
 </span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">ConfigProvider</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">StyleProvider</span><span class="p">&gt;;</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>这里的 shadowRoot 为 ShadowDOM 本身，appRoot 为 React 挂载的节点。</p><h3 id="tailwind-css">Tailwind CSS</h3><p>项目使用了 Tailwind CSS 4，所以 AntDesign 需要做一些<a class="link" href="https://ant.design/docs/react/compatible-style-cn#%E5%85%BC%E5%AE%B9%E4%B8%89%E6%96%B9%E6%A0%B7%E5%BC%8F%E5%BA%93" target="_blank" rel="noopener">
+</span></span></code></pre></td></tr></tbody></table></div></div><p>这里的 shadowRoot 为 ShadowDOM，appRoot 为 React 挂载的节点。</p><h3 id="tailwind-css">Tailwind CSS</h3><p>项目使用了 Tailwind CSS 4，所以 AntDesign 需要做一些<a class="link" href="https://ant.design/docs/react/compatible-style-cn#%E5%85%BC%E5%AE%B9%E4%B8%89%E6%96%B9%E6%A0%B7%E5%BC%8F%E5%BA%93" target="_blank" rel="noopener">
 调整
 </a>；使用 StyleProvider.layer 降低 AntDesign 样式优先级：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -415,7 +415,7 @@ Popover 与 Tooltip 在写业务的时候，发现 Popover 与 Tooltip 的使用
 </span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">import</span> <span class="s1">'antd/dist/reset.css'</span> <span class="nt">layer</span><span class="o">(</span><span class="nt">reset</span><span class="o">)</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">import</span> <span class="s1">'tailwindcss/theme.css'</span> <span class="nt">layer</span><span class="o">(</span><span class="nt">theme</span><span class="o">)</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">import</span> <span class="s1">'tailwindcss/utilities.css'</span> <span class="nt">layer</span><span class="o">(</span><span class="nt">utilities</span><span class="o">)</span><span class="p">;</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>但是别高兴太早，引入了 AntDesign/X 之后，会遇到 AntDesign 样式丢失<a class="link" href="https://github.com/ant-design/x/issues/559" target="_blank" rel="noopener">
+</span></span></code></pre></td></tr></tbody></table></div></div><p>引入了 AntDesign/X 之后，会遇到 AntDesign 样式丢失<a class="link" href="https://github.com/ant-design/x/issues/559" target="_blank" rel="noopener">
 问题
 </a>，需要使用<a class="link" href="https://pnpm.io/zh/cli/patch" target="_blank" rel="noopener">
 pnpm patch
@@ -496,45 +496,17 @@ pnpm patch
 模块解析行为
 </a>，对 CJS 的默认导出处理做出了<a class="link" href="https://rolldown.rs/in-depth/bundling-cjs#ambiguous-default-import-from-cjs-modules" target="_blank" rel="noopener">
 调整
-</a>；antd/locale/zh_CN 是通过 module.exports 导出的：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
+</a>。在 antd/locale/zh_CN 中，zhCN 是通过 module.exports 导出的：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 在项目中使用时
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="nx">zhCN</span> <span class="nx">from</span> <span class="s1">'antd/locale/zh_CN'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// node_modules/antd/locale/zh_CN.js
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../lib/locale/zh_CN'</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="c1">// node_modules/antd/lib/locale/zh_CN.js
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">exports</span><span class="p">,</span> <span class="s1">'__esModule'</span><span class="p">,</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">value</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">localeValues</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">locale</span><span class="o">:</span> <span class="s1">'zh-cn'</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">// ...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
-</span></span><span class="line"><span class="cl"><span class="cm">/**
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * exports.__esModule 为 true，rolldown-vite 会去 module.exports 找 localeValues
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * 而 localeValues 被绑定到了 module.exports.default
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * 模块找不到，语言配置 zhCN 失效
-</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
-</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">_default</span> <span class="o">=</span> <span class="p">(</span><span class="nx">exports</span><span class="p">.</span><span class="k">default</span> <span class="o">=</span> <span class="nx">localeValues</span><span class="p">);</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>虽然在 antd/lib/locale/zh_CN 中，exports.__esModule 的值为 true；此时默认导出是 module.exports，但用户实际使用的是 antd/locale/zh_CN；此时 rolldown-vite 会去 module.exports.default 上查找 zh_CN 模块，但未找到；导致了语言配置<a class="link" href="https://www.doubao.com/thread/w5999ff7c72b65da5" target="_blank" rel="noopener">
+</span></span></code></pre></td></tr></tbody></table></div></div><p>在默认配置下，只有当 exports.__esModule 为 true 时，module.exports 才会被视为默认导出。此时 rolldown-vite 将去 module.exports.default 上查找 zhCN，但未找到；导致了语言配置<a class="link" href="https://www.doubao.com/thread/w5999ff7c72b65da5" target="_blank" rel="noopener">
 不起作用
-</a>。</p><h2 id="shadowdom-1">ShadowDOM</h2><p>JS-SDK 插件端主要分为四个控件：</p><ol><li>右下角对话框入口按钮；</li><li>划词快捷指令菜单；</li><li>对话历史面板；</li><li>对话框面板。</li></ol><p>当时，和同事讨论了两种方案：iframe 和 ShadowDOM；我们的关注点主要有两个：样式隔离、宿主通信。</p><h3 id="样式隔离">样式隔离</h3><p>在真正接触 ShadowDOM 之前，以为和 iframe 一样，可以对样式实现完全的隔离；实则不然，ShadowDOM 的样式隔离是<strong>单向</strong>的，内部样式影响不到外部；但是，外部可以通过 ShadowRoot 对内部样式实现间接控制。这种控制是通过<strong>样式继承</strong>实现的；比如 HTML 中的表单元素大部分都是 ShadowDOM，但是我们还是可以通过 CSS 改变表单元素内部的<strong>字重、字体、颜色</strong>。</p><p>iframe 的样式隔离更彻底，但是如果要在 iframe 中使用 vw/vh 单位；此时 vw/vh 是基于当前 iframe 自身宽高计算的，而非宿主环境的 viewport。所以，基于 iframe 的布局难度是高于 ShadowDOM 的。</p><p>为了解决 ShadowDOM 的样式隔离问题，需要在 ShadowDOM 中重置样式：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</a>。</p><p>而当 legacy.inconsistentCjsInterop 被置为 true 时，module.exports 将被视为默认导出。</p><h2 id="shadowdom-1">ShadowDOM</h2><p>JS-SDK 插件端主要分为四个控件：</p><ol><li>右下角对话框入口按钮；</li><li>划词快捷指令菜单；</li><li>对话历史面板；</li><li>对话框面板。</li></ol><p>当时，和同事讨论了两种方案：iframe 和 ShadowDOM；我们的关注点主要有两个：样式隔离、宿主通信。</p><h3 id="样式隔离">样式隔离</h3><p>在真正接触 ShadowDOM 之前，以为和 iframe 一样，可以对样式实现完全的隔离；实则不然，ShadowDOM 的样式隔离是<strong>单向</strong>的，内部样式影响不到外部；但是，外部可以通过 ShadowRoot 对内部样式实现间接控制。这种控制是通过<strong>样式继承</strong>实现的；比如 HTML 中的表单元素大部分都是 ShadowDOM，但是我们还是可以通过 CSS 改变表单元素内部的<strong>字重、字体、颜色</strong>。</p><p>iframe 的样式隔离更彻底，但是如果要在 iframe 中使用 vw/vh 单位；此时 vw/vh 是基于当前 iframe 自身宽高计算的，而非宿主环境的 viewport。所以，基于 iframe 的布局难度是高于 ShadowDOM 的。</p><p>为了解决 ShadowDOM 的样式隔离问题，需要在 ShadowDOM 中重置样式：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4

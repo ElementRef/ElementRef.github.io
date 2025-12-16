@@ -195,7 +195,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">onClose?&lt;/span>: &lt;span class="kt">VoidFunction&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">messageType&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">current&lt;/span>: &lt;span class="kt">null&lt;/span> &lt;span class="kr">as&lt;/span> &lt;span class="kt">unknown&lt;/span> &lt;span class="kr">as&lt;/span> &lt;span class="nx">MessageType&lt;/span> &lt;span class="p">};&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">element&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">current&lt;/span>: &lt;span class="kt">null&lt;/span> &lt;span class="kr">as&lt;/span> &lt;span class="nx">JointContent&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">element&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">current&lt;/span>: &lt;span class="kt">null&lt;/span> &lt;span class="kr">as&lt;/span> &lt;span class="kt">unknown&lt;/span> &lt;span class="kr">as&lt;/span> &lt;span class="nx">JointContent&lt;/span> &lt;span class="p">};&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">toString&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">call&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">content&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;[object Object]&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 此时 content 为 ReactElement | ArgsProps
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">isValidElement&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">content&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
@@ -450,7 +450,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">StyleProvider&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>这里的 shadowRoot 为 ShadowDOM 本身，appRoot 为 React 挂载的节点。&lt;/p>
+&lt;/div>&lt;p>这里的 shadowRoot 为 ShadowDOM，appRoot 为 React 挂载的节点。&lt;/p>
 &lt;h3 id="tailwind-css">Tailwind CSS&lt;/h3>
 &lt;p>项目使用了 Tailwind CSS 4，所以 AntDesign 需要做一些&lt;a class="link"
 href="https://ant.design/docs/react/compatible-style-cn#%E5%85%BC%E5%AE%B9%E4%B8%89%E6%96%B9%E6%A0%B7%E5%BC%8F%E5%BA%93"
@@ -494,7 +494,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">@&lt;/span>&lt;span class="k">import&lt;/span> &lt;span class="s1">&amp;#39;tailwindcss/utilities.css&amp;#39;&lt;/span> &lt;span class="nt">layer&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="nt">utilities&lt;/span>&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>但是别高兴太早，引入了 AntDesign/X 之后，会遇到 AntDesign 样式丢失&lt;a class="link"
+&lt;/div>&lt;p>引入了 AntDesign/X 之后，会遇到 AntDesign 样式丢失&lt;a class="link"
 href="https://github.com/ant-design/x/issues/559"
 target="_blank" rel="noopener"
 >
@@ -628,56 +628,29 @@ target="_blank" rel="noopener"
 >
 调整
 &lt;/a>
-；antd/locale/zh_CN 是通过 module.exports 导出的：&lt;/p>
+。在 antd/locale/zh_CN 中，zhCN 是通过 module.exports 导出的：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;span class="lnt">17
-&lt;/span>&lt;span class="lnt">18
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 在项目中使用时
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="nx">zhCN&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s1">&amp;#39;antd/locale/zh_CN&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// node_modules/antd/locale/zh_CN.js
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">module&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">exports&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;../lib/locale/zh_CN&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// node_modules/antd/lib/locale/zh_CN.js
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">defineProperty&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">exports&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;__esModule&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">value&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kc">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">localeValues&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">locale&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;zh-cn&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// ...
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">};&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * exports.__esModule 为 true，rolldown-vite 会去 module.exports 找 localeValues
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 而 localeValues 被绑定到了 module.exports.default
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 模块找不到，语言配置 zhCN 失效
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">var&lt;/span> &lt;span class="nx">_default&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">exports&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">default&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">localeValues&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>虽然在 antd/lib/locale/zh_CN 中，exports.__esModule 的值为 true；此时默认导出是 module.exports，但用户实际使用的是 antd/locale/zh_CN；此时 rolldown-vite 会去 module.exports.default 上查找 zh_CN 模块，但未找到；导致了语言配置&lt;a class="link"
+&lt;/div>&lt;p>在默认配置下，只有当 exports.__esModule 为 true 时，module.exports 才会被视为默认导出。此时 rolldown-vite 将去 module.exports.default 上查找 zhCN，但未找到；导致了语言配置&lt;a class="link"
 href="https://www.doubao.com/thread/w5999ff7c72b65da5"
 target="_blank" rel="noopener"
 >
 不起作用
 &lt;/a>
 。&lt;/p>
+&lt;p>而当 legacy.inconsistentCjsInterop 被置为 true 时，module.exports 将被视为默认导出。&lt;/p>
 &lt;h2 id="shadowdom-1">ShadowDOM&lt;/h2>
 &lt;p>JS-SDK 插件端主要分为四个控件：&lt;/p>
 &lt;ol>
@@ -4705,7 +4678,7 @@ use-context-selector
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>通过构造函数，可以快速创建状态实例：&lt;/p>
+&lt;/div>&lt;p>通过工厂函数，可以快速创建状态实例：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -4742,7 +4715,7 @@ use-context-selector
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>以 useAuthTokenStore 为例，有三种调用方式：&lt;/p>
+&lt;/div>&lt;p>以 useAuthTokenStore 为例，有三种获取状态的方式：&lt;/p>
 &lt;ol>
 &lt;li>useAuthTokenStore()：在组件中访问整个状态；&lt;/li>
 &lt;li>useAuthTokenStore().getState()：获取当前的状态快照，不触发重新渲染；&lt;/li>
@@ -4768,7 +4741,7 @@ use-context-selector
 &lt;/li>
 &lt;li>SDK 输入框 placeholder 能够让宿主环境自定义；
 &lt;ul>
-&lt;li>这算是一种&lt;strong>品牌化&lt;/strong>需求，公司想 SDK 向 SaaS 服务方向发展。&lt;/li>
+&lt;li>这算是一种&lt;strong>品牌化&lt;/strong>需求，公司想 SDK 向 SaaS 服务的方向发展。&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>SDK 入口按钮能够自定义/显隐控制/位置记忆；
@@ -5010,7 +4983,7 @@ use-context-selector
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Example.ChatSdk.onCustomEvent.eventPayload&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">eventPayload&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Example.ChatSdk.onCustomEvent.eventType&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">eventType&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">eventType&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;sendToMySelf&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">sdkInstance&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">sendMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">eventPayload&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">_Example_ChatSdk_&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">sendMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">eventPayload&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">;&lt;/span>
@@ -5088,7 +5061,7 @@ use-context-selector
 &lt;/li>
 &lt;li>体积较大，打包 UMD 格式时，会将所有依赖打包为一个 JS：
 &lt;ol>
-&lt;li>和豆包一样，打包产物有 5MB+，即使 gzip 也有 2MB+，这还是去了 sourcemap 的情况下；&lt;/li>
+&lt;li>和 Coze 一样，打包产物有 5MB+，即使 gzip 也有 2MB+，这还是去了 sourcemap 的情况下；&lt;/li>
 &lt;li>SDK 和宿主的业务逻辑耦合性弱，不需要同宿主环境代码一起加载，拖慢宿主加载速度。&lt;/li>
 &lt;/ol>
 &lt;/li>
