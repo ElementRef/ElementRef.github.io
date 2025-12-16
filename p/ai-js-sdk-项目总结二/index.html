@@ -777,11 +777,7 @@ pnpm patch
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="p">]</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>仅需修改 tsconfig.node.json，让它只验证 Node 环境的配置文件即可：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-patch" data-lang="patch"><span class="line"><span class="cl"><span class="gd">- "include": ["vite.config.ts"]
-</span></span></span><span class="line"><span class="cl"><span class="gd"></span><span class="gi">+ "files": ["vite.config.ts"]
-</span></span></span></code></pre></td></tr></tbody></table></div></div><p>至于 tsc –noEmit 与 tsc –build 差别：</p><ul><li>tsc –noEmit 仅执行类型检查，不编译，不支持 tsconfig.json 中的 references；</li><li>tsc –build 输出编译文件，支持 tsconfig.json 中的 references。</li></ul><h2 id="eventsource">EventSource</h2><p>起初，使用 axios 向后台发起 SSE 请求，并通过 <a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/ReadableStream/getReader" target="_blank" rel="noopener">getReader
+</span></span></code></pre></td></tr></tbody></table></div></div><p>至于 tsc –noEmit 与 tsc –build 差别：</p><ul><li>tsc –noEmit 仅执行类型检查，不编译，不支持 tsconfig.json 中的 references；</li><li>tsc –build 输出编译文件，支持 tsconfig.json 中的 references。</li></ul><h2 id="eventsource">EventSource</h2><p>起初，使用 axios 向后台发起 SSE 请求，并通过 <a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/ReadableStream/getReader" target="_blank" rel="noopener">getReader
 </a>读取数据流：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3

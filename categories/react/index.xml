@@ -1201,17 +1201,6 @@ references
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>仅需修改 tsconfig.node.json，让它只验证 Node 环境的配置文件即可：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-patch" data-lang="patch">&lt;span class="line">&lt;span class="cl">&lt;span class="gd">- &amp;#34;include&amp;#34;: [&amp;#34;vite.config.ts&amp;#34;]
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="gd">&lt;/span>&lt;span class="gi">+ &amp;#34;files&amp;#34;: [&amp;#34;vite.config.ts&amp;#34;]
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
 &lt;/div>&lt;p>至于 tsc &amp;ndash;noEmit 与 tsc &amp;ndash;build 差别：&lt;/p>
 &lt;ul>
 &lt;li>tsc &amp;ndash;noEmit 仅执行类型检查，不编译，不支持 tsconfig.json 中的 references；&lt;/li>
