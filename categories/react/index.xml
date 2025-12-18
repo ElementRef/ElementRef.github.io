@@ -945,7 +945,13 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">shadowSheet&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">insertRule&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sb">`:host { &lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">properties&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">join&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;; &amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb"> }`&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>这样，颜色就能正常渲染了；这也说明了，CSS 变量是可以穿透到 ShadowDOM 内部的。&lt;/p>
+&lt;/div>&lt;p>这样，颜色就能正常渲染了；这也说明了，CSS 变量是可以穿透到 ShadowDOM 内部的。同时，最新版的 Tailwind CSS 似乎已经在解决这个问题了，&lt;a class="link"
+href="https://play.tailwindcss.com"
+target="_blank" rel="noopener"
+>
+Tailwind Play
+&lt;/a>
+编译后的 CSS 变量会同时存在于 :root 和 :host 中。&lt;/p>
 &lt;p>尝试修改 JSX 代码中的类名，发现新的样式并没有生效；起初以为是 Tailwind CSS 配置的问题，但是手动刷新页面后，样式生效了；说明新的 CSS 没能热更新到页面：&lt;/p>
 &lt;ul>
 &lt;li>import &amp;lsquo;./index.css&amp;rsquo; 将被视为&lt;strong>模块依赖&lt;/strong>；CSS 将被编译并注入到 HTML；&lt;/li>
