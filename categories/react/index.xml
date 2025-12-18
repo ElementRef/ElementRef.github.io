@@ -879,13 +879,13 @@ CSS 变量
 上；其实，这些变量已经被写入到了 ShadowDOM 中，但未生效：&lt;/p>
 &lt;ol>
 &lt;li>Tailwind CSS 默认会将变量写到 :root 选择器中，但在 ShadowDOM 中没有这个选择器，只有 :host；&lt;/li>
-&lt;li>Tailwind CSS 4 中，CSS 变量依赖于 &lt;a class="link"
+&lt;li>Tailwind CSS 4 中，内置的 CSS 变量通过 &lt;a class="link"
 href="https://tailwindcss.com/docs/upgrade-guide#browser-requirements"
 target="_blank" rel="noopener"
 >
 @property
 &lt;/a>
-，来实现 CSS 过渡、默认值、类型约束。&lt;/li>
+注册，来实现 CSS 过渡、默认值、类型约束。&lt;/li>
 &lt;/ol>
 &lt;p>需要&lt;a class="link"
 href="https://github.com/tailwindlabs/tailwindcss/issues/15005#issuecomment-2737489813"
