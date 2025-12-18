@@ -574,7 +574,8 @@ pnpm patch
 </span></span><span class="line"><span class="cl">  <span class="nt">--color-red-950</span><span class="o">:</span> <span class="nt">oklch</span><span class="o">(</span><span class="nt">25</span><span class="p">.</span><span class="nc">8</span><span class="o">%</span> <span class="nt">0</span><span class="p">.</span><span class="nc">092</span> <span class="nt">26</span><span class="p">.</span><span class="nc">042</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>可以看到，颜色写在 <a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties" target="_blank" rel="noopener">CSS 变量
-</a>上；其实，这些变量已经被写入到了 ShadowDOM 中，但未生效：</p><ol><li>Tailwind CSS 默认会将变量写到 :root 选择器中，但在 ShadowDOM 中没有这个选择器，只有 :host；</li><li>需要<a class="link" href="https://github.com/tailwindlabs/tailwindcss/issues/15005#issuecomment-2737489813" target="_blank" rel="noopener">
+</a>上；其实，这些变量已经被写入到了 ShadowDOM 中，但未生效：</p><ol><li>Tailwind CSS 默认会将变量写到 :root 选择器中，但在 ShadowDOM 中没有这个选择器，只有 :host；</li><li>Tailwind CSS 4 中，所有 CSS 变量都依赖于 <a class="link" href="https://tailwindcss.com/docs/upgrade-guide#browser-requirements" target="_blank" rel="noopener">@property
+</a>，实现 CSS 过渡、类型约束；</li><li>需要<a class="link" href="https://github.com/tailwindlabs/tailwindcss/issues/15005#issuecomment-2737489813" target="_blank" rel="noopener">
 将这些 CSS 变量挂载到全局
 </a>：</li></ol><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
