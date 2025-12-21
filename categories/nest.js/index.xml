@@ -6238,7 +6238,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kr">boolean&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="nx">Promise&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">boolean&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="nx">Observable&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">boolean&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 读取 @Roles 元数据信息
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 我们的 @Roles 使用在了 RouteHandler 上，所以这里使用 context.getHandler
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 我们 @Roles 使用在了 RouteHandler 上，所以这里使用 context.getHandler
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果 @Roles 用在了 Controller 上，需要使用 context.getClass 获取元数据信息
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 如果 @Roles 既用在了 Controller 上，又用在了 RouteHandler 上，需要使用 getAllAndOverride|getAllAndMerge
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * const roles = this.reflector.getAllAndMerge(Roles, [context.getHandler(), context.getClass()])
