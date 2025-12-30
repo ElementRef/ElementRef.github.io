@@ -4589,6 +4589,18 @@ target="_blank" rel="noopener"
 use-context-selector
 &lt;/a>
 不必多说，相比于 useContext，他的状态颗粒度更细，能跳过不必要的渲染。&lt;/p>
+&lt;p>两者的区别，可以参考&lt;a class="link"
+href="https://blog.jimmieluo.com/zustand-and-react-context"
+target="_blank" rel="noopener"
+>
+Zustand 和 React Context
+&lt;/a>
+：&lt;/p>
+&lt;ul>
+&lt;li>Zustand 创建的状态是&lt;strong>单例&lt;/strong>的，Context 中的状态实例是和 Provider 绑定的；&lt;/li>
+&lt;li>Context 中状态的生命周期是和组件的生命周期绑定的，而 Zustand 不是；&lt;/li>
+&lt;li>Zustand.createStore 和 Context 结合使用，可生成多实例状态。&lt;/li>
+&lt;/ul>
 &lt;h3 id="zustand">Zustand&lt;/h3>
 &lt;p>持久化状态中，不仅需要保存 JS-SDK 状态，还需要保存：客户端标识 deviceId、登录用户信息 userInfo（Admin 端）、登录凭证 token（Admin 端）等；为了方便创建状态，需要一个 Zustand 工厂函数：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -5195,6 +5207,13 @@ href="https://github.com/egoist/tailwindcss-icons/issues/37"
 target="_blank" rel="noopener"
 >
 Load SVGs from Filesystem
+&lt;/a>
+&lt;/li>
+&lt;li>&lt;a class="link"
+href="https://tkdodo.eu/blog/zustand-and-react-context"
+target="_blank" rel="noopener"
+>
+Zustand and React Context
 &lt;/a>
 &lt;/li>
 &lt;/ul></description></item><item><title>「转」我在函数组件中可以随便写，最通俗异步组件原理 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E8%BD%AC%E6%88%91%E5%9C%A8%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E4%B8%AD%E5%8F%AF%E4%BB%A5%E9%9A%8F%E4%BE%BF%E5%86%99%E6%9C%80%E9%80%9A%E4%BF%97%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%E5%8E%9F%E7%90%86/</link><pubDate>Fri, 31 Dec 2021 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E8%BD%AC%E6%88%91%E5%9C%A8%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E4%B8%AD%E5%8F%AF%E4%BB%A5%E9%9A%8F%E4%BE%BF%E5%86%99%E6%9C%80%E9%80%9A%E4%BF%97%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%E5%8E%9F%E7%90%86/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/react.png" alt="「转」我在函数组件中可以随便写，最通俗异步组件原理" />&lt;h2 id="不可能的事">不可能的事&lt;/h2>
