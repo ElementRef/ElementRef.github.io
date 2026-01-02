@@ -662,7 +662,7 @@ target="_blank" rel="noopener"
 &lt;p>当时，和同事讨论了两种方案：iframe 和 ShadowDOM；我们的关注点主要有两个：样式隔离、宿主通信。&lt;/p>
 &lt;h3 id="样式隔离">样式隔离&lt;/h3>
 &lt;p>在真正接触 ShadowDOM 之前，以为和 iframe 一样，可以对样式实现完全的隔离；实则不然，ShadowDOM 的样式隔离是&lt;strong>单向&lt;/strong>的，内部样式影响不到外部；但是，外部可以通过 ShadowRoot 对内部样式实现间接控制。这种控制是通过&lt;strong>样式继承&lt;/strong>实现的；比如 HTML 中的表单元素大部分都是 ShadowDOM，但是我们还是可以通过 CSS 改变表单元素内部的&lt;strong>字重、字体、颜色&lt;/strong>。&lt;/p>
-&lt;p>iframe 的样式隔离更彻底，但是如果要在 iframe 中使用 vw/vh 单位；此时 vw/vh 是基于当前 iframe 自身宽高计算的，而非宿主环境的 viewport。所以，基于 iframe 的布局难度是高于 ShadowDOM 的。&lt;/p>
+&lt;p>iframe 的样式隔离更彻底，但是如果要在 iframe 中使用 vw/vh 单位；此时 vw/vh 是基于当前 iframe 自身宽高计算的，而非宿主环境的 viewport。&lt;/p>
 &lt;p>为了解决 ShadowDOM 的样式隔离问题，需要在 ShadowDOM 中重置样式：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
