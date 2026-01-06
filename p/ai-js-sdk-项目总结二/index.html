@@ -334,7 +334,6 @@ Popover 与 Tooltip 在写业务的时候，发现 Popover 与 Tooltip 的使用
 </span><span class="lnt">27
 </span><span class="lnt">28
 </span><span class="lnt">29
-</span><span class="lnt">30
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="line"><span class="cl"><span class="kr">import</span> <span class="kr">type</span> <span class="p">{</span> <span class="nx">MessageType</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'antd/es/message/interface'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="kr">type</span> <span class="p">{</span> <span class="nx">PropsWithChildren</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'react'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -351,9 +350,8 @@ Popover 与 Tooltip 在写业务的时候，发现 Popover 与 Tooltip 的使用
 </span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">      <span class="p">{</span><span class="k">typeof</span> <span class="nx">onClick</span><span class="o">?</span><span class="p">.</span><span class="nx">current</span> <span class="o">===</span> <span class="s1">'function'</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
 </span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">i</span>
-</span></span><span class="line"><span class="cl">          <span class="na">data-testid</span><span class="o">=</span><span class="s">"message-close-icon"</span>
 </span></span><span class="line"><span class="cl">          <span class="na">className</span><span class="o">=</span><span class="s">"i-web-message-close text-[12px] cursor-pointer"</span>
-</span></span><span class="line"><span class="cl">          <span class="na">data-info</span><span class="o">=</span><span class="s">"i-web-close 有 hover 时的背景，所以不能直接用"</span>
+</span></span><span class="line"><span class="cl">          <span class="na">data-testid</span><span class="o">=</span><span class="s">"message-close-icon"</span>
 </span></span><span class="line"><span class="cl">          <span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">await</span> <span class="nx">onClick</span><span class="p">.</span><span class="nx">current</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nx">onClick</span><span class="o">?</span><span class="p">.</span><span class="nx">current</span><span class="o">?</span><span class="p">.</span><span class="nx">then</span><span class="p">)</span> <span class="p">{</span>
