@@ -750,7 +750,7 @@ unicode-bidi:normal
 &lt;h3 id="宿主通信">宿主通信&lt;/h3>
 &lt;p>产品需要支持划词菜单；当用户在划词菜单中选中某条命令时，需要使用&lt;strong>命令 + 选中内容&lt;/strong>直接发起对话；这就涉及到了 JS-SDK 和宿主环境通信，如果两者不属于用一个执行上下文，就需要跨上下文通信，那么&lt;strong>桥&lt;/strong>这种东西就不可避免；而 ShadowDOM 恰好可以避免跨上下文通信，而 iframe 需要借助 postMessage 等 API 和宿主环境通信：&lt;/p>
 &lt;ul>
-&lt;li>同源场景：iframe.contentWindow，top.window；&lt;/li>
+&lt;li>同源场景：iframe.contentWindow，window.top；&lt;/li>
 &lt;li>跨域场景：
 &lt;ul>
 &lt;li>iframe.postMessage，window.onmessage；&lt;/li>
