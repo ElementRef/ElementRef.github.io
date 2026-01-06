@@ -2172,7 +2172,7 @@ Streamdown
 &lt;/a>
 ，重点优化了 md 渲染的抖动问题，还内置了代码块、Mermaid 渲染。&lt;/p>
 &lt;h3 id="xss-问题">XSS 问题&lt;/h3>
-&lt;p>react-markdown 自身有有一定的&lt;a class="link"
+&lt;p>react-markdown 自身有一定的&lt;a class="link"
 href="https://github.com/remarkjs/react-markdown/issues/55"
 target="_blank" rel="noopener"
 >
@@ -2485,21 +2485,21 @@ target="_blank" rel="noopener"
 &lt;ol>
 &lt;li>选区顶部空间足够，理想状态；&lt;/li>
 &lt;li>选区顶部空间不足，但是底部空间足够，；&lt;/li>
-&lt;li>选区顶部空间不足，并且底部空间不足，菜单不能完全展示。&lt;/li>
+&lt;li>选区顶部空间不足，并且底部空间不足，菜单不能完全展示/菜单需要和选区发生重合。&lt;/li>
 &lt;/ol>
 &lt;/li>
 &lt;li>选区右侧空间不足，但是左侧空间足够：
 &lt;ol>
 &lt;li>选区顶部空间足够；&lt;/li>
 &lt;li>选区顶部空间不足，但是底部空间足够；&lt;/li>
-&lt;li>选区顶部空间不足，并且底部空间不足，菜单不能完全展示。&lt;/li>
+&lt;li>选区顶部空间不足，并且底部空间不足，菜单不能完全展示/菜单需要和选区发生重合。&lt;/li>
 &lt;/ol>
 &lt;/li>
 &lt;li>选区右侧空间不足，并且左侧空间不足，代表&lt;strong>选区跨行&lt;/strong>：
 &lt;ol>
 &lt;li>选区顶部空间足够；&lt;/li>
 &lt;li>选区顶部空间不足，但是底部空间足够；&lt;/li>
-&lt;li>选区顶部空间不足，并且底部空间不足，菜单不能完全展示。&lt;/li>
+&lt;li>选区顶部空间不足，并且底部空间不足，菜单不能完全展示/菜单需要和选区发生重合。&lt;/li>
 &lt;/ol>
 &lt;/li>
 &lt;/ol>
@@ -2691,7 +2691,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">setTop&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">selectionPosition&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">top&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;右侧空间足够，上下空间均不够；此时，容器高度小于菜单高度；菜单不能完全展示&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;右侧空间足够，上下空间均不够；此时，容器高度小于菜单高度；菜单不能完全展示/菜单需要和选区发生重合&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">setTop&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">selectionPosition&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">bottom&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="nx">contextMenuEle&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">current&lt;/span>&lt;span class="o">?&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">offsetHeight&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
@@ -2707,7 +2707,7 @@ target="_blank" rel="noopener"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">setTop&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">selectionPosition&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">top&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;左侧空间足够，上下空间均不够；此时，容器高度小于菜单高度；菜单不能完全展示&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;左侧空间足够，上下空间均不够；此时，容器高度小于菜单高度；菜单不能完全展示/菜单需要和选区发生重合&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">setTop&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">selectionPosition&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">bottom&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="nx">contextMenuEle&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">current&lt;/span>&lt;span class="o">?&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">offsetHeight&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
