@@ -774,7 +774,13 @@ target="_blank" rel="noopener"
 控制
 &lt;/a>
 iframe 的资源加载的；SDK 应避免改变宿主的安全策略；&lt;/li>
-&lt;li>iframe 中发起的请求的 Origin 不是&lt;strong>宿主&lt;/strong>的，这就给接口权限验证增加了难度。&lt;/li>
+&lt;li>iframe 中发起的请求的 Origin 不是&lt;strong>宿主&lt;/strong>的，这就给接口权限验证增加了难度；&lt;/li>
+&lt;li>宿主对 iframe 中的内容控制力较弱，不安全的 iframe 可能会引发 XSS 问题。&lt;/li>
+&lt;/ul>
+&lt;p>但这并不意味着 iframe 不好；当 iframe 和宿主是&lt;strong>跨站&lt;/strong>的情况下：&lt;/p>
+&lt;ul>
+&lt;li>渲染性能更好，iframe 内部的重排/重绘不会影响宿主；&lt;/li>
+&lt;li>独立的渲染线程，iframe 对宿主的 JS 性能影响很小。&lt;/li>
 &lt;/ul>
 &lt;h3 id="样式加载">样式加载&lt;/h3>
 &lt;p>由于组件渲染在 ShadowDOM，为了使样式不被 ShadowDOM 隔离；需要将 CSS 注入到 ShadowDOM 内部，这需要用到 Vite 对&lt;a class="link"
