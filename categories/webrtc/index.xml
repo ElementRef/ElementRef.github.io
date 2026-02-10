@@ -2,13 +2,13 @@
 &lt;p>随着政府对个体户税收政策的收紧，公司需要采集客户的“话术视频”来作为规避业务风险的“凭据”。具体来说就是，需要用户在手机端录制一段“我已同意 xxx”的视频，并且录制完成之后，上传至服务器保存。&lt;/p>
 &lt;p>经过调研搜集，大致有两种实现思路：&lt;a class="link"
 href="https://w3c.github.io/html-media-capture"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 基于 input[capture] 的实现
 &lt;/a>
 和&lt;a class="link"
 href="https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 基于 WebRTC 的实现
 &lt;/a>
@@ -24,7 +24,7 @@ target="_blank" rel="noopener"
 &lt;h2 id="webrtc">WebRTC&lt;/h2>
 &lt;p>前端调用设备采集视频流主要采用的是 &lt;a class="link"
 href="https://developer.mozilla.org/zh-CN/docs/Glossary/WebRTC"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 WebRTC 实时通讯技术
 &lt;/a>
@@ -33,7 +33,7 @@ WebRTC 实时通讯技术
 &lt;ul>
 &lt;li>&lt;a class="link"
 href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaDevices"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 MediaDevices
 &lt;/a>
@@ -41,14 +41,14 @@ MediaDevices
 &lt;ul>
 &lt;li>&lt;a class="link"
 href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaDevices/getUserMedia"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 getUserMedia
 &lt;/a>
 ，为 RTC 连接&lt;strong>获取&lt;/strong>设备的摄像头与麦克风权限并&lt;strong>接入&lt;/strong>设备信号；会提示用户给予使用媒体输入的许可；&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaDevices/getDisplayMedia"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 getDisplayMedia
 &lt;/a>
@@ -57,21 +57,21 @@ getDisplayMedia
 &lt;/li>
 &lt;li>&lt;a class="link"
 href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaStream"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 MediaStream
 &lt;/a>
 是一个媒体内容的流，一个流包含几个轨道，比如视频和音频轨道；&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://developer.mozilla.org/zh-CN/docs/Web/API/RTCDataChannel"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 RTCDataChannel
 &lt;/a>
 ，用来设置 P2P 数据连接，在两者之间建立一个双向数据通道连接；&lt;/li>
 &lt;li>&lt;a class="link"
 href="https://developer.mozilla.org/zh-CN/docs/Web/API/RTCPeerConnection"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 RTCPeerConnection
 &lt;/a>
@@ -375,7 +375,7 @@ RTCPeerConnection
 &lt;/div>
 &lt;/div>&lt;p>接下来就是使用 &lt;a class="link"
 href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaRecorder"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 MediaRecorder
 &lt;/a>
@@ -495,20 +495,20 @@ MediaRecorder
 &lt;/div>&lt;h2 id="兼容性">兼容性&lt;/h2>
 &lt;p>根据&lt;a class="link"
 href="https://faceid.com/document/faceid-guide-docs/h5_rtc_compatibility"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 旷视发布的 RTC 兼容性说明
 &lt;/a>
 ，iOS 和原生 Android 内置的浏览器和 WebView 组件都已经很好的支持了 WebRTC；腾讯的 X5 也对 WebRTC 有不错的支持。&lt;/p>
 &lt;p>如果出现了运行错误，可以使用 &lt;a class="link"
 href="https://developer.mozilla.org/zh-CN/docs/Web/API/WebRTC_API/adapter.js"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 adapter.js
 &lt;/a>
 垫片并使用 &lt;a class="link"
 href="https://webdemo.agora.io/agora_webrtc_troubleshooting"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Agora WebRTC Precall Test
 &lt;/a>
@@ -516,14 +516,14 @@ Agora WebRTC Precall Test
 &lt;p>小米部分机型不识别 MediaStream，并且没有对应的开发文档。&lt;/p>
 &lt;p>如果 iOS 不能实时预览和回放，请&lt;a class="link"
 href="https://developer.apple.com/documentation/webkit/delivering_video_content_for_safari"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 参阅
 &lt;/a>
 。&lt;/p>
 &lt;p>DEMO 在&lt;a class="link"
 href="https://ElementRef.github.io/DemosForIfe/MediaRecorder.html"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 这里
 &lt;/a>

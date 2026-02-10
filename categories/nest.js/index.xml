@@ -346,7 +346,7 @@
 &lt;p>在上一节，我们提到&lt;strong>验证前置&lt;/strong>；在请求真正进入 RouteHandler 之前，最好把参数、权限等验证逻辑提前，尽早抛出错误；而不是将验证逻辑和具体业务逻辑参杂在 RouteHandler 中；这里同样，在应用启动之前，应验证所有环境变量，而不是将问题留到运行时再解决。&lt;/p>
 &lt;p>ConfigModule 允许我们自定义验证函数，来对环境变量进行验证；这里，我们需要用到 &lt;a class="link"
 href="https://github.com/hapijs/joi"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Joi
 &lt;/a>
@@ -494,7 +494,7 @@ Joi
 &lt;/div>&lt;h2 id="数据库集成">数据库集成&lt;/h2>
 &lt;p>文档上介绍了 TypeORM 和 SequelizeORM，但是社区好像更青睐 Prisma；好在 Nest 也对 Prisma 做了&lt;a class="link"
 href="https://docs.nestjs.com/recipes/prisma"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 官方指南
 &lt;/a>
@@ -1004,7 +1004,7 @@ target="_blank" rel="noopener"
 &lt;/div>
 &lt;/div>&lt;p>@nestjs/cache-manager 提供了一个内存缓存，只能保存&lt;a class="link"
 href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API/Structured_clone_algorithm#javascript_types"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 可被结构化算法复制
 &lt;/a>
@@ -1817,7 +1817,7 @@ target="_blank" rel="noopener"
 &lt;/div>
 &lt;/div>&lt;p>执行 nest g service task，新建一个 TaskService 管理调度任务；关于 cron，可以参考&lt;a class="link"
 href="https://cloud.google.com/scheduler/docs/configuring/cron-job-schedules?hl=zh-cn"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 这里
 &lt;/a>
@@ -2627,7 +2627,7 @@ target="_blank" rel="noopener"
 &lt;/div>&lt;h2 id="eventemitter">EventEmitter&lt;/h2>
 &lt;p>@nestjs/event-emitter 通过 &lt;a class="link"
 href="https://github.com/EventEmitter2/EventEmitter2"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 eventemitter2
 &lt;/a>
@@ -2845,7 +2845,7 @@ eventemitter2
 &lt;/div>&lt;h2 id="文件上传express">文件上传（Express）&lt;/h2>
 &lt;p>在 Express 模式下，Nest 内置了基于 &lt;a class="link"
 href="https://github.com/expressjs/multer"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 multer
 &lt;/a>
@@ -3910,7 +3910,7 @@ multer
 &lt;/div>&lt;h2 id="mvcexpress">MVC（Express）&lt;/h2>
 &lt;p>不用管 MVC 是什么，简单地讲，就是 Nest 调用模版引擎，渲染 HTML。Nest 推荐使用 &lt;a class="link"
 href="https://github.com/pillarjs/hbs"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 hbs
 &lt;/a>
@@ -4103,7 +4103,7 @@ hbs
 &lt;/div>
 &lt;/div>&lt;p>如果不想使用 @nestjs/cli，可以尝试官方&lt;a class="link"
 href="https://dev.to/micalevisk/5-steps-to-create-a-bare-minimum-nestjs-app-from-scratch-5c3b"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 推荐指南
 &lt;/a>
@@ -4926,7 +4926,7 @@ target="_blank" rel="noopener"
 &lt;/div>
 &lt;/div>&lt;p>如果你用过 Angular 的话，你可能会想到 &lt;a class="link"
 href="https://github.com/angular/angular/blob/main/packages/router/src/router_module.ts"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 RouterModule
 &lt;/a>
@@ -5292,7 +5292,7 @@ RouterModule
 &lt;/div>
 &lt;/div>&lt;p>除了 HttpException，Nest 还内置了一些其他的继承于 HttpException 的&lt;a class="link"
 href="https://docs.nestjs.com/exception-filters#built-in-http-exceptions"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 错误构造函数
 &lt;/a>
@@ -6651,7 +6651,7 @@ target="_blank" rel="noopener"
 &lt;h2 id="注入作用域">注入作用域&lt;/h2>
 &lt;p>不同于 NgProvider 的&lt;a class="link"
 href="https://elementref.github.io/p/angular-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/#%E6%9C%8D%E5%8A%A1"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 四种
 &lt;/a>

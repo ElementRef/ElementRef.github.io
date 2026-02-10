@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>TS on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/ts/</link><description>Recent content in TS on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 24 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/ts/index.xml" rel="self" type="application/rss+xml"/><item><title>TS 装饰器的使用 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/ts-%E8%A3%85%E9%A5%B0%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 24 Feb 2025 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/ts-%E8%A3%85%E9%A5%B0%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/typescript.png" alt="TS 装饰器的使用" />&lt;p>最近在看一个 SaaS 项目，项目中的数据请求函数有点另类，不同于我之前写的项目；它的每个请求函数是基于 &lt;a class="link"
 href="https://www.typescriptlang.org/docs/handbook/decorators.html"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 装饰器
 &lt;/a>
 来构建的。相比于继承，装饰器的控制颗粒度更小更灵活，并且对类本身的侵入性较小。&lt;/p>
 &lt;p>本文中，代码的运行时为 &lt;a class="link"
 href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-8.html"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 TypeScript@5.8.2
 &lt;/a>
@@ -92,7 +92,7 @@ TypeScript@5.8.2
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/AIYQNghgzlAiCmBjA9gJwgFzQMQHYChFIYACBFdLVKAUQA8IBbABzHhIG98SSoIBPABIBLAIQAuEgAoAlCQC8APhIA3ZMIAmAbnwBffAHoAVEe5GSgbx9AoxGAHTMAWaoBC3C4Gj1QFj-ZkrmQb4AfUbeAK5sUAYY-MzwUIiowswYBmDCAEaJKQB0PhSYaFDpbADmEIj8mekYUB5ZkKjs4ZEk4NBwSGg5qAokADwAKtiBuIgYwsi4JPB0GPC4GlAk-YPDo4pSGBCoBfAYkn0DQyO4ckoku4sHJAA&amp;#43;quraZgb4AGZ7S2NNMORtVHir65vb888DjJJGpNJxuCRjKYeCRzABtBb7UaSD6UXL0JiseAAXQhsJIaw2WxIgHBjQCIKoAYBkAIeaAAgTAL&amp;#43;KgAdTQCwDHijPceChcFBkGx8sgClIAORvFrZL5jZSEv6CgA0BN&amp;#43;xPkSrIrTR1AxLDYMi0kIMBNQgXgEIMesA98qAU7lAN&amp;#43;2gAKlQA6-4A7&amp;#43;UAnKa2wAESoATNMA&amp;#43;crOQBQcg5AHo6gHIDQAxKoBO00AqzYQqVbdLMVDILD1eDpXBMdjyEiC1HtWgMTXwQU6HhRjAxuMJiJJvhCYSdJ5nUbSORcGG6kiAfAVAJVKXt94cAMP&amp;#43;AZPjAF&amp;#43;KgFPTQDr&amp;#43;niCQALYR5ZCBDDMedSAAGAElBQBZEgAEg4GGneRTjHgumX2ohukL8qJJdj8fjFfSc4X886UkYUAKkigGFiuAKRzKM2MKctyvJgPy76fuePCXnohgmB41j2IAH26AMr6gBxcoAFOqAJvxgAziYAwDGABSugBhco0xCip8OC4FIWZUDmmJah4OGAPpygAv0YAcGa9rYdiAPRmFqAAfK1oOL2gDB2oAV8q8YAn9qANUR9o2FJgCGMYA2-GADIRJFOnchCjD&amp;#43;4y5linS4PAADuKpiui&amp;#43;lsLIOgTIxlYCCI1mtuuW50RZdlAA"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 点击
 &lt;/a>
@@ -152,7 +152,7 @@ target="_blank" rel="noopener"
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEAiCmwD2AnMAXVECiAPMAtgA4jzQDeAUNNAAIAKKSR8K6AngsmpigGIA7atAjxcALmgByAmFJToAH2kAzeLPnQAvNI3wpAbkoBfSgHoAVBeoXogPR1A5AaBRiMAOmYAs1QCFugbx9A0eqAsf5toASQAE3gAfQJQgFdSCDMOFghgFABLInQzEFSAIyzcgDow7gwsAtIAczBgdiKC9AhA4vAUMkSyRmZWDi5UUpRtaAAKdDAUCvh0SQB5HIArRHQAGmgiJhY2dgBpeHZJCHQ0gQqlEXYCHKQQAEptAD5oADckVJCjaAszShVogWB0VJIATQTobHqIPq8QQjMYTKbQWYLf4rNZdTY7PYiQ6pY6nCDnS43CjCZACCBXeDlJAVIZSUHdTgQnioQTQB6jcaTKQrDlw64GaBmMzQQDgxoBEFUAedqAaPk4Ez&amp;#43;jh8MRSJJyKYaKTyaQqTS6esGb1mfxgQ9UWDtrtuas9ejdvzBcLxY5ALAqgAfPERiYSIxZFeAqHHwembGGc5ZWtEcDErKg0dVAv0VaJoHLK6CHaLwJbCGjwATRAisMDJ&amp;#43;CSNMZrPQOGSIa3LQPaMxmitdCJ4FSNR6Qzl4yZhuieGPOTp&amp;#43;4UaBq0f8kyUDXoaBiQgkMg6ATwADuspKvAV89I1aMGop2qGc6VlNEuDtQvsDkAPAqAaoiQdbwRuWcDAJymgEzFQBcctB23J4EA"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 点击
 &lt;/a>
@@ -293,7 +293,7 @@ target="_blank" rel="noopener"
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEAiCmwD2AnMAXVECiAPMAtgA4jzQDeAUNNESgJYBuGZE8uAXNAOQFindoAHx4AzeHwHQAvD0nxuAbkrVoAAQCSAOwjowW4PACy8dAAskAEwTI0mFADEtqogFcARiHrBoAc1MAyuwAFACUFKo0KKauKFrQ5vQQAHRsuMo0AL4qNGoBeujeJuZWNqgYqE6quhjefqbaokhhETRRMXHQWq4gIBnQ2dkA9ABUI9Qj0ICdpoCrNoCjEYAOmYAWaoAhboDePoDR6oBY-xNdVvAA&amp;#43;gRWPfAQQ&amp;#43;gAnkRnwAxE6ENe7k-07smWiOX2KaS&amp;#43;YMBLh9kugILtPqAwNEEtcyMULNYvnZUDJoAAeAAqAD5gnoUP50FwAPLuABWiHQABpaCgkDcUFcANLwS5cXQMLS&amp;#43;YTQCCXAjuJAgamfCB3egPVBcDGwywABVp9KuCFF93smKx4WkWOg0pucoV8AZl2VYolKHV3MYSHolgyIyGlFErgMhSQ8W0NQMxlMCLKyMcWmCqjxBOJZIplJcBqNzNZPPQHK5Il5-MFkZoItN9i48rphqVt1VqEooRz0YLKvF9kt1ssrWgyB0gvgyRASF8wW4Hr0XvhpSRFQD0G1IdM3Gpo-QoUU0CGQ2ggHBjQCIKoA87UA0fJwAc-PCEEjwLjkbI0RsQZut9ud7v6Qx9xG2QdOYc0vMxlnj5&amp;#43;Ky6x6ez&amp;#43;fL2aALAqgAPnvU6BBLgqijOMbSTIAK-GAHtqgCf2oAKXorIAMAyAMKKgAOpoAdsaALAMgCH8oA9gaRJMVAwW0ABEjaiPQvixGAnjwJRXAJq48DpjQkw0JR8DdAQhqMaQLHQKI-BsJx0DcdAlEAO4MHoTEiWx8CkQMpEOsebqnqQ54dl2Og9jePr9ve9iPtqmZFig75WVWqA-nO0AIWhuGAHo6gDkBnhkHzoAd-KAJymrk4Z53ntOgsTxORbQ0XRDFMVwYkgBJkTQHxrgCWg8WieJHEpfJ9CKaQCU5aomTKNkTouvQbrQPktTALefoPoGwZQqG0AkuSwBUlGL5MiybIJvQnLcimApCqodlmmWfXGoW9koCWM2fia1k1ja9Ynmebb6XVhQNSZd7fJU8Qjm1Y4TudU4zk5y5oYAIeaAAQJgC-ilhoUNtp20Xtwe1FIdTXmadH75l&amp;#43;b7UnQs3fjdf5LoBIEEo0SCQWMakISh6HYfhxFqVFUlUTF9GZcJrEoOxknSbx-GCUpxVJblFE8flhXMST7FqUeXGaR9Ta6Ttna-QdJRHf6FnQFN9i2fNZrTpQ2QnugqX4MQpColo8CyZuZlYDuyvwGEyhOYAWPKABTqgAL8YAMhGAG&amp;#43;mgClRoAmKmADD-gAHaoAXHIBUFIWANJygBwKvbBLgdAgCwcoAvwGANURAWUOwu66X77CopV3XVfELRRdE4WdLw-AKOVihAA"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 点击
 &lt;/a>
@@ -349,7 +349,7 @@ target="_blank" rel="noopener"
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEAiCmwD2AnMAXVECiAPMAtgA4jzQDeAUNNAAIAUAymAJ4LJqYoA87qGWPIRLwAfAEpq0ABYBLeuIpSaKeOgCuKAHbQARAAlZAGmgBJAOQBZOIn5cc&amp;#43;YqV0BuKQF9KngGbqtwdFkkHWY2W05UbgAVUXopdDAUAHM1AC5oKKMpIhQkIngUdBYAaXgWdIBrMqRvDKyaABN4CGAUWSIudIAFXPzCsJa2jtRKRSoaZC0IdGhUWSTZLTAQSzVpJAboAF5oBOS1AG0cvIKi0pYAXTcaAHob6EBZxMBMxUB85UBO00BVmykmwfauADoAG7LdRkHa&amp;#43;fyBYLQBRKGg0WS1ehFfI1WZtBZLFZrDbbLY7cwQgJBLTmMbKeGTCBIUj-EBIJL0AAGABJyHNMctVuh1g1-mAiCQWMjEil0OJ3CYLNYAIwAJmgAE14IkYAB5EANJnia7wzw0dxuTxUmbwRwibbQLTwADuNg4AhQDmEpAUbjNLvg-zkbugd2ghilVntdkE5tIQdlCuVqugGoaQA"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 点击
 &lt;/a>
@@ -401,7 +401,7 @@ target="_blank" rel="noopener"
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEAiCmwD2AnMAXVECiAPMAtgA4jzQDeAUNNGAFZi4AUAAgAphoHzrwoLI0mFADEAdtCIYAFgC5oEdCgCWYgOYAaaO06EefAagypx0ZQBN5ileoCUFajWgoeAVxQSABtPToiEWQB6QIAjMAtXADpkAkCAEnIpdGkAX3jyCxTPAG5HFMp8wIAqIuoi6EBO00BVm0BRiMAHTMALNUAQt0BvH0Bo9UAsf7LoMSRzeAB9Aj7XUghA9ABPIngIYBUidECQZRDl1cj&amp;#43;wWMUCEjSNTBgSc3I9AhurfAXaCmZ6A4ufX5EI2FoAF5oJnRONR55AB5EJ0RDoLREFBIGYoKYAaXgkysSlUamgAB8FJMCCEkCAMdBXGJ&amp;#43;gAzVTwcwQ3TcXgoACSxPguHkYlcOL49g&amp;#43;AD5oAA3JAWXLQIqBSgkonAdDKJASR56WmGIQmMRMRy-FD-dBAkFgjSOSHQvjwxHImxozEQbG4-GYomk8mU-XU54M-rMnpskJ8Si2eT8iwOGjIMQQPHwfZINRMADkcppBleStEEh56s10a0aZ4tmy0GC0EA4MaARBVAHnagGj5OCJnY4fDEUjycj5IMy0OkCNR2POhVV4SmHkGmHGyYZyRQweTBGTHN5wKFovVQCwKoAHz1oDFwjmDrfDIEjMbjz0VOz7ki7fFdTJHUietPPuGn&amp;#43;eLgGV9QCySoB6M0ANN6AA8VAFRygCHlQAOpgUQA"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 点击
 &lt;/a>
@@ -469,7 +469,7 @@ target="_blank" rel="noopener"
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEAiCmwD2AnMAXVECiAPMAtgA4jzQDeAUNNAHaHwBqYK0AvNAOScDcl10AAIBBYMHhRUCZGkwoAYrQEBzeOjoMAFAEoKAmijUBXFLWjoAFgEsIAOnoEmLPjQC&amp;#43;AiGo2PNANzAgRvAAXNAQ6ChWtMq6VDQ0ljb2DMysHP6B8C7Q7u4A9HnQgP3RgHepgBZqgKMRgA6ZZYAhboDePoDR6oAwKoCdpoCrNtVllABmRrTA6FZIZqLikijSqBioipoC6Cyq6KEA8gBGAFaI6AA0AkQoSETwKOgAngDS8Oeh4ZHR0AA&amp;#43;YecE60gg&amp;#43;zQAJhLAkSIclCAAUjiczucEBAAVYgahKNpQr4kFYfnoaMhaBBPvBbCAkMpNJwxhIcZNENM5IpoAA&amp;#43;cxLNScXYMlDLbQ8aAFaCAcGNAIgqgDztQDR8nBKbIsHhCCQQhR3JiRjjSPjCcTSRMpuKFGZ6YdjqcLtdzszoLqIQabhyuYV&amp;#43;aUyoBYFUAD57eeACPIAKjd&amp;#43;jdGJo3poACIsT0rMoTGB1qR-aEIkFvr74v74LQjI40BH4FHoD0Ap4vTkvXkBFjFXiCUSSWIyVIxTMtXToH8YYC5MbG7D4SgOZRXEA"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 点击
 &lt;/a>
@@ -538,7 +538,7 @@ target="_blank" rel="noopener"
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/AIYQNghgzlAiCmBjA9gJwgFzQMQHYHld4ACAelOMABzQOBVBzI0BkIgKFEhgRXS1TwBUB3ZM3DQ4SNJhy4eAC1TwS5KoAlFBo0SsoxduK5QAogA8IAWwAOYEgG9GxYsACy8DNOQATbZ0mEFFGqtsOTi7uYp7cUgI2do7Obh4S4TJyPsr&amp;#43;xPBGZhYAFACUxJbEAL6MJQBmAK64iBgAlsi4xMJsoQl43tkYEKgA5k4AXMTYVTX1uPnWtii4UMgWAHRgyD3ZAOTNohxtBESruQDcpYyV1XUNTRrxXLwCnd19GIPDp2MTUdOzC0sr65et1xFkHtDuURmdGhsrpIkvI7r0BkMwa8Cu8Gp94ItlmtIf9obJ5MCjidRucYsEoeEOl14Y9iPgAEYAKyQGAANMRTKhkKZ4KgMABPADS8H5gygGFQtVwPWIAB9iFB&amp;#43;cZ6XM3lM0XMMd81mS4rjKbsDkSkaSgnqtgD&amp;#43;Mg4Q9BgzmTV2ZzubyBcLRQqJVKZfLFcrVSj1TNNZifrqQhboQJCaCXqbYhGdHjkjaEfaWU6uTy&amp;#43;UKRWKvdK5QqlSqwGriB8Q9rVuGKbx8fAY0A"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 点击
 &lt;/a>
@@ -611,7 +611,7 @@ target="_blank" rel="noopener"
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/KYOwrgtgBAIsDGB7ATgQwC4oGKvp5AngCoEAOwUA3gFBRQDCANqgM4txJr5QC8UA5E1bsEKDCn4AaWlAAKyROWToCHMdz795i4MtWiuE6XQCywdAAtEAEzWHkvAWcs2745FJmzUaCOd1uGgLevv7IgRLUAL7UAGZgIHgAloggsAbuOHgoBAAUKuQAXOmcmbj4xGTAAJRUMiwA7kno8BZQ&amp;#43;VW1NHR08KwUEchZFSTkAHRCbIOFMj1QyOZgyGnxiegpaZMipfhYIPk&amp;#43;AObmxVgJyanVp&amp;#43;frqVAAPlAAbohJ1lRQUQDcs1B9LAMMrtyjlRsAxtolCppr86At0EsVjcNnIFFD9DtsPtYT10EcTlAAPIAIwAVgh0MY5j1SGjdCoANLAAjFFjoZBJECHB5QFgECDExCMHFXZ6vd6UT4-Ob-QGYoYgwhgsbOKy2IEoGbU&amp;#43;aLZZQVYXNKq1waobY7V0PHIY7oYok8l4Kna2k6PRMlm89mc7mPPkCoVO6nWYAseAc0j4YqQ&amp;#43;n6UPh-AiqN0vRwONJCMoHkvN4fb6-YOxVBgRi2nHwxH65F3EKoPzoAKmva5HGW-G2olkimBuYu9Hu1lerk8v2Cxg8hIFznAazdmk&amp;#43;WthACSIGDAA9iuABbpE2Kc5K83QYlEgA"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 点击
 &lt;/a>
@@ -667,7 +667,7 @@ target="_blank" rel="noopener"
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/GYVwdgxgLglg9mABAEQKYBsCGBPAkmANzgGtUAeAFQD4AKWAW1QC5EwR6AjVAJ0QF5EARgAMogJSIA3gChEibqighuSOpm4BzRSwoAaRAAducAzyjYA0qmwtS2OMER7EAE1QBnCNxgGocbiwACsam3OZont6&amp;#43;-hJ8VFKycogQCO5w6KgAdOhwGjQA5O44ABIwiMWY7ogAQqioSACycC4wwDCoLvliANyJcilg7lCI-jAaMGCY6A2KABbN-IhQ6lpQANpGJmaW1gC6vUmuHl4&amp;#43;ftyZBFMgqIs0mfcr7izgxGBwAO5ga7ux8TKHcncigoMEYcBAUBoNF&amp;#43;CQBSVaiDo2FMDhG3nGk2mcwWfFxiHyoEgsAQXVhcKSCiUKjRYwmUxmUHmLkymAMBnQ2DUmkU&amp;#43;kePT6AIAvgK5IL9AxUPzDoKDogZdJhRAsO4qmgsHhCCRUABRAAemHo7Ju-0QAAE1Th8ERSGQLRrrTr9YaMrQAMyiYRiRJFbClaFk-qpdJZHJ5ABEpX0uHyDRQGBwiCtWpcYalcoV0gGQ0QqCdRsWYFQ7zj6qTpD1BqN0N6ucrGUyPr9PUQAHoW4hXYhAEuegDgVQDKRoAHZXKMCjMZLCbLHSAA"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 点击
 &lt;/a>
@@ -777,7 +777,7 @@ target="_blank" rel="noopener"
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAECCCuAXAFgYTI4yCiAPMAtgA4gCm0A3gFDTTDwBODpAdorMMAPbxsAKpBgQCWUYVxbQAvNADkAVQiDZAbio1oAAQAU6TDiZcG2hCj1Y8hEqQCUAHlNoMF-MTIA&amp;#43;Gxp2wAJiJYBIVEIcRZtWT8A2XtHcxxXa08NMAAlUgBHeGFmKOEWADFwm0oNWm4WCC4yADoQLgBzCIBJaAA5UlJfODh-fOggkTEJaAAVLmhU3hi1WgBfKgWAM15gRDDegMGQsO0iQRFEbeGWAC5oCEQGfIaS6lpmREZJFZY1jbtR6FJcRFZfGAAeQARgArUhrdzaMrQRBgBgNUiIc6jAA0MKIDC4&amp;#43;wYiAAngBpUh484Aa2JXCWY3RtFovlIEGA1yIiCM5z4WJx&amp;#43;IAIgymcIWUYNHcYRVLpQ6IxmGwONxeEcDjsRjIFEoGLJoHNpLD4YjENBIAaWHjZrSxfqjMIGvkwCAALJI5BcboyOEIpEAbUx2ME&amp;#43;KJeIAuqa6XzmayGDUAG62&amp;#43;DkGTaGqJ3UQc68UksLgAdxYHoDJSk7lKtNpwip2noTFY7E4PH4ipO0AAhFIZDjDsdQhIRcXiygsZnoCxSAPsIZjLJmpV4EslsJgMIqwN652WDMYfNviAlNBS9BtPj9pToJbrSxbQ6UM7pC25K93hIYkWew8kc9j9dT&amp;#43;fHc6amAiCQ8X3XUkVRA0EQgGxg1pBZizmU04MWKg73WEZ4lHLFjCWLECHOApVhQlhu2gR432Qj4vh&amp;#43;P4WABaAQXBSFoV7YDkWpDFOV9QliTJCkqTRGF6UZMM2QGdjcTxXlBIFcNhSfcoJHFChB0IcgtRkLCuAIKDzXfK0bXtb8XR1d1EC9US-WJIN&amp;#43;NDKSjCjGM4z3RNf3A1MWHTLMczzaRC3uHsrjxWSe13fc8UPKkTz0i8nRdG9ZDIh8iOfF8ngYSQIrPfTL18X9-xAQC3T1UDk0g9doNKrVgGcZA90EDDEp7AB6BroEAe&amp;#43;VAFO5QAwHUATFTAHvowAoOUAUqNSrkypqlIOpGm0AADdCjGgApsOgAASCgzwIUg5nOKbQNqowSufGDoPgtQFm0n4rDIbUhwHOIqssNxSG0Erzoe390iyHJSDyQpihUIA"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 点击
 &lt;/a>
@@ -815,7 +815,7 @@ target="_blank" rel="noopener"
 &lt;/div>
 &lt;/div>&lt;p>修改后的代码效果，可以在&lt;a class="link"
 href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAECCCuAXAFgYTI4yCiAPMAtgA4gCm0A3gFDTTDwBODpAdorMMAPbxsAKpBgQCWUYVxbQAvNADkAVQiDZAbio1oAAQAU6TDiZcG2hCj1Y8hEqQCUAHlNoMF-MTIA&amp;#43;Gxp2wAJiJYBIVEIcRZtWT8A2XtHcxxXa08NMAAlUgBHeGFmKOEWADFwm0oNWm4WCC4yADoQLgBzCIBJaAA5UlJfODh-fOggkTEJaAAVLmhU3hi1WgBfKgWAM15gRDDegMGQsO0iQRFEbeGWAC5oCEQGfIaS6lpmREZJFZY1jbtR6FJcRFZfGAAeQARgArUhrdzaMrQRBgBgNUiIc6jAA0MKIDC4&amp;#43;wYiAAngBpUh484Aa2JXCWY3RtFovlIEGA1yIiCM5z4WJx&amp;#43;IAIgymcIWUYNHcYRVLpQ6IxmGwONxeEcDjsRjIFEoGLJoHNpLD4YjENBIAaWHjZrSxfqjMIGvkwCAALJI5BcboyemM5mshg1AButvgpFNdL5HqMPr95Bk2hq0d1EHOvFJLC4AHcWABtAC6JSk7lKtNpwip2noTFY7E4PH4ipO0AAhFIZDjDsdQhIRfn8ygscnoCxSD3sIZjLJmpV4EslsJgMIywNq62WDMYfNviAlNBC9BtPj9pToJbrSxbQ6UM7pA25K93hIYnmOw8kc999dD8fHc6amAiCQ8dvdUjUQNBEIBsQNaQWfM5lNKDFioK91hGeJByxYwlixAhzgKVYEJYdtoEeJ94I&amp;#43;L4fj&amp;#43;FgAWgEFwUhaFO3-ZFqQxTlBHxIkSWgck8T3NEYTdflBQYdlmNxPFeXdAVPWFO9ygkcUKF7QhyC1GQ0K4AgwPNZ8rRte13xdaA&amp;#43;JDL1fRAf0wMMiTQxM-1tSjGNgPjFhExTdMs2kXN7g7K48WkjtN23PFdypA8dJPJ0XQvWQiJvPD7wfJ4GEkEKj1009fE-b8QF-OEEQAoCGhAsDIOXTU6GcZAt0EFDYo7AB6WroEAe&amp;#43;VAFO5QAwHUATFTAHvowAoOUAUqMSpkypqlIOpGm0AADZCjGgAp0OgAASCgjwIUg5nOcbAKqoxQJKiDwOgtQFk0n4rDIbU&amp;#43;x7OJyssNxSG0HaTtuz90iyHJSDyQpihUIA"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 这里
 &lt;/a>
@@ -986,7 +986,7 @@ target="_blank" rel="noopener"
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEBKCmBHArvCAXAQsgliAJvAE7QDeAUNNAPTXSAUroKbmgfdGB2-oO-RgQjaDK8pdBmHQ5g0AEYB7fAE8AFAEoyfKkXjpkRAHbQZSqtHRgiAc1UAuOPGDii&amp;#43;ADwYiODUYA00MBqkA&amp;#43;F7qoAHInF-YnQpAGl4KXMHJyNoAB9&amp;#43;KQBbCRBE6GQNQgAzJ3h8Xz09f0MwFNViAEkc&amp;#43;AAPcw1kNOJdOXMAN3EcfGgAXi9FEqorDQxoQJxOwXhIqQHoAAMpmfR4AH0JaQ2AElJA4NCIqIB&amp;#43;ADp0cQBldEdneQBfJYBuP2gxidXZgFlVMEWFBGegA1lFzABybZSCHFYGTcqVdZEWqEervR5vYE4XLaACCRCIYCk5xwEAJRNkBmMqgA2t91vMALpyBRA&amp;#43;HUkzoemONZzKJM87&amp;#43;ZAQAAWMgZ8D&amp;#43;BjkWJGj2g8BAEHgww5hi5POms2Ziy1fOlYCZcpKj10mL4ZqotAYLA4nEALJp8ARCESi&amp;#43;BgQhECDyNXKVTqLQ6YGcswWKw2ex3OJuDzeOElQ4hIhheYxaPOTIQVLpTLZPIFIrvMpEpE1OqNaDNVpEdpdHp9QZ&amp;#43;vSfdCTXk6qKLFYd9Ybd2e4gQPYHILJ1NnS43DNGJ6vd6t9va9aGwHvKhg6LQCEDr0QWHrhGlqooisYk16HH4wnE0nkm9UjV0yXM1nNkqh7kvgVCkXiyWGrKGKKsqqrsiGT5fr2-JSEyeoAf8xoYuacpWjQdBMGwgD3sYAIfqAEPKgAOps6Biugi6Dipu6b3EYbK6CoaiaNo7yfuYCARnYsTOLGng&amp;#43;MWY7HGm-AzlmObiBkST5vA&amp;#43;QaIUCalIiJ6og0TQtKIbQlB00DdL0AxDOBLbiOMbbfgs-TLJKGxlORI5JgJk5XLc1FzheoyGV80GrmZ&amp;#43;klJucmJgpyJKeiwIWtiuIyBSt5kpFj40lBy4wSytHwvokH6p2sG-mKEoef8QEhSBKrvnon7pYyArwblBhISFKGWnwNqYawgCn5oAR9GEcRgjCNAKDELIlFCdRyV6PRgZMRBcWsZY1gcTO3HxnxRwpicW6cfESTZmkYl5nU0mycWAXlmiKk1nWWkNrpxWLiZ3YWb1RBSDZ-HLfMFwOTOzkLm5xlVQCXmHr5h4lhUilniFLnQFeEUPneMUyKVJlJcVVAI9BzJZf&amp;#43;v35fKhVgYeqMJbqZllVKiEQ2hVChdAZqPEAA"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 点击
 &lt;/a>
@@ -1085,7 +1085,7 @@ target="_blank" rel="noopener"
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEBKCmBHArvCAXAQsgliAJvAE7QDeAUNNBmOjsNAEYD2&amp;#43;AngBQCUAXNAApgiYALbx0xACLxgzYejllKVaEXHIiAOzhJUGbHkJEAdAHF4m4rXiC2IZmHwcA5C3bOuAbmUBfZTToGAAt4R2IIbj5BYTEJImlZeUUKFVV1LR0UNCxcAmIzCysJW3tHFxCwoggPbyo-KgD6aAAHWiCOAGt4Nj4MIhxNAHNeASFRcSkZOVpk5So1dA1tBCz9XKMCy3kbMDsHJ2dW9CDnABpoLrYvX390Wiasok5L3vR&amp;#43;oZHo8biE6YUSFIqBZLTJ6HKGfLmLbWEr7FyPNhnC7da51W73BhQoo7PZlObQADuITUfFcrER0AAPtBnBUjNUqTSjidGc4EWd8ZcAPyvd6DZRcJSpAD0wuggBX4wB7aoAh5UADqaAUYjAA6ZgAs1fHAjIcfFUO5EQbiPgIRL4AA8fQGg3OYE0bAAfKctS0iMxmsR0GwANLdXnmxkQNgiFggRnITSEABmA3g&amp;#43;HtqSorRiEyIAElQ-AAB58TTIAPEfEjABuzBw&amp;#43;GgAF4bULY7JNBhHTh89ZPWwy9AAAbNfoNiQAfQAJKQicR4D4&amp;#43;6QO87XR7ulzjAoAMpvc3cHyt2pV5g19B1rvwACy4jALcuDqoXMrsZUlxjF5U8e&amp;#43;xBThDTJ&amp;#43;g9RvfFILTGsQfqbTr7XVIcDDaAOEHNQy1LUsaTcClKWpcD4Eg6DaVCekPHPWMdT1dAAG0O3rRtugAXRbAid33O5AJUHxoHgEAICQwEL2A0CAEEiGENhjBwCAOK4jhsPEfDOyIthiK4QVmJvIS8PIsTiOMZpkAgdp5IkSiwFRG9aPoxjMIvWSRMIiQm1I6DjIog9iOo1I3zs-EfDXPwfCAA"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 点击
 &lt;/a>
@@ -1207,7 +1207,7 @@ target="_blank" rel="noopener"
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEBKCmBHArvCAXAQsgliAJvAE7QDeAUNNBmOjsNAObzoCyLAFgPb4AURXZIw4BVIiABc1dERwA7RgBpoXAA50uciFIQo06AJJyc6AJRT26bvgAi8YFyK1HZSlWhEWyInLhJUGNh4hEQAdADi8HLEtPC6Aej8gsJiIMoA5OEAogAq6cpqGlqmANxuAL5uNHQMhCAs8JbWSUKi4lIYsgoF6jia2n56GEYm5tBNPHYOTuguFO4eXj6DCUEExBFRMehx-votKeIZNlkAMrlZ&amp;#43;Sq9-aUVVei09NCqXBgTfAKtqR0y8krXIoDeL6EZmCycSb2RzOEjzdyedDeXwgwK4dZhSLRGa7IaJL6HNLQdIABQA8gBlPI9IF3KiVKjVZ6qZBsSGfZJtSTSLoAwp9LQ6PbDYzg8bsqYw2ZwtxURHIlb6NYhTbY2Ko-Gc1IZEkiamAgUQOnQBnSJ4MLHbXEJXiyjxa9o8-6KO0AW3ZUkyuXS0AAPsTyVSff70idzjlLn6A3r8nb&amp;#43;f0hXiwW5TK4FvLlraFlRHkRmOghdN8AAeTrO6BgOQATwAfC7sy8BKpiOgqwBpeBV368qMQKuugBGXBAUeQckIADN5PB8PXs4QIMBZOpHFISU2W1W7Ivl9K7WN12pN9ulzgVyR-QA3Lg4fDQAC8NbT2YcWnQZBeYCc7p2RCMhAADykId8CrEkvzAH9iH-eAAJNB87QWXN8wAbQAA1UWRL1iAB9ECqxwgASUhMKPIhWw7KsAH5QlmCk-gUXhTHKNCAF0-X9UhyjKBtXwwD9VAgqC-3HWCpA4eAwBCCBwO-BoRMA&amp;#43;D70Q9xkJYdDMJwbCdhwiSpOICAiJIjdyPbTsaLohjGCYlj2N9TjuJUvj30EqwAEEiCcLtoA8rziwQItSys5RK1rJ9lIbHMv1QjCsNw1yOCM0jm1MyiLK4ejeRstiOOgFDWJ4l9&amp;#43;nfPQiCrXywG8iqq386EiBLMtugrasa3ClSorzdTYq03DSoI4jks3NLaIyqzsrs-18sKhYF1Pc9QmwkBUAfaAJzHYAimgXhQh26KBmq4tQprA8BFdHAIHgWqIFeLR4CfeEG3qd98JWvaUPw2TIPkmCAIK9roCe6A9Ok168wgFDgYMz7hJ&amp;#43;v7IoBlhoG8Ed73tb5xGm7MEuq0IJ0cLIwGADheF4UhoAAa07ZRBLk38fpNVNH2feHkZW5HQk8VRwGAeBeDQ0hiMpqtyhYkKwZQmmvrp0TfvSzL-iY40G3KJXs0BvqVvSdJMYWPqcbxogCaJkmyaF6mhO&amp;#43;mWGYfe7-qoDXUbQ4i&amp;#43;vKQXO3Ke9iLeyWYZl1jygAMjQnX3BVkP7dQMqVr60IIBAeheYABmUABaABGVWFlZx3iOR8oqOdyPheD-6M18CcWGN5HlAeyKdtCeMtDneH8KkH9rAfe9Ua9PJoCo6A5GQEARykAApCkyQAOVjqycAnKteHw0xm8iyGiAgFeG3bnh-vKagnggKc0EVEVRhDxyFgvk1yHKIA"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 点击
 &lt;/a>
@@ -1332,7 +1332,7 @@ target="_blank" rel="noopener"
 &lt;/div>&lt;p>打开控制台，请求已经发出，并且自定义请求头已经生效；报错是因为跨域问题。&lt;/p>
 &lt;p>完整代码在&lt;a class="link"
 href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEBKCmBHArvCAXAQsgliAJvAE7QDeAUNNBmOjsNAEYD2&amp;#43;AngBQCUAXNAApgiYALbx0xACLxgzYejllKVaEXHIiAOzhJUGbHkJEAdAHF4m4rXiC2IZmHwcA5C3bOuAbmUBfZTToGAAt4R2IIbj5BYTEJImlZeUUKFVV1LR0UNCxcAmIzCysJW3tHFxCwoggPbyo-KgD6aAAHWiCOAGt4Nj4MIhxNAHNeASFRcSkZOVpk5So1dA1tBCz9XKMCy3kbMDsHJ2dW9CDnABpoLrYvX390Wiasok5L3vR&amp;#43;oZHo8biE6YUSFIqBZLTJ6HKGfLmLbWEr7FyPNhnC7da51W73BhQoo7PZlObQADuITUfFcrER0AAPtBnBUjNUqTSjidGc4EWd8ZcAPyvd6DZRcJSpAD0wuggBX4wB7aoAh5UADqaAUYjAA6ZgAs1fHAjIcfFUO5EQbiPgIRL4AA8fQGg3OYE0bAAfKctS0iMxmsR0GwANLdXnmxkQNgiFggRnITSEABmA3g&amp;#43;HtqSorRiEyIAElQ-AAB58TTIAPEfEjABuzBw&amp;#43;GgAF4bULY7JNBhHTh89ZPWwy9AAAbNfoNiQAfQAJKQicR4D4&amp;#43;6QO87XR7ulzjAoAMpvc3cHyt2pV5g19B1rvwACy4jALcuDqoXMrsZUlxjF5U8e&amp;#43;xBThDTJ&amp;#43;g9RvfFILTGsQfqbTr7XVIcDDaAOEHNQy1LUsaTcClKWpcD4Eg6DaVCekPHPWMdT1dAAG0O3rRtugAXRbAid33O5AJUHxoHgEAICQwEL2A0CAEEiGENhjBwCAOK4jhsPEfDOyIthiK4QVmJvIS8PIsTiOMZpkAgdp5IkSiwFRG9aPoxjMIvWSRMIiQm1I6DjIog9iOo1I3zs-EfDXN9GgYHDKKCVgOCdZBBiCABVIgQG9IZzmdOgNwgA1dGyFMcHQEYPNYX4kgBNV0mWGK1ghEwsW2FYwW85hfICoLzmcUwAFEABUkXCnBIu0ly7kCaBCBACYkqcHy-MC4LqEXULoHqyLotWdA4oSvgupSmY0tSdVMvGgw8lywp8qy9AipKvryskSqABkasqurmgimsmvRVrmmYDAuu23qgpCi1hrOhqazGsFJsS8RPPwWb-kwxbQWyFaNjy6wCuyB7SpAcr&amp;#43;AAeTnWqwrexrnKupplPQe6eth57UfOqKQYwb7pt&amp;#43;5KplSoGMpJ8FVs2bEoYwGHdppfh-JR16icuhoWqaCGJGZra1WKx7&amp;#43;rNUL8ViP7SSq2rWUR5HnFZfajuqk7Fc5jlUhGj66cmgUacWDUHVk6KjVNQaXqtW1r1SccXSIN0m2e31-UDYNUwjSxowdQgIGAfozrkKInSdt1pED4P-jzMOJ2dtgo6DnAQ5IalC2LMsK2kqhq1rT87x-ZM-z4WCvmLx901fMsXyM9tRJ7WDR0dycmxnedreXVtSPgsgnIdfOt0L79EyrjNoDpcIK7Hv8a9LOuhBw3CG5M&amp;#43;BuynqoW-Dtvp1nZgFz5bve&amp;#43;pUgB4vIev2Ofjdj4G&amp;#43;2GNQ05BNSWbetG0KwXm9oHr9T1&amp;#43;ZbeCcXZ707kfLgK4T7QFwjZQekUtwInvnfTiuxH5UxftbS079P6L11MJVeO5uwIkARHKcbAO4Hy7uAnuVJqTQNsm1NAKc07GAbCAVALYwwhmAOdUCxg&amp;#43;FL2JvfY0tsbSfCdCIXi8BUEQBujWeAOcXwdS3LBFsAjcLl1HnEceMDv5KMnmhcIqjdQQFwpvCAM8tF-h0TePRGggzQTxn1ehcY2j32MGGOQlUwDAHaBwT8V4vwJksU&amp;#43;V8gpywGVjHYlsdjjBqGaOAYA8AOCtlIP2S4PgVyWmMfhTRv4nzEXIYfJcklnGhNKXohELZnDOFKQg5B3EPFEC8T4jgfjkRsHOEXWeISfBhIUd-KglToKtn7AiHwaTug&amp;#43;FLP2NRXTgnpmIj4AAZKuF8vTamoCeC2BExgIAgHoEkgADOcAAtAARm0heKJwz&amp;#43;x2J8FyUZmy2ArlKcDMM4gWl2POLnWMfDjB6wgPbG8sE&amp;#43;Ay1YMhGk8sVZnizCAIMfAABSc4EYADldnW2ApwWCXAgUXjMbi2MYL8BrOoPcCAEY0AG00PFS5NFqLn1fOQPwoBIAwDYs0HAc5iD5gOZWAAAsLMG&amp;#43;R3IUwOEEdA6BmhRVFIwMAxZkDGFkCIYUY42gI0sD4FVzJqoEmYD4JEZ8uDKBwpgOV&amp;#43;BkCalSAKzaQqTBmO4GkcaAAJAxVQLbPytnyTBdt8TWuWusfIsEHVqGWuSd1RB0FeugCIoFfqwS2qUm0FwzJ1XwAwpocYBNfWCoDSYZkya2g6uYBhMAepMzZkYMQWNOacrGARC4OgYgaAiGaBhRt2RRDNHLTmIgAp44SMYsI9&amp;#43;mFhQACpR1alHdAQAm-GABnEwA2UaAC-FQAAHKACo5QAmKmAHvowAMP&amp;#43;AEYdQA98qAFO5QAm36ACa4wA4-GAG8fQA0eqAArjQAtaaTugIAeLTAD98oALO1ACScoAX8VZSABC3KUN7ABhcpO4U&amp;#43;JjhOgJNASwUHKqcTkNwDGVA42g1zUpZAONRXlAlVKngopBjMGYIMDqirmDKtVccVNmqKNBCLfq75vTlDY1MIR4jSTs02rQ-awUIawQusqMTJ&amp;#43;EbPXmm9XaDj-ra1Bp4zasNOhLavzE9Wzjtb82HDVZYdNmaBpeok-GtDantW6pLWW6DFaq16dQ7W&amp;#43;tzh23NtbYKOzdwW3dsrb2qgYiyOSKHbaTCEHmBQZg9AODToiCIZuMhmtDMbp3Sw7SHD0rhTCFDGRsAHLSPKrSzgYUBrGNxluugWAVp8BkfZTgS1KgUPZQZjZy4GEXhmZ7cpyTNWnkuDUGGDCHXXO5g8-27zIi-NBEg9B&amp;#43;AsH4Nhcun4cgl8stcqIDyxJd8OXzcW0haCQWyurYOeFub3KDnKGMCas1FrPzOC5SAMMJzpA&amp;#43;zTaSBA&amp;#43;AVY&amp;#43;AY&amp;#43;VQAcuaADN9QA8dpIjOQADnOJIawxhNABe4EaqgiraAtI4MQULfAQtyD6ZhfOzASOw4Q&amp;#43;jkwTaIClvgE1a4e2FsHYh8x1jHUKtUDOxdq7N3IzOFJJgNhabXxAp&amp;#43;R4kMRg&amp;#43;C4WcAdIQWzBB6iROd4gepmyYHeM4YijkgXnY50IAQ9Aghyp1ioP7QLAcSGB6D8H0AdeQ-QNDzH8OJtI&amp;#43;kijtHE2YcTeMNj3H&amp;#43;PvCE7W0pArRWUsiDKxwDX8AtcEm4ADoHIPfeSX14bibxvQum&amp;#43;UOb73mOrehZt2gHHeprjrPIEAA"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 这里
 &lt;/a>
@@ -1985,28 +1985,28 @@ target="_blank" rel="noopener"
 &lt;ul>
 &lt;li>&lt;a class="link"
 href="https://fettblog.eu/typescript-react-why-i-dont-use-react-fc"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 TypeScript + React: Why I don&amp;rsquo;t Use React.FC
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
 href="https://github.com/facebook/create-react-app/pull/8177"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Remove React.FC from TypeScript Template
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
 href="https://fettblog.eu/typescript-react-component-patterns"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 TypeScript + React: Component Patterns
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
 href="https://react-typescript-cheatsheet.netlify.app"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 React TypeScript Cheatsheet
 &lt;/a>
@@ -3207,35 +3207,35 @@ React TypeScript Cheatsheet
 &lt;ul>
 &lt;li>&lt;a class="link"
 href="https://juejin.cn/post/6844903749501059085"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 TypeScript 中的 interface 和 type 到底有什么区别
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
 href="https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 TypeScript: Interfaces VS Types
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
 href="https://juejin.im/post/5d04ac745188250a8b1fd203"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 TypeScript 3.0: unknown 类型
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
 href="https://juejin.im/post/5c2f87ce5188252593122c98"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 TypeScript 强大的类型别名
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
 href="https://www.bilibili.com/video/BV17N4y1e7PK"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 TS 中的协变与逆变
 &lt;/a>
@@ -4749,7 +4749,7 @@ TS 中的协变与逆变
 &lt;/div>&lt;h2 id="类型工具">类型工具&lt;/h2>
 &lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/docs/handbook/utility-types.html#awaitedtype"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Awaited&lt;Type>
 &lt;/a>
@@ -4770,7 +4770,7 @@ Awaited&lt;Type>
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Partial&lt;Type>
 &lt;/a>
@@ -4803,7 +4803,7 @@ Partial&lt;Type>
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/docs/handbook/utility-types.html#requiredtype"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Required&lt;Type>
 &lt;/a>
@@ -4836,7 +4836,7 @@ Required&lt;Type>
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/docs/handbook/utility-types.html#readonlytype"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Readonly&lt;Type>
 &lt;/a>
@@ -4869,7 +4869,7 @@ Readonly&lt;Type>
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Record&amp;lt;Keys, Type&amp;gt;
 &lt;/a>
@@ -4896,7 +4896,7 @@ Record&amp;lt;Keys, Type&amp;gt;
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Pick&amp;lt;Type, Keys&amp;gt;
 &lt;/a>
@@ -4927,7 +4927,7 @@ Pick&amp;lt;Type, Keys&amp;gt;
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Omit&amp;lt;Type, Keys&amp;gt;
 &lt;/a>
@@ -4960,7 +4960,7 @@ Omit&amp;lt;Type, Keys&amp;gt;
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/docs/handbook/utility-types.html#excludeuniontype-excludedmembers"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Exclude&amp;lt;UnionType, ExcludedMembers&amp;gt;
 &lt;/a>
@@ -4991,7 +4991,7 @@ Exclude&amp;lt;UnionType, ExcludedMembers&amp;gt;
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/docs/handbook/utility-types.html#extracttype-union"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Extract&amp;lt;Type, Union&amp;gt;
 &lt;/a>
@@ -5022,7 +5022,7 @@ Extract&amp;lt;Type, Union&amp;gt;
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/docs/handbook/utility-types.html#nonnullabletype"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 NonNullable&lt;Type>
 &lt;/a>
@@ -5041,7 +5041,7 @@ NonNullable&lt;Type>
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/docs/handbook/utility-types.html#parameterstype"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Parameters&lt;Type>
 &lt;/a>
@@ -5082,7 +5082,7 @@ Parameters&lt;Type>
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/docs/handbook/utility-types.html#constructorparameterstype"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 ConstructorParameters&lt;Type>
 &lt;/a>
@@ -5117,7 +5117,7 @@ ConstructorParameters&lt;Type>
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/docs/handbook/utility-types.html#returntypetype"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 ReturnType&lt;Type>
 &lt;/a>
@@ -5160,7 +5160,7 @@ ReturnType&lt;Type>
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/docs/handbook/utility-types.html#instancetypetype"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 InstanceType&lt;Type>
 &lt;/a>
@@ -5195,7 +5195,7 @@ InstanceType&lt;Type>
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/docs/handbook/utility-types.html#thisparametertypetype"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 ThisParameterType&lt;Type>
 &lt;/a>
@@ -5232,7 +5232,7 @@ ThisParameterType&lt;Type>
 &lt;/div>
 &lt;/div>&lt;p>&lt;a class="link"
 href="https://www.typescriptlang.org/docs/handbook/utility-types.html#omitthisparametertype"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 OmitThisParameter&lt;Type>
 &lt;/a>
@@ -5267,7 +5267,7 @@ OmitThisParameter&lt;Type>
 &lt;ul>
 &lt;li>&lt;a class="link"
 href="https://jkchao.github.io/typescript-book-chinese"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 深入理解 TypeScript
 &lt;/a>

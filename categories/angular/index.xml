@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Angular on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/angular/</link><description>Recent content in Angular on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 16 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/angular/index.xml" rel="self" type="application/rss+xml"/><item><title>Angular 路由复用 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/angular-%E8%B7%AF%E7%94%B1%E5%A4%8D%E7%94%A8/</link><pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/angular-%E8%B7%AF%E7%94%B1%E5%A4%8D%E7%94%A8/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/angular.png" alt="Angular 路由复用" />&lt;p>最近在看一个 SaaS 项目，涉及到了&lt;strong>路由复用&lt;/strong>的概念；在搞清楚之后，发现很早就接触过相关的需求，那么路由复用适用于什么场景呢？&lt;/p>
 &lt;p>之前在花瓣网做基于 Next.js 的官网重构时，产品设计希望在用户从瀑布流进入到详情页时，保留瀑布流页面的渲染状态，方便用户在进行回退操作时，能够接着上次的内容继续浏览。在此之前，花瓣网是一个基于 Node 的 MPA，页面状态的保留依赖于浏览器的 bfcache；在重构的过程中，发现 React 和 Next.js 都没有提供路由复用的功能；当时找遍了社区，有一些基于 react-router 的实现方案，但在 Next.js 环境下无法使用。后来官方&lt;a class="link"
 href="https://zh-hans.react.dev/blog/2022/06/15/react-labs-what-we-have-been-working-on-june-2022#offscreen"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 有计划
 &lt;/a>
 提供一个 off-screen 组件来实现组件实例缓存的功能；六年后的今天，off-screen 已经更名为 &lt;a class="link"
 href="https://zh-hans.react.dev/blog/2024/02/15/react-labs-what-we-have-been-working-on-february-2024#offscreen-renamed-to-activity"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 activity
 &lt;/a>
@@ -198,14 +198,14 @@ activity
 &lt;h2 id="angular">Angular&lt;/h2>
 &lt;p>上述功能对 Ng 来说，就没那么容易实现了；Ng 并没有提供 keep-alive 组件，也没有提供 onActivated/onDeactivated 钩子。如果要在 Ng 中实现相同的功能，需要借助 &lt;a class="link"
 href="https://angular.cn/api/router/RouteReuseStrategy"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 RouteReuseStrategy
 &lt;/a>
 。&lt;/p>
 &lt;p>我们可以通过查找 DefaultRouteReuseStrategy 关键字查找 Ng 默认的&lt;a class="link"
 href="https://github.com/angular/angular/blob/628ab4033bd3d165f235806632484895bb1f056f/packages/router/src/route_reuse_strategy.ts#L80"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 路由复用策略
 &lt;/a>
@@ -572,7 +572,7 @@ target="_blank" rel="noopener"
 &lt;/div>
 &lt;/div>&lt;p>其实，Ng 已经帮我们做好了；对组件实例的引用存在于 store 的第二个参数内；虽然 Ng 在 d.ts 中并没有告诉我们 &lt;a class="link"
 href="https://angular.cn/api/router/DetachedRouteHandle"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 DetachedRouteHandle
 &lt;/a>
@@ -629,13 +629,13 @@ DetachedRouteHandle
 &lt;/div>
 &lt;/div>&lt;p>发现，DetachedRouteHandle 上存在一个 &lt;a class="link"
 href="https://angular.cn/api/core/ComponentRef"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 componentRef
 &lt;/a>
 属性，它是 &lt;a class="link"
 href="https://angular.cn/api/core/ComponentFactory"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 ComponentFactory
 &lt;/a>
@@ -1898,7 +1898,7 @@ ComponentFactory
 &lt;p>Angular 中的 ngTemplateOutlet 和 Vue 中的 Slot 的便捷性明显不如 JSX 的 renderProps 模式；毕竟渲染函数的表现力真的不如 JSX。&lt;/p>
 &lt;p>虽有诸多不便，但是如果想实现 UI 的复用；插槽可能是唯一的选择。对于 renderless 模式，推荐 Tailwind CSS 作者的 &lt;a class="link"
 href="https://adamwathan.me/renderless-components-in-vuejs"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Renderless Components in Vue.js
 &lt;/a>
@@ -2563,7 +2563,7 @@ Renderless Components in Vue.js
 &lt;/div>
 &lt;/div>&lt;p>是不是眼熟&lt;a class="link"
 href="https://cn.vuejs.org/api/built-in-special-elements.html#component"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 &amp;lt;component/&amp;gt;
 &lt;/a>
@@ -3787,7 +3787,7 @@ loading="lazy"
 &lt;/div>
 &lt;/div>&lt;p>但是这种方式不够灵活，总不能一种事件就写一个指令。可以借助 &lt;a class="link"
 href="https://angular.cn/api/platform-browser/EventManager"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 EventManager
 &lt;/a>
@@ -3917,7 +3917,7 @@ EventManager
 &lt;/div>
 &lt;/div>&lt;p>控制台会报**&lt;a class="link"
 href="https://angular.cn/errors/NG0100"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 NG100 错误
 &lt;/a>
@@ -3931,35 +3931,35 @@ NG100 错误
 &lt;ul>
 &lt;li>&lt;a class="link"
 href="https://indepth.dev/posts/1467/how-to-use-controlvalueaccessor-to-enhance-date-input-with-automatic-conversion-and-validation"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 How To Use ControlValueAccessor To Enhance Date Input With Automatic Conversion And Validation
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
 href="https://indepth.dev/posts/1508/structure-initialization-logic-without-ngoninit-utilize-observables-and-ngonchanges"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Component Initialization Without ngOnInit With Async Pipes For Observables And ngOnChanges
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
 href="https://indepth.dev/posts/1058/a-gentle-introduction-into-change-detection-in-angular"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 A Gentle Introduction Into Change Detection in Angular
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
 href="https://indepth.dev/posts/1434/running-event-listeners-outside-of-the-ngzone"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Running Event Listeners Outside Of The NgZone
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
 href="https://netbasal.com/understanding-angular-structural-directives-659acd0f67e"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Understanding Angular Structural Directives
 &lt;/a>
@@ -3967,7 +3967,7 @@ Understanding Angular Structural Directives
 &lt;/ul></description></item><item><title>Angular 快速上手 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/angular-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</link><pubDate>Wed, 16 Mar 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/angular-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/angular.png" alt="Angular 快速上手" />&lt;h2 id="组件">组件&lt;/h2>
 &lt;p>在 Angular 中，组件是用来定义视图的，一个应用至少有一个根组件（属于根模块的一部分）；组件由三部分组成：组件类（控制组件模板渲染）、组件模板、组件样式（默认仅对当前组件生效，不会污染全局）；可以使用 ng generate 命令或&lt;a class="link"
 href="https://marketplace.visualstudio.com/items?itemName=alexiv.vscode-angular2-files"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 编辑器扩展
 &lt;/a>
@@ -5797,7 +5797,7 @@ target="_blank" rel="noopener"
 &lt;p>当 class 需要某个依赖时，该依赖就会作为参数添加到 class 的构造函数中。当 Angular 实例化 class 时，DI 会在“注入器树”中查找（从局部开始，向上冒泡，直到 root）provider；如果没有找到 provider，会报错。&lt;/p>
 &lt;p>如果要保证外部注入的服务是自己（当前 class）独有的（&lt;a class="link"
 href="https://angular.cn/guide/dependency-injection-in-action#multiple-service-instances-sandboxing"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 沙箱式隔离
 &lt;/a>
@@ -6470,7 +6470,7 @@ target="_blank" rel="noopener"
 &lt;/div>
 &lt;/div>&lt;p>&amp;lt;ng-content/&amp;gt;，使用在组件内部，可以使组件&lt;a class="link"
 href="https://angular.cn/guide/content-projection"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 “接受外部插入进来的内容”
 &lt;/a>
@@ -6702,7 +6702,7 @@ target="_blank" rel="noopener"
 &lt;/div>
 &lt;/div>&lt;p>在开发的过程中，可能会遇到**&lt;a class="link"
 href="https://angular.cn/errors/NG0100"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 NG100 错误
 &lt;/a>
@@ -6847,7 +6847,7 @@ NG100 错误
 &lt;/div>
 &lt;/div>&lt;p>如果某个值被确认是可信的，可以通过 &lt;a class="link"
 href="https://angular.cn/api/platform-browser/DomSanitizer"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 DomSanitizer
 &lt;/a>
@@ -6897,49 +6897,49 @@ DomSanitizer
 &lt;ul>
 &lt;li>&lt;a class="link"
 href="https://dev.to/christiankohler/improved-dependeny-injection-with-the-new-providedin-scopes-any-and-platform-30bb"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Improved Dependency Injection With The New ProvidedIn Scopes &amp;lsquo;any&amp;rsquo; And &amp;lsquo;platform&amp;rsquo;
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
 href="https://juejin.cn/post/7012492445506093092"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 深入理解 Angular 依赖注入（二）：依赖注入在 Angular 中的应用
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
 href="https://limeii.github.io/2019/06/angular-changeDetectionStrategy-OnPush"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Angular Change Detection：变更检测策略
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
 href="https://www.geeksforgeeks.org/what-is-aot-and-jit-compiler-in-angular"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 What Is AOT And JIT Compiler In Angular?
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
 href="https://juejin.cn/post/6869995328330792968"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 ng-template、ng-content、ng-container
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
 href="https://www.cnblogs.com/laixiangran/p/8723166.html"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 使用 ng-content 进行组件内容投射
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
 href="https://blog.kevinyang.net/2018/01/19/angular-viewproviders-providers"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 viewProviders vs providers
 &lt;/a>

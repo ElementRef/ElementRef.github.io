@@ -22,13 +22,13 @@
 &lt;p>在开发环境，相较于 Webpack，改变了运行策略；将&lt;strong>先编译后运行服务&lt;/strong>变为了&lt;strong>先运行服务后编译&lt;/strong>；模块之间的依赖解析工作交给了浏览器，Vite 只负责按需“编译”。所以，他提升了部分开发体验，而对生产环境的打包速度并没有质的提升。&lt;/p>
 &lt;p>为什么说是“部分”呢？因为如果页面依赖众多，还是会有可感知的“白屏”。这可能是因为 esbuild 还不够快？也可能是复杂项目的渲染触发了过多的 HTTP 请求，达到了浏览器的并发限制。可以看看&lt;a class="link"
 href="https://moonvy.com/blog/post/2024/migrate-vite-to-rsbuild"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 这篇文章
 &lt;/a>
 和&lt;a class="link"
 href="https://github.com/vitejs/vite/discussions/13697"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 相关 issue
 &lt;/a>
@@ -48,19 +48,19 @@ target="_blank" rel="noopener"
 &lt;h3 id="热替换">热替换&lt;/h3>
 &lt;p>Vite 提供了一套适用于 ESM 的 &lt;a class="link"
 href="https://cn.vitejs.dev/guide/api-hmr.html"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 HMR API
 &lt;/a>
 ，可以实现精准的 HMR。Vite 已经集成了 &lt;a class="link"
 href="https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Vue
 &lt;/a>
 、&lt;a class="link"
 href="https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 React
 &lt;/a>
@@ -69,7 +69,7 @@ React
 &lt;p>Vite 对 TS 文件进行转换而不进行类型检查，它希望类型检查由 IDE 完成。因为类型检查需要解析整个项目的依赖关系，和 Vite 的按需编译模式不匹配。&lt;/p>
 &lt;p>如果需要进行类型检查，可以借助 tsc --noEmit，或者借助 &lt;a class="link"
 href="https://github.com/fi3ework/vite-plugin-checker"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 vite-plugin-checker
 &lt;/a>
@@ -284,7 +284,7 @@ vite-plugin-checker
 &lt;/ul>
 &lt;p>可以通过 build.target 指定构建目标，最低为 es2015。如果要兼容更低版本的浏览器，需要使用&lt;a class="link"
 href="https://github.com/vitejs/vite/tree/main/packages/plugin-legacy"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 @vitejs/plugin-legacy
 &lt;/a>
@@ -568,7 +568,7 @@ target="_blank" rel="noopener"
 &lt;/div>&lt;h2 id="插件">插件&lt;/h2>
 &lt;p>如果要写插件，推荐使用 &lt;a class="link"
 href="https://github.com/antfu/vite-plugin-inspect"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 vite-plugin-inspect
 &lt;/a>
@@ -1962,21 +1962,21 @@ vite-plugin-inspect
 &lt;ul>
 &lt;li>&lt;a class="link"
 href="https://www.zhangxinxu.com/wordpress/2023/08/html-attribute-nonce-translate"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 查漏补缺，我仍未知道的 HTML nonce 和 popover 属性
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
 href="https://www.doubao.com/thread/wadb214671149543e"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Vite 模块合并核心逻辑
 &lt;/a>
 &lt;/li>
 &lt;li>&lt;a class="link"
 href="https://www.doubao.com/thread/w19fbc989a2025bf6"
-target="_blank" rel="noopener"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
 >
 Babel 与 Polyfill 协同
 &lt;/a>
