@@ -4695,6 +4695,45 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">example2&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
+&lt;/div>&lt;h2 id="获取类型中的只读属性">获取类型中的只读属性&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// https://www.bilibili.com/video/BV1cvcezHEwZ
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">interface&lt;/span> &lt;span class="nx">Todo&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">readonly&lt;/span> &lt;span class="nx">title&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">readonly&lt;/span> &lt;span class="nx">description&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">completed&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">Equal&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">X&lt;/span>&lt;span class="err">,&lt;/span> &lt;span class="na">Y&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">(&amp;lt;&lt;/span>&lt;span class="nt">U&lt;/span>&lt;span class="p">&amp;gt;()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">U&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="nx">X&lt;/span> &lt;span class="o">?&lt;/span> &lt;span class="nx">1&lt;/span> : &lt;span class="kt">2&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">U&lt;/span>&lt;span class="p">&amp;gt;()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">U&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="nx">Y&lt;/span> &lt;span class="o">?&lt;/span> &lt;span class="nx">1&lt;/span> : &lt;span class="kt">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">?&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">:&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">GetReadonlyKeys&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">T&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="nx">K&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="k">keyof&lt;/span> &lt;span class="nx">T&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">Equal&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Pick&lt;/span>&lt;span class="err">&amp;lt;&lt;/span>&lt;span class="na">T&lt;/span>&lt;span class="err">,&lt;/span> &lt;span class="na">K&lt;/span>&lt;span class="p">&amp;gt;,&lt;/span> &lt;span class="nx">Readonly&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Pick&lt;/span>&lt;span class="err">&amp;lt;&lt;/span>&lt;span class="na">T&lt;/span>&lt;span class="err">,&lt;/span> &lt;span class="na">K&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>&lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">?&lt;/span> &lt;span class="nx">K&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> : &lt;span class="kt">never&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}[&lt;/span>&lt;span class="k">keyof&lt;/span> &lt;span class="nx">T&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">Result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">GetReadonlyKeys&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Todo&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
 &lt;/div>&lt;h2 id="参考">参考&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a class="link"
