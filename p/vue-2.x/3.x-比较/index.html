@@ -2531,7 +2531,7 @@
 </span></span><span class="line"><span class="cl">      <span class="k">case</span> <span class="s1">'set'</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 如果操作类型是 SET 并且 target 是 Map 类型，需要触发 ITERATE_KEY 关联的副作用
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">isMap</span><span class="p">(</span><span class="nx">target</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">          <span class="nx">add</span><span class="p">(</span><span class="nx">depsMap</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">ITERATE_KEY</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">add</span><span class="p">(</span><span class="nx">depsMap</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="err">I</span><span class="nx">TERATE_KEY</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
