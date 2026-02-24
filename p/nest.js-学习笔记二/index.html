@@ -2978,7 +2978,7 @@
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">new</span> <span class="nx">StreamableFile</span><span class="p">(</span><span class="nx">stream</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="http-模块">HTTP 模块</h2><p>Nest 基于 Axios 构建了 HttpModule，HttpModule 导出了 HttpService，HttpService 会自动将响应转换为 RxJS 对象；要使用 HttpModule，需要安装@nestjs/axios：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="http-模块">HTTP 模块</h2><p>Nest 基于 axios 构建了 HttpModule，HttpModule 导出了 HttpService，HttpService 会自动将响应转换为 RxJS 对象；要使用 HttpModule，需要安装@nestjs/axios：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pnpm add @nestjs/axios axios
 </span></span></code></pre></td></tr></tbody></table></div></div><p>然后，导入 HttpModule，依赖注入 HttpService 即可：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
