@@ -1,1431 +1,1431 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/docker/</link><description>Recent content in Docker on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 03 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>狂神说 Java 之 Docker 学习笔记 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Tue, 03 Dec 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/docker.png" alt="狂神说 Java 之 Docker 学习笔记" />&lt;h2 id="概述">概述&lt;/h2>
-&lt;p>Docker 是一个 Client/Server 系统，其守护进程运行在主机上；Client/Server 通过 Socket 进行通信：&lt;/p>
-&lt;ul>
-&lt;li>客户端，Client：
-&lt;ul>
-&lt;li>docker build，构建镜像；&lt;/li>
-&lt;li>docker pull，拉取镜像；&lt;/li>
-&lt;li>docker run，运行镜像。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>服务器，DOCKER_HOST：
-&lt;ul>
-&lt;li>Daemon，守护进程；&lt;/li>
-&lt;li>Containers，容器，用来运行一个/一组应用，Docker 通过容器来提供服务；&lt;/li>
-&lt;li>Images，镜像，可以把他想象成一个构造函数，镜像运行的结果就是容器。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>仓库，Registry，存放镜像的地方：
-&lt;ul>
-&lt;li>公有仓库：DockerHub、阿里云等等；&lt;/li>
-&lt;li>私有仓库。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;p>通过将项目和对应的运行环境一起打包为 Docker 镜像；提升项目部署体验。项目运行之前，不再需要复杂的环境配置（甚至有些环境依赖不能够跨平台）：&lt;/p>
-&lt;ul>
-&lt;li>虚拟机虚拟出一套硬件，并在虚拟硬件之上运行一个完整的操作系统，项目运行在虚拟机系统内；&lt;/li>
-&lt;li>内核级虚拟化，应用直接运行在宿主系统内核之上，容器没有虚拟出自己的硬件系统；&lt;/li>
-&lt;li>每个容器之间都是相互隔离的，都有自己单独的文件系统；&lt;/li>
-&lt;li>开发、测试、线上环境高度一致。&lt;/li>
-&lt;/ul>
-&lt;h2 id="命令">命令&lt;/h2>
-&lt;h3 id="帮助命令">帮助命令&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看帮助信息&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker --help
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看版本信息&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker version
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看详细信息，包含镜像、容器...&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker info
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.help.png"
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/docker/</link><description>Recent content in Docker on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 03 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>狂神说 Java 之 Docker 学习笔记 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Tue, 03 Dec 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/docker.png" alt="狂神说 Java 之 Docker 学习笔记" /&gt;&lt;h2 id="概述"&gt;概述&lt;/h2&gt;
+&lt;p&gt;Docker 是一个 Client/Server 系统，其守护进程运行在主机上；Client/Server 通过 Socket 进行通信：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;客户端，Client：
+&lt;ul&gt;
+&lt;li&gt;docker build，构建镜像；&lt;/li&gt;
+&lt;li&gt;docker pull，拉取镜像；&lt;/li&gt;
+&lt;li&gt;docker run，运行镜像。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;服务器，DOCKER_HOST：
+&lt;ul&gt;
+&lt;li&gt;Daemon，守护进程；&lt;/li&gt;
+&lt;li&gt;Containers，容器，用来运行一个/一组应用，Docker 通过容器来提供服务；&lt;/li&gt;
+&lt;li&gt;Images，镜像，可以把他想象成一个构造函数，镜像运行的结果就是容器。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;仓库，Registry，存放镜像的地方：
+&lt;ul&gt;
+&lt;li&gt;公有仓库：DockerHub、阿里云等等；&lt;/li&gt;
+&lt;li&gt;私有仓库。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过将项目和对应的运行环境一起打包为 Docker 镜像；提升项目部署体验。项目运行之前，不再需要复杂的环境配置（甚至有些环境依赖不能够跨平台）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;虚拟机虚拟出一套硬件，并在虚拟硬件之上运行一个完整的操作系统，项目运行在虚拟机系统内；&lt;/li&gt;
+&lt;li&gt;内核级虚拟化，应用直接运行在宿主系统内核之上，容器没有虚拟出自己的硬件系统；&lt;/li&gt;
+&lt;li&gt;每个容器之间都是相互隔离的，都有自己单独的文件系统；&lt;/li&gt;
+&lt;li&gt;开发、测试、线上环境高度一致。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="命令"&gt;命令&lt;/h2&gt;
+&lt;h3 id="帮助命令"&gt;帮助命令&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看帮助信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker --help
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看版本信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker version
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看详细信息，包含镜像、容器...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker info
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.help.png"
 width="1700"
 height="2614"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.help_hu17771850033439252856.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.help_hu17892929114535338800.png 1024w"
-alt="docker help"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.help_hu_bc8d02b52c18e64b.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.help_hu_a2f3b8efaa487971.png 1024w"
+alt="docker –help"
 class="gallery-image"
 data-flex-grow="65"
 data-flex-basis="156px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="docker-images">docker images&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;span class="lnt">7
-&lt;/span>&lt;span class="lnt">8
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看镜像帮助信息&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker images --help
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看本地镜像&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker images
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看本地镜像，显示全部镜像&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker images --all
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看本地镜像，仅显示镜像 ID&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker images --quiet
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="docker-images"&gt;docker images&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看镜像帮助信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker images --help
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看本地镜像&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker images
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看本地镜像，显示全部镜像&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker images --all
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看本地镜像，仅显示镜像 ID&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker images --quiet
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images.png"
 width="1700"
 height="1158"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images_hu17890351500060768796.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images_hu15479858549935851394.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images_hu_1dedc631fb46b295.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images_hu_711355413e9dde1a.png 1024w"
 alt="docker images"
 class="gallery-image"
 data-flex-grow="146"
 data-flex-basis="352px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="docker-search">docker search&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看镜像搜索帮助信息&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker search --help
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 搜索远程镜像&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker search mysql
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 对搜索结果进行过滤，仅展示 STAR 在 3000 以上的镜像&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker search mysql --filter&lt;span class="o">=&lt;/span>&lt;span class="nv">STARS&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">3000&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.search.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="docker-search"&gt;docker search&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看镜像搜索帮助信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker search --help
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 搜索远程镜像&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker search mysql
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 对搜索结果进行过滤，仅展示 STAR 在 3000 以上的镜像&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker search mysql --filter&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;STARS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;3000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.search.png"
 width="1700"
 height="1418"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.search_hu3996600367194119301.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.search_hu1381904099901833384.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.search_hu_964618d9e4512f9.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.search_hu_f7605d6432acb70a.png 1024w"
 alt="docker search"
 class="gallery-image"
 data-flex-grow="119"
 data-flex-basis="287px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="docker-pull">docker pull&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;span class="lnt">7
-&lt;/span>&lt;span class="lnt">8
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看镜像拉取帮助信息&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker pull --help
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 拉取镜像&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker pull nginx
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 拉取指定版本镜像&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker pull nginx:1.26
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 直接从地址拉取镜像&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker pull docker.io/library/nginx:latest
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.pull.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="docker-pull"&gt;docker pull&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看镜像拉取帮助信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker pull --help
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 拉取镜像&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker pull nginx
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 拉取指定版本镜像&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker pull nginx:1.26
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 直接从地址拉取镜像&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker pull docker.io/library/nginx:latest
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.pull.png"
 width="1700"
 height="1652"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.pull_hu7122996612658872305.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.pull_hu8975018491302369731.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.pull_hu_3cb5f656fbba257c.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.pull_hu_f70e8c119a873f86.png 1024w"
 alt="docker pull"
 class="gallery-image"
 data-flex-grow="102"
 data-flex-basis="246px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="docker-rmi">docker rmi&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;span class="lnt">7
-&lt;/span>&lt;span class="lnt">8
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看镜像删除帮助信息&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker rmi --help
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 删除指定镜像&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker rmi --force a86cd5b7fd4c
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 删除多个镜像&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker rmi --force a86cd5b7fd4c b97de6c8gf4d
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 删除所有镜像&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker rmi --force &lt;span class="k">$(&lt;/span>docker images --all --quiet&lt;span class="k">)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rmi.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="docker-rmi"&gt;docker rmi&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看镜像删除帮助信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker rmi --help
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 删除指定镜像&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker rmi --force a86cd5b7fd4c
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 删除多个镜像&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker rmi --force a86cd5b7fd4c b97de6c8gf4d
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 删除所有镜像&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker rmi --force &lt;span class="k"&gt;$(&lt;/span&gt;docker images --all --quiet&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rmi.png"
 width="1700"
 height="1652"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rmi_hu868731813973388294.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rmi_hu5527141039744779942.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rmi_hu_90e7b47d2a474faf.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rmi_hu_f4576e0ed01ce73c.png 1024w"
 alt="docker rmi"
 class="gallery-image"
 data-flex-grow="102"
 data-flex-basis="246px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="docker-run">docker run&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;span class="lnt">17
-&lt;/span>&lt;span class="lnt">18
-&lt;/span>&lt;span class="lnt">19
-&lt;/span>&lt;span class="lnt">20
-&lt;/span>&lt;span class="lnt">21
-&lt;/span>&lt;span class="lnt">22
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 创建容器并启动&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># --name 指定容器名称&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># --detach 以后台方式运行&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># --interactive 以交互方式运行，可以进入容器查看内容&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># --publish 指定端口&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># --publish IP:主机端口:容器端口&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># --publish 主机端口:容器端口（常用）&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># --publish 容器端口&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># --publish-all 指定随机端口&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --name --detach --interactive --publish --publish-all
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 以交互方式运行 centos 镜像，并调用 centos 下的 bash&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --interactive centos /bin/bash
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 后台启动容器；如果一个容器以「后台运行」的方式被启动&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 当容器没有对应的「前台进程」时，会被 Docker 自动停止&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --detach centos
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 后台启动容器 nginx-exp 并将容器的 80 端口映射到宿主环境的 2323 端口&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 宿主机通过 localhost:2323 就能访问到容器内部运行的 nginx 服务&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --detach --name nginx-exp --publish 2323:80 nginx
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 退出停止并容器&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">exit&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 退出不停止容器&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CMD + P + Q
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.run.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="docker-run"&gt;docker run&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 创建容器并启动&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# --name 指定容器名称&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# --detach 以后台方式运行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# --interactive 以交互方式运行，可以进入容器查看内容&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# --publish 指定端口&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# --publish IP:主机端口:容器端口&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# --publish 主机端口:容器端口（常用）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# --publish 容器端口&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# --publish-all 指定随机端口&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --name --detach --interactive --publish --publish-all
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 以交互方式运行 centos 镜像，并调用 centos 下的 bash&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --interactive centos /bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 后台启动容器；如果一个容器以「后台运行」的方式被启动&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 当容器没有对应的「前台进程」时，会被 Docker 自动停止&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --detach centos
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 后台启动容器 nginx-exp 并将容器的 80 端口映射到宿主环境的 2323 端口&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 宿主机通过 localhost:2323 就能访问到容器内部运行的 nginx 服务&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --detach --name nginx-exp --publish 2323:80 nginx
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 退出停止并容器&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;exit&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 退出不停止容器&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;CMD + P + Q
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.run.png"
 width="1700"
 height="1054"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.run_hu11115301238392403670.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.run_hu3678954481560224258.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.run_hu_fa9e4d6f12860953.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.run_hu_29e3d6448d5db19a.png 1024w"
 alt="docker run"
 class="gallery-image"
 data-flex-grow="161"
 data-flex-basis="387px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="docker-ps">docker ps&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看当前运行的容器&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker ps
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看当前 + 曾经运行过的容器&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker ps --all
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看当前运行的容器，仅展示容器 ID&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker ps --quiet
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ps.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="docker-ps"&gt;docker ps&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看当前运行的容器&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker ps
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看当前 + 曾经运行过的容器&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker ps --all
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看当前运行的容器，仅展示容器 ID&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker ps --quiet
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ps.png"
 width="1700"
 height="1418"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ps_hu6664748860847240790.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ps_hu6907377627145483563.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ps_hu_e749a6f1b7f06d50.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ps_hu_7ea471049b907172.png 1024w"
 alt="docker ps"
 class="gallery-image"
 data-flex-grow="119"
 data-flex-basis="287px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="docker-rm">docker rm&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;span class="lnt">7
-&lt;/span>&lt;span class="lnt">8
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 删除容器，不能删除正在运行的容器&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker rm a86cd5b7fd4c
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 强制删除容器&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker rm --force a86cd5b7fd4c
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 删除所有容器&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker rm --force &lt;span class="k">$(&lt;/span>docker ps --all --quiet&lt;span class="k">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 删除所有容器&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker ps --all --quiet&lt;span class="p">|&lt;/span>xargs docker rm --force
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rm.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="docker-rm"&gt;docker rm&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 删除容器，不能删除正在运行的容器&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker rm a86cd5b7fd4c
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 强制删除容器&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker rm --force a86cd5b7fd4c
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 删除所有容器&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker rm --force &lt;span class="k"&gt;$(&lt;/span&gt;docker ps --all --quiet&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 删除所有容器&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker ps --all --quiet&lt;span class="p"&gt;|&lt;/span&gt;xargs docker rm --force
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rm.png"
 width="1700"
 height="1730"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rm_hu15133704161791211209.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rm_hu9124269866086142035.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rm_hu_3227d54e90e11551.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rm_hu_233ab6b016bae11d.png 1024w"
 alt="docker rm"
 class="gallery-image"
 data-flex-grow="98"
 data-flex-basis="235px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="docker-start">docker start&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;span class="lnt">7
-&lt;/span>&lt;span class="lnt">8
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 启动容器&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker start a86cd5b7fd4c
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 重启容器&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker restart a86cd5b7fd4c
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 停止当前正在运行的容器&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker stop a86cd5b7fd4c
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 强制停止容器&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">kill&lt;/span> a86cd5b7fd4c
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h3 id="docker-logs">docker logs&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 要查看容器日志，首先要运行一个容器&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --detach centos bin/sh -c &lt;span class="s2">&amp;#34;while true;do echo hahaha;sleep 1;done&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看获取日志帮助信息&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker logs --help
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 日志查看&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker logs --timestamps --follow --tail &lt;span class="m">10&lt;/span> efcf4490c790
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.logs.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="docker-start"&gt;docker start&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 启动容器&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker start a86cd5b7fd4c
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 重启容器&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker restart a86cd5b7fd4c
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 停止当前正在运行的容器&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker stop a86cd5b7fd4c
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 强制停止容器&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;kill&lt;/span&gt; a86cd5b7fd4c
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="docker-logs"&gt;docker logs&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 要查看容器日志，首先要运行一个容器&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --detach centos bin/sh -c &lt;span class="s2"&gt;&amp;#34;while true;do echo hahaha;sleep 1;done&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看获取日志帮助信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker logs --help
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 日志查看&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker logs --timestamps --follow --tail &lt;span class="m"&gt;10&lt;/span&gt; efcf4490c790
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.logs.png"
 width="1700"
 height="1054"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.logs_hu326276975701071029.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.logs_hu6409170302661898170.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.logs_hu_74c9b10bfed165e3.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.logs_hu_480cd84c75c68064.png 1024w"
 alt="docker.logs"
 class="gallery-image"
 data-flex-grow="161"
 data-flex-basis="387px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="docker-top">docker top&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看容器内部的进程信息&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker top a86cd5b7fd4c
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.top.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="docker-top"&gt;docker top&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看容器内部的进程信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker top a86cd5b7fd4c
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.top.png"
 width="1910"
 height="846"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.top_hu17948057595657114679.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.top_hu6051345702895858504.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.top_hu_ce3ec2021c99c73a.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.top_hu_6760946bb9702432.png 1024w"
 alt="docker top"
 class="gallery-image"
 data-flex-grow="225"
 data-flex-basis="541px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="docker-inspect">docker inspect&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看容器元信息&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker inspect a86cd5b7fd4c
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.inspect.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="docker-inspect"&gt;docker inspect&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看容器元信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker inspect a86cd5b7fd4c
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.inspect.png"
 width="2638"
 height="2094"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.inspect_hu6421859128249791788.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.inspect_hu16365486350300438226.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.inspect_hu_5ba4cf9a8eea7527.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.inspect_hu_d13dfafa91b211f8.png 1024w"
 alt="docker inspect"
 class="gallery-image"
 data-flex-grow="125"
 data-flex-basis="302px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="docker-exec">docker exec&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 进入容器内部&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive --tty efcf4490c790 /bin/bash
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.exec.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="docker-exec"&gt;docker exec&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 进入容器内部&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; --interactive --tty efcf4490c790 /bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.exec.png"
 width="1700"
 height="1132"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.exec_hu6644026887771805049.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.exec_hu8541582460179719425.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.exec_hu_a19f96a8c501d0c.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.exec_hu_bbbecbc8362dcb56.png 1024w"
 alt="docker exec"
 class="gallery-image"
 data-flex-grow="150"
 data-flex-basis="360px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="docker-attach">docker attach&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 进入容器内部&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker attach efcf4490c790
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.attach.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="docker-attach"&gt;docker attach&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 进入容器内部&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker attach efcf4490c790
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.attach.png"
 width="1700"
 height="1132"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.attach_hu13832304896373133012.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.attach_hu6533240278801985467.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.attach_hu_66996b468a6fc32a.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.attach_hu_4e474e847d50ca8c.png 1024w"
 alt="docker attach"
 class="gallery-image"
 data-flex-grow="150"
 data-flex-basis="360px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="docker-cp">docker cp&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 将容器内部的文件拷贝到宿主环境&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker cp c3b8237515e0:/home/text.txt /Users/spicicomic/Desktop
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cp.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="docker-cp"&gt;docker cp&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 将容器内部的文件拷贝到宿主环境&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker cp c3b8237515e0:/home/text.txt /Users/spicicomic/Desktop
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cp.png"
 width="1700"
 height="2094"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cp_hu1164712220973398659.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cp_hu16159566824814362310.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cp_hu_9e9c86f57fd02ac8.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cp_hu_49b85180b24f1499.png 1024w"
 alt="docker cp"
 class="gallery-image"
 data-flex-grow="81"
 data-flex-basis="194px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="docker-stats">docker stats&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看当前运行状态&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker stats
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.stats.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="docker-stats"&gt;docker stats&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看当前运行状态&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker stats
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.stats.png"
 width="1700"
 height="1288"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.stats_hu6056593122583217790.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.stats_hu17741667430349562625.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.stats_hu_f9597aacdde0070e.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.stats_hu_1c5fb4c0e740acb.png 1024w"
 alt="docker stats"
 class="gallery-image"
 data-flex-grow="131"
 data-flex-basis="316px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="docker-commit">docker commit&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 将容器提交为镜像，可以保存当前容器的状态到新的镜像；可以理解为虚拟机快照&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker commit --message &lt;span class="s2">&amp;#34;提交信息&amp;#34;&lt;/span> --author &lt;span class="s2">&amp;#34;John Smith &amp;lt;hannibal@a-team.com&amp;gt;&amp;#34;&lt;/span> c1b44335a5dd nginx-test:1.2.3
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.commit.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="docker-commit"&gt;docker commit&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 将容器提交为镜像，可以保存当前容器的状态到新的镜像；可以理解为虚拟机快照&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker commit --message &lt;span class="s2"&gt;&amp;#34;提交信息&amp;#34;&lt;/span&gt; --author &lt;span class="s2"&gt;&amp;#34;John Smith &amp;lt;hannibal@a-team.com&amp;gt;&amp;#34;&lt;/span&gt; c1b44335a5dd nginx-test:1.2.3
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.commit.png"
 width="1882"
 height="1262"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.commit_hu15477525274437392029.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.commit_hu6488096550452810166.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.commit_hu_c7ee5fbefb4813cc.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.commit_hu_d120efd05f1dba29.png 1024w"
 alt="docker commit"
 class="gallery-image"
 data-flex-grow="149"
 data-flex-basis="357px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="docker-volume">docker volume&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看「未指定挂载位置的」容器内挂载目录&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker volume ls
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看名称为 centos_home 的容器内挂载目录的详细信息&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker volume inspect centos_home
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 移除未使用的挂载目录&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker volume prune
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h2 id="docker-镜像">Docker 镜像&lt;/h2>
-&lt;p>镜像是一个独立可执行的软件包，用来打包&lt;strong>运行环境&lt;/strong>和&lt;strong>基于运行环境开发的软件&lt;/strong>；内部包含了运行某个软件所需要的所有内容（代码、依赖、运行环境、环境变量、配置文件&amp;hellip;）。&lt;/p>
-&lt;h3 id="镜像启动流程">镜像启动流程&lt;/h3>
-&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.hello-world.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="docker-volume"&gt;docker volume&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看「未指定挂载位置的」容器内挂载目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker volume ls
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看名称为 centos_home 的容器内挂载目录的详细信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker volume inspect centos_home
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 移除未使用的挂载目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker volume prune
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="docker-镜像"&gt;Docker 镜像&lt;/h2&gt;
+&lt;p&gt;镜像是一个独立可执行的软件包，用来打包&lt;strong&gt;运行环境&lt;/strong&gt;和&lt;strong&gt;基于运行环境开发的软件&lt;/strong&gt;；内部包含了运行某个软件所需要的所有内容（代码、依赖、运行环境、环境变量、配置文件&amp;hellip;）。&lt;/p&gt;
+&lt;h3 id="镜像启动流程"&gt;镜像启动流程&lt;/h3&gt;
+&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.hello-world.png"
 width="1700"
 height="1054"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.hello-world_hu6426640360207565227.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.hello-world_hu14491976569297517102.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.hello-world_hu_6e060708c80bfc1a.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.hello-world_hu_6f612ce65220380a.png 1024w"
 alt="镜像启动流程"
 class="gallery-image"
 data-flex-grow="161"
 data-flex-basis="387px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="镜像加载流程">镜像加载流程&lt;/h3>
-&lt;p>Docker 使用&lt;strong>联合文件系统&lt;/strong>，UnionFS 是一种分层、轻量、高性能的文件系统；他支持&lt;strong>对文件系统的修改&lt;/strong>作为一次&lt;strong>提交&lt;/strong>来层层叠加，同时将不同目录挂载到同一个虚拟文件系统下。&lt;/p>
-&lt;p>UnionFS 是 Docker 镜像的根基，镜像可以通过分层来进行继承，基于基础镜像制作各种具体的应用镜像。每次可以同时加载多个文件系统；这样，最终的镜像会包含所有底层的文件和目录。&lt;/p>
-&lt;p>和 Linux 一样，镜像的最底层是 bootfs，包含了：&lt;/p>
-&lt;ul>
-&lt;li>bootloader 加载器，主要用来将 kernel 加载引导至内存中；&lt;/li>
-&lt;li>kernel 内核，加载完成后，内存由 kernel 控制。&lt;/li>
-&lt;/ul>
-&lt;p>在 bootfs 之上还有一层 rootfs：&lt;/p>
-&lt;ul>
-&lt;li>包含了 Linux 中的一些标准目录文件，/bin、/etc、/dev 等；&lt;/li>
-&lt;li>代表了不同 Linux 发行版，Ubuntu、CentOS 等。&lt;/li>
-&lt;/ul>
-&lt;p>对于精简的系统，rootfs 可以很小，只需要包含基本的命令、工具和库即可；底层直接使用宿主系统的 kernel。&lt;/p>
-&lt;p>所有镜像都起始于一个基础的镜像层，每当对镜像进行修改/添加内容时，会在当前镜像层之上创建新的镜像层；有点类似于对抽象 class 的继承，通过多层继承实现完整功能：&lt;/p>
-&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images.layer.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="镜像加载流程"&gt;镜像加载流程&lt;/h3&gt;
+&lt;p&gt;Docker 使用&lt;strong&gt;联合文件系统&lt;/strong&gt;，UnionFS 是一种分层、轻量、高性能的文件系统；他支持&lt;strong&gt;对文件系统的修改&lt;/strong&gt;作为一次&lt;strong&gt;提交&lt;/strong&gt;来层层叠加，同时将不同目录挂载到同一个虚拟文件系统下。&lt;/p&gt;
+&lt;p&gt;UnionFS 是 Docker 镜像的根基，镜像可以通过分层来进行继承，基于基础镜像制作各种具体的应用镜像。每次可以同时加载多个文件系统；这样，最终的镜像会包含所有底层的文件和目录。&lt;/p&gt;
+&lt;p&gt;和 Linux 一样，镜像的最底层是 bootfs，包含了：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;bootloader 加载器，主要用来将 kernel 加载引导至内存中；&lt;/li&gt;
+&lt;li&gt;kernel 内核，加载完成后，内存由 kernel 控制。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在 bootfs 之上还有一层 rootfs：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;包含了 Linux 中的一些标准目录文件，/bin、/etc、/dev 等；&lt;/li&gt;
+&lt;li&gt;代表了不同 Linux 发行版，Ubuntu、CentOS 等。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对于精简的系统，rootfs 可以很小，只需要包含基本的命令、工具和库即可；底层直接使用宿主系统的 kernel。&lt;/p&gt;
+&lt;p&gt;所有镜像都起始于一个基础的镜像层，每当对镜像进行修改/添加内容时，会在当前镜像层之上创建新的镜像层；有点类似于对抽象 class 的继承，通过多层继承实现完整功能：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images.layer.png"
 width="1700"
 height="2536"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images.layer_hu8969904480831605347.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images.layer_hu15278298681509251537.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images.layer_hu_e3be4b540098d82e.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images.layer_hu_d7283d3db9666a6f.png 1024w"
 alt="镜像加载流程"
 class="gallery-image"
 data-flex-grow="67"
 data-flex-basis="160px"
 loading="lazy"
->
-&lt;/p>
-&lt;p>镜像都是只读的，当被放到容器中运行时，会在镜像顶部创建一个可写层（容器层），可写层之下的都叫做镜像层。&lt;/p>
-&lt;h2 id="容器数据卷">容器数据卷&lt;/h2>
-&lt;p>数据卷产生的原因：&lt;/p>
-&lt;ul>
-&lt;li>当我们在容器中运行镜像时，我们对容器内数据的操作都保存在容器内部；当容器被删除时，相关数据就会丢失；&lt;/li>
-&lt;li>容器与容器是隔离的，一个容器并不能访问另一个容器内部的文件系统数据。&lt;/li>
-&lt;/ul>
-&lt;p>容器数据卷通过将容器内的&lt;strong>目录挂载&lt;/strong>到宿主环境上，帮我们实现&lt;strong>数据同步&lt;/strong>、&lt;strong>数据持久化&lt;/strong>和&lt;strong>数据共享&lt;/strong>。&lt;/p>
-&lt;h3 id="指定路径挂载">指定路径挂载&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 使用 --volume 宿主机目录:容器内目录&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --volume /Users/spicicomic/Desktop/docker_volume:/home --interactive centos /bin/bash
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volume.png"
+&gt;
+&lt;/p&gt;
+&lt;p&gt;镜像都是只读的，当被放到容器中运行时，会在镜像顶部创建一个可写层（容器层），可写层之下的都叫做镜像层。&lt;/p&gt;
+&lt;h2 id="容器数据卷"&gt;容器数据卷&lt;/h2&gt;
+&lt;p&gt;数据卷产生的原因：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当我们在容器中运行镜像时，我们对容器内数据的操作都保存在容器内部；当容器被删除时，相关数据就会丢失；&lt;/li&gt;
+&lt;li&gt;容器与容器是隔离的，一个容器并不能访问另一个容器内部的文件系统数据。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;容器数据卷通过将容器内的&lt;strong&gt;目录挂载&lt;/strong&gt;到宿主环境上，帮我们实现&lt;strong&gt;数据同步&lt;/strong&gt;、&lt;strong&gt;数据持久化&lt;/strong&gt;和&lt;strong&gt;数据共享&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id="指定路径挂载"&gt;指定路径挂载&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 使用 --volume 宿主机目录:容器内目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --volume /Users/spicicomic/Desktop/docker_volume:/home --interactive centos /bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volume.png"
 width="2092"
 height="1054"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volume_hu5940690216618017984.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volume_hu8765460067472920334.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volume_hu_253e2f7583be3ed7.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volume_hu_4d63b1414f2929f1.png 1024w"
 alt="指定路径挂载"
 class="gallery-image"
 data-flex-grow="198"
 data-flex-basis="476px"
 loading="lazy"
->
-&lt;/p>
-&lt;p>我们可以通过 inspect 命令查看挂载信息：&lt;/p>
-&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mounts.png"
+&gt;
+&lt;/p&gt;
+&lt;p&gt;我们可以通过 inspect 命令查看挂载信息：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mounts.png"
 width="1406"
 height="1054"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mounts_hu11951226032939348991.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mounts_hu4935835471765920548.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mounts_hu_4e65848387c3e96b.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mounts_hu_1199648d287f72d9.png 1024w"
 alt="指定路径挂载"
 class="gallery-image"
 data-flex-grow="133"
 data-flex-basis="320px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="具名挂载与匿名挂载">具名挂载与匿名挂载&lt;/h3>
-&lt;p>匿名挂载，在挂载时，不指定宿主机目录，仅指定容器挂载目录：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 此时，没有指定 /home 挂载到宿主环境的目录&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --volume /home --interactive centos /bin/bash
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>具名挂载，在挂载时，给容器内要挂载的目录起一个具体的名称：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 此时，给容器内要挂载的目录起了一个 centos_home 的名称&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --volume centos_home:/home --interactive centos /bin/bash
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mount.name.nameless.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="具名挂载与匿名挂载"&gt;具名挂载与匿名挂载&lt;/h3&gt;
+&lt;p&gt;匿名挂载，在挂载时，不指定宿主机目录，仅指定容器挂载目录：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 此时，没有指定 /home 挂载到宿主环境的目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --volume /home --interactive centos /bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;具名挂载，在挂载时，给容器内要挂载的目录起一个具体的名称：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 此时，给容器内要挂载的目录起了一个 centos_home 的名称&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --volume centos_home:/home --interactive centos /bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mount.name.nameless.png"
 width="1700"
 height="1054"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mount.name.nameless_hu16846017960908099809.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mount.name.nameless_hu9965890938910464503.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mount.name.nameless_hu_2358d7f0ee9f3540.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mount.name.nameless_hu_7d404f0b1d047c69.png 1024w"
 alt="具名挂载"
 class="gallery-image"
 data-flex-grow="161"
 data-flex-basis="387px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="挂载权限">挂载权限&lt;/h3>
-&lt;p>在挂载时，可以指定挂载目录对&lt;strong>容器&lt;/strong>的权限：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># ro readonly 容器只读，只有宿主机可以写入内容&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># rw readwrite 容器可读可写，容器也可以写入内容&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --volume centos_home:/home:ro --interactive centos /bin/bash
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --volume centos_home:/home:rw --interactive centos /bin/bash
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h3 id="数据卷容器">数据卷容器&lt;/h3>
-&lt;p>除了借助宿主环境，我们还可以借助容器来实现数据共享；数据卷容器就像一个全局变量，保存着其他容器的数据状态：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 运行容器 dataVolume，并挂载 volume01 和 volume02 两个目录&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --detach --interactive --name dataVolume --volume /volume01 --volume /volume02 centos /bin/bash
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 运行容器 container01，并通过 --volumes-from 连接到 dataVolume&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --detach --interactive --name container01 --volumes-from dataVolume centos /bin/bash
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 运行容器 container02，并通过 --volumes-from 连接到 dataVolume&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --detach --interactive --name container02 --volumes-from dataVolume centos /bin/bash
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volumes-from.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="挂载权限"&gt;挂载权限&lt;/h3&gt;
+&lt;p&gt;在挂载时，可以指定挂载目录对&lt;strong&gt;容器&lt;/strong&gt;的权限：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# ro readonly 容器只读，只有宿主机可以写入内容&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# rw readwrite 容器可读可写，容器也可以写入内容&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --volume centos_home:/home:ro --interactive centos /bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --volume centos_home:/home:rw --interactive centos /bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="数据卷容器"&gt;数据卷容器&lt;/h3&gt;
+&lt;p&gt;除了借助宿主环境，我们还可以借助容器来实现数据共享；数据卷容器就像一个全局变量，保存着其他容器的数据状态：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 运行容器 dataVolume，并挂载 volume01 和 volume02 两个目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --detach --interactive --name dataVolume --volume /volume01 --volume /volume02 centos /bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 运行容器 container01，并通过 --volumes-from 连接到 dataVolume&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --detach --interactive --name container01 --volumes-from dataVolume centos /bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 运行容器 container02，并通过 --volumes-from 连接到 dataVolume&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --detach --interactive --name container02 --volumes-from dataVolume centos /bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volumes-from.png"
 width="3212"
 height="1956"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volumes-from_hu5054834696532089427.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volumes-from_hu11328170945674108935.png 1024w"
-alt="volumes-from"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volumes-from_hu_e298177f96dab9c5.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volumes-from_hu_fd74579d938e7cf7.png 1024w"
+alt="–volumes-from"
 class="gallery-image"
 data-flex-grow="164"
 data-flex-basis="394px"
 loading="lazy"
->
-&lt;/p>
-&lt;p>&amp;ndash;volumes-from dataVolume 的意思是，将 dataVolume 的目录挂载到当前容器。即使数据卷容器 dataVolume 被删除，数据也不会被销毁，除非数据不再被任何容器所使用。或者说，dataVolume 的存在与否不影响 dataVolume 的挂载状态，当 dataVolume 没有被任何容器挂载时，数据状态才被释放。&lt;/p>
-&lt;h2 id="dockerfile">Dockerfile&lt;/h2>
-&lt;p>Dockerfile 是用来构建 Docker 镜像的脚本文件；镜像是一层一层的，所以文件中的每条命令都是一层镜像：&lt;/p>
-&lt;ul>
-&lt;li>每行只支持一条指令，指令可以带多个参数；&lt;/li>
-&lt;li>每个&lt;strong>保留关键字/指令&lt;/strong>最好使用大写；&lt;/li>
-&lt;li>每条指令都会创建一个镜像层；&lt;/li>
-&lt;li>按照从上到下的顺序进行执行；&lt;/li>
-&lt;li>文件内容是大小写不敏感的。&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;span class="lnt">7
-&lt;/span>&lt;span class="lnt">8
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 文件名称建议使用 Dockerfile&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="c"># 每条指令都是镜像中的一层&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">FROM&lt;/span>&lt;span class="s"> centos&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">VOLUME&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;volume01&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;volume02&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">CMD&lt;/span> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;----end----&amp;#34;&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">CMD&lt;/span> /bin/bash&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>使用 build 命令构建镜像：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 通过 --file 指定 Dockerfile 位置，通过 --tag 指定镜像名称和版本，别忘了最后的 . 表示镜像位置&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker build --file /Users/spicicomic/Desktop/docker_volume/Dockerfile --tag spicicomic/example:1.0 .
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.png"
+&gt;
+&lt;/p&gt;
+&lt;p&gt;&amp;ndash;volumes-from dataVolume 的意思是，将 dataVolume 的目录挂载到当前容器。即使数据卷容器 dataVolume 被删除，数据也不会被销毁，除非数据不再被任何容器所使用。或者说，dataVolume 的存在与否不影响 dataVolume 的挂载状态，当 dataVolume 没有被任何容器挂载时，数据状态才被释放。&lt;/p&gt;
+&lt;h2 id="dockerfile"&gt;Dockerfile&lt;/h2&gt;
+&lt;p&gt;Dockerfile 是用来构建 Docker 镜像的脚本文件；镜像是一层一层的，所以文件中的每条命令都是一层镜像：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每行只支持一条指令，指令可以带多个参数；&lt;/li&gt;
+&lt;li&gt;每个&lt;strong&gt;保留关键字/指令&lt;/strong&gt;最好使用大写；&lt;/li&gt;
+&lt;li&gt;每条指令都会创建一个镜像层；&lt;/li&gt;
+&lt;li&gt;按照从上到下的顺序进行执行；&lt;/li&gt;
+&lt;li&gt;文件内容是大小写不敏感的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 文件名称建议使用 Dockerfile&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 每条指令都是镜像中的一层&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;centos&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;VOLUME&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;volume01&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;volume02&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;CMD&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;----end----&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;CMD&lt;/span&gt; /bin/bash&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;使用 build 命令构建镜像：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 通过 --file 指定 Dockerfile 位置，通过 --tag 指定镜像名称和版本，别忘了最后的 . 表示镜像位置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker build --file /Users/spicicomic/Desktop/docker_volume/Dockerfile --tag spicicomic/example:1.0 .
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.png"
 width="2064"
 height="1704"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build_hu221922927722552152.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build_hu18062973426266998471.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build_hu_604106864c034422.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build_hu_fd4bc32119f1e36.png 1024w"
 alt="docker build"
 class="gallery-image"
 data-flex-grow="121"
 data-flex-basis="290px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="构建指令">构建指令&lt;/h3>
-&lt;p>用于构建镜像时使用，其指定的操作&lt;strong>不会&lt;/strong>在运行镜像的容器中执行：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;span class="lnt">17
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span class="line">&lt;span class="cl">&lt;span class="k">FROM&lt;/span>&lt;span class="s"> # 指定基础镜像，在基础镜像的基础上修改数据从而构建新的镜像&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">FROM&lt;/span>&lt;span class="s"> image # 默认使用 latest 版本&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">FROM&lt;/span>&lt;span class="s"> image:tag # 支持指定版本&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">FROM&lt;/span>&lt;span class="s"> scratch # 99% 以上的基础镜像都是从 scratch 开始的&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span> &lt;span class="c1"># 代表着一个「空」操作，不会创建额外的镜像层&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">MAINTAINER&lt;/span>&lt;span class="s"> # 镜像创建者信息（姓名 + 邮箱）&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> &lt;span class="c1"># 运行任何被基础镜像支持的命令&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ENV&lt;/span> &lt;span class="c1"># 设置环境变量，设置之后，RUN 命令可以使用该环境变量&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span> &lt;span class="c1"># 在容器启动后也可以通过 docker inspect 查看环境变量&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span> &lt;span class="c1"># 通过 docker run –env key=value 设置或修改环境变量&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ENV&lt;/span> JAVA_HOME /path/to/java/dirent&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ADD&lt;/span> &lt;span class="c1"># 添加文件（压缩包「会」自动解压）&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ADD&lt;/span> 源路径 目标路径&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h3 id="设置指令">设置指令&lt;/h3>
-&lt;p>用于设置镜像的属性，其指定的操作&lt;strong>会&lt;/strong>在运行镜像的容器中执行：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;span class="lnt">17
-&lt;/span>&lt;span class="lnt">18
-&lt;/span>&lt;span class="lnt">19
-&lt;/span>&lt;span class="lnt">20
-&lt;/span>&lt;span class="lnt">21
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span class="line">&lt;span class="cl">&lt;span class="k">CMD&lt;/span> &lt;span class="c1"># 容器启动时，需要运行的命令，只执行一次&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span> &lt;span class="c1"># 可被外部传入的命令覆盖掉&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span> &lt;span class="c1"># 会被最后一个覆盖掉&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ENTRYPOINT&lt;/span> &lt;span class="c1"># 容器启动时，需要运行的命令&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span> &lt;span class="c1"># 外部传入的命令会追加到此命令之后&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">EXPOSE&lt;/span>&lt;span class="s"> # 指定容器将哪个端口到宿主机&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">USER&lt;/span>&lt;span class="s"> # 设置启动容器的用户，默认为 root&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">COPY&lt;/span> &lt;span class="c1"># 将文件拷贝到镜像中（压缩包「不会」自动解压）&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">WORKDIR&lt;/span>&lt;span class="s"> # 设置镜像的工作目录&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span> &lt;span class="c1"># 相当于 cd 命令，可以多次切换目录&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">VOLUME&lt;/span>&lt;span class="s"> # 设置挂载目录，使容器中的一个目录具有持久化存储数据的功能&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ONBUILD&lt;/span> &lt;span class="c"># 镜像被继承时，需要运行的命令（触发指令）&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span> &lt;span class="c1"># 可以理解为，在子镜像中执行的命令&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span> &lt;span class="c1"># 在作为别人的基础镜像时执行的命令&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h3 id="cmd-与-entrypoint">CMD 与 ENTRYPOINT&lt;/h3>
-&lt;p>使用 Dockerfile 构建一个镜像：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span class="line">&lt;span class="cl">&lt;span class="k">FROM&lt;/span>&lt;span class="s"> centos&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">CMD&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;ls&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;-a&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cmd.error.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="构建指令"&gt;构建指令&lt;/h3&gt;
+&lt;p&gt;用于构建镜像时使用，其指定的操作&lt;strong&gt;不会&lt;/strong&gt;在运行镜像的容器中执行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;FROM &lt;span class="c1"&gt;# 指定基础镜像，在基础镜像的基础上修改数据从而构建新的镜像&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;image&lt;/span&gt; &lt;span class="c1"&gt;# 默认使用 latest 版本&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;image:tag&lt;/span&gt; &lt;span class="c1"&gt;# 支持指定版本&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;scratch&lt;/span&gt; &lt;span class="c1"&gt;# 99% 以上的基础镜像都是从 scratch 开始的&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 代表着一个「空」操作，不会创建额外的镜像层&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;MAINTAINER &lt;span class="c1"&gt;# 镜像创建者信息（姓名 + 邮箱）&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; &lt;span class="c1"&gt;# 运行任何被基础镜像支持的命令&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ENV&lt;/span&gt; &lt;span class="c1"&gt;# 设置环境变量，设置之后，RUN 命令可以使用该环境变量&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 在容器启动后也可以通过 docker inspect 查看环境变量&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 通过 docker run –env key=value 设置或修改环境变量&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ENV&lt;/span&gt; JAVA_HOME /path/to/java/dirent&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ADD&lt;/span&gt; &lt;span class="c1"&gt;# 添加文件（压缩包「会」自动解压）&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ADD&lt;/span&gt; 源路径 目标路径&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="设置指令"&gt;设置指令&lt;/h3&gt;
+&lt;p&gt;用于设置镜像的属性，其指定的操作&lt;strong&gt;会&lt;/strong&gt;在运行镜像的容器中执行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;CMD&lt;/span&gt; &lt;span class="c1"&gt;# 容器启动时，需要运行的命令，只执行一次&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 可被外部传入的命令覆盖掉&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 会被最后一个覆盖掉&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ENTRYPOINT&lt;/span&gt; &lt;span class="c1"&gt;# 容器启动时，需要运行的命令&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 外部传入的命令会追加到此命令之后&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;EXPOSE &lt;span class="c1"&gt;# 指定容器将哪个端口到宿主机&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;USER &lt;span class="c1"&gt;# 设置启动容器的用户，默认为 root&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;COPY&lt;/span&gt; &lt;span class="c1"&gt;# 将文件拷贝到镜像中（压缩包「不会」自动解压）&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;WORKDIR &lt;span class="c1"&gt;# 设置镜像的工作目录&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 相当于 cd 命令，可以多次切换目录&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;VOLUME &lt;span class="c1"&gt;# 设置挂载目录，使容器中的一个目录具有持久化存储数据的功能&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ONBUILD&lt;/span&gt; &lt;span class="c"&gt;# 镜像被继承时，需要运行的命令（触发指令）&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 可以理解为，在子镜像中执行的命令&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 在作为别人的基础镜像时执行的命令&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="cmd-与-entrypoint"&gt;CMD 与 ENTRYPOINT&lt;/h3&gt;
+&lt;p&gt;使用 Dockerfile 构建一个镜像：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;centos&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;CMD&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;ls&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;-a&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cmd.error.png"
 width="1714"
 height="1730"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cmd.error_hu11179501389745458645.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cmd.error_hu3429171719596852528.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cmd.error_hu_cd208c0f310259dc.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cmd.error_hu_29a20b7ad71b8e12.png 1024w"
 alt="CMD"
 class="gallery-image"
 data-flex-grow="99"
 data-flex-basis="237px"
 loading="lazy"
->
-&lt;/p>
-&lt;p>我们将 CMD 替换为 ENTRYPOINT：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span class="line">&lt;span class="cl">&lt;span class="k">FROM&lt;/span>&lt;span class="s"> centos&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="c"># 同 CMD 一样，ENTRYPOINT 也只有最后一个会生效&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ENTRYPOINT&lt;/span> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;I&amp;#39;M ENTRYPOINT&amp;#34;&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ENTRYPOINT&lt;/span> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;--------------&amp;#34;&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ENTRYPOINT&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;ls&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;-a&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.entrypoint.success.png"
+&gt;
+&lt;/p&gt;
+&lt;p&gt;我们将 CMD 替换为 ENTRYPOINT：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;centos&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 同 CMD 一样，ENTRYPOINT 也只有最后一个会生效&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ENTRYPOINT&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;I&amp;#39;M ENTRYPOINT&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ENTRYPOINT&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;--------------&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ENTRYPOINT&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;ls&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;-a&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.entrypoint.success.png"
 width="1714"
 height="1834"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.entrypoint.success_hu7578923585215549624.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.entrypoint.success_hu15359224950543698721.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.entrypoint.success_hu_813750b7cefe3c7.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.entrypoint.success_hu_3b3c770b585f5ecd.png 1024w"
 alt="ENTRYPOINT"
 class="gallery-image"
 data-flex-grow="93"
 data-flex-basis="224px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="构建-centos">构建 CentOS&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;span class="lnt">17
-&lt;/span>&lt;span class="lnt">18
-&lt;/span>&lt;span class="lnt">19
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span class="line">&lt;span class="cl">&lt;span class="k">FROM&lt;/span>&lt;span class="s"> centos&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">MAINTAINER&lt;/span>&lt;span class="s"> kuangshen&amp;lt;24736743@qq.com&amp;gt;&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ENV&lt;/span> MYPATH /usr/local&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">WORKDIR&lt;/span>&lt;span class="s"> $MYPATH&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="c"># Errors during downloading metadata for repository &amp;#39;appstream&amp;#39;:&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="c"># https://kb.fast-line.tw/linux/778/&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> &lt;span class="nb">cd&lt;/span> /etc/yum.repos.d/&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> sed -i &lt;span class="s1">&amp;#39;s/mirrorlist/#mirrorlist/g&amp;#39;&lt;/span> /etc/yum.repos.d/CentOS-*&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> sed -i &lt;span class="s1">&amp;#39;s|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g&amp;#39;&lt;/span> /etc/yum.repos.d/CentOS-*&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> yum -y install vim&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> yum -y install net-tools&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">EXPOSE&lt;/span>&lt;span class="s"> 80&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="c"># 只有最后一个 CMD 会执行&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">CMD&lt;/span> &lt;span class="nb">echo&lt;/span> &lt;span class="nv">$MYPATH&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">CMD&lt;/span> &lt;span class="nb">echo&lt;/span> &lt;span class="s1">&amp;#39;-----end-----&amp;#39;&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">CMD&lt;/span> /bin/bash&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>通过 build 进行构建：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 通过 Dockerfile 构建镜像 centos/example&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker build --file /Users/spicicomic/Desktop/docker_volume/Dockerfile --tag centos/example:1.0 .
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.dockerfile.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="构建-centos"&gt;构建 CentOS&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;centos&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;MAINTAINER&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;kuangshen&amp;lt;24736743@qq.com&lt;/span&gt;&amp;gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ENV&lt;/span&gt; MYPATH /usr/local&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;WORKDIR&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;$MYPATH&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# Errors during downloading metadata for repository &amp;#39;appstream&amp;#39;:&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# https://kb.fast-line.tw/linux/778/&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; &lt;span class="nb"&gt;cd&lt;/span&gt; /etc/yum.repos.d/&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; sed -i &lt;span class="s1"&gt;&amp;#39;s/mirrorlist/#mirrorlist/g&amp;#39;&lt;/span&gt; /etc/yum.repos.d/CentOS-*&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; sed -i &lt;span class="s1"&gt;&amp;#39;s|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g&amp;#39;&lt;/span&gt; /etc/yum.repos.d/CentOS-*&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; yum -y install vim&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; yum -y install net-tools&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;EXPOSE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;80&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 只有最后一个 CMD 会执行&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;CMD&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$MYPATH&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;CMD&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;-----end-----&amp;#39;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;CMD&lt;/span&gt; /bin/bash&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;通过 build 进行构建：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 通过 Dockerfile 构建镜像 centos/example&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker build --file /Users/spicicomic/Desktop/docker_volume/Dockerfile --tag centos/example:1.0 .
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.dockerfile.png"
 width="1700"
 height="2094"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.dockerfile_hu108564713383550264.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.dockerfile_hu8640200943205513822.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.dockerfile_hu_4dccd40754b777a9.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.dockerfile_hu_4acf4eca897e7dfb.png 1024w"
 alt="docker build"
 class="gallery-image"
 data-flex-grow="81"
 data-flex-basis="194px"
 loading="lazy"
->
-&lt;/p>
-&lt;p>通过 history 查看构建历史：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看 centos/example 的构建历史&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">history&lt;/span> 794dc81a2b36
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.history.png"
+&gt;
+&lt;/p&gt;
+&lt;p&gt;通过 history 查看构建历史：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看 centos/example 的构建历史&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;history&lt;/span&gt; 794dc81a2b36
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.history.png"
 width="1714"
 height="1184"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.history_hu16087796918774442366.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.history_hu3745913581035445906.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.history_hu_1606a48a49762c62.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.history_hu_e90d4b148bf3b3d4.png 1024w"
 alt="docker history"
 class="gallery-image"
 data-flex-grow="144"
 data-flex-basis="347px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="构建-tomcat">构建 Tomcat&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;span class="lnt">17
-&lt;/span>&lt;span class="lnt">18
-&lt;/span>&lt;span class="lnt">19
-&lt;/span>&lt;span class="lnt">20
-&lt;/span>&lt;span class="lnt">21
-&lt;/span>&lt;span class="lnt">22
-&lt;/span>&lt;span class="lnt">23
-&lt;/span>&lt;span class="lnt">24
-&lt;/span>&lt;span class="lnt">25
-&lt;/span>&lt;span class="lnt">26
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span class="line">&lt;span class="cl">&lt;span class="k">FROM&lt;/span>&lt;span class="s"> centos&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">MAINTAINER&lt;/span>&lt;span class="s"> kuangshen&amp;lt;24736743@qq.com&amp;gt;&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">COPY&lt;/span> README.md /usr/local/README.md&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ADD&lt;/span> apache-tomcat-10.1.34.tar.gz /usr/local&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ADD&lt;/span> jdk-23_linux-aarch64_bin.tar.gz /usr/local&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> &lt;span class="nb">cd&lt;/span> /etc/yum.repos.d/&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> sed -i &lt;span class="s1">&amp;#39;s/mirrorlist/#mirrorlist/g&amp;#39;&lt;/span> /etc/yum.repos.d/CentOS-*&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> sed -i &lt;span class="s1">&amp;#39;s|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g&amp;#39;&lt;/span> /etc/yum.repos.d/CentOS-*&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> yum -y install vim&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> yum -y install net-tools&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ENV&lt;/span> &lt;span class="nv">MYPATH&lt;/span>&lt;span class="o">=&lt;/span>/usr/local&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">WORKDIR&lt;/span>&lt;span class="s"> $MYPATH&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ENV&lt;/span> &lt;span class="nv">CATALINA_HOME&lt;/span>&lt;span class="o">=&lt;/span>/usr/local/apache-tomcat-10.1.34&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ENV&lt;/span> &lt;span class="nv">CATALINA_BASE&lt;/span>&lt;span class="o">=&lt;/span>/usr/local/apache-tomcat-10.1.34&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ENV&lt;/span> &lt;span class="nv">JAVA_HOME&lt;/span>&lt;span class="o">=&lt;/span>/usr/local/jdk-23.0.1&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ENV&lt;/span> &lt;span class="nv">CLASSPATH&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$JAVA_HOME&lt;/span>/lib/dt.jar:&lt;span class="nv">$JAVA_HOME&lt;/span>/lib/tools.jar&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ENV&lt;/span> &lt;span class="nv">PATH&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$PATH&lt;/span>:&lt;span class="nv">$CATALINA_HOME&lt;/span>/lib:&lt;span class="nv">$CATALINA_HOME&lt;/span>/bin:JAVA_HOME/bin&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">EXPOSE&lt;/span>&lt;span class="s"> 8080&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">CMD&lt;/span> /usr/local/apache-tomcat-10.1.34/bin/startup.sh &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> tail -F /usr/local/apache-tomcat-10.1.34/logs/catalina.out&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.java.tomcat.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="构建-tomcat"&gt;构建 Tomcat&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;centos&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;MAINTAINER&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;kuangshen&amp;lt;24736743@qq.com&lt;/span&gt;&amp;gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;COPY&lt;/span&gt; README.md /usr/local/README.md&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ADD&lt;/span&gt; apache-tomcat-10.1.34.tar.gz /usr/local&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ADD&lt;/span&gt; jdk-23_linux-aarch64_bin.tar.gz /usr/local&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; &lt;span class="nb"&gt;cd&lt;/span&gt; /etc/yum.repos.d/&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; sed -i &lt;span class="s1"&gt;&amp;#39;s/mirrorlist/#mirrorlist/g&amp;#39;&lt;/span&gt; /etc/yum.repos.d/CentOS-*&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; sed -i &lt;span class="s1"&gt;&amp;#39;s|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g&amp;#39;&lt;/span&gt; /etc/yum.repos.d/CentOS-*&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; yum -y install vim&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; yum -y install net-tools&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ENV&lt;/span&gt; &lt;span class="nv"&gt;MYPATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/usr/local&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;WORKDIR&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;$MYPATH&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ENV&lt;/span&gt; &lt;span class="nv"&gt;CATALINA_HOME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/usr/local/apache-tomcat-10.1.34&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ENV&lt;/span&gt; &lt;span class="nv"&gt;CATALINA_BASE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/usr/local/apache-tomcat-10.1.34&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ENV&lt;/span&gt; &lt;span class="nv"&gt;JAVA_HOME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/usr/local/jdk-23.0.1&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ENV&lt;/span&gt; &lt;span class="nv"&gt;CLASSPATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$JAVA_HOME&lt;/span&gt;/lib/dt.jar:&lt;span class="nv"&gt;$JAVA_HOME&lt;/span&gt;/lib/tools.jar&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ENV&lt;/span&gt; &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;:&lt;span class="nv"&gt;$CATALINA_HOME&lt;/span&gt;/lib:&lt;span class="nv"&gt;$CATALINA_HOME&lt;/span&gt;/bin:JAVA_HOME/bin&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;EXPOSE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;8080&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;CMD&lt;/span&gt; /usr/local/apache-tomcat-10.1.34/bin/startup.sh &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; tail -F /usr/local/apache-tomcat-10.1.34/logs/catalina.out&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.java.tomcat.png"
 width="1728"
 height="1236"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.java.tomcat_hu6456332255900747234.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.java.tomcat_hu14559644392113383759.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.java.tomcat_hu_2d2c5da4830085de.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.java.tomcat_hu_11873320c819bcaa.png 1024w"
 alt="构建 Tomcat"
 class="gallery-image"
 data-flex-grow="139"
 data-flex-basis="335px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="发布镜像">发布镜像&lt;/h3>
-&lt;p>使用 login 命令登录：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;span class="lnt">7
-&lt;/span>&lt;span class="lnt">8
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 首先要登录 DockerHub 账号&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker login --username spicicomic
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 将要发布的镜像打上自己的「账号」标签&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker tag tomcat/java:1.0 spicicomic/tomcat_java:1.0
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 或者使用镜像 ID 打标签&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker tag b23b7e343dc5 spicicomic/tomcat_java:1.0
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># push 到 DockerHub 即可&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker push spicicomic/tomcat_java:1.0
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.push.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="发布镜像"&gt;发布镜像&lt;/h3&gt;
+&lt;p&gt;使用 login 命令登录：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 首先要登录 DockerHub 账号&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker login --username spicicomic
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 将要发布的镜像打上自己的「账号」标签&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker tag tomcat/java:1.0 spicicomic/tomcat_java:1.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 或者使用镜像 ID 打标签&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker tag b23b7e343dc5 spicicomic/tomcat_java:1.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# push 到 DockerHub 即可&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker push spicicomic/tomcat_java:1.0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.push.png"
 width="1658"
 height="690"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.push_hu8758242109218655546.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.push_hu6203551067936774368.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.push_hu_6a0e92c9970d6b62.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.push_hu_36b87076875cb67.png 1024w"
 alt="docker push"
 class="gallery-image"
 data-flex-grow="240"
 data-flex-basis="576px"
 loading="lazy"
->
-&lt;/p>
-&lt;h2 id="docker-网络">Docker 网络&lt;/h2>
-&lt;p>网络命名空间 NetworkNamespace 是 Linux 内核提供的一项非常重要的功能，它是网络虚拟化技术的基础，也是 Kubernetes 和以 Docker 为代表的容器技术在实现它们各自的网络时所依赖的基础。当运行多个 Docker 容器的时候，Docker 会在每个容器内部创建相应的 NetworkNamespace，从而实现不同容器之间的网络隔离。&lt;/p>
-&lt;p>光有隔离还不行，因为容器还要和外界进行网络联通，所以除了 NetworkNamespace 以外，另一个重要的概念是网桥 NetworkBridge。它是由 Linux 内核提供的一种链路层设备，用于在不同网段之间转发数据包。Docker 就是利用网桥来实现容器和外界之间的通信的。默认情况下，Docker 服务会在它所在的机器上创建一个名为 docker0 的网桥。&lt;/p>
-&lt;p>狂神视频中使用的是阿里云 Linux 做演示的，我的电脑是跑的是 macOS，使用 &lt;a class="link"
+&gt;
+&lt;/p&gt;
+&lt;h2 id="docker-网络"&gt;Docker 网络&lt;/h2&gt;
+&lt;p&gt;网络命名空间 NetworkNamespace 是 Linux 内核提供的一项非常重要的功能，它是网络虚拟化技术的基础，也是 Kubernetes 和以 Docker 为代表的容器技术在实现它们各自的网络时所依赖的基础。当运行多个 Docker 容器的时候，Docker 会在每个容器内部创建相应的 NetworkNamespace，从而实现不同容器之间的网络隔离。&lt;/p&gt;
+&lt;p&gt;光有隔离还不行，因为容器还要和外界进行网络联通，所以除了 NetworkNamespace 以外，另一个重要的概念是网桥 NetworkBridge。它是由 Linux 内核提供的一种链路层设备，用于在不同网段之间转发数据包。Docker 就是利用网桥来实现容器和外界之间的通信的。默认情况下，Docker 服务会在它所在的机器上创建一个名为 docker0 的网桥。&lt;/p&gt;
+&lt;p&gt;狂神视频中使用的是阿里云 Linux 做演示的，我的电脑是跑的是 macOS，使用 &lt;a class="link"
 href="https://formulae.brew.sh/formula/iproute2mac"
 target="_blank" rel="noopener" referrerpolicy="no-referrer"
->
+&gt;
 ip addr
-&lt;/a>
+&lt;/a&gt;
 命令时，没有 docker0 网卡。这和 macOS&amp;rsquo;s Docker 实现方式有关，macOS&amp;rsquo;s Docker 跑在一个轻量化的 &lt;a class="link"
 href="https://github.com/linuxkit/linuxkit"
 target="_blank" rel="noopener" referrerpolicy="no-referrer"
->
+&gt;
 LinuxKit
-&lt;/a>
-虚拟机上，在 Linux 上不需要这层虚拟机；所以，在 macOS 中看不到 docker0。&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 拉取 Tomcat 7.0 镜像，最新版的镜像不包含 ip addr&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker pull tomcat:7.0
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 运行一个 tomcat01 容器，端口随机&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --detach --publish-all --name tomcat01 tomcat:7.0
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看 tomcat01 内的网络信息&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat01 ip addr
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat01.png"
+&lt;/a&gt;
+虚拟机上，在 Linux 上不需要这层虚拟机；所以，在 macOS 中看不到 docker0。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 拉取 Tomcat 7.0 镜像，最新版的镜像不包含 ip addr&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker pull tomcat:7.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 运行一个 tomcat01 容器，端口随机&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --detach --publish-all --name tomcat01 tomcat:7.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看 tomcat01 内的网络信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; --interactive tomcat01 ip addr
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat01.png"
 width="1700"
 height="1574"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat01_hu185900284255856891.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat01_hu2816384764070462390.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat01_hu_4833e2eccf8a53d4.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat01_hu_4773686e9380eb47.png 1024w"
 alt="Docker 网络"
 class="gallery-image"
 data-flex-grow="108"
 data-flex-basis="259px"
 loading="lazy"
->
-&lt;/p>
-&lt;p>我们再启动后一个容器 tomcat02 来 ping 容器 tomcat01：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;span class="lnt">7
-&lt;/span>&lt;span class="lnt">8
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 运行一个 tomcat02 容器，**端口随机**&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --detach --publish-all --name tomcat02 tomcat:7.0
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 使用 tomcat02 来 ping 容器 tomcat01 的 IP&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat02 ping 192.168.215.2
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看 tomcat02 内的网络信息&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat02 ip addr
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 使用 tomcat01 来 ping 容器 tomcat02 的 IP&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat01 ping 192.168.215.3
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat02.png"
+&gt;
+&lt;/p&gt;
+&lt;p&gt;我们再启动后一个容器 tomcat02 来 ping 容器 tomcat01：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 运行一个 tomcat02 容器，**端口随机**&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --detach --publish-all --name tomcat02 tomcat:7.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 使用 tomcat02 来 ping 容器 tomcat01 的 IP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; --interactive tomcat02 ping 192.168.215.2
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看 tomcat02 内的网络信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; --interactive tomcat02 ip addr
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 使用 tomcat01 来 ping 容器 tomcat02 的 IP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; --interactive tomcat01 ping 192.168.215.3
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat02.png"
 width="1700"
 height="1340"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat02_hu11745089270067711155.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat02_hu14694072270156029880.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat02_hu_8ba6ce39400a3c27.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat02_hu_e8728ceba6bb299d.png 1024w"
 alt="Docker 网络"
 class="gallery-image"
 data-flex-grow="126"
 data-flex-basis="304px"
 loading="lazy"
->
-&lt;/p>
-&lt;p>在 Linux 环境下，容器是如何访问网络的？&lt;/p>
-&lt;ul>
-&lt;li>宿主创建一个 docker0 网卡，随机分配一个本地未占用的私有网段；例如，172.17.0.1/16；&lt;/li>
-&lt;li>Docker 容器会增加一个 eth0 的网卡，随机（不指定的情况下）分配同一网段；例如，172.17.0.0/16 中的一个 IP；&lt;/li>
-&lt;li>Docker 容器在启动时，如果没有显式指定加入任何网络，就会默认加入到名为 bridge 的网络。而这个 bridge 网络就是基于 docker0 实现的；&lt;/li>
-&lt;li>当 Docker 创建一个容器时，同时会创建了一对 veth-pair 接口（当数据包发送到一个接口时，另外一个接口也可以收到相同的数据包）；这对 veth-pair 接口一端在容器内，即 eth0；另一端在本地并&lt;strong>被挂载到 docker0 网桥&lt;/strong>。通过这种方式，Docker 就创建了在主机和所有容器之间一个虚拟共享网络；&lt;strong>主机可以跟容器通信，容器之间也可以相互通信&lt;/strong>。&lt;/li>
-&lt;/ul>
-&lt;h3 id="容器互联之--link">容器互联之&amp;quot;--link&amp;quot;&lt;/h3>
-&lt;p>在之前，我们都是通过 IP 直接去 ping 另一个容器的；这很不方便，我们能否通过容器名称来 ping 呢？可以通过 --link 来连接容器：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 启动 tomcat03 容器，并通过 --link 连接 tomcat01 和 tomcat02&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --detach --publish-all --name tomcat03 --link tomcat01 --link tomcat02 tomcat:7.0
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.link.png"
+&gt;
+&lt;/p&gt;
+&lt;p&gt;在 Linux 环境下，容器是如何访问网络的？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;宿主创建一个 docker0 网卡，随机分配一个本地未占用的私有网段；例如，172.17.0.1/16；&lt;/li&gt;
+&lt;li&gt;Docker 容器会增加一个 eth0 的网卡，随机（不指定的情况下）分配同一网段；例如，172.17.0.0/16 中的一个 IP；&lt;/li&gt;
+&lt;li&gt;Docker 容器在启动时，如果没有显式指定加入任何网络，就会默认加入到名为 bridge 的网络。而这个 bridge 网络就是基于 docker0 实现的；&lt;/li&gt;
+&lt;li&gt;当 Docker 创建一个容器时，同时会创建了一对 veth-pair 接口（当数据包发送到一个接口时，另外一个接口也可以收到相同的数据包）；这对 veth-pair 接口一端在容器内，即 eth0；另一端在本地并&lt;strong&gt;被挂载到 docker0 网桥&lt;/strong&gt;。通过这种方式，Docker 就创建了在主机和所有容器之间一个虚拟共享网络；&lt;strong&gt;主机可以跟容器通信，容器之间也可以相互通信&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="容器互联之--link"&gt;容器互联之&amp;quot;--link&amp;quot;&lt;/h3&gt;
+&lt;p&gt;在之前，我们都是通过 IP 直接去 ping 另一个容器的；这很不方便，我们能否通过容器名称来 ping 呢？可以通过 --link 来连接容器：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 启动 tomcat03 容器，并通过 --link 连接 tomcat01 和 tomcat02&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --detach --publish-all --name tomcat03 --link tomcat01 --link tomcat02 tomcat:7.0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.link.png"
 width="1700"
 height="2744"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.link_hu8570416614762686842.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.link_hu7541377361424269674.png 1024w"
-alt="link"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.link_hu_3154f7e8ce7807cf.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.link_hu_e052b0a69d3c07bf.png 1024w"
+alt="–link"
 class="gallery-image"
 data-flex-grow="61"
 data-flex-basis="148px"
 loading="lazy"
->
-&lt;/p>
-&lt;p>我们再来看一下三个容器的 host 文件：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat03 cat /etc/hosts
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat01 cat /etc/hosts
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat02 cat /etc/hosts
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.host.png"
+&gt;
+&lt;/p&gt;
+&lt;p&gt;我们再来看一下三个容器的 host 文件：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; --interactive tomcat03 cat /etc/hosts
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; --interactive tomcat01 cat /etc/hosts
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; --interactive tomcat02 cat /etc/hosts
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.host.png"
 width="1700"
 height="1054"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.host_hu15893977757182328966.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.host_hu5508810790701495898.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.host_hu_8545c522d144e53c.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.host_hu_b02e7012f011ca30.png 1024w"
 alt="容器互联"
 class="gallery-image"
 data-flex-grow="161"
 data-flex-basis="387px"
 loading="lazy"
->
-&lt;/p>
-&lt;p>--link 是通过修改容器内的 host 配置实现的，已经不建议使用了。&lt;/p>
-&lt;h3 id="容器互联之自定义网络">容器互联之“自定义网络”&lt;/h3>
-&lt;p>查看所有的 Docker 网络：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker network ls
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mode.png"
+&gt;
+&lt;/p&gt;
+&lt;p&gt;--link 是通过修改容器内的 host 配置实现的，已经不建议使用了。&lt;/p&gt;
+&lt;h3 id="容器互联之自定义网络"&gt;容器互联之“自定义网络”&lt;/h3&gt;
+&lt;p&gt;查看所有的 Docker 网络：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker network ls
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mode.png"
 width="1700"
 height="1054"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mode_hu15444353303868436269.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mode_hu14846482420965971085.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mode_hu_ca1f307d80bbcf22.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mode_hu_43435d9a5477bb59.png 1024w"
 alt="docker network"
 class="gallery-image"
 data-flex-grow="161"
 data-flex-basis="387px"
 loading="lazy"
->
-&lt;/p>
-&lt;p>我们创建一个网络并启动一个容器：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 使用 network 创建一个名为 mynet 网络&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># --driver bridge 表示桥接模式&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># --gateway 192.168.0.8 表示网关配置&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># --subnet 192.168.0.0/16 表示子网配置&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 如果遇到了报错，可以使用 docker network prune 命令&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker network create --driver bridge --subnet 192.168.0.0/24 --gateway 192.168.0.8 mynet
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看一下网络列表&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker network ls
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看一下 mynet 细节&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker network inspect mynet
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 如果不配置 --net 选项，默认就是 --net bridge，只是之前我们都没写罢了&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># docker run --detach --publish-all --name tomcat01 tomcat:7.0&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --detach --publish-all --name tomcat-mynet-01 --net mynet tomcat:7.0
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --detach --publish-all --name tomcat-mynet-02 --net mynet tomcat:7.0
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet.png"
+&gt;
+&lt;/p&gt;
+&lt;p&gt;我们创建一个网络并启动一个容器：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 使用 network 创建一个名为 mynet 网络&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# --driver bridge 表示桥接模式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# --gateway 192.168.0.8 表示网关配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# --subnet 192.168.0.0/16 表示子网配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 如果遇到了报错，可以使用 docker network prune 命令&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker network create --driver bridge --subnet 192.168.0.0/24 --gateway 192.168.0.8 mynet
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看一下网络列表&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker network ls
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看一下 mynet 细节&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker network inspect mynet
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 如果不配置 --net 选项，默认就是 --net bridge，只是之前我们都没写罢了&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# docker run --detach --publish-all --name tomcat01 tomcat:7.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --detach --publish-all --name tomcat-mynet-01 --net mynet tomcat:7.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --detach --publish-all --name tomcat-mynet-02 --net mynet tomcat:7.0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet.png"
 width="1700"
 height="1574"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet_hu1631024976788406968.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet_hu933021589180063290.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet_hu_38650282651c1780.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet_hu_b5c9458e18668a30.png 1024w"
 alt="自定义网络"
 class="gallery-image"
 data-flex-grow="108"
 data-flex-basis="259px"
 loading="lazy"
->
-&lt;/p>
-&lt;p>此时，我们就可以直接通过容器名称来建立连接：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat-mynet-01 ping tomcat-mynet-02
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat-mynet-02 ping tomcat-mynet-01
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet.ping.png"
+&gt;
+&lt;/p&gt;
+&lt;p&gt;此时，我们就可以直接通过容器名称来建立连接：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; --interactive tomcat-mynet-01 ping tomcat-mynet-02
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; --interactive tomcat-mynet-02 ping tomcat-mynet-01
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet.ping.png"
 width="1700"
 height="742"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet.ping_hu12118974881467826872.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet.ping_hu14304232350476693143.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet.ping_hu_c6e14b03a13808ea.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet.ping_hu_c33b18f9ffb70efe.png 1024w"
 alt="自定义网络"
 class="gallery-image"
 data-flex-grow="229"
 data-flex-basis="549px"
 loading="lazy"
->
-&lt;/p>
-&lt;h3 id="容器互联之网络联通">容器互联之“网络联通”&lt;/h3>
-&lt;p>如何让 docker0 下的容器和 mynet 下的容器联通呢？例如 tomcat01 ping tomcat-mynet-01；首先，不能直接打通 docker0 和 mynet，因为他们不属于一个网段，只能尝试将容器同时接入 docker0 和 mynet：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 我们看一下 network 命令的帮助信息&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker network --help
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 他有一个 connect 命令，来将容器接入到一个网络中&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker network connect --help
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.help.png"
+&gt;
+&lt;/p&gt;
+&lt;h3 id="容器互联之网络联通"&gt;容器互联之“网络联通”&lt;/h3&gt;
+&lt;p&gt;如何让 docker0 下的容器和 mynet 下的容器联通呢？例如 tomcat01 ping tomcat-mynet-01；首先，不能直接打通 docker0 和 mynet，因为他们不属于一个网段，只能尝试将容器同时接入 docker0 和 mynet：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 我们看一下 network 命令的帮助信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker network --help
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 他有一个 connect 命令，来将容器接入到一个网络中&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker network connect --help
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.help.png"
 width="1700"
 height="1080"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.help_hu5920872606760645804.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.help_hu2366754199110522545.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.help_hu_4e61bd7cea4ae42.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.help_hu_2102c0d7878a7b4e.png 1024w"
 alt="网络联通"
 class="gallery-image"
 data-flex-grow="157"
 data-flex-basis="377px"
 loading="lazy"
->
-&lt;/p>
-&lt;p>我们尝试将 tomcat01 连入 mynet 网络：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 将 tomcat01 加入 mynet&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker network connect mynet tomcat01
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 相互 ping 一下&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat-mynet-02 ping tomcat01
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> --interactive tomcat01 ping tomcat-mynet-01
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.tomcat01.png"
+&gt;
+&lt;/p&gt;
+&lt;p&gt;我们尝试将 tomcat01 连入 mynet 网络：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 将 tomcat01 加入 mynet&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker network connect mynet tomcat01
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 相互 ping 一下&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; --interactive tomcat-mynet-02 ping tomcat01
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; --interactive tomcat01 ping tomcat-mynet-01
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.tomcat01.png"
 width="1700"
 height="2146"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.tomcat01_hu5914883962053002889.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.tomcat01_hu9505436548397697650.png 1024w"
+srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.tomcat01_hu_7d1b295f02c28f04.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.tomcat01_hu_1a95125d3367a3f8.png 1024w"
 alt="网络联通"
 class="gallery-image"
 data-flex-grow="79"
 data-flex-basis="190px"
 loading="lazy"
->
-&lt;/p>
+&gt;
+&lt;/p&gt;
 &lt;!--
 ## Docker 整合
 ## Docker Compose
 ## Docker Swarm
 ## CI/CD
--->
-&lt;h2 id="参考">参考&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a class="link"
+--&gt;
+&lt;h2 id="参考"&gt;参考&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class="link"
 href="https://www.bilibili.com/video/BV1og4y1q7M4"
 target="_blank" rel="noopener" referrerpolicy="no-referrer"
->
+&gt;
 狂神说 Java - Docker 最新超详细版教程通俗易懂
-&lt;/a>
-&lt;/li>
-&lt;li>&lt;a class="link"
+&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="link"
 href="https://yuanmomo.net/2019/06/13/docker-network"
 target="_blank" rel="noopener" referrerpolicy="no-referrer"
->
+&gt;
 Docker 的 (Linux/Mac OS) 网络配置问题
-&lt;/a>
-&lt;/li>
-&lt;li>&lt;a class="link"
+&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="link"
 href="https://www.haoyizebo.com/posts/fd0b9bd8"
 target="_blank" rel="noopener" referrerpolicy="no-referrer"
->
+&gt;
 Docker for Mac 的网络问题及解决办法
-&lt;/a>
-&lt;/li>
-&lt;li>&lt;a class="link"
+&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="link"
 href="https://morningspace.github.io/tech/k8s-net-docker0"
 target="_blank" rel="noopener" referrerpolicy="no-referrer"
->
+&gt;
 Kubernetes 网络篇 - 从 docker0 开始
-&lt;/a>
-&lt;/li>
-&lt;li>&lt;a class="link"
+&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="link"
 href="https://xieyufei.com/2022/03/22/FrontEnd-Docker-Advance.html"
 target="_blank" rel="noopener" referrerpolicy="no-referrer"
->
+&gt;
 前端抢饭碗系列之 Docker 进阶部署
-&lt;/a>
-&lt;/li>
-&lt;li>&lt;a class="link"
+&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="link"
 href="https://www.flftuu.com/2019/03/21/dockerfile"
 target="_blank" rel="noopener" referrerpolicy="no-referrer"
->
+&gt;
 Dockerfile
-&lt;/a>
-&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>
