@@ -263,6 +263,12 @@
 </span><span class="lnt">247
 </span><span class="lnt">248
 </span><span class="lnt">249
+</span><span class="lnt">250
+</span><span class="lnt">251
+</span><span class="lnt">252
+</span><span class="lnt">253
+</span><span class="lnt">254
+</span><span class="lnt">255
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">slideMotion</span> <span class="o">=</span> <span class="nx">trigger</span><span class="p">(</span><span class="s1">'slideMotion'</span><span class="p">,</span> <span class="p">[</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// 创建一组有名字的 CSS 样式，它会在成功转换到指定的状态时应用到元素上
 </span></span></span><span class="line"><span class="cl">  <span class="nx">state</span><span class="p">(</span>
@@ -470,8 +476,14 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">ngDoCheck</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="cm">/**
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * 用于检测 Angular 无法捕获的变更
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * 紧跟在每次执行变更检测时的 ngOnChanges 和首次执行变更检测时的 ngOnInit 后调用
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 用于检测 Angular 无法捕获的变更：
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * - 第三方库的回调（如 Echarts 的事件）
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * - 原生 JS 事件（非 Angular 封装的）
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * - requestAnimationFrame 回调
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * - WebSocket 推送的消息
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 紧跟在每次执行变更检测时的 ngOnChanges 和首次执行变更检测时的 ngOnInit 后调用：
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * - 即使当前组件状态无变化，父级组件/应用的状态变更仍会出发无关组件的 ngDoCheck
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * - 触发频率极高，应用中任何细微的变化，都会导致 ngDoCheck 被调用
 </span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">ngAfterContentInit</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
@@ -754,13 +766,19 @@
 </span><span class="lnt">16
 </span><span class="lnt">17
 </span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">TicketListComponent</span> <span class="kr">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">data</span>: <span class="kt">Array</span><span class="o">&lt;</span><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">id</span>: <span class="kt">number</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">title</span>: <span class="kt">srting</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span><span class="o">&gt;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">route</span>: <span class="kt">ActivatedRoute</span><span class="p">,</span> <span class="kr">private</span> <span class="nx">apiService</span>: <span class="kt">ApiService</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">route</span>: <span class="kt">ActivatedRoute</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">apiService</span>: <span class="kt">ApiService</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="p">{}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="nx">ngOnInit() {</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">apiService</span><span class="p">.</span><span class="nx">fetchTickets1</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">list</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="nx">list</span> <span class="o">||</span> <span class="p">[]));</span>
@@ -806,6 +824,9 @@
 </span><span class="lnt">32
 </span><span class="lnt">33
 </span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">Seller</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">id</span>: <span class="kt">number</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">name</span>: <span class="kt">srting</span><span class="p">;</span>
@@ -838,7 +859,10 @@
 </span></span><span class="line"><span class="cl">    <span class="nx">switchMap</span><span class="p">(</span><span class="nx">params</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">apiService</span><span class="p">.</span><span class="nx">fetchTickets</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">route</span>: <span class="kt">ActivatedRoute</span><span class="p">,</span> <span class="kr">private</span> <span class="nx">apiService</span>: <span class="kt">ApiService</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">route</span>: <span class="kt">ActivatedRoute</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">apiService</span>: <span class="kt">ApiService</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="p">{}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>如果不喜欢模版中出现太多 async，可以借助 combineLatest 将多个 Observable 合并：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -879,6 +903,9 @@
 </span><span class="lnt">37
 </span><span class="lnt">38
 </span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@Component</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">template</span><span class="o">:</span> <span class="sb">`
 </span></span></span><span class="line"><span class="cl"><span class="sb">    &lt;ng-container *ngIf="vm$ | async as vm"&gt;
@@ -916,7 +943,10 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">route</span>: <span class="kt">ActivatedRoute</span><span class="p">,</span> <span class="kr">private</span> <span class="nx">apiService</span>: <span class="kt">ApiService</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">route</span>: <span class="kt">ActivatedRoute</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">apiService</span>: <span class="kt">ApiService</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="p">{}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>自从 Angular 的编译和渲染引擎切换到 Ivy 之后：</p><ol><li>ChangeDetectionStrategy.Default 策略下，在每次“变更检测”的过程中，“纯”管道的 transform 方法，只有在入参发生变化的情况下才会被调用；</li><li>ChangeDetectionStrategy.Default 策略下，在每次“变更检测”的过程中，“非纯”管道的 transform 方法都会被调用；</li><li>当使用 async 管道时（它是“非纯”的），最好使用 ChangeDetectionStrategy.OnPush 策略；</li><li>无论是否是“纯”管道，每个管道都会有自己的实例（ViewEngine 时期，“纯”管道是共享实例的）；</li><li>在同一模版中，使用了两次 A 管道，则会有两个 A 管道的实例存在。</li></ol><h2 id="服务">服务</h2><p>服务是 Angular 的核心，他是专门用来处理某件事情的（数据请求、数据共享等）具有明确定义的 class；一般情况下，服务用来创建与视图无关但需要跨组件共享的数据/逻辑。</p><p>官方推崇“Component 处理页面展示，Service 处理内在逻辑”的原则（有点像 React 中的 UI 组件和逻辑组件）。</p><p>服务一般（具体看 providedIn 的取值）以单例的形式存在，实例化之后，应用于整个应用。</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1649,6 +1679,9 @@
 </span><span class="lnt">51
 </span><span class="lnt">52
 </span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ActivatedRoute</span><span class="p">,</span> <span class="nx">NavigationEnd</span><span class="p">,</span> <span class="nx">Router</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@angular/router'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">@Component</span><span class="p">({</span>
@@ -1662,7 +1695,10 @@
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="p">{</span> <span class="nx">queryParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">parseUrl</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">queryParams</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">route</span>: <span class="kt">ActivatedRoute</span><span class="p">,</span> <span class="kr">private</span> <span class="nx">router</span>: <span class="kt">Router</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">route</span>: <span class="kt">ActivatedRoute</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">router</span>: <span class="kt">Router</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="p">{}</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">ngOnInit() {</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 在组件初始化的时候，订阅路由查询参数的变化
 </span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">.</span><span class="nx">queryParams</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">params</span> <span class="o">=&gt;</span> <span class="p">{</span>
