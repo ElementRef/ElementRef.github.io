@@ -6600,7 +6600,7 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;@ContentChild() 从**当前组件模版的外部投射进来的内容（类似 React 中的 props.children）**中获取组件对象：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;@ContentChild() 从当前组件模版的外部投射进来的内容（类似 React 中的 props.children）中获取组件对象：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -6663,11 +6663,11 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;说明：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;ContentChild 和 ViewChild 指向的类型不同（一个在当前模版中查找，一个在当前模版的外部投射内容中查找）；&lt;/li&gt;
 &lt;li&gt;ViewChild 对应的是 ngAfterViewInit、ngAfterViewChecked；&lt;/li&gt;
 &lt;li&gt;ContentChild 对应的是 ngAfterContentInit、ngAfterContentChecked；&lt;/li&gt;
-&lt;li&gt;AfterView 关心的是 ViewChildren，ViewChildren 的元素标签会出现在当前组件的模版中；&lt;/li&gt;
-&lt;li&gt;AfterContent 关心的是 ContentChildren，ContentChildren 被投射进当前组件中。&lt;/li&gt;
+&lt;li&gt;AfterView 关心的是 ViewChildren，ViewChildren 出现在当前组件的模版中；&lt;/li&gt;
+&lt;li&gt;AfterContent 关心的是 ContentChildren，ContentChildren 被投射进当前组件中；&lt;/li&gt;
+&lt;li&gt;ContentChild 和 ViewChild 指向的类型不同（一个在外部投射内容中查找，一个在当前模版中查找）。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="changedetectorref"&gt;ChangeDetectorRef&lt;/h2&gt;
 &lt;p&gt;首先，每个组件都有自己的变更检测器，一个应用包含多个组件，组件之间的层级关系形成了“组件树”。&lt;/p&gt;
