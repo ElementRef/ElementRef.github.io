@@ -2567,7 +2567,7 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &gt;
 &amp;lt;component/&amp;gt;
 &lt;/a&gt;
-&lt;/p&gt;
+。&lt;/p&gt;
 &lt;h2 id="formcontrolname"&gt;formControlName&lt;/h2&gt;
 &lt;p&gt;在自定义元素上使用 formControlName：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -3646,6 +3646,9 @@ loading="lazy"
 &lt;/span&gt;&lt;span class="lnt"&gt;50
 &lt;/span&gt;&lt;span class="lnt"&gt;51
 &lt;/span&gt;&lt;span class="lnt"&gt;52
+&lt;/span&gt;&lt;span class="lnt"&gt;53
+&lt;/span&gt;&lt;span class="lnt"&gt;54
+&lt;/span&gt;&lt;span class="lnt"&gt;55
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;@Component&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
@@ -3657,7 +3660,10 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;class&lt;/span&gt; &lt;span class="nx"&gt;EventListenerComponent&lt;/span&gt; &lt;span class="kr"&gt;implements&lt;/span&gt; &lt;span class="nx"&gt;AfterViewInit&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;AfterViewChecked&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kd"&gt;@ViewChild&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;btn&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nx"&gt;btn&lt;/span&gt;&lt;span class="o"&gt;!:&lt;/span&gt; &lt;span class="nx"&gt;ElementRef&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;HTMLButtonElement&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;constructor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kr"&gt;private&lt;/span&gt; &lt;span class="nx"&gt;renderer&lt;/span&gt;: &lt;span class="kt"&gt;Renderer2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kr"&gt;private&lt;/span&gt; &lt;span class="nx"&gt;zone&lt;/span&gt;: &lt;span class="kt"&gt;NgZone&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;constructor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;private&lt;/span&gt; &lt;span class="nx"&gt;renderer&lt;/span&gt;: &lt;span class="kt"&gt;Renderer2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;private&lt;/span&gt; &lt;span class="nx"&gt;zone&lt;/span&gt;: &lt;span class="kt"&gt;NgZone&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;ngAfterViewInit&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;zone&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;runOutsideAngular&lt;/span&gt;&lt;span class="p"&gt;(()&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -3897,7 +3903,7 @@ EventManager
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;@Component&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;template&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="sb"&gt;`
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sb"&gt; &amp;lt;label nz-checkbox [(ngModel)]=&amp;#34;checkbox&amp;#34;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sb"&gt; &amp;lt;span [textContent]=&amp;#34;time | date : &amp;#39;hh:mm:ss:SSS&amp;#39;&amp;#34;&amp;gt;&amp;lt;/span&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sb"&gt; &amp;lt;span [textContent]=&amp;#34;time | date: &amp;#39;hh:mm:ss:SSS&amp;#39;&amp;#34;&amp;gt;&amp;lt;/span&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sb"&gt; &amp;lt;/label&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sb"&gt; `&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;selector&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;app-example&amp;#39;&lt;/span&gt;
