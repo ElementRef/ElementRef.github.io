@@ -780,7 +780,13 @@ iframe 的资源加载的；SDK 应避免改变宿主的安全策略；&lt;/li&g
 &lt;p&gt;但这并不意味着 iframe 不好；当 iframe 和宿主是&lt;strong&gt;跨站&lt;/strong&gt;的情况下：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;渲染性能更好，iframe 内部的重排/重绘不会影响宿主；&lt;/li&gt;
-&lt;li&gt;独立的渲染线程，iframe 对宿主的 JS 性能影响很小。&lt;/li&gt;
+&lt;li&gt;&lt;a class="link"
+href="https://developer.chrome.com/blog/site-isolation?hl=zh-cn#why_should_web_developers_care_about_site_isolation"
+target="_blank" rel="noopener" referrerpolicy="no-referrer"
+&gt;
+独立
+&lt;/a&gt;
+的渲染线程，iframe 对宿主的 JS 性能影响很小。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="样式加载"&gt;样式加载&lt;/h3&gt;
 &lt;p&gt;由于组件渲染在 ShadowDOM，为了使样式不被 ShadowDOM 隔离；需要将 CSS 注入到 ShadowDOM 内部，这需要用到 Vite 对&lt;a class="link"
