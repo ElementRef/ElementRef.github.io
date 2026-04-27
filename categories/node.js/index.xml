@@ -659,11 +659,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id="cookie"&gt;Cookie&lt;/h2&gt;
-&lt;p&gt;HTTP 是一个无状态的协议，Cookie 用来记录服务器与客户端之间的状态；Cookie 的处理分为如下几步：&lt;/p&gt;
+&lt;p&gt;HTTP 是一个无状态的协议，cookie 用来记录服务器与客户端之间的状态；cookie 的处理分为如下几步：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;服务器向客户端发送 Cookie；&lt;/li&gt;
-&lt;li&gt;浏览器将 Cookie 保存；&lt;/li&gt;
-&lt;li&gt;每次发生请求都会将 Cookie 发向服务器。&lt;/li&gt;
+&lt;li&gt;服务器向客户端发送 cookie；&lt;/li&gt;
+&lt;li&gt;浏览器将 cookie 保存；&lt;/li&gt;
+&lt;li&gt;每次发生请求都会将 cookie 发向服务器。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -684,7 +684,7 @@ loading="lazy"
 &lt;/span&gt;&lt;span class="lnt"&gt;15
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// Cookie 格式是 key1=value2;key2=value2 形式的
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// cookie 格式是 key1=value2;key2=value2 形式的
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;parseCookie&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;cookie&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nx"&gt;cookie&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -704,10 +704,10 @@ loading="lazy"
 &lt;/div&gt;&lt;h2 id="session"&gt;Session&lt;/h2&gt;
 &lt;p&gt;Session 只保留在服务器端，数据的安全性得到一定的保障，数据也无须在每次请求中都被传递；如何将客户端和服务器中的 Session 对应呢：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;基于 Cookie 来实现用户和数据的映射；&lt;/li&gt;
+&lt;li&gt;基于 cookie 来实现用户和数据的映射；&lt;/li&gt;
 &lt;li&gt;通过查询字符串来实现客户端和服务器数据的对应。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;一旦服务器端启用了 Session，它将约定一个键值作为 Session 口令；将 Session 口令放在 Cookie 中；如果用户请求 Cookie 中没有携带口令，它就会为之生成一个值，这个值是唯一且不重复的值，并设定超时时间；如果口令被篹改，客户端就丢失了与 Session 的映射关系，也无法修改服务器端存在的数据了。&lt;/p&gt;
+&lt;p&gt;一旦服务器端启用了 Session，它将约定一个键值作为 Session 口令；将 Session 口令放在 cookie 中；如果用户请求 cookie 中没有携带口令，它就会为之生成一个值，这个值是唯一且不重复的值，并设定超时时间；如果口令被篹改，客户端就丢失了与 Session 的映射关系，也无法修改服务器端存在的数据了。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -779,7 +779,7 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;sessions&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;session&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;id&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;session&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;session&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 处理请求，检查 Cookie 口令与服务端数据
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 处理请求，检查 cookie 口令与服务端数据
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;handler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kd"&gt;let&lt;/span&gt; &lt;span class="nx"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;cookies&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nx"&gt;id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;

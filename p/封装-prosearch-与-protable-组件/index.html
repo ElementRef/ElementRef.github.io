@@ -470,14 +470,14 @@
 </span></span><span class="line"><span class="cl">      ...
 </span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">ng-template</span> <span class="err">#</span><span class="na">renderSelfSearch</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">ng-template</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">ng-container</span>
 </span></span><span class="line"><span class="cl">        <span class="err">[</span><span class="na">ngTemplateOutlet</span><span class="err">]="</span><span class="na">templateRef</span><span class="err">"</span>
 </span></span><span class="line"><span class="cl">        <span class="err">[</span><span class="na">ngTemplateOutletContext</span><span class="err">]="{</span>
 </span></span><span class="line"><span class="cl">          <span class="na">record:</span> <span class="na">item</span><span class="err">,</span>
 </span></span><span class="line"><span class="cl">          <span class="na">rt:</span> <span class="na">item</span><span class="err">.</span><span class="na">renderSearchType</span><span class="err">,</span>
 </span></span><span class="line"><span class="cl">          <span class="na">validateForm:</span> <span class="na">validateForm</span>
 </span></span><span class="line"><span class="cl">        <span class="err">}"</span>
-</span></span><span class="line"><span class="cl">      <span class="p">&gt;&lt;/</span><span class="nt">ng-template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&gt;&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">ng-template</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
@@ -953,6 +953,9 @@
 </span><span class="lnt">52
 </span><span class="lnt">53
 </span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">ProTableComponent</span> <span class="kr">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">@Input</span><span class="p">()</span> <span class="nx">columns</span>: <span class="kt">ColumnsItem</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">@Input</span><span class="p">()</span> <span class="nx">requestService</span>: <span class="kt">any</span><span class="p">;</span>
@@ -971,7 +974,10 @@
 </span></span><span class="line"><span class="cl">  <span class="nx">pages</span>: <span class="kt">number</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">raw</span>: <span class="kt">any</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">route</span>: <span class="kt">ActivatedRoute</span><span class="p">,</span> <span class="kr">private</span> <span class="nx">router</span>: <span class="kt">Router</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">route</span>: <span class="kt">ActivatedRoute</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">router</span>: <span class="kt">Router</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="p">{}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="nx">ngOnInit() {</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">.</span><span class="nx">queryParams</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">params</span> <span class="o">=&gt;</span> <span class="p">{</span>

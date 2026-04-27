@@ -386,7 +386,7 @@
 </span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="nx">iconv</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">buf</span><span class="p">,</span> <span class="s1">'utf8'</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="cookie">Cookie</h2><p>HTTP 是一个无状态的协议，Cookie 用来记录服务器与客户端之间的状态；Cookie 的处理分为如下几步：</p><ul><li>服务器向客户端发送 Cookie；</li><li>浏览器将 Cookie 保存；</li><li>每次发生请求都会将 Cookie 发向服务器。</li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="cookie">Cookie</h2><p>HTTP 是一个无状态的协议，cookie 用来记录服务器与客户端之间的状态；cookie 的处理分为如下几步：</p><ul><li>服务器向客户端发送 cookie；</li><li>浏览器将 cookie 保存；</li><li>每次发生请求都会将 cookie 发向服务器。</li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -401,7 +401,7 @@
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
-</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// Cookie 格式是 key1=value2;key2=value2 形式的
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// cookie 格式是 key1=value2;key2=value2 形式的
 </span></span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">parseCookie</span><span class="p">(</span><span class="nx">cookie</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">cookie</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span><span class="p">;</span>
@@ -416,7 +416,7 @@
 </span></span><span class="line"><span class="cl">  <span class="p">});</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">temp</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="session">Session</h2><p>Session 只保留在服务器端，数据的安全性得到一定的保障，数据也无须在每次请求中都被传递；如何将客户端和服务器中的 Session 对应呢：</p><ul><li>基于 Cookie 来实现用户和数据的映射；</li><li>通过查询字符串来实现客户端和服务器数据的对应。</li></ul><p>一旦服务器端启用了 Session，它将约定一个键值作为 Session 口令；将 Session 口令放在 Cookie 中；如果用户请求 Cookie 中没有携带口令，它就会为之生成一个值，这个值是唯一且不重复的值，并设定超时时间；如果口令被篹改，客户端就丢失了与 Session 的映射关系，也无法修改服务器端存在的数据了。</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="session">Session</h2><p>Session 只保留在服务器端，数据的安全性得到一定的保障，数据也无须在每次请求中都被传递；如何将客户端和服务器中的 Session 对应呢：</p><ul><li>基于 cookie 来实现用户和数据的映射；</li><li>通过查询字符串来实现客户端和服务器数据的对应。</li></ul><p>一旦服务器端启用了 Session，它将约定一个键值作为 Session 口令；将 Session 口令放在 cookie 中；如果用户请求 cookie 中没有携带口令，它就会为之生成一个值，这个值是唯一且不重复的值，并设定超时时间；如果口令被篹改，客户端就丢失了与 Session 的映射关系，也无法修改服务器端存在的数据了。</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -483,7 +483,7 @@
 </span></span><span class="line"><span class="cl">  <span class="nx">sessions</span><span class="p">[</span><span class="nx">session</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="nx">session</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">session</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="c1">// 处理请求，检查 Cookie 口令与服务端数据
+</span></span><span class="line"><span class="cl"><span class="c1">// 处理请求，检查 cookie 口令与服务端数据
 </span></span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">handler</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">cookies</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
