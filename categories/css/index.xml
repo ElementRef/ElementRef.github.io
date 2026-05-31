@@ -1,6 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CSS on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/css/</link><description>Recent content in CSS on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 07 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/css/index.xml" rel="self" type="application/rss+xml"/><item><title>Tailwind CSS 快速上手 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/tailwind-css-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</link><pubDate>Mon, 07 Oct 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/tailwind-css-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/tailwind-css.png" alt="Tailwind CSS 快速上手" /&gt;&lt;h2 id="是什么"&gt;是什么&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CSS on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/css/</link><description>Recent Content in CSS on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo 0.162.0</generator><language>zh</language><lastBuildDate>Mon, 07 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/css/index.xml" rel="self" type="application/rss+xml"/><item><title>Tailwind CSS 快速上手</title><link>https://ElementRef.github.io/p/tailwind-css-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</link><pubDate>Mon, 07 Oct 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/tailwind-css-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/tailwind-css.png" alt="Featured image of post Tailwind CSS 快速上手" /&gt;&lt;h2 id="是什么"&gt;是什么
+&lt;/h2&gt;
 &lt;p&gt;借助于 JIT，Tailwind CSS 会在编译期间，扫描你的 HTML、Components 或者其他用来描述 HTML 的模版，收集其中的 class，然后生成对应的 CSS 文件。他是为了解决：CSS 冗余、CSS 耦合等问题。&lt;/p&gt;
-&lt;h2 id="怎么用"&gt;怎么用&lt;/h2&gt;
+&lt;h2 id="怎么用"&gt;怎么用
+&lt;/h2&gt;
 &lt;p&gt;使用 TailwindCLI:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;安装 TailwindCLI；&lt;/li&gt;
@@ -16,53 +18,32 @@
 &lt;li&gt;在 CSS 文件中添加 @tailwind 指令；&lt;/li&gt;
 &lt;li&gt;项目运行/打包时，Tailwind CSS 会自动编译输出。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;对于 VSCode 用户，推荐使用 &lt;a class="link"
-href="https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Tailwind CSS IntelliSense
-&lt;/a&gt;
-来获得代码提示和自动补全；官方还维护了一个 &lt;a class="link"
-href="https://github.com/tailwindlabs/prettier-plugin-tailwindcss"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Prettier 插件
-&lt;/a&gt;
-来确保项目中的 class 顺序符合 &lt;a class="link"
-href="https://tailwindcss.com/blog/automatic-class-sorting-with-prettier#how-classes-are-sorted"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Tailwind CSS 建议
-&lt;/a&gt;
+&lt;p&gt;对于 VSCode 用户，推荐使用 &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Tailwind CSS IntelliSense&lt;/a&gt;
+ 来获得代码提示和自动补全；官方还维护了一个 &lt;a class="link" href="https://github.com/tailwindlabs/prettier-plugin-tailwindcss" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Prettier 插件&lt;/a&gt;
+来确保项目中的 class 顺序符合 &lt;a class="link" href="https://tailwindcss.com/blog/automatic-class-sorting-with-prettier#how-classes-are-sorted" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Tailwind CSS 建议&lt;/a&gt;
 。&lt;/p&gt;
-&lt;h2 id="预处理"&gt;预处理&lt;/h2&gt;
+&lt;h2 id="预处理"&gt;预处理
+&lt;/h2&gt;
 &lt;p&gt;Tailwind CSS 可以作为 PostCSS 的一个插件；所以，如果你的项目恰好使用了 PostCSS 并且没有使用 Sass/Less/Stylus；那是再好不过的了；官方文档上推荐了几个 PostCSS 插件：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-postcss-nesting
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;postcss-nesting&lt;/a&gt;
 ，用来支持嵌套语法；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://github.com/postcss/postcss-import"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-postcss-import
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/postcss/postcss-import" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;postcss-import&lt;/a&gt;
 ，用来支持 @import 语法；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://github.com/postcss/autoprefixer"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-autoprefixer
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/postcss/autoprefixer" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;autoprefixer&lt;/a&gt;
 ，用来自动添加浏览器前缀。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;对于 Sass/Less/Stylus 这些，官方持消极态度；因为项目中的大部分 CSS 会由 Tailwind 生成；你甚至都不用额外的写 CSS；所以，这些预处理器的使用并不会带来太多的好处。&lt;/p&gt;
-&lt;h2 id="修饰符"&gt;修饰符&lt;/h2&gt;
-&lt;h3 id="伪类"&gt;伪类&lt;/h3&gt;
+&lt;h2 id="修饰符"&gt;修饰符
+&lt;/h2&gt;
+&lt;h3 id="伪类"&gt;伪类
+&lt;/h3&gt;
 &lt;p&gt;在传统的 CSS 中，我们会把不同的状态绑定到同一个 class 上；而在 Tailwind CSS 中，我们使用不同的 class 来描述不同状态下的样式：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -151,7 +132,8 @@ autoprefixer
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;table&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="伪元素"&gt;伪元素&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="伪元素"&gt;伪元素
+&lt;/h3&gt;
 &lt;p&gt;当需要定义 ::before 和 ::after 的样式时，可以使用 before|after 修饰符：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -319,7 +301,8 @@ autoprefixer
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;dialog&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="元素标记"&gt;元素标记&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="元素标记"&gt;元素标记
+&lt;/h3&gt;
 &lt;p&gt;当想要基于&lt;strong&gt;上层元素&lt;/strong&gt;的状态而改变自身样式时，可以给上层元素一个 group 标记：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -524,12 +507,8 @@ autoprefixer
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;fieldset&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;* 修饰符匹配&lt;strong&gt;子元素&lt;/strong&gt;，就像&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Universal_selectors"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-通配选择器
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;* 修饰符匹配&lt;strong&gt;子元素&lt;/strong&gt;，就像&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Universal_selectors" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;通配选择器&lt;/a&gt;
 一样，作用域略有不同：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -567,7 +546,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="媒体查询"&gt;媒体查询&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="媒体查询"&gt;媒体查询
+&lt;/h3&gt;
 &lt;p&gt;响应式 &lt;strong&gt;md&lt;/strong&gt;、&lt;strong&gt;lg&lt;/strong&gt;&amp;hellip;：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -776,7 +756,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;flex supports-[display:grid]:grid ...&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="属性选择"&gt;属性选择&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="属性选择"&gt;属性选择
+&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;ltr|rtl&lt;/strong&gt; 用来匹配 HTML 元素的 dir 属性：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -847,7 +828,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="自定义修饰符"&gt;自定义修饰符&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="自定义修饰符"&gt;自定义修饰符
+&lt;/h3&gt;
 &lt;p&gt;官方的例子中，使用 &amp;amp; 匹配当前元素，使用 @ 匹配媒体查询；基本和 CSS 规范和 Sass|Less|Stylus 保持一致：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -936,14 +918,11 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;更多修饰符&lt;a class="link"
-href="https://tailwindcss.com/docs/hover-focus-and-other-states#appendix"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-详见
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;更多修饰符&lt;a class="link" href="https://tailwindcss.com/docs/hover-focus-and-other-states#appendix" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;详见&lt;/a&gt;
 。&lt;/p&gt;
-&lt;h2 id="响应式"&gt;响应式&lt;/h2&gt;
+&lt;h2 id="响应式"&gt;响应式
+&lt;/h2&gt;
 &lt;p&gt;Tailwind CSS 默认提供了以下响应断点，分别是：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;sm，对应 @media (min-width: 640px)；&lt;/li&gt;
@@ -1025,7 +1004,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="黑暗模式"&gt;黑暗模式&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="黑暗模式"&gt;黑暗模式
+&lt;/h2&gt;
 &lt;p&gt;Tailwind CSS 使用 prefers-color-scheme 媒体查询来切换黑暗模式（media 策略）；如果想要手动切换，可以使用 selector 策略：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1093,7 +1073,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="样式复用"&gt;样式复用&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="样式复用"&gt;样式复用
+&lt;/h2&gt;
 &lt;p&gt;在使用 Tailwind CSS 时，你可能会遇到一些样式重复的情况，比如下方的 &amp;lt;img&amp;gt;：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1155,13 +1136,9 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;如果能通过模版循环、组件等方式复用，那将是极好的；如果不能，Tailwind CSS 提供了 &lt;a class="link"
-href="https://tailwindcss.com/docs/functions-and-directives#apply"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-@apply
-&lt;/a&gt;
-方法来提取公共样式：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;如果能通过模版循环、组件等方式复用，那将是极好的；如果不能，Tailwind CSS 提供了 &lt;a class="link" href="https://tailwindcss.com/docs/functions-and-directives#apply" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;@apply&lt;/a&gt;
+ 方法来提取公共样式：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1188,8 +1165,10 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="自定义样式配置"&gt;自定义样式配置&lt;/h2&gt;
-&lt;h3 id="主题自定义"&gt;主题自定义&lt;/h3&gt;
+&lt;/div&gt;&lt;h2 id="自定义样式配置"&gt;自定义样式配置
+&lt;/h2&gt;
+&lt;h3 id="主题自定义"&gt;主题自定义
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1262,7 +1241,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="使用自由值"&gt;使用自由值&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="使用自由值"&gt;使用自由值
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1295,7 +1275,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="basecomponentsutilities"&gt;base、components、utilities&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="basecomponentsutilities"&gt;base、components、utilities
+&lt;/h2&gt;
 &lt;p&gt;在 CSS 中，相同权重的规则定义的&lt;strong&gt;先后顺序&lt;/strong&gt;决定了它们之间的优先级；如果规则的权重相同，则后边定义的规则会覆盖前边定义的规则：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1333,20 +1314,12 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;button&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;bg-black btn&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;button&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;所以，Tailwind CSS 基于 &lt;a class="link"
-href="https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/#what-is-itcss"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-ITCSS
-&lt;/a&gt;
-将样式分成了三层：base、components 和 utilities：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;所以，Tailwind CSS 基于 &lt;a class="link" href="https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/#what-is-itcss" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;ITCSS&lt;/a&gt;
+ 将样式分成了三层：base、components 和 utilities：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;base 层包含所有的&lt;a class="link"
-href="https://tailwindcss.com/docs/preflight"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-基础样式
-&lt;/a&gt;
+&lt;li&gt;base 层包含所有的&lt;a class="link" href="https://tailwindcss.com/docs/preflight" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;基础样式&lt;/a&gt;
 ，比如样式重置、元素默认样式等，优先级最低；&lt;/li&gt;
 &lt;li&gt;components 层开放给开发者或第三方样式库，用来自定义组件样式，优先级次之；&lt;/li&gt;
 &lt;li&gt;utilities 层包含工具类样式，比如 flex、grid、ml-* 等，优先级最高。&lt;/li&gt;
@@ -1468,6 +1441,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;span class="lnt"&gt;41
 &lt;/span&gt;&lt;span class="lnt"&gt;42
 &lt;/span&gt;&lt;span class="lnt"&gt;43
+&lt;/span&gt;&lt;span class="lnt"&gt;44
+&lt;/span&gt;&lt;span class="lnt"&gt;45
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-css" data-lang="css"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;tailwind&lt;/span&gt; &lt;span class="nt"&gt;base&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c"&gt;/* 注入 Tailwind CSS 和 plugins 注册的的基础样式 */&lt;/span&gt;
@@ -1492,7 +1467,9 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;layer&lt;/span&gt; &lt;span class="nt"&gt;components&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c"&gt;/* 定义一个上下文菜单阴影 */&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;shadow-context-menu&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;box-shadow&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;rgba&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.067&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;rgba&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.067&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;box-shadow&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;rgba&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.067&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;rgba&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.067&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;rgba&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.067&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c"&gt;/* 定义一个卡片 UI */&lt;/span&gt;
@@ -1556,14 +1533,11 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;需要注意的是，@layer 扩展出来的样式，不会受到 &lt;a class="link"
-href="https://tailwindcss.com/docs/configuration#prefix"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-​Prefix
-&lt;/a&gt;
-配置的影响。&lt;/p&gt;
-&lt;h2 id="配置文件"&gt;配置文件&lt;/h2&gt;
+&lt;/div&gt;&lt;p&gt;需要注意的是，@layer 扩展出来的样式，不会受到 &lt;a class="link" href="https://tailwindcss.com/docs/configuration#prefix" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;​Prefix&lt;/a&gt;
+ 配置的影响。&lt;/p&gt;
+&lt;h2 id="配置文件"&gt;配置文件
+&lt;/h2&gt;
 &lt;p&gt;默认的配置文件为项目目录下的 tailwind.config.js|ts，也可以通过命令行参数指定配置文件：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1919,60 +1893,35 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="nx"&gt;satisfies&lt;/span&gt; &lt;span class="nx"&gt;Config&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="常用插件"&gt;常用插件&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="常用插件"&gt;常用插件
+&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://github.com/tailwindlabs/tailwindcss-container-queries"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-@tailwindcss/container-queries
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/tailwindlabs/tailwindcss-container-queries" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;@tailwindcss/container-queries&lt;/a&gt;
 ，可以基于 @container 的尺寸，在当前元素应用不同的样式；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://github.com/tailwindlabs/tailwindcss-typography"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-@tailwindcss/typography
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/tailwindlabs/tailwindcss-typography" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;@tailwindcss/typography&lt;/a&gt;
 ，用于修饰 Markdown 或富文本生成的 HTML 内容；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://github.com/jamiebuilds/tailwindcss-animate"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-tailwindcss-animate
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/jamiebuilds/tailwindcss-animate" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;tailwindcss-animate&lt;/a&gt;
 ，动画插件，内置了一些动画类名；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://github.com/tailwindlabs/tailwindcss-aspect-ratio"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-tailwindcss-aspect-ratio
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/tailwindlabs/tailwindcss-aspect-ratio" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;tailwindcss-aspect-ratio&lt;/a&gt;
 ，方便设置元素的宽高比；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://github.com/tailwindlabs/tailwindcss-forms"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-tailwindcss-forms
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/tailwindlabs/tailwindcss-forms" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;tailwindcss-forms&lt;/a&gt;
 ，对表单元素的样式进行重置；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://github.com/dcastil/tailwind-merge"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-tailwind-merge
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/dcastil/tailwind-merge" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;tailwind-merge&lt;/a&gt;
 ，用于合并多个 class。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="优势"&gt;优势&lt;/h2&gt;
-&lt;p&gt;Tailwind CSS 生成的 CSS 文件体积很小，即使不做代码分割，也能获得不错的加载性能。Tailwind 推荐使用 &lt;a class="link"
-href="https://cssnano.github.io/cssnano"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-cssnano
-&lt;/a&gt;
-压缩 CSS，可以获得更小的体积。&lt;/p&gt;
-&lt;h2 id="质疑"&gt;质疑&lt;/h2&gt;
+&lt;h2 id="优势"&gt;优势
+&lt;/h2&gt;
+&lt;p&gt;Tailwind CSS 生成的 CSS 文件体积很小，即使不做代码分割，也能获得不错的加载性能。Tailwind 推荐使用 &lt;a class="link" href="https://cssnano.github.io/cssnano" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;cssnano&lt;/a&gt;
+ 压缩 CSS，可以获得更小的体积。&lt;/p&gt;
+&lt;h2 id="质疑"&gt;质疑
+&lt;/h2&gt;
 &lt;p&gt;在阅读文档的时候，被下边这个官方实例吓到过：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -2025,20 +1974,13 @@ cssnano
 &lt;li&gt;行内样式不能使用伪类/伪元素，而 Tailwind CSS 借助于修饰符，支持在 class 中使用伪类/伪元素；&lt;/li&gt;
 &lt;li&gt;行内样式不能使用媒体查询，而 Tailwind CSS 借助于修饰符，支持在 class 中使用媒体查询；&lt;/li&gt;
 &lt;li&gt;在组件化开发的趋势下，超长的 class 被封装在组件内部，不至于难于维护。&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>《CSS 新世界》笔记 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/css-%E6%96%B0%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/</link><pubDate>Mon, 28 Feb 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/css-%E6%96%B0%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/css.png" alt="《CSS 新世界》笔记" /&gt;&lt;h2 id="前置知识"&gt;前置知识&lt;/h2&gt;
-&lt;p&gt;&lt;a class="link"
-href="https://www.zhangxinxu.com/wordpress/2011/03/css-css3-unit-units"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-CSS/CSS3 长度、时间、频率、角度单位大全
-&lt;/a&gt;
+&lt;/ul&gt;</description></item><item><title>《CSS 新世界》笔记</title><link>https://ElementRef.github.io/p/css-%E6%96%B0%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/</link><pubDate>Mon, 28 Feb 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/css-%E6%96%B0%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/css.png" alt="Featured image of post 《CSS 新世界》笔记" /&gt;&lt;h2 id="前置知识"&gt;前置知识
+&lt;/h2&gt;
+&lt;p&gt;&lt;a class="link" href="https://www.zhangxinxu.com/wordpress/2011/03/css-css3-unit-units" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;CSS/CSS3 长度、时间、频率、角度单位大全&lt;/a&gt;
 &lt;/p&gt;
-&lt;p&gt;&lt;a class="link"
-href="https://www.zhangxinxu.com/wordpress/2019/11/css-value-type"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-CSS 值类型文档大全
-&lt;/a&gt;
+&lt;p&gt;&lt;a class="link" href="https://www.zhangxinxu.com/wordpress/2019/11/css-value-type" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;CSS 值类型文档大全&lt;/a&gt;
 &lt;/p&gt;
 &lt;p&gt;CSS 全局关键字属性值：&lt;/p&gt;
 &lt;ul&gt;
@@ -2134,7 +2076,8 @@ CSS 值类型文档大全
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;总之，Web 开发是没有必要让所有浏览器都显示得一模一样的；&lt;strong&gt;好的浏览器有更好的显示，糟糕的浏览器就只有普通的显示&lt;/strong&gt;；这才是对用户更负责任的做法。&lt;/p&gt;
-&lt;h2 id="widthfit-content"&gt;width:fit-content&lt;/h2&gt;
+&lt;h2 id="widthfit-content"&gt;width:fit-content
+&lt;/h2&gt;
 &lt;p&gt;fit-content 的样式表现就是 CSS2.1 规范中的 &lt;strong&gt;shrink-to-fit&lt;/strong&gt;，称其为&lt;strong&gt;包裹性&lt;/strong&gt;；尺寸收缩但不会超出包含块级元素的尺寸限制：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -2275,7 +2218,8 @@ CSS 值类型文档大全
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="min-content-与-max-content"&gt;min-content 与 max-content&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="min-content-与-max-content"&gt;min-content 与 max-content
+&lt;/h2&gt;
 &lt;p&gt;min-content 即&lt;strong&gt;首选最小宽度&lt;/strong&gt;或者&lt;strong&gt;最小内容宽度&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;元素由 content-box、padding-box、border-box 和 margin-box 组成，元素最终占据的尺寸由这 4 个盒子占据的尺寸决定。其中 padding-box、border-box 和 margin-box 的尺寸表现规则&lt;strong&gt;不会&lt;/strong&gt;因为元素的不同而有所不同，但是 content-box 不一样，它&lt;strong&gt;随着内容的不同&lt;/strong&gt;，首选最小宽度也会不同：&lt;/p&gt;
 &lt;ul&gt;
@@ -2335,7 +2279,8 @@ CSS 值类型文档大全
 &lt;p&gt;在实际开发中是不会使用 min-content 关键字的，但是会非常频繁地遇到 min-content 的表现场景。&lt;/p&gt;
 &lt;p&gt;max-content 表示最大内容宽度；作用是让元素尽可能大，保证图文内容在一行显示，哪怕最终的宽度溢出外部容器元素。&lt;/p&gt;
 &lt;p&gt;所有需要使用 max-content 的场景，都能使用 white-space:nowrap 实现一模一样的效果，并且兼容性更好；所以，实际上 max-content 没有任何实用价值。&lt;/p&gt;
-&lt;h2 id="positionsticky"&gt;position:sticky&lt;/h2&gt;
+&lt;h2 id="positionsticky"&gt;position:sticky
+&lt;/h2&gt;
 &lt;p&gt;黏性定位效果底层的渲染规则&lt;strong&gt;和固定定位没有任何关系&lt;/strong&gt;，而是&lt;strong&gt;相对定位的延伸&lt;/strong&gt;：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;元素发生偏移的时候，元素的原始位置是保留的；&lt;/li&gt;
@@ -2538,7 +2483,8 @@ CSS 值类型文档大全
 &lt;/div&gt;
 &lt;/div&gt;&lt;img alt="position:sticky" title="position:sticky" style="display: block;margin: 0 auto;width: 70%;" src="sticky-in-three.png"/&gt;
 &lt;p&gt;上一个黏性定位元素被滚走，下一个黏性定位元素正好开始有黏性效果。&lt;/p&gt;
-&lt;h2 id="font-family"&gt;font-family&lt;/h2&gt;
+&lt;h2 id="font-family"&gt;font-family
+&lt;/h2&gt;
 &lt;p&gt;全新的通用字体族：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;system-ui，系统 UI 字体：
@@ -2687,20 +2633,36 @@ CSS 值类型文档大全
 &lt;/span&gt;&lt;span class="lnt"&gt;24
 &lt;/span&gt;&lt;span class="lnt"&gt;25
 &lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;span class="lnt"&gt;31
+&lt;/span&gt;&lt;span class="lnt"&gt;32
+&lt;/span&gt;&lt;span class="lnt"&gt;33
+&lt;/span&gt;&lt;span class="lnt"&gt;34
+&lt;/span&gt;&lt;span class="lnt"&gt;35
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-css" data-lang="css"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;/* @font-face 定义的字体只有在被使用的时候才会加载 */&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;font-face&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;font-family&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;Emoji&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;src&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;local&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Apple Color Emoji&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;),&lt;/span&gt; &lt;span class="nt"&gt;local&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Segoe UI Emoji&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;),&lt;/span&gt; &lt;span class="nt"&gt;local&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s1"&gt;&amp;#39;Segoe UI Symbol&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;),&lt;/span&gt; &lt;span class="nt"&gt;local&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Noto Color Emoji&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;src&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;local&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Apple Color Emoji&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;),&lt;/span&gt; &lt;span class="nt"&gt;local&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Segoe UI Emoji&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;local&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Segoe UI Symbol&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;),&lt;/span&gt; &lt;span class="nt"&gt;local&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Noto Color Emoji&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;unicode-range&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;U&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nt"&gt;1F000-1F644&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;U&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nt"&gt;203C-3299&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;/* 最佳无衬线字体 */&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;body&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;font-family&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;system-ui&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;apple-system&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Segoe&lt;/span&gt; &lt;span class="n"&gt;UI&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Roboto&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Emoji&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Helvetica&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;Arial&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;sans-serif&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;font-family&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;system-ui&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;apple-system&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;Segoe&lt;/span&gt; &lt;span class="n"&gt;UI&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;Roboto&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;Emoji&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;Helvetica&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;Arial&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kc"&gt;sans-serif&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;/* 最佳衬线字体 */&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;font-serif&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -2708,16 +2670,19 @@ CSS 值类型文档大全
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;/* 最佳等宽字体 */&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;font-mono&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;font-family&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Menlo&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Monaco&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Consolas&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Liberation Mono&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Courier New&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kc"&gt;monospace&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;font-family&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;Menlo&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Monaco&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Consolas&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Liberation Mono&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Courier New&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;monospace&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;/* math 通用字体 */&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;math&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;font-family&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Cambria&lt;/span&gt; &lt;span class="n"&gt;Math&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Latin&lt;/span&gt; &lt;span class="n"&gt;Modern&lt;/span&gt; &lt;span class="n"&gt;Math&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;font-family&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;Cambria&lt;/span&gt; &lt;span class="n"&gt;Math&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;Latin&lt;/span&gt; &lt;span class="n"&gt;Modern&lt;/span&gt; &lt;span class="n"&gt;Math&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="font-display"&gt;font-display&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="font-display"&gt;font-display
+&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;字体显示时间线&lt;/strong&gt;开始于浏览器&lt;strong&gt;尝试下载&lt;/strong&gt;字体的那一刻，整个时间线分为 3 个时段，每个时段有不同的字体渲染行为：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;字体阻塞时段，如果未加载字体，任何试图使用它的元素都必须以&lt;strong&gt;不可见&lt;/strong&gt;的方式渲染后备字体；如果在此期间字体成功加载，则正常使用它；&lt;/li&gt;
@@ -2733,22 +2698,20 @@ CSS 值类型文档大全
 &lt;li&gt;optional，字体阻塞时段极短（不超过 100ms），没有字体交换时段；如果字体瞬间被加载（被缓存），则浏览器使用该字体，否则使用回退字体；日常 Web 开发更推荐。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;font-display 属性只能用在 @font-face 规则中；如果你的自定义字体是用于字体呈现，就使用 optional，否则使用默认值。&lt;/p&gt;
-&lt;h2 id="中断与换行"&gt;中断与换行&lt;/h2&gt;
+&lt;h2 id="中断与换行"&gt;中断与换行
+&lt;/h2&gt;
 &lt;p&gt;字符单元默认的中断与换行规则：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Space（普通空格）、Enter（回车）和 Tab（制表符）无论怎样组合都会&lt;strong&gt;合并为单个普通空格&lt;/strong&gt;；&lt;/li&gt;
 &lt;li&gt;文字可以在 CJK 文本、普通空格和短横线连字符处换行，连续英文单词和数字不换行。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;word-break:keep-all 可以让 CJK 文本&lt;strong&gt;不换行排版&lt;/strong&gt;，同时又&lt;strong&gt;不影响&lt;/strong&gt;非 CJK 文本的排版行为。&lt;/p&gt;
-&lt;p&gt;&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/hyphens"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-hyphens
-&lt;/a&gt;
-是专为英文场景设计的一个 CSS 属性，可以让英文单词&lt;strong&gt;断开换行的时候带上连字符&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/hyphens" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;hyphens&lt;/a&gt;
+ 是专为英文场景设计的一个 CSS 属性，可以让英文单词&lt;strong&gt;断开换行的时候带上连字符&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;&amp;lt;wbr/&amp;gt; 表示有机会就断开换行（如果宽度足够就不换行）；而 &amp;lt;br/&amp;gt; 则是直接换行显示，无论宽度是否足够。&lt;/p&gt;
-&lt;h2 id="text-decoration"&gt;text-decoration&lt;/h2&gt;
+&lt;h2 id="text-decoration"&gt;text-decoration
+&lt;/h2&gt;
 &lt;p&gt;text-decoration 是一个缩写属性：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;text-decoration-line，装饰线类型：
@@ -2805,7 +2768,8 @@ hyphens
 &lt;/div&gt;&lt;img alt="text-decoration-style" title="text-decoration-style" style="display: block;margin: 0 auto;width: 70%;" src="text-decoration.png"/&gt;
 &lt;p&gt;text-underline-position:(under|left|right|from-font) 可以用来设置下划线的位置。&lt;/p&gt;
 &lt;p&gt;text-underline-offset 也可以用来设置下划线的位置（只对下划线类型的装饰线有效），其偏移量支持数值和百分比值。&lt;/p&gt;
-&lt;h2 id="color"&gt;color&lt;/h2&gt;
+&lt;h2 id="color"&gt;color
+&lt;/h2&gt;
 &lt;p&gt;不是所有人都知道的一些知识：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;HTML 中 color 算法和 CSS 中的 color 算法是&lt;strong&gt;不一样&lt;/strong&gt;的；无法识别的颜色在 HTML 中会渲染成另外一个颜色，而在 CSS 中会忽略这个颜色；&lt;/li&gt;
@@ -2827,7 +2791,8 @@ hyphens
 &lt;li&gt;Saturation，饱和度，0% ～ 100%；&lt;/li&gt;
 &lt;li&gt;Lightness，亮度，0% ～ 100%。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="background-clip"&gt;background-clip&lt;/h2&gt;
+&lt;h2 id="background-clip"&gt;background-clip
+&lt;/h2&gt;
 &lt;p&gt;background-clip 支持下面几个属性值：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;border-box，默认值，背景图像或者背景颜色的显示区域是整个 border-box，边框的下方也会显示背景内容；&lt;/li&gt;
@@ -2908,7 +2873,8 @@ hyphens
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;img alt="background-clip" title="background-clip" style="display: block;margin: 0 auto;width: 70%;" src="background-clip.png"/&gt;
-&lt;h2 id="box-shadow"&gt;box-shadow&lt;/h2&gt;
+&lt;h2 id="box-shadow"&gt;box-shadow
+&lt;/h2&gt;
 &lt;p&gt;多边框效果：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -2925,6 +2891,12 @@ hyphens
 &lt;/span&gt;&lt;span class="lnt"&gt;11
 &lt;/span&gt;&lt;span class="lnt"&gt;12
 &lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
@@ -2934,8 +2906,14 @@ hyphens
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;border-radius&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;background-color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;dodgerblue&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;box-shadow&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="kc"&gt;white&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mh"&gt;#fc9918&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mh"&gt;#f14a16&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mh"&gt;#35589a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mh"&gt;#370665&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mh"&gt;#121212&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;28&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mh"&gt;#30475e&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;box-shadow&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="kc"&gt;white&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mh"&gt;#fc9918&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mh"&gt;#f14a16&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mh"&gt;#35589a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mh"&gt;#370665&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mh"&gt;#121212&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;28&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mh"&gt;#30475e&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;32&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="mh"&gt;#f05454&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
@@ -2943,7 +2921,8 @@ hyphens
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;img alt="box-shadow" title="box-shadow" style="display: block;margin: 0 auto;width: 70%;" src="box-shadow-multi.png"/&gt;
-&lt;h2 id="transform"&gt;transform&lt;/h2&gt;
+&lt;h2 id="transform"&gt;transform
+&lt;/h2&gt;
 &lt;p&gt;CSS 中的角度单位：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;deg，角度，一个完整的圆是 360deg；&lt;/li&gt;
@@ -3057,7 +3036,8 @@ hyphens
 &lt;li&gt;zoom 缩放会实时&lt;strong&gt;改变&lt;/strong&gt;元素占据的尺寸空间；&lt;/li&gt;
 &lt;li&gt;zoom 不会创建层叠上下文，不会使子元素 position:fixed 失效，不会改变绝对定位元素的包含块。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id="minmax-和-clamp"&gt;min、max 和 clamp&lt;/h2&gt;
+&lt;h2 id="minmax-和-clamp"&gt;min、max 和 clamp
+&lt;/h2&gt;
 &lt;p&gt;min(expression [, expression]) 支持一个或多个表达式，每个表达式之间使用逗号分隔，然后将最小的表达式的&lt;strong&gt;值&lt;/strong&gt;作为返回值；例如：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -3097,56 +3077,35 @@ hyphens
 &lt;li&gt;如果 VAL 大于 MAX，则使用 MAX 作为返回值；&lt;/li&gt;
 &lt;li&gt;如果 VAL 小于 MIN，则使用 MIN 作为返回值。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="渐变"&gt;渐变&lt;/h2&gt;
-&lt;p&gt;CSS 渐变本质上是一个图像，无法使用 transition 实现过渡效果，也无法使用 &lt;a class="link"
-href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-animation
-&lt;/a&gt;
-实现动画效果。&lt;/p&gt;
+&lt;h2 id="渐变"&gt;渐变
+&lt;/h2&gt;
+&lt;p&gt;CSS 渐变本质上是一个图像，无法使用 transition 实现过渡效果，也无法使用 &lt;a class="link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;animation&lt;/a&gt;
+ 实现动画效果。&lt;/p&gt;
 &lt;p&gt;渐变角度和渐变方位关系：0deg 表示向上，顺时针旋转是正角度，所以 90deg 表示向右。&lt;/p&gt;
 &lt;img alt="渐变角度" title="渐变角度" style="display: block;margin: 0 auto;width: 70%;" src="gradient-angle.png"/&gt;
-&lt;h2 id="变换"&gt;变换&lt;/h2&gt;
+&lt;h2 id="变换"&gt;变换
+&lt;/h2&gt;
 &lt;p&gt;3D 变换相关的三个属性：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-style"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-transform-style
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-style" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;transform-style&lt;/a&gt;
 ，设置元素的子元素是位于 3D 空间（preserve-3d）中还是平面（flat）中；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/perspective"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-perspective
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/perspective" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;perspective&lt;/a&gt;
 ，指定观察者与 z=0 平面的距离，使具有三维位置变换的元素产生透视效果；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/perspective-origin"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-perspective-origin
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/perspective-origin" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;perspective-origin&lt;/a&gt;
 ，指定观察者的位置，用作 perspective 属性的消失点；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/backface-visibility"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-backface-visibility
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/backface-visibility" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;backface-visibility&lt;/a&gt;
 ，指定当元素背面朝向观察者时是否可见。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;DEMO，&lt;a class="link"
-href="https://ElementRef.github.io/DemosForIfe/Design%20B.html"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-旋转的骰子
-&lt;/a&gt;
+&lt;p&gt;DEMO，&lt;a class="link" href="https://ElementRef.github.io/DemosForIfe/Design%20B.html" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;旋转的骰子&lt;/a&gt;
 。&lt;/p&gt;
-&lt;h2 id="动画"&gt;动画&lt;/h2&gt;
+&lt;h2 id="动画"&gt;动画
+&lt;/h2&gt;
 &lt;p&gt;@keyframes 规则中的 CSS 优先级是最高的；因此，没有必要在 @keyframes 中使用 !important 关键字。&lt;/p&gt;
 &lt;p&gt;animation-direction 可以用来控制动画的方向，其本质上是通过控制 @keyframes 规则中定义的动画关键帧执行的方向来实现的：&lt;/p&gt;
 &lt;ul&gt;
@@ -3176,7 +3135,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="分栏布局"&gt;分栏布局&lt;/h2&gt;
+&lt;h2 id="分栏布局"&gt;分栏布局
+&lt;/h2&gt;
 &lt;p&gt;分栏布局相关的 CSS 属性：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;columns，column-width 和 column-count 的缩写；最终分栏的数量要么由 column-count 决定，要么由 column-width 决定：
@@ -3252,7 +3212,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;img alt="分栏布局" title="分栏布局" style="display: block;margin: 0 auto;width: 70%;" src="column.png"/&gt;
-&lt;h2 id="弹性布局"&gt;弹性布局&lt;/h2&gt;
+&lt;h2 id="弹性布局"&gt;弹性布局
+&lt;/h2&gt;
 &lt;p&gt;display:flex 发生了什么？&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;弹性子项（包括匿名内联元素）都是&lt;strong&gt;块级元素&lt;/strong&gt;；&lt;/li&gt;
@@ -3433,26 +3394,14 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/ul&gt;
 &lt;p&gt;flex 是 flex-grow、flex-shrink 和 flex-basis 的简写：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex-grow"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-flex-grow
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex-grow" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;flex-grow&lt;/a&gt;
 ，弹性容器在主轴方向上剩余空间&lt;strong&gt;多余&lt;/strong&gt;时分配规则；默认 0，表示不分配；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex-shrink"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-flex-shrink
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex-shrink" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;flex-shrink&lt;/a&gt;
 ，弹性容器在主轴方向上剩余空间&lt;strong&gt;不足&lt;/strong&gt;时分配规则；默认 1，表示分配；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex-basis"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-flex-basis
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex-basis" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;flex-basis&lt;/a&gt;
 ，空间分配的基础尺寸；作用在 content-box 上，默认 auto；&lt;/li&gt;
 &lt;li&gt;flex:initial，等同于 flex:0 1 auto，&lt;strong&gt;不抢&lt;/strong&gt;多余空间，可以在空间不足时收缩；&lt;/li&gt;
 &lt;li&gt;flex:auto，等同于 flex:1 1 auto，子项&lt;strong&gt;自动拉伸/收缩&lt;/strong&gt;来填满剩余空间，在容器尺寸不足时会优先最大化内容尺寸；&lt;/li&gt;
@@ -3488,7 +3437,8 @@ flex-basis
 &lt;li&gt;弹性增长指的是 flex-grow，弹性收缩指的是 flex-shrink；&lt;/li&gt;
 &lt;li&gt;最大尺寸主要受 max-width 限制；最小尺寸则受最小内容宽度、width 和 min-width 共同影响。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="网格布局"&gt;网格布局&lt;/h2&gt;
+&lt;h2 id="网格布局"&gt;网格布局
+&lt;/h2&gt;
 &lt;p&gt;网格布局的默认布局和块布局非常类似，就是简单地&lt;strong&gt;从上往下依次垂直排列&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;显式网格：在规定容器内显示的网格。
 隐式网格：多于设置的单元格数量的 grid 子项，或者是在设定的网格范围之外出现 grid 子项。&lt;/p&gt;
@@ -3938,7 +3888,8 @@ flex-basis
 &lt;li&gt;align-self，设置个网格元素的垂直对齐方式；&lt;/li&gt;
 &lt;li&gt;place-self，&amp;lt;align-self&amp;gt; &amp;lt;justify-self&amp;gt;?。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="shapes-布局"&gt;Shapes 布局&lt;/h2&gt;
+&lt;h2 id="shapes-布局"&gt;Shapes 布局
+&lt;/h2&gt;
 &lt;p&gt;Shapes 需要 float 的配合，可以实现不规则的图文环绕效果；其相关的 CSS 属性有 3 个：shape-outside、shape-margin、shape-image-threshold。&lt;/p&gt;
 &lt;p&gt;shape-outside 支持的属性值：&lt;/p&gt;
 &lt;ul&gt;
@@ -4156,7 +4107,8 @@ flex-basis
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;img alt="shape-outside-image" title="shape-outside-image" style="display: block;margin: 0 auto;width: 70%;" src="shape-outside-image.png"/&gt;
-&lt;h2 id="媒体查询"&gt;媒体查询&lt;/h2&gt;
+&lt;h2 id="媒体查询"&gt;媒体查询
+&lt;/h2&gt;
 &lt;p&gt;@media 查询的规则由 4 部分组成：媒体查询修饰符、媒体类型、媒体条件、媒体特征。&lt;/p&gt;
 &lt;p&gt;媒体查询修饰符：&lt;/p&gt;
 &lt;ul&gt;
@@ -4275,7 +4227,8 @@ flex-basis
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="image-set"&gt;image-set&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="image-set"&gt;image-set
+&lt;/h2&gt;
 &lt;p&gt;image-set 类似于 HTML 中的 srcset 属性，可以根据屏幕的&lt;strong&gt;像素密度&lt;/strong&gt;来显示相应的背景图。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -4297,7 +4250,8 @@ flex-basis
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="变量与自定义属性"&gt;变量与自定义属性&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="变量与自定义属性"&gt;变量与自定义属性
+&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;CSS 变量的声明&lt;/strong&gt;由 CSS 自定义属性及其对应的值组成；&lt;strong&gt;CSS 变量的使用&lt;/strong&gt;是通过变量函数 var() 调用 CSS 自定义属性实现。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -4370,13 +4324,9 @@ flex-basis
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;CSS 自定义属性是有作用域的，所以全局使用的自定义属性都定义在 &lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:root"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-:root
-&lt;/a&gt;
-伪类中。&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;CSS 自定义属性是有作用域的，所以全局使用的自定义属性都定义在 &lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:root" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;:root&lt;/a&gt;
+ 伪类中。&lt;/p&gt;
 &lt;p&gt;CSS 自定义属性不支持在媒体查询的查询条件中使用，也不支持 content 属性：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -4440,7 +4390,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;window&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getComputedStyle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;divEle&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;getPropertyValue&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;--color&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// 取值
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="object-fit"&gt;object-fit&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="object-fit"&gt;object-fit
+&lt;/h2&gt;
 &lt;p&gt;替换元素的内在尺寸适用于外部指定的尺寸，这就导致两个问题：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;外部指定的尺寸和内在尺寸有可能宽高比例不相符；&lt;/li&gt;
@@ -4543,7 +4494,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;li&gt;from-image，初始值，如果包含 Orientation，则对图片方向进行纠正；&lt;/li&gt;
 &lt;li&gt;none，不对图片方向进行纠正。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="filter"&gt;filter&lt;/h2&gt;
+&lt;h2 id="filter"&gt;filter
+&lt;/h2&gt;
 &lt;p&gt;filter 支持 10 个滤镜函数：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;blur(5px)，模糊，不支持百分比，其参数值可以理解为屏幕上互相融合的像素数量，会有边缘泛白的问题；&lt;/li&gt;
@@ -4613,94 +4565,55 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/div&gt;
 &lt;/div&gt;&lt;img alt="filter:drop-shadow" title="filter:drop-shadow" style="display: block;margin: 0 auto;width: 70%;" src="drop-shadow.png"/&gt;
 &lt;p&gt;backdrop-filter 和 filter 语法相似，可以轻松实现毛玻璃效果；他们的区别是，backdrop-filter 是让&lt;strong&gt;当前元素所在区域后面的内容&lt;/strong&gt;应用滤镜效果，需要当前元素是半/完全透明的；filter 是让当前元素自身应用滤镜效果。&lt;/p&gt;
-&lt;h2 id="混合模式"&gt;混合模式&lt;/h2&gt;
+&lt;h2 id="混合模式"&gt;混合模式
+&lt;/h2&gt;
 &lt;p&gt;CSS 中有 3 个混合模式相关的属性：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;mix-blend-mode，元素与元素之间的混合；&lt;/li&gt;
 &lt;li&gt;isolation，应用于祖先元素，限制 mix-blend-mode：
 &lt;ul&gt;
 &lt;li&gt;auto，默认值，混合模式隔离与否根据具体情况而定；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://demo.cssworld.cn/new/11/5-1.php"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-isolate
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://demo.cssworld.cn/new/11/5-1.php" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;isolate&lt;/a&gt;
 ，对混合模式进行隔离（通过创建新的层叠上下文）。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;background-blend-mode，混合元素背景图案、渐变和颜色。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;background-blend-mode 和 &lt;a class="link"
-href="https://demo.cssworld.cn/new/11/3-1.php"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-mix-blend-mode
-&lt;/a&gt;
-支持的混合模式是一致的：&lt;/p&gt;
+&lt;p&gt;background-blend-mode 和 &lt;a class="link" href="https://demo.cssworld.cn/new/11/3-1.php" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;mix-blend-mode&lt;/a&gt;
+ 支持的混合模式是一致的：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;normal，正常；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://demo.cssworld.cn/new/11/3-2.php"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-multiply
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://demo.cssworld.cn/new/11/3-2.php" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;multiply&lt;/a&gt;
 ，正片叠底，混合后颜色变暗；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://demo.cssworld.cn/new/11/3-3.php"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-screen
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://demo.cssworld.cn/new/11/3-3.php" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;screen&lt;/a&gt;
 ，滤色，效果和 multiply 正好相反，混合后颜色变亮；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://demo.cssworld.cn/new/11/3-4.php"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-overlay
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://demo.cssworld.cn/new/11/3-4.php" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;overlay&lt;/a&gt;
 ，叠加，根据下层元素色值和 128 的大小，采用“multiply”或“screen”算法；&lt;/li&gt;
 &lt;li&gt;darken，变暗，将两种颜色的 RGB 通道值依次进行比较，&lt;strong&gt;哪个色值小&lt;/strong&gt;就使用哪个色值；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://demo.cssworld.cn/new/11/3-5.php"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-lighten
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://demo.cssworld.cn/new/11/3-5.php" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;lighten&lt;/a&gt;
 ，变亮，将两种颜色的 RGB 通道值依次进行比较，&lt;strong&gt;哪个色值大&lt;/strong&gt;就使用哪个色值；&lt;/li&gt;
 &lt;li&gt;color-dodge，颜色变淡，混合区域的对比度降低；&lt;/li&gt;
 &lt;li&gt;color-burn，颜色加深，混合区域的对比度提升；&lt;/li&gt;
 &lt;li&gt;hard-light，强光，亮的地方更亮，暗的地方更暗；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://demo.cssworld.cn/new/11/3-6.php"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-soft-light
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://demo.cssworld.cn/new/11/3-6.php" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;soft-light&lt;/a&gt;
 ，柔光，效果同“hard-light”，只是没那么极端；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://demo.cssworld.cn/new/11/3-7.php"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-difference
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://demo.cssworld.cn/new/11/3-7.php" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;difference&lt;/a&gt;
 ，差值，最终颜色的色值是用较浅颜色的色值减去较深颜色的色值的结果；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://demo.cssworld.cn/new/11/3-8.php"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-exclusion
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://demo.cssworld.cn/new/11/3-8.php" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;exclusion&lt;/a&gt;
 ，排除，对比度要比“difference”低一些；&lt;/li&gt;
 &lt;li&gt;hue，色调混合，将颜色混合，使用底层元素的亮度和饱和度，以及上层元素的色调；&lt;/li&gt;
 &lt;li&gt;saturation，饱和度混合，混合后的颜色保留底图的亮度和色调，并使用顶图的饱和度；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://demo.cssworld.cn/new/11/3-9.php"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-color
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://demo.cssworld.cn/new/11/3-9.php" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;color&lt;/a&gt;
 ，颜色混合，混合后的颜色保留底图的亮度，并使用顶图的色调和饱和度；&lt;/li&gt;
 &lt;li&gt;luminosity，亮度混合，混合后的颜色保留底图的色调和饱和度，并使用顶图的亮度。&lt;/li&gt;
 &lt;/ul&gt;
@@ -4745,7 +4658,8 @@ color
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;img alt="background-blend-mode" title="background-blend-mode" style="display: block;margin: 0 auto;width: 70%;" src="normal-night.png"/&gt;
-&lt;h2 id="遮罩效果"&gt;遮罩效果&lt;/h2&gt;
+&lt;h2 id="遮罩效果"&gt;遮罩效果
+&lt;/h2&gt;
 &lt;p&gt;mask-image，设置使用遮罩效果的图像：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;none，默认值，表示无遮罩图片；&lt;/li&gt;
@@ -4798,7 +4712,8 @@ color
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;img alt="-webkit-mask-image" title="-webkit-mask-image" style="display: block;margin: 0 auto;width: 70%;" src="hasky-whale.png"/&gt;
-&lt;h2 id="滚动行为"&gt;滚动行为&lt;/h2&gt;
+&lt;h2 id="滚动行为"&gt;滚动行为
+&lt;/h2&gt;
 &lt;p&gt;scroll-behavior 属于交互渐进增强型的属性：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;auto，初始值，不常用；&lt;/li&gt;
@@ -4815,13 +4730,10 @@ color
 &lt;li&gt;auto，是否“锚定”由浏览器决定；&lt;/li&gt;
 &lt;li&gt;none，禁止“锚定”。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="滚动吸附"&gt;滚动吸附&lt;/h2&gt;
-&lt;p&gt;当元素滚动结束时，自动定位到“指定”位置（当超过一定阈值的时候），有点类似于“&lt;a class="link"
-href="https://demo.cssworld.cn/new/13/1-4.php"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-吸附
-&lt;/a&gt;
+&lt;h2 id="滚动吸附"&gt;滚动吸附
+&lt;/h2&gt;
+&lt;p&gt;当元素滚动结束时，自动定位到“指定”位置（当超过一定阈值的时候），有点类似于“&lt;a class="link" href="https://demo.cssworld.cn/new/13/1-4.php" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;吸附&lt;/a&gt;
 ”的效果。&lt;/p&gt;
 &lt;p&gt;其中作用在“滚动容器”上的属性有：&lt;/p&gt;
 &lt;ul&gt;
@@ -4834,12 +4746,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;li&gt;inline，捕捉和内联元素排列一个滚动方向的定位点，默认文档流下指的就是“捕捉水平定位点”；&lt;/li&gt;
 &lt;li&gt;both，“水平”和“垂直”均捕获；&lt;/li&gt;
 &lt;li&gt;mandatory，强制定位，如果存在有效的定位点位置，则滚动容器必须在滚动结束时进行定位；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://demo.cssworld.cn/new/13/1-5.php"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-proximity
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://demo.cssworld.cn/new/13/1-5.php" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;proximity&lt;/a&gt;
 ，浏览器自己判断要不要定位（当容器窗口尺寸小于子元素尺寸时，不定位；否则，定位）。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -4863,7 +4771,8 @@ proximity
 &lt;/li&gt;
 &lt;li&gt;scroll-margin(-*)，用来调整定位点的位置。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="滚动条样式"&gt;滚动条样式&lt;/h2&gt;
+&lt;h2 id="滚动条样式"&gt;滚动条样式
+&lt;/h2&gt;
 &lt;p&gt;scrollbar-width 用来设置滚动条的宽度，并不支持具体的长度值：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;auto，系统默认滚动条样式；&lt;/li&gt;
@@ -4897,7 +4806,8 @@ proximity
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="点击行为"&gt;点击行为&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="点击行为"&gt;点击行为
+&lt;/h2&gt;
 &lt;p&gt;pointer-events: none 虽然可以禁用“鼠标”点击、悬停和拖拽行为，但其并不适合用来实现“禁用”效果：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;不能阻止键盘行为，对应元素仍可以通过键盘被 focus 并 click；&lt;/li&gt;
@@ -4916,7 +4826,8 @@ proximity
 &lt;li&gt;pan-down，表示支持手指往下移动，移动开始后往上可以恢复的操作；&lt;/li&gt;
 &lt;li&gt;pinch-zoom，表示支持手指缩放页面的操作。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="拉伸行为"&gt;拉伸行为&lt;/h2&gt;
+&lt;h2 id="拉伸行为"&gt;拉伸行为
+&lt;/h2&gt;
 &lt;p&gt;resize 属性的作用条件：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;不支持内联元素；&lt;/li&gt;
@@ -4924,7 +4835,8 @@ proximity
 &lt;/ul&gt;
 &lt;p&gt;resize 属性是通过改变元素的 width/height 属性值来实现的，所以可以通过 min/max-width/height 来限制元素的拉伸尺寸。&lt;/p&gt;
 &lt;p&gt;resize 的拖拽条样式可以通过 ::webkit-resizer 伪元素进行自定义。&lt;/p&gt;
-&lt;h2 id="输入行为"&gt;输入行为&lt;/h2&gt;
+&lt;h2 id="输入行为"&gt;输入行为
+&lt;/h2&gt;
 &lt;p&gt;caret-color 可以改变输入框“插入光标”的颜色；其不仅对表单元素有效，对设置了 contenteditable 的普通元素同样有效。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -4954,7 +4866,8 @@ proximity
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt; &lt;span class="na"&gt;contenteditable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;contenteditable&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="选择行为"&gt;选择行为&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="选择行为"&gt;选择行为
+&lt;/h2&gt;
 &lt;p&gt;user-select 属性多用于内嵌在 WebView 的页面中，保持和原生应用一致的内容选择体验：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;auto，初始值；&lt;/li&gt;
@@ -4983,7 +4896,8 @@ proximity
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="打印行为"&gt;打印行为&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="打印行为"&gt;打印行为
+&lt;/h2&gt;
 &lt;p&gt;打印页面时隐藏不必要的信息：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -5009,44 +4923,25 @@ proximity
 &lt;ul&gt;
 &lt;li&gt;economy，默认值，浏览器可以对元素进行样式上的调整（怎么调整浏览器自己定）；&lt;/li&gt;
 &lt;li&gt;exact，不要浏览器对样式进行调整。&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>《CSS 选择器世界》笔记 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/css-%E9%80%89%E6%8B%A9%E5%99%A8%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/</link><pubDate>Thu, 20 Jan 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/css-%E9%80%89%E6%8B%A9%E5%99%A8%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/css.png" alt="《CSS 选择器世界》笔记" /&gt;&lt;h2 id="优先级与选择器"&gt;优先级与选择器&lt;/h2&gt;
+&lt;/ul&gt;</description></item><item><title>《CSS 选择器世界》笔记</title><link>https://ElementRef.github.io/p/css-%E9%80%89%E6%8B%A9%E5%99%A8%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/</link><pubDate>Thu, 20 Jan 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/css-%E9%80%89%E6%8B%A9%E5%99%A8%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/css.png" alt="Featured image of post 《CSS 选择器世界》笔记" /&gt;&lt;h2 id="优先级与选择器"&gt;优先级与选择器
+&lt;/h2&gt;
 &lt;p&gt;CSS 是有局部作用域的（ShadowDOM）。&lt;/p&gt;
 &lt;p&gt;CSS 选择符有五种：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors/Combinators#%E5%90%8E%E4%BB%A3%E9%80%89%E6%8B%A9%E5%99%A8"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-后代关系（空格）
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors/Combinators#%E5%90%8E%E4%BB%A3%E9%80%89%E6%8B%A9%E5%99%A8" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;后代关系（空格）&lt;/a&gt;
 ；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors/Combinators#%E5%AD%90%E4%BB%A3%E5%85%B3%E7%B3%BB%E9%80%89%E6%8B%A9%E5%99%A8"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-父子关系（&amp;gt;）
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors/Combinators#%E5%AD%90%E4%BB%A3%E5%85%B3%E7%B3%BB%E9%80%89%E6%8B%A9%E5%99%A8" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;父子关系（&amp;gt;）&lt;/a&gt;
 ；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors/Combinators#%E9%82%BB%E6%8E%A5%E5%85%84%E5%BC%9F"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-相邻兄弟关系（+）
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors/Combinators#%E9%82%BB%E6%8E%A5%E5%85%84%E5%BC%9F" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;相邻兄弟关系（+）&lt;/a&gt;
 ；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors/Combinators#%E9%80%9A%E7%94%A8%E5%85%84%E5%BC%9F"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-随后兄弟关系（~）
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors/Combinators#%E9%80%9A%E7%94%A8%E5%85%84%E5%BC%9F" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;随后兄弟关系（~）&lt;/a&gt;
 ；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Column_combinator"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-列关系（||）
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Column_combinator" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;列关系（||）&lt;/a&gt;
 。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;CSS 优先级有六种：&lt;/p&gt;
@@ -5273,30 +5168,31 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Pastrami beef ribs shank pork belly sirloin boudin.&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/css-%E9%80%89%E6%8B%A9%E5%99%A8%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/near-sibling-selector.png"
-width="1672"
-height="508"
-srcset="https://ElementRef.github.io/p/css-%E9%80%89%E6%8B%A9%E5%99%A8%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/near-sibling-selector_hu_655428dd6d433e8e.png 480w, https://ElementRef.github.io/p/css-%E9%80%89%E6%8B%A9%E5%99%A8%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/near-sibling-selector_hu_128bd5c253952e2f.png 1024w"
-alt="兄弟选择器"
-class="gallery-image"
-data-flex-grow="329"
-data-flex-basis="789px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="兄弟选择器" class="gallery-image" data-flex-basis="789px" data-flex-grow="329" height="508" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/css-%E9%80%89%E6%8B%A9%E5%99%A8%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/near-sibling-selector_hu_ff0f853d684a8087.png" srcset="https://ElementRef.github.io/p/css-%E9%80%89%E6%8B%A9%E5%99%A8%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/near-sibling-selector_hu_1078c9c4085ac53f.png 800w, https://ElementRef.github.io/p/css-%E9%80%89%E6%8B%A9%E5%99%A8%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/near-sibling-selector_hu_1b3144b4aba974bc.png 1600w, https://ElementRef.github.io/p/css-%E9%80%89%E6%8B%A9%E5%99%A8%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/near-sibling-selector_hu_ff0f853d684a8087.png 1672w" width="1672"&gt;
+
 &lt;/p&gt;
 &lt;p&gt;为什么没有&lt;strong&gt;前面兄弟选择器&lt;/strong&gt;？&lt;/p&gt;
 &lt;p&gt;受制于 DOM 渲染规则；如果 CSS 支持了&lt;strong&gt;前面兄弟选择器&lt;/strong&gt;或者父元素选择器，那就必须要等页面所有子元素加载完毕才能渲染 HTML 文档。网页呈现速度必然会大大减慢，浏览器会出现长时间的白板，这会造成不好的体验。&lt;/p&gt;
-&lt;h2 id="属性选择器"&gt;属性选择器&lt;/h2&gt;
+&lt;h2 id="属性选择器"&gt;属性选择器
+&lt;/h2&gt;
 &lt;p&gt;八种属性选择器：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;[attr]，只要包含指定的属性就匹配；&lt;/li&gt;
-&lt;li&gt;[attr=&amp;ldquo;val&amp;rdquo;]，属性值完全匹配选择器；&lt;/li&gt;
-&lt;li&gt;[attr~=&amp;ldquo;val&amp;rdquo;]，属性值单词完全匹配选择器；&lt;/li&gt;
-&lt;li&gt;[attr|=&amp;ldquo;val&amp;rdquo;]，属性值起始片段完全匹配选择器（val、val-*）；&lt;/li&gt;
-&lt;li&gt;[attr^=&amp;ldquo;val&amp;rdquo;]，属性值以字符 val 开头的元素；&lt;/li&gt;
-&lt;li&gt;[attr$=&amp;ldquo;val&amp;rdquo;]，属性值以字符 val 结尾的元素；&lt;/li&gt;
-&lt;li&gt;[attr*=&amp;ldquo;val&amp;rdquo;]，属性值包含字符 val 的元素；&lt;/li&gt;
-&lt;li&gt;[attr=&amp;ldquo;val&amp;rdquo; i]，以上几种均适用，匹配时忽略属性值大小写。&lt;/li&gt;
+&lt;li&gt;
+\[attr\]，只要包含指定的属性就匹配；&lt;/li&gt;
+&lt;li&gt;
+\[attr="val"\]，属性值完全匹配选择器；&lt;/li&gt;
+&lt;li&gt;
+\[attr~="val"\]，属性值单词完全匹配选择器；&lt;/li&gt;
+&lt;li&gt;
+\[attr|="val"\]，属性值起始片段完全匹配选择器（val、val-*）；&lt;/li&gt;
+&lt;li&gt;
+\[attr^="val"\]，属性值以字符 val 开头的元素；&lt;/li&gt;
+&lt;li&gt;
+\[attr$="val"\]，属性值以字符 val 结尾的元素；&lt;/li&gt;
+&lt;li&gt;
+\[attr\*="val"\]，属性值包含字符 val 的元素；&lt;/li&gt;
+&lt;li&gt;
+\[attr="val" i\]，以上几种均适用，匹配时忽略属性值大小写。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -5379,14 +5275,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;DEMO 在&lt;a class="link"
-href="https://ElementRef.github.io/DemosForIfe/CSS%20Filter.html"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-这里
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;DEMO 在&lt;a class="link" href="https://ElementRef.github.io/DemosForIfe/CSS%20Filter.html" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;这里&lt;/a&gt;
 。&lt;/p&gt;
-&lt;h2 id="伪类"&gt;伪类&lt;/h2&gt;
+&lt;h2 id="伪类"&gt;伪类
+&lt;/h2&gt;
 &lt;p&gt;:focus 默认只能匹配特定的元素：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;设置了 contenteditable 属性的普通元素；&lt;/li&gt;
@@ -5450,18 +5343,17 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;https://baidu.com/&amp;#34;&lt;/span&gt; &lt;span class="na"&gt;target&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;_blank&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;百度&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;:placeholder-shown 表示当输入框的 placeholder 内容显示的时候，匹配该输入框；通过此伪类可以实现比较有意思的&lt;a class="link"
-href="https://ElementRef.github.io/DemosForIfe/Placeholder%20Shown.html"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-交互
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;:placeholder-shown 表示当输入框的 placeholder 内容显示的时候，匹配该输入框；通过此伪类可以实现比较有意思的&lt;a class="link" href="https://ElementRef.github.io/DemosForIfe/Placeholder%20Shown.html" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;交互&lt;/a&gt;
 。&lt;/p&gt;
-&lt;p&gt;:checked 与 [checked] 的区别：&lt;/p&gt;
+&lt;p&gt;:checked 与 &lt;/p&gt;
+\[checked\]&lt;p&gt; 的区别：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;:checked 只能匹配标准表单元素，不能匹配普通元素；&lt;/li&gt;
-&lt;li&gt;[checked] 可以与设置了 checked 属性的任意元素匹配；&lt;/li&gt;
-&lt;li&gt;[checked] 不会响应 JS 对元素属性的修改；&lt;/li&gt;
+&lt;li&gt;
+\[checked\]可以与设置了 checked 属性的任意元素匹配；&lt;/li&gt;
+&lt;li&gt;
+\[checked\]不会响应 JS 对元素属性的修改；&lt;/li&gt;
 &lt;li&gt;:checked 可以匹配从祖先元素那里继承过来的状态。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;可以对输入值进行验证的伪类：&lt;/p&gt;
@@ -5552,19 +5444,23 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;li&gt;不支持多个表达式，也不支持选择符，例如，:not(li, dd) 是无效的。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;:fullscreen 伪类用来匹配全屏元素；通过调用 element.requestFullScreen 可以让元素全屏显示，通过调用 document.cancelFullScreen 可以取消全屏。&lt;/p&gt;
-&lt;p&gt;:lang() 用来匹配指定语言环境下的元素。&lt;/p&gt;</description></item><item><title>《CSS 世界》笔记 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/css-%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/</link><pubDate>Sun, 02 Jan 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/css-%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/css.png" alt="《CSS 世界》笔记" /&gt;&lt;h2 id="文档流"&gt;文档流&lt;/h2&gt;
+&lt;p&gt;:lang() 用来匹配指定语言环境下的元素。&lt;/p&gt;</description></item><item><title>《CSS 世界》笔记</title><link>https://ElementRef.github.io/p/css-%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/</link><pubDate>Sun, 02 Jan 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/css-%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/css.png" alt="Featured image of post 《CSS 世界》笔记" /&gt;&lt;h2 id="文档流"&gt;文档流
+&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;文档流&lt;/strong&gt;是指 CSS 中引导元素排列和定位的一条看不见的“水流”。&lt;/p&gt;
 &lt;p&gt;CSS 的基石是 HTML，所以 HTML 默认的表现符合“流”，可以通过破坏“流”来实现特殊布局。&lt;/p&gt;
 &lt;p&gt;文档流的流向是可以改变的（column、display、float、position&amp;hellip;），这种改变可以让 CSS 的展现更为丰富；因此，“文档流从左往右自上而下”这种说法是不严谨的。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;流体布局&lt;/strong&gt;指的是利用元素“流”的特性实现的各类布局效果；因为“流”本身具有自适应特性，所以“流体布局”往往都是具有自适应性的。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;流动性&lt;/strong&gt;是一种 margin/border/padding 和 content &lt;strong&gt;自动分配水平空间&lt;/strong&gt;的机制；如果手动设置宽度，就完全就不像“水流”那样完全利用容器空间，即所谓的&lt;strong&gt;流动性丢失&lt;/strong&gt;。&lt;/p&gt;
-&lt;h2 id="块级元素"&gt;块级元素&lt;/h2&gt;
+&lt;h2 id="块级元素"&gt;块级元素
+&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;块级元素&lt;/strong&gt;和 display:block 不是一个概念。例如，li 默认的 display 值是 list-item，table 默认的 display 值是 table，但是它们均是“块级元素”，因为它们都符合块级元素的基本特征；也就是一个水平流上只能单独显示一个元素，多个块级元素则换行显示。&lt;/p&gt;
 &lt;p&gt;由于“块级元素”具有&lt;strong&gt;换行&lt;/strong&gt;特性，因此理论上它都可以配合 clear 属性来清除浮动带来的影响（IE 中的伪元素不支持 display:list-item；这是不用 display:list-item 清除浮动的主因，兼容性不好）。&lt;/p&gt;
-&lt;h2 id="内外盒子臆想"&gt;内外盒子（臆想）&lt;/h2&gt;
+&lt;h2 id="内外盒子臆想"&gt;内外盒子（臆想）
+&lt;/h2&gt;
 &lt;p&gt;每个元素都两个盒子，外在盒子和内在盒子。&lt;strong&gt;外在盒子&lt;/strong&gt;负责元素是可以一行显示，还是只能换行显示；&lt;strong&gt;内在盒子&lt;/strong&gt;负责宽高、内容呈现什么的。&lt;/p&gt;
 &lt;p&gt;display:block 元素的盒子实际由外在的“块级盒子”和内在的“块级容器盒子”组成；display:inline-block 元素则由外在的“内联盒子”和内在的“块级容器盒子”组成；display:inline 元素则内外均是“内联盒子”。&lt;/p&gt;
-&lt;h2 id="替换元素"&gt;替换元素&lt;/h2&gt;
+&lt;h2 id="替换元素"&gt;替换元素
+&lt;/h2&gt;
 &lt;p&gt;通过修改某个属性值呈现的内容就可以被替换的元素就称为&lt;strong&gt;替换元素&lt;/strong&gt;；因此，img、object、video、iframe 或者 textarea 和 input 都是典型的替换元素：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;内容可替换；&lt;/li&gt;
@@ -5650,27 +5546,26 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="元素尺寸"&gt;元素尺寸&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="元素尺寸"&gt;元素尺寸
+&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;元素偏移尺寸：offsetWidth/offsetHeight，元素的 border-box 尺寸；&lt;/li&gt;
 &lt;li&gt;元素可视尺寸：clientWidth/clientHeight，元素的 padding-box 尺寸；&lt;/li&gt;
 &lt;li&gt;元素外部尺寸：元素的 margin-box 尺寸，有可能为负数。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id="minmax-width-与-minmax-height"&gt;min/max-width 与 min/max-height&lt;/h2&gt;
+&lt;h2 id="minmax-width-与-minmax-height"&gt;min/max-width 与 min/max-height
+&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;min-* 的初始值是 none，max-* 的初始值是 auto；&lt;/li&gt;
 &lt;li&gt;如果 width &amp;gt; max-width，width 的值会被 max-width 的值覆盖（即使 width 的权重是 !important，因为 !important 只解决相同属性的优先级问题）；&lt;/li&gt;
 &lt;li&gt;如果 min-width &amp;gt; max-width，min-width 会覆盖 max-width 的值；&lt;/li&gt;
 &lt;li&gt;对于任意高度元素的展开收起动画，不妨试试 max-height（height:auto 不会触发过渡动画）。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id="margin"&gt;margin&lt;/h2&gt;
+&lt;h2 id="margin"&gt;margin
+&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;margin 与 padding 百分比值无论是水平方向还是垂直方向都是&lt;strong&gt;相对于其&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Guides/Display/Containing_block"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-包含块
-&lt;/a&gt;
+&lt;li&gt;margin 与 padding 百分比值无论是水平方向还是垂直方向都是&lt;strong&gt;相对于其&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Guides/Display/Containing_block" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;包含块&lt;/a&gt;
 宽度&lt;/strong&gt;计算的；&lt;/li&gt;
 &lt;li&gt;块级元素（不包括浮动和绝对定位元素）的上下外边距（margin-top/bottom）有时会合并为单个外边距；
 &lt;ol&gt;
@@ -5679,16 +5574,13 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;li&gt;空的块级元素。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
-&lt;li&gt;margin 的合并只发生在和当前文档流方向的相&lt;strong&gt;垂直&lt;/strong&gt;的方向上（默认文档流是水平流，可用 &lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference/Properties/writing-mode"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-writing-mode
-&lt;/a&gt;
-改写）；&lt;/li&gt;
+&lt;li&gt;margin 的合并只发生在和当前文档流方向的相&lt;strong&gt;垂直&lt;/strong&gt;的方向上（默认文档流是水平流，可用 &lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference/Properties/writing-mode" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;writing-mode&lt;/a&gt;
+ 改写）；&lt;/li&gt;
 &lt;li&gt;阻止 margin 合并的方法：触发 BFC、设置 border（border:0 不行）、设置 padding、设置 height。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id="line-height"&gt;line-height&lt;/h2&gt;
+&lt;h2 id="line-height"&gt;line-height
+&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;line-height 的定义就是两基线的间距，vertical-align 的默认值就是基线（字母 x 的下边缘线）;&lt;/li&gt;
 &lt;li&gt;x-height 指的是小写字母 x 的高度，术语描述就是基线和等分线（midline，也称作中线）之间的距离；&lt;/li&gt;
@@ -5761,7 +5653,8 @@ writing-mode
 &lt;li&gt;长度值（21px），所有子元素继承的是解析值（21px）；&lt;/li&gt;
 &lt;li&gt;计算行高值时，所有浏览器都是向上取整的。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id="vertical-align"&gt;vertical-align&lt;/h2&gt;
+&lt;h2 id="vertical-align"&gt;vertical-align
+&lt;/h2&gt;
 &lt;p&gt;只能作用在 display 计算值为 inline、inline-block，inline-table 或 table-cell 的元素上；块级、浮动、绝对定位元素上无效。&lt;/p&gt;
 &lt;p&gt;vertical-align 的属性值分为以下几类：&lt;/p&gt;
 &lt;ol&gt;
@@ -5816,7 +5709,8 @@ writing-mode
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;img alt="vertical-align" title="vertical-align" style="display: block;margin: 0 auto;width: 70%;" src="baseline.png"/&gt;
-&lt;h2 id="float"&gt;float&lt;/h2&gt;
+&lt;h2 id="float"&gt;float
+&lt;/h2&gt;
 &lt;p&gt;float 的特性：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;块状化并格式化上下文，元素一旦 float 的属性值不为 none，则其 display 计算值就是 block 或者 table；&lt;/li&gt;
@@ -5873,7 +5767,8 @@ writing-mode
 &lt;/div&gt;&lt;p&gt;因此，这里设置了 float:right 的 a 元素是相对于最后一行的“行框盒子”对齐的。&lt;/p&gt;
 &lt;img alt="浮动锚点" title="浮动锚点" style="display: block;margin: 0 auto;width: 70%;" src="float-anchor.png"/&gt;
 &lt;p&gt;“浮动锚点”的作用就是产生“行框盒子”，因为“浮动锚点”表现如同一个空的内联元素，有内联元素自然就有“行框盒子”；于是，float 元素对齐的参考实体“行框盒子”对于块状元素也同样适用了，只不过这个“行框盒子”由于没有任何内容，所以无尺寸，看不见也摸不着罢了。&lt;/p&gt;
-&lt;h2 id="块级格式化上下文"&gt;块级格式化上下文&lt;/h2&gt;
+&lt;h2 id="块级格式化上下文"&gt;块级格式化上下文
+&lt;/h2&gt;
 &lt;p&gt;如果一个元素具有 BFC，内部子元素再怎么翻江倒海，都不会影响外部的元素。所以，BFC 元素是不可能发生 margin 重叠的，因为 margin 重叠是会影响外面的元素的；BFC 元素也可以用来清除浮动的影响，因为如果不清除，子元素浮动则父元素高度塌陷，必然会影响后面元素布局和定位，这显然有违 BFC 元素的子元素不会影响外部元素的设定。&lt;/p&gt;
 &lt;p&gt;创建块级格式化上下文：&lt;/p&gt;
 &lt;ol&gt;
@@ -5955,7 +5850,8 @@ writing-mode
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="overflow"&gt;overflow&lt;/h2&gt;
+&lt;h2 id="overflow"&gt;overflow
+&lt;/h2&gt;
 &lt;p&gt;overflow 原本的作用指定了块容器元素的内容溢出时是否需要裁剪，“BFC”只是其衍生出来的特性，“剪裁”才是其本职工作；当子元素内容超出容器宽度高度限制的时候，剪裁的边界是 border-box 的内边缘，而非 padding-box 的内边缘。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -6070,7 +5966,8 @@ writing-mode
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;img alt="文本溢出" title="文本溢出" style="display: block;margin: 0 auto;width: 70%;" src="overflow-ellipsis.png"/&gt;
-&lt;h2 id="absolute"&gt;absolute&lt;/h2&gt;
+&lt;h2 id="absolute"&gt;absolute
+&lt;/h2&gt;
 &lt;p&gt;一个元素的尺寸和位置经常受其&lt;strong&gt;包含块&lt;/strong&gt;（containing block）的影响（比如说，width:50%，那到底是哪个“元素”宽度的一半呢？注意，这里的这个“元素”实际上就是指的“包含块”）；&lt;strong&gt;大多数情况下&lt;/strong&gt;，包含块就是这个元素最近的祖先块元素的内容区，确定一个元素的包含块的过程完全依赖于这个元素的 position 属性：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;根元素（html）所在的包含块被称为&lt;strong&gt;初始包含块&lt;/strong&gt;，他的尺寸是视口 viewport；&lt;/li&gt;
@@ -6260,7 +6157,8 @@ writing-mode
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;img alt="position:absolute" title="position:absolute" style="display: block;margin: 0 auto;width: 70%;" src="absolute-size.png"/&gt;
-&lt;h2 id="层叠规则"&gt;层叠规则&lt;/h2&gt;
+&lt;h2 id="层叠规则"&gt;层叠规则
+&lt;/h2&gt;
 &lt;p&gt;层叠上下文（stacking context），是 HTML 中的一个三维的概念；如果一个元素含有层叠上下文，我们可以理解为这个元素在 z 轴（垂直于显示器）上就“高人一等”。&lt;/p&gt;
 &lt;p&gt;层叠水平（stacking level），决定了&lt;strong&gt;同一个层叠上下文&lt;/strong&gt;中元素在 z 轴上的显示顺序。&lt;/p&gt;
 &lt;p&gt;层叠顺序（stacking order），表示元素发生层叠时有着特定的&lt;strong&gt;垂直显示顺序&lt;/strong&gt;。&lt;/p&gt;
@@ -6413,7 +6311,8 @@ writing-mode
 &lt;/div&gt;&lt;img alt="z-index:-1" title="z-index:-1" style="display: block;margin: 0 auto;width: 70%;" src="z-index--1.png"/&gt;
 &lt;img alt="opacity:0.99" title="opacity:0.99" style="display: block;margin: 0 auto;width: 70%;" src="opacity-0.99.png"/&gt;
 &lt;p&gt;z-index 负值可以隐藏元素，只需要层叠上下文内的某一个父元素加个背景色就可以。它与 clip 隐藏相比的一个优势是，元素无须绝对定位，设置 position:relative 也可以隐藏；另一个优势是，它对原来的布局以及元素的行为没有任何影响，而 clip 隐藏会导致控件 focus 的焦点发生细微的变化，在特定条件下是有体验问题的。它的不足之处就是不具有普遍适用性，需要其他元素配合进行隐藏。&lt;/p&gt;
-&lt;h2 id="font"&gt;font&lt;/h2&gt;
+&lt;h2 id="font"&gt;font
+&lt;/h2&gt;
 &lt;p&gt;font-size 的关键字属性分为两类：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;相对尺寸关键字：相对于当前元素计算：
@@ -6649,7 +6548,8 @@ writing-mode
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;pre&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="text-indent"&gt;text-indent&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="text-indent"&gt;text-indent
+&lt;/h2&gt;
 &lt;p&gt;text-indent 可以在标签受限的情况下，实现特殊的布局效果：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -6714,7 +6614,8 @@ writing-mode
 &lt;li&gt;&amp;lt;button/&amp;gt; 标签按钮 text-indent 值有效，但是存在兼容性差异，IE 理解为单标签，百分比值按照容器计算，而 Chrome/Firefox 标签内还有其他 ShadowDOM 元素，因此百分比值是按照自身的尺寸计算的；&lt;/li&gt;
 &lt;li&gt;&amp;lt;input/&amp;gt; 和 &amp;lt;textarea/&amp;gt; 输入框的 text-indent 在低版本 IE 下有兼容问题。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id="letter-spacing"&gt;letter-spacing&lt;/h2&gt;
+&lt;h2 id="letter-spacing"&gt;letter-spacing
+&lt;/h2&gt;
 &lt;p&gt;letter-spacing 具有一下特征：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;继承性；&lt;/li&gt;
@@ -6724,7 +6625,8 @@ writing-mode
 &lt;li&gt;支持小数值，即使 0.1px 也是支持的，但并不总能看到效果，这与屏幕的像素密度有关。对普通的桌面显示器，设备像素比是 1，最小渲染单位是 1px，因此，需要至少连续 10 个字符，才能看到 0.1px 产生的 1px 间距变化，如果是 9 个字符，则不会有效果，这很可能会让人误以为 letter-spacing 不支持非常小的数值，实际上是支持的；&lt;/li&gt;
 &lt;li&gt;暂不支持百分比值。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id="word-spacing"&gt;word-spacing&lt;/h2&gt;
+&lt;h2 id="word-spacing"&gt;word-spacing
+&lt;/h2&gt;
 &lt;p&gt;word-spacing 和 letter-spacing 名称类似，其特性也有很多共通之处：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;都具有继承性；&lt;/li&gt;
@@ -6734,7 +6636,8 @@ writing-mode
 &lt;li&gt;间隔算法都会受到 text-align:justify 两端对齐的影响；&lt;/li&gt;
 &lt;li&gt;letter-spacing 作用于所有字符，word-spacing 仅作用于空格字符（即可以是键盘敲出来的空格 Space/Tab，也可以是换行符产生的空格）。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id="word-breakbreak-all-与-word-wrapbreak-word"&gt;word-break:break-all 与 word-wrap:break-word&lt;/h2&gt;
+&lt;h2 id="word-breakbreak-all-与-word-wrapbreak-word"&gt;word-break:break-all 与 word-wrap:break-word
+&lt;/h2&gt;
 &lt;p&gt;word-break 的属性如下：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;normal，使用默认的换行规则；&lt;/li&gt;
@@ -6769,7 +6672,8 @@ writing-mode
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;img alt="word-break:break-all 与 word-wrap:break-word" title="word-break:break-all 与 word-wrap:break-word" style="display: block;margin: 0 auto;width: 70%;" src="word-break|word-wrap.png"/&gt;
-&lt;h2 id="white-space"&gt;white-space&lt;/h2&gt;
+&lt;h2 id="white-space"&gt;white-space
+&lt;/h2&gt;
 &lt;p&gt;white-space 声明了如何处理元素内的空白字符，这类空白字符包括 Space、Enter、Tab 产生的空白。因此，white-space 可以决定图文内容是否在一行显示（回车空格是否生效），是否显示大段连续空白（空格是否生效）等。其属性值包括下面这些：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;normal，合并&lt;strong&gt;空白字符&lt;/strong&gt;（多个空格变成一个）和&lt;strong&gt;换行符&lt;/strong&gt;（多个连续换行合并成一个，并当作一个普通空格处理）；&lt;/li&gt;
@@ -6779,7 +6683,8 @@ writing-mode
 &lt;li&gt;pre-line，合并&lt;strong&gt;空白字符&lt;/strong&gt;，内容只在有&lt;strong&gt;换行符&lt;/strong&gt;的地方换行，允许文本环绕。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;img alt="white-space" title="white-space" style="display: block;margin: 0 auto;width: 70%;" src="white-space.png"/&gt;
-&lt;h2 id="text-alignjustify"&gt;text-align:justify&lt;/h2&gt;
+&lt;h2 id="text-alignjustify"&gt;text-align:justify
+&lt;/h2&gt;
 &lt;p&gt;在默认设置下，text-align:justify 要想有两端对齐的效果，需要满足两点：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;有分隔点，如空格；&lt;/li&gt;
@@ -6865,7 +6770,8 @@ writing-mode
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;img alt="text-align-justify" title="text-align-justify" style="display: block;margin: 0 auto;width: 70%;" src="text-align-justify.png"/&gt;
-&lt;h2 id="first-letter-与-first-line"&gt;::first-letter 与 ::first-line&lt;/h2&gt;
+&lt;h2 id="first-letter-与-first-line"&gt;::first-letter 与 ::first-line
+&lt;/h2&gt;
 &lt;p&gt;::first-letter/::first-line 生效的前提：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;不是所有的字符都能单独作为 ::first-letter 伪元素存在的；常见的标点符号、各类括号和引号都不行（::first-line 不适用）；&lt;/li&gt;
@@ -6874,17 +6780,10 @@ writing-mode
 &lt;li&gt;::first-letter 伪元素是作为子元素存在的，或者说应当被看作是子元素，CSS 权重更高；&lt;/li&gt;
 &lt;li&gt;应用在 ::first-letter 伪元素上的 CSS 只有一部分规则有效。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id="displayopacityvisibility"&gt;display、opacity、visibility&lt;/h2&gt;
-&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/css-%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/display-opacity-visibility.png"
-width="1818"
-height="384"
-srcset="https://ElementRef.github.io/p/css-%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/display-opacity-visibility_hu_b6c816c27dac29f4.png 480w, https://ElementRef.github.io/p/css-%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/display-opacity-visibility_hu_f8dce135700533d1.png 1024w"
-alt="display、opacity、visibility"
-class="gallery-image"
-data-flex-grow="473"
-data-flex-basis="1136px"
-loading="lazy"
-&gt;
+&lt;h2 id="displayopacityvisibility"&gt;display、opacity、visibility
+&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="display、opacity、visibility" class="gallery-image" data-flex-basis="1136px" data-flex-grow="473" height="384" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/css-%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/display-opacity-visibility_hu_20a377ddd2ae682b.png" srcset="https://ElementRef.github.io/p/css-%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/display-opacity-visibility_hu_de11c67ef88c3d0b.png 800w, https://ElementRef.github.io/p/css-%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/display-opacity-visibility_hu_fc257c627a50f140.png 1600w, https://ElementRef.github.io/p/css-%E4%B8%96%E7%95%8C%E7%AC%94%E8%AE%B0/display-opacity-visibility_hu_20a377ddd2ae682b.png 1818w" width="1818"&gt;
+
 &lt;/p&gt;
 &lt;p&gt;HTML 中有很多标签和属性天然 display:none，如 &amp;lt;style/&amp;gt;、&amp;lt;script/&amp;gt;、&amp;lt;dialog/&amp;gt;、[type=&amp;ldquo;hidden&amp;rdquo;] 元素。如果这些标签在 &amp;lt;body/&amp;gt; 元素中，设置 display:block 是可以让内联 CSS 和 JS 代码直接在页面中显示的。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -6944,12 +6843,14 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;img alt="display:none" title="display:none" style="display: block;margin: 0 auto;width: 70%;" src="show-style-script.png"/&gt;
-&lt;h2 id="cursor"&gt;cursor&lt;/h2&gt;
+&lt;h2 id="cursor"&gt;cursor
+&lt;/h2&gt;
 &lt;p&gt;cursor:none 可以隐藏用户鼠标光标，全屏看视频时，可以判断用户行为，自动隐藏鼠标。&lt;/p&gt;
 &lt;p&gt;cursor:context-menu 适用于自定义上下文菜单的情形，例如，邮箱、网盘等。&lt;/p&gt;
 &lt;p&gt;cursor:default 常搭配 user-select:none 属性使用，表示当前内容不可选。&lt;/p&gt;
 &lt;p&gt;cursor:cell 可以让光标变为 Excel 里的样式。&lt;/p&gt;
-&lt;h2 id="direction"&gt;direction&lt;/h2&gt;
+&lt;h2 id="direction"&gt;direction
+&lt;/h2&gt;
 &lt;p&gt;direction 设计的本意是为了兼顾阿拉伯语、希伯来语等从右往左的语言，他有两个属性值：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;ltr，默认值，从左往右；&lt;/li&gt;

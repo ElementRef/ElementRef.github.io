@@ -1,15 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/docker/</link><description>Recent content in Docker on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 03 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>狂神说 Java 之 Docker 学习笔记 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Tue, 03 Dec 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/docker.png" alt="狂神说 Java 之 Docker 学习笔记" /&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/docker/</link><description>Recent Content in Docker on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo 0.162.0</generator><language>zh</language><lastBuildDate>Tue, 03 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>狂神说 Java 之 Docker 学习笔记</title><link>https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Tue, 03 Dec 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/docker.png" alt="Featured image of post 狂神说 Java 之 Docker 学习笔记" /&gt;
+
+
+
+
+ 
+
 &lt;div class="video-wrapper"&gt;
-&lt;iframe
-src="https://player.bilibili.com/player.html?as_wide=1&amp;amp;high_quality=1&amp;amp;page=1&amp;bvid=BV1og4y1q7M4"
-allowfullscreen="true"
-framespacing="0"
-frameborder="no"
-scrolling="no"
-&gt;
-&lt;/iframe&gt;
+ &lt;iframe src="https://player.bilibili.com/player.html?as_wide=1&amp;amp;high_quality=1&amp;amp;page=1&amp;bvid=BV1og4y1q7M4"
+ scrolling="no"
+ framespacing="0"
+ frameborder="no"
+ allowfullscreen="true"
+ &gt;
+ &lt;/iframe&gt;
 &lt;/div&gt;
-&lt;h2 id="概述"&gt;概述&lt;/h2&gt;
+
+&lt;h2 id="概述"&gt;概述
+&lt;/h2&gt;
 &lt;p&gt;Docker 是一个 Client/Server 系统，其守护进程运行在主机上；Client/Server 通过 Socket 进行通信：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;客户端，Client：
@@ -40,8 +47,10 @@ scrolling="no"
 &lt;li&gt;每个容器之间都是相互隔离的，都有自己单独的文件系统；&lt;/li&gt;
 &lt;li&gt;开发、测试、线上环境高度一致。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="命令"&gt;命令&lt;/h2&gt;
-&lt;h3 id="帮助命令"&gt;帮助命令&lt;/h3&gt;
+&lt;h2 id="命令"&gt;命令
+&lt;/h2&gt;
+&lt;h3 id="帮助命令"&gt;帮助命令
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -60,18 +69,11 @@ scrolling="no"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker info
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.help.png"
-width="1700"
-height="2614"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.help_hu_bc8d02b52c18e64b.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.help_hu_a2f3b8efaa487971.png 1024w"
-alt="docker –help"
-class="gallery-image"
-data-flex-grow="65"
-data-flex-basis="156px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker –help" class="gallery-image" data-flex-basis="156px" data-flex-grow="65" height="2614" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.help_hu_ab7f2e815885cd57.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.help_hu_d8b39e60ac9c0952.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.help_hu_f5a7292a6869d67d.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.help_hu_ab7f2e815885cd57.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="docker-images"&gt;docker images&lt;/h3&gt;
+&lt;h3 id="docker-images"&gt;docker images
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -94,18 +96,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker images --quiet
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images.png"
-width="1700"
-height="1158"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images_hu_1dedc631fb46b295.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images_hu_711355413e9dde1a.png 1024w"
-alt="docker images"
-class="gallery-image"
-data-flex-grow="146"
-data-flex-basis="352px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker images" class="gallery-image" data-flex-basis="352px" data-flex-grow="146" height="1158" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images_hu_c841bd6c11b5467.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images_hu_60283438894b7a2.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images_hu_7bc237bf3c79dce0.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images_hu_c841bd6c11b5467.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="docker-search"&gt;docker search&lt;/h3&gt;
+&lt;h3 id="docker-search"&gt;docker search
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -124,18 +119,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker search mysql --filter&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;STARS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;3000&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.search.png"
-width="1700"
-height="1418"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.search_hu_964618d9e4512f9.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.search_hu_f7605d6432acb70a.png 1024w"
-alt="docker search"
-class="gallery-image"
-data-flex-grow="119"
-data-flex-basis="287px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker search" class="gallery-image" data-flex-basis="287px" data-flex-grow="119" height="1418" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.search_hu_13c623ed09ddda18.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.search_hu_6c5a4f98fdc0d1a7.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.search_hu_575244972663d199.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.search_hu_13c623ed09ddda18.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="docker-pull"&gt;docker pull&lt;/h3&gt;
+&lt;h3 id="docker-pull"&gt;docker pull
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -158,18 +146,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker pull docker.io/library/nginx:latest
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.pull.png"
-width="1700"
-height="1652"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.pull_hu_3cb5f656fbba257c.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.pull_hu_f70e8c119a873f86.png 1024w"
-alt="docker pull"
-class="gallery-image"
-data-flex-grow="102"
-data-flex-basis="246px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker pull" class="gallery-image" data-flex-basis="246px" data-flex-grow="102" height="1652" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.pull_hu_a29afae8ff0d3865.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.pull_hu_954fb75a16f41e0b.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.pull_hu_ebdb5017fea25ef9.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.pull_hu_a29afae8ff0d3865.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="docker-rmi"&gt;docker rmi&lt;/h3&gt;
+&lt;h3 id="docker-rmi"&gt;docker rmi
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -192,18 +173,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker rmi --force &lt;span class="k"&gt;$(&lt;/span&gt;docker images --all --quiet&lt;span class="k"&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rmi.png"
-width="1700"
-height="1652"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rmi_hu_90e7b47d2a474faf.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rmi_hu_f4576e0ed01ce73c.png 1024w"
-alt="docker rmi"
-class="gallery-image"
-data-flex-grow="102"
-data-flex-basis="246px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker rmi" class="gallery-image" data-flex-basis="246px" data-flex-grow="102" height="1652" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rmi_hu_f1fdb328e545062a.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rmi_hu_448c98091190fd7b.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rmi_hu_7377a1efc1c19401.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rmi_hu_f1fdb328e545062a.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="docker-run"&gt;docker run&lt;/h3&gt;
+&lt;h3 id="docker-run"&gt;docker run
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -254,18 +228,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;CMD + P + Q
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.run.png"
-width="1700"
-height="1054"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.run_hu_fa9e4d6f12860953.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.run_hu_29e3d6448d5db19a.png 1024w"
-alt="docker run"
-class="gallery-image"
-data-flex-grow="161"
-data-flex-basis="387px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker run" class="gallery-image" data-flex-basis="387px" data-flex-grow="161" height="1054" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.run_hu_c300d69574038673.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.run_hu_2d353d20075d0831.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.run_hu_8f345bf0ae502980.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.run_hu_c300d69574038673.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="docker-ps"&gt;docker ps&lt;/h3&gt;
+&lt;h3 id="docker-ps"&gt;docker ps
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -284,18 +251,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker ps --quiet
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ps.png"
-width="1700"
-height="1418"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ps_hu_e749a6f1b7f06d50.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ps_hu_7ea471049b907172.png 1024w"
-alt="docker ps"
-class="gallery-image"
-data-flex-grow="119"
-data-flex-basis="287px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker ps" class="gallery-image" data-flex-basis="287px" data-flex-grow="119" height="1418" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ps_hu_be9959560a7cc763.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ps_hu_146692fd6f5ed149.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ps_hu_d89aef6f779bb23a.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ps_hu_be9959560a7cc763.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="docker-rm"&gt;docker rm&lt;/h3&gt;
+&lt;h3 id="docker-rm"&gt;docker rm
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -318,18 +278,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker ps --all --quiet&lt;span class="p"&gt;|&lt;/span&gt;xargs docker rm --force
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rm.png"
-width="1700"
-height="1730"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rm_hu_3227d54e90e11551.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rm_hu_233ab6b016bae11d.png 1024w"
-alt="docker rm"
-class="gallery-image"
-data-flex-grow="98"
-data-flex-basis="235px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker rm" class="gallery-image" data-flex-basis="235px" data-flex-grow="98" height="1730" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rm_hu_ff872aadd095ff3b.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rm_hu_e7d2daeae58ec6f0.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rm_hu_4f016722166ba73c.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.rm_hu_ff872aadd095ff3b.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="docker-start"&gt;docker start&lt;/h3&gt;
+&lt;h3 id="docker-start"&gt;docker start
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -352,7 +305,8 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;kill&lt;/span&gt; a86cd5b7fd4c
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="docker-logs"&gt;docker logs&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="docker-logs"&gt;docker logs
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -371,18 +325,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker logs --timestamps --follow --tail &lt;span class="m"&gt;10&lt;/span&gt; efcf4490c790
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.logs.png"
-width="1700"
-height="1054"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.logs_hu_74c9b10bfed165e3.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.logs_hu_480cd84c75c68064.png 1024w"
-alt="docker.logs"
-class="gallery-image"
-data-flex-grow="161"
-data-flex-basis="387px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker.logs" class="gallery-image" data-flex-basis="387px" data-flex-grow="161" height="1054" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.logs_hu_88c964968a7cf074.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.logs_hu_2d65c89ccf56f0d3.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.logs_hu_ab215024c8d46955.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.logs_hu_88c964968a7cf074.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="docker-top"&gt;docker top&lt;/h3&gt;
+&lt;h3 id="docker-top"&gt;docker top
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -393,18 +340,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker top a86cd5b7fd4c
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.top.png"
-width="1910"
-height="846"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.top_hu_ce3ec2021c99c73a.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.top_hu_6760946bb9702432.png 1024w"
-alt="docker top"
-class="gallery-image"
-data-flex-grow="225"
-data-flex-basis="541px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker top" class="gallery-image" data-flex-basis="541px" data-flex-grow="225" height="846" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.top_hu_febb7706ee7cfd6c.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.top_hu_10a8db05d77cd245.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.top_hu_254e7f81108ae6eb.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.top_hu_febb7706ee7cfd6c.png 1910w" width="1910"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="docker-inspect"&gt;docker inspect&lt;/h3&gt;
+&lt;h3 id="docker-inspect"&gt;docker inspect
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -415,18 +355,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker inspect a86cd5b7fd4c
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.inspect.png"
-width="2638"
-height="2094"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.inspect_hu_5ba4cf9a8eea7527.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.inspect_hu_d13dfafa91b211f8.png 1024w"
-alt="docker inspect"
-class="gallery-image"
-data-flex-grow="125"
-data-flex-basis="302px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker inspect" class="gallery-image" data-flex-basis="302px" data-flex-grow="125" height="2094" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.inspect_hu_f1cede773bde895a.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.inspect_hu_522436f26c0a6299.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.inspect_hu_53fa8b60b61e2356.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.inspect_hu_7a3ee711d34e8961.png 2400w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.inspect_hu_f1cede773bde895a.png 2638w" width="2638"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="docker-exec"&gt;docker exec&lt;/h3&gt;
+&lt;h3 id="docker-exec"&gt;docker exec
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -437,18 +370,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; --interactive --tty efcf4490c790 /bin/bash
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.exec.png"
-width="1700"
-height="1132"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.exec_hu_a19f96a8c501d0c.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.exec_hu_bbbecbc8362dcb56.png 1024w"
-alt="docker exec"
-class="gallery-image"
-data-flex-grow="150"
-data-flex-basis="360px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker exec" class="gallery-image" data-flex-basis="360px" data-flex-grow="150" height="1132" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.exec_hu_6e6d6348af773fac.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.exec_hu_b7742f372951d916.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.exec_hu_5c7310a482c57afc.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.exec_hu_6e6d6348af773fac.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="docker-attach"&gt;docker attach&lt;/h3&gt;
+&lt;h3 id="docker-attach"&gt;docker attach
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -459,18 +385,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker attach efcf4490c790
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.attach.png"
-width="1700"
-height="1132"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.attach_hu_66996b468a6fc32a.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.attach_hu_4e474e847d50ca8c.png 1024w"
-alt="docker attach"
-class="gallery-image"
-data-flex-grow="150"
-data-flex-basis="360px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker attach" class="gallery-image" data-flex-basis="360px" data-flex-grow="150" height="1132" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.attach_hu_29b3fc9765aee42d.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.attach_hu_9be9e67d5c2a5316.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.attach_hu_f52795f7b6a151d4.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.attach_hu_29b3fc9765aee42d.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="docker-cp"&gt;docker cp&lt;/h3&gt;
+&lt;h3 id="docker-cp"&gt;docker cp
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -481,18 +400,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker cp c3b8237515e0:/home/text.txt /Users/spicicomic/Desktop
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cp.png"
-width="1700"
-height="2094"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cp_hu_9e9c86f57fd02ac8.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cp_hu_49b85180b24f1499.png 1024w"
-alt="docker cp"
-class="gallery-image"
-data-flex-grow="81"
-data-flex-basis="194px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker cp" class="gallery-image" data-flex-basis="194px" data-flex-grow="81" height="2094" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cp_hu_ed5c00bca2eb7116.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cp_hu_505b9c3771065162.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cp_hu_d854d75824b6a631.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cp_hu_ed5c00bca2eb7116.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="docker-stats"&gt;docker stats&lt;/h3&gt;
+&lt;h3 id="docker-stats"&gt;docker stats
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -503,18 +415,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker stats
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.stats.png"
-width="1700"
-height="1288"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.stats_hu_f9597aacdde0070e.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.stats_hu_1c5fb4c0e740acb.png 1024w"
-alt="docker stats"
-class="gallery-image"
-data-flex-grow="131"
-data-flex-basis="316px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker stats" class="gallery-image" data-flex-basis="316px" data-flex-grow="131" height="1288" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.stats_hu_bd007db2022cede7.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.stats_hu_d1e8a670abf6c9c.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.stats_hu_bda14a8e539900ea.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.stats_hu_bd007db2022cede7.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="docker-commit"&gt;docker commit&lt;/h3&gt;
+&lt;h3 id="docker-commit"&gt;docker commit
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -525,18 +430,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker commit --message &lt;span class="s2"&gt;&amp;#34;提交信息&amp;#34;&lt;/span&gt; --author &lt;span class="s2"&gt;&amp;#34;John Smith &amp;lt;hannibal@a-team.com&amp;gt;&amp;#34;&lt;/span&gt; c1b44335a5dd nginx-test:1.2.3
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.commit.png"
-width="1882"
-height="1262"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.commit_hu_c7ee5fbefb4813cc.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.commit_hu_d120efd05f1dba29.png 1024w"
-alt="docker commit"
-class="gallery-image"
-data-flex-grow="149"
-data-flex-basis="357px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker commit" class="gallery-image" data-flex-basis="357px" data-flex-grow="149" height="1262" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.commit_hu_1503a430a3da37e2.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.commit_hu_8a6ef2ca4b101fd2.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.commit_hu_f810dc39b8a6cc3.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.commit_hu_1503a430a3da37e2.png 1882w" width="1882"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="docker-volume"&gt;docker volume&lt;/h3&gt;
+&lt;h3 id="docker-volume"&gt;docker volume
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -555,21 +453,16 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker volume prune
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="docker-镜像"&gt;Docker 镜像&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="docker-镜像"&gt;Docker 镜像
+&lt;/h2&gt;
 &lt;p&gt;镜像是一个独立可执行的软件包，用来打包&lt;strong&gt;运行环境&lt;/strong&gt;和&lt;strong&gt;基于运行环境开发的软件&lt;/strong&gt;；内部包含了运行某个软件所需要的所有内容（代码、依赖、运行环境、环境变量、配置文件&amp;hellip;）。&lt;/p&gt;
-&lt;h3 id="镜像启动流程"&gt;镜像启动流程&lt;/h3&gt;
-&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.hello-world.png"
-width="1700"
-height="1054"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.hello-world_hu_6e060708c80bfc1a.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.hello-world_hu_6f612ce65220380a.png 1024w"
-alt="镜像启动流程"
-class="gallery-image"
-data-flex-grow="161"
-data-flex-basis="387px"
-loading="lazy"
-&gt;
+&lt;h3 id="镜像启动流程"&gt;镜像启动流程
+&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="镜像启动流程" class="gallery-image" data-flex-basis="387px" data-flex-grow="161" height="1054" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.hello-world_hu_35068aced26b3fbb.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.hello-world_hu_ba17762c97dcd20b.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.hello-world_hu_119d8f215c75e207.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.hello-world_hu_35068aced26b3fbb.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="镜像加载流程"&gt;镜像加载流程&lt;/h3&gt;
+&lt;h3 id="镜像加载流程"&gt;镜像加载流程
+&lt;/h3&gt;
 &lt;p&gt;Docker 使用&lt;strong&gt;联合文件系统&lt;/strong&gt;，UnionFS 是一种分层、轻量、高性能的文件系统；他支持&lt;strong&gt;对文件系统的修改&lt;/strong&gt;作为一次&lt;strong&gt;提交&lt;/strong&gt;来层层叠加，同时将不同目录挂载到同一个虚拟文件系统下。&lt;/p&gt;
 &lt;p&gt;UnionFS 是 Docker 镜像的根基，镜像可以通过分层来进行继承，基于基础镜像制作各种具体的应用镜像。每次可以同时加载多个文件系统；这样，最终的镜像会包含所有底层的文件和目录。&lt;/p&gt;
 &lt;p&gt;和 Linux 一样，镜像的最底层是 bootfs，包含了：&lt;/p&gt;
@@ -584,26 +477,20 @@ loading="lazy"
 &lt;/ul&gt;
 &lt;p&gt;对于精简的系统，rootfs 可以很小，只需要包含基本的命令、工具和库即可；底层直接使用宿主系统的 kernel。&lt;/p&gt;
 &lt;p&gt;所有镜像都起始于一个基础的镜像层，每当对镜像进行修改/添加内容时，会在当前镜像层之上创建新的镜像层；有点类似于对抽象 class 的继承，通过多层继承实现完整功能：&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images.layer.png"
-width="1700"
-height="2536"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images.layer_hu_e3be4b540098d82e.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images.layer_hu_d7283d3db9666a6f.png 1024w"
-alt="镜像加载流程"
-class="gallery-image"
-data-flex-grow="67"
-data-flex-basis="160px"
-loading="lazy"
-&gt;
+&lt;p&gt;&lt;img alt="镜像加载流程" class="gallery-image" data-flex-basis="160px" data-flex-grow="67" height="2536" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images.layer_hu_8d3c5af0070c94ba.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images.layer_hu_8af3fe16e3ab29f3.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images.layer_hu_b36049003371ecc3.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.images.layer_hu_8d3c5af0070c94ba.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
 &lt;p&gt;镜像都是只读的，当被放到容器中运行时，会在镜像顶部创建一个可写层（容器层），可写层之下的都叫做镜像层。&lt;/p&gt;
-&lt;h2 id="容器数据卷"&gt;容器数据卷&lt;/h2&gt;
+&lt;h2 id="容器数据卷"&gt;容器数据卷
+&lt;/h2&gt;
 &lt;p&gt;数据卷产生的原因：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;当我们在容器中运行镜像时，我们对容器内数据的操作都保存在容器内部；当容器被删除时，相关数据就会丢失；&lt;/li&gt;
 &lt;li&gt;容器与容器是隔离的，一个容器并不能访问另一个容器内部的文件系统数据。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;容器数据卷通过将容器内的&lt;strong&gt;目录挂载&lt;/strong&gt;到宿主环境上，帮我们实现&lt;strong&gt;数据同步&lt;/strong&gt;、&lt;strong&gt;数据持久化&lt;/strong&gt;和&lt;strong&gt;数据共享&lt;/strong&gt;。&lt;/p&gt;
-&lt;h3 id="指定路径挂载"&gt;指定路径挂载&lt;/h3&gt;
+&lt;h3 id="指定路径挂载"&gt;指定路径挂载
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -614,30 +501,15 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --volume /Users/spicicomic/Desktop/docker_volume:/home --interactive centos /bin/bash
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volume.png"
-width="2092"
-height="1054"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volume_hu_253e2f7583be3ed7.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volume_hu_4d63b1414f2929f1.png 1024w"
-alt="指定路径挂载"
-class="gallery-image"
-data-flex-grow="198"
-data-flex-basis="476px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="指定路径挂载" class="gallery-image" data-flex-basis="476px" data-flex-grow="198" height="1054" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volume_hu_9999620c86224247.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volume_hu_d52563acecf23374.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volume_hu_cb5a19e0a7b4f101.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volume_hu_9999620c86224247.png 2092w" width="2092"&gt;
+
 &lt;/p&gt;
 &lt;p&gt;我们可以通过 inspect 命令查看挂载信息：&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mounts.png"
-width="1406"
-height="1054"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mounts_hu_4e65848387c3e96b.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mounts_hu_1199648d287f72d9.png 1024w"
-alt="指定路径挂载"
-class="gallery-image"
-data-flex-grow="133"
-data-flex-basis="320px"
-loading="lazy"
-&gt;
+&lt;p&gt;&lt;img alt="指定路径挂载" class="gallery-image" data-flex-basis="320px" data-flex-grow="133" height="1054" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mounts_hu_b3aafcbf9d4c5c2d.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mounts_hu_dc5ed9a2be555b5c.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mounts_hu_b3aafcbf9d4c5c2d.png 1406w" width="1406"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="具名挂载与匿名挂载"&gt;具名挂载与匿名挂载&lt;/h3&gt;
+&lt;h3 id="具名挂载与匿名挂载"&gt;具名挂载与匿名挂载
+&lt;/h3&gt;
 &lt;p&gt;匿名挂载，在挂载时，不指定宿主机目录，仅指定容器挂载目录：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -660,18 +532,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --volume centos_home:/home --interactive centos /bin/bash
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mount.name.nameless.png"
-width="1700"
-height="1054"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mount.name.nameless_hu_2358d7f0ee9f3540.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mount.name.nameless_hu_7d404f0b1d047c69.png 1024w"
-alt="具名挂载"
-class="gallery-image"
-data-flex-grow="161"
-data-flex-basis="387px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="具名挂载" class="gallery-image" data-flex-basis="387px" data-flex-grow="161" height="1054" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mount.name.nameless_hu_250e4cfc29301f92.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mount.name.nameless_hu_2c7fb89860ce7bfa.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mount.name.nameless_hu_9c15f97424d6fe4b.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.mount.name.nameless_hu_250e4cfc29301f92.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="挂载权限"&gt;挂载权限&lt;/h3&gt;
+&lt;h3 id="挂载权限"&gt;挂载权限
+&lt;/h3&gt;
 &lt;p&gt;在挂载时，可以指定挂载目录对&lt;strong&gt;容器&lt;/strong&gt;的权限：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -687,7 +552,8 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --volume centos_home:/home:rw --interactive centos /bin/bash
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="数据卷容器"&gt;数据卷容器&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="数据卷容器"&gt;数据卷容器
+&lt;/h3&gt;
 &lt;p&gt;除了借助宿主环境，我们还可以借助容器来实现数据共享；数据卷容器就像一个全局变量，保存着其他容器的数据状态：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -707,19 +573,12 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --detach --interactive --name container02 --volumes-from dataVolume centos /bin/bash
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volumes-from.png"
-width="3212"
-height="1956"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volumes-from_hu_e298177f96dab9c5.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volumes-from_hu_fd74579d938e7cf7.png 1024w"
-alt="–volumes-from"
-class="gallery-image"
-data-flex-grow="164"
-data-flex-basis="394px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="–volumes-from" class="gallery-image" data-flex-basis="394px" data-flex-grow="164" height="1956" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volumes-from_hu_273a37664de74a7.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volumes-from_hu_1a21e5e15e78a8e.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volumes-from_hu_422b5dc8184d64fc.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volumes-from_hu_10c74f8f938ba804.png 2400w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.volumes-from_hu_273a37664de74a7.png 3212w" width="3212"&gt;
+
 &lt;/p&gt;
 &lt;p&gt;&amp;ndash;volumes-from dataVolume 的意思是，将 dataVolume 的目录挂载到当前容器。即使数据卷容器 dataVolume 被删除，数据也不会被销毁，除非数据不再被任何容器所使用。或者说，dataVolume 的存在与否不影响 dataVolume 的挂载状态，当 dataVolume 没有被任何容器挂载时，数据状态才被释放。&lt;/p&gt;
-&lt;h2 id="dockerfile"&gt;Dockerfile&lt;/h2&gt;
+&lt;h2 id="dockerfile"&gt;Dockerfile
+&lt;/h2&gt;
 &lt;p&gt;Dockerfile 是用来构建 Docker 镜像的脚本文件；镜像是一层一层的，所以文件中的每条命令都是一层镜像：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;每行只支持一条指令，指令可以带多个参数；&lt;/li&gt;
@@ -761,18 +620,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker build --file /Users/spicicomic/Desktop/docker_volume/Dockerfile --tag spicicomic/example:1.0 .
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.png"
-width="2064"
-height="1704"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build_hu_604106864c034422.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build_hu_fd4bc32119f1e36.png 1024w"
-alt="docker build"
-class="gallery-image"
-data-flex-grow="121"
-data-flex-basis="290px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker build" class="gallery-image" data-flex-basis="290px" data-flex-grow="121" height="1704" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build_hu_303d3355f02a043f.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build_hu_a953c4b2f4d5bd91.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build_hu_1d642dba890b1684.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build_hu_303d3355f02a043f.png 2064w" width="2064"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="构建指令"&gt;构建指令&lt;/h3&gt;
+&lt;h3 id="构建指令"&gt;构建指令
+&lt;/h3&gt;
 &lt;p&gt;用于构建镜像时使用，其指定的操作&lt;strong&gt;不会&lt;/strong&gt;在运行镜像的容器中执行：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -814,7 +666,8 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ADD&lt;/span&gt; 源路径 目标路径&lt;span class="err"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="设置指令"&gt;设置指令&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="设置指令"&gt;设置指令
+&lt;/h3&gt;
 &lt;p&gt;用于设置镜像的属性，其指定的操作&lt;strong&gt;会&lt;/strong&gt;在运行镜像的容器中执行：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -864,7 +717,8 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 在作为别人的基础镜像时执行的命令&lt;/span&gt;&lt;span class="err"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="cmd-与-entrypoint"&gt;CMD 与 ENTRYPOINT&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="cmd-与-entrypoint"&gt;CMD 与 ENTRYPOINT
+&lt;/h3&gt;
 &lt;p&gt;使用 Dockerfile 构建一个镜像：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -878,16 +732,8 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;CMD&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;ls&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;-a&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="err"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cmd.error.png"
-width="1714"
-height="1730"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cmd.error_hu_cd208c0f310259dc.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cmd.error_hu_29a20b7ad71b8e12.png 1024w"
-alt="CMD"
-class="gallery-image"
-data-flex-grow="99"
-data-flex-basis="237px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="CMD" class="gallery-image" data-flex-basis="237px" data-flex-grow="99" height="1730" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cmd.error_hu_49227164f854a145.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cmd.error_hu_ed1f7e336bf99dd8.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cmd.error_hu_ddd24dec4be31039.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.cmd.error_hu_49227164f854a145.png 1714w" width="1714"&gt;
+
 &lt;/p&gt;
 &lt;p&gt;我们将 CMD 替换为 ENTRYPOINT：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -906,18 +752,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;ENTRYPOINT&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;ls&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;-a&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="err"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.entrypoint.success.png"
-width="1714"
-height="1834"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.entrypoint.success_hu_813750b7cefe3c7.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.entrypoint.success_hu_3b3c770b585f5ecd.png 1024w"
-alt="ENTRYPOINT"
-class="gallery-image"
-data-flex-grow="93"
-data-flex-basis="224px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="ENTRYPOINT" class="gallery-image" data-flex-basis="224px" data-flex-grow="93" height="1834" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.entrypoint.success_hu_95a38bcf06cb7c9e.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.entrypoint.success_hu_2892323526fc0ab1.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.entrypoint.success_hu_eeaab6b5b193f2d8.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.entrypoint.success_hu_95a38bcf06cb7c9e.png 1714w" width="1714"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="构建-centos"&gt;构建 CentOS&lt;/h3&gt;
+&lt;h3 id="构建-centos"&gt;构建 CentOS
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -973,16 +812,8 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker build --file /Users/spicicomic/Desktop/docker_volume/Dockerfile --tag centos/example:1.0 .
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.dockerfile.png"
-width="1700"
-height="2094"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.dockerfile_hu_4dccd40754b777a9.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.dockerfile_hu_4acf4eca897e7dfb.png 1024w"
-alt="docker build"
-class="gallery-image"
-data-flex-grow="81"
-data-flex-basis="194px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker build" class="gallery-image" data-flex-basis="194px" data-flex-grow="81" height="2094" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.dockerfile_hu_9c83c590a5842e57.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.dockerfile_hu_74fcb95ab53d895f.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.dockerfile_hu_92d3ed3f46dbd9c9.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.dockerfile_hu_9c83c590a5842e57.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
 &lt;p&gt;通过 history 查看构建历史：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -995,18 +826,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;history&lt;/span&gt; 794dc81a2b36
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.history.png"
-width="1714"
-height="1184"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.history_hu_1606a48a49762c62.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.history_hu_e90d4b148bf3b3d4.png 1024w"
-alt="docker history"
-class="gallery-image"
-data-flex-grow="144"
-data-flex-basis="347px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker history" class="gallery-image" data-flex-basis="347px" data-flex-grow="144" height="1184" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.history_hu_3286d56d0e7024dc.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.history_hu_cf0690fe39523ea5.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.history_hu_f7a0a97401060ae4.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.build.history_hu_3286d56d0e7024dc.png 1714w" width="1714"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="构建-tomcat"&gt;构建 Tomcat&lt;/h3&gt;
+&lt;h3 id="构建-tomcat"&gt;构建 Tomcat
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1065,18 +889,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;CMD&lt;/span&gt; /usr/local/apache-tomcat-10.1.34/bin/startup.sh &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; tail -F /usr/local/apache-tomcat-10.1.34/logs/catalina.out&lt;span class="err"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.java.tomcat.png"
-width="1728"
-height="1236"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.java.tomcat_hu_2d2c5da4830085de.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.java.tomcat_hu_11873320c819bcaa.png 1024w"
-alt="构建 Tomcat"
-class="gallery-image"
-data-flex-grow="139"
-data-flex-basis="335px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="构建 Tomcat" class="gallery-image" data-flex-basis="335px" data-flex-grow="139" height="1236" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.java.tomcat_hu_fb8a0cff54f706af.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.java.tomcat_hu_626566c124246c08.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.java.tomcat_hu_dc5b28624e36caab.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.java.tomcat_hu_fb8a0cff54f706af.png 1728w" width="1728"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="发布镜像"&gt;发布镜像&lt;/h3&gt;
+&lt;h3 id="发布镜像"&gt;发布镜像
+&lt;/h3&gt;
 &lt;p&gt;使用 login 命令登录：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1100,33 +917,18 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker push spicicomic/tomcat_java:1.0
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.push.png"
-width="1658"
-height="690"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.push_hu_6a0e92c9970d6b62.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.push_hu_36b87076875cb67.png 1024w"
-alt="docker push"
-class="gallery-image"
-data-flex-grow="240"
-data-flex-basis="576px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker push" class="gallery-image" data-flex-basis="576px" data-flex-grow="240" height="690" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.push_hu_ee5d4a0b9809775.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.push_hu_7918cfbd694f796d.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.push_hu_6ce177c6a20cc57d.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.push_hu_ee5d4a0b9809775.png 1658w" width="1658"&gt;
+
 &lt;/p&gt;
-&lt;h2 id="docker-网络"&gt;Docker 网络&lt;/h2&gt;
+&lt;h2 id="docker-网络"&gt;Docker 网络
+&lt;/h2&gt;
 &lt;p&gt;网络命名空间 NetworkNamespace 是 Linux 内核提供的一项非常重要的功能，它是网络虚拟化技术的基础，也是 Kubernetes 和以 Docker 为代表的容器技术在实现它们各自的网络时所依赖的基础。当运行多个 Docker 容器的时候，Docker 会在每个容器内部创建相应的 NetworkNamespace，从而实现不同容器之间的网络隔离。&lt;/p&gt;
 &lt;p&gt;光有隔离还不行，因为容器还要和外界进行网络联通，所以除了 NetworkNamespace 以外，另一个重要的概念是网桥 NetworkBridge。它是由 Linux 内核提供的一种链路层设备，用于在不同网段之间转发数据包。Docker 就是利用网桥来实现容器和外界之间的通信的。默认情况下，Docker 服务会在它所在的机器上创建一个名为 docker0 的网桥。&lt;/p&gt;
-&lt;p&gt;狂神视频中使用的是阿里云 Linux 做演示的，我的电脑是跑的是 macOS，使用 &lt;a class="link"
-href="https://formulae.brew.sh/formula/iproute2mac"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-ip addr
-&lt;/a&gt;
-命令时，没有 docker0 网卡。这和 macOS&amp;rsquo;s Docker 实现方式有关，macOS&amp;rsquo;s Docker 跑在一个轻量化的 &lt;a class="link"
-href="https://github.com/linuxkit/linuxkit"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-LinuxKit
-&lt;/a&gt;
-虚拟机上，在 Linux 上不需要这层虚拟机；所以，在 macOS 中看不到 docker0。&lt;/p&gt;
+&lt;p&gt;狂神视频中使用的是阿里云 Linux 做演示的，我的电脑是跑的是 macOS，使用 &lt;a class="link" href="https://formulae.brew.sh/formula/iproute2mac" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;ip addr&lt;/a&gt;
+ 命令时，没有 docker0 网卡。这和 macOS&amp;rsquo;s Docker 实现方式有关，macOS&amp;rsquo;s Docker 跑在一个轻量化的 &lt;a class="link" href="https://github.com/linuxkit/linuxkit" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;LinuxKit&lt;/a&gt;
+ 虚拟机上，在 Linux 上不需要这层虚拟机；所以，在 macOS 中看不到 docker0。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -1145,16 +947,8 @@ LinuxKit
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; --interactive tomcat01 ip addr
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat01.png"
-width="1700"
-height="1574"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat01_hu_4833e2eccf8a53d4.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat01_hu_4773686e9380eb47.png 1024w"
-alt="Docker 网络"
-class="gallery-image"
-data-flex-grow="108"
-data-flex-basis="259px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="Docker 网络" class="gallery-image" data-flex-basis="259px" data-flex-grow="108" height="1574" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat01_hu_ee534e380d5a26de.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat01_hu_1035d52cf031f053.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat01_hu_bf9c24a416bbdd06.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat01_hu_ee534e380d5a26de.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
 &lt;p&gt;我们再启动后一个容器 tomcat02 来 ping 容器 tomcat01：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -1179,16 +973,8 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; --interactive tomcat01 ping 192.168.215.3
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat02.png"
-width="1700"
-height="1340"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat02_hu_8ba6ce39400a3c27.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat02_hu_e8728ceba6bb299d.png 1024w"
-alt="Docker 网络"
-class="gallery-image"
-data-flex-grow="126"
-data-flex-basis="304px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="Docker 网络" class="gallery-image" data-flex-basis="304px" data-flex-grow="126" height="1340" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat02_hu_cdb717a3ace1e14.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat02_hu_e10d4d3fc14e9930.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat02_hu_6060d96c84037291.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.ping.tomcat02_hu_cdb717a3ace1e14.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
 &lt;p&gt;在 Linux 环境下，容器是如何访问网络的？&lt;/p&gt;
 &lt;ul&gt;
@@ -1197,7 +983,8 @@ loading="lazy"
 &lt;li&gt;Docker 容器在启动时，如果没有显式指定加入任何网络，就会默认加入到名为 bridge 的网络。而这个 bridge 网络就是基于 docker0 实现的；&lt;/li&gt;
 &lt;li&gt;当 Docker 创建一个容器时，同时会创建了一对 veth-pair 接口（当数据包发送到一个接口时，另外一个接口也可以收到相同的数据包）；这对 veth-pair 接口一端在容器内，即 eth0；另一端在本地并&lt;strong&gt;被挂载到 docker0 网桥&lt;/strong&gt;。通过这种方式，Docker 就创建了在主机和所有容器之间一个虚拟共享网络；&lt;strong&gt;主机可以跟容器通信，容器之间也可以相互通信&lt;/strong&gt;。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="容器互联之--link"&gt;容器互联之&amp;quot;--link&amp;quot;&lt;/h3&gt;
+&lt;h3 id="容器互联之--link"&gt;容器互联之&amp;quot;--link&amp;quot;
+&lt;/h3&gt;
 &lt;p&gt;在之前，我们都是通过 IP 直接去 ping 另一个容器的；这很不方便，我们能否通过容器名称来 ping 呢？可以通过 --link 来连接容器：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1209,16 +996,8 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --detach --publish-all --name tomcat03 --link tomcat01 --link tomcat02 tomcat:7.0
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.link.png"
-width="1700"
-height="2744"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.link_hu_3154f7e8ce7807cf.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.link_hu_e052b0a69d3c07bf.png 1024w"
-alt="–link"
-class="gallery-image"
-data-flex-grow="61"
-data-flex-basis="148px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="–link" class="gallery-image" data-flex-basis="148px" data-flex-grow="61" height="2744" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.link_hu_65ae238e843f0d71.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.link_hu_a69cdefcb4efff2.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.link_hu_b2cabcc90f650216.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.link_hu_65ae238e843f0d71.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
 &lt;p&gt;我们再来看一下三个容器的 host 文件：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -1233,19 +1012,12 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; --interactive tomcat02 cat /etc/hosts
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.host.png"
-width="1700"
-height="1054"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.host_hu_8545c522d144e53c.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.host_hu_b02e7012f011ca30.png 1024w"
-alt="容器互联"
-class="gallery-image"
-data-flex-grow="161"
-data-flex-basis="387px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="容器互联" class="gallery-image" data-flex-basis="387px" data-flex-grow="161" height="1054" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.host_hu_8951f9a4e9d8f07d.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.host_hu_249c2235e09cd4c5.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.host_hu_3737cbd54db1a833.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.container.host_hu_8951f9a4e9d8f07d.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
 &lt;p&gt;--link 是通过修改容器内的 host 配置实现的，已经不建议使用了。&lt;/p&gt;
-&lt;h3 id="容器互联之自定义网络"&gt;容器互联之“自定义网络”&lt;/h3&gt;
+&lt;h3 id="容器互联之自定义网络"&gt;容器互联之“自定义网络”
+&lt;/h3&gt;
 &lt;p&gt;查看所有的 Docker 网络：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1255,16 +1027,8 @@ loading="lazy"
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker network ls
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mode.png"
-width="1700"
-height="1054"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mode_hu_ca1f307d80bbcf22.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mode_hu_43435d9a5477bb59.png 1024w"
-alt="docker network"
-class="gallery-image"
-data-flex-grow="161"
-data-flex-basis="387px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="docker network" class="gallery-image" data-flex-basis="387px" data-flex-grow="161" height="1054" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mode_hu_3460622ac21378cc.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mode_hu_89b5d35672aee6e.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mode_hu_8466f996d93c10fd.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mode_hu_3460622ac21378cc.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
 &lt;p&gt;我们创建一个网络并启动一个容器：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -1301,16 +1065,8 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --detach --publish-all --name tomcat-mynet-02 --net mynet tomcat:7.0
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet.png"
-width="1700"
-height="1574"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet_hu_38650282651c1780.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet_hu_b5c9458e18668a30.png 1024w"
-alt="自定义网络"
-class="gallery-image"
-data-flex-grow="108"
-data-flex-basis="259px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="自定义网络" class="gallery-image" data-flex-basis="259px" data-flex-grow="108" height="1574" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet_hu_ff7532b589d53de5.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet_hu_4201b5de92d6991c.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet_hu_ee92a656ccf35fc9.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet_hu_ff7532b589d53de5.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
 &lt;p&gt;此时，我们就可以直接通过容器名称来建立连接：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -1323,18 +1079,11 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; --interactive tomcat-mynet-02 ping tomcat-mynet-01
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet.ping.png"
-width="1700"
-height="742"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet.ping_hu_c6e14b03a13808ea.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet.ping_hu_c33b18f9ffb70efe.png 1024w"
-alt="自定义网络"
-class="gallery-image"
-data-flex-grow="229"
-data-flex-basis="549px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="自定义网络" class="gallery-image" data-flex-basis="549px" data-flex-grow="229" height="742" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet.ping_hu_3743ab3567d6bd11.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet.ping_hu_420c6faff8edf819.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet.ping_hu_3c35a2e47d1fae33.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.mynet.ping_hu_3743ab3567d6bd11.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
-&lt;h3 id="容器互联之网络联通"&gt;容器互联之“网络联通”&lt;/h3&gt;
+&lt;h3 id="容器互联之网络联通"&gt;容器互联之“网络联通”
+&lt;/h3&gt;
 &lt;p&gt;如何让 docker0 下的容器和 mynet 下的容器联通呢？例如 tomcat01 ping tomcat-mynet-01；首先，不能直接打通 docker0 和 mynet，因为他们不属于一个网段，只能尝试将容器同时接入 docker0 和 mynet：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1350,16 +1099,8 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker network connect --help
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.help.png"
-width="1700"
-height="1080"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.help_hu_4e61bd7cea4ae42.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.help_hu_2102c0d7878a7b4e.png 1024w"
-alt="网络联通"
-class="gallery-image"
-data-flex-grow="157"
-data-flex-basis="377px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="网络联通" class="gallery-image" data-flex-basis="377px" data-flex-grow="157" height="1080" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.help_hu_84b013a1390b9287.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.help_hu_4a175dbeee9b6202.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.help_hu_c7059f534a3eb0f5.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.help_hu_84b013a1390b9287.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
 &lt;p&gt;我们尝试将 tomcat01 连入 mynet 网络：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -1378,72 +1119,40 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; --interactive tomcat01 ping tomcat-mynet-01
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.tomcat01.png"
-width="1700"
-height="2146"
-srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.tomcat01_hu_7d1b295f02c28f04.png 480w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.tomcat01_hu_1a95125d3367a3f8.png 1024w"
-alt="网络联通"
-class="gallery-image"
-data-flex-grow="79"
-data-flex-basis="190px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="网络联通" class="gallery-image" data-flex-basis="190px" data-flex-grow="79" height="2146" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.tomcat01_hu_a1b3f4998865b587.png" srcset="https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.tomcat01_hu_fe22ef7887a1813a.png 800w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.tomcat01_hu_f375d9b7bb9ce18e.png 1600w, https://ElementRef.github.io/p/%E7%8B%82%E7%A5%9E%E8%AF%B4-java-%E4%B9%8B-docker-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker.network.connect.tomcat01_hu_a1b3f4998865b587.png 1700w" width="1700"&gt;
+
 &lt;/p&gt;
 &lt;!--
 ## Docker 整合
+
 ## Docker Compose
+
 ## Docker Swarm
+
 ## CI/CD
 --&gt;
-&lt;h2 id="参考"&gt;参考&lt;/h2&gt;
+&lt;h2 id="参考"&gt;参考
+&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://www.bilibili.com/video/BV1og4y1q7M4"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-狂神说 Java - Docker 最新超详细版教程通俗易懂
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://www.bilibili.com/video/BV1og4y1q7M4" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;狂神说 Java - Docker 最新超详细版教程通俗易懂&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://yuanmomo.net/2019/06/13/docker-network"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Docker 的 (Linux/Mac OS) 网络配置问题
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://yuanmomo.net/2019/06/13/docker-network" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Docker 的 (Linux/Mac OS) 网络配置问题&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://www.haoyizebo.com/posts/fd0b9bd8"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Docker for Mac 的网络问题及解决办法
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://www.haoyizebo.com/posts/fd0b9bd8" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Docker for Mac 的网络问题及解决办法&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://morningspace.github.io/tech/k8s-net-docker0"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Kubernetes 网络篇 - 从 docker0 开始
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://morningspace.github.io/tech/k8s-net-docker0" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Kubernetes 网络篇 - 从 docker0 开始&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://xieyufei.com/2022/03/22/FrontEnd-Docker-Advance.html"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-前端抢饭碗系列之 Docker 进阶部署
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://xieyufei.com/2022/03/22/FrontEnd-Docker-Advance.html" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;前端抢饭碗系列之 Docker 进阶部署&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://lbb00.com/blogs/2022112400/%E4%BC%98%E5%8C%96%20Dockerfile%20%E4%BD%93%E7%A7%AF%E5%8F%8A%E6%9E%84%E5%BB%BA%E9%80%9F%E5%BA%A6"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-优化 Dockerfile 体积及构建速度
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://lbb00.com/blogs/2022112400/%E4%BC%98%E5%8C%96%20Dockerfile%20%E4%BD%93%E7%A7%AF%E5%8F%8A%E6%9E%84%E5%BB%BA%E9%80%9F%E5%BA%A6" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;优化 Dockerfile 体积及构建速度&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://www.flftuu.com/2019/03/21/dockerfile"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Dockerfile
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://www.flftuu.com/2019/03/21/dockerfile" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Dockerfile&lt;/a&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</description></item></channel></rss>

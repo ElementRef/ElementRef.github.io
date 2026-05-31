@@ -1,29 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Native on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/native/</link><description>Recent content in Native on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 05 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/native/index.xml" rel="self" type="application/rss+xml"/><item><title>JSBridge 初上手 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/jsbridge-%E5%88%9D%E4%B8%8A%E6%89%8B/</link><pubDate>Mon, 05 Jun 2023 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/jsbridge-%E5%88%9D%E4%B8%8A%E6%89%8B/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/jsbridge.png" alt="JSBridge 初上手" /&gt;&lt;p&gt;政策转向，面向 B 端的业务不得不转向 C 端；而 C 端用户显然对性能和交互更为挑剔，于是老板决定上原生。为了赶工期，采用 Native + Web 的开发方式；经过调研，Native 和 Web 之间较为常用的通信方式为 JSBridge。为此，小组还开发了一个&lt;a class="link"
-href="https://www.npmjs.com/package/@hema-npm/js-bridge"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-包
-&lt;/a&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Native on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/native/</link><description>Recent Content in Native on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo 0.162.0</generator><language>zh</language><lastBuildDate>Mon, 05 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/native/index.xml" rel="self" type="application/rss+xml"/><item><title>JSBridge 初上手</title><link>https://ElementRef.github.io/p/jsbridge-%E5%88%9D%E4%B8%8A%E6%89%8B/</link><pubDate>Mon, 05 Jun 2023 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/jsbridge-%E5%88%9D%E4%B8%8A%E6%89%8B/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/jsbridge.png" alt="Featured image of post JSBridge 初上手" /&gt;&lt;p&gt;政策转向，面向 B 端的业务不得不转向 C 端；而 C 端用户显然对性能和交互更为挑剔，于是老板决定上原生。为了赶工期，采用 Native + Web 的开发方式；经过调研，Native 和 Web 之间较为常用的通信方式为 JSBridge。为此，小组还开发了一个&lt;a class="link" href="https://www.npmjs.com/package/@hema-npm/js-bridge" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;包&lt;/a&gt;
 来满足业务需要。&lt;/p&gt;
-&lt;h2 id="webview"&gt;WebView&lt;/h2&gt;
-&lt;p&gt;如果 iOS/Android 要访问 Web 页面，需要使用 WebView（一个嵌入在操作系统里的组件）；&lt;a class="link"
-href="https://developer.apple.com/documentation/webkit/wkwebview"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-WKWebView
-&lt;/a&gt;
-基于 Safari，&lt;a class="link"
-href="https://developer.android.com/reference/android/webkit/WebView"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Android System WebView
-&lt;/a&gt;
-基于 Chrome，当然还有微软的 &lt;a class="link"
-href="https://learn.microsoft.com/zh-cn/microsoft-edge/webview2"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Microsoft Edge WebView2
-&lt;/a&gt;
+&lt;h2 id="webview"&gt;WebView
+&lt;/h2&gt;
+&lt;p&gt;如果 iOS/Android 要访问 Web 页面，需要使用 WebView（一个嵌入在操作系统里的组件）；&lt;a class="link" href="https://developer.apple.com/documentation/webkit/wkwebview" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;WKWebView&lt;/a&gt;
+ 基于 Safari，&lt;a class="link" href="https://developer.android.com/reference/android/webkit/WebView" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Android System WebView&lt;/a&gt;
+ 基于 Chrome，当然还有微软的 &lt;a class="link" href="https://learn.microsoft.com/zh-cn/microsoft-edge/webview2" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Microsoft Edge WebView2&lt;/a&gt;
 。&lt;/p&gt;
 &lt;p&gt;在我看来，WebView 像是一个继承自浏览器引擎的类，具有完整的浏览器功能；开发者可以在其基础上对其进行定制化来满足业务需要；比如说，可以对 UA 进行定制，这样 Web 就可以对当前的运行环境做判断：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -52,19 +37,11 @@ Microsoft Edge WebView2
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;以 WKWebView 为例，&lt;a class="link"
-href="https://developer.apple.com/documentation/webkit/wkwebviewconfiguration"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-WKWebViewConfiguration
-&lt;/a&gt;
-用来配置 WKWebView，&lt;a class="link"
-href="https://developer.apple.com/documentation/foundation/urlrequest"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-URLRequest
-&lt;/a&gt;
-用来指定访问的内容。&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;以 WKWebView 为例，&lt;a class="link" href="https://developer.apple.com/documentation/webkit/wkwebviewconfiguration" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;WKWebViewConfiguration&lt;/a&gt;
+ 用来配置 WKWebView，&lt;a class="link" href="https://developer.apple.com/documentation/foundation/urlrequest" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;URLRequest&lt;/a&gt;
+ 用来指定访问的内容。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -111,85 +88,51 @@ URLRequest
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="jsbridge"&gt;JSBridge&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="jsbridge"&gt;JSBridge
+&lt;/h2&gt;
 &lt;p&gt;因为 Native 和 Web 处于两个不同的运行环境中，为了进行通信，需要一个&lt;strong&gt;桥&lt;/strong&gt;的东西来连接 Native 和 Web，这个桥就是 JSBridge。对于 Native 和 Web 这两个角色，Native 拥有更大的权限，它可以通过初始化一个 WebView 打开页面，也可以直接销毁 WebView 实例关闭页面；既然 Native 对 WebView 可以有完全的控制，那么 Native 就可以通过更改 WebView 实例中的 JS 运行时来间接的影响 Web 的行为，比如：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;在 window 上添加双方约定好的属性，比如 window.attr4Shared：
 &lt;ul&gt;
-&lt;li&gt;Android 可以通过 &lt;a class="link"
-href="https://developer.android.com/reference/android/webkit/WebView#evaluateJavascript%28java.lang.String,%20android.webkit.ValueCallback%3Cjava.lang.String%3E%29"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-evaluateJavascript
-&lt;/a&gt;
-调用 Web 逻辑；&lt;/li&gt;
-&lt;li&gt;iOS 可以通过 &lt;a class="link"
-href="https://developer.apple.com/documentation/webkit/wkwebview/1415017-evaluatejavascript"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-evaluateJavaScript:javaScriptString
-&lt;/a&gt;
-调用 Web 逻辑；&lt;/li&gt;
-&lt;li&gt;Web 可以调用 Android 通过 &lt;a class="link"
-href="https://developer.android.com/reference/android/webkit/WebView#addJavascriptInterface%28java.lang.Object,%20java.lang.String%29"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-addJavascriptInterface
-&lt;/a&gt;
-注入的全局属性/方法；&lt;/li&gt;
-&lt;li&gt;Web 可以调用 iOS 通过 &lt;a class="link"
-href="https://developer.apple.com/documentation/webkit/wkscriptmessagehandler"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-WKScriptMessageHandler
-&lt;/a&gt;
-注入的全局属性/方法。&lt;/li&gt;
+&lt;li&gt;Android 可以通过 &lt;a class="link" href="https://developer.android.com/reference/android/webkit/WebView#evaluateJavascript%28java.lang.String,%20android.webkit.ValueCallback%3Cjava.lang.String%3E%29" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;evaluateJavascript&lt;/a&gt;
+ 调用 Web 逻辑；&lt;/li&gt;
+&lt;li&gt;iOS 可以通过 &lt;a class="link" href="https://developer.apple.com/documentation/webkit/wkwebview/1415017-evaluatejavascript" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;evaluateJavaScript:javaScriptString&lt;/a&gt;
+ 调用 Web 逻辑；&lt;/li&gt;
+&lt;li&gt;Web 可以调用 Android 通过 &lt;a class="link" href="https://developer.android.com/reference/android/webkit/WebView#addJavascriptInterface%28java.lang.Object,%20java.lang.String%29" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;addJavascriptInterface&lt;/a&gt;
+ 注入的全局属性/方法；&lt;/li&gt;
+&lt;li&gt;Web 可以调用 iOS 通过 &lt;a class="link" href="https://developer.apple.com/documentation/webkit/wkscriptmessagehandler" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;WKScriptMessageHandler&lt;/a&gt;
+ 注入的全局属性/方法。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;拦截 Web 对外部资源的访问，比如链接跳转、&lt;a class="link"
-href="https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-URLScheme
-&lt;/a&gt;
+&lt;li&gt;拦截 Web 对外部资源的访问，比如链接跳转、&lt;a class="link" href="https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;URLScheme&lt;/a&gt;
 ；
 &lt;ul&gt;
-&lt;li&gt;Android 可以通过 &lt;a class="link"
-href="https://developer.android.com/reference/android/webkit/WebViewClient#shouldOverrideUrlLoading%28android.webkit.WebView,%20android.webkit.WebResourceRequest%29"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-shouldOverrideUrlLoading
-&lt;/a&gt;
-拦截 Web 对 URL 访问，实现 Web 对 Android 逻辑的调用；&lt;/li&gt;
-&lt;li&gt;iOS 可以通过 &lt;a class="link"
-href="https://developer.apple.com/documentation/webkit/wknavigationdelegate"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-WKNavigationDelegate
-&lt;/a&gt;
-拦截 Web 对 URL 访问，实现 Web 对 iOS 逻辑的调用。&lt;/li&gt;
+&lt;li&gt;Android 可以通过 &lt;a class="link" href="https://developer.android.com/reference/android/webkit/WebViewClient#shouldOverrideUrlLoading%28android.webkit.WebView,%20android.webkit.WebResourceRequest%29" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;shouldOverrideUrlLoading&lt;/a&gt;
+ 拦截 Web 对 URL 访问，实现 Web 对 Android 逻辑的调用；&lt;/li&gt;
+&lt;li&gt;iOS 可以通过 &lt;a class="link" href="https://developer.apple.com/documentation/webkit/wknavigationdelegate" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;WKNavigationDelegate&lt;/a&gt;
+ 拦截 Web 对 URL 访问，实现 Web 对 iOS 逻辑的调用。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;拦截全局方法的默认行为，比如 window.prompt：
 &lt;ul&gt;
-&lt;li&gt;Android 可以通过 &lt;a class="link"
-href="https://developer.android.com/reference/android/webkit/WebChromeClient"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-WebChromeClient
-&lt;/a&gt;
-拦截 Web API 默认行为，实现 Web 对 Android 逻辑的调用；&lt;/li&gt;
-&lt;li&gt;iOS 可以通过 &lt;a class="link"
-href="https://developer.apple.com/documentation/webkit/wkuidelegate"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-WKUIDelegate
-&lt;/a&gt;
-拦截 Web API 默认行为，实现 Web 对 iOS 逻辑的调用。&lt;/li&gt;
+&lt;li&gt;Android 可以通过 &lt;a class="link" href="https://developer.android.com/reference/android/webkit/WebChromeClient" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;WebChromeClient&lt;/a&gt;
+ 拦截 Web API 默认行为，实现 Web 对 Android 逻辑的调用；&lt;/li&gt;
+&lt;li&gt;iOS 可以通过 &lt;a class="link" href="https://developer.apple.com/documentation/webkit/wkuidelegate" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;WKUIDelegate&lt;/a&gt;
+ 拦截 Web API 默认行为，实现 Web 对 iOS 逻辑的调用。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="android-使用-shouldoverrideurlloading-拦截对-url-的访问web-调用-native"&gt;Android 使用 shouldOverrideUrlLoading 拦截对 URL 的访问（Web 调用 Native）&lt;/h3&gt;
+&lt;h3 id="android-使用-shouldoverrideurlloading-拦截对-url-的访问web-调用-native"&gt;Android 使用 shouldOverrideUrlLoading 拦截对 URL 的访问（Web 调用 Native）
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -220,7 +163,8 @@ WKUIDelegate
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="android-使用-addjavascriptinterface-向-web-注入内容web-调用-native"&gt;Android 使用 addJavascriptInterface 向 Web 注入内容（Web 调用 Native）&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="android-使用-addjavascriptinterface-向-web-注入内容web-调用-native"&gt;Android 使用 addJavascriptInterface 向 Web 注入内容（Web 调用 Native）
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -245,7 +189,8 @@ WKUIDelegate
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;webview&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;addJavascriptinterface&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Bridge&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#34;_sBridge&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="android-使用-webchromeclient-拦截-web-apiweb-调用-native"&gt;Android 使用 WebChromeClient 拦截 Web API（Web 调用 Native）&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="android-使用-webchromeclient-拦截-web-apiweb-调用-native"&gt;Android 使用 WebChromeClient 拦截 Web API（Web 调用 Native）
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -266,7 +211,8 @@ WKUIDelegate
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="android-使用-evaluatejavascript-调用-webnative-调用-web"&gt;Android 使用 evaluateJavascript 调用 Web（Native 调用 Web）&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="android-使用-evaluatejavascript-调用-webnative-调用-web"&gt;Android 使用 evaluateJavascript 调用 Web（Native 调用 Web）
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -289,7 +235,8 @@ WKUIDelegate
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="ios-使用-wknavigationdelegate-拦截对-url-的访问web-调用-native"&gt;iOS 使用 WKNavigationDelegate 拦截对 URL 的访问（Web 调用 Native）&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="ios-使用-wknavigationdelegate-拦截对-url-的访问web-调用-native"&gt;iOS 使用 WKNavigationDelegate 拦截对 URL 的访问（Web 调用 Native）
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -366,7 +313,8 @@ WKUIDelegate
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="ios-使用-wkscriptmessagehandler-向-web-注入内容web-调用-native"&gt;iOS 使用 WKScriptMessageHandler 向 Web 注入内容（Web 调用 Native）&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="ios-使用-wkscriptmessagehandler-向-web-注入内容web-调用-native"&gt;iOS 使用 WKScriptMessageHandler 向 Web 注入内容（Web 调用 Native）
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -425,7 +373,8 @@ WKUIDelegate
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="ios-使用-wkuidelegate-拦截-web-apiweb-调用-native"&gt;iOS 使用 WKUIDelegate 拦截 Web API（Web 调用 Native）&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="ios-使用-wkuidelegate-拦截-web-apiweb-调用-native"&gt;iOS 使用 WKUIDelegate 拦截 Web API（Web 调用 Native）
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -500,7 +449,8 @@ WKUIDelegate
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="ios-使用-evaluatejavascript-调用-webnative-调用-web"&gt;iOS 使用 evaluateJavaScript 调用 Web（Native 调用 Web）&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="ios-使用-evaluatejavascript-调用-webnative-调用-web"&gt;iOS 使用 evaluateJavaScript 调用 Web（Native 调用 Web）
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -535,7 +485,8 @@ WKUIDelegate
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="具体实现"&gt;具体实现&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="具体实现"&gt;具体实现
+&lt;/h2&gt;
 &lt;p&gt;首先，需要定义一个全局对象，用来保存 JSBridge 相关的属性/方法：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -918,7 +869,8 @@ WKUIDelegate
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;其实这种&lt;strong&gt;事件订阅&lt;/strong&gt;的场景就是上一个&lt;strong&gt;调用 Native 方法&lt;/strong&gt;的简化版；区别是 nativeRegister 中的方法需要 Native 主动去调用。&lt;/p&gt;
-&lt;h2 id="具体应用"&gt;具体应用&lt;/h2&gt;
+&lt;h2 id="具体应用"&gt;具体应用
+&lt;/h2&gt;
 &lt;p&gt;当需要通过 Native 选择并上传文件时，可以调用 upload 来实现；因为 Web 需要回显上传进度，需要轮询调用：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1012,20 +964,13 @@ WKUIDelegate
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;});&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="参考"&gt;参考&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="参考"&gt;参考
+&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://moxo.io/blog/2017/04/19/ios-and-javascript-3-wkwebview"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-iOS 与 JavaScript 的交互（三）WKWebView
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://moxo.io/blog/2017/04/19/ios-and-javascript-3-wkwebview" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;iOS 与 JavaScript 的交互（三）WKWebView&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://viseator.github.io/2018/09/07/android_JSBridge"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Android JSBridge 原理与实现
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://viseator.github.io/2018/09/07/android_JSBridge" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Android JSBridge 原理与实现&lt;/a&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</description></item></channel></rss>

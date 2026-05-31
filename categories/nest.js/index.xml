@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Nest.js on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/nest.js/</link><description>Recent content in Nest.js on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 28 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/nest.js/index.xml" rel="self" type="application/rss+xml"/><item><title>Nest.js 学习笔记（二） · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/</link><pubDate>Mon, 28 Oct 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/nestjs.png" alt="Nest.js 学习笔记（二）" /&gt;&lt;h2 id="应用配置"&gt;应用配置&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Nest.js on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/nest.js/</link><description>Recent Content in Nest.js on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo 0.162.0</generator><language>zh</language><lastBuildDate>Mon, 28 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/nest.js/index.xml" rel="self" type="application/rss+xml"/><item><title>Nest.js 学习笔记（二）</title><link>https://ElementRef.github.io/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/</link><pubDate>Mon, 28 Oct 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/nestjs.png" alt="Featured image of post Nest.js 学习笔记（二）" /&gt;&lt;h2 id="应用配置"&gt;应用配置
+&lt;/h2&gt;
 &lt;p&gt;一般来说，不同的运行环境需要有不同的应用配置；比如测试环境需要连接测试库，生产环境需要连接生产库。你肯定想到了通过 dotenv 将环境变量映射到 process.env 上；当然，在 Nest 中继续使用 dotenv 不是不可以；但是 Nest 提供了一种更为优雅的方式 @nestjs/config，当然内部还是依赖于 dotenv：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -209,7 +210,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="命名空间"&gt;命名空间&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="命名空间"&gt;命名空间
+&lt;/h3&gt;
 &lt;p&gt;ConfigModule 还支持环境变量命名空间，需要使用 registerAs 自定义配置文件：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -311,7 +313,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="局部注册"&gt;局部注册&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="局部注册"&gt;局部注册
+&lt;/h3&gt;
 &lt;p&gt;如果你的应用很庞大，每个部分使用的配置不一样，可以采取局部注册的方式；ConfigModule 提供了局部注册的静态方法 forFeature：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -342,14 +345,11 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;需要注意的是，局部注册的变量可能在构造函数中访问不到；因为 forFeature 是在模块初始化的过程中运行的，所以请在 onModuleInit 中获取局部注册的环境变量。&lt;/p&gt;
-&lt;h3 id="变量验证"&gt;变量验证&lt;/h3&gt;
+&lt;h3 id="变量验证"&gt;变量验证
+&lt;/h3&gt;
 &lt;p&gt;在上一节，我们提到&lt;strong&gt;验证前置&lt;/strong&gt;；在请求真正进入 RouteHandler 之前，最好把参数、权限等验证逻辑提前，尽早抛出错误；而不是将验证逻辑和具体业务逻辑参杂在 RouteHandler 中；这里同样，在应用启动之前，应验证所有环境变量，而不是将问题留到运行时再解决。&lt;/p&gt;
-&lt;p&gt;ConfigModule 允许我们自定义验证函数，来对环境变量进行验证；这里，我们需要用到 &lt;a class="link"
-href="https://github.com/hapijs/joi"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Joi
-&lt;/a&gt;
+&lt;p&gt;ConfigModule 允许我们自定义验证函数，来对环境变量进行验证；这里，我们需要用到 &lt;a class="link" href="https://github.com/hapijs/joi" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Joi&lt;/a&gt;
 ；当然，你也可以试试上一节用到的 Zod：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -424,7 +424,8 @@ Joi
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;class&lt;/span&gt; &lt;span class="nx"&gt;AppModule&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="可扩展变量"&gt;可扩展变量&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="可扩展变量"&gt;可扩展变量
+&lt;/h3&gt;
 &lt;p&gt;@nestjs/config 支持在 .env 文件中使用变量扩展：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -461,7 +462,8 @@ Joi
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;class&lt;/span&gt; &lt;span class="nx"&gt;AppModule&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="maints-中使用"&gt;main.ts 中使用&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="maints-中使用"&gt;main.ts 中使用
+&lt;/h3&gt;
 &lt;p&gt;如果要在应用入口 main.ts 中使用 ConfigService，需要调用 app.get：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -491,13 +493,10 @@ Joi
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;bootstrap&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="数据库集成"&gt;数据库集成&lt;/h2&gt;
-&lt;p&gt;文档上介绍了 TypeORM 和 SequelizeORM，但是社区好像更青睐 Prisma；好在 Nest 也对 Prisma 做了&lt;a class="link"
-href="https://docs.nestjs.com/recipes/prisma"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-官方指南
-&lt;/a&gt;
+&lt;/div&gt;&lt;h2 id="数据库集成"&gt;数据库集成
+&lt;/h2&gt;
+&lt;p&gt;文档上介绍了 TypeORM 和 SequelizeORM，但是社区好像更青睐 Prisma；好在 Nest 也对 Prisma 做了&lt;a class="link" href="https://docs.nestjs.com/recipes/prisma" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;官方指南&lt;/a&gt;
 。&lt;/p&gt;
 &lt;p&gt;首先，需要安装并运行 PrismaCLI：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -990,7 +989,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="缓存"&gt;缓存&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="缓存"&gt;缓存
+&lt;/h2&gt;
 &lt;p&gt;为了提高性能，Nest 通过 @nestjs/cache-manager 提供了缓存管理；安装 cache-manager：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1002,12 +1002,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pnpm add @nestjs/cache-manager cache-manager@5
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;@nestjs/cache-manager 提供了一个内存缓存，只能保存&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API/Structured_clone_algorithm#javascript_types"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-可被结构化算法复制
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;@nestjs/cache-manager 提供了一个内存缓存，只能保存&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API/Structured_clone_algorithm#javascript_types" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;可被结构化算法复制&lt;/a&gt;
 的数据；当然，你也可以切换为别的服务，比如 Redis：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1307,7 +1303,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;class&lt;/span&gt; &lt;span class="nx"&gt;AppModule&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="序列化"&gt;序列化&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="序列化"&gt;序列化
+&lt;/h2&gt;
 &lt;p&gt;请求/响应 payload 在客户端服务端之间传递，在发送之前，需要被序列化为字符串（数据流除外）；在这个过程中，我们可以对数据进行整理/转换。例如，对信息进行加密、剔除敏感信息等。Nest 内置了序列化拦截器 ClassSerializerInterceptor 方便我们对数据进行序列化操作：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1477,7 +1474,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="版本控制"&gt;版本控制&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="版本控制"&gt;版本控制
+&lt;/h2&gt;
 &lt;p&gt;Nest 允许开发者单独为 Controller 或某个路由定义版本，毕竟破坏性的升级的同时还要做好老版本应用的兼容工作。Nest 支持以下四种方式进行版本控制：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;通过 URI，默认情况下，可以通过 URI 区分版本；&lt;/li&gt;
@@ -1485,7 +1483,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;li&gt;通过 MediaType，通过 Accept 字段区分；&lt;/li&gt;
 &lt;li&gt;自定义，需要实现一个 extractor 函数。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="uri"&gt;URI&lt;/h3&gt;
+&lt;h3 id="uri"&gt;URI
+&lt;/h3&gt;
 &lt;p&gt;可以通过在 URL 中添加版本路径来控制接口版本：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;/api/v1/finance/exportBatchProtocol&lt;/li&gt;
@@ -1523,7 +1522,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;如果开启了 VersioningType.URI，他会在所有路径前添加一个版本路径 v1|v2&amp;hellip;&lt;/p&gt;
-&lt;h3 id="请求头"&gt;请求头&lt;/h3&gt;
+&lt;h3 id="请求头"&gt;请求头
+&lt;/h3&gt;
 &lt;p&gt;VersioningType.HEADER 允许我们通过自定义请求头来实现版本控制：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1559,7 +1559,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;bootstrap&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="accept"&gt;Accept&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="accept"&gt;Accept
+&lt;/h3&gt;
 &lt;p&gt;通过 Accept 请求头字段传递版本（Accept: application/json;v=2）：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1595,7 +1596,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;bootstrap&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="自定义"&gt;自定义&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="自定义"&gt;自定义
+&lt;/h3&gt;
 &lt;p&gt;如果要自己实现版本控制逻辑，需要实现一个 extractor 来匹配版本：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1655,7 +1657,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;bootstrap&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="路由适配"&gt;路由适配&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="路由适配"&gt;路由适配
+&lt;/h3&gt;
 &lt;p&gt;如果开启了版本控制，而 Controller/Route 没有适配版本，任何进入到 Controller/Route 的请求都将接收到 404 状态码：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1779,7 +1782,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="任务调度"&gt;任务调度&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="任务调度"&gt;任务调度
+&lt;/h2&gt;
 &lt;p&gt;任务调度允许：在&lt;strong&gt;固定时间&lt;/strong&gt;或&lt;strong&gt;周期性地&lt;/strong&gt;执行某块逻辑，比如 GitHub Actions 就支持 cron 配置来执行定时任务。@nestjs/schedule 也提供了同样的功能。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1815,12 +1819,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;class&lt;/span&gt; &lt;span class="nx"&gt;AppModule&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;执行 nest g service task，新建一个 TaskService 管理调度任务；关于 cron，可以参考&lt;a class="link"
-href="https://cloud.google.com/scheduler/docs/configuring/cron-job-schedules?hl=zh-cn"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-这里
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;执行 nest g service task，新建一个 TaskService 管理调度任务；关于 cron，可以参考&lt;a class="link" href="https://cloud.google.com/scheduler/docs/configuring/cron-job-schedules?hl=zh-cn" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;这里&lt;/a&gt;
 ：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1890,7 +1890,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="动态调度"&gt;动态调度&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="动态调度"&gt;动态调度
+&lt;/h3&gt;
 &lt;p&gt;上边的事例都是“静态”的，都是提前写死在代码里的；如果我们想通过 API 动态触发/暂停这些任务呢？@nestjs/schedule 同样也提供了这种能力：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -2070,7 +2071,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="队列"&gt;队列&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="队列"&gt;队列
+&lt;/h2&gt;
 &lt;p&gt;队列是一种设计模式，帮助解决应用的扩展性和性能问题：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;对资源密集型任务进行缓冲，减少性能波动；&lt;/li&gt;
@@ -2261,7 +2263,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;BullModule 注册的任务存在于 Redis 中，每当队列被实例化（例如，应用重启），队列将首先尝试执行此前未完成的任务；每个队列有一个/多个 Producers、Consumers 和 Listeners；Jobs 默认按照&lt;strong&gt;先进先出&lt;/strong&gt;的顺序出列，也可以&lt;strong&gt;后进先出&lt;/strong&gt;或者根据任务优先级出列。&lt;/p&gt;
-&lt;h2 id="日志"&gt;日志&lt;/h2&gt;
+&lt;h2 id="日志"&gt;日志
+&lt;/h2&gt;
 &lt;p&gt;@nestjs/common 中内置了一个 Logger 用来在控制台输出一些提示信息，我们可以对 Logger 做一些扩展来实现一些额外的功能：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;完全禁用日志记录；&lt;/li&gt;
@@ -2516,7 +2519,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="cookieexpress"&gt;cookie（Express）&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="cookieexpress"&gt;cookie（Express）
+&lt;/h2&gt;
 &lt;p&gt;要在 Nest 中使用 cookie，需要安装 cookie-parser：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -2624,14 +2628,11 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="eventemitter"&gt;EventEmitter&lt;/h2&gt;
-&lt;p&gt;@nestjs/event-emitter 通过 &lt;a class="link"
-href="https://github.com/EventEmitter2/EventEmitter2"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-eventemitter2
-&lt;/a&gt;
-向 Nest 提供观察者模式的实现：&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id="eventemitter"&gt;EventEmitter
+&lt;/h2&gt;
+&lt;p&gt;@nestjs/event-emitter 通过 &lt;a class="link" href="https://github.com/EventEmitter2/EventEmitter2" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;eventemitter2&lt;/a&gt;
+ 向 Nest 提供观察者模式的实现：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -2805,7 +2806,8 @@ eventemitter2
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;eventEmitter&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;emit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;order.created&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;blah blah...&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;});&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="响应压缩express"&gt;响应压缩（Express）&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="响应压缩express"&gt;响应压缩（Express）
+&lt;/h2&gt;
 &lt;p&gt;Nest 支持通过中间件来压缩响应主体；当然，在生产环境下，这部分工作通常由反向代理来完成；先来安装 compression：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -2842,14 +2844,11 @@ eventemitter2
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;bootstrap&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="文件上传express"&gt;文件上传（Express）&lt;/h2&gt;
-&lt;p&gt;在 Express 模式下，Nest 内置了基于 &lt;a class="link"
-href="https://github.com/expressjs/multer"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-multer
-&lt;/a&gt;
-的模块来处理文件上传；multer &lt;strong&gt;仅支持&lt;/strong&gt;处理 Content-Type:multipart/form-data 的数据：&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id="文件上传express"&gt;文件上传（Express）
+&lt;/h2&gt;
+&lt;p&gt;在 Express 模式下，Nest 内置了基于 &lt;a class="link" href="https://github.com/expressjs/multer" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;multer&lt;/a&gt;
+ 的模块来处理文件上传；multer &lt;strong&gt;仅支持&lt;/strong&gt;处理 Content-Type:multipart/form-data 的数据：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3332,7 +3331,8 @@ multer
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="多文件上传"&gt;多文件上传&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="多文件上传"&gt;多文件上传
+&lt;/h3&gt;
 &lt;p&gt;如果多个文件对应一个字段，只需要将 UploadedFile 改为 UploadedFiles 即可：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -3487,7 +3487,8 @@ multer
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="流式传输"&gt;流式传输&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="流式传输"&gt;流式传输
+&lt;/h3&gt;
 &lt;p&gt;当遇到需要将文件传输至客户端的场景时，可以将数据 pipe 到 Response 中去：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -3629,7 +3630,8 @@ multer
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="http-模块"&gt;HTTP 模块&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="http-模块"&gt;HTTP 模块
+&lt;/h2&gt;
 &lt;p&gt;Nest 基于 axios 构建了 HttpModule，HttpModule 导出了 HttpService，HttpService 会自动将响应转换为 RxJS 对象；要使用 HttpModule，需要安装@nestjs/axios：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -3763,7 +3765,8 @@ multer
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;class&lt;/span&gt; &lt;span class="nx"&gt;AppModule&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="sessionexpress"&gt;Session（Express）&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="sessionexpress"&gt;Session（Express）
+&lt;/h2&gt;
 &lt;p&gt;要在 Nest 中启用 Session，需要安装两个依赖：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -3907,14 +3910,11 @@ multer
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="mvcexpress"&gt;MVC（Express）&lt;/h2&gt;
-&lt;p&gt;不用管 MVC 是什么，简单地讲，就是 Nest 调用模版引擎，渲染 HTML。Nest 推荐使用 &lt;a class="link"
-href="https://github.com/pillarjs/hbs"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-hbs
-&lt;/a&gt;
-模版引擎：&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id="mvcexpress"&gt;MVC（Express）
+&lt;/h2&gt;
+&lt;p&gt;不用管 MVC 是什么，简单地讲，就是 Nest 调用模版引擎，渲染 HTML。Nest 推荐使用 &lt;a class="link" href="https://github.com/pillarjs/hbs" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;hbs&lt;/a&gt;
+ 模版引擎：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -4045,7 +4045,8 @@ hbs
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="eventsource"&gt;EventSource&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="eventsource"&gt;EventSource
+&lt;/h2&gt;
 &lt;p&gt;Nest 也简化了 EventSource 的使用，如果直接使用 Node 处理 EventSource，需要配置 Content-Type:text/event-stream；在 Nest 中，只需要使用 @Sse 即可：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -4081,9 +4082,11 @@ hbs
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>Nest.js 学习笔记（一） · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</link><pubDate>Fri, 18 Oct 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/nestjs.png" alt="Nest.js 学习笔记（一）" /&gt;&lt;h2 id="是什么"&gt;是什么&lt;/h2&gt;
+&lt;/div&gt;</description></item><item><title>Nest.js 学习笔记（一）</title><link>https://ElementRef.github.io/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</link><pubDate>Fri, 18 Oct 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/nest.js-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/nestjs.png" alt="Featured image of post Nest.js 学习笔记（一）" /&gt;&lt;h2 id="是什么"&gt;是什么
+&lt;/h2&gt;
 &lt;p&gt;Nest.js 是一个抽象于 Express/Fasify、参考了 Angular 设计哲学的开箱即用的后端框架。&lt;/p&gt;
-&lt;h2 id="开始使用"&gt;开始使用&lt;/h2&gt;
+&lt;h2 id="开始使用"&gt;开始使用
+&lt;/h2&gt;
 &lt;p&gt;需要全局安装 @nestjs/cli：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -4101,12 +4104,8 @@ hbs
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pnpm run start -- -b swc
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;如果不想使用 @nestjs/cli，可以尝试官方&lt;a class="link"
-href="https://dev.to/micalevisk/5-steps-to-create-a-bare-minimum-nestjs-app-from-scratch-5c3b"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-推荐指南
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;如果不想使用 @nestjs/cli，可以尝试官方&lt;a class="link" href="https://dev.to/micalevisk/5-steps-to-create-a-bare-minimum-nestjs-app-from-scratch-5c3b" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;推荐指南&lt;/a&gt;
 。&lt;/p&gt;
 &lt;p&gt;项目新建完成之后，src 目录下的结构如下：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -4162,7 +4161,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;bootstrap&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="controller"&gt;Controller&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="controller"&gt;Controller
+&lt;/h2&gt;
 &lt;p&gt;控制器用来处理来自客户端的请求，一个控制器可能对应着一条或多条路由，不同的路由对应着不同的业务逻辑。&lt;/p&gt;
 &lt;p&gt;我们先执行一条命令，这条命令会初始化 user 模块以及对应的控制器、Service、数据模型：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -4523,7 +4523,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;li&gt;interface 在编译过程中会被移除；&lt;/li&gt;
 &lt;li&gt;Nest 需要在运行时使用 DTO。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="service"&gt;Service&lt;/h2&gt;
+&lt;h2 id="service"&gt;Service
+&lt;/h2&gt;
 &lt;p&gt;同 Angular 一样，Service 同样负责处理具体的业务细节；通过依赖注入 Service，Controller 将具体逻辑移交给 Service 实例中的方法：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -4686,7 +4687,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;class&lt;/span&gt; &lt;span class="nx"&gt;UserModule&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="module"&gt;Module&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="module"&gt;Module
+&lt;/h2&gt;
 &lt;p&gt;同 Angular 一样，每个 Nest 应用都有一个 RootModule 和若干的子 Module，RootModule 会被传入 NestFactory.create 中，完成整个应用的构建：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -4924,12 +4926,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;class&lt;/span&gt; &lt;span class="nx"&gt;AppModule&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;如果你用过 Angular 的话，你可能会想到 &lt;a class="link"
-href="https://github.com/angular/angular/blob/main/packages/router/src/router_module.ts"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-RouterModule
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;如果你用过 Angular 的话，你可能会想到 &lt;a class="link" href="https://github.com/angular/angular/blob/main/packages/router/src/router_module.ts" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;RouterModule&lt;/a&gt;
 ：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -5066,7 +5064,8 @@ RouterModule
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="中间件"&gt;中间件&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="中间件"&gt;中间件
+&lt;/h2&gt;
 &lt;p&gt;Nest 中间件和 Express 中间件相同，是一个运行在控制器之前的函数，接受 request 和 response 并通过 next 调用下一个中间件：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;修改 request 和 response 对象；&lt;/li&gt;
@@ -5231,7 +5230,8 @@ RouterModule
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;bootstrap&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="异常过滤"&gt;异常过滤&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="异常过滤"&gt;异常过滤
+&lt;/h2&gt;
 &lt;p&gt;Nest 内部提供了 HttpException 用来抛出 HTTP 相关的错误：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -5290,12 +5290,8 @@ RouterModule
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;除了 HttpException，Nest 还内置了一些其他的继承于 HttpException 的&lt;a class="link"
-href="https://docs.nestjs.com/exception-filters#built-in-http-exceptions"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-错误构造函数
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;除了 HttpException，Nest 还内置了一些其他的继承于 HttpException 的&lt;a class="link" href="https://docs.nestjs.com/exception-filters#built-in-http-exceptions" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;错误构造函数&lt;/a&gt;
 。&lt;/p&gt;
 &lt;p&gt;当内置的错误处理不能满足业务需要（例如：错误收集、日志收集）时，可以构造自定义错误处理程序：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -5580,7 +5576,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;bootstrap&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="管道"&gt;管道&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="管道"&gt;管道
+&lt;/h2&gt;
 &lt;p&gt;管道是一个被 @Injectable 装饰的、需要 implements PipeTransform 的 class；他将会对传入 RouteHandler 中的数据进行处理；和 NgPipe 不同的是，NgPipe 使用 @Pipe 装饰器；他的使用场景是：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;数据转换；&lt;/li&gt;
@@ -5798,7 +5795,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;最直接的，可以在 RouteHandler 中验证，但是这破坏了职责单一性原则；我们更希望数据在进入 RouteHandler 之前就完成验证。&lt;/p&gt;
-&lt;h3 id="zod"&gt;Zod&lt;/h3&gt;
+&lt;h3 id="zod"&gt;Zod
+&lt;/h3&gt;
 &lt;p&gt;这里，我们需要使用 Zod 这个库：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -5946,7 +5944,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="全局管道"&gt;全局管道&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="全局管道"&gt;全局管道
+&lt;/h3&gt;
 &lt;p&gt;有两种方式注册全局管道，一种是调用 useGlobalPipes 注册：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -6029,7 +6028,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;class&lt;/span&gt; &lt;span class="nx"&gt;AppModule&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="守卫"&gt;守卫&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="守卫"&gt;守卫
+&lt;/h2&gt;
 &lt;p&gt;同 Angular 中的路由守卫一样，Nest 允许我们通过 implements CanActivate 生成一个可被注入的 class，作为路由守卫；守卫会在中间件之后、管道和拦截器之前执行；他的唯一作用就是对传进来的请求进行判断（验证权限/角色&amp;hellip;），是否应该交给 RouteHandler 处理；在 Express 中，这部分功能通常由中间件负责。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -6123,7 +6123,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;class&lt;/span&gt; &lt;span class="nx"&gt;AppModule&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="自定义装饰器"&gt;自定义装饰器&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="自定义装饰器"&gt;自定义装饰器
+&lt;/h3&gt;
 &lt;p&gt;如果当前路由控制器下，包含了适用于不同权限的不同接口：一些接口只有管理员才能请求、一些接口只有客服才能请求、一些管理员和客服都能请求但普通用户不可以。这种场景下怎么能最大化完成接口复用呢？&lt;/p&gt;
 &lt;p&gt;Nest 给出的方案是，通过装饰器元数据解决；使用 createDecorator 创建一个装饰器：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -6275,7 +6276,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="拦截器"&gt;拦截器&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="拦截器"&gt;拦截器
+&lt;/h2&gt;
 &lt;p&gt;就像前端常用的请求拦截器一样，Nest 为 Interceptors 提供了以下能力：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;在 RouteHandler 调用前后添加额外的处理逻辑；&lt;/li&gt;
@@ -6421,7 +6423,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;class&lt;/span&gt; &lt;span class="nx"&gt;AppModule&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="动态模块"&gt;动态模块&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="动态模块"&gt;动态模块
+&lt;/h2&gt;
 &lt;p&gt;一般情况下，一个模块导入另一个模块，就自动注入了被导入模块的 exports：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -6648,13 +6651,10 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;li&gt;不知道具体的使用场景，我在 Ng 里都没有碰到过；&lt;/li&gt;
 &lt;li&gt;太复杂了，对于我这个初学者。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="注入作用域"&gt;注入作用域&lt;/h2&gt;
-&lt;p&gt;不同于 NgProvider 的&lt;a class="link"
-href="https://elementref.github.io/p/angular-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/#%E6%9C%8D%E5%8A%A1"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-四种
-&lt;/a&gt;
+&lt;h2 id="注入作用域"&gt;注入作用域
+&lt;/h2&gt;
+&lt;p&gt;不同于 NgProvider 的&lt;a class="link" href="https://elementref.github.io/p/angular-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/#%E6%9C%8D%E5%8A%A1" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;四种&lt;/a&gt;
 注入作用域，NestProvider 有三种注入作用域：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;DEFAULT，Provider 实例以单例存在，共享于整个应用，和应用共存亡；&lt;/li&gt;
@@ -6808,7 +6808,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="循环依赖"&gt;循环依赖&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="循环依赖"&gt;循环依赖
+&lt;/h2&gt;
 &lt;p&gt;简单的讲就是：classA 依赖 classB，同时 classB 依赖 classA。Nest 使用 forwardRef 解决循环依赖。&lt;/p&gt;
 &lt;p&gt;forwardRef 的作用是引用尚未存在的变量：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -6869,7 +6870,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;class&lt;/span&gt; &lt;span class="nx"&gt;UserModule&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="moduleref"&gt;ModuleRef&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="moduleref"&gt;ModuleRef
+&lt;/h2&gt;
 &lt;p&gt;Nest 内部维护了一个列表，保存着被 @Injectable 修饰的 Provider，及其对应的作为&lt;strong&gt;查找依据&lt;/strong&gt;的 InjectionToken。ModuleRef 就是用来访问这个列表的，ModuleRef 还提供了一个方法来&lt;strong&gt;动态实例化&lt;/strong&gt; Provider。&lt;/p&gt;
 &lt;p&gt;一个 class 可以通过注入 ModuleRef 来访问 ModuleRef 实例：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -7038,7 +7040,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="模块懒加载"&gt;模块懒加载&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="模块懒加载"&gt;模块懒加载
+&lt;/h2&gt;
 &lt;p&gt;第一次知道，后端也可以有懒加载；印象中 Node 在不兼容 ESM 之前，CommonJS 的依赖都是同步加载的；在 Angular 的路由系统中，如果想要懒加载一个模块，需要使用 loadChildren 方法：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -7114,7 +7117,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;li&gt;懒加载模块不能被 @Global 修饰符装饰。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;懒加载更多是用在&lt;strong&gt;根据不同的输入，启用不同的服务模块&lt;/strong&gt;的场景，例如：Serverless|WebHook|CronSchdule&amp;hellip;&lt;/p&gt;
-&lt;h2 id="生命周期"&gt;生命周期&lt;/h2&gt;
+&lt;h2 id="生命周期"&gt;生命周期
+&lt;/h2&gt;
 &lt;p&gt;同 Angular 组件一样，Nest 中的每个元素（模块、控制器、Provider）都有（Scope.REQUEST 的元素除外）生命周期钩子：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;开始，执行顺序取决于模块的导入顺序：
@@ -7325,7 +7329,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;和&lt;strong&gt;开始阶段&lt;/strong&gt;一致，也是具有&lt;strong&gt;冒泡&lt;/strong&gt;特征，从里到外开始调用。&lt;/p&gt;
 &lt;p&gt;文档上提到，&lt;strong&gt;结束阶段&lt;/strong&gt;的钩子可能在 Widnows 平台上不能正常工作；并且 enableShutdownHooks 内部是使用事件监听的方式实现的，可能会占用更多内存，所以没有默认开启。&lt;/p&gt;
-&lt;h2 id="总结"&gt;总结&lt;/h2&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Module，用来划分资源/业务模块，每个 Module 包含了 Controller、Service、Entity、DTO 等等；&lt;/li&gt;
 &lt;li&gt;Guard，请求到达对应路由内部之前，检验是否满足对应的条件，保证 Handler  内部逻辑的单一性；&lt;/li&gt;

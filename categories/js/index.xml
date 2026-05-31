@@ -1,17 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>JS on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/js/</link><description>Recent content in JS on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 05 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/js/index.xml" rel="self" type="application/rss+xml"/><item><title>前端性能优化 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link><pubDate>Tue, 05 Nov 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/javascript.png" alt="前端性能优化" /&gt;&lt;p&gt;为什么性能很重要：&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>JS on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/js/</link><description>Recent Content in JS on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo 0.162.0</generator><language>zh</language><lastBuildDate>Tue, 05 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/js/index.xml" rel="self" type="application/rss+xml"/><item><title>前端性能优化</title><link>https://ElementRef.github.io/p/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link><pubDate>Tue, 05 Nov 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/javascript.png" alt="Featured image of post 前端性能优化" /&gt;&lt;p&gt;为什么性能很重要：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;好的性能可以更好地吸引并留住用户；&lt;/li&gt;
 &lt;li&gt;留住用户等于高的业务转化率；&lt;/li&gt;
 &lt;li&gt;性能关乎用户体验。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="核心指标"&gt;核心指标&lt;/h2&gt;
-&lt;p&gt;&lt;a class="link"
-href="https://web.dev/articles/vitals?hl=zh-cn"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Web Vitals
-&lt;/a&gt;
-针对网站性能，提出了三个关键指标，LCP、INP、CLS：&lt;/p&gt;
+&lt;h2 id="核心指标"&gt;核心指标
+&lt;/h2&gt;
+&lt;p&gt;&lt;a class="link" href="https://web.dev/articles/vitals?hl=zh-cn" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Web Vitals&lt;/a&gt;
+ 针对网站性能，提出了三个关键指标，LCP、INP、CLS：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;LCP(Largest Contentful Paint)，最大内容绘制，衡量&lt;strong&gt;加载&lt;/strong&gt;性能；应在开始加载后的 2.5 秒内完成：
 &lt;ul&gt;
@@ -32,20 +29,13 @@ Web Vitals
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;开发者可以通过 &lt;a class="link"
-href="https://developer.chrome.com/docs/lighthouse/overview?hl=zh-cn"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Lighthouse
-&lt;/a&gt;
-/&lt;a class="link"
-href="https://www.webpagetest.org"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-WebPageTest
-&lt;/a&gt;
-对这些指标进行评估。&lt;/p&gt;
-&lt;h3 id="lcp"&gt;LCP&lt;/h3&gt;
+&lt;p&gt;开发者可以通过 &lt;a class="link" href="https://developer.chrome.com/docs/lighthouse/overview?hl=zh-cn" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Lighthouse&lt;/a&gt;
+/&lt;a class="link" href="https://www.webpagetest.org" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;WebPageTest&lt;/a&gt;
+ 对这些指标进行评估。&lt;/p&gt;
+&lt;h3 id="lcp"&gt;LCP
+&lt;/h3&gt;
 &lt;p&gt;LCP 主要受到这四个部分的影响：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;加载第一个字节所需时间（TTFB），从发起网页加载到浏览器收到 HTML 文档响应的&lt;strong&gt;第一个字节&lt;/strong&gt;的时间：
@@ -71,7 +61,8 @@ WebPageTest
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="inp"&gt;INP&lt;/h3&gt;
+&lt;h3 id="inp"&gt;INP
+&lt;/h3&gt;
 &lt;p&gt;INP 不像 LCP，它存在于网页的整个生命周期；所以，需要 RUM 的参与来收集整个生命周期内的交互延迟数据：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;不要长时间占用主线程，确保主线程能有对交互敏感的事件的响应能力；&lt;/li&gt;
@@ -80,7 +71,8 @@ WebPageTest
 &lt;li&gt;使用防抖/节流优化频繁触发的事件回调；&lt;/li&gt;
 &lt;li&gt;将复杂的计算任务交给 WebWorker。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="cls"&gt;CLS&lt;/h3&gt;
+&lt;h3 id="cls"&gt;CLS
+&lt;/h3&gt;
 &lt;p&gt;造成 CLS 不佳的原因只有两个：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;内容不确定：
@@ -98,7 +90,8 @@ WebPageTest
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;良好的 bfcache 设计也能使页面在导航期间获得良好的 CLS 数据。&lt;/p&gt;
-&lt;h2 id="如何操作"&gt;如何操作&lt;/h2&gt;
+&lt;h2 id="如何操作"&gt;如何操作
+&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;升级 HTTP/2|3，利用二进制分帧、头部压缩等优势；&lt;/li&gt;
 &lt;li&gt;预渲染和服务器渲染的结合使用，提升首屏体验；&lt;/li&gt;
@@ -130,7 +123,8 @@ WebPageTest
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="bfcache"&gt;bfcache&lt;/h2&gt;
+&lt;h2 id="bfcache"&gt;bfcache
+&lt;/h2&gt;
 &lt;p&gt;当用户使用浏览器的前进后退按钮时，bfcache 可以延缓页面销毁，带来更及时的导航体验：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;bfcache 对 SPA 没有意义；因为 JS 监听了浏览器导航功能，导航前后都在同一个页面；&lt;/li&gt;
@@ -188,7 +182,8 @@ WebPageTest
 &lt;li&gt;不要创建 window.opener 引用，会导致 bfcache 失效；&lt;/li&gt;
 &lt;li&gt;beforeunload 事件不会影响 bfcache，但不要滥用。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="webpack"&gt;Webpack&lt;/h2&gt;
+&lt;h2 id="webpack"&gt;Webpack
+&lt;/h2&gt;
 &lt;p&gt;Webpack 对前端性能的影响，更多体现在构建产物上：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;打包时，将 mode 置为 production，Webpack 内部会对打包产物做优化；&lt;/li&gt;
@@ -707,30 +702,20 @@ WebPageTest
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="参考"&gt;参考&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="参考"&gt;参考
+&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://github.com/MrErHu/blog/issues/46"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Babel Polyfill 常见问题总结
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/MrErHu/blog/issues/46" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Babel Polyfill 常见问题总结&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://web.dev/articles/vitals?hl=zh-cn"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Web Vitals
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://web.dev/articles/vitals?hl=zh-cn" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Web Vitals&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://web.dev/articles/bfcache?hl=zh-cn"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-往返缓存
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://web.dev/articles/bfcache?hl=zh-cn" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;往返缓存&lt;/a&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>面向面试编程 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E9%9D%A2%E5%90%91%E9%9D%A2%E8%AF%95%E7%BC%96%E7%A8%8B/</link><pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E9%9D%A2%E5%90%91%E9%9D%A2%E8%AF%95%E7%BC%96%E7%A8%8B/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/javascript.png" alt="面向面试编程" /&gt;&lt;h2 id="for-循环打印-0-9"&gt;for 循环打印 0-9&lt;/h2&gt;
+&lt;/ul&gt;</description></item><item><title>面向面试编程</title><link>https://ElementRef.github.io/p/%E9%9D%A2%E5%90%91%E9%9D%A2%E8%AF%95%E7%BC%96%E7%A8%8B/</link><pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E9%9D%A2%E5%90%91%E9%9D%A2%E8%AF%95%E7%BC%96%E7%A8%8B/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/javascript.png" alt="Featured image of post 面向面试编程" /&gt;&lt;h2 id="for-循环打印-0-9"&gt;for 循环打印 0-9
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -809,7 +794,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="proxy-实现数据绑定"&gt;Proxy 实现数据绑定&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="proxy-实现数据绑定"&gt;Proxy 实现数据绑定
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -894,7 +880,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现-applycallbind"&gt;实现 apply、call、bind&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现-applycallbind"&gt;实现 apply、call、bind
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -993,7 +980,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;example&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;bind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;eo&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;])();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现-async"&gt;实现 async&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现-async"&gt;实现 async
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1070,7 +1058,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现-compose"&gt;实现 compose&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现-compose"&gt;实现 compose
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1115,7 +1104,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;f&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;hello, &amp;#39;&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt; &lt;span class="c1"&gt;// hello, cba
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现-instanceof"&gt;实现 instanceof&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现-instanceof"&gt;实现 instanceof
+&lt;/h2&gt;
 &lt;p&gt;决定类型的是 prototype，而不是构造函数：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1174,7 +1164,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;toString&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;temp&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt; &lt;span class="c1"&gt;// [object Hello]
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现-flatten"&gt;实现 flatten&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现-flatten"&gt;实现 flatten
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1225,7 +1216,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;flattenThree&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现-jsonp"&gt;实现 jsonp&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现-jsonp"&gt;实现 jsonp
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1278,7 +1270,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现-map使用-reduce"&gt;实现 map（使用 reduce）&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现-map使用-reduce"&gt;实现 map（使用 reduce）
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1315,7 +1308,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;b&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// [&amp;#39;a!&amp;#39;, &amp;#39;b!&amp;#39;, &amp;#39;c!&amp;#39;]
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现-reduce"&gt;实现 reduce&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现-reduce"&gt;实现 reduce
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1378,7 +1372,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;b&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// [0, 1, 2, 3, 4, 5]
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现-new"&gt;实现 new&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现-new"&gt;实现 new
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -1399,7 +1394,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现-setintervalsettimeout使用-requestanimationframe"&gt;实现 setInterval/setTimeout（使用 requestAnimationFrame）&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现-setintervalsettimeout使用-requestanimationframe"&gt;实现 setInterval/setTimeout（使用 requestAnimationFrame）
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1440,7 +1436,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现-eventemitter"&gt;实现 EventEmitter&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现-eventemitter"&gt;实现 EventEmitter
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1515,7 +1512,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现-lazyman"&gt;实现 LazyMan&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现-lazyman"&gt;实现 LazyMan
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1616,7 +1614,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;LazyMan&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Tony&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;eat&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;lunch&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;eat&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;dinner&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;sleepFirst&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;eat&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;juice&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现-objectassign"&gt;实现 Object.assign&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现-objectassign"&gt;实现 Object.assign
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1691,7 +1690,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;Object&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;customAssign&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;a&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现-promise"&gt;实现 Promise&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现-promise"&gt;实现 Promise
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1914,7 +1914,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;catch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现-promiseallpromiseracepromiseretry-和-promiseallsettled"&gt;实现 Promise.all、Promise.race、Promise.retry 和 Promise.allSettled&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现-promiseallpromiseracepromiseretry-和-promiseallsettled"&gt;实现 Promise.all、Promise.race、Promise.retry 和 Promise.allSettled
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -2059,7 +2060,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现继承"&gt;实现继承&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现继承"&gt;实现继承
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -2180,7 +2182,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现柯里化"&gt;实现柯里化&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现柯里化"&gt;实现柯里化
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -2217,7 +2220,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;test&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt; &lt;span class="c1"&gt;// 15
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现深拷贝"&gt;实现深拷贝&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现深拷贝"&gt;实现深拷贝
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -2366,7 +2370,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;deepClone&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;temp&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现一个无限累加的函数chrome-中已失效"&gt;&lt;del&gt;实现一个无限累加的函数&lt;/del&gt;（Chrome 中已失效）&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现一个无限累加的函数chrome-中已失效"&gt;&lt;del&gt;实现一个无限累加的函数&lt;/del&gt;（Chrome 中已失效）
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -2405,7 +2410,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt; &lt;span class="c1"&gt;// 15
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现两个非常大的数字超出了-number-范围的加法"&gt;实现两个非常大的数字（超出了 Number 范围）的加法&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现两个非常大的数字超出了-number-范围的加法"&gt;实现两个非常大的数字（超出了 Number 范围）的加法
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -2456,7 +2462,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;bigNumberSum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;12345435356&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;94564354325&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// 106909789681
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="复杂类型转换"&gt;复杂类型转换&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="复杂类型转换"&gt;复杂类型转换
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -2515,7 +2522,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="数组去重"&gt;数组去重&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="数组去重"&gt;数组去重
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -2562,7 +2570,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;deduThree&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="写一个函数输入-n求斐波那契数列的第-n-项"&gt;写一个函数，输入 n，求斐波那契数列的第 n 项&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="写一个函数输入-n求斐波那契数列的第-n-项"&gt;写一个函数，输入 n，求斐波那契数列的第 n 项
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -2611,7 +2620,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;fibonacciTwo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;n&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="判断一个数是否是斐波那契数列中的一项如果是返回是第几项"&gt;判断一个数是否是斐波那契数列中的一项，如果是返回是第几项&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="判断一个数是否是斐波那契数列中的一项如果是返回是第几项"&gt;判断一个数是否是斐波那契数列中的一项，如果是返回是第几项
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -2666,7 +2676,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="扁平化去重"&gt;扁平化去重&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="扁平化去重"&gt;扁平化去重
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -2685,7 +2696,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="利用函数柯理化动态创建函数"&gt;利用函数柯理化动态创建函数&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="利用函数柯理化动态创建函数"&gt;利用函数柯理化动态创建函数
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -2762,7 +2774,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="节流与防抖"&gt;节流与防抖&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="节流与防抖"&gt;节流与防抖
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -2853,7 +2866,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="合并数组"&gt;合并数组&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="合并数组"&gt;合并数组
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -2912,7 +2926,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="计算数组交集"&gt;计算数组交集&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="计算数组交集"&gt;计算数组交集
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -2967,7 +2982,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;jiaoJi&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;a1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;a2&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="大小写取相反"&gt;大小写取相反&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="大小写取相反"&gt;大小写取相反
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -2996,7 +3012,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;upLow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;tYUFtfhjfFugyuiygU&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="字符串匹配"&gt;字符串匹配&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="字符串匹配"&gt;字符串匹配
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3037,7 +3054,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;fitStr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;asdfg&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;dfg&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// 2
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="旋转数组"&gt;旋转数组&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="旋转数组"&gt;旋转数组
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3078,7 +3096,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;spinTwo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;k&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="打印出-1-1000-之间所有的对称数"&gt;打印出 1-1000 之间所有的对称数&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="打印出-1-1000-之间所有的对称数"&gt;打印出 1-1000 之间所有的对称数
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -3095,7 +3114,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="找区间"&gt;找区间&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="找区间"&gt;找区间
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3134,7 +3154,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;findRange&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt; &lt;span class="c1"&gt;// 1~3 5 7~8 10
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="给定一个整数数组和一个目标值找出数组中和为目标值的两个数"&gt;给定一个整数数组和一个目标值，找出数组中和为目标值的两个数&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="给定一个整数数组和一个目标值找出数组中和为目标值的两个数"&gt;给定一个整数数组和一个目标值，找出数组中和为目标值的两个数
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3163,7 +3184,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;findSum&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="不使用加减乘除计算整数的-7-倍"&gt;不使用加减乘除计算整数的 7 倍&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="不使用加减乘除计算整数的-7-倍"&gt;不使用加减乘除计算整数的 7 倍
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3190,7 +3212,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;seventTwo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="字符串排序"&gt;字符串排序&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="字符串排序"&gt;字符串排序
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3217,7 +3240,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;sortStr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;红蓝蓝黄红黄蓝红红黄红&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt; &lt;span class="c1"&gt;// 黄黄黄红红红红红蓝蓝蓝
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="将扁平的数据结构转化为树"&gt;将扁平的数据结构转化为树&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="将扁平的数据结构转化为树"&gt;将扁平的数据结构转化为树
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3268,7 +3292,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;arr2Tree&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;exampleArr&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="检验链表是否成环"&gt;检验链表是否成环&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="检验链表是否成环"&gt;检验链表是否成环
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3321,7 +3346,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="最长递增子序列"&gt;最长递增子序列&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="最长递增子序列"&gt;最长递增子序列
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3400,7 +3426,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;lengthOfLIS&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;]));&lt;/span&gt; &lt;span class="c1"&gt;// 1
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="比较版本号"&gt;比较版本号&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="比较版本号"&gt;比较版本号
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3473,7 +3500,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;compareVersion&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;1.2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1.10&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt; &lt;span class="c1"&gt;// -1
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="展示页面实时刷新率"&gt;展示页面实时刷新率&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="展示页面实时刷新率"&gt;展示页面实时刷新率
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3522,7 +3550,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现前缀树"&gt;实现前缀树&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现前缀树"&gt;实现前缀树
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3615,7 +3644,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="为数字添加千分位"&gt;为数字添加千分位&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="为数字添加千分位"&gt;为数字添加千分位
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3662,7 +3692,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;convert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;example4&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现前缀和数组"&gt;实现前缀和数组&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现前缀和数组"&gt;实现前缀和数组
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3717,7 +3748,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;closedSum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;temp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt; &lt;span class="c1"&gt;// 25
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现差分数组"&gt;实现差分数组&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现差分数组"&gt;实现差分数组
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3814,7 +3846,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;diffArr&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;result&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="对象转换为-xml"&gt;对象转换为 XML&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="对象转换为-xml"&gt;对象转换为 XML
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3891,7 +3924,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="xml-转换为对象"&gt;XML 转换为对象&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="xml-转换为对象"&gt;XML 转换为对象
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3970,7 +4004,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="求数组的所有非空子集"&gt;求数组的所有非空子集&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="求数组的所有非空子集"&gt;求数组的所有非空子集
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -4017,7 +4052,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;allSubSet&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;]));&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="对象树递归过滤"&gt;对象树递归过滤&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="对象树递归过滤"&gt;对象树递归过滤
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -4100,7 +4136,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="二维数组按元素连通性合并分组"&gt;二维数组按“元素连通性”合并分组&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="二维数组按元素连通性合并分组"&gt;二维数组按“元素连通性”合并分组
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -4401,7 +4438,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="路径数组--树trie--前缀树"&gt;路径数组 → 树（Trie / 前缀树）&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="路径数组--树trie--前缀树"&gt;路径数组 → 树（Trie / 前缀树）
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -4456,7 +4494,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现有并行限制的-promise-调度器"&gt;实现有并行限制的 Promise 调度器&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现有并行限制的-promise-调度器"&gt;实现有并行限制的 Promise 调度器
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -4539,7 +4578,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// output: 2 3 1 4
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="数组消除--配对删除"&gt;数组消除 / 配对删除&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="数组消除--配对删除"&gt;数组消除 / 配对删除
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -4590,7 +4630,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;pairDelete&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]));&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="实现-ratelimit-限流函数"&gt;实现 RateLimit 限流函数&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="实现-ratelimit-限流函数"&gt;实现 RateLimit 限流函数
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -4695,7 +4736,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;example2&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="获取类型中的只读属性"&gt;获取类型中的只读属性&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="获取类型中的只读属性"&gt;获取类型中的只读属性
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -4736,7 +4778,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;type&lt;/span&gt; &lt;span class="nx"&gt;Result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;GetReadonlyKeys&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;Todo&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="给定一个字符串找出不含有重复字符的最长子串的长度"&gt;给定一个字符串，找出不含有重复字符的最长子串的长度&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="给定一个字符串找出不含有重复字符的最长子串的长度"&gt;给定一个字符串，找出不含有重复字符的最长子串的长度
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -4789,23 +4832,17 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;findNoRepeatLength&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;bbbbb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt; &lt;span class="c1"&gt;// 1 ✔️
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="参考"&gt;参考&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="参考"&gt;参考
+&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://www.pzijun.cn/blog"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-每日进阶
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://www.pzijun.cn/blog" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;每日进阶&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://muyiy.cn/question"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-壹题
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://muyiy.cn/question" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;壹题&lt;/a&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>再读《你不知道的 JavaScript》 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E5%86%8D%E8%AF%BB%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-javascript/</link><pubDate>Wed, 05 Feb 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E5%86%8D%E8%AF%BB%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-javascript/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/javascript.png" alt="再读《你不知道的 JavaScript》" /&gt;&lt;h2 id="词法作用域"&gt;词法作用域&lt;/h2&gt;
+&lt;/ul&gt;</description></item><item><title>再读《你不知道的 JavaScript》</title><link>https://ElementRef.github.io/p/%E5%86%8D%E8%AF%BB%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-javascript/</link><pubDate>Wed, 05 Feb 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E5%86%8D%E8%AF%BB%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-javascript/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/javascript.png" alt="Featured image of post 再读《你不知道的 JavaScript》" /&gt;&lt;h2 id="词法作用域"&gt;词法作用域
+&lt;/h2&gt;
 &lt;p&gt;传统编译语言的源代码在执行前会经历三个步骤，统称为编译：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;词法分析，将源代码分解为词法单元；&lt;/li&gt;
@@ -4882,7 +4919,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;c&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// 2，c 被泄露到全局作用域
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="闭包"&gt;闭包&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="闭包"&gt;闭包
+&lt;/h2&gt;
 &lt;p&gt;当函数可以记住并访问所在的词法作用域时，就产生了闭包，即使函数是在当前词法作用域之外执行。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -4910,19 +4948,13 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;fn&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="c1"&gt;// bar 拥有对 foo 内部作用域的引用，而这个引用就叫作闭包
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="运算符优先级"&gt;运算符优先级&lt;/h2&gt;
-&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E5%86%8D%E8%AF%BB%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-javascript/operator-precedence.png"
-width="2034"
-height="4521"
-srcset="https://ElementRef.github.io/p/%E5%86%8D%E8%AF%BB%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-javascript/operator-precedence_hu_76a40099e4f961d1.png 480w, https://ElementRef.github.io/p/%E5%86%8D%E8%AF%BB%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-javascript/operator-precedence_hu_24eaaf952b4b2761.png 1024w"
-alt="运算符优先级"
-class="gallery-image"
-data-flex-grow="44"
-data-flex-basis="107px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;h2 id="运算符优先级"&gt;运算符优先级
+&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="运算符优先级" class="gallery-image" data-flex-basis="107px" data-flex-grow="44" height="4521" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E5%86%8D%E8%AF%BB%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-javascript/operator-precedence_hu_cb7f6815e7906958.png" srcset="https://ElementRef.github.io/p/%E5%86%8D%E8%AF%BB%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-javascript/operator-precedence_hu_fd87240647460013.png 800w, https://ElementRef.github.io/p/%E5%86%8D%E8%AF%BB%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-javascript/operator-precedence_hu_65c6d9b37009610f.png 1600w, https://ElementRef.github.io/p/%E5%86%8D%E8%AF%BB%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-javascript/operator-precedence_hu_cb7f6815e7906958.png 2034w" width="2034"&gt;
+
 &lt;/p&gt;
-&lt;h2 id="this"&gt;this&lt;/h2&gt;
+&lt;h2 id="this"&gt;this
+&lt;/h2&gt;
 &lt;p&gt;this 的行为很像动态作用域，是在运行时进行绑定的。当一个函数被调用时，会创建一条活动记录（执行上下文），这条记录会包含函数在哪里被调用（调用栈）、调用方式、传入参数等信息，this 就是这条记录的一个属性。&lt;/p&gt;
 &lt;p&gt;this 的绑定规则：默认绑定、隐式绑定、显示绑定、new 绑定。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -4998,7 +5030,8 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;在箭头函数中，放弃了 this 的绑定规则，用当前的词法作用域取代了 this 机制。&lt;/p&gt;
-&lt;h2 id="-与-"&gt;== 与 ===&lt;/h2&gt;
+&lt;h2 id="-与-"&gt;== 与 ===
+&lt;/h2&gt;
 &lt;p&gt;常见的误区是：“== 检查值是否相等，=== 检查值和类型是否相等”；正确的解释是：“== 允许在相等比较中进行强制类型转换，而 === 不允许”。实际上 == 的工作量要大一些。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -5012,7 +5045,8 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;42&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// false
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="子类构造器"&gt;子类构造器&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="子类构造器"&gt;子类构造器
+&lt;/h2&gt;
 &lt;p&gt;对于类，构造器不是必须的，如果省略，二者都会提供默认的构造器；默认子类构造器自动调用父类构造器并传递所有参数。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -5040,14 +5074,19 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>「转」谈谈递归 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E8%BD%AC%E8%B0%88%E8%B0%88%E9%80%92%E5%BD%92/</link><pubDate>Fri, 14 Jun 2019 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E8%BD%AC%E8%B0%88%E8%B0%88%E9%80%92%E5%BD%92/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/javascript.png" alt="「转」谈谈递归" /&gt;&lt;h2 id="什么是递归"&gt;什么是递归&lt;/h2&gt;
+&lt;/div&gt;</description></item><item><title>「转」谈谈递归</title><link>https://ElementRef.github.io/p/%E8%BD%AC%E8%B0%88%E8%B0%88%E9%80%92%E5%BD%92/</link><pubDate>Fri, 14 Jun 2019 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E8%BD%AC%E8%B0%88%E8%B0%88%E9%80%92%E5%BD%92/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/javascript.png" alt="Featured image of post 「转」谈谈递归" /&gt;&lt;h2 id="什么是递归"&gt;什么是递归
+&lt;/h2&gt;
 &lt;p&gt;小时候，我们都听过下面这则故事：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;从前有座山，山里有个庙，庙里有个老和尚在给小和尚讲故事，讲的什么呢？&lt;strong&gt;从前有座山，山里有个庙，庙里有个老和尚在给小和尚讲故事，讲的什么呢？从前有座山，山里有个庙，庙里有个老和尚在给小和尚讲故事，讲的什么呢？&amp;hellip;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;从前有座山，山里有个庙，庙里有个老和尚在给小和尚讲故事，讲的什么呢？&lt;strong&gt;从前有座山，山里有个庙，庙里有个老和尚在给小和尚讲故事，讲的什么呢？从前有座山，山里有个庙，庙里有个老和尚在给小和尚讲故事，讲的什么呢？&amp;hellip;&lt;/strong&gt;&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+
 &lt;p&gt;这个故事自己套着自己，没完没了，像是某种特征在不断地重复，这就是递归了。&lt;/p&gt;
 &lt;p&gt;在计算机科学里，递归指的是一种通过重复将问题分解为同类的子问题而解决问题的方法。套用程序的概念，就是函数执行过程中直接或间接地调用自身。&lt;/p&gt;
-&lt;h2 id="用递归来解决问题"&gt;用递归来解决问题&lt;/h2&gt;
+&lt;h2 id="用递归来解决问题"&gt;用递归来解决问题
+&lt;/h2&gt;
 &lt;p&gt;由递归的概念可知，如果某个问题有一些自相似的特征，可以分解为子问题，那么它就可以被递归定义。如果问题被递归定义了，也差不多解决了。&lt;/p&gt;
 &lt;p&gt;我们来看一个具体例子：&lt;/p&gt;
 &lt;p&gt;假设现在有 5 个人、5 个座位，那这几个人的位置分布情况有几种。我们先来列举一下：&lt;/p&gt;
@@ -5172,7 +5211,8 @@ loading="lazy"
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;由此，我们就通过定义递归函数 f 描述了这个问题，对于任意的自然数 n，我们只需执行 f(n) 就可以得到答案。&lt;/p&gt;
 &lt;p&gt;用递归的思路来解决问题，并不是写出具体的求解步骤，而是试着把问题描述出来，考虑有哪些共同模式，怎么切分，何处结束，以及何处执行递归。&lt;/p&gt;
-&lt;h2 id="递归函数的优化"&gt;递归函数的优化&lt;/h2&gt;
+&lt;h2 id="递归函数的优化"&gt;递归函数的优化
+&lt;/h2&gt;
 &lt;p&gt;当 n = 5 时，我们把上面这个函数完整的执行过程模拟出来：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -5204,12 +5244,8 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="mi"&gt;120&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;我们可以看到，随着 f(5) 这个函数的执行，需要记录的中间状态的数目一直在变，先增后减。在空间消耗上，表现就是栈先累积后收缩，整个计算过程空间复杂度是 O(n)，当 n 很大的时候会 &lt;a class="link"
-href="https://stackoverflow.com"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Stack Overflow
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;我们可以看到，随着 f(5) 这个函数的执行，需要记录的中间状态的数目一直在变，先增后减。在空间消耗上，表现就是栈先累积后收缩，整个计算过程空间复杂度是 O(n)，当 n 很大的时候会 &lt;a class="link" href="https://stackoverflow.com" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Stack Overflow&lt;/a&gt;
 。&lt;/p&gt;
 &lt;p&gt;我们思考一下另一种方案，刚才的执行是从 n 开始，一步步计算，直到临界条件 0 为止。现在试着倒过来，由 1 开始，一步步计算，直到 n 为止，当然，此时的临界条件也相应的变为&lt;strong&gt;超过 n&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;实现起来应该就是这样：&lt;/p&gt;
@@ -5268,16 +5304,14 @@ Stack Overflow
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;可以看出，这种方案随着计算的增加，消耗的空间一直不变，占用恒量的内存，和迭代程序一样，它的空间复杂度是 O(1)。&lt;/p&gt;
 &lt;p&gt;所以经过尾递归优化后，使得递归计算可以跟 while、for 等迭代式计算的效率基本相当。&lt;/p&gt;
-&lt;h2 id="参考"&gt;参考&lt;/h2&gt;
+&lt;h2 id="参考"&gt;参考
+&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://io.upyun.com/2016/04/05/recursion"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-谈谈递归
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://io.upyun.com/2016/04/05/recursion" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;谈谈递归&lt;/a&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>attribute 与 property · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/attribute-%E4%B8%8E-property/</link><pubDate>Sat, 25 May 2019 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/attribute-%E4%B8%8E-property/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/javascript.png" alt="attribute 与 property" /&gt;&lt;h2 id="区别"&gt;区别&lt;/h2&gt;
+&lt;/ul&gt;</description></item><item><title>attribute 与 property</title><link>https://ElementRef.github.io/p/attribute-%E4%B8%8E-property/</link><pubDate>Sat, 25 May 2019 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/attribute-%E4%B8%8E-property/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/javascript.png" alt="Featured image of post attribute 与 property" /&gt;&lt;h2 id="区别"&gt;区别
+&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;attribute 指的是 HTML 的属性，property 指的是 DOM 对象（JS 对象）的属性；&lt;/li&gt;
 &lt;li&gt;非自定义的 attribute 特性与 property 有映射关系，比如：id，class 等；&lt;/li&gt;
@@ -5326,27 +5360,22 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/attribute-%E4%B8%8E-property/attribute.png"
-width="1594"
-height="1070"
-srcset="https://ElementRef.github.io/p/attribute-%E4%B8%8E-property/attribute_hu_15b7805b4b2794ab.png 480w, https://ElementRef.github.io/p/attribute-%E4%B8%8E-property/attribute_hu_3c101d0239cbfcdf.png 1024w"
-alt="attribute"
-class="gallery-image"
-data-flex-grow="148"
-data-flex-basis="357px"
-loading="lazy"
-&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt="attribute" class="gallery-image" data-flex-basis="357px" data-flex-grow="148" height="1070" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/attribute-%E4%B8%8E-property/attribute_hu_91693148ce71ff5a.png" srcset="https://ElementRef.github.io/p/attribute-%E4%B8%8E-property/attribute_hu_b340d6ec83139d5d.png 800w, https://ElementRef.github.io/p/attribute-%E4%B8%8E-property/attribute_hu_91693148ce71ff5a.png 1594w" width="1594"&gt;
+
 &lt;/p&gt;
-&lt;h2 id="总结"&gt;总结&lt;/h2&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;
 &lt;p&gt;可以看到 attribute 只是 DOM 对象的 property 之一，保存着对应元素在 HTML 代码中的所有属性；其中 attribute 的值全部为字符串，而 property 的值可以为字符串、对象、数组、布尔值、null、undefined 等。&lt;/p&gt;
 &lt;p&gt;为了操作 DOM 的简便，除了自定义属性，大部分 attribute 在 property 里都有对应的映射；修改其一等价于修改另一个。其中 for 和 class 为 JS 的保留字，所以 attribute 的 for/class 属性映射到了 property 的 htmlFor/className。&lt;/p&gt;
-&lt;p&gt;因为 attribute 的属性值只能为字符串，所以当我们在 HTML 中加上‘checked=&amp;ldquo;false&amp;rdquo;’时，false 会被当作是长度为 5 的字符串，被隐式转换为 true，所以默认“man”被选中。因此 在设置“以非字符串为属性值”的属性时，应该在 JS 中设置 property。&lt;/p&gt;</description></item><item><title>「转」VirtualDOM 真的比操作原生 DOM 快吗？ · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E8%BD%ACvirtualdom-%E7%9C%9F%E7%9A%84%E6%AF%94%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%94%9F-dom-%E5%BF%AB%E5%90%97/</link><pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E8%BD%ACvirtualdom-%E7%9C%9F%E7%9A%84%E6%AF%94%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%94%9F-dom-%E5%BF%AB%E5%90%97/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/javascript.png" alt="「转」VirtualDOM 真的比操作原生 DOM 快吗？" /&gt;&lt;h2 id="原生-dom-操作-vs-通过框架封装操作"&gt;原生 DOM 操作 vs 通过框架封装操作&lt;/h2&gt;
+&lt;p&gt;因为 attribute 的属性值只能为字符串，所以当我们在 HTML 中加上‘checked=&amp;ldquo;false&amp;rdquo;’时，false 会被当作是长度为 5 的字符串，被隐式转换为 true，所以默认“man”被选中。因此 在设置“以非字符串为属性值”的属性时，应该在 JS 中设置 property。&lt;/p&gt;</description></item><item><title>「转」VirtualDOM 真的比操作原生 DOM 快吗？</title><link>https://ElementRef.github.io/p/%E8%BD%ACvirtualdom-%E7%9C%9F%E7%9A%84%E6%AF%94%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%94%9F-dom-%E5%BF%AB%E5%90%97/</link><pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E8%BD%ACvirtualdom-%E7%9C%9F%E7%9A%84%E6%AF%94%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%94%9F-dom-%E5%BF%AB%E5%90%97/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/javascript.png" alt="Featured image of post 「转」VirtualDOM 真的比操作原生 DOM 快吗？" /&gt;&lt;h2 id="原生-dom-操作-vs-通过框架封装操作"&gt;原生 DOM 操作 vs 通过框架封装操作
+&lt;/h2&gt;
 &lt;p&gt;这是一个性能 vs 可维护性的取舍。&lt;/p&gt;
 &lt;p&gt;框架的意义在于为你掩盖底层的 DOM 操作，让你用更声明式的方式来描述你的目的，从而让你的代码更容易维护。&lt;/p&gt;
 &lt;p&gt;没有任何框架可以比纯手动的优化 DOM 操作更快，因为框架的 DOM 操作层需要应对任何上层 API 可能产生的操作，它的实现必须是普适的。&lt;/p&gt;
 &lt;p&gt;针对任何一个 BenchMark，我都可以写出比任何框架更快的手动优化，但是那有什么意义呢？在构建一个实际应用的时候，你难道为每一个地方都去做手动优化吗？出于可维护性的考虑，这显然不可能。&lt;/p&gt;
 &lt;p&gt;框架给你的保证是，你在不需要手动优化的情况下，我依然可以给你提供过得去的性能。&lt;/p&gt;
-&lt;h2 id="对-react-的-virtualdom-的误解"&gt;对 React 的 VirtualDOM 的误解&lt;/h2&gt;
+&lt;h2 id="对-react-的-virtualdom-的误解"&gt;对 React 的 VirtualDOM 的误解
+&lt;/h2&gt;
 &lt;p&gt;React 从来没有说过“React 比原生操作 DOM 快”。&lt;/p&gt;
 &lt;p&gt;React 的基本思维模式是每次有变动就整个重新渲染整个应用。如果没有 VirtualDOM，简单来想就是直接重置 innerHTML。&lt;/p&gt;
 &lt;p&gt;很多人都没有意识到，在一个大型列表所有数据都变了的情况下，重置 innerHTML 其实是一个还算合理的操作。&lt;/p&gt;
@@ -5363,7 +5392,8 @@ loading="lazy"
 &lt;li&gt;不管你的数据变化多少，每次重绘的性能都可以接受；&lt;/li&gt;
 &lt;li&gt;你依然可以用类似 innerHTML 的思路去写你的应用。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id="mvvm-vs-virtualdom"&gt;MVVM vs VirtualDOM&lt;/h2&gt;
+&lt;h2 id="mvvm-vs-virtualdom"&gt;MVVM vs VirtualDOM
+&lt;/h2&gt;
 &lt;p&gt;相比起 React，其他 MVVM 系框架比如 Angular、Knockout、Vue 以及 Avalon 采用的都是数据绑定：通过 Directive/Binding 对象，观察数据变化并保留对实际 DOM 元素的引用，当有数据变化时进行对应的操作。&lt;/p&gt;
 &lt;p&gt;MVVM 的变化检查是数据层面的，而 React 的检查是 DOM 结构层面的。&lt;/p&gt;
 &lt;p&gt;MVVM 的性能也根据变动检测的实现原理有所不同：&lt;/p&gt;
@@ -5379,23 +5409,17 @@ loading="lazy"
 &lt;p&gt;假如没有任何复用方面的优化，由于数据是“全新”的，MVVM 实际上需要销毁之前的所有实例，重新创建所有实例，最后再进行一次渲染！这就是为什么题目里链接的 Angular/Knockout 实现都相对比较慢。相比之下，React 的变动检查由于是 DOM 结构层面的，即使是全新的数据，只要最后渲染结果没变，那么就不需要做无用功。&lt;/p&gt;
 &lt;p&gt;Angular 和 Vue 都提供了列表重绘的优化机制，也就是“提示”框架如何有效地复用实例和 DOM 元素。比如数据库里的同一个对象，在两次前端 API 调用里面会成为不同的对象，但是它们依然有一样的 uid。这时候你就可以提示 track by uid 来让 Angular 知道，这两个对象其实是同一份数据。那么原来这份数据对应的实例和 DOM 元素都可以复用，只需要更新变动了的部分。或者，你也可以直接 track by $index 来进行“原地复用”：直接根据在数组里的位置进行复用。&lt;/p&gt;
 &lt;p&gt;在题目给出的例子里，如果 Angular 实现加上 track by $index 的话，后续重绘是不会比 React 慢多少的。甚至在 dbmonster 测试中，Angular 和 Vue 用了 track by $index 以后都比 React 快，顺道说一句，React 渲染列表的时候也需要提供 key 这个特殊 prop，本质上和 track-by 是一回事。&lt;/p&gt;
-&lt;h2 id="参考"&gt;参考&lt;/h2&gt;
+&lt;h2 id="参考"&gt;参考
+&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://www.zhihu.com/question/31809713/answer/53544875"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-网上都说操作真实 DOM 慢，但测试结果却比 React 更快，为什么？
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://www.zhihu.com/question/31809713/answer/53544875" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;网上都说操作真实 DOM 慢，但测试结果却比 React 更快，为什么？&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://github.com/Advanced-Frontend/Daily-Interview-Question"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-壹题
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/Advanced-Frontend/Daily-Interview-Question" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;壹题&lt;/a&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>随机排列一个数组 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E9%9A%8F%E6%9C%BA%E6%8E%92%E5%88%97%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84/</link><pubDate>Wed, 22 May 2019 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E9%9A%8F%E6%9C%BA%E6%8E%92%E5%88%97%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/javascript.png" alt="随机排列一个数组" /&gt;&lt;h2 id="arrayprototypesort"&gt;Array.prototype.sort()&lt;/h2&gt;
+&lt;/ul&gt;</description></item><item><title>随机排列一个数组</title><link>https://ElementRef.github.io/p/%E9%9A%8F%E6%9C%BA%E6%8E%92%E5%88%97%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84/</link><pubDate>Wed, 22 May 2019 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E9%9A%8F%E6%9C%BA%E6%8E%92%E5%88%97%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/javascript.png" alt="Featured image of post 随机排列一个数组" /&gt;&lt;h2 id="arrayprototypesort"&gt;Array.prototype.sort()
+&lt;/h2&gt;
 &lt;p&gt;sort 方法不能实现随机排序的原因是：当对一个数组进行 n 次排序后，这 n 个数组的第 x 项的平均数并不是无限接近于原数组所有项的平均数。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -5421,7 +5445,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;concat&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="nx"&gt;sort&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nx"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nb"&gt;Math&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;random&lt;/span&gt;&lt;span class="p"&gt;()));&lt;/span&gt; &lt;span class="c1"&gt;// 伪随机
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="经典洗牌算法"&gt;经典洗牌算法&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="经典洗牌算法"&gt;经典洗牌算法
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -5464,7 +5489,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;randomList&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="fisheryates"&gt;Fisher–Yates&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="fisheryates"&gt;Fisher–Yates
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -5489,16 +5515,14 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;shuffleList&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="参考"&gt;参考&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="参考"&gt;参考
+&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://zhuanlan.zhihu.com/p/27589512"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-JS 中随机排列数组顺序（经典洗牌算法）和数组的排序方法
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://zhuanlan.zhihu.com/p/27589512" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;JS 中随机排列数组顺序（经典洗牌算法）和数组的排序方法&lt;/a&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>JS 的事件循环机制 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/js-%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6/</link><pubDate>Mon, 13 May 2019 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/js-%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/javascript.png" alt="JS 的事件循环机制" /&gt;&lt;h2 id="浏览器"&gt;浏览器&lt;/h2&gt;
+&lt;/ul&gt;</description></item><item><title>JS 的事件循环机制</title><link>https://ElementRef.github.io/p/js-%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6/</link><pubDate>Mon, 13 May 2019 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/js-%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/javascript.png" alt="Featured image of post JS 的事件循环机制" /&gt;&lt;h2 id="浏览器"&gt;浏览器
+&lt;/h2&gt;
 &lt;p&gt;浏览器是多进程（CPU 资源分配的最小单位）的，新开一个 Tab 页其实就是创建了一个浏览器&lt;strong&gt;渲染进程&lt;/strong&gt;（记得很早之前，Firefox 是多个 Tab 共用一个进程，导致一个页面的假死会使整个浏览器崩掉）；一个进程中包含了多个线程（CPU 资源调度的最小单位），比如渲染线程、JS 线程、HTTP 请求线程等。当你发起一个请求时，其实就是创建了一个请求线程，当请求结束后，该线程可能就会被销毁。一个浏览器渲染进程通常由以下常驻线程组成：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;GUI 渲染线程：
@@ -5528,12 +5552,14 @@ JS 中随机排列数组顺序（经典洗牌算法）和数组的排序方法
 &lt;/li&gt;
 &lt;li&gt;事件触发线程：负责任务队列的维护和事件循环的控制。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="事件驱动"&gt;事件驱动&lt;/h2&gt;
+&lt;h2 id="事件驱动"&gt;事件驱动
+&lt;/h2&gt;
 &lt;p&gt;所谓的事件驱动，就是将一切抽象为事件。I/O 操作完成是一个事件，用户点击是一个事件，一个图片加载完成是一个事件；当这些事件发生时对应的代码逻辑就会&lt;strong&gt;进入&lt;/strong&gt;任务队列，等待 JS 线程读取。&lt;/p&gt;
 &lt;p&gt;事件驱动的实现过程主要靠“事件循环”完成；JS 线程不停的从任务队列里读取事件。如果事件有关联的处理函数，就执行函数。&lt;/p&gt;
 &lt;img alt="堆和栈" title="堆和栈" style="display: block;margin: 0 auto;width: 50%;" src="event-loop.svg"/&gt;
 &lt;p&gt;JS 线程运行时，产生堆 Heap 和栈 Stack，栈中的代码调用各种接口，在“任务队列”中加入各种事件；只要栈中的代码执行完毕，JS 线程就会去读取“任务队列”，依次执行那些事件所对应的回调函数。&lt;/p&gt;
-&lt;h2 id="任务队列"&gt;任务队列&lt;/h2&gt;
+&lt;h2 id="任务队列"&gt;任务队列
+&lt;/h2&gt;
 &lt;p&gt;JS 运行时包含了多个待处理任务的队列（宏任务队列 TaskQueue、微任务队列 JobQueue 等）；每一个任务都关联着一个用以处理这个任务的函数。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;宏任务队列：ScriptCode、MessageChannel、setTimeout、setInterval、setImmediate、I/O、UIRender、requestAnimationFrame、requestIdleCallback 等；&lt;/li&gt;
@@ -5541,7 +5567,8 @@ JS 中随机排列数组顺序（经典洗牌算法）和数组的排序方法
 &lt;/ul&gt;
 &lt;p&gt;你可以将这些方法看作是&lt;strong&gt;任务分发装置&lt;/strong&gt;，他们会将要执行的代码或回调函数&lt;strong&gt;分发&lt;/strong&gt;给不同的任务队列。&lt;/p&gt;
 &lt;p&gt;在事件循环期间的某个时刻，从最先进入队列的消息开始处理队列中的消息；这个消息会被移出队列，并作为输入参数调用与之关联的函数；函数的处理会一直进行到执行栈再次为空为止；然后事件循环将会从任务队列中提取下一个任务（如果还有的话）。&lt;/p&gt;
-&lt;h2 id="事件循环机制"&gt;事件循环机制&lt;/h2&gt;
+&lt;h2 id="事件循环机制"&gt;事件循环机制
+&lt;/h2&gt;
 &lt;p&gt;为了协调事件、用户交互、脚本、UI 渲染和网络处理等行为，防止 JS 线程阻塞，JS 引入事件循环机制来管理协调这些事件，实现异步：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;从 ScriptCode 开始执行代码（宏任务）；&lt;/li&gt;
@@ -5553,7 +5580,8 @@ JS 中随机排列数组顺序（经典洗牌算法）和数组的排序方法
 &lt;li&gt;一旦调用栈中的任务执行完毕，系统就会读取任务队列，将任务压入调用栈执行；&lt;/li&gt;
 &lt;li&gt;JS 线程不断重复上面的步骤（执行一个宏任务-&amp;gt;执行微任务队列里的所有任务-&amp;gt;渲染工作（可能不需要）-&amp;gt;执行下一个宏任务-&amp;gt;&amp;hellip;）。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id="注意"&gt;注意&lt;/h2&gt;
+&lt;h2 id="注意"&gt;注意
+&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;process.nextTick 队列中的任务会比 Promise 队列中的任务先入栈，Promise 队列中的任务会比 MutationObserver 队列中的任务先入栈（尽管他们都是微任务）；&lt;/li&gt;
 &lt;li&gt;MessageChannel 队列中的任务会比 setInterval/setTimeout 队列中的任务先入栈（尽管他们都是宏任务）；&lt;/li&gt;
@@ -5562,48 +5590,25 @@ JS 中随机排列数组顺序（经典洗牌算法）和数组的排序方法
 &lt;li&gt;如果更新渲染不会带来视觉上的改变或者帧动画队列为空，浏览器会跳过当前帧的更新；&lt;/li&gt;
 &lt;li&gt;如果浏览器上下文不可见，那么页面会降低到 4fps 左右甚至更低。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id="参考"&gt;参考&lt;/h2&gt;
+&lt;h2 id="参考"&gt;参考
+&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://www.dailichun.com/2018/01/21/js_singlethread_eventloop.html"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-从浏览器多进程到 JS 单线程，JS 运行机制最全面的一次梳理
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://www.dailichun.com/2018/01/21/js_singlethread_eventloop.html" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;从浏览器多进程到 JS 单线程，JS 运行机制最全面的一次梳理&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://juejin.cn/post/6953541785217925151"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-考古挖掘：高刷显示器下的 requestAnimationFrame
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://juejin.cn/post/6953541785217925151" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;考古挖掘：高刷显示器下的 requestAnimationFrame&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Tasks, Microtasks, Queues and Schedules
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Tasks, Microtasks, Queues and Schedules&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://github.com/ljianshu/Blog/issues/54"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-浏览器与 Node 的事件循环有何区别？
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/ljianshu/Blog/issues/54" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;浏览器与 Node 的事件循环有何区别？&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://coderlt.coding.me/2017/12/13/event-loop"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-JavaScript 中的事件循环 EventLoop
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://coderlt.coding.me/2017/12/13/event-loop" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;JavaScript 中的事件循环 EventLoop&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-并发模型与事件循环
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;并发模型与事件循环&lt;/a&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</description></item></channel></rss>

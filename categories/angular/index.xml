@@ -1,18 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Angular on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/angular/</link><description>Recent content in Angular on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 16 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/angular/index.xml" rel="self" type="application/rss+xml"/><item><title>Angular 路由复用 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/angular-%E8%B7%AF%E7%94%B1%E5%A4%8D%E7%94%A8/</link><pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/angular-%E8%B7%AF%E7%94%B1%E5%A4%8D%E7%94%A8/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/angular.png" alt="Angular 路由复用" /&gt;&lt;p&gt;最近在看一个 SaaS 项目，涉及到了&lt;strong&gt;路由复用&lt;/strong&gt;的概念；在搞清楚之后，发现很早就接触过相关的需求，那么路由复用适用于什么场景呢？&lt;/p&gt;
-&lt;p&gt;之前在花瓣网做基于 Next.js 的官网重构时，产品设计希望在用户从瀑布流进入到详情页时，保留瀑布流页面的渲染状态，方便用户在进行回退操作时，能够接着上次的内容继续浏览。在此之前，花瓣网是一个基于 Node 的 MPA，页面状态的保留依赖于浏览器的 bfcache；在重构的过程中，发现 React 和 Next.js 都没有提供路由复用的功能；当时找遍了社区，有一些基于 react-router 的实现方案，但在 Next.js 环境下无法使用。后来官方&lt;a class="link"
-href="https://zh-hans.react.dev/blog/2022/06/15/react-labs-what-we-have-been-working-on-june-2022#offscreen"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-有计划
-&lt;/a&gt;
-提供一个 off-screen 组件来实现组件实例缓存的功能；六年后的今天，off-screen 已经更名为 &lt;a class="link"
-href="https://zh-hans.react.dev/blog/2024/02/15/react-labs-what-we-have-been-working-on-february-2024#offscreen-renamed-to-activity"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-activity
-&lt;/a&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Angular on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/angular/</link><description>Recent Content in Angular on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo 0.162.0</generator><language>zh</language><lastBuildDate>Sun, 16 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/angular/index.xml" rel="self" type="application/rss+xml"/><item><title>Angular 路由复用</title><link>https://ElementRef.github.io/p/angular-%E8%B7%AF%E7%94%B1%E5%A4%8D%E7%94%A8/</link><pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/angular-%E8%B7%AF%E7%94%B1%E5%A4%8D%E7%94%A8/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/angular.png" alt="Featured image of post Angular 路由复用" /&gt;&lt;p&gt;最近在看一个 SaaS 项目，涉及到了&lt;strong&gt;路由复用&lt;/strong&gt;的概念；在搞清楚之后，发现很早就接触过相关的需求，那么路由复用适用于什么场景呢？&lt;/p&gt;
+&lt;p&gt;之前在花瓣网做基于 Next.js 的官网重构时，产品设计希望在用户从瀑布流进入到详情页时，保留瀑布流页面的渲染状态，方便用户在进行回退操作时，能够接着上次的内容继续浏览。在此之前，花瓣网是一个基于 Node 的 MPA，页面状态的保留依赖于浏览器的 bfcache；在重构的过程中，发现 React 和 Next.js 都没有提供路由复用的功能；当时找遍了社区，有一些基于 react-router 的实现方案，但在 Next.js 环境下无法使用。后来官方&lt;a class="link" href="https://zh-hans.react.dev/blog/2022/06/15/react-labs-what-we-have-been-working-on-june-2022#offscreen" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;有计划&lt;/a&gt;
+提供一个 off-screen 组件来实现组件实例缓存的功能；六年后的今天，off-screen 已经更名为 &lt;a class="link" href="https://zh-hans.react.dev/blog/2024/02/15/react-labs-what-we-have-been-working-on-february-2024#offscreen-renamed-to-activity" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;activity&lt;/a&gt;
 ，但还是没有正式到来。&lt;/p&gt;
-&lt;h2 id="vue"&gt;Vue&lt;/h2&gt;
+&lt;h2 id="vue"&gt;Vue
+&lt;/h2&gt;
 &lt;p&gt;在说 Angular 之前，我想先说一下 Vue 内置的 keep-alive，它可以搭配 router-view 实现&lt;strong&gt;路由复用&lt;/strong&gt;；被复用的组件不会被重新挂载/卸载，组件的内部状态被完整保留：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -195,20 +188,13 @@ activity
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;通过控制台，我们能知道：当我们通过 router-link 将路由切换到 /posts 或者 /about 时，onDeactivated 执行，onUnmounted 没有执行，这表示组件没有被卸载；同时，当 HomeView 切回台前时，watchEffect 将接着上次的 currentIndex 值继续向控制台打印；这说明 HomeView 内部的状态及关联的副作用并没有被&lt;strong&gt;清除&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;通过浏览器的前进/后退功能进行页面导航时，结论依然成立；此外，我们还可以通过 onActivated/onDeactivated 来执行/清理一些副作用。&lt;/p&gt;
-&lt;h2 id="angular"&gt;Angular&lt;/h2&gt;
-&lt;p&gt;上述功能对 Ng 来说，就没那么容易实现了；Ng 并没有提供 keep-alive 组件，也没有提供 onActivated/onDeactivated 钩子。如果要在 Ng 中实现相同的功能，需要借助 &lt;a class="link"
-href="https://angular.cn/api/router/RouteReuseStrategy"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-RouteReuseStrategy
-&lt;/a&gt;
+&lt;h2 id="angular"&gt;Angular
+&lt;/h2&gt;
+&lt;p&gt;上述功能对 Ng 来说，就没那么容易实现了；Ng 并没有提供 keep-alive 组件，也没有提供 onActivated/onDeactivated 钩子。如果要在 Ng 中实现相同的功能，需要借助 &lt;a class="link" href="https://angular.cn/api/router/RouteReuseStrategy" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;RouteReuseStrategy&lt;/a&gt;
 。&lt;/p&gt;
-&lt;p&gt;我们可以通过查找 DefaultRouteReuseStrategy 关键字查找 Ng 默认的&lt;a class="link"
-href="https://github.com/angular/angular/blob/628ab4033bd3d165f235806632484895bb1f056f/packages/router/src/route_reuse_strategy.ts#L80"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-路由复用策略
-&lt;/a&gt;
+&lt;p&gt;我们可以通过查找 DefaultRouteReuseStrategy 关键字查找 Ng 默认的&lt;a class="link" href="https://github.com/angular/angular/blob/628ab4033bd3d165f235806632484895bb1f056f/packages/router/src/route_reuse_strategy.ts#L80" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;路由复用策略&lt;/a&gt;
 ：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -570,13 +556,9 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;其实，Ng 已经帮我们做好了；对组件实例的引用存在于 store 的第二个参数内；虽然 Ng 在 d.ts 中并没有告诉我们 &lt;a class="link"
-href="https://angular.cn/api/router/DetachedRouteHandle"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-DetachedRouteHandle
-&lt;/a&gt;
-的具体类型；我们打印一下：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;其实，Ng 已经帮我们做好了；对组件实例的引用存在于 store 的第二个参数内；虽然 Ng 在 d.ts 中并没有告诉我们 &lt;a class="link" href="https://angular.cn/api/router/DetachedRouteHandle" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;DetachedRouteHandle&lt;/a&gt;
+ 的具体类型；我们打印一下：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -627,19 +609,11 @@ DetachedRouteHandle
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;发现，DetachedRouteHandle 上存在一个 &lt;a class="link"
-href="https://angular.cn/api/core/ComponentRef"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-componentRef
-&lt;/a&gt;
-属性，它是 &lt;a class="link"
-href="https://angular.cn/api/core/ComponentFactory"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-ComponentFactory
-&lt;/a&gt;
-的返回值；它的 instance 属性指向的就是组件实例；知道了这一点，我们就可以手动调用组件实例内部的方法了：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;发现，DetachedRouteHandle 上存在一个 &lt;a class="link" href="https://angular.cn/api/core/ComponentRef" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;componentRef&lt;/a&gt;
+ 属性，它是 &lt;a class="link" href="https://angular.cn/api/core/ComponentFactory" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;ComponentFactory&lt;/a&gt;
+ 的返回值；它的 instance 属性指向的就是组件实例；知道了这一点，我们就可以手动调用组件实例内部的方法了：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -770,10 +744,12 @@ ComponentFactory
 &lt;p&gt;对于第一个问题，DetachedRouteHandle 中只能获取到路由直接绑定的组件实例；除了使用模版变量 + ViewChild 之外，Ng 也没有提供额外的获取子组件实例的 API。&lt;/p&gt;
 &lt;p&gt;为了能调用子孙组件的 onActivated/onDeactivated 方法，我们不得不在组件中通过 ViewChild 来获取子组件实例并手动调用对应方法。或者，维护一个全局状态；每个组件在 OnInit 时，手动将自己（实例）添加到路由对应的组件实例数组中。这样，我们在 shouldReuseRoute 方法中，可以从全局状态中获取路由对应的组件实例集合，通过遍历数组集合来调用实例内部的对应的 onActivated/onDeactivated 方法。&lt;/p&gt;
 &lt;p&gt;这两种解决方式都对组件原本的逻辑有较大的侵入，并不优雅；RouteReuseStrategy 和 keep-alive 两者的功能出发点本来就不一样，所以上述存在的问题也说得通。&lt;/p&gt;
-&lt;p&gt;对于第二个问题，我们可以自己实现缓存控制，而且缓存策略的灵活性会比 keep-alive 更能贴近业务场景。&lt;/p&gt;</description></item><item><title>封装 ProSearch 与 ProTable 组件 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E5%B0%81%E8%A3%85-prosearch-%E4%B8%8E-protable-%E7%BB%84%E4%BB%B6/</link><pubDate>Tue, 03 Jan 2023 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E5%B0%81%E8%A3%85-prosearch-%E4%B8%8E-protable-%E7%BB%84%E4%BB%B6/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/angular.png" alt="封装 ProSearch 与 ProTable 组件" /&gt;&lt;h2 id="业务场景"&gt;业务场景&lt;/h2&gt;
+&lt;p&gt;对于第二个问题，我们可以自己实现缓存控制，而且缓存策略的灵活性会比 keep-alive 更能贴近业务场景。&lt;/p&gt;</description></item><item><title>封装 ProSearch 与 ProTable 组件</title><link>https://ElementRef.github.io/p/%E5%B0%81%E8%A3%85-prosearch-%E4%B8%8E-protable-%E7%BB%84%E4%BB%B6/</link><pubDate>Tue, 03 Jan 2023 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E5%B0%81%E8%A3%85-prosearch-%E4%B8%8E-protable-%E7%BB%84%E4%BB%B6/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/angular.png" alt="Featured image of post 封装 ProSearch 与 ProTable 组件" /&gt;&lt;h2 id="业务场景"&gt;业务场景
+&lt;/h2&gt;
 &lt;p&gt;公司面向 B 端的产品是一个后台管理系统，分了五个业务线，这五个业务线服务于不同的业务对象；但他们都有一个共同的特点：数据展示大多以搜索 + 表格的形式；作为一个有着一二百个页面的管理系统，每次新增页面都要将模版代码拷贝一份；一来开发效率低下，二来复用性不够、冗余代码比较多。&lt;/p&gt;
 &lt;p&gt;为了解决这些问题，催生了 ProSearch 和 ProTable，通过配置的方式快速搭建页面。&lt;/p&gt;
-&lt;h2 id="实现-prosearch"&gt;实现 ProSearch&lt;/h2&gt;
+&lt;h2 id="实现-prosearch"&gt;实现 ProSearch
+&lt;/h2&gt;
 &lt;p&gt;ProSearch 本质就是一个带了样式的 FormGroup，需要将所有筛选项包裹起来：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -860,7 +836,8 @@ ComponentFactory
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="封装常见表单"&gt;封装常见表单&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="封装常见表单"&gt;封装常见表单
+&lt;/h3&gt;
 &lt;p&gt;ProSearch 封装了一些常见的搜索项，比如 input、select、range-picker、date-picker；具体渲染哪些表单，需要根据传入的配置来：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1244,7 +1221,8 @@ ComponentFactory
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;ng-container&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="渲染自定义表单"&gt;渲染自定义表单&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="渲染自定义表单"&gt;渲染自定义表单
+&lt;/h3&gt;
 &lt;p&gt;最后，还有一种常见的情况；如果 ProSearch 内置的表单都不能满足需求时，ProSearch 应该有渲染一段 TemplateRef 的能力；我们将通过 renderSelfSearch 提供这种能力：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1322,7 +1300,8 @@ ComponentFactory
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Angular 和 Vue 的模版的灵活性都不及 JSX，比如上边的 renderSelfSearch 在 for 循环中会被渲染多次；每次匹配的内容是根据 rt 来的。&lt;/p&gt;
-&lt;h3 id="处理表单间的依赖"&gt;处理表单间的依赖&lt;/h3&gt;
+&lt;h3 id="处理表单间的依赖"&gt;处理表单间的依赖
+&lt;/h3&gt;
 &lt;p&gt;上文中已经提到了一部分，SearchFormListItem 上有一个私有属性 _reset；它是在初始化的时候，根据 item.dependence 生成的：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1471,8 +1450,10 @@ ComponentFactory
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="加载-selectoptions"&gt;加载 select.options&lt;/h3&gt;
-&lt;p&gt;你可能会有疑问，代码中的 this[`get${x.type}`]?.({}) 这些是什么；这些是用来加载 SelectOptions 的，这些方法被预先写在了 ProSearch 中：&lt;/p&gt;
+&lt;/div&gt;&lt;h3 id="加载-selectoptions"&gt;加载 select.options
+&lt;/h3&gt;
+&lt;p&gt;你可能会有疑问，代码中的 this&lt;/p&gt;
+\[\`get${x.type}\`\]&lt;p&gt;?.({}) 这些是什么；这些是用来加载 SelectOptions 的，这些方法被预先写在了 ProSearch 中：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1504,7 +1485,8 @@ ComponentFactory
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;如果不在 ProSearch 中提供，也可提供过 SearchFormListItem 提供。&lt;/p&gt;
-&lt;h2 id="实现-protable"&gt;实现 ProTable&lt;/h2&gt;
+&lt;h2 id="实现-protable"&gt;实现 ProTable
+&lt;/h2&gt;
 &lt;p&gt;同 ProSearch 一样，ProTable 就是一个带了样式的 Table；将 Table 封装起来，就不用一遍遍的写复杂的配置和分页逻辑了：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1556,7 +1538,8 @@ ComponentFactory
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;ng-template&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="封装-thead"&gt;封装 thead&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="封装-thead"&gt;封装 thead
+&lt;/h3&gt;
 &lt;p&gt;和 ProSearch 的思路相同，通过循环传入的配置来渲染 thead：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1666,7 +1649,8 @@ ComponentFactory
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;这里需要拿 type 做一层判断，判断渲染到 thead 还是 tbody。&lt;/p&gt;
-&lt;h3 id="封装-tbody"&gt;封装 tbody&lt;/h3&gt;
+&lt;h3 id="封装-tbody"&gt;封装 tbody
+&lt;/h3&gt;
 &lt;p&gt;和 thead 类似，tbody 同样要循环 columns，并在 TemplateRef 中渲染自定义内容：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1738,7 +1722,8 @@ ComponentFactory
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;ng-template&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="数据请求"&gt;数据请求&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="数据请求"&gt;数据请求
+&lt;/h3&gt;
 &lt;p&gt;如果使用外部数据，可以传入 data 选项，并通过抛出的 onChangePageIndex、onChangePageSize 触发数据分页请求：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1899,16 +1884,14 @@ ComponentFactory
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;当然，你可能会疑惑；数据请求接口的入参从哪里来呢？我们采用的方式是从 URL 中拿取，在 Angular 中 ActivatedRoute.queryParams 是一个 RxJS 对象；当我们修改 URL 中的查询参数时，ActivatedRoute.queryParams 的订阅者会拿到最新的参数并自动运行，无需考虑手动调用和参数传递问题。&lt;/p&gt;
 &lt;p&gt;通过 ActivatedRoute，实现了 ProSearch 与 ProTable 的解藕和数据传递问题。&lt;/p&gt;
-&lt;h2 id="总结"&gt;总结&lt;/h2&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;
 &lt;p&gt;ProSearch 与 ProTable 的诞生主要还是依附于 renderless 模式的使用；通过渲染插槽来实现渲染内容的自定义。&lt;/p&gt;
 &lt;p&gt;Angular 中的 ngTemplateOutlet 和 Vue 中的 Slot 的便捷性明显不如 JSX 的 renderProps 模式；毕竟渲染函数的表现力真的不如 JSX。&lt;/p&gt;
-&lt;p&gt;虽有诸多不便，但是如果想实现 UI 的复用；插槽可能是唯一的选择。对于 renderless 模式，推荐 Tailwind CSS 作者的 &lt;a class="link"
-href="https://adamwathan.me/renderless-components-in-vuejs"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Renderless Components in Vue.js
-&lt;/a&gt;
-。&lt;/p&gt;</description></item><item><title>Angular 组件设计 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/angular-%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1/</link><pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/angular-%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/angular.png" alt="Angular 组件设计" /&gt;&lt;h2 id="ngtemplateoutlet"&gt;ngTemplateOutlet&lt;/h2&gt;
+&lt;p&gt;虽有诸多不便，但是如果想实现 UI 的复用；插槽可能是唯一的选择。对于 renderless 模式，推荐 Tailwind CSS 作者的 &lt;a class="link" href="https://adamwathan.me/renderless-components-in-vuejs" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Renderless Components in Vue.js&lt;/a&gt;
+。&lt;/p&gt;</description></item><item><title>Angular 组件设计</title><link>https://ElementRef.github.io/p/angular-%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1/</link><pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/angular-%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/angular.png" alt="Featured image of post Angular 组件设计" /&gt;&lt;h2 id="ngtemplateoutlet"&gt;ngTemplateOutlet
+&lt;/h2&gt;
 &lt;p&gt;从字面来看，就像 &amp;lt;router-outlet/&amp;gt; 之于 router 一样，ngTemplateOutlet 就是 &lt;strong&gt;TemplateRef&lt;/strong&gt; 的“出口”。除了渲染 TemplateRef 之外，它还支持指定一个对象 context 作为“模版内容”的渲染上下文。&lt;/p&gt;
 &lt;p&gt;Vue 的 scopedSlots 和 React 的 renderProps 以及后来的 Composition API 和 Hooks 都在践行“逻辑与 UI”的分离；因为 UI 的自由度非常高，形态千变万化，而数据逻辑的自由度就小不少，UI 更多是数据逻辑的延伸。有了 ngTemplateOutlet，也可以在 Angular 中分离逻辑与 UI（虽然 Angular 在这方面的最佳实践是“依赖注入 Service”）。&lt;/p&gt;
 &lt;p&gt;使用 ngTemplateOutlet 构造 DynamicTabListSlotComponent：&lt;/p&gt;
@@ -2519,7 +2502,8 @@ Renderless Components in Vue.js
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;app-codes&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="ngcomponentoutlet"&gt;ngComponentOutlet&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="ngcomponentoutlet"&gt;ngComponentOutlet
+&lt;/h2&gt;
 &lt;p&gt;组件类装饰器中有一个可选的属性 selector，selector 决定了组件的实例化位置；当组件装饰器中缺少 selector 属性（或者 selector 属性值为空）时，Ng 会为其生成一个 &amp;lt;ng-component/&amp;gt; 标签。&lt;/p&gt;
 &lt;p&gt;没有 selector 属性的组件可以通过以下两种方式渲染到页面中：&lt;/p&gt;
 &lt;ol&gt;
@@ -2567,14 +2551,11 @@ Renderless Components in Vue.js
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;是不是眼熟&lt;a class="link"
-href="https://cn.vuejs.org/api/built-in-special-elements.html#component"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-&amp;lt;component/&amp;gt;
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;是不是眼熟&lt;a class="link" href="https://cn.vuejs.org/api/built-in-special-elements.html#component" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;&amp;lt;component/&amp;gt;&lt;/a&gt;
 。&lt;/p&gt;
-&lt;h2 id="formcontrolname"&gt;formControlName&lt;/h2&gt;
+&lt;h2 id="formcontrolname"&gt;formControlName
+&lt;/h2&gt;
 &lt;p&gt;在自定义元素上使用 formControlName：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -2986,7 +2967,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="asyncpipe"&gt;asyncPipe&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="asyncpipe"&gt;asyncPipe
+&lt;/h2&gt;
 &lt;p&gt;一般情况下，我们会在 ngOnInit 中请求组件需要的初始化数据；但是这会导致相关的副作用散落在组件的各个部分。&lt;/p&gt;
 &lt;p&gt;借助 Angular 提供的 AsyncPipe，组件可以以流的形式来处理这部分逻辑；这样，相关逻辑就被数据流“串联”起来了：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -3123,12 +3105,11 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="directive"&gt;directive&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="directive"&gt;directive
+&lt;/h2&gt;
 &lt;p&gt;指令的好处是，可以在同一元素上叠加多个指令来完成不同的逻辑。&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/angular-%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1/directive.svg"
-alt="LocalImage"
-loading="lazy"
-&gt;
+&lt;p&gt;&lt;img alt="LocalImage" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/angular-%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1/directive.svg"&gt;
+
 &lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;指令 carousel 绑定了三个 key：from、autoplay、withDelay；&lt;/li&gt;
@@ -3293,7 +3274,8 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="intersectiondirective"&gt;IntersectionDirective&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id="intersectiondirective"&gt;IntersectionDirective
+&lt;/h3&gt;
 &lt;p&gt;在实际业务中，遇到了评论自动加载的场景，这里借助 IntersectionObserver 实现这个指令：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -3478,7 +3460,8 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="runoutsideangular"&gt;runOutsideAngular&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="runoutsideangular"&gt;runOutsideAngular
+&lt;/h2&gt;
 &lt;p&gt;在 Angular 中，DOM 事件的触发会导致 Ng 进行“变更检测”；如果该事件的副作用最终没有造成“绑定值”的更新；那么当前的“变更检测”就是多余的。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -3795,13 +3778,9 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; */&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;但是这种方式不够灵活，总不能一种事件就写一个指令。可以借助 &lt;a class="link"
-href="https://angular.cn/api/platform-browser/EventManager"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-EventManager
-&lt;/a&gt;
-实现同样的效果。&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;但是这种方式不够灵活，总不能一种事件就写一个指令。可以借助 &lt;a class="link" href="https://angular.cn/api/platform-browser/EventManager" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;EventManager&lt;/a&gt;
+ 实现同样的效果。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3880,7 +3859,8 @@ EventManager
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;class&lt;/span&gt; &lt;span class="nx"&gt;AppModule&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="expressionchangedafterithasbeencheckederror"&gt;ExpressionChangedAfterItHasBeenCheckedError&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="expressionchangedafterithasbeencheckederror"&gt;ExpressionChangedAfterItHasBeenCheckedError
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3925,62 +3905,36 @@ EventManager
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; */&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;控制台会报**&lt;a class="link"
-href="https://angular.cn/errors/NG0100"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-NG100 错误
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;控制台会报**&lt;a class="link" href="https://angular.cn/errors/NG0100" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;NG100 错误&lt;/a&gt;
 **，原因是多选框的勾选会改变 checkbox，从而触发“变更检测”，导致 DOM 更新，在 DOM 重新渲染的过程中，timeGetter 的返回值和在“变更检测”过程中的返回值不同；渲染前后的值的不同被“发现”了，导致错误被抛出。&lt;/p&gt;
 &lt;p&gt;值的变化是什么时候被发现的呢？在组件被渲染到页面的过程中，组件内部会有一个被称为 View 的数据结构，保存着&lt;strong&gt;对组件实例的引用&lt;/strong&gt;和&lt;strong&gt;绑定表达式的值&lt;/strong&gt;；在变更检测过程中，编译器会将需要更新的 DOM 属性打上标记；对于每个被标记的属性，编译器都会创建一个绑定，该绑定定义了&lt;strong&gt;要更新的属性名称&lt;/strong&gt;以及&lt;strong&gt;用来获取新值的表达式&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;在“变更检测”过程中，会运行&lt;strong&gt;编译器为视图生成的&lt;/strong&gt;所有绑定表达式，并将执行结果和&lt;strong&gt;储存在 View 中的 oldValue&lt;/strong&gt;进行比较，这就是“脏”检查的由来；如果值有变化，那么就会更新“界面”和“oldValue”；当前组件的“变更检测”进行完毕，就会对“子组件”进行相同的操作。&lt;/p&gt;
 &lt;p&gt;在上述例子中，Angular 在 spanView 和 timeGetter 之间建立了一种绑定关系；在每次检测过程中，绑定表达式被执行，timeGetter 返回的时间戳并被日期管道处理，日期管道返回的值会和 oldValue 进行比较，如果检测到值的差异，spanView 的 textContent 会被更新。&lt;/p&gt;
 &lt;p&gt;在开发环境中，每个“变更检测周期（整个组件树完成变更检测）”之后会&lt;strong&gt;同步&lt;/strong&gt;进行一次“额外的检测”，以确保“最终值”和变更检测过程中的值一致；不同于“变更检测”，在“额外检测”过程中，如果检测到“值的不同”，不会进行&lt;strong&gt;视图更新&lt;/strong&gt;，而是抛出&lt;strong&gt;ExpressionChangedAfterItHasBeenCheckedError&lt;/strong&gt;错误。&lt;/p&gt;
 &lt;p&gt;简单的说，如果值&lt;strong&gt;总是&lt;/strong&gt;在“变更检测”期间发生变化，就会造成“变更检测死循环”；“ExpressionChangedAfterItHasBeenCheckedError”错误就是在出现“变更检测死循环”的情况下被抛出的；或者说，当应用&lt;strong&gt;内部状态&lt;/strong&gt;和&lt;strong&gt;渲染结果&lt;/strong&gt;不匹配时，就会抛出“ExpressionChangedAfterItHasBeenCheckedError”。&lt;/p&gt;
-&lt;h2 id="参考"&gt;参考&lt;/h2&gt;
+&lt;h2 id="参考"&gt;参考
+&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://indepth.dev/posts/1467/how-to-use-controlvalueaccessor-to-enhance-date-input-with-automatic-conversion-and-validation"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-How To Use ControlValueAccessor To Enhance Date Input With Automatic Conversion And Validation
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://indepth.dev/posts/1467/how-to-use-controlvalueaccessor-to-enhance-date-input-with-automatic-conversion-and-validation" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;How To Use ControlValueAccessor To Enhance Date Input With Automatic Conversion And Validation&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://indepth.dev/posts/1508/structure-initialization-logic-without-ngoninit-utilize-observables-and-ngonchanges"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Component Initialization Without ngOnInit With Async Pipes For Observables And ngOnChanges
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://indepth.dev/posts/1508/structure-initialization-logic-without-ngoninit-utilize-observables-and-ngonchanges" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Component Initialization Without ngOnInit With Async Pipes For Observables And ngOnChanges&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://indepth.dev/posts/1058/a-gentle-introduction-into-change-detection-in-angular"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-A Gentle Introduction Into Change Detection in Angular
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://indepth.dev/posts/1058/a-gentle-introduction-into-change-detection-in-angular" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;A Gentle Introduction Into Change Detection in Angular&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://indepth.dev/posts/1434/running-event-listeners-outside-of-the-ngzone"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Running Event Listeners Outside Of The NgZone
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://indepth.dev/posts/1434/running-event-listeners-outside-of-the-ngzone" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Running Event Listeners Outside Of The NgZone&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://netbasal.com/understanding-angular-structural-directives-659acd0f67e"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Understanding Angular Structural Directives
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://netbasal.com/understanding-angular-structural-directives-659acd0f67e" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Understanding Angular Structural Directives&lt;/a&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>Angular 快速上手 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/angular-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</link><pubDate>Wed, 16 Mar 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/angular-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/angular.png" alt="Angular 快速上手" /&gt;&lt;h2 id="组件"&gt;组件&lt;/h2&gt;
-&lt;p&gt;在 Angular 中，组件是用来定义视图的，一个应用至少有一个根组件（属于根模块的一部分）；组件由三部分组成：组件类（控制组件模板渲染）、组件模板、组件样式（默认仅对当前组件生效，不会污染全局）；可以使用 ng generate 命令或&lt;a class="link"
-href="https://marketplace.visualstudio.com/items?itemName=alexiv.vscode-angular2-files"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-编辑器扩展
-&lt;/a&gt;
+&lt;/ul&gt;</description></item><item><title>Angular 快速上手</title><link>https://ElementRef.github.io/p/angular-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</link><pubDate>Wed, 16 Mar 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/angular-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/angular.png" alt="Featured image of post Angular 快速上手" /&gt;&lt;h2 id="组件"&gt;组件
+&lt;/h2&gt;
+&lt;p&gt;在 Angular 中，组件是用来定义视图的，一个应用至少有一个根组件（属于根模块的一部分）；组件由三部分组成：组件类（控制组件模板渲染）、组件模板、组件样式（默认仅对当前组件生效，不会污染全局）；可以使用 ng generate 命令或&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=alexiv.vscode-angular2-files" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;编辑器扩展&lt;/a&gt;
 快速新建组件（服务、管道&amp;hellip;）：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;组件模板，语法和 HTML 几乎相同，多了一些 Angular 独有的指令和标签；&lt;/li&gt;
@@ -4504,7 +4458,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="指令没有模版的特殊组件"&gt;指令（没有“模版”的特殊组件）&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="指令没有模版的特殊组件"&gt;指令（没有“模版”的特殊组件）
+&lt;/h2&gt;
 &lt;p&gt;指令用来将自定义行为附加到 DOM 中：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;结构性指令：通过添加、移除、替换 DOM 来修改布局，例如：*ngIf、*ngFor、*ngSwitch、*ngSwitchDefault、*ngComponentOutlet、*ngTemplateOutlet；&lt;/li&gt;
@@ -4662,7 +4617,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="管道"&gt;管道&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="管道"&gt;管道
+&lt;/h2&gt;
 &lt;p&gt;Angular 内置了 async（从 Promise/Observable 中取值）、date、currency、json（JSON2String）、uppercase、lowercase、titlecase、precent 等管道。&lt;/p&gt;
 &lt;p&gt;无论是用法还是效果都和 Vue 3.0 中已经删除的 filter 很像，用于数据转换。&lt;/p&gt;
 &lt;p&gt;有一点需要注意：管道操作符的优先级&lt;strong&gt;高于&lt;/strong&gt;逻辑运算符。&lt;/p&gt;
@@ -4987,7 +4943,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;li&gt;无论是否是“纯”管道，每个管道都会有自己的实例（ViewEngine 时期，“纯”管道是共享实例的）；&lt;/li&gt;
 &lt;li&gt;在同一模版中，使用了两次 A 管道，则会有两个 A 管道的实例存在。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id="服务"&gt;服务&lt;/h2&gt;
+&lt;h2 id="服务"&gt;服务
+&lt;/h2&gt;
 &lt;p&gt;服务是 Angular 的核心，他是专门用来处理某件事情的（数据请求、数据共享等）具有明确定义的 class；一般情况下，服务用来创建与视图无关但需要跨组件共享的数据/逻辑。&lt;/p&gt;
 &lt;p&gt;官方推崇“Component 处理页面展示，Service 处理内在逻辑”的原则（有点像 React 中的 UI 组件和逻辑组件）。&lt;/p&gt;
 &lt;p&gt;服务一般（具体看 providedIn 的取值）以单例的形式存在，实例化之后，应用于整个应用。&lt;/p&gt;
@@ -5129,7 +5086,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="模块"&gt;模块&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="模块"&gt;模块
+&lt;/h2&gt;
 &lt;p&gt;NgModule 是 Angular 的基本构造块（NgModule 和 ESModule 不同但互补），也是 Angular 对“依赖”进行组织的一种形式；其为组件提供了编译上下文；一个 Angular 应用由至少一个根模块（AppModule）和多个特性模块组成。&lt;/p&gt;
 &lt;p&gt;NgModule 可以将组件及其相关代码（服务等）关联，形成功能单元（一般是按照业务划分的）；模块之间即相互独立又可通过 imports/exports 建立联系；模块可以让代码更“内聚”。&lt;/p&gt;
 &lt;p&gt;一个 Angular 应用一般包含四种模块：&lt;/p&gt;
@@ -5245,7 +5203,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;class&lt;/span&gt; &lt;span class="nx"&gt;ExampleModule&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="表单"&gt;表单&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="表单"&gt;表单
+&lt;/h2&gt;
 &lt;p&gt;Angular 提供了两种不同的方法来通过表单处理用户输入：响应式表单和模板驱动表单。两者都从视图中捕获用户输入事件、验证用户输入、创建表单模型、修改数据模型，并提供跟踪这些更改的途径：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;响应式表单：提供对底层表单对象模型直接、显式的访问；可伸缩性、可扩展性、可复用性和可测试性都更高；视图和数据模型之间使用同步数据流；&lt;/li&gt;
@@ -5551,7 +5510,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="路由"&gt;路由&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="路由"&gt;路由
+&lt;/h2&gt;
 &lt;p&gt;Router 是一个提供导航和操纵 URL 能力的 NgModule；通过将浏览器 URL 解释为更改视图的操作指令来启用导航：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -5837,16 +5797,13 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="依赖注入"&gt;依赖注入&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="依赖注入"&gt;依赖注入
+&lt;/h2&gt;
 &lt;p&gt;依赖是指系统中的各个组成部分之间的相互关系；具体到 Angular，是指某个 class 执行其功能“所需的”服务（@Injectable）或对象。&lt;/p&gt;
 &lt;p&gt;在传统模式中，如果组件 A 依赖服务 B，A 会在内部创建一个 B 的实例；在依赖注入模式中，依赖项 B 会通过 A 的 constructor 注入（默认行为是 new 调用），保存在 A 的私有属性上。&lt;/p&gt;
 &lt;p&gt;当 class 需要某个依赖时，该依赖就会作为参数添加到 class 的构造函数中。当 Angular 实例化 class 时，DI 会在“注入器树”中查找（从局部开始，向上冒泡，直到 root）provider；如果没有找到 provider，会报错。&lt;/p&gt;
-&lt;p&gt;如果要保证外部注入的服务是自己（当前 class）独有的（&lt;a class="link"
-href="https://angular.cn/guide/dependency-injection-in-action#multiple-service-instances-sandboxing"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-沙箱式隔离
-&lt;/a&gt;
+&lt;p&gt;如果要保证外部注入的服务是自己（当前 class）独有的（&lt;a class="link" href="https://angular.cn/guide/dependency-injection-in-action#multiple-service-instances-sandboxing" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;沙箱式隔离&lt;/a&gt;
 ），只需在自己的元数据 providers 中列出 Service 即可（就能拥有自己独有的服务实例）。&lt;/p&gt;
 &lt;p&gt;如果“允许依赖缺失”或者需要“限制依赖查找范围”，可以使用修饰符更改默认的依赖查找机制：&lt;/p&gt;
 &lt;ul&gt;
@@ -5963,7 +5920,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="双向绑定"&gt;双向绑定&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="双向绑定"&gt;双向绑定
+&lt;/h2&gt;
 &lt;p&gt;Angular 也有 Vue 中的 v-model 机制（modelValue/update:modelValue），语法为 [(value)]；实现思路同样也是基于“组件传值”和“自定义事件”（语法糖）。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -6013,7 +5971,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="绑定语法"&gt;绑定语法&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="绑定语法"&gt;绑定语法
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -6054,7 +6013,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;my-component&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="模版变量"&gt;模版变量&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="模版变量"&gt;模版变量
+&lt;/h2&gt;
 &lt;p&gt;模版变量，顾名思义，就是存在于组件模版中的变量；模版变量可以引用：元素、指令、组件等：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;如果在组件上声明变量，该变量就会引用该组件实例；&lt;/li&gt;
@@ -6085,7 +6045,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;模版变量可以在“包含此模板变量”的模板中的任何地方引用它；既然使用模版变量的前提是“包含此模板变量”，那么决定模版边界的“结构型指令（例如，ngIf、ngFor）”也决定了模版变量的&lt;strong&gt;作用域&lt;/strong&gt;。&lt;/p&gt;
-&lt;h2 id="网络请求"&gt;网络请求&lt;/h2&gt;
+&lt;h2 id="网络请求"&gt;网络请求
+&lt;/h2&gt;
 &lt;p&gt;要使用 HttpClient，需要在模块中导入 HttpClientModule；一般情况下，在 AppModule 导入：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -6290,7 +6251,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="特殊标签"&gt;特殊标签&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="特殊标签"&gt;特殊标签
+&lt;/h2&gt;
 &lt;p&gt;&amp;lt;ng-container/&amp;gt;，类似于 Vue 模版中的 &amp;lt;template/&amp;gt; 或者 React.Fragment；无实际意义，用来对模板片段按照展示逻辑进行&lt;strong&gt;分组&lt;/strong&gt;：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -6514,12 +6476,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&amp;lt;ng-content/&amp;gt;，使用在组件内部，可以使组件&lt;a class="link"
-href="https://angular.cn/guide/content-projection"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-“接受外部插入进来的内容”
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&amp;lt;ng-content/&amp;gt;，使用在组件内部，可以使组件&lt;a class="link" href="https://angular.cn/guide/content-projection" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;“接受外部插入进来的内容”&lt;/a&gt;
 ，相当于 Vue 模版中的 &amp;lt;slot/&amp;gt;：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Angular 中并没有“&lt;strong&gt;具名插槽&lt;/strong&gt;”的概念，但是 &amp;lt;ng-content/&amp;gt; 有一个 select 属性（CSS 选择器，不支持变量），可以起到对外部插入的内容进行&lt;strong&gt;过滤&lt;/strong&gt;的作用；&lt;/li&gt;
@@ -6558,13 +6516,15 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="特殊选择器"&gt;特殊选择器&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="特殊选择器"&gt;特殊选择器
+&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;::ng-deep、/deep/、&amp;gt;&amp;gt;&amp;gt;，将样式应用到全局；所以请在 ::ng-deep 之前带上 :host，防止污染全局样式；&lt;/li&gt;
 &lt;li&gt;:host、:host(condition)，宿主元素选择器/当“宿主元素”满足 condition 时；&lt;/li&gt;
 &lt;li&gt;:host-context(condition)，当“宿主的祖先元素”满足 condition 时。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="contentchild-与-viewchild"&gt;ContentChild 与 ViewChild&lt;/h2&gt;
+&lt;h2 id="contentchild-与-viewchild"&gt;ContentChild 与 ViewChild
+&lt;/h2&gt;
 &lt;p&gt;@ViewChild() 从当前&lt;strong&gt;组件模版中&lt;/strong&gt;获取组件对象（Vue/React 中 ref 的功能）：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -6679,7 +6639,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;li&gt;AfterContent 关心的是 ContentChildren，ContentChildren 被投射进当前组件中；&lt;/li&gt;
 &lt;li&gt;ContentChild 和 ViewChild 指向的类型不同（一个在外部投射内容中查找，一个在当前模版中查找）。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="changedetectorref"&gt;ChangeDetectorRef&lt;/h2&gt;
+&lt;h2 id="changedetectorref"&gt;ChangeDetectorRef
+&lt;/h2&gt;
 &lt;p&gt;首先，每个组件都有自己的变更检测器，一个应用包含多个组件，组件之间的层级关系形成了“组件树”。&lt;/p&gt;
 &lt;p&gt;Angular 的默认检测机制是：当一个组件发生变更时，无论它在组件树的什么位置，都会触发树中的所有的变更检测器；Ng 会从“自顶向下”，扫描树所有节点。&lt;/p&gt;
 &lt;p&gt;ChangeDetectorRef 为组件实例提供了&lt;strong&gt;自定义变更检测功能&lt;/strong&gt;，可以将组件从&lt;strong&gt;变更检测树&lt;/strong&gt;中添加或删除；ChangeDetectorRef 提供了五个方法：&lt;/p&gt;
@@ -6746,12 +6707,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;在开发的过程中，可能会遇到**&lt;a class="link"
-href="https://angular.cn/errors/NG0100"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-NG100 错误
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;在开发的过程中，可能会遇到**&lt;a class="link" href="https://angular.cn/errors/NG0100" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;NG100 错误&lt;/a&gt;
 **，特别是在 ngAfterViewInit 钩子中执行“手动”渲染操作时；原因是，在开发模式下，每次&amp;quot;变更检测&amp;quot;后，都会执行一次&amp;quot;附加检查&amp;quot;，如果在附加检查过程中，视图和&amp;quot;变更检测&amp;quot;后的视图不一致，会报 NG100 错误。&lt;/p&gt;
 &lt;p&gt;解决方法是，将同步渲染逻辑改为异步（宏任务、微任务均可），或者同步调用 detectChanges 重新进行变更检测。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -6812,7 +6769,8 @@ NG100 错误
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="aot-与-jit"&gt;AOT 与 JIT&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="aot-与-jit"&gt;AOT 与 JIT
+&lt;/h2&gt;
 &lt;p&gt;组件和模版需要经过编译，才能在浏览器中运行；Angular 提供了两种编译方式：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Ahead-Of-Time 预编译（在打包/构建时编译，Angular 9 之后）：
@@ -6846,7 +6804,8 @@ NG100 错误
 &lt;li&gt;模版类型检查：TS 编译器会验证模版中绑定的表达式。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;JIT 编译器可以替代 AOT 编译器，在“运行时”将模板编译（需要将 compiler 打包）为浏览器中的可执行模板代码。&lt;/p&gt;
-&lt;h2 id="安全"&gt;安全&lt;/h2&gt;
+&lt;h2 id="安全"&gt;安全
+&lt;/h2&gt;
 &lt;p&gt;为了防范 XSS，Angular 认为所有值都是不可信任的；任何值在插入 DOM 之前，都会被进行“无害化”处理（前提是使用 Angular 模版，如果在代码中直接使用 DOM API，将没有“无害化”处理）。&lt;/p&gt;
 &lt;p&gt;Angular 定义了四个安全上下文：&lt;/p&gt;
 &lt;ul&gt;
@@ -6891,12 +6850,8 @@ NG100 错误
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;如果某个值被确认是可信的，可以通过 &lt;a class="link"
-href="https://angular.cn/api/platform-browser/DomSanitizer"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-DomSanitizer
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;如果某个值被确认是可信的，可以通过 &lt;a class="link" href="https://angular.cn/api/platform-browser/DomSanitizer" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;DomSanitizer&lt;/a&gt;
 将这个值标记为安全值，安全的值将不会被进行“无害化”。&lt;/p&gt;
 &lt;p&gt;DomSanitizer 提供了六种方法：&lt;/p&gt;
 &lt;ul&gt;
@@ -6939,55 +6894,28 @@ DomSanitizer
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="参考"&gt;参考&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="参考"&gt;参考
+&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://dev.to/christiankohler/improved-dependeny-injection-with-the-new-providedin-scopes-any-and-platform-30bb"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Improved Dependency Injection With The New ProvidedIn Scopes &amp;lsquo;any&amp;rsquo; And &amp;lsquo;platform&amp;rsquo;
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://dev.to/christiankohler/improved-dependeny-injection-with-the-new-providedin-scopes-any-and-platform-30bb" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Improved Dependency Injection With The New ProvidedIn Scopes &amp;lsquo;any&amp;rsquo; And &amp;lsquo;platform&amp;rsquo;&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://juejin.cn/post/7012492445506093092"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-深入理解 Angular 依赖注入（二）：依赖注入在 Angular 中的应用
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://juejin.cn/post/7012492445506093092" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;深入理解 Angular 依赖注入（二）：依赖注入在 Angular 中的应用&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://limeii.github.io/2019/06/angular-changeDetectionStrategy-OnPush"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Angular Change Detection：变更检测策略
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://limeii.github.io/2019/06/angular-changeDetectionStrategy-OnPush" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Angular Change Detection：变更检测策略&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://www.geeksforgeeks.org/what-is-aot-and-jit-compiler-in-angular"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-What Is AOT And JIT Compiler In Angular?
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://www.geeksforgeeks.org/what-is-aot-and-jit-compiler-in-angular" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;What Is AOT And JIT Compiler In Angular?&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://juejin.cn/post/6869995328330792968"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-ng-template、ng-content、ng-container
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://juejin.cn/post/6869995328330792968" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;ng-template、ng-content、ng-container&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://www.cnblogs.com/laixiangran/p/8723166.html"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-使用 ng-content 进行组件内容投射
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://www.cnblogs.com/laixiangran/p/8723166.html" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;使用 ng-content 进行组件内容投射&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://blog.kevinyang.net/2018/01/19/angular-viewproviders-providers"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-viewProviders vs providers
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://blog.kevinyang.net/2018/01/19/angular-viewproviders-providers" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;viewProviders vs providers&lt;/a&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</description></item></channel></rss>

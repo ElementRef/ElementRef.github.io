@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>交互 on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/%E4%BA%A4%E4%BA%92/</link><description>Recent content in 交互 on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 02 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/%E4%BA%A4%E4%BA%92/index.xml" rel="self" type="application/rss+xml"/><item><title>如何实现虚拟滚动？ · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%99%9A%E6%8B%9F%E6%BB%9A%E5%8A%A8/</link><pubDate>Thu, 02 Dec 2021 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%99%9A%E6%8B%9F%E6%BB%9A%E5%8A%A8/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/interaction.png" alt="如何实现虚拟滚动？" /&gt;&lt;p&gt;首先，需要有一个滚动容器 div 来放置滚动列表 ul；按照通常的渲染方式，ul 里会有大量（成千上万）的列表元素 li；当对某一个 li 进行 DOM 操作时（比如，一些股票软件会通过高亮的方式实时渲染此支股票的涨跌），需要先遍历所有 li，找到要进行操作的元素，再进行 DOM 操作。此时，页面可能会因为 DOM 树过于庞大而占用大量内存，页面渲染可能卡顿。而虚拟滚动要做的，就是在保证用户正常交互体验的同时尽可能少的渲染 DOM，提升页面的响应速度。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>交互 on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/%E4%BA%A4%E4%BA%92/</link><description>Recent Content in 交互 on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo 0.162.0</generator><language>zh</language><lastBuildDate>Thu, 02 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/%E4%BA%A4%E4%BA%92/index.xml" rel="self" type="application/rss+xml"/><item><title>如何实现虚拟滚动？</title><link>https://ElementRef.github.io/p/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%99%9A%E6%8B%9F%E6%BB%9A%E5%8A%A8/</link><pubDate>Thu, 02 Dec 2021 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%99%9A%E6%8B%9F%E6%BB%9A%E5%8A%A8/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/interaction.png" alt="Featured image of post 如何实现虚拟滚动？" /&gt;&lt;p&gt;首先，需要有一个滚动容器 div 来放置滚动列表 ul；按照通常的渲染方式，ul 里会有大量（成千上万）的列表元素 li；当对某一个 li 进行 DOM 操作时（比如，一些股票软件会通过高亮的方式实时渲染此支股票的涨跌），需要先遍历所有 li，找到要进行操作的元素，再进行 DOM 操作。此时，页面可能会因为 DOM 树过于庞大而占用大量内存，页面渲染可能卡顿。而虚拟滚动要做的，就是在保证用户正常交互体验的同时尽可能少的渲染 DOM，提升页面的响应速度。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -233,13 +233,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;VirtualScroll&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;containerEle&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;listEle&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;listData&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;DEMO 在&lt;a class="link"
-href="https://ElementRef.github.io/DemosForIfe/Virtual%20Scroll.html"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-这里
-&lt;/a&gt;
-。&lt;/p&gt;</description></item><item><title>如何实现弹幕效果？ · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%BC%B9%E5%B9%95%E6%95%88%E6%9E%9C/</link><pubDate>Mon, 20 Apr 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%BC%B9%E5%B9%95%E6%95%88%E6%9E%9C/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/interaction.png" alt="如何实现弹幕效果？" /&gt;&lt;h2 id="数据格式"&gt;数据格式&lt;/h2&gt;
+&lt;/div&gt;&lt;p&gt;DEMO 在&lt;a class="link" href="https://ElementRef.github.io/DemosForIfe/Virtual%20Scroll.html" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;这里&lt;/a&gt;
+。&lt;/p&gt;</description></item><item><title>如何实现弹幕效果？</title><link>https://ElementRef.github.io/p/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%BC%B9%E5%B9%95%E6%95%88%E6%9E%9C/</link><pubDate>Mon, 20 Apr 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%BC%B9%E5%B9%95%E6%95%88%E6%9E%9C/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/interaction.png" alt="Featured image of post 如何实现弹幕效果？" /&gt;&lt;h2 id="数据格式"&gt;数据格式
+&lt;/h2&gt;
 &lt;p&gt;弹幕一般用在直播或者视频播放的场景中，是评论的一种变形；按照我的理解，它的数据格式应该是：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -257,7 +254,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="发布弹幕"&gt;发布弹幕&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="发布弹幕"&gt;发布弹幕
+&lt;/h2&gt;
 &lt;p&gt;当用户发布弹幕时，获取当前视频的时间点，将弹幕插入到弹幕列表中：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -307,7 +305,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="弹幕展示"&gt;弹幕展示&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="弹幕展示"&gt;弹幕展示
+&lt;/h2&gt;
 &lt;p&gt;实时获取视频的播放状态，当视频播放时，获取视频播放位置；当播放时间等于弹幕时间时，展示对应弹幕：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -422,11 +421,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="未完待续"&gt;未完待续&lt;/h2&gt;
-&lt;p&gt;DEMO 在&lt;a class="link"
-href="https://ElementRef.github.io/DemosForIfe/Barrage.html"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-这里
-&lt;/a&gt;
+&lt;/div&gt;&lt;h2 id="未完待续"&gt;未完待续
+&lt;/h2&gt;
+&lt;p&gt;DEMO 在&lt;a class="link" href="https://ElementRef.github.io/DemosForIfe/Barrage.html" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;这里&lt;/a&gt;
 ，暂停视频时当前时间对应的弹幕停止滚动还没想好怎么实现（初步想法是使用 animation 替换 transform，因为 animation-play-state 可以控制动画的状态）。&lt;/p&gt;</description></item></channel></rss>

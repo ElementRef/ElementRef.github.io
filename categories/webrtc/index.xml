@@ -1,17 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WebRTC on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/webrtc/</link><description>Recent content in WebRTC on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 25 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/webrtc/index.xml" rel="self" type="application/rss+xml"/><item><title>WebRTC 初上手 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/webrtc-%E5%88%9D%E4%B8%8A%E6%89%8B/</link><pubDate>Mon, 25 Apr 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/webrtc-%E5%88%9D%E4%B8%8A%E6%89%8B/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/webrtc.png" alt="WebRTC 初上手" /&gt;&lt;h2 id="需求"&gt;需求&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WebRTC on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/webrtc/</link><description>Recent Content in WebRTC on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo 0.162.0</generator><language>zh</language><lastBuildDate>Mon, 25 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/webrtc/index.xml" rel="self" type="application/rss+xml"/><item><title>WebRTC 初上手</title><link>https://ElementRef.github.io/p/webrtc-%E5%88%9D%E4%B8%8A%E6%89%8B/</link><pubDate>Mon, 25 Apr 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/webrtc-%E5%88%9D%E4%B8%8A%E6%89%8B/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/webrtc.png" alt="Featured image of post WebRTC 初上手" /&gt;&lt;h2 id="需求"&gt;需求
+&lt;/h2&gt;
 &lt;p&gt;随着政府对个体户税收政策的收紧，公司需要采集客户的“话术视频”来作为规避业务风险的“凭据”。具体来说就是，需要用户在手机端录制一段“我已同意 xxx”的视频，并且录制完成之后，上传至服务器保存。&lt;/p&gt;
-&lt;p&gt;经过调研搜集，大致有两种实现思路：&lt;a class="link"
-href="https://w3c.github.io/html-media-capture"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-基于 input[capture] 的实现
-&lt;/a&gt;
-和&lt;a class="link"
-href="https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-基于 WebRTC 的实现
-&lt;/a&gt;
+&lt;p&gt;经过调研搜集，大致有两种实现思路：&lt;a class="link" href="https://w3c.github.io/html-media-capture" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;基于 input[capture] 的实现&lt;/a&gt;
+和&lt;a class="link" href="https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;基于 WebRTC 的实现&lt;/a&gt;
 ；input 这种不是本文重点，略过。&lt;/p&gt;
 &lt;p&gt;基于 WebRTC 的实现的基本思路是：&lt;/p&gt;
 &lt;ol&gt;
@@ -21,60 +14,33 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;li&gt;如果文件较大，可能需要 Blob 等 API 对媒体流进行分包上传；&lt;/li&gt;
 &lt;li&gt;如果产品有需要，可能后端要调用 ffmpeg 等工具对视频编码进行转换。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id="webrtc"&gt;WebRTC&lt;/h2&gt;
-&lt;p&gt;前端调用设备采集视频流主要采用的是 &lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Glossary/WebRTC"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-WebRTC 实时通讯技术
-&lt;/a&gt;
+&lt;h2 id="webrtc"&gt;WebRTC
+&lt;/h2&gt;
+&lt;p&gt;前端调用设备采集视频流主要采用的是 &lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Glossary/WebRTC" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;WebRTC 实时通讯技术&lt;/a&gt;
 ，它是一项可以用于视频聊天、音频聊天或 P2P 文件分享的技术。&lt;/p&gt;
 &lt;p&gt;整个 WebRTC 主要有以下几个 API 组成：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaDevices"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-MediaDevices
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaDevices" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;MediaDevices&lt;/a&gt;
 ，提供访问连接媒体输入的设备（相机、麦克风以及屏幕共享等），可以使你取得任何硬件资源的媒体数据：
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaDevices/getUserMedia"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-getUserMedia
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaDevices/getUserMedia" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;getUserMedia&lt;/a&gt;
 ，为 RTC 连接&lt;strong&gt;获取&lt;/strong&gt;设备的摄像头与麦克风权限并&lt;strong&gt;接入&lt;/strong&gt;设备信号；会提示用户给予使用媒体输入的许可；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaDevices/getDisplayMedia"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-getDisplayMedia
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaDevices/getDisplayMedia" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;getDisplayMedia&lt;/a&gt;
 ，提示用户去选择和授权捕获&lt;strong&gt;屏幕内容&lt;/strong&gt;在一个 MediaStream 里。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaStream"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-MediaStream
-&lt;/a&gt;
-是一个媒体内容的流，一个流包含几个轨道，比如视频和音频轨道；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/API/RTCDataChannel"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-RTCDataChannel
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaStream" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;MediaStream&lt;/a&gt;
+ 是一个媒体内容的流，一个流包含几个轨道，比如视频和音频轨道；&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/RTCDataChannel" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;RTCDataChannel&lt;/a&gt;
 ，用来设置 P2P 数据连接，在两者之间建立一个双向数据通道连接；&lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/API/RTCPeerConnection"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-RTCPeerConnection
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/RTCPeerConnection" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;RTCPeerConnection&lt;/a&gt;
 ，用于配置音频或视频聊天。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -373,13 +339,9 @@ RTCPeerConnection
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;//
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;接下来就是使用 &lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaRecorder"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-MediaRecorder
-&lt;/a&gt;
-进行视频流的录制：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;接下来就是使用 &lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaRecorder" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;MediaRecorder&lt;/a&gt;
+ 进行视频流的录制：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -492,39 +454,20 @@ MediaRecorder
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="兼容性"&gt;兼容性&lt;/h2&gt;
-&lt;p&gt;根据&lt;a class="link"
-href="https://faceid.com/document/faceid-guide-docs/h5_rtc_compatibility"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-旷视发布的 RTC 兼容性说明
-&lt;/a&gt;
+&lt;/div&gt;&lt;h2 id="兼容性"&gt;兼容性
+&lt;/h2&gt;
+&lt;p&gt;根据&lt;a class="link" href="https://faceid.com/document/faceid-guide-docs/h5_rtc_compatibility" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;旷视发布的 RTC 兼容性说明&lt;/a&gt;
 ，iOS 和原生 Android 内置的浏览器和 WebView 组件都已经很好的支持了 WebRTC；腾讯的 X5 也对 WebRTC 有不错的支持。&lt;/p&gt;
-&lt;p&gt;如果出现了运行错误，可以使用 &lt;a class="link"
-href="https://developer.mozilla.org/zh-CN/docs/Web/API/WebRTC_API/adapter.js"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-adapter.js
-&lt;/a&gt;
-垫片并使用 &lt;a class="link"
-href="https://webdemo.agora.io/agora_webrtc_troubleshooting"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Agora WebRTC Precall Test
-&lt;/a&gt;
-检测当前环境对 WebRTC 的支持情况。&lt;/p&gt;
+&lt;p&gt;如果出现了运行错误，可以使用 &lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/WebRTC_API/adapter.js" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;adapter.js&lt;/a&gt;
+ 垫片并使用 &lt;a class="link" href="https://webdemo.agora.io/agora_webrtc_troubleshooting" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Agora WebRTC Precall Test&lt;/a&gt;
+ 检测当前环境对 WebRTC 的支持情况。&lt;/p&gt;
 &lt;p&gt;小米部分机型不识别 MediaStream，并且没有对应的开发文档。&lt;/p&gt;
-&lt;p&gt;如果 iOS 不能实时预览和回放，请&lt;a class="link"
-href="https://developer.apple.com/documentation/webkit/delivering_video_content_for_safari"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-参阅
-&lt;/a&gt;
+&lt;p&gt;如果 iOS 不能实时预览和回放，请&lt;a class="link" href="https://developer.apple.com/documentation/webkit/delivering_video_content_for_safari" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;参阅&lt;/a&gt;
 。&lt;/p&gt;
-&lt;p&gt;DEMO 在&lt;a class="link"
-href="https://ElementRef.github.io/DemosForIfe/MediaRecorder.html"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-这里
-&lt;/a&gt;
+&lt;p&gt;DEMO 在&lt;a class="link" href="https://ElementRef.github.io/DemosForIfe/MediaRecorder.html" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;这里&lt;/a&gt;
 。&lt;/p&gt;</description></item></channel></rss>

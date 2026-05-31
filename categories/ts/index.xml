@@ -1,18 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>TS on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/ts/</link><description>Recent content in TS on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 24 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/ts/index.xml" rel="self" type="application/rss+xml"/><item><title>TS 装饰器的使用 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/ts-%E8%A3%85%E9%A5%B0%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 24 Feb 2025 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/ts-%E8%A3%85%E9%A5%B0%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/typescript.png" alt="TS 装饰器的使用" /&gt;&lt;p&gt;最近在看一个 SaaS 项目，项目中的数据请求函数有点另类，不同于我之前写的项目；它的每个请求函数是基于 &lt;a class="link"
-href="https://www.typescriptlang.org/docs/handbook/decorators.html"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-装饰器
-&lt;/a&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>TS on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/ts/</link><description>Recent Content in TS on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo 0.162.0</generator><language>zh</language><lastBuildDate>Mon, 24 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/ts/index.xml" rel="self" type="application/rss+xml"/><item><title>TS 装饰器的使用</title><link>https://ElementRef.github.io/p/ts-%E8%A3%85%E9%A5%B0%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 24 Feb 2025 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/ts-%E8%A3%85%E9%A5%B0%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/typescript.png" alt="Featured image of post TS 装饰器的使用" /&gt;&lt;p&gt;最近在看一个 SaaS 项目，项目中的数据请求函数有点另类，不同于我之前写的项目；它的每个请求函数是基于 &lt;a class="link" href="https://www.typescriptlang.org/docs/handbook/decorators.html" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;装饰器&lt;/a&gt;
 来构建的。相比于继承，装饰器的控制颗粒度更小更灵活，并且对类本身的侵入性较小。&lt;/p&gt;
-&lt;p&gt;本文中，代码的运行时为 &lt;a class="link"
-href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-8.html"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-TypeScript@5.8.2
-&lt;/a&gt;
+&lt;p&gt;本文中，代码的运行时为 &lt;a class="link" href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-8.html" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;TypeScript@5.8.2&lt;/a&gt;
 。&lt;/p&gt;
-&lt;h2 id="装饰器"&gt;装饰器&lt;/h2&gt;
+&lt;h2 id="装饰器"&gt;装饰器
+&lt;/h2&gt;
 &lt;p&gt;TS 装饰器分为：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;类&lt;/strong&gt;装饰器；&lt;/li&gt;
@@ -21,7 +14,8 @@ TypeScript@5.8.2
 &lt;li&gt;&lt;strong&gt;参数&lt;/strong&gt;装饰器；&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;访问器&lt;/strong&gt;装饰器。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id="类装饰器"&gt;类装饰器&lt;/h3&gt;
+&lt;h3 id="类装饰器"&gt;类装饰器
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -90,14 +84,11 @@ TypeScript@5.8.2
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;example&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;sayHi&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="c1"&gt;// I&amp;#39;M DecoratorsExample
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/AIYQNghgzlAiCmBjA9gJwgFzQMQHYChFIYACBFdLVKAUQA8IBbABzHhIG98SSoIBPABIBLAIQAuEgAoAlCQC8APhIA3ZMIAmAbnwBffAHoAVEe5GSgbx9AoxGAHTMAWaoBC3C4Gj1QFj-ZkrmQb4AfUbeAK5sUAYY-MzwUIiowswYBmDCAEaJKQB0PhSYaFDpbADmEIj8mekYUB5ZkKjs4ZEk4NBwSGg5qAokADwAKtiBuIgYwsi4JPB0GPC4GlAk-YPDo4pSGBCoBfAYkn0DQyO4ckoku4sHJAA&amp;#43;quraZgb4AGZ7S2NNMORtVHir65vb888DjJJGpNJxuCRjKYeCRzABtBb7UaSD6UXL0JiseAAXQhsJIaw2WxIgHBjQCIKoAYBkAIeaAAgTAL&amp;#43;KgAdTQCwDHijPceChcFBkGx8sgClIAORvFrZL5jZSEv6CgA0BN&amp;#43;xPkSrIrTR1AxLDYMi0kIMBNQgXgEIMesA98qAU7lAN&amp;#43;2gAKlQA6-4A7&amp;#43;UAnKa2wAESoATNMA&amp;#43;crOQBQcg5AHo6gHIDQAxKoBO00AqzYQqVbdLMVDILD1eDpXBMdjyEiC1HtWgMTXwQU6HhRjAxuMJiJJvhCYSdJ5nUbSORcGG6kiAfAVAJVKXt94cAMP&amp;#43;AZPjAF&amp;#43;KgFPTQDr&amp;#43;niCQALYR5ZCBDDMedSAAGAElBQBZEgAEg4GGneRTjHgumX2ohukL8qJJdj8fjFfSc4X886UkYUAKkigGFiuAKRzKM2MKctyvJgPy76fuePCXnohgmB41j2IAH26AMr6gBxcoAFOqAJvxgAziYAwDGABSugBhco0xCip8OC4FIWZUDmmJah4OGAPpygAv0YAcGa9rYdiAPRmFqAAfK1oOL2gDB2oAV8q8YAn9qANUR9o2FJgCGMYA2-GADIRJFOnchCjD&amp;#43;4y5linS4PAADuKpiui&amp;#43;lsLIOgTIxlYCCI1mtuuW50RZdlAA"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-点击
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/AIYQNghgzlAiCmBjA9gJwgFzQMQHYChFIYACBFdLVKAUQA8IBbABzHhIG98SSoIBPABIBLAIQAuEgAoAlCQC8APhIA3ZMIAmAbnwBffAHoAVEe5GSgbx9AoxGAHTMAWaoBC3C4Gj1QFj-ZkrmQb4AfUbeAK5sUAYY-MzwUIiowswYBmDCAEaJKQB0PhSYaFDpbADmEIj8mekYUB5ZkKjs4ZEk4NBwSGg5qAokADwAKtiBuIgYwsi4JPB0GPC4GlAk-YPDo4pSGBCoBfAYkn0DQyO4ckoku4sHJAA&amp;#43;quraZgb4AGZ7S2NNMORtVHir65vb888DjJJGpNJxuCRjKYeCRzABtBb7UaSD6UXL0JiseAAXQhsJIaw2WxIgHBjQCIKoAYBkAIeaAAgTAL&amp;#43;KgAdTQCwDHijPceChcFBkGx8sgClIAORvFrZL5jZSEv6CgA0BN&amp;#43;xPkSrIrTR1AxLDYMi0kIMBNQgXgEIMesA98qAU7lAN&amp;#43;2gAKlQA6-4A7&amp;#43;UAnKa2wAESoATNMA&amp;#43;crOQBQcg5AHo6gHIDQAxKoBO00AqzYQqVbdLMVDILD1eDpXBMdjyEiC1HtWgMTXwQU6HhRjAxuMJiJJvhCYSdJ5nUbSORcGG6kiAfAVAJVKXt94cAMP&amp;#43;AZPjAF&amp;#43;KgFPTQDr&amp;#43;niCQALYR5ZCBDDMedSAAGAElBQBZEgAEg4GGneRTjHgumX2ohukL8qJJdj8fjFfSc4X886UkYUAKkigGFiuAKRzKM2MKctyvJgPy76fuePCXnohgmB41j2IAH26AMr6gBxcoAFOqAJvxgAziYAwDGABSugBhco0xCip8OC4FIWZUDmmJah4OGAPpygAv0YAcGa9rYdiAPRmFqAAfK1oOL2gDB2oAV8q8YAn9qANUR9o2FJgCGMYA2-GADIRJFOnchCjD&amp;#43;4y5linS4PAADuKpiui&amp;#43;lsLIOgTIxlYCCI1mtuuW50RZdlAA" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;点击&lt;/a&gt;
 查看源码。&lt;/p&gt;
-&lt;h3 id="属性装饰器"&gt;属性装饰器&lt;/h3&gt;
+&lt;h3 id="属性装饰器"&gt;属性装饰器
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -150,14 +141,11 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;example&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;sex&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// 属性值被 PropertyDecoratorFn 改写为 female
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEAiCmwD2AnMAXVECiAPMAtgA4jzQDeAUNNAAIAKKSR8K6AngsmpigGIA7atAjxcALmgByAmFJToAH2kAzeLPnQAvNI3wpAbkoBfSgHoAVBeoXogPR1A5AaBRiMAOmYAs1QCFugbx9A0eqAsf5toASQAE3gAfQJQgFdSCDMOFghgFABLInQzEFSAIyzcgDow7gwsAtIAczBgdiKC9AhA4vAUMkSyRmZWDi5UUpRtaAAKdDAUCvh0SQB5HIArRHQAGmgiJhY2dgBpeHZJCHQ0gQqlEXYCHKQQAEptAD5oADckVJCjaAszShVogWB0VJIATQTobHqIPq8QQjMYTKbQWYLf4rNZdTY7PYiQ6pY6nCDnS43CjCZACCBXeDlJAVIZSUHdTgQnioQTQB6jcaTKQrDlw64GaBmMzQQDgxoBEFUAedqAaPk4Ez&amp;#43;jh8MRSJJyKYaKTyaQqTS6esGb1mfxgQ9UWDtrtuas9ejdvzBcLxY5ALAqgAfPERiYSIxZFeAqHHwembGGc5ZWtEcDErKg0dVAv0VaJoHLK6CHaLwJbCGjwATRAisMDJ&amp;#43;CSNMZrPQOGSIa3LQPaMxmitdCJ4FSNR6Qzl4yZhuieGPOTp&amp;#43;4UaBq0f8kyUDXoaBiQgkMg6ATwADuspKvAV89I1aMGop2qGc6VlNEuDtQvsDkAPAqAaoiQdbwRuWcDAJymgEzFQBcctB23J4EA"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-点击
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEAiCmwD2AnMAXVECiAPMAtgA4jzQDeAUNNAAIAKKSR8K6AngsmpigGIA7atAjxcALmgByAmFJToAH2kAzeLPnQAvNI3wpAbkoBfSgHoAVBeoXogPR1A5AaBRiMAOmYAs1QCFugbx9A0eqAsf5toASQAE3gAfQJQgFdSCDMOFghgFABLInQzEFSAIyzcgDow7gwsAtIAczBgdiKC9AhA4vAUMkSyRmZWDi5UUpRtaAAKdDAUCvh0SQB5HIArRHQAGmgiJhY2dgBpeHZJCHQ0gQqlEXYCHKQQAEptAD5oADckVJCjaAszShVogWB0VJIATQTobHqIPq8QQjMYTKbQWYLf4rNZdTY7PYiQ6pY6nCDnS43CjCZACCBXeDlJAVIZSUHdTgQnioQTQB6jcaTKQrDlw64GaBmMzQQDgxoBEFUAedqAaPk4Ez&amp;#43;jh8MRSJJyKYaKTyaQqTS6esGb1mfxgQ9UWDtrtuas9ejdvzBcLxY5ALAqgAfPERiYSIxZFeAqHHwembGGc5ZWtEcDErKg0dVAv0VaJoHLK6CHaLwJbCGjwATRAisMDJ&amp;#43;CSNMZrPQOGSIa3LQPaMxmitdCJ4FSNR6Qzl4yZhuieGPOTp&amp;#43;4UaBq0f8kyUDXoaBiQgkMg6ATwADuspKvAV89I1aMGop2qGc6VlNEuDtQvsDkAPAqAaoiQdbwRuWcDAJymgEzFQBcctB23J4EA" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;点击&lt;/a&gt;
 查看源码。&lt;/p&gt;
-&lt;h3 id="方法装饰器"&gt;方法装饰器&lt;/h3&gt;
+&lt;h3 id="方法装饰器"&gt;方法装饰器
+&lt;/h3&gt;
 &lt;p&gt;当装饰&lt;strong&gt;实例方法&lt;/strong&gt;时，第一个参数指向&lt;strong&gt;实例&lt;/strong&gt;；当装饰&lt;strong&gt;静态方法&lt;/strong&gt;时，第一个参数指向&lt;strong&gt;构造函数&lt;/strong&gt;：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -291,12 +279,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEAiCmwD2AnMAXVECiAPMAtgA4jzQDeAUNNESgJYBuGZE8uAXNAOQFindoAHx4AzeHwHQAvD0nxuAbkrVoAAQCSAOwjowW4PACy8dAAskAEwTI0mFADEtqogFcARiHrBoAc1MAyuwAFACUFKo0KKauKFrQ5vQQAHRsuMo0AL4qNGoBeujeJuZWNqgYqE6quhjefqbaokhhETRRMXHQWq4gIBnQ2dkA9ABUI9Qj0ICdpoCrNoCjEYAOmYAWaoAhboDePoDR6oBY-xNdVvAA&amp;#43;gRWPfAQQ&amp;#43;gAnkRnwAxE6ENe7k-07smWiOX2KaS&amp;#43;YMBLh9kugILtPqAwNEEtcyMULNYvnZUDJoAAeAAqAD5gnoUP50FwAPLuABWiHQABpaCgkDcUFcANLwS5cXQMLS&amp;#43;YTQCCXAjuJAgamfCB3egPVBcDGwywABVp9KuCFF93smKx4WkWOg0pucoV8AZl2VYolKHV3MYSHolgyIyGlFErgMhSQ8W0NQMxlMCLKyMcWmCqjxBOJZIplJcBqNzNZPPQHK5Il5-MFkZoItN9i48rphqVt1VqEooRz0YLKvF9kt1ssrWgyB0gvgyRASF8wW4Hr0XvhpSRFQD0G1IdM3Gpo-QoUU0CGQ2ggHBjQCIKoA87UA0fJwAc-PCEEjwLjkbI0RsQZut9ud7v6Qx9xG2QdOYc0vMxlnj5&amp;#43;Ky6x6ez&amp;#43;fL2aALAqgAPnvU6BBLgqijOMbSTIAK-GAHtqgCf2oAKXorIAMAyAMKKgAOpoAdsaALAMgCH8oA9gaRJMVAwW0ABEjaiPQvixGAnjwJRXAJq48DpjQkw0JR8DdAQhqMaQLHQKI-BsJx0DcdAlEAO4MHoTEiWx8CkQMpEOsebqnqQ54dl2Og9jePr9ve9iPtqmZFig75WVWqA-nO0AIWhuGAHo6gDkBnhkHzoAd-KAJymrk4Z53ntOgsTxORbQ0XRDFMVwYkgBJkTQHxrgCWg8WieJHEpfJ9CKaQCU5aomTKNkTouvQbrQPktTALefoPoGwZQqG0AkuSwBUlGL5MiybIJvQnLcimApCqodlmmWfXGoW9koCWM2fia1k1ja9Ynmebb6XVhQNSZd7fJU8Qjm1Y4TudU4zk5y5oYAIeaAAQJgC-ilhoUNtp20Xtwe1FIdTXmadH75l&amp;#43;b7UnQs3fjdf5LoBIEEo0SCQWMakISh6HYfhxFqVFUlUTF9GZcJrEoOxknSbx-GCUpxVJblFE8flhXMST7FqUeXGaR9Ta6Ttna-QdJRHf6FnQFN9i2fNZrTpQ2QnugqX4MQpColo8CyZuZlYDuyvwGEyhOYAWPKABTqgAL8YAMhGAG&amp;#43;mgClRoAmKmADD-gAHaoAXHIBUFIWANJygBwKvbBLgdAgCwcoAvwGANURAWUOwu66X77CopV3XVfELRRdE4WdLw-AKOVihAA"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-点击
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEAiCmwD2AnMAXVECiAPMAtgA4jzQDeAUNNESgJYBuGZE8uAXNAOQFindoAHx4AzeHwHQAvD0nxuAbkrVoAAQCSAOwjowW4PACy8dAAskAEwTI0mFADEtqogFcARiHrBoAc1MAyuwAFACUFKo0KKauKFrQ5vQQAHRsuMo0AL4qNGoBeujeJuZWNqgYqE6quhjefqbaokhhETRRMXHQWq4gIBnQ2dkA9ABUI9Qj0ICdpoCrNoCjEYAOmYAWaoAhboDePoDR6oBY-xNdVvAA&amp;#43;gRWPfAQQ&amp;#43;gAnkRnwAxE6ENe7k-07smWiOX2KaS&amp;#43;YMBLh9kugILtPqAwNEEtcyMULNYvnZUDJoAAeAAqAD5gnoUP50FwAPLuABWiHQABpaCgkDcUFcANLwS5cXQMLS&amp;#43;YTQCCXAjuJAgamfCB3egPVBcDGwywABVp9KuCFF93smKx4WkWOg0pucoV8AZl2VYolKHV3MYSHolgyIyGlFErgMhSQ8W0NQMxlMCLKyMcWmCqjxBOJZIplJcBqNzNZPPQHK5Il5-MFkZoItN9i48rphqVt1VqEooRz0YLKvF9kt1ssrWgyB0gvgyRASF8wW4Hr0XvhpSRFQD0G1IdM3Gpo-QoUU0CGQ2ggHBjQCIKoA87UA0fJwAc-PCEEjwLjkbI0RsQZut9ud7v6Qx9xG2QdOYc0vMxlnj5&amp;#43;Ky6x6ez&amp;#43;fL2aALAqgAPnvU6BBLgqijOMbSTIAK-GAHtqgCf2oAKXorIAMAyAMKKgAOpoAdsaALAMgCH8oA9gaRJMVAwW0ABEjaiPQvixGAnjwJRXAJq48DpjQkw0JR8DdAQhqMaQLHQKI-BsJx0DcdAlEAO4MHoTEiWx8CkQMpEOsebqnqQ54dl2Og9jePr9ve9iPtqmZFig75WVWqA-nO0AIWhuGAHo6gDkBnhkHzoAd-KAJymrk4Z53ntOgsTxORbQ0XRDFMVwYkgBJkTQHxrgCWg8WieJHEpfJ9CKaQCU5aomTKNkTouvQbrQPktTALefoPoGwZQqG0AkuSwBUlGL5MiybIJvQnLcimApCqodlmmWfXGoW9koCWM2fia1k1ja9Ynmebb6XVhQNSZd7fJU8Qjm1Y4TudU4zk5y5oYAIeaAAQJgC-ilhoUNtp20Xtwe1FIdTXmadH75l&amp;#43;b7UnQs3fjdf5LoBIEEo0SCQWMakISh6HYfhxFqVFUlUTF9GZcJrEoOxknSbx-GCUpxVJblFE8flhXMST7FqUeXGaR9Ta6Ttna-QdJRHf6FnQFN9i2fNZrTpQ2QnugqX4MQpColo8CyZuZlYDuyvwGEyhOYAWPKABTqgAL8YAMhGAG&amp;#43;mgClRoAmKmADD-gAHaoAXHIBUFIWANJygBwKvbBLgdAgCwcoAvwGANURAWUOwu66X77CopV3XVfELRRdE4WdLw-AKOVihAA" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;点击&lt;/a&gt;
 查看源码。&lt;/p&gt;
 &lt;p&gt;在实际开发中，方法装饰器通常用来给原方法进行增强：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -347,14 +331,11 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;example&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;hi&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="c1"&gt;// Hi, I&amp;#39;M DecoratorsExample, I&amp;#39;M 12 Years Old
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEAiCmwD2AnMAXVECiAPMAtgA4jzQDeAUNNAAIAUAymAJ4LJqYoA87qGWPIRLwAfAEpq0ABYBLeuIpSaKeOgCuKAHbQARAAlZAGmgBJAOQBZOIn5cc&amp;#43;YqV0BuKQF9KngGbqtwdFkkHWY2W05UbgAVUXopdDAUAHM1AC5oKKMpIhQkIngUdBYAaXgWdIBrMqRvDKyaABN4CGAUWSIudIAFXPzCsJa2jtRKRSoaZC0IdGhUWSTZLTAQSzVpJAboAF5oBOS1AG0cvIKi0pYAXTcaAHob6EBZxMBMxUB85UBO00BVmykmwfauADoAG7LdRkHa&amp;#43;fyBYLQBRKGg0WS1ehFfI1WZtBZLFZrDbbLY7cwQgJBLTmMbKeGTCBIUj-EBIJL0AAGABJyHNMctVuh1g1-mAiCQWMjEil0OJ3CYLNYAIwAJmgAE14IkYAB5EANJnia7wzw0dxuTxUmbwRwibbQLTwADuNg4AhQDmEpAUbjNLvg-zkbugd2ghilVntdkE5tIQdlCuVqugGoaQA"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-点击
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEAiCmwD2AnMAXVECiAPMAtgA4jzQDeAUNNAAIAUAymAJ4LJqYoA87qGWPIRLwAfAEpq0ABYBLeuIpSaKeOgCuKAHbQARAAlZAGmgBJAOQBZOIn5cc&amp;#43;YqV0BuKQF9KngGbqtwdFkkHWY2W05UbgAVUXopdDAUAHM1AC5oKKMpIhQkIngUdBYAaXgWdIBrMqRvDKyaABN4CGAUWSIudIAFXPzCsJa2jtRKRSoaZC0IdGhUWSTZLTAQSzVpJAboAF5oBOS1AG0cvIKi0pYAXTcaAHob6EBZxMBMxUB85UBO00BVmykmwfauADoAG7LdRkHa&amp;#43;fyBYLQBRKGg0WS1ehFfI1WZtBZLFZrDbbLY7cwQgJBLTmMbKeGTCBIUj-EBIJL0AAGABJyHNMctVuh1g1-mAiCQWMjEil0OJ3CYLNYAIwAJmgAE14IkYAB5EANJnia7wzw0dxuTxUmbwRwibbQLTwADuNg4AhQDmEpAUbjNLvg-zkbugd2ghilVntdkE5tIQdlCuVqugGoaQA" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;点击&lt;/a&gt;
 查看源码。&lt;/p&gt;
-&lt;h3 id="参数装饰器"&gt;参数装饰器&lt;/h3&gt;
+&lt;h3 id="参数装饰器"&gt;参数装饰器
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -399,14 +380,11 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEAiCmwD2AnMAXVECiAPMAtgA4jzQDeAUNNGAFZi4AUAAgAphoHzrwoLI0mFADEAdtCIYAFgC5oEdCgCWYgOYAaaO06EefAagypx0ZQBN5ileoCUFajWgoeAVxQSABtPToiEWQB6QIAjMAtXADpkAkCAEnIpdGkAX3jyCxTPAG5HFMp8wIAqIuoi6EBO00BVm0BRiMAHTMALNUAQt0BvH0Bo9UAsf7LoMSRzeAB9Aj7XUghA9ABPIngIYBUidECQZRDl1cj&amp;#43;wWMUCEjSNTBgSc3I9AhurfAXaCmZ6A4ufX5EI2FoAF5oJnRONR55AB5EJ0RDoLREFBIGYoKYAaXgkysSlUamgAB8FJMCCEkCAMdBXGJ&amp;#43;gAzVTwcwQ3TcXgoACSxPguHkYlcOL49g&amp;#43;AD5oAA3JAWXLQIqBSgkonAdDKJASR56WmGIQmMRMRy-FD-dBAkFgjSOSHQvjwxHImxozEQbG4-GYomk8mU-XU54M-rMnpskJ8Si2eT8iwOGjIMQQPHwfZINRMADkcppBleStEEh56s10a0aZ4tmy0GC0EA4MaARBVAHnagGj5OCJnY4fDEUjycj5IMy0OkCNR2POhVV4SmHkGmHGyYZyRQweTBGTHN5wKFovVQCwKoAHz1oDFwjmDrfDIEjMbjz0VOz7ki7fFdTJHUietPPuGn&amp;#43;eLgGV9QCySoB6M0ANN6AA8VAFRygCHlQAOpgUQA"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-点击
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEAiCmwD2AnMAXVECiAPMAtgA4jzQDeAUNNGAFZi4AUAAgAphoHzrwoLI0mFADEAdtCIYAFgC5oEdCgCWYgOYAaaO06EefAagypx0ZQBN5ileoCUFajWgoeAVxQSABtPToiEWQB6QIAjMAtXADpkAkCAEnIpdGkAX3jyCxTPAG5HFMp8wIAqIuoi6EBO00BVm0BRiMAHTMALNUAQt0BvH0Bo9UAsf7LoMSRzeAB9Aj7XUghA9ABPIngIYBUidECQZRDl1cj&amp;#43;wWMUCEjSNTBgSc3I9AhurfAXaCmZ6A4ufX5EI2FoAF5oJnRONR55AB5EJ0RDoLREFBIGYoKYAaXgkysSlUamgAB8FJMCCEkCAMdBXGJ&amp;#43;gAzVTwcwQ3TcXgoACSxPguHkYlcOL49g&amp;#43;AD5oAA3JAWXLQIqBSgkonAdDKJASR56WmGIQmMRMRy-FD-dBAkFgjSOSHQvjwxHImxozEQbG4-GYomk8mU-XU54M-rMnpskJ8Si2eT8iwOGjIMQQPHwfZINRMADkcppBleStEEh56s10a0aZ4tmy0GC0EA4MaARBVAHnagGj5OCJnY4fDEUjycj5IMy0OkCNR2POhVV4SmHkGmHGyYZyRQweTBGTHN5wKFovVQCwKoAHz1oDFwjmDrfDIEjMbjz0VOz7ki7fFdTJHUietPPuGn&amp;#43;eLgGV9QCySoB6M0ANN6AA8VAFRygCHlQAOpgUQA" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;点击&lt;/a&gt;
 查看源码。&lt;/p&gt;
-&lt;h3 id="访问器装饰器"&gt;访问器装饰器&lt;/h3&gt;
+&lt;h3 id="访问器装饰器"&gt;访问器装饰器
+&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -467,14 +445,11 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEAiCmwD2AnMAXVECiAPMAtgA4jzQDeAUNNAHaHwBqYK0AvNAOScDcl10AAIBBYMHhRUCZGkwoAYrQEBzeOjoMAFAEoKAmijUBXFLWjoAFgEsIAOnoEmLPjQC&amp;#43;AiGo2PNANzAgRvAAXNAQ6ChWtMq6VDQ0ljb2DMysHP6B8C7Q7u4A9HnQgP3RgHepgBZqgKMRgA6ZZYAhboDePoDR6oAwKoCdpoCrNtVllABmRrTA6FZIZqLikijSqBioipoC6Cyq6KEA8gBGAFaI6AA0AkQoSETwKOgAngDS8Oeh4ZHR0AA&amp;#43;YecE60gg&amp;#43;zQAJhLAkSIclCAAUjiczucEBAAVYgahKNpQr4kFYfnoaMhaBBPvBbCAkMpNJwxhIcZNENM5IpoAA&amp;#43;cxLNScXYMlDLbQ8aAFaCAcGNAIgqgDztQDR8nBKbIsHhCCQQhR3JiRjjSPjCcTSRMpuKFGZ6YdjqcLtdzszoLqIQabhyuYV&amp;#43;aUyoBYFUAD57eeACPIAKjd&amp;#43;jdGJo3poACIsT0rMoTGB1qR-aEIkFvr74v74LQjI40BH4FHoD0Ap4vTkvXkBFjFXiCUSSWIyVIxTMtXToH8YYC5MbG7D4SgOZRXEA"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-点击
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEAiCmwD2AnMAXVECiAPMAtgA4jzQDeAUNNAHaHwBqYK0AvNAOScDcl10AAIBBYMHhRUCZGkwoAYrQEBzeOjoMAFAEoKAmijUBXFLWjoAFgEsIAOnoEmLPjQC&amp;#43;AiGo2PNANzAgRvAAXNAQ6ChWtMq6VDQ0ljb2DMysHP6B8C7Q7u4A9HnQgP3RgHepgBZqgKMRgA6ZZYAhboDePoDR6oAwKoCdpoCrNtVllABmRrTA6FZIZqLikijSqBioipoC6Cyq6KEA8gBGAFaI6AA0AkQoSETwKOgAngDS8Oeh4ZHR0AA&amp;#43;YecE60gg&amp;#43;zQAJhLAkSIclCAAUjiczucEBAAVYgahKNpQr4kFYfnoaMhaBBPvBbCAkMpNJwxhIcZNENM5IpoAA&amp;#43;cxLNScXYMlDLbQ8aAFaCAcGNAIgqgDztQDR8nBKbIsHhCCQQhR3JiRjjSPjCcTSRMpuKFGZ6YdjqcLtdzszoLqIQabhyuYV&amp;#43;aUyoBYFUAD57eeACPIAKjd&amp;#43;jdGJo3poACIsT0rMoTGB1qR-aEIkFvr74v74LQjI40BH4FHoD0Ap4vTkvXkBFjFXiCUSSWIyVIxTMtXToH8YYC5MbG7D4SgOZRXEA" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;点击&lt;/a&gt;
 查看源码。&lt;/p&gt;
-&lt;h3 id="装饰器的执行顺序"&gt;装饰器的执行顺序&lt;/h3&gt;
+&lt;h3 id="装饰器的执行顺序"&gt;装饰器的执行顺序
+&lt;/h3&gt;
 &lt;p&gt;无论是那种装饰器，执行都是&lt;strong&gt;由近及远&lt;/strong&gt;的；离&lt;strong&gt;被装饰对象&lt;/strong&gt;最&lt;strong&gt;近&lt;/strong&gt;的装饰器&lt;strong&gt;最先执行&lt;/strong&gt;，离&lt;strong&gt;被装饰对象&lt;/strong&gt;最&lt;strong&gt;远&lt;/strong&gt;的装饰器&lt;strong&gt;最后执行&lt;/strong&gt;：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -536,14 +511,11 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/AIYQNghgzlAiCmBjA9gJwgFzQMQHYHld4ACAelOMABzQOBVBzI0BkIgKFEhgRXS1TwBUB3ZM3DQ4SNJhy4eAC1TwS5KoAlFBo0SsoxduK5QAogA8IAWwAOYEgG9GxYsACy8DNOQATbZ0mEFFGqtsOTi7uYp7cUgI2do7Obh4S4TJyPsr&amp;#43;xPBGZhYAFACUxJbEAL6MJQBmAK64iBgAlsi4xMJsoQl43tkYEKgA5k4AXMTYVTX1uPnWtii4UMgWAHRgyD3ZAOTNohxtBESruQDcpYyV1XUNTRrxXLwCnd19GIPDp2MTUdOzC0sr65et1xFkHtDuURmdGhsrpIkvI7r0BkMwa8Cu8Gp94ItlmtIf9obJ5MCjidRucYsEoeEOl14Y9iPgAEYAKyQGAANMRTKhkKZ4KgMABPADS8H5gygGFQtVwPWIAB9iFB&amp;#43;cZ6XM3lM0XMMd81mS4rjKbsDkSkaSgnqtgD&amp;#43;Mg4Q9BgzmTV2ZzubyBcLRQqJVKZfLFcrVSj1TNNZifrqQhboQJCaCXqbYhGdHjkjaEfaWU6uTy&amp;#43;UKRWKvdK5QqlSqwGriB8Q9rVuGKbx8fAY0A"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-点击
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/AIYQNghgzlAiCmBjA9gJwgFzQMQHYHld4ACAelOMABzQOBVBzI0BkIgKFEhgRXS1TwBUB3ZM3DQ4SNJhy4eAC1TwS5KoAlFBo0SsoxduK5QAogA8IAWwAOYEgG9GxYsACy8DNOQATbZ0mEFFGqtsOTi7uYp7cUgI2do7Obh4S4TJyPsr&amp;#43;xPBGZhYAFACUxJbEAL6MJQBmAK64iBgAlsi4xMJsoQl43tkYEKgA5k4AXMTYVTX1uPnWtii4UMgWAHRgyD3ZAOTNohxtBESruQDcpYyV1XUNTRrxXLwCnd19GIPDp2MTUdOzC0sr65et1xFkHtDuURmdGhsrpIkvI7r0BkMwa8Cu8Gp94ItlmtIf9obJ5MCjidRucYsEoeEOl14Y9iPgAEYAKyQGAANMRTKhkKZ4KgMABPADS8H5gygGFQtVwPWIAB9iFB&amp;#43;cZ6XM3lM0XMMd81mS4rjKbsDkSkaSgnqtgD&amp;#43;Mg4Q9BgzmTV2ZzubyBcLRQqJVKZfLFcrVSj1TNNZifrqQhboQJCaCXqbYhGdHjkjaEfaWU6uTy&amp;#43;UKRWKvdK5QqlSqwGriB8Q9rVuGKbx8fAY0A" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;点击&lt;/a&gt;
 查看源码。&lt;/p&gt;
-&lt;h2 id="装饰器工厂"&gt;装饰器工厂&lt;/h2&gt;
+&lt;h2 id="装饰器工厂"&gt;装饰器工厂
+&lt;/h2&gt;
 &lt;p&gt;一般很少直接使用一个装饰器函数，因为它的使用场景太固定了；在实际业务中，通常使用工厂函数来返回装饰器（有点函数柯理化的味道）。这样装饰器能够通过闭包，访问到更多的配置信息；同时也方便将属于相同业务的装饰器集中起来：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -609,12 +581,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/KYOwrgtgBAIsDGB7ATgQwC4oGKvp5AngCoEAOwUA3gFBRQDCANqgM4txJr5QC8UA5E1bsEKDCn4AaWlAAKyROWToCHMdz795i4MtWiuE6XQCywdAAtEAEzWHkvAWcs2745FJmzUaCOd1uGgLevv7IgRLUAL7UAGZgIHgAloggsAbuOHgoBAAUKuQAXOmcmbj4xGTAAJRUMiwA7kno8BZQ&amp;#43;VW1NHR08KwUEchZFSTkAHRCbIOFMj1QyOZgyGnxiegpaZMipfhYIPk&amp;#43;AObmxVgJyanVp&amp;#43;frqVAAPlAAbohJ1lRQUQDcs1B9LAMMrtyjlRsAxtolCppr86At0EsVjcNnIFFD9DtsPtYT10EcTlAAPIAIwAVgh0MY5j1SGjdCoANLAAjFFjoZBJECHB5QFgECDExCMHFXZ6vd6UT4-Ob-QGYoYgwhgsbOKy2IEoGbU&amp;#43;aLZZQVYXNKq1waobY7V0PHIY7oYok8l4Kna2k6PRMlm89mc7mPPkCoVO6nWYAseAc0j4YqQ&amp;#43;n6UPh-AiqN0vRwONJCMoHkvN4fb6-YOxVBgRi2nHwxH65F3EKoPzoAKmva5HGW-G2olkimBuYu9Hu1lerk8v2Cxg8hIFznAazdmk&amp;#43;WthACSIGDAA9iuABbpE2Kc5K83QYlEgA"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-点击
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/KYOwrgtgBAIsDGB7ATgQwC4oGKvp5AngCoEAOwUA3gFBRQDCANqgM4txJr5QC8UA5E1bsEKDCn4AaWlAAKyROWToCHMdz795i4MtWiuE6XQCywdAAtEAEzWHkvAWcs2745FJmzUaCOd1uGgLevv7IgRLUAL7UAGZgIHgAloggsAbuOHgoBAAUKuQAXOmcmbj4xGTAAJRUMiwA7kno8BZQ&amp;#43;VW1NHR08KwUEchZFSTkAHRCbIOFMj1QyOZgyGnxiegpaZMipfhYIPk&amp;#43;AObmxVgJyanVp&amp;#43;frqVAAPlAAbohJ1lRQUQDcs1B9LAMMrtyjlRsAxtolCppr86At0EsVjcNnIFFD9DtsPtYT10EcTlAAPIAIwAVgh0MY5j1SGjdCoANLAAjFFjoZBJECHB5QFgECDExCMHFXZ6vd6UT4-Ob-QGYoYgwhgsbOKy2IEoGbU&amp;#43;aLZZQVYXNKq1waobY7V0PHIY7oYok8l4Kna2k6PRMlm89mc7mPPkCoVO6nWYAseAc0j4YqQ&amp;#43;n6UPh-AiqN0vRwONJCMoHkvN4fb6-YOxVBgRi2nHwxH65F3EKoPzoAKmva5HGW-G2olkimBuYu9Hu1lerk8v2Cxg8hIFznAazdmk&amp;#43;WthACSIGDAA9iuABbpE2Kc5K83QYlEgA" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;点击&lt;/a&gt;
 查看源码。&lt;/p&gt;
 &lt;p&gt;当然，在实际业务代码中，通常不会根据传入的值来返回不同类型的装饰器；更多的是对原有的属性和方法进行增强：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -665,12 +633,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;example&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;sayHi&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="c1"&gt;// 3 秒后打印 Hi, I&amp;#39;M Delay Invoked
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/GYVwdgxgLglg9mABAEQKYBsCGBPAkmANzgGtUAeAFQD4AKWAW1QC5EwR6AjVAJ0QF5EARgAMogJSIA3gChEibqighuSOpm4BzRSwoAaRAAducAzyjYA0qmwtS2OMER7EAE1QBnCNxgGocbiwACsam3OZont6&amp;#43;-hJ8VFKycogQCO5w6KgAdOhwGjQA5O44ABIwiMWY7ogAQqioSACycC4wwDCoLvliANyJcilg7lCI-jAaMGCY6A2KABbN-IhQ6lpQANpGJmaW1gC6vUmuHl4&amp;#43;ftyZBFMgqIs0mfcr7izgxGBwAO5ga7ux8TKHcncigoMEYcBAUBoNF&amp;#43;CQBSVaiDo2FMDhG3nGk2mcwWfFxiHyoEgsAQXVhcKSCiUKjRYwmUxmUHmLkymAMBnQ2DUmkU&amp;#43;kePT6AIAvgK5IL9AxUPzDoKDogZdJhRAsO4qmgsHhCCRUABRAAemHo7Ju-0QAAE1Th8ERSGQLRrrTr9YaMrQAMyiYRiRJFbClaFk-qpdJZHJ5ABEpX0uHyDRQGBwiCtWpcYalcoV0gGQ0QqCdRsWYFQ7zj6qTpD1BqN0N6ucrGUyPr9PUQAHoW4hXYhAEuegDgVQDKRoAHZXKMCjMZLCbLHSAA"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-点击
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/GYVwdgxgLglg9mABAEQKYBsCGBPAkmANzgGtUAeAFQD4AKWAW1QC5EwR6AjVAJ0QF5EARgAMogJSIA3gChEibqighuSOpm4BzRSwoAaRAAducAzyjYA0qmwtS2OMER7EAE1QBnCNxgGocbiwACsam3OZont6&amp;#43;-hJ8VFKycogQCO5w6KgAdOhwGjQA5O44ABIwiMWY7ogAQqioSACycC4wwDCoLvliANyJcilg7lCI-jAaMGCY6A2KABbN-IhQ6lpQANpGJmaW1gC6vUmuHl4&amp;#43;ftyZBFMgqIs0mfcr7izgxGBwAO5ga7ux8TKHcncigoMEYcBAUBoNF&amp;#43;CQBSVaiDo2FMDhG3nGk2mcwWfFxiHyoEgsAQXVhcKSCiUKjRYwmUxmUHmLkymAMBnQ2DUmkU&amp;#43;kePT6AIAvgK5IL9AxUPzDoKDogZdJhRAsO4qmgsHhCCRUABRAAemHo7Ju-0QAAE1Th8ERSGQLRrrTr9YaMrQAMyiYRiRJFbClaFk-qpdJZHJ5ABEpX0uHyDRQGBwiCtWpcYalcoV0gGQ0QqCdRsWYFQ7zj6qTpD1BqN0N6ucrGUyPr9PUQAHoW4hXYhAEuegDgVQDKRoAHZXKMCjMZLCbLHSAA" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;点击&lt;/a&gt;
 查看源码。&lt;/p&gt;
 &lt;p&gt;上述，实现了&lt;strong&gt;延迟执行&lt;/strong&gt;；相似的，我们还可以用装饰器实现&lt;strong&gt;权限验证&lt;/strong&gt;、&lt;strong&gt;错误拦截&lt;/strong&gt;等：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -775,16 +739,14 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;example&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;aRequireAdminFn&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAECCCuAXAFgYTI4yCiAPMAtgA4gCm0A3gFDTTDwBODpAdorMMAPbxsAKpBgQCWUYVxbQAvNADkAVQiDZAbio1oAAQAU6TDiZcG2hCj1Y8hEqQCUAHlNoMF-MTIA&amp;#43;Gxp2wAJiJYBIVEIcRZtWT8A2XtHcxxXa08NMAAlUgBHeGFmKOEWADFwm0oNWm4WCC4yADoQLgBzCIBJaAA5UlJfODh-fOggkTEJaAAVLmhU3hi1WgBfKgWAM15gRDDegMGQsO0iQRFEbeGWAC5oCEQGfIaS6lpmREZJFZY1jbtR6FJcRFZfGAAeQARgArUhrdzaMrQRBgBgNUiIc6jAA0MKIDC4&amp;#43;wYiAAngBpUh484Aa2JXCWY3RtFovlIEGA1yIiCM5z4WJx&amp;#43;IAIgymcIWUYNHcYRVLpQ6IxmGwONxeEcDjsRjIFEoGLJoHNpLD4YjENBIAaWHjZrSxfqjMIGvkwCAALJI5BcboyOEIpEAbUx2ME&amp;#43;KJeIAuqa6XzmayGDUAG62&amp;#43;DkGTaGqJ3UQc68UksLgAdxYHoDJSk7lKtNpwip2noTFY7E4PH4ipO0AAhFIZDjDsdQhIRcXiygsZnoCxSAPsIZjLJmpV4EslsJgMIqwN652WDMYfNviAlNBS9BtPj9pToJbrSxbQ6UM7pC25K93hIYkWew8kc9j9dT&amp;#43;fHc6amAiCQ8X3XUkVRA0EQgGxg1pBZizmU04MWKg73WEZ4lHLFjCWLECHOApVhQlhu2gR432Qj4vh&amp;#43;P4WABaAQXBSFoV7YDkWpDFOV9QliTJCkqTRGF6UZMM2QGdjcTxXlBIFcNhSfcoJHFChB0IcgtRkLCuAIKDzXfK0bXtb8XR1d1EC9US-WJIN&amp;#43;NDKSjCjGM4z3RNf3A1MWHTLMczzaRC3uHsrjxWSe13fc8UPKkTz0i8nRdG9ZDIh8iOfF8ngYSQIrPfTL18X9-xAQC3T1UDk0g9doNKrVgGcZA90EDDEp7AB6BroEAe&amp;#43;VAFO5QAwHUATFTAHvowAoOUAUqNSrkypqlIOpGm0AADdCjGgApsOgAASCgzwIUg5nOKbQNqowSufGDoPgtQFm0n4rDIbUhwHOIqssNxSG0Erzoe390iyHJSDyQpihUIA"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-点击
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAECCCuAXAFgYTI4yCiAPMAtgA4gCm0A3gFDTTDwBODpAdorMMAPbxsAKpBgQCWUYVxbQAvNADkAVQiDZAbio1oAAQAU6TDiZcG2hCj1Y8hEqQCUAHlNoMF-MTIA&amp;#43;Gxp2wAJiJYBIVEIcRZtWT8A2XtHcxxXa08NMAAlUgBHeGFmKOEWADFwm0oNWm4WCC4yADoQLgBzCIBJaAA5UlJfODh-fOggkTEJaAAVLmhU3hi1WgBfKgWAM15gRDDegMGQsO0iQRFEbeGWAC5oCEQGfIaS6lpmREZJFZY1jbtR6FJcRFZfGAAeQARgArUhrdzaMrQRBgBgNUiIc6jAA0MKIDC4&amp;#43;wYiAAngBpUh484Aa2JXCWY3RtFovlIEGA1yIiCM5z4WJx&amp;#43;IAIgymcIWUYNHcYRVLpQ6IxmGwONxeEcDjsRjIFEoGLJoHNpLD4YjENBIAaWHjZrSxfqjMIGvkwCAALJI5BcboyOEIpEAbUx2ME&amp;#43;KJeIAuqa6XzmayGDUAG62&amp;#43;DkGTaGqJ3UQc68UksLgAdxYHoDJSk7lKtNpwip2noTFY7E4PH4ipO0AAhFIZDjDsdQhIRcXiygsZnoCxSAPsIZjLJmpV4EslsJgMIqwN652WDMYfNviAlNBS9BtPj9pToJbrSxbQ6UM7pC25K93hIYkWew8kc9j9dT&amp;#43;fHc6amAiCQ8X3XUkVRA0EQgGxg1pBZizmU04MWKg73WEZ4lHLFjCWLECHOApVhQlhu2gR432Qj4vh&amp;#43;P4WABaAQXBSFoV7YDkWpDFOV9QliTJCkqTRGF6UZMM2QGdjcTxXlBIFcNhSfcoJHFChB0IcgtRkLCuAIKDzXfK0bXtb8XR1d1EC9US-WJIN&amp;#43;NDKSjCjGM4z3RNf3A1MWHTLMczzaRC3uHsrjxWSe13fc8UPKkTz0i8nRdG9ZDIh8iOfF8ngYSQIrPfTL18X9-xAQC3T1UDk0g9doNKrVgGcZA90EDDEp7AB6BroEAe&amp;#43;VAFO5QAwHUATFTAHvowAoOUAUqNSrkypqlIOpGm0AADdCjGgApsOgAASCgzwIUg5nOKbQNqowSufGDoPgtQFm0n4rDIbUhwHOIqssNxSG0Erzoe390iyHJSDyQpihUIA" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;点击&lt;/a&gt;
 查看源码。&lt;/p&gt;
-&lt;p&gt;如果运行这段代码，你会发现 AdminPermission 装饰器并没有起作用；原因是，每次我们获取原始方法时，都是通过 target[propertyKey] 拿的。&lt;/p&gt;
+&lt;p&gt;如果运行这段代码，你会发现 AdminPermission 装饰器并没有起作用；原因是，每次我们获取原始方法时，都是通过 target&lt;/p&gt;
+\[propertyKey\]&lt;p&gt; 拿的。&lt;/p&gt;
 &lt;p&gt;拿到的都是原来的方法没错，但是在这种&lt;strong&gt;装饰器叠加&lt;/strong&gt;的场景中，我们想拿到&lt;strong&gt;被上一个装饰器装饰&lt;/strong&gt;后的方法。&lt;/p&gt;
-&lt;p&gt;所以我们不能再通过 target[propertyKey] 获取原始方法了：&lt;/p&gt;
+&lt;p&gt;所以我们不能再通过 target&lt;/p&gt;
+\[propertyKey\]&lt;p&gt; 获取原始方法了：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -813,14 +775,11 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;originalMethod&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;descriptor&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;value&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;修改后的代码效果，可以在&lt;a class="link"
-href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAECCCuAXAFgYTI4yCiAPMAtgA4gCm0A3gFDTTDwBODpAdorMMAPbxsAKpBgQCWUYVxbQAvNADkAVQiDZAbio1oAAQAU6TDiZcG2hCj1Y8hEqQCUAHlNoMF-MTIA&amp;#43;Gxp2wAJiJYBIVEIcRZtWT8A2XtHcxxXa08NMAAlUgBHeGFmKOEWADFwm0oNWm4WCC4yADoQLgBzCIBJaAA5UlJfODh-fOggkTEJaAAVLmhU3hi1WgBfKgWAM15gRDDegMGQsO0iQRFEbeGWAC5oCEQGfIaS6lpmREZJFZY1jbtR6FJcRFZfGAAeQARgArUhrdzaMrQRBgBgNUiIc6jAA0MKIDC4&amp;#43;wYiAAngBpUh484Aa2JXCWY3RtFovlIEGA1yIiCM5z4WJx&amp;#43;IAIgymcIWUYNHcYRVLpQ6IxmGwONxeEcDjsRjIFEoGLJoHNpLD4YjENBIAaWHjZrSxfqjMIGvkwCAALJI5BcboyemM5mshg1AButvgpFNdL5HqMPr95Bk2hq0d1EHOvFJLC4AHcWABtAC6JSk7lKtNpwip2noTFY7E4PH4ipO0AAhFIZDjDsdQhIRfn8ygscnoCxSD3sIZjLJmpV4EslsJgMIywNq62WDMYfNviAlNBC9BtPj9pToJbrSxbQ6UM7pA25K93hIYnmOw8kc999dD8fHc6amAiCQ8dvdUjUQNBEIBsQNaQWfM5lNKDFioK91hGeJByxYwlixAhzgKVYEJYdtoEeJ94I&amp;#43;L4fj&amp;#43;FgAWgEFwUhaFO3-ZFqQxTlBHxIkSWgck8T3NEYTdflBQYdlmNxPFeXdAVPWFO9ygkcUKF7QhyC1GQ0K4AgwPNZ8rRte13xdaA&amp;#43;JDL1fRAf0wMMiTQxM-1tSjGNgPjFhExTdMs2kXN7g7K48WkjtN23PFdypA8dJPJ0XQvWQiJvPD7wfJ4GEkEKj1009fE-b8QF-OEEQAoCGhAsDIOXTU6GcZAt0EFDYo7AB6WroEAe&amp;#43;VAFO5QAwHUATFTAHvowAoOUAUqMSpkypqlIOpGm0AADZCjGgAp0OgAASCgjwIUg5nOcbAKqoxQJKiDwOgtQFk0n4rDIbU&amp;#43;x7OJyssNxSG0HaTtuz90iyHJSDyQpihUIA"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-这里
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;修改后的代码效果，可以在&lt;a class="link" href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAECCCuAXAFgYTI4yCiAPMAtgA4gCm0A3gFDTTDwBODpAdorMMAPbxsAKpBgQCWUYVxbQAvNADkAVQiDZAbio1oAAQAU6TDiZcG2hCj1Y8hEqQCUAHlNoMF-MTIA&amp;#43;Gxp2wAJiJYBIVEIcRZtWT8A2XtHcxxXa08NMAAlUgBHeGFmKOEWADFwm0oNWm4WCC4yADoQLgBzCIBJaAA5UlJfODh-fOggkTEJaAAVLmhU3hi1WgBfKgWAM15gRDDegMGQsO0iQRFEbeGWAC5oCEQGfIaS6lpmREZJFZY1jbtR6FJcRFZfGAAeQARgArUhrdzaMrQRBgBgNUiIc6jAA0MKIDC4&amp;#43;wYiAAngBpUh484Aa2JXCWY3RtFovlIEGA1yIiCM5z4WJx&amp;#43;IAIgymcIWUYNHcYRVLpQ6IxmGwONxeEcDjsRjIFEoGLJoHNpLD4YjENBIAaWHjZrSxfqjMIGvkwCAALJI5BcboyemM5mshg1AButvgpFNdL5HqMPr95Bk2hq0d1EHOvFJLC4AHcWABtAC6JSk7lKtNpwip2noTFY7E4PH4ipO0AAhFIZDjDsdQhIRfn8ygscnoCxSD3sIZjLJmpV4EslsJgMIywNq62WDMYfNviAlNBC9BtPj9pToJbrSxbQ6UM7pA25K93hIYnmOw8kc999dD8fHc6amAiCQ8dvdUjUQNBEIBsQNaQWfM5lNKDFioK91hGeJByxYwlixAhzgKVYEJYdtoEeJ94I&amp;#43;L4fj&amp;#43;FgAWgEFwUhaFO3-ZFqQxTlBHxIkSWgck8T3NEYTdflBQYdlmNxPFeXdAVPWFO9ygkcUKF7QhyC1GQ0K4AgwPNZ8rRte13xdaA&amp;#43;JDL1fRAf0wMMiTQxM-1tSjGNgPjFhExTdMs2kXN7g7K48WkjtN23PFdypA8dJPJ0XQvWQiJvPD7wfJ4GEkEKj1009fE-b8QF-OEEQAoCGhAsDIOXTU6GcZAt0EFDYo7AB6WroEAe&amp;#43;VAFO5QAwHUATFTAHvowAoOUAUqMSpkypqlIOpGm0AADZCjGgAp0OgAASCgjwIUg5nOcbAKqoxQJKiDwOgtQFk0n4rDIbU&amp;#43;x7OJyssNxSG0HaTtuz90iyHJSDyQpihUIA" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;这里&lt;/a&gt;
 查看。&lt;/p&gt;
-&lt;h2 id="构造数据请求"&gt;构造数据请求&lt;/h2&gt;
+&lt;h2 id="构造数据请求"&gt;构造数据请求
+&lt;/h2&gt;
 &lt;p&gt;首先，初始化一个工具集合 RequestBuilder，包含了各种装饰器工厂；我们先来介绍四种参数装饰器工厂：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -984,12 +943,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEBKCmBHArvCAXAQsgliAJvAE7QDeAUNNAPTXSAUroKbmgfdGB2-oO-RgQjaDK8pdBmHQ5g0AEYB7fAE8AFAEoyfKkXjpkRAHbQZSqtHRgiAc1UAuOPGDii&amp;#43;ADwYiODUYA00MBqkA&amp;#43;F7qoAHInF-YnQpAGl4KXMHJyNoAB9&amp;#43;KQBbCRBE6GQNQgAzJ3h8Xz09f0MwFNViAEkc&amp;#43;AAPcw1kNOJdOXMAN3EcfGgAXi9FEqorDQxoQJxOwXhIqQHoAAMpmfR4AH0JaQ2AElJA4NCIqIB&amp;#43;ADp0cQBldEdneQBfJYBuP2gxidXZgFlVMEWFBGegA1lFzABybZSCHFYGTcqVdZEWqEervR5vYE4XLaACCRCIYCk5xwEAJRNkBmMqgA2t91vMALpyBRA&amp;#43;HUkzoemONZzKJM87&amp;#43;ZAQAAWMgZ8D&amp;#43;BjkWJGj2g8BAEHgww5hi5POms2Ziy1fOlYCZcpKj10mL4ZqotAYLA4nEALJp8ARCESi&amp;#43;BgQhECDyNXKVTqLQ6YGcswWKw2ex3OJuDzeOElQ4hIhheYxaPOTIQVLpTLZPIFIrvMpEpE1OqNaDNVpEdpdHp9QZ&amp;#43;vSfdCTXk6qKLFYd9Ybd2e4gQPYHILJ1NnS43DNGJ6vd6t9va9aGwHvKhg6LQCEDr0QWHrhGlqooisYk16HH4wnE0nkm9UjV0yXM1nNkqh7kvgVCkXiyWGrKGKKsqqrsiGT5fr2-JSEyeoAf8xoYuacpWjQdBMGwgD3sYAIfqAEPKgAOps6Biugi6Dipu6b3EYbK6CoaiaNo7yfuYCARnYsTOLGng&amp;#43;MWY7HGm-AzlmObiBkST5vA&amp;#43;QaIUCalIiJ6og0TQtKIbQlB00DdL0AxDOBLbiOMbbfgs-TLJKGxlORI5JgJk5XLc1FzheoyGV80GrmZ&amp;#43;klJucmJgpyJKeiwIWtiuIyBSt5kpFj40lBy4wSytHwvokH6p2sG-mKEoef8QEhSBKrvnon7pYyArwblBhISFKGWnwNqYawgCn5oAR9GEcRgjCNAKDELIlFCdRyV6PRgZMRBcWsZY1gcTO3HxnxRwpicW6cfESTZmkYl5nU0mycWAXlmiKk1nWWkNrpxWLiZ3YWb1RBSDZ-HLfMFwOTOzkLm5xlVQCXmHr5h4lhUilniFLnQFeEUPneMUyKVJlJcVVAI9BzJZf&amp;#43;v35fKhVgYeqMJbqZllVKiEQ2hVChdAZqPEAA"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-点击
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEBKCmBHArvCAXAQsgliAJvAE7QDeAUNNAPTXSAUroKbmgfdGB2-oO-RgQjaDK8pdBmHQ5g0AEYB7fAE8AFAEoyfKkXjpkRAHbQZSqtHRgiAc1UAuOPGDii&amp;#43;ADwYiODUYA00MBqkA&amp;#43;F7qoAHInF-YnQpAGl4KXMHJyNoAB9&amp;#43;KQBbCRBE6GQNQgAzJ3h8Xz09f0MwFNViAEkc&amp;#43;AAPcw1kNOJdOXMAN3EcfGgAXi9FEqorDQxoQJxOwXhIqQHoAAMpmfR4AH0JaQ2AElJA4NCIqIB&amp;#43;ADp0cQBldEdneQBfJYBuP2gxidXZgFlVMEWFBGegA1lFzABybZSCHFYGTcqVdZEWqEervR5vYE4XLaACCRCIYCk5xwEAJRNkBmMqgA2t91vMALpyBRA&amp;#43;HUkzoemONZzKJM87&amp;#43;ZAQAAWMgZ8D&amp;#43;BjkWJGj2g8BAEHgww5hi5POms2Ziy1fOlYCZcpKj10mL4ZqotAYLA4nEALJp8ARCESi&amp;#43;BgQhECDyNXKVTqLQ6YGcswWKw2ex3OJuDzeOElQ4hIhheYxaPOTIQVLpTLZPIFIrvMpEpE1OqNaDNVpEdpdHp9QZ&amp;#43;vSfdCTXk6qKLFYd9Ybd2e4gQPYHILJ1NnS43DNGJ6vd6t9va9aGwHvKhg6LQCEDr0QWHrhGlqooisYk16HH4wnE0nkm9UjV0yXM1nNkqh7kvgVCkXiyWGrKGKKsqqrsiGT5fr2-JSEyeoAf8xoYuacpWjQdBMGwgD3sYAIfqAEPKgAOps6Biugi6Dipu6b3EYbK6CoaiaNo7yfuYCARnYsTOLGng&amp;#43;MWY7HGm-AzlmObiBkST5vA&amp;#43;QaIUCalIiJ6og0TQtKIbQlB00DdL0AxDOBLbiOMbbfgs-TLJKGxlORI5JgJk5XLc1FzheoyGV80GrmZ&amp;#43;klJucmJgpyJKeiwIWtiuIyBSt5kpFj40lBy4wSytHwvokH6p2sG-mKEoef8QEhSBKrvnon7pYyArwblBhISFKGWnwNqYawgCn5oAR9GEcRgjCNAKDELIlFCdRyV6PRgZMRBcWsZY1gcTO3HxnxRwpicW6cfESTZmkYl5nU0mycWAXlmiKk1nWWkNrpxWLiZ3YWb1RBSDZ-HLfMFwOTOzkLm5xlVQCXmHr5h4lhUilniFLnQFeEUPneMUyKVJlJcVVAI9BzJZf&amp;#43;v35fKhVgYeqMJbqZllVKiEQ2hVChdAZqPEAA" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;点击&lt;/a&gt;
 查看源码。&lt;/p&gt;
 &lt;p&gt;你会发现，四者除了内部的 privateKey 之外，完全相同；privateKey 的目的是为了保存一些信息，方便之后使用。&lt;/p&gt;
 &lt;p&gt;我们将这些相似的逻辑合并一下：&lt;/p&gt;
@@ -1083,12 +1038,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEBKCmBHArvCAXAQsgliAJvAE7QDeAUNNBmOjsNAEYD2&amp;#43;AngBQCUAXNAApgiYALbx0xACLxgzYejllKVaEXHIiAOzhJUGbHkJEAdAHF4m4rXiC2IZmHwcA5C3bOuAbmUBfZTToGAAt4R2IIbj5BYTEJImlZeUUKFVV1LR0UNCxcAmIzCysJW3tHFxCwoggPbyo-KgD6aAAHWiCOAGt4Nj4MIhxNAHNeASFRcSkZOVpk5So1dA1tBCz9XKMCy3kbMDsHJ2dW9CDnABpoLrYvX390Wiasok5L3vR&amp;#43;oZHo8biE6YUSFIqBZLTJ6HKGfLmLbWEr7FyPNhnC7da51W73BhQoo7PZlObQADuITUfFcrER0AAPtBnBUjNUqTSjidGc4EWd8ZcAPyvd6DZRcJSpAD0wuggBX4wB7aoAh5UADqaAUYjAA6ZgAs1fHAjIcfFUO5EQbiPgIRL4AA8fQGg3OYE0bAAfKctS0iMxmsR0GwANLdXnmxkQNgiFggRnITSEABmA3g&amp;#43;HtqSorRiEyIAElQ-AAB58TTIAPEfEjABuzBw&amp;#43;GgAF4bULY7JNBhHTh89ZPWwy9AAAbNfoNiQAfQAJKQicR4D4&amp;#43;6QO87XR7ulzjAoAMpvc3cHyt2pV5g19B1rvwACy4jALcuDqoXMrsZUlxjF5U8e&amp;#43;xBThDTJ&amp;#43;g9RvfFILTGsQfqbTr7XVIcDDaAOEHNQy1LUsaTcClKWpcD4Eg6DaVCekPHPWMdT1dAAG0O3rRtugAXRbAid33O5AJUHxoHgEAICQwEL2A0CAEEiGENhjBwCAOK4jhsPEfDOyIthiK4QVmJvIS8PIsTiOMZpkAgdp5IkSiwFRG9aPoxjMIvWSRMIiQm1I6DjIog9iOo1I3zs-EfDXPwfCAA"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-点击
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEBKCmBHArvCAXAQsgliAJvAE7QDeAUNNBmOjsNAEYD2&amp;#43;AngBQCUAXNAApgiYALbx0xACLxgzYejllKVaEXHIiAOzhJUGbHkJEAdAHF4m4rXiC2IZmHwcA5C3bOuAbmUBfZTToGAAt4R2IIbj5BYTEJImlZeUUKFVV1LR0UNCxcAmIzCysJW3tHFxCwoggPbyo-KgD6aAAHWiCOAGt4Nj4MIhxNAHNeASFRcSkZOVpk5So1dA1tBCz9XKMCy3kbMDsHJ2dW9CDnABpoLrYvX390Wiasok5L3vR&amp;#43;oZHo8biE6YUSFIqBZLTJ6HKGfLmLbWEr7FyPNhnC7da51W73BhQoo7PZlObQADuITUfFcrER0AAPtBnBUjNUqTSjidGc4EWd8ZcAPyvd6DZRcJSpAD0wuggBX4wB7aoAh5UADqaAUYjAA6ZgAs1fHAjIcfFUO5EQbiPgIRL4AA8fQGg3OYE0bAAfKctS0iMxmsR0GwANLdXnmxkQNgiFggRnITSEABmA3g&amp;#43;HtqSorRiEyIAElQ-AAB58TTIAPEfEjABuzBw&amp;#43;GgAF4bULY7JNBhHTh89ZPWwy9AAAbNfoNiQAfQAJKQicR4D4&amp;#43;6QO87XR7ulzjAoAMpvc3cHyt2pV5g19B1rvwACy4jALcuDqoXMrsZUlxjF5U8e&amp;#43;xBThDTJ&amp;#43;g9RvfFILTGsQfqbTr7XVIcDDaAOEHNQy1LUsaTcClKWpcD4Eg6DaVCekPHPWMdT1dAAG0O3rRtugAXRbAid33O5AJUHxoHgEAICQwEL2A0CAEEiGENhjBwCAOK4jhsPEfDOyIthiK4QVmJvIS8PIsTiOMZpkAgdp5IkSiwFRG9aPoxjMIvWSRMIiQm1I6DjIog9iOo1I3zs-EfDXPwfCAA" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;点击&lt;/a&gt;
 查看源码。&lt;/p&gt;
 &lt;p&gt;有了 Payload 的构建，使用相同的方法来构建请求函数；不同的是，这次使用方法装饰器：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -1205,12 +1156,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEBKCmBHArvCAXAQsgliAJvAE7QDeAUNNBmOjsNAObzoCyLAFgPb4AURXZIw4BVIiABc1dERwA7RgBpoXAA50uciFIQo06AJJyc6AJRT26bvgAi8YFyK1HZSlWhEWyInLhJUGNh4hEQAdADi8HLEtPC6Aej8gsJiIMoA5OEAogAq6cpqGlqmANxuAL5uNHQMhCAs8JbWSUKi4lIYsgoF6jia2n56GEYm5tBNPHYOTuguFO4eXj6DCUEExBFRMehx-votKeIZNlkAMrlZ&amp;#43;Sq9-aUVVei09NCqXBgTfAKtqR0y8krXIoDeL6EZmCycSb2RzOEjzdyedDeXwgwK4dZhSLRGa7IaJL6HNLQdIABQA8gBlPI9IF3KiVKjVZ6qZBsSGfZJtSTSLoAwp9LQ6PbDYzg8bsqYw2ZwtxURHIlb6NYhTbY2Ko-Gc1IZEkiamAgUQOnQBnSJ4MLHbXEJXiyjxa9o8-6KO0AW3ZUkyuXS0AAPsTyVSff70idzjlLn6A3r8nb&amp;#43;f0hXiwW5TK4FvLlraFlRHkRmOghdN8AAeTrO6BgOQATwAfC7sy8BKpiOgqwBpeBV368qMQKuugBGXBAUeQckIADN5PB8PXs4QIMBZOpHFISU2W1W7Ivl9K7WN12pN9ulzgVyR-QA3Lg4fDQAC8NbT2YcWnQZBeYCc7p2RCMhAADykId8CrEkvzAH9iH-eAAJNB87QWXN8wAbQAA1UWRL1iAB9ECqxwgASUhMKPIhWw7KsAH5QlmCk-gUXhTHKNCAF0-X9UhyjKBtXwwD9VAgqC-3HWCpA4eAwBCCBwO-BoRMA&amp;#43;D70Q9xkJYdDMJwbCdhwiSpOICAiJIjdyPbTsaLohjGCYlj2N9TjuJUvj30EqwAEEiCcLtoA8rziwQItSys5RK1rJ9lIbHMv1QjCsNw1yOCM0jm1MyiLK4ejeRstiOOgFDWJ4l9&amp;#43;nfPQiCrXywG8iqq386EiBLMtugrasa3ClSorzdTYq03DSoI4jks3NLaIyqzsrs-18sKhYF1Pc9QmwkBUAfaAJzHYAimgXhQh26KBmq4tQprA8BFdHAIHgWqIFeLR4CfeEG3qd98JWvaUPw2TIPkmCAIK9roCe6A9Ok168wgFDgYMz7hJ&amp;#43;v7IoBlhoG8Ed73tb5xGm7MEuq0IJ0cLIwGADheF4UhoAAa07ZRBLk38fpNVNH2feHkZW5HQk8VRwGAeBeDQ0hiMpqtyhYkKwZQmmvrp0TfvSzL-iY40G3KJXs0BvqVvSdJMYWPqcbxogCaJkmyaF6mhO&amp;#43;mWGYfe7-qoDXUbQ4i&amp;#43;vKQXO3Ke9iLeyWYZl1jygAMjQnX3BVkP7dQMqVr60IIBAeheYABmUABaABGVWFlZx3iOR8oqOdyPheD-6M18CcWGN5HlAeyKdtCeMtDneH8KkH9rAfe9Ua9PJoCo6A5GQEARykAApCkyQAOVjqycAnKteHw0xm8iyGiAgFeG3bnh-vKagnggKc0EVEVRhDxyFgvk1yHKIA"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-点击
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEBKCmBHArvCAXAQsgliAJvAE7QDeAUNNBmOjsNAObzoCyLAFgPb4AURXZIw4BVIiABc1dERwA7RgBpoXAA50uciFIQo06AJJyc6AJRT26bvgAi8YFyK1HZSlWhEWyInLhJUGNh4hEQAdADi8HLEtPC6Aej8gsJiIMoA5OEAogAq6cpqGlqmANxuAL5uNHQMhCAs8JbWSUKi4lIYsgoF6jia2n56GEYm5tBNPHYOTuguFO4eXj6DCUEExBFRMehx-votKeIZNlkAMrlZ&amp;#43;Sq9-aUVVei09NCqXBgTfAKtqR0y8krXIoDeL6EZmCycSb2RzOEjzdyedDeXwgwK4dZhSLRGa7IaJL6HNLQdIABQA8gBlPI9IF3KiVKjVZ6qZBsSGfZJtSTSLoAwp9LQ6PbDYzg8bsqYw2ZwtxURHIlb6NYhTbY2Ko-Gc1IZEkiamAgUQOnQBnSJ4MLHbXEJXiyjxa9o8-6KO0AW3ZUkyuXS0AAPsTyVSff70idzjlLn6A3r8nb&amp;#43;f0hXiwW5TK4FvLlraFlRHkRmOghdN8AAeTrO6BgOQATwAfC7sy8BKpiOgqwBpeBV368qMQKuugBGXBAUeQckIADN5PB8PXs4QIMBZOpHFISU2W1W7Ivl9K7WN12pN9ulzgVyR-QA3Lg4fDQAC8NbT2YcWnQZBeYCc7p2RCMhAADykId8CrEkvzAH9iH-eAAJNB87QWXN8wAbQAA1UWRL1iAB9ECqxwgASUhMKPIhWw7KsAH5QlmCk-gUXhTHKNCAF0-X9UhyjKBtXwwD9VAgqC-3HWCpA4eAwBCCBwO-BoRMA&amp;#43;D70Q9xkJYdDMJwbCdhwiSpOICAiJIjdyPbTsaLohjGCYlj2N9TjuJUvj30EqwAEEiCcLtoA8rziwQItSys5RK1rJ9lIbHMv1QjCsNw1yOCM0jm1MyiLK4ejeRstiOOgFDWJ4l9&amp;#43;nfPQiCrXywG8iqq386EiBLMtugrasa3ClSorzdTYq03DSoI4jks3NLaIyqzsrs-18sKhYF1Pc9QmwkBUAfaAJzHYAimgXhQh26KBmq4tQprA8BFdHAIHgWqIFeLR4CfeEG3qd98JWvaUPw2TIPkmCAIK9roCe6A9Ok168wgFDgYMz7hJ&amp;#43;v7IoBlhoG8Ed73tb5xGm7MEuq0IJ0cLIwGADheF4UhoAAa07ZRBLk38fpNVNH2feHkZW5HQk8VRwGAeBeDQ0hiMpqtyhYkKwZQmmvrp0TfvSzL-iY40G3KJXs0BvqVvSdJMYWPqcbxogCaJkmyaF6mhO&amp;#43;mWGYfe7-qoDXUbQ4i&amp;#43;vKQXO3Ke9iLeyWYZl1jygAMjQnX3BVkP7dQMqVr60IIBAeheYABmUABaABGVWFlZx3iOR8oqOdyPheD-6M18CcWGN5HlAeyKdtCeMtDneH8KkH9rAfe9Ua9PJoCo6A5GQEARykAApCkyQAOVjqycAnKteHw0xm8iyGiAgFeG3bnh-vKagnggKc0EVEVRhDxyFgvk1yHKIA" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;点击&lt;/a&gt;
 查看源码。&lt;/p&gt;
 &lt;p&gt;至此，我们的 RequestBuilder 就写好了，我们来试一试：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -1330,13 +1277,10 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;打开控制台，请求已经发出，并且自定义请求头已经生效；报错是因为跨域问题。&lt;/p&gt;
-&lt;p&gt;完整代码在&lt;a class="link"
-href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEBKCmBHArvCAXAQsgliAJvAE7QDeAUNNBmOjsNAEYD2&amp;#43;AngBQCUAXNAApgiYALbx0xACLxgzYejllKVaEXHIiAOzhJUGbHkJEAdAHF4m4rXiC2IZmHwcA5C3bOuAbmUBfZTToGAAt4R2IIbj5BYTEJImlZeUUKFVV1LR0UNCxcAmIzCysJW3tHFxCwoggPbyo-KgD6aAAHWiCOAGt4Nj4MIhxNAHNeASFRcSkZOVpk5So1dA1tBCz9XKMCy3kbMDsHJ2dW9CDnABpoLrYvX390Wiasok5L3vR&amp;#43;oZHo8biE6YUSFIqBZLTJ6HKGfLmLbWEr7FyPNhnC7da51W73BhQoo7PZlObQADuITUfFcrER0AAPtBnBUjNUqTSjidGc4EWd8ZcAPyvd6DZRcJSpAD0wuggBX4wB7aoAh5UADqaAUYjAA6ZgAs1fHAjIcfFUO5EQbiPgIRL4AA8fQGg3OYE0bAAfKctS0iMxmsR0GwANLdXnmxkQNgiFggRnITSEABmA3g&amp;#43;HtqSorRiEyIAElQ-AAB58TTIAPEfEjABuzBw&amp;#43;GgAF4bULY7JNBhHTh89ZPWwy9AAAbNfoNiQAfQAJKQicR4D4&amp;#43;6QO87XR7ulzjAoAMpvc3cHyt2pV5g19B1rvwACy4jALcuDqoXMrsZUlxjF5U8e&amp;#43;xBThDTJ&amp;#43;g9RvfFILTGsQfqbTr7XVIcDDaAOEHNQy1LUsaTcClKWpcD4Eg6DaVCekPHPWMdT1dAAG0O3rRtugAXRbAid33O5AJUHxoHgEAICQwEL2A0CAEEiGENhjBwCAOK4jhsPEfDOyIthiK4QVmJvIS8PIsTiOMZpkAgdp5IkSiwFRG9aPoxjMIvWSRMIiQm1I6DjIog9iOo1I3zs-EfDXN9GgYHDKKCVgOCdZBBiCABVIgQG9IZzmdOgNwgA1dGyFMcHQEYPNYX4kgBNV0mWGK1ghEwsW2FYwW85hfICoLzmcUwAFEABUkXCnBIu0ly7kCaBCBACYkqcHy-MC4LqEXULoHqyLotWdA4oSvgupSmY0tSdVMvGgw8lywp8qy9AipKvryskSqABkasqurmgimsmvRVrmmYDAuu23qgpCi1hrOhqazGsFJsS8RPPwWb-kwxbQWyFaNjy6wCuyB7SpAcr&amp;#43;AAeTnWqwrexrnKupplPQe6eth57UfOqKQYwb7pt&amp;#43;5KplSoGMpJ8FVs2bEoYwGHdppfh-JR16icuhoWqaCGJGZra1WKx7&amp;#43;rNUL8ViP7SSq2rWUR5HnFZfajuqk7Fc5jlUhGj66cmgUacWDUHVk6KjVNQaXqtW1r1SccXSIN0m2e31-UDYNUwjSxowdQgIGAfozrkKInSdt1pED4P-jzMOJ2dtgo6DnAQ5IalC2LMsK2kqhq1rT87x-ZM-z4WCvmLx901fMsXyM9tRJ7WDR0dycmxnedreXVtSPgsgnIdfOt0L79EyrjNoDpcIK7Hv8a9LOuhBw3CG5M&amp;#43;BuynqoW-Dtvp1nZgFz5bve&amp;#43;pUgB4vIev2Ofjdj4G&amp;#43;2GNQ05BNSWbetG0KwXm9oHr9T1&amp;#43;ZbeCcXZ707kfLgK4T7QFwjZQekUtwInvnfTiuxH5UxftbS079P6L11MJVeO5uwIkARHKcbAO4Hy7uAnuVJqTQNsm1NAKc07GAbCAVALYwwhmAOdUCxg&amp;#43;FL2JvfY0tsbSfCdCIXi8BUEQBujWeAOcXwdS3LBFsAjcLl1HnEceMDv5KMnmhcIqjdQQFwpvCAM8tF-h0TePRGggzQTxn1ehcY2j32MGGOQlUwDAHaBwT8V4vwJksU&amp;#43;V8gpywGVjHYlsdjjBqGaOAYA8AOCtlIP2S4PgVyWmMfhTRv4nzEXIYfJcklnGhNKXohELZnDOFKQg5B3EPFEC8T4jgfjkRsHOEXWeISfBhIUd-KglToKtn7AiHwaTug&amp;#43;FLP2NRXTgnpmIj4AAZKuF8vTamoCeC2BExgIAgHoEkgADOcAAtAARm0heKJwz&amp;#43;x2J8FyUZmy2ArlKcDMM4gWl2POLnWMfDjB6wgPbG8sE&amp;#43;Ay1YMhGk8sVZnizCAIMfAABSc4EYADldnW2ApwWCXAgUXjMbi2MYL8BrOoPcCAEY0AG00PFS5NFqLn1fOQPwoBIAwDYs0HAc5iD5gOZWAAAsLMG&amp;#43;R3IUwOEEdA6BmhRVFIwMAxZkDGFkCIYUY42gI0sD4FVzJqoEmYD4JEZ8uDKBwpgOV&amp;#43;BkCalSAKzaQqTBmO4GkcaAAJAxVQLbPytnyTBdt8TWuWusfIsEHVqGWuSd1RB0FeugCIoFfqwS2qUm0FwzJ1XwAwpocYBNfWCoDSYZkya2g6uYBhMAepMzZkYMQWNOacrGARC4OgYgaAiGaBhRt2RRDNHLTmIgAp44SMYsI9&amp;#43;mFhQACpR1alHdAQAm-GABnEwA2UaAC-FQAAHKACo5QAmKmAHvowAMP&amp;#43;AEYdQA98qAFO5QAm36ACa4wA4-GAG8fQA0eqAArjQAtaaTugIAeLTAD98oALO1ACScoAX8VZSABC3KUN7ABhcpO4U&amp;#43;JjhOgJNASwUHKqcTkNwDGVA42g1zUpZAONRXlAlVKngopBjMGYIMDqirmDKtVccVNmqKNBCLfq75vTlDY1MIR4jSTs02rQ-awUIawQusqMTJ&amp;#43;EbPXmm9XaDj-ra1Bp4zasNOhLavzE9Wzjtb82HDVZYdNmaBpeok-GtDantW6pLWW6DFaq16dQ7W&amp;#43;tzh23NtbYKOzdwW3dsrb2qgYiyOSKHbaTCEHmBQZg9AODToiCIZuMhmtDMbp3Sw7SHD0rhTCFDGRsAHLSPKrSzgYUBrGNxluugWAVp8BkfZTgS1KgUPZQZjZy4GEXhmZ7cpyTNWnkuDUGGDCHXXO5g8-27zIi-NBEg9B&amp;#43;AsH4Nhcun4cgl8stcqIDyxJd8OXzcW0haCQWyurYOeFub3KDnKGMCas1FrPzOC5SAMMJzpA&amp;#43;zTaSBA&amp;#43;AVY&amp;#43;AY&amp;#43;VQAcuaADN9QA8dpIjOQADnOJIawxhNABe4EaqgiraAtI4MQULfAQtyD6ZhfOzASOw4Q&amp;#43;jkwTaIClvgE1a4e2FsHYh8x1jHUKtUDOxdq7N3IzOFJJgNhabXxAp&amp;#43;R4kMRg&amp;#43;C4WcAdIQWzBB6iROd4gepmyYHeM4YijkgXnY50IAQ9Aghyp1ioP7QLAcSGB6D8H0AdeQ-QNDzH8OJtI&amp;#43;kijtHE2YcTeMNj3H&amp;#43;PvCE7W0pArRWUsiDKxwDX8AtcEm4ADoHIPfeSX14bibxvQum&amp;#43;UOb73mOrehZt2gHHeprjrPIEAA"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-这里
-&lt;/a&gt;
-。&lt;/p&gt;</description></item><item><title>TS 在 React 中的简单应用 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/ts-%E5%9C%A8-react-%E4%B8%AD%E7%9A%84%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8/</link><pubDate>Mon, 17 Jan 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/ts-%E5%9C%A8-react-%E4%B8%AD%E7%9A%84%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/typescript.png" alt="TS 在 React 中的简单应用" /&gt;&lt;h2 id="导入方式"&gt;导入方式&lt;/h2&gt;
+&lt;p&gt;完整代码在&lt;a class="link" href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEBKCmBHArvCAXAQsgliAJvAE7QDeAUNNBmOjsNAEYD2&amp;#43;AngBQCUAXNAApgiYALbx0xACLxgzYejllKVaEXHIiAOzhJUGbHkJEAdAHF4m4rXiC2IZmHwcA5C3bOuAbmUBfZTToGAAt4R2IIbj5BYTEJImlZeUUKFVV1LR0UNCxcAmIzCysJW3tHFxCwoggPbyo-KgD6aAAHWiCOAGt4Nj4MIhxNAHNeASFRcSkZOVpk5So1dA1tBCz9XKMCy3kbMDsHJ2dW9CDnABpoLrYvX390Wiasok5L3vR&amp;#43;oZHo8biE6YUSFIqBZLTJ6HKGfLmLbWEr7FyPNhnC7da51W73BhQoo7PZlObQADuITUfFcrER0AAPtBnBUjNUqTSjidGc4EWd8ZcAPyvd6DZRcJSpAD0wuggBX4wB7aoAh5UADqaAUYjAA6ZgAs1fHAjIcfFUO5EQbiPgIRL4AA8fQGg3OYE0bAAfKctS0iMxmsR0GwANLdXnmxkQNgiFggRnITSEABmA3g&amp;#43;HtqSorRiEyIAElQ-AAB58TTIAPEfEjABuzBw&amp;#43;GgAF4bULY7JNBhHTh89ZPWwy9AAAbNfoNiQAfQAJKQicR4D4&amp;#43;6QO87XR7ulzjAoAMpvc3cHyt2pV5g19B1rvwACy4jALcuDqoXMrsZUlxjF5U8e&amp;#43;xBThDTJ&amp;#43;g9RvfFILTGsQfqbTr7XVIcDDaAOEHNQy1LUsaTcClKWpcD4Eg6DaVCekPHPWMdT1dAAG0O3rRtugAXRbAid33O5AJUHxoHgEAICQwEL2A0CAEEiGENhjBwCAOK4jhsPEfDOyIthiK4QVmJvIS8PIsTiOMZpkAgdp5IkSiwFRG9aPoxjMIvWSRMIiQm1I6DjIog9iOo1I3zs-EfDXN9GgYHDKKCVgOCdZBBiCABVIgQG9IZzmdOgNwgA1dGyFMcHQEYPNYX4kgBNV0mWGK1ghEwsW2FYwW85hfICoLzmcUwAFEABUkXCnBIu0ly7kCaBCBACYkqcHy-MC4LqEXULoHqyLotWdA4oSvgupSmY0tSdVMvGgw8lywp8qy9AipKvryskSqABkasqurmgimsmvRVrmmYDAuu23qgpCi1hrOhqazGsFJsS8RPPwWb-kwxbQWyFaNjy6wCuyB7SpAcr&amp;#43;AAeTnWqwrexrnKupplPQe6eth57UfOqKQYwb7pt&amp;#43;5KplSoGMpJ8FVs2bEoYwGHdppfh-JR16icuhoWqaCGJGZra1WKx7&amp;#43;rNUL8ViP7SSq2rWUR5HnFZfajuqk7Fc5jlUhGj66cmgUacWDUHVk6KjVNQaXqtW1r1SccXSIN0m2e31-UDYNUwjSxowdQgIGAfozrkKInSdt1pED4P-jzMOJ2dtgo6DnAQ5IalC2LMsK2kqhq1rT87x-ZM-z4WCvmLx901fMsXyM9tRJ7WDR0dycmxnedreXVtSPgsgnIdfOt0L79EyrjNoDpcIK7Hv8a9LOuhBw3CG5M&amp;#43;BuynqoW-Dtvp1nZgFz5bve&amp;#43;pUgB4vIev2Ofjdj4G&amp;#43;2GNQ05BNSWbetG0KwXm9oHr9T1&amp;#43;ZbeCcXZ707kfLgK4T7QFwjZQekUtwInvnfTiuxH5UxftbS079P6L11MJVeO5uwIkARHKcbAO4Hy7uAnuVJqTQNsm1NAKc07GAbCAVALYwwhmAOdUCxg&amp;#43;FL2JvfY0tsbSfCdCIXi8BUEQBujWeAOcXwdS3LBFsAjcLl1HnEceMDv5KMnmhcIqjdQQFwpvCAM8tF-h0TePRGggzQTxn1ehcY2j32MGGOQlUwDAHaBwT8V4vwJksU&amp;#43;V8gpywGVjHYlsdjjBqGaOAYA8AOCtlIP2S4PgVyWmMfhTRv4nzEXIYfJcklnGhNKXohELZnDOFKQg5B3EPFEC8T4jgfjkRsHOEXWeISfBhIUd-KglToKtn7AiHwaTug&amp;#43;FLP2NRXTgnpmIj4AAZKuF8vTamoCeC2BExgIAgHoEkgADOcAAtAARm0heKJwz&amp;#43;x2J8FyUZmy2ArlKcDMM4gWl2POLnWMfDjB6wgPbG8sE&amp;#43;Ay1YMhGk8sVZnizCAIMfAABSc4EYADldnW2ApwWCXAgUXjMbi2MYL8BrOoPcCAEY0AG00PFS5NFqLn1fOQPwoBIAwDYs0HAc5iD5gOZWAAAsLMG&amp;#43;R3IUwOEEdA6BmhRVFIwMAxZkDGFkCIYUY42gI0sD4FVzJqoEmYD4JEZ8uDKBwpgOV&amp;#43;BkCalSAKzaQqTBmO4GkcaAAJAxVQLbPytnyTBdt8TWuWusfIsEHVqGWuSd1RB0FeugCIoFfqwS2qUm0FwzJ1XwAwpocYBNfWCoDSYZkya2g6uYBhMAepMzZkYMQWNOacrGARC4OgYgaAiGaBhRt2RRDNHLTmIgAp44SMYsI9&amp;#43;mFhQACpR1alHdAQAm-GABnEwA2UaAC-FQAAHKACo5QAmKmAHvowAMP&amp;#43;AEYdQA98qAFO5QAm36ACa4wA4-GAG8fQA0eqAArjQAtaaTugIAeLTAD98oALO1ACScoAX8VZSABC3KUN7ABhcpO4U&amp;#43;JjhOgJNASwUHKqcTkNwDGVA42g1zUpZAONRXlAlVKngopBjMGYIMDqirmDKtVccVNmqKNBCLfq75vTlDY1MIR4jSTs02rQ-awUIawQusqMTJ&amp;#43;EbPXmm9XaDj-ra1Bp4zasNOhLavzE9Wzjtb82HDVZYdNmaBpeok-GtDantW6pLWW6DFaq16dQ7W&amp;#43;tzh23NtbYKOzdwW3dsrb2qgYiyOSKHbaTCEHmBQZg9AODToiCIZuMhmtDMbp3Sw7SHD0rhTCFDGRsAHLSPKrSzgYUBrGNxluugWAVp8BkfZTgS1KgUPZQZjZy4GEXhmZ7cpyTNWnkuDUGGDCHXXO5g8-27zIi-NBEg9B&amp;#43;AsH4Nhcun4cgl8stcqIDyxJd8OXzcW0haCQWyurYOeFub3KDnKGMCas1FrPzOC5SAMMJzpA&amp;#43;zTaSBA&amp;#43;AVY&amp;#43;AY&amp;#43;VQAcuaADN9QA8dpIjOQADnOJIawxhNABe4EaqgiraAtI4MQULfAQtyD6ZhfOzASOw4Q&amp;#43;jkwTaIClvgE1a4e2FsHYh8x1jHUKtUDOxdq7N3IzOFJJgNhabXxAp&amp;#43;R4kMRg&amp;#43;C4WcAdIQWzBB6iROd4gepmyYHeM4YijkgXnY50IAQ9Aghyp1ioP7QLAcSGB6D8H0AdeQ-QNDzH8OJtI&amp;#43;kijtHE2YcTeMNj3H&amp;#43;PvCE7W0pArRWUsiDKxwDX8AtcEm4ADoHIPfeSX14bibxvQum&amp;#43;UOb73mOrehZt2gHHeprjrPIEAA" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;这里&lt;/a&gt;
+。&lt;/p&gt;</description></item><item><title>TS 在 React 中的简单应用</title><link>https://ElementRef.github.io/p/ts-%E5%9C%A8-react-%E4%B8%AD%E7%9A%84%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8/</link><pubDate>Mon, 17 Jan 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/ts-%E5%9C%A8-react-%E4%B8%AD%E7%9A%84%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/typescript.png" alt="Featured image of post TS 在 React 中的简单应用" /&gt;&lt;h2 id="导入方式"&gt;导入方式
+&lt;/h2&gt;
 &lt;p&gt;在 19/20 版本，默认导出可能不可用。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1348,7 +1292,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="nx"&gt;ReactDOM&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;react-dom&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="组件-props-类型"&gt;组件 props 类型&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="组件-props-类型"&gt;组件 props 类型
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1483,7 +1428,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;li&gt;在定义组件的 props 和 state 类型时，使用 type，因为它更具有约束性；&lt;/li&gt;
 &lt;li&gt;在定义联合类型时，type 非常有用；在描述数据结构 implement 或 extends 类型时，interface 更好。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id="函数组件"&gt;函数组件&lt;/h2&gt;
+&lt;h2 id="函数组件"&gt;函数组件
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -1510,7 +1456,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;li&gt;FC 之前还有 SFC、VFC，谁知道还会不会改名字；&lt;/li&gt;
 &lt;li&gt;对&lt;strong&gt;组件命名空间模式&lt;/strong&gt;支持的不够好。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id="类组件"&gt;类组件&lt;/h2&gt;
+&lt;h2 id="类组件"&gt;类组件
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1595,7 +1542,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="hook"&gt;Hook&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="hook"&gt;Hook
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1754,7 +1702,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="事件"&gt;事件&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="事件"&gt;事件
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1867,7 +1816,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="portals"&gt;Portals&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="portals"&gt;Portals
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1926,7 +1876,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="错误边界"&gt;错误边界&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="错误边界"&gt;错误边界
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1981,37 +1932,23 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="参考"&gt;参考&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="参考"&gt;参考
+&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://fettblog.eu/typescript-react-why-i-dont-use-react-fc"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-TypeScript + React: Why I don&amp;rsquo;t Use React.FC
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://fettblog.eu/typescript-react-why-i-dont-use-react-fc" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;TypeScript + React: Why I don&amp;rsquo;t Use React.FC&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://github.com/facebook/create-react-app/pull/8177"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Remove React.FC from TypeScript Template
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/facebook/create-react-app/pull/8177" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Remove React.FC from TypeScript Template&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://fettblog.eu/typescript-react-component-patterns"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-TypeScript + React: Component Patterns
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://fettblog.eu/typescript-react-component-patterns" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;TypeScript + React: Component Patterns&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://react-typescript-cheatsheet.netlify.app"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-React TypeScript Cheatsheet
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://react-typescript-cheatsheet.netlify.app" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;React TypeScript Cheatsheet&lt;/a&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>TypeScript 复习总结（二） · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/typescript-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93%E4%BA%8C/</link><pubDate>Fri, 24 Apr 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/typescript-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93%E4%BA%8C/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/typescript.png" alt="TypeScript 复习总结（二）" /&gt;&lt;h2 id="编译上下文"&gt;编译上下文&lt;/h2&gt;
+&lt;/ul&gt;</description></item><item><title>TypeScript 复习总结（二）</title><link>https://ElementRef.github.io/p/typescript-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93%E4%BA%8C/</link><pubDate>Fri, 24 Apr 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/typescript-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93%E4%BA%8C/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/typescript.png" alt="Featured image of post TypeScript 复习总结（二）" /&gt;&lt;h2 id="编译上下文"&gt;编译上下文
+&lt;/h2&gt;
 &lt;p&gt;tsconfig.json 用来给文件分组，告诉 TS 哪些文件是有效的，哪些是无效的；还包含有正在被使用的编译选项的信息。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -2141,7 +2078,8 @@ React TypeScript Cheatsheet
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="声明空间"&gt;声明空间&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="声明空间"&gt;声明空间
+&lt;/h2&gt;
 &lt;p&gt;在 TS 里存在两种声明空间：&lt;strong&gt;类型声明空间&lt;/strong&gt;与&lt;strong&gt;变量声明空间&lt;/strong&gt;。类型声明空间包含用来当做类型注解的内容：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -2178,7 +2116,8 @@ React TypeScript Cheatsheet
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;bar&lt;/span&gt;: &lt;span class="kt"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// Error，foo 只能用在变量声明空间
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="类型兼容"&gt;类型兼容&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="类型兼容"&gt;类型兼容
+&lt;/h2&gt;
 &lt;p&gt;类型兼容性用于确定一个类型是否能赋值给其他类型。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -2236,7 +2175,8 @@ React TypeScript Cheatsheet
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;point3D&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;point&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// Error, Property &amp;#39;z&amp;#39; is missing in type &amp;#39;Point&amp;#39; but required in type &amp;#39;Point3D&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="模块"&gt;模块&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="模块"&gt;模块
+&lt;/h2&gt;
 &lt;p&gt;在默认情况下，当你开始在一个新的 TS 文件中写下代码时，它处于全局命名空间中。如果你在相同的项目里创建了一个新的文件 bar.ts，TS 类型系统将会允许你使用变量 foo，就好像它在全局可用一样：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -2268,7 +2208,8 @@ React TypeScript Cheatsheet
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;在项目中，一般会建立一个全局类型模块 global.d.ts，可以将通用的类型提取出来作为 lib.d.ts 的扩充。&lt;/p&gt;
-&lt;h2 id="协变与逆变"&gt;协变与逆变&lt;/h2&gt;
+&lt;h2 id="协变与逆变"&gt;协变与逆变
+&lt;/h2&gt;
 &lt;p&gt;更&lt;strong&gt;具体&lt;/strong&gt;的类型，总是可以赋值给更&lt;strong&gt;宽泛&lt;/strong&gt;的类型，不能反过来，因为保证不了类型安全：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -2382,7 +2323,8 @@ React TypeScript Cheatsheet
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;导致这种情况的原因是：TS 中，类型跟着变量走，而不是跟着值走的。&lt;/p&gt;
-&lt;h2 id="interface-与-type"&gt;interface 与 type&lt;/h2&gt;
+&lt;h2 id="interface-与-type"&gt;interface 与 type
+&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;都可以描述一个对象或者函数：&lt;/li&gt;
 &lt;/ol&gt;
@@ -2582,7 +2524,8 @@ React TypeScript Cheatsheet
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;总的来说，interface 用来描述&lt;strong&gt;数据结构&lt;/strong&gt;，type 用来描述&lt;strong&gt;类型关系&lt;/strong&gt;。&lt;/p&gt;
-&lt;h2 id="undefinednullnever-与-void"&gt;undefined、null、never 与 void&lt;/h2&gt;
+&lt;h2 id="undefinednullnever-与-void"&gt;undefined、null、never 与 void
+&lt;/h2&gt;
 &lt;p&gt;默认情况下 never、null 和 undefined 是所有类型的子类型；就是说你可以把 never、null 和 undefined 赋值给任何类型的变量。只有 never 可以赋值给 never 类型；当你指定了 strictNullChecks 标记，null 和 undefined 只能赋值给 void 和它们各自。void 表示没有任何类型，never 表示永远不存在的值的类型。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -2618,7 +2561,8 @@ React TypeScript Cheatsheet
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="any-与-unknown"&gt;any 与 unknown&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="any-与-unknown"&gt;any 与 unknown
+&lt;/h2&gt;
 &lt;p&gt;any 类型本质上是类型系统的一个逃逸舱；允许我们对 any 类型的值执行任何操作，而无需事先执行任何形式的检查。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -2769,7 +2713,8 @@ React TypeScript Cheatsheet
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;type&lt;/span&gt; &lt;span class="nx"&gt;IntersectionType4&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kt"&gt;unknown&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="kt"&gt;number&lt;/span&gt;&lt;span class="p"&gt;[];&lt;/span&gt; &lt;span class="c1"&gt;// number[]
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="as-与-satisfies"&gt;as 与 satisfies&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="as-与-satisfies"&gt;as 与 satisfies
+&lt;/h2&gt;
 &lt;p&gt;最近在看 Tailwind CSS 的时候，发现配置文件末尾会添加一个 satisfies 关键字：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -2866,7 +2811,8 @@ React TypeScript Cheatsheet
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;而 satisfies 表示，当前变量的值&lt;strong&gt;符合&lt;/strong&gt;给定的类型的某一种情况；某个属性到底是哪个类型，具体情况具体分析。&lt;/p&gt;
-&lt;h2 id="private-与-protected"&gt;private 与 protected&lt;/h2&gt;
+&lt;h2 id="private-与-protected"&gt;private 与 protected
+&lt;/h2&gt;
 &lt;p&gt;当成员被标记成 private 时，它就不能在声明它的类的外部访问；protected 成员在派生类中仍然可以访问。&lt;/p&gt;
 &lt;p&gt;TS 使用的是结构性类型系统；当我们比较两种不同的类型时，并不在乎它们从何处而来，如果所有成员的类型都是兼容的，我们就认为它们的类型是兼容的；当我们比较带有 private 或 protected 成员的类型的时候，如果其中一个类型里包含一个 private 成员，那么只有当另外一个类型中也存在这样一个 private 成员，并且它们都是来自同一处声明时，我们才认为这两个类型是兼容的；对于 protected 成员也使用这个规则。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -2923,7 +2869,8 @@ React TypeScript Cheatsheet
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;p&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;job&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// Error，受保护属性只能在类及其子类中访问
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="instanceof"&gt;instanceof&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="instanceof"&gt;instanceof
+&lt;/h2&gt;
 &lt;p&gt;通过判断构造函数进行类型保护。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -3003,7 +2950,8 @@ React TypeScript Cheatsheet
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;selectAnimal&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;wang&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="typeof"&gt;typeof&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="typeof"&gt;typeof
+&lt;/h2&gt;
 &lt;p&gt;typeof 操作符可以用来获取一个变量声明或对象的类型，也可以用来类型保护（基本类型）。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -3031,7 +2979,8 @@ React TypeScript Cheatsheet
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;type&lt;/span&gt; &lt;span class="nx"&gt;ToArrayType&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;typeof&lt;/span&gt; &lt;span class="nx"&gt;toArray&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// &amp;lt;T&amp;gt;(x: T) =&amp;gt; T[]
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="keyof"&gt;keyof&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="keyof"&gt;keyof
+&lt;/h2&gt;
 &lt;p&gt;keyof 操作符可以用于获取某种类型的所有键，其返回类型是联合类型。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -3067,7 +3016,8 @@ React TypeScript Cheatsheet
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;p6&lt;/span&gt;: &lt;span class="kt"&gt;keys&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;number&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="infer"&gt;infer&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="infer"&gt;infer
+&lt;/h2&gt;
 &lt;p&gt;infer 的作用是让 TS 自己推断，并将推断的结果存储到一个临时变量中，并且只能用于 extends 语句中；它与泛型的区别在于，泛型是声明一个“参数”，而 infer 是声明一个“中间变量”。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -3105,7 +3055,8 @@ React TypeScript Cheatsheet
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;type&lt;/span&gt; &lt;span class="nx"&gt;T6&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;CustomReturnType&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="kt"&gt;number&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// number
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="in"&gt;in&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="in"&gt;in
+&lt;/h2&gt;
 &lt;p&gt;用来&lt;strong&gt;遍历枚举&lt;/strong&gt;类型或&lt;strong&gt;类型保护&lt;/strong&gt;。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -3157,7 +3108,8 @@ React TypeScript Cheatsheet
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="is"&gt;is&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="is"&gt;is
+&lt;/h2&gt;
 &lt;p&gt;is 关键字用来创建自定义类型保护：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -3203,44 +3155,26 @@ React TypeScript Cheatsheet
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;example&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="nx"&gt;bar&lt;/span&gt;: &lt;span class="kt"&gt;123&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;common&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;456&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;});&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="参考"&gt;参考&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="参考"&gt;参考
+&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://juejin.cn/post/6844903749501059085"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-TypeScript 中的 interface 和 type 到底有什么区别
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://juejin.cn/post/6844903749501059085" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;TypeScript 中的 interface 和 type 到底有什么区别&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-TypeScript: Interfaces VS Types
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;TypeScript: Interfaces VS Types&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://juejin.im/post/5d04ac745188250a8b1fd203"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-TypeScript 3.0: unknown 类型
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://juejin.im/post/5d04ac745188250a8b1fd203" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;TypeScript 3.0: unknown 类型&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://juejin.im/post/5c2f87ce5188252593122c98"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-TypeScript 强大的类型别名
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://juejin.im/post/5c2f87ce5188252593122c98" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;TypeScript 强大的类型别名&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://www.bilibili.com/video/BV17N4y1e7PK"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-TS 中的协变与逆变
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://www.bilibili.com/video/BV17N4y1e7PK" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;TS 中的协变与逆变&lt;/a&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>TypeScript 复习总结（一） · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/typescript-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93%E4%B8%80/</link><pubDate>Sat, 08 Feb 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/typescript-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93%E4%B8%80/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/typescript.png" alt="TypeScript 复习总结（一）" /&gt;&lt;h2 id="原始类型一booleannumberstringvoidundefinednullsymbolbigint"&gt;原始类型（一）：boolean、number、string、void、undefined、null、symbol、bigint&lt;/h2&gt;
+&lt;/ul&gt;</description></item><item><title>TypeScript 复习总结（一）</title><link>https://ElementRef.github.io/p/typescript-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93%E4%B8%80/</link><pubDate>Sat, 08 Feb 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/typescript-%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93%E4%B8%80/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/typescript.png" alt="Featured image of post TypeScript 复习总结（一）" /&gt;&lt;h2 id="原始类型一booleannumberstringvoidundefinednullsymbolbigint"&gt;原始类型（一）：boolean、number、string、void、undefined、null、symbol、bigint
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3283,7 +3217,8 @@ TS 中的协变与逆变
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;a&lt;/span&gt;: &lt;span class="kt"&gt;undefined&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// pass
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="原始类型二anyunknownneverobject数组元组"&gt;原始类型（二）：any、unknown、never、object、数组、元组&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="原始类型二anyunknownneverobject数组元组"&gt;原始类型（二）：any、unknown、never、object、数组、元组
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3414,7 +3349,8 @@ TS 中的协变与逆变
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="枚举类型用于声明一组命名的常数当一个变量有几种可能的取值时可以将它定义为枚举类型本质是-js-对象"&gt;枚举类型：用于声明一组命名的常数，当一个变量有几种可能的取值时，可以将它定义为枚举类型，本质是 JS 对象&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="枚举类型用于声明一组命名的常数当一个变量有几种可能的取值时可以将它定义为枚举类型本质是-js-对象"&gt;枚举类型：用于声明一组命名的常数，当一个变量有几种可能的取值时，可以将它定义为枚举类型，本质是 JS 对象
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3685,7 +3621,8 @@ TS 中的协变与逆变
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;Month&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;isSummer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;Month&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;January&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt; &lt;span class="c1"&gt;// false
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="接口为类型命名为你的代码或第三方代码定义契约"&gt;接口：为类型命名、为你的代码或第三方代码定义契约&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="接口为类型命名为你的代码或第三方代码定义契约"&gt;接口：为类型命名、为你的代码或第三方代码定义契约
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3772,7 +3709,8 @@ TS 中的协变与逆变
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="类"&gt;类&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="类"&gt;类
+&lt;/h2&gt;
 &lt;p&gt;接口与类的区别：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;interface 是仅存在于 TS 上下文中的一种虚拟结构，TS 依赖接口用于类型检查，编译为 JS 后，接口将会被移除；&lt;/li&gt;
@@ -3863,7 +3801,8 @@ TS 中的协变与逆变
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;gtr&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;run&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="c1"&gt;// fault
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="函数"&gt;函数&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="函数"&gt;函数
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3936,7 +3875,8 @@ TS 中的协变与逆变
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="泛型一种特殊的变量只用于表示类型而不是值"&gt;泛型：一种特殊的变量，只用于表示类型而不是值&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="泛型一种特殊的变量只用于表示类型而不是值"&gt;泛型：一种特殊的变量，只用于表示类型而不是值
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -4143,7 +4083,8 @@ TS 中的协变与逆变
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;type&lt;/span&gt; &lt;span class="nx"&gt;CustomReturnType&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;T&lt;/span&gt; &lt;span class="kr"&gt;extends&lt;/span&gt; &lt;span class="p"&gt;(...&lt;/span&gt;&lt;span class="nx"&gt;args&lt;/span&gt;: &lt;span class="kt"&gt;any&lt;/span&gt;&lt;span class="p"&gt;[])&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;infer&lt;/span&gt; &lt;span class="nx"&gt;V&lt;/span&gt; &lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="nx"&gt;V&lt;/span&gt; : &lt;span class="kt"&gt;never&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="类型断言与类型守卫"&gt;类型断言与类型守卫&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="类型断言与类型守卫"&gt;类型断言与类型守卫
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -4248,7 +4189,8 @@ TS 中的协变与逆变
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="高级类型交叉类型联合类型类型别名"&gt;高级类型：交叉类型、联合类型、类型别名&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="高级类型交叉类型联合类型类型别名"&gt;高级类型：交叉类型、联合类型、类型别名
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -4367,7 +4309,8 @@ TS 中的协变与逆变
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;declare&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;interfaced&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;arg&lt;/span&gt;: &lt;span class="kt"&gt;Interface&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;Interface&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="可辨识联合类型"&gt;可辨识联合类型&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="可辨识联合类型"&gt;可辨识联合类型
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -4456,7 +4399,8 @@ TS 中的协变与逆变
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="装饰器在多个不同的类之间共享或者扩展一些方法或行为而不是去直接修改它本身"&gt;装饰器：在多个不同的类之间共享或者扩展一些方法或行为，而不是去直接修改它本身&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="装饰器在多个不同的类之间共享或者扩展一些方法或行为而不是去直接修改它本身"&gt;装饰器：在多个不同的类之间共享或者扩展一些方法或行为，而不是去直接修改它本身
+&lt;/h2&gt;
 &lt;p&gt;JS 需要配合 babel-plugin-transform-decorators-legacy，TS 需要配合 experimentalDecorators 选项。&lt;/p&gt;
 &lt;p&gt;装饰器本质上是一个函数，@expression 其实是一个语法糖，@expression 求值后必须也是一个函数，它会在运行时被调用，被装饰的声明信息做为参数传入。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -4597,7 +4541,8 @@ TS 中的协变与逆变
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;p&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;greet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;xiaomuzhu&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="赋值断言is-关键字可调用类型注解和类型推导"&gt;赋值断言、is 关键字、可调用类型注解和类型推导&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="赋值断言is-关键字可调用类型注解和类型推导"&gt;赋值断言、is 关键字、可调用类型注解和类型推导
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -4678,7 +4623,8 @@ TS 中的协变与逆变
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// Error：不能把 &amp;#39;string&amp;#39; 类型赋值给 &amp;#39;number&amp;#39; 类型
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="索引类型映射类型"&gt;索引类型、映射类型&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="索引类型映射类型"&gt;索引类型、映射类型
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -4729,7 +4675,8 @@ TS 中的协变与逆变
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;type&lt;/span&gt; &lt;span class="nx"&gt;partialUser&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;User&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 所有属性都变成了可选类型
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="条件类型"&gt;条件类型&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="条件类型"&gt;条件类型
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -4746,13 +4693,10 @@ TS 中的协变与逆变
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;f&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// string
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="类型工具"&gt;类型工具&lt;/h2&gt;
-&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/docs/handbook/utility-types.html#awaitedtype"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Awaited&lt;Type&gt;
-&lt;/a&gt;
+&lt;/div&gt;&lt;h2 id="类型工具"&gt;类型工具
+&lt;/h2&gt;
+&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/docs/handbook/utility-types.html#awaitedtype" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Awaited&lt;Type&gt;&lt;/a&gt;
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -4768,12 +4712,8 @@ Awaited&lt;Type&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;type&lt;/span&gt; &lt;span class="nx"&gt;MyAwaited&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;T&lt;/span&gt; &lt;span class="kr"&gt;extends&lt;/span&gt; &lt;span class="nx"&gt;Promise&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;infer&lt;/span&gt; &lt;span class="na"&gt;U&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="nx"&gt;MyAwaited&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;U&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;T&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Partial&lt;Type&gt;
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Partial&lt;Type&gt;&lt;/a&gt;
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -4801,12 +4741,8 @@ Partial&lt;Type&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kt"&gt;never&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/docs/handbook/utility-types.html#requiredtype"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Required&lt;Type&gt;
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/docs/handbook/utility-types.html#requiredtype" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Required&lt;Type&gt;&lt;/a&gt;
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -4834,12 +4770,8 @@ Required&lt;Type&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kt"&gt;never&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/docs/handbook/utility-types.html#readonlytype"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Readonly&lt;Type&gt;
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/docs/handbook/utility-types.html#readonlytype" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Readonly&lt;Type&gt;&lt;/a&gt;
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -4867,12 +4799,8 @@ Readonly&lt;Type&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kt"&gt;never&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Record&amp;lt;Keys, Type&amp;gt;
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Record&amp;lt;Keys, Type&amp;gt;&lt;/a&gt;
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -4894,12 +4822,8 @@ Record&amp;lt;Keys, Type&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;type&lt;/span&gt; &lt;span class="nx"&gt;MyRecord&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;K&lt;/span&gt; &lt;span class="na"&gt;extends&lt;/span&gt; &lt;span class="na"&gt;keyof&lt;/span&gt; &lt;span class="na"&gt;any&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="na"&gt;U&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;P&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;K&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;U&lt;/span&gt; &lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Pick&amp;lt;Type, Keys&amp;gt;
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Pick&amp;lt;Type, Keys&amp;gt;&lt;/a&gt;
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -4925,12 +4849,8 @@ Pick&amp;lt;Type, Keys&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Omit&amp;lt;Type, Keys&amp;gt;
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Omit&amp;lt;Type, Keys&amp;gt;&lt;/a&gt;
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -4958,12 +4878,8 @@ Omit&amp;lt;Type, Keys&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/docs/handbook/utility-types.html#excludeuniontype-excludedmembers"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Exclude&amp;lt;UnionType, ExcludedMembers&amp;gt;
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/docs/handbook/utility-types.html#excludeuniontype-excludedmembers" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Exclude&amp;lt;UnionType, ExcludedMembers&amp;gt;&lt;/a&gt;
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -4989,12 +4905,8 @@ Exclude&amp;lt;UnionType, ExcludedMembers&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;type&lt;/span&gt; &lt;span class="nx"&gt;MyExclude&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="na"&gt;U&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;T&lt;/span&gt; &lt;span class="kr"&gt;extends&lt;/span&gt; &lt;span class="nx"&gt;U&lt;/span&gt; &lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="kt"&gt;never&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;T&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/docs/handbook/utility-types.html#extracttype-union"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Extract&amp;lt;Type, Union&amp;gt;
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/docs/handbook/utility-types.html#extracttype-union" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Extract&amp;lt;Type, Union&amp;gt;&lt;/a&gt;
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -5020,12 +4932,8 @@ Extract&amp;lt;Type, Union&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;type&lt;/span&gt; &lt;span class="nx"&gt;MyExtract&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="na"&gt;U&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;T&lt;/span&gt; &lt;span class="kr"&gt;extends&lt;/span&gt; &lt;span class="nx"&gt;U&lt;/span&gt; &lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="nx"&gt;T&lt;/span&gt; : &lt;span class="kt"&gt;never&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/docs/handbook/utility-types.html#nonnullabletype"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-NonNullable&lt;Type&gt;
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/docs/handbook/utility-types.html#nonnullabletype" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;NonNullable&lt;Type&gt;&lt;/a&gt;
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -5039,12 +4947,8 @@ NonNullable&lt;Type&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;type&lt;/span&gt; &lt;span class="nx"&gt;MyNonNullable&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;T&lt;/span&gt; &lt;span class="kr"&gt;extends&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="kc"&gt;undefined&lt;/span&gt; &lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="kt"&gt;never&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;T&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/docs/handbook/utility-types.html#parameterstype"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-Parameters&lt;Type&gt;
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/docs/handbook/utility-types.html#parameterstype" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Parameters&lt;Type&gt;&lt;/a&gt;
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -5080,12 +4984,8 @@ Parameters&lt;Type&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; : &lt;span class="kt"&gt;never&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/docs/handbook/utility-types.html#constructorparameterstype"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-ConstructorParameters&lt;Type&gt;
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/docs/handbook/utility-types.html#constructorparameterstype" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;ConstructorParameters&lt;Type&gt;&lt;/a&gt;
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -5115,12 +5015,8 @@ ConstructorParameters&lt;Type&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;T&lt;/span&gt; &lt;span class="kr"&gt;extends&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="p"&gt;(...&lt;/span&gt;&lt;span class="nx"&gt;params&lt;/span&gt;: &lt;span class="kt"&gt;infer&lt;/span&gt; &lt;span class="nx"&gt;U&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="kt"&gt;any&lt;/span&gt; &lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="nx"&gt;U&lt;/span&gt; : &lt;span class="kt"&gt;never&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/docs/handbook/utility-types.html#returntypetype"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-ReturnType&lt;Type&gt;
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/docs/handbook/utility-types.html#returntypetype" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;ReturnType&lt;Type&gt;&lt;/a&gt;
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -5158,12 +5054,8 @@ ReturnType&lt;Type&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; : &lt;span class="kt"&gt;never&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/docs/handbook/utility-types.html#instancetypetype"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-InstanceType&lt;Type&gt;
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/docs/handbook/utility-types.html#instancetypetype" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;InstanceType&lt;Type&gt;&lt;/a&gt;
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -5193,12 +5085,8 @@ InstanceType&lt;Type&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;T&lt;/span&gt; &lt;span class="kr"&gt;extends&lt;/span&gt; &lt;span class="kr"&gt;abstract&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="p"&gt;(...&lt;/span&gt;&lt;span class="nx"&gt;parama&lt;/span&gt;: &lt;span class="kt"&gt;any&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;infer&lt;/span&gt; &lt;span class="nx"&gt;U&lt;/span&gt; &lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="nx"&gt;U&lt;/span&gt; : &lt;span class="kt"&gt;never&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/docs/handbook/utility-types.html#thisparametertypetype"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-ThisParameterType&lt;Type&gt;
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/docs/handbook/utility-types.html#thisparametertypetype" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;ThisParameterType&lt;Type&gt;&lt;/a&gt;
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -5230,12 +5118,8 @@ ThisParameterType&lt;Type&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; : &lt;span class="kt"&gt;never&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class="link"
-href="https://www.typescriptlang.org/docs/handbook/utility-types.html#omitthisparametertype"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-OmitThisParameter&lt;Type&gt;
-&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/docs/handbook/utility-types.html#omitthisparametertype" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;OmitThisParameter&lt;Type&gt;&lt;/a&gt;
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -5263,13 +5147,10 @@ OmitThisParameter&lt;Type&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; : &lt;span class="kt"&gt;never&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="参考"&gt;参考&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="参考"&gt;参考
+&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://jkchao.github.io/typescript-book-chinese"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-深入理解 TypeScript
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://jkchao.github.io/typescript-book-chinese" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;深入理解 TypeScript&lt;/a&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</description></item></channel></rss>

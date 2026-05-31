@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>设计模式 on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link><description>Recent content in 设计模式 on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 27 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml"/><item><title>《设计模式与开发实践》笔记 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/</link><pubDate>Tue, 27 Jul 2021 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/patterns.png" alt="《设计模式与开发实践》笔记" /&gt;&lt;h2 id="多态"&gt;多态&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>设计模式 on 馬腊咯稽</title><link>https://ElementRef.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link><description>Recent Content in 设计模式 on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo 0.162.0</generator><language>zh</language><lastBuildDate>Tue, 27 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml"/><item><title>《设计模式与开发实践》笔记</title><link>https://ElementRef.github.io/p/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/</link><pubDate>Tue, 27 Jul 2021 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/patterns.png" alt="Featured image of post 《设计模式与开发实践》笔记" /&gt;&lt;h2 id="多态"&gt;多态
+&lt;/h2&gt;
 &lt;p&gt;同一操作作用于不同的对象上面，可以产生不同的解释和不同的执行结果；给不同的对象发送同一个消息的时候，这些对象会根据这个消息分别给出不同的反馈；多态背后的思想是将“做什么”和“谁去做以及怎样去做”分离开来。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -36,7 +37,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;makeSound&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;Duck&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt; &lt;span class="c1"&gt;// 嘎嘎嘎
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="面向接口编程"&gt;面向接口编程&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="面向接口编程"&gt;面向接口编程
+&lt;/h2&gt;
 &lt;p&gt;“在系统分析和架构中，分清层次和依赖关系；每个层次不是直接向其上层提供服务，而是通过定义一组接口，仅向上层暴露其接口功能；上层对于下层仅仅是接口依赖，而不依赖具体类”是设计模式中最重要的思想。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -90,7 +92,8 @@
 &lt;li&gt;易于程序的扩展；&lt;/li&gt;
 &lt;li&gt;有利于程序的维护。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="面向切面编程aop"&gt;面向切面编程（AOP）&lt;/h2&gt;
+&lt;h2 id="面向切面编程aop"&gt;面向切面编程（AOP）
+&lt;/h2&gt;
 &lt;p&gt;把一些跟核心业务逻辑模块无关的功能抽离出来，这些跟业务逻辑无关的功能通常包括日志统计、安全控制、异常处理等。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -154,7 +157,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;fn&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="单例模式"&gt;单例模式&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="单例模式"&gt;单例模式
+&lt;/h2&gt;
 &lt;p&gt;保证一个类仅有一个实例，并提供一个访问它的全局访问点。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -214,7 +218,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;getSingle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;LoginLayer&lt;/span&gt;&lt;span class="p"&gt;)();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="策略模式"&gt;策略模式&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="策略模式"&gt;策略模式
+&lt;/h2&gt;
 &lt;p&gt;定义一系列的算法，把它们一个个封装起来，并且使它们可以相互替换：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -258,7 +263,8 @@
 &lt;li&gt;在策略模式中利用组合和委托来让 Context 拥有执行算法的能力，这也是继承的一种更轻便的替代方案；&lt;/li&gt;
 &lt;li&gt;策略模式提供了对开放—封闭原则的完美支持，将算法独立封装，使得它们易于切换，易于理解，易于扩展。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="代理模式"&gt;代理模式&lt;/h2&gt;
+&lt;h2 id="代理模式"&gt;代理模式
+&lt;/h2&gt;
 &lt;p&gt;为一个对象提供一个代用品或占位符，以便控制对它的访问。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -402,7 +408,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;})(&lt;/span&gt;&lt;span class="nx"&gt;mult&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="迭代器模式"&gt;迭代器模式&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="迭代器模式"&gt;迭代器模式
+&lt;/h2&gt;
 &lt;p&gt;提供一种方法顺序访问一个聚合对象中的各个元素，而又不需要暴露该对象的内部表示。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -424,7 +431,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="发布订阅模式"&gt;发布订阅模式&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="发布订阅模式"&gt;发布订阅模式
+&lt;/h2&gt;
 &lt;p&gt;可以取代对象之间硬编码的通知机制，一个对象不用再显式地调用另外一个对象的某个接口。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -478,7 +486,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="命令模式"&gt;命令模式&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="命令模式"&gt;命令模式
+&lt;/h2&gt;
 &lt;p&gt;命令指的是一个执行某些特定事情的指令。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -534,7 +543,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;setCommand&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;btn3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;refreshMenuBarCommand&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="组合模式"&gt;组合模式&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="组合模式"&gt;组合模式
+&lt;/h2&gt;
 &lt;p&gt;将对象组合成树形结构，以表示“部分 - 整体”的层次结构；通过对象的多态性表现，使得用户对单个对象和组合对象的使用具有一致性。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -672,9 +682,11 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;组合对象包含一组叶对象，但 Leaf 并不是 Composite 的子类；组合对象把请求委托给它所包含的所有叶对象，它们能够合作的关键是拥有相同的接口。&lt;/p&gt;
 &lt;p&gt;组合模式除了要求组合对象和叶对象拥有相同的接口之外，还有一个必要条件，就是对一组叶对象的操作必须具有一致性。&lt;/p&gt;
-&lt;h2 id="模板方法"&gt;模板方法&lt;/h2&gt;
+&lt;h2 id="模板方法"&gt;模板方法
+&lt;/h2&gt;
 &lt;p&gt;由两部分结构组成，第一部分是抽象父类，第二部分是具体的实现子类；通常在抽象父类中封装了子类的算法框架，包括实现一些公共方法以及封装子类中所有方法的执行顺序；子类通过继承这个抽象类，也继承了整个算法结构，并且可以选择重写父类的方法。&lt;/p&gt;
-&lt;h2 id="享元模式flyweight"&gt;享元模式（flyweight）&lt;/h2&gt;
+&lt;h2 id="享元模式flyweight"&gt;享元模式（flyweight）
+&lt;/h2&gt;
 &lt;p&gt;运用共享技术来有效支持大量细粒度的对象；如果系统中因为创建了大量类似的对象而导致内存占用过高，享元模式就非常有用了。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -755,7 +767,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;})();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="职责链模式"&gt;职责链模式&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="职责链模式"&gt;职责链模式
+&lt;/h2&gt;
 &lt;p&gt;使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系；将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止；我们把这些对象称为链中的节点。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -907,7 +920,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;order&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="中介者模式"&gt;中介者模式&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="中介者模式"&gt;中介者模式
+&lt;/h2&gt;
 &lt;p&gt;解除对象与对象之间的紧耦合关系；增加一个中介者对象后，所有的相关对象都通过中介者对象来通信，而不是互相引用；所以当一个对象发生改变时，只需要通知中介者对象即可。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1085,9 +1099,11 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;中介者模式使各个对象之间得以解耦，以中介者和对象之间的一对多关系取代了对象之间的网状多对多关系；各个对象只需关注自身功能的实现，对象之间的交互关系交给了中介者对象来实现和维护。&lt;/p&gt;
 &lt;p&gt;最大的缺点是系统中会新增一个中介者对象，因为对象之间交互的复杂性，转移成了中介者对象的复杂性，使得中介者对象经常是巨大的；中介者对象自身往往就是一个难以维护的对象。&lt;/p&gt;
-&lt;h2 id="装饰者模式"&gt;装饰者模式&lt;/h2&gt;
+&lt;h2 id="装饰者模式"&gt;装饰者模式
+&lt;/h2&gt;
 &lt;p&gt;给对象动态地增加职责的方式称为装饰者模式；能够在不改变对象自身的基础上，在程序运行期间给对象动态地添加职责；跟继承相比，装饰者是一种更轻便灵活的做法，这是一种“即用即付”的方式；他没有真正地改动对象自身，而是将对象放入另一个对象之中，这些对象以一条链的方式进行引用，形成一个聚合对象。&lt;/p&gt;
-&lt;h2 id="状态模式"&gt;状态模式&lt;/h2&gt;
+&lt;h2 id="状态模式"&gt;状态模式
+&lt;/h2&gt;
 &lt;p&gt;状态模式的关键是区分事物内部的状态，事物内部状态的改变往往会带来事物的行为改变；状态模式的关键是把事物的每种状态都封装成单独的类，跟此种状态有关的行为都被封装在这个类的内部。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1182,19 +1198,13 @@
 &lt;li&gt;Context 中的请求动作和状态类中封装的行为可以非常容易地独立变化而互不影响。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;状态模式的缺点是会在系统中定义许多状态类，编写多个状态类是一项枯燥乏味的工作，而且系统中会因此而增加不少对象；由于逻辑分散在状态类中，虽然避开了条件分支语句，但也造成了逻辑分散的问题；我们无法在一个地方就看出整个状态机的逻辑。&lt;/p&gt;
-&lt;h2 id="适配器模式"&gt;适配器模式&lt;/h2&gt;
-&lt;p&gt;适配器模式主要用来解决两个已有接口之间不匹配的问题，它不考虑这些接口是怎样实现的，也不考虑它们将来可能会如何演化；适配器模式不需要改变已有的接口，就能够使它们协同作用。&lt;/p&gt;</description></item><item><title>观察者模式与发布订阅模式 · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/</link><pubDate>Sat, 18 Apr 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/patterns.png" alt="观察者模式与发布订阅模式" /&gt;&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/patterns.jpg"
-width="1148"
-height="770"
-srcset="https://ElementRef.github.io/p/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/patterns_hu_53fe02348ad7bc9f.jpg 480w, https://ElementRef.github.io/p/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/patterns_hu_94bcaa0a2cd854ff.jpg 1024w"
-alt="设计模式"
-class="gallery-image"
-data-flex-grow="149"
-data-flex-basis="357px"
-loading="lazy"
-&gt;
+&lt;h2 id="适配器模式"&gt;适配器模式
+&lt;/h2&gt;
+&lt;p&gt;适配器模式主要用来解决两个已有接口之间不匹配的问题，它不考虑这些接口是怎样实现的，也不考虑它们将来可能会如何演化；适配器模式不需要改变已有的接口，就能够使它们协同作用。&lt;/p&gt;</description></item><item><title>观察者模式与发布订阅模式</title><link>https://ElementRef.github.io/p/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/</link><pubDate>Sat, 18 Apr 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/patterns.png" alt="Featured image of post 观察者模式与发布订阅模式" /&gt;&lt;p&gt;&lt;img alt="设计模式" class="gallery-image" data-flex-basis="357px" data-flex-grow="149" height="770" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/patterns_hu_6ec079a5499fbb2c.jpg" srcset="https://ElementRef.github.io/p/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/patterns_hu_d01938705a3706c9.jpg 800w, https://ElementRef.github.io/p/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/patterns_hu_6ec079a5499fbb2c.jpg 1148w" width="1148"&gt;
+
 &lt;/p&gt;
-&lt;h2 id="观察者模式"&gt;观察者模式&lt;/h2&gt;
+&lt;h2 id="观察者模式"&gt;观察者模式
+&lt;/h2&gt;
 &lt;p&gt;观察者模式就好个体奶农（Subject）和个人（Observers）的关系；奶农负责统计有多少人订了产品（Subscribe），个人都会有一个相同拿牛奶的方法（Event）；奶农有新奶了就负责调用这个方法（Fire Event）。&lt;/p&gt;
 &lt;p&gt;观察者模式是一对多的关系，多个观察者对应一个对象；当被观察对象更新时会通知所有观察者。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -1291,7 +1301,8 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;notifyObservers&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="发布订阅模式"&gt;发布订阅模式&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="发布订阅模式"&gt;发布订阅模式
+&lt;/h2&gt;
 &lt;p&gt;发布订阅模式就好像报社（Publishers）、邮局（Topic/Event Channel）和个人（Subscribers）的关系；报纸的订阅（Subscribe）和分发（Fire Event）是由邮局来完成的，报社只负责将报纸发送给邮局（Publish Topic/Event）。&lt;/p&gt;
 &lt;p&gt;发布订阅模式是多对多的关系，可以有多个发布者多个观察者；每个发布者对应着多个观察者，每个观察者对应着多个发布者。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -1386,36 +1397,23 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;zhaoliu&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;publishTopic&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;channel&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="回归-vue"&gt;回归 Vue&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="回归-vue"&gt;回归 Vue
+&lt;/h2&gt;
 &lt;p&gt;对于响应式对象，Vue 会在对象属性的 getter 中收集属性对应的依赖，在对象属性的 setter 中通知对应依赖进行更新；一个数据对象对应多个依赖，数据是被观察目标，视图、计算属性、侦听器这些是观察者/依赖者。&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://ElementRef.github.io/p/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/vue.png"
-width="1200"
-height="750"
-srcset="https://ElementRef.github.io/p/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/vue_hu_5789a07f3251bc3e.png 480w, https://ElementRef.github.io/p/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/vue_hu_53a6026756c24268.png 1024w"
-alt="回归 Vue"
-class="gallery-image"
-data-flex-grow="160"
-data-flex-basis="384px"
-loading="lazy"
-&gt;
+&lt;p&gt;&lt;img alt="回归 Vue" class="gallery-image" data-flex-basis="384px" data-flex-grow="160" height="750" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/vue_hu_f9179fe6a60e607.png" srcset="https://ElementRef.github.io/p/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/vue_hu_d8a20f0fea00fa33.png 800w, https://ElementRef.github.io/p/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/vue_hu_f9179fe6a60e607.png 1200w" width="1200"&gt;
+
 &lt;/p&gt;
-&lt;h2 id="参考"&gt;参考&lt;/h2&gt;
+&lt;h2 id="参考"&gt;参考
+&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://juejin.im/post/5af05d406fb9a07a9e4d2799"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-不好意思，观察者模式跟发布订阅模式就是不一样
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://juejin.im/post/5af05d406fb9a07a9e4d2799" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;不好意思，观察者模式跟发布订阅模式就是不一样&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/25"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-介绍下观察者模式和订阅发布模式的区别
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/25" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;介绍下观察者模式和订阅发布模式的区别&lt;/a&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>实现 Singleton · I AM BEA, I DRINK TEA</title><link>https://ElementRef.github.io/p/%E5%AE%9E%E7%8E%B0-singleton/</link><pubDate>Wed, 29 May 2019 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E5%AE%9E%E7%8E%B0-singleton/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/patterns.png" alt="实现 Singleton" /&gt;&lt;h2 id="singleton-是什么"&gt;Singleton 是什么&lt;/h2&gt;
+&lt;/ul&gt;</description></item><item><title>实现 Singleton</title><link>https://ElementRef.github.io/p/%E5%AE%9E%E7%8E%B0-singleton/</link><pubDate>Wed, 29 May 2019 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/%E5%AE%9E%E7%8E%B0-singleton/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/patterns.png" alt="Featured image of post 实现 Singleton" /&gt;&lt;h2 id="singleton-是什么"&gt;Singleton 是什么
+&lt;/h2&gt;
 &lt;p&gt;单例模式是指：一个类仅有一个实例，并且有一个访问点可以访问到这个类；为了实现单例模式，需要在类第一次被调用的时候，将实例保存下来；在这个类被第 n 次调用时，将第一次的实例返回。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1451,7 +1449,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;a&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="nx"&gt;b&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// true
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="单例模式的应用命名空间"&gt;单例模式的应用：命名空间&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="单例模式的应用命名空间"&gt;单例模式的应用：命名空间
+&lt;/h2&gt;
 &lt;p&gt;最简单的单例模式就是以字面量这种形式创建的对象，这种最简单的单例模式可以防止全局变量被污染。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1473,7 +1472,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="单例模式的应用管理模块"&gt;单例模式的应用：管理模块&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="单例模式的应用管理模块"&gt;单例模式的应用：管理模块
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -1494,7 +1494,8 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;})();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="es6-单例模式"&gt;ES6 单例模式&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="es6-单例模式"&gt;ES6 单例模式
+&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1539,13 +1540,10 @@ target="_blank" rel="noopener" referrerpolicy="no-referrer"
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;a1&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="nx"&gt;a2&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// true
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="参考"&gt;参考&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id="参考"&gt;参考
+&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class="link"
-href="https://zhuanlan.zhihu.com/p/34754447"
-target="_blank" rel="noopener" referrerpolicy="no-referrer"
-&gt;
-从 ES6 重新认识 JavaScript 设计模式 (一)：单例模式
-&lt;/a&gt;
+&lt;li&gt;&lt;a class="link" href="https://zhuanlan.zhihu.com/p/34754447" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;从 ES6 重新认识 JavaScript 设计模式 (一)：单例模式&lt;/a&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</description></item></channel></rss>
