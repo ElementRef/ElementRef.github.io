@@ -4110,6 +4110,9 @@
 &lt;li&gt;Context 中状态的生命周期是和组件的生命周期绑定的，而 Zustand 不是；&lt;/li&gt;
 &lt;li&gt;Zustand.createStore 和 Context 结合使用，可生成多实例状态。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;当「Zustand + Context」结合使用时，因为 Context 是组件树的一部分，导致 Zustand 创建的状态被迫有了「层级」；此时，&lt;a class="link" href="https://gemini.google.com/share/c30751fb67f0" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;建议使用 atom&lt;/a&gt;
+来管理状态。&lt;/p&gt;
 &lt;h3 id="zustand"&gt;Zustand
 &lt;/h3&gt;
 &lt;p&gt;持久化状态中，不仅需要保存 JS-SDK 状态，还需要保存：客户端标识 deviceId、登录用户信息 userInfo（Admin 端）、登录凭证 token（Admin 端）等；为了方便创建状态，需要一个 Zustand 工厂函数：&lt;/p&gt;
@@ -4700,6 +4703,9 @@
 &lt;/li&gt;
 &lt;li&gt;&lt;a class="link" href="https://github.com/JoshuaKGoldberg/eslint-plugin-package-json/issues/928" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;Feature: Enforce Order of Imports and Exports&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://gemini.google.com/share/c30751fb67f0" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Atom vs. Zustand: State Management&lt;/a&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;a class="link" href="https://github.com/egoist/tailwindcss-icons/issues/37" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;Load SVGs from Filesystem&lt;/a&gt;
