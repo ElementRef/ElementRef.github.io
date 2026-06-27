@@ -399,7 +399,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id="shadowdom"&gt;ShadowDOM
 &lt;/h3&gt;
-&lt;p&gt;为了能在 ShadownDOM 中正确渲染 AntDesign 样式，需要根据&lt;a class="link" href="https://ant.design/docs/react/compatible-style-cn#shadow-dom-%E5%9C%BA%E6%99%AF" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+&lt;p&gt;为了能在 ShadowDOM 中正确渲染 AntDesign 样式，需要根据&lt;a class="link" href="https://ant.design/docs/react/compatible-style-cn#shadow-dom-%E5%9C%BA%E6%99%AF" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;文档&lt;/a&gt;
 设置 StyleProvider；同时为了保证弹出框（Select, Tooltip, Menu 等等）的正确渲染，需要指定全局的 getPopupContainer，否则会得到&lt;strong&gt;trigger element and popup element should in same shadow root&lt;/strong&gt;的错误信息：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -449,7 +449,7 @@
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-tsx" data-lang="tsx"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;ConfigProvider&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;antd&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;StyleProvider&lt;/span&gt; &lt;span class="na"&gt;layer&lt;/span&gt; &lt;span class="na"&gt;container&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;shadowRoot&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="nx"&gt;ShadowRoot&lt;/span&gt;&lt;span class="p"&gt;}&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;StyleProvider&lt;/span&gt; &lt;span class="na"&gt;container&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;shadowRoot&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="nx"&gt;ShadowRoot&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="na"&gt;layer&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;children&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;StyleProvider&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
@@ -576,9 +576,9 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;原因是 CJS 没有&lt;strong&gt;默认导出&lt;/strong&gt;的概念，当在 ESM 导入 CJS 模块时：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;import * as cjsModule from &amp;lsquo;cjs-module&amp;rsquo; 时，cjsModule.default === module.exports；&lt;/li&gt;
-&lt;li&gt;import cjsModule from &amp;lsquo;cjs-module&amp;rsquo; 时，cjsModule === module.exports；&lt;/li&gt;
-&lt;li&gt;没有&lt;strong&gt;命名导出&lt;/strong&gt;，import { foo } from &amp;lsquo;cjs-module&amp;rsquo; 需要工具链处理。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;import * as cjsModule from 'cjs-module'&lt;/code&gt;时，&lt;code&gt;cjsModule.default === module.exports&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;import cjsModule from 'cjs-module'&lt;/code&gt;时，&lt;code&gt;cjsModule === module.exports&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;没有&lt;strong&gt;命名导出&lt;/strong&gt;，&lt;code&gt;import { foo } from 'cjs-module'&lt;/code&gt;需要工具链处理。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;rolldown-vite 为了统一开发与编译阶段的&lt;a class="link" href="https://github.com/vitejs/rolldown-vite/issues/490" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;模块解析行为&lt;/a&gt;
@@ -846,8 +846,8 @@
  编译后的 CSS 变量会同时存在于 :root 和 :host 中。&lt;/p&gt;
 &lt;p&gt;尝试修改 JSX 代码中的类名，发现新的样式并没有生效；起初以为是 Tailwind CSS 配置的问题，但是手动刷新页面后，样式生效了；说明新的 CSS 没能热更新到页面：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;import &amp;lsquo;./index.css&amp;rsquo; 将被视为&lt;strong&gt;模块依赖&lt;/strong&gt;；CSS 将被编译并注入到 HTML；&lt;/li&gt;
-&lt;li&gt;import innerStyle from &amp;lsquo;./index.css?inline&amp;rsquo; 将被视为&lt;strong&gt;静态资源&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;import './index.css'&lt;/code&gt;将被视为&lt;strong&gt;模块依赖&lt;/strong&gt;；CSS 将被编译并注入到 HTML；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;import innerStyle from './index.css?inline'&lt;/code&gt;将被视为&lt;strong&gt;静态资源&lt;/strong&gt;。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;此时，Vite 是知道 ./index.css?inline 有更新的，但是不知道如何&lt;strong&gt;应用更新&lt;/strong&gt;，毕竟 CSS 不再是一个模块依赖了；需要借助 &lt;a class="link" href="https://cn.vite.dev/guide/api-hmr#hot-accept-cb" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;import.meta.hot.accept&lt;/a&gt;
@@ -1718,7 +1718,7 @@
 。&lt;/p&gt;
 &lt;h3 id="自定义元素"&gt;自定义元素
 &lt;/h3&gt;
-&lt;p&gt;有一个场景，我们和 AI 约定，某种情况下，请返回 &amp;lt;custom-event event-type=&amp;lsquo;order&amp;rsquo; event-payload=&amp;lsquo;8186340&amp;rsquo;&amp;gt;自定义元素&amp;lt;/custom-event&amp;gt;；用户点击之后，可以将 eventType 和 eventPayload 发送给&lt;strong&gt;宿主&lt;/strong&gt;，让宿主执行后续逻辑：&lt;/p&gt;
+&lt;p&gt;有一个场景，我们和 AI 约定，某种情况下，请返回&lt;code&gt;&amp;lt;custom-event event-type='order' event-payload='8186340'&amp;gt;自定义元素&amp;lt;/custom-event&amp;gt;&lt;/code&gt;；用户点击之后，可以将 eventType 和 eventPayload 发送给&lt;strong&gt;宿主&lt;/strong&gt;，让宿主执行后续逻辑：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1751,8 +1751,8 @@
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-tsx" data-lang="tsx"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;interface&lt;/span&gt; &lt;span class="nx"&gt;ChatSdkConfigEventParams&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;eventType&lt;/span&gt;: &lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 事件类型
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;eventPayload&lt;/span&gt;: &lt;span class="kt"&gt;any&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 事件载荷
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;eventPayload&lt;/span&gt;: &lt;span class="kt"&gt;any&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 事件载荷
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;eventType&lt;/span&gt;: &lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 事件类型
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;Markdown&lt;/span&gt;
@@ -4481,8 +4481,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;renderContext?&lt;/span&gt;: &lt;span class="kt"&gt;RenderContext&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;interface&lt;/span&gt; &lt;span class="nx"&gt;ChatSdkConfigEventParams&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;eventType&lt;/span&gt;: &lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;eventPayload&lt;/span&gt;: &lt;span class="kt"&gt;any&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;eventType&lt;/span&gt;: &lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;type&lt;/span&gt; &lt;span class="nx"&gt;EntranceInterceptor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kr"&gt;from&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;EntranceFrom&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;Promise&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;boolean&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;type&lt;/span&gt; &lt;span class="nx"&gt;EntranceFrom&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ContextMenu&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;EntranceButton&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;SmartButton&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -4580,7 +4580,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;这样做有以下好处：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;广告位可以配置为 &lt;strong&gt;&amp;lt;a href=&amp;ldquo;javascript:window?._Example_ChatSdk_?.sendMessage(&amp;lsquo;广告&amp;rsquo;)&amp;quot;&amp;gt;我是广告&amp;lt;/a&amp;gt;&lt;/strong&gt;；用户点击后，直接向 AI 发消息；&lt;/li&gt;
+&lt;li&gt;广告位可以配置为&lt;code&gt;&amp;lt;a href=&amp;quot;javascript:window?._Example_ChatSdk_?.sendMessage('广告')&amp;quot;/&amp;gt;&lt;/code&gt;；用户点击后，直接向 AI 发消息；&lt;/li&gt;
 &lt;li&gt;如果要支持更多自定义事件，只需要通过 Admin 端修改 AI 提示词，并更新宿主环境的配置，无需修改 SDK 代码；&lt;/li&gt;
 &lt;li&gt;如果要给 AI 调用添加任何&lt;strong&gt;前置条件&lt;/strong&gt;，只需要更新宿主环境配置，无需修改 SDK 代码。&lt;/li&gt;
 &lt;/ul&gt;
@@ -4626,8 +4626,8 @@
 &lt;ol&gt;
 &lt;li&gt;在第三方宿主环境使用 ESM 格式的包，是不明智的：
 &lt;ol&gt;
-&lt;li&gt;type=&amp;ldquo;module&amp;rdquo; 脚本必须通过 CORS 校验；&lt;/li&gt;
-&lt;li&gt;必须添加 crossorigin=&amp;ldquo;anonymous&amp;rdquo;；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;type=&amp;quot;module&amp;quot;&lt;/code&gt;脚本必须通过 CORS 校验；&lt;/li&gt;
+&lt;li&gt;必须添加&lt;code&gt;crossorigin=&amp;quot;anonymous&amp;quot;&lt;/code&gt;；&lt;/li&gt;
 &lt;li&gt;脚本服务器必须添加 CORS 响应头。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
@@ -4642,8 +4642,8 @@
 &lt;ol&gt;
 &lt;li&gt;使用 loadSDKJS 加载 SDK 资源：
 &lt;ol&gt;
-&lt;li&gt;因为在本地开发环境，Vite 输出的是 ESM 格式，所以 type=&amp;ldquo;module&amp;rdquo;；&lt;/li&gt;
-&lt;li&gt;线上部署的 UMD 格式，需要在配置时，改为 type=&amp;ldquo;text/javascript&amp;rdquo;；&lt;/li&gt;
+&lt;li&gt;因为在本地开发环境，Vite 输出的是 ESM 格式，所以&lt;code&gt;type=&amp;quot;module&amp;quot;&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;线上部署的 UMD 格式，需要在配置时，改为&lt;code&gt;type=&amp;quot;text/javascript&amp;quot;&lt;/code&gt;；&lt;/li&gt;
 &lt;li&gt;这样加载更灵活，比如在后台管理的登录页，引入 SDK 也无意义。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;

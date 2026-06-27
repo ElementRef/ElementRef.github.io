@@ -357,7 +357,7 @@
 </span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="shadowdom">ShadowDOM</h3><p>为了能在 ShadownDOM 中正确渲染 AntDesign 样式，需要根据<a class="link" href="https://ant.design/docs/react/compatible-style-cn#shadow-dom-%E5%9C%BA%E6%99%AF" target="_blank" rel="noopener" referrerpolicy="no-referrer">文档</a>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="shadowdom">ShadowDOM</h3><p>为了能在 ShadowDOM 中正确渲染 AntDesign 样式，需要根据<a class="link" href="https://ant.design/docs/react/compatible-style-cn#shadow-dom-%E5%9C%BA%E6%99%AF" target="_blank" rel="noopener" referrerpolicy="no-referrer">文档</a>
 设置 StyleProvider；同时为了保证弹出框（Select, Tooltip, Menu 等等）的正确渲染，需要指定全局的 getPopupContainer，否则会得到<strong>trigger element and popup element should in same shadow root</strong>的错误信息：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
@@ -390,7 +390,7 @@
 </span><span class="lnt">5
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ConfigProvider</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'antd'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">StyleProvider</span> <span class="na">layer</span> <span class="na">container</span><span class="o">=</span><span class="p">{</span><span class="nx">shadowRoot</span> <span class="kr">as</span> <span class="nx">ShadowRoot</span><span class="p">}&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">StyleProvider</span> <span class="na">container</span><span class="o">=</span><span class="p">{</span><span class="nx">shadowRoot</span> <span class="kr">as</span> <span class="nx">ShadowRoot</span><span class="p">}</span> <span class="na">layer</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">{</span><span class="nx">children</span><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">StyleProvider</span><span class="p">&gt;;</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>同时 Tailwind CSS 4 正式支持了 CSS Layer；所以需要修改 @layer 配置，并手动引入 AntDesign 的样式重置文件：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -479,7 +479,7 @@
 </span></span><span class="line"><span class="cl">    <span class="c1">// ...
 </span></span></span><span class="line"><span class="cl">  <span class="p">};</span>
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>原因是 CJS 没有<strong>默认导出</strong>的概念，当在 ESM 导入 CJS 模块时：</p><ul><li>import * as cjsModule from ‘cjs-module’ 时，cjsModule.default === module.exports；</li><li>import cjsModule from ‘cjs-module’ 时，cjsModule === module.exports；</li><li>没有<strong>命名导出</strong>，import { foo } from ‘cjs-module’ 需要工具链处理。</li></ul><p>rolldown-vite 为了统一开发与编译阶段的<a class="link" href="https://github.com/vitejs/rolldown-vite/issues/490" target="_blank" rel="noopener" referrerpolicy="no-referrer">模块解析行为</a>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>原因是 CJS 没有<strong>默认导出</strong>的概念，当在 ESM 导入 CJS 模块时：</p><ul><li><code>import * as cjsModule from 'cjs-module'</code>时，<code>cjsModule.default === module.exports</code>；</li><li><code>import cjsModule from 'cjs-module'</code>时，<code>cjsModule === module.exports</code>；</li><li>没有<strong>命名导出</strong>，<code>import { foo } from 'cjs-module'</code>需要工具链处理。</li></ul><p>rolldown-vite 为了统一开发与编译阶段的<a class="link" href="https://github.com/vitejs/rolldown-vite/issues/490" target="_blank" rel="noopener" referrerpolicy="no-referrer">模块解析行为</a>
 ，对 CJS 的默认导出处理做出了<a class="link" href="https://rolldown.rs/in-depth/bundling-cjs#ambiguous-default-import-from-cjs-modules" target="_blank" rel="noopener" referrerpolicy="no-referrer">调整</a>
 。在 antd/locale/zh_CN 中，zhCN 是通过 module.exports 导出的：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -593,7 +593,7 @@ iframe 的资源加载的；SDK 应避免改变宿主的安全策略；</li><li>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="nx">shadowSheet</span><span class="p">.</span><span class="nx">insertRule</span><span class="p">(</span><span class="sb">`:host { </span><span class="si">${</span><span class="nx">properties</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">'; '</span><span class="p">)</span><span class="si">}</span><span class="sb"> }`</span><span class="p">);</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>这样，颜色就能正常渲染了；这也说明了，CSS 变量是可以穿透到 ShadowDOM 内部的。同时，最新版的 Tailwind CSS 似乎已经在解决这个问题了，<a class="link" href="https://play.tailwindcss.com" target="_blank" rel="noopener" referrerpolicy="no-referrer">Tailwind Play</a>
-编译后的 CSS 变量会同时存在于 :root 和 :host 中。</p><p>尝试修改 JSX 代码中的类名，发现新的样式并没有生效；起初以为是 Tailwind CSS 配置的问题，但是手动刷新页面后，样式生效了；说明新的 CSS 没能热更新到页面：</p><ul><li>import ‘./index.css’ 将被视为<strong>模块依赖</strong>；CSS 将被编译并注入到 HTML；</li><li>import innerStyle from ‘./index.css?inline’ 将被视为<strong>静态资源</strong>。</li></ul><p>此时，Vite 是知道 ./index.css?inline 有更新的，但是不知道如何<strong>应用更新</strong>，毕竟 CSS 不再是一个模块依赖了；需要借助 <a class="link" href="https://cn.vite.dev/guide/api-hmr#hot-accept-cb" target="_blank" rel="noopener" referrerpolicy="no-referrer">import.meta.hot.accept</a>
+编译后的 CSS 变量会同时存在于 :root 和 :host 中。</p><p>尝试修改 JSX 代码中的类名，发现新的样式并没有生效；起初以为是 Tailwind CSS 配置的问题，但是手动刷新页面后，样式生效了；说明新的 CSS 没能热更新到页面：</p><ul><li><code>import './index.css'</code>将被视为<strong>模块依赖</strong>；CSS 将被编译并注入到 HTML；</li><li><code>import innerStyle from './index.css?inline'</code>将被视为<strong>静态资源</strong>。</li></ul><p>此时，Vite 是知道 ./index.css?inline 有更新的，但是不知道如何<strong>应用更新</strong>，毕竟 CSS 不再是一个模块依赖了；需要借助 <a class="link" href="https://cn.vite.dev/guide/api-hmr#hot-accept-cb" target="_blank" rel="noopener" referrerpolicy="no-referrer">import.meta.hot.accept</a>
 告知 Vite 如何应用更新：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
@@ -1304,7 +1304,7 @@ iframe 的资源加载的；SDK 应避免改变宿主的安全策略；</li><li>
 </span></span><span class="line"><span class="cl">  <span class="p">{</span><span class="nx">children</span><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">Markdown</span><span class="p">&gt;;</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>这样，图片都被替换为了 <a class="link" href="https://ant.design/components/image" target="_blank" rel="noopener" referrerpolicy="no-referrer">AntDesign.Image</a>
-。</p><h3 id="自定义元素">自定义元素</h3><p>有一个场景，我们和 AI 约定，某种情况下，请返回 &lt;custom-event event-type=‘order’ event-payload=‘8186340’&gt;自定义元素&lt;/custom-event&gt;；用户点击之后，可以将 eventType 和 eventPayload 发送给<strong>宿主</strong>，让宿主执行后续逻辑：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+。</p><h3 id="自定义元素">自定义元素</h3><p>有一个场景，我们和 AI 约定，某种情况下，请返回<code>&lt;custom-event event-type='order' event-payload='8186340'&gt;自定义元素&lt;/custom-event&gt;</code>；用户点击之后，可以将 eventType 和 eventPayload 发送给<strong>宿主</strong>，让宿主执行后续逻辑：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1332,8 +1332,8 @@ iframe 的资源加载的；SDK 应避免改变宿主的安全策略；</li><li>
 </span><span class="lnt">26
 </span><span class="lnt">27
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">ChatSdkConfigEventParams</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">eventType</span>: <span class="kt">string</span><span class="p">;</span> <span class="c1">// 事件类型
-</span></span></span><span class="line"><span class="cl">  <span class="nx">eventPayload</span>: <span class="kt">any</span><span class="p">;</span> <span class="c1">// 事件载荷
+</span></span><span class="line"><span class="cl">  <span class="nx">eventPayload</span>: <span class="kt">any</span><span class="p">;</span> <span class="c1">// 事件载荷
+</span></span></span><span class="line"><span class="cl">  <span class="nx">eventType</span>: <span class="kt">string</span><span class="p">;</span> <span class="c1">// 事件类型
 </span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">Markdown</span>
