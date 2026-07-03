@@ -1,0 +1,1546 @@
+<!DOCTYPE html><html lang="zh" dir="ltr"><head><meta charset="utf-8"><style>@layer __jampack__{:where(img[jampack-sized]){max-width:100%;height:auto}}</style><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><meta name="description" content="劳动节之前，公司决定把 AI 融入到内部项目（WMS|ERP|CRM|…）当中；同时，为了能兼顾商业化场景，最好能避免对现有项目做任何业务流程上的修改；最后确定，AI 通过 JS-SDK 插件融入到现有系统；此外，需要一个 Web 端作为独立的 C 端入口，一个 Admin 管理端用来配置 AI（模型、插件、提示词、知识库、智能体预览…）。劳动节回来，我被分到了三块儿任务：\n"><title>AI JS-SDK 项目总结（一） · I AM BEA, I DRINK TEA</title><link rel="canonical" href="https://ElementRef.github.io/p/ai-js-sdk-1/"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="preload" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&amp;display=swap" as="style"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&amp;display=swap"><link rel="stylesheet" href="/scss/style.min.1243efdf0a4b2d5e8a94d9b48d38408d382af8ff47fff9e97cce76f84b9ccca6.css"><meta property="og:title" content="AI JS-SDK 项目总结（一）"><meta property="og:description" content="劳动节之前，公司决定把 AI 融入到内部项目（WMS|ERP|CRM|…）当中；同时，为了能兼顾商业化场景，最好能避免对现有项目做任何业务流程上的修改；最后确定，AI 通过 JS-SDK 插件融入到现有系统；此外，需要一个 Web 端作为独立的 C 端入口，一个 Admin 管理端用来配置 AI（模型、插件、提示词、知识库、智能体预览…）。劳动节回来，我被分到了三块儿任务：\n"><meta property="og:url" content="https://ElementRef.github.io/p/ai-js-sdk-1/"><meta property="og:site_name" content="馬腊咯稽"><meta property="og:type" content="article"><meta property="og:locale" content="zh_CN"><meta property="article:section" content="Post"><meta property="article:published_time" content="2025-07-31T00:00:00+00:00"><meta property="article:modified_time" content="2025-07-31T00:00:00+00:00"><meta property="og:image" content="https://ElementRef.github.io/img/cover/react.png"><meta property="og:logo" content="/favicon.svg"><meta name="twitter:site" content="@SpiciComic"><meta name="twitter:creator" content="@SpiciComic"><meta name="twitter:title" content="AI JS-SDK 项目总结（一）"><meta name="twitter:description" content="劳动节之前，公司决定把 AI 融入到内部项目（WMS|ERP|CRM|…）当中；同时，为了能兼顾商业化场景，最好能避免对现有项目做任何业务流程上的修改；最后确定，AI 通过 JS-SDK 插件融入到现有系统；此外，需要一个 Web 端作为独立的 C 端入口，一个 Admin 管理端用来配置 AI（模型、插件、提示词、知识库、智能体预览…）。劳动节回来，我被分到了三块儿任务：\n"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://ElementRef.github.io/img/cover/react.png"><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><meta name="apple-mobile-web-app-title" content="馬腊咯稽"><meta http-equiv="Content-Security-Policy" content=" frame-src https://*.bilibili.com https://*.qq.com https://*.youtube.com https://youtu.be https://www.youtube-nocookie.com; upgrade-insecure-requests "><script src="https://umami.spicicomic.workers.dev/elementref.js" crossorigin="anonymous" data-website-id="87868be0-a9cf-4f8c-8fee-e3cbb99e6cf2" defer=""></script><script src="https://static.cloudflareinsights.com/beacon.min.js" crossorigin="anonymous" data-cf-beacon="{&quot;token&quot;: &quot;9d3fb1ef9fac4cb0b7d041747556f0c4&quot;}" defer=""></script></head><body class="article-page"><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container extended flex main-container on-phone--column"><aside class="sidebar sticky left-sidebar"><button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="菜单">
+<span class="hamburger-box"><span class="hamburger-inner"></span></span></button><header><figure class="site-avatar"><a href="/" rel="noopener" referrerpolicy="no-referrer"><img src="/img/avatar_hu_28c494226642278b.webp" width="600" height="600" class="site-logo" alt="Avatar" fetchpriority="high" decoding="async"></a></figure><div class="site-meta"><h1 class="site-name"><a href="/" rel="noopener" referrerpolicy="no-referrer">馬腊咯稽</a></h1><h2 class="site-description">I AM BEA, I DRINK TEA</h2></div></header><ol class="menu-social"><li><a href="https://github.com/ElementRef" title="GitHub" referrerpolicy="no-referrer" rel="noopener" target="_blank"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-brand-github" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"></path></svg></a></li><li><a href="https://douban.com/people/nicknoonan" title="DouBan" referrerpolicy="no-referrer" rel="noopener" target="_blank"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-douban" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M4 20h16M5 4h14M8 8h8a2 2 0 012 2v2a2 2 0 01-2 2H8a2 2 0 01-2-2v-2a2 2 0 012-2m8 6-2 6m-6-3 1 3"></path></svg></a></li><li><a href="https://last.fm/zh/user/SpiciComic/listening-report" title="Last.fm" referrerpolicy="no-referrer" rel="noopener" target="_blank"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-lastfm" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M20 8c-.83-1-1.388-1-2-1s-2 .271-2 2 1.384 2.233 3 3 2.125 1.812 2 3-1 2-3 2-3-1-3.5-2-1.585-4.78-2.497-6a5 5 0 10-1 7"></path></svg></a></li></ol><ol class="menu" id="main-menu"><li><a href="/"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-home" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M5 12H3l9-9 9 9h-2M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"></path></svg>
+<span>主页</span></a></li><li><a href="/archives/"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-archive" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><rect width="18" height="4" x="3" y="4" rx="2"></rect><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+<span>归档</span></a></li><li><a href="/terminal/"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-terminal" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="m5 7 5 5-5 5m7 2h7"></path></svg>
+<span>命令</span></a></li><li><a href="/links/"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"></path><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"></path></svg>
+<span>好文</span></a></li><li><a href="/artificial-intelligence/"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icons-tabler-outline icon-tabler-brain" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M15.5 13A3.5 3.5.0 0012 16.5v1a3.5 3.5.0 007 0v-1.8M8.5 13a3.5 3.5.0 013.5 3.5v1a3.5 3.5.0 01-7 0v-1.8"></path><path d="M17.5 16a3.5 3.5.0 000-7H17"></path><path d="M19 9.3V6.5a3.5 3.5.0 00-7 0M6.5 16a3.5 3.5.0 010-7H7"></path><path d="M5 9.3V6.5a3.5 3.5.0 017 0v10"></path></svg>
+<span>机智</span></a></li><li><a href="/about/"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-user" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><circle cx="12" cy="7" r="4"></circle><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"></path></svg>
+<span>关于</span></a></li><li class="menu-bottom-section"><ol class="menu"><li id="dark-mode-toggle"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-toggle-left" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><circle cx="8" cy="12" r="2"></circle><rect width="20" height="12" x="2" y="6" rx="6"></rect></svg>
+<svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-toggle-right" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><circle cx="16" cy="12" r="2"></circle><rect width="20" height="12" x="2" y="6" rx="6"></rect></svg>
+<span>主题</span></li></ol></li></ol></aside><aside class="sidebar sticky right-sidebar"><section class="archives widget"><div class="widget-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-hash" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M5 9h14M5 15h14M11 4 7 20M17 4l-4 16"></path></svg></div><h2 class="section-title widget-title">目录</h2><div class="widget--toc"><nav class="toc-nav" id="TableOfContents"><ol><li><a href="#项目搭建">项目搭建</a><ol><li><a href="#目录结构">目录结构</a></li><li><a href="#pnpm-workspace">pnpm workspace</a></li><li><a href="#commitlintconfigjs">commitlint.config.js</a></li><li><a href="#eslintconfigjs">eslint.config.js</a></li><li><a href="#stylelintconfigjs">stylelint.config.js</a></li><li><a href="#tailwindconfigjs">tailwind.config.js</a></li><li><a href="#nginx-configconf">nginx-config.conf</a></li><li><a href="#turbojson">turbo.json</a></li><li><a href="#子包配置">子包配置</a></li></ol></li><li><a href="#状态管理">状态管理</a><ol><li><a href="#zustand">Zustand</a></li></ol></li><li><a href="#构建-sdk">构建 SDK</a><ol><li><a href="#sdk-结构">SDK 结构</a></li><li><a href="#sdk-配置">SDK 配置</a></li><li><a href="#sdk-使用">SDK 使用</a></li></ol></li><li><a href="#参考">参考</a></li></ol></nav></div></section></aside><main class="full-width main"><article class="has-image main-article"><header class="article-header"><div class="article-image"><a href="/p/ai-js-sdk-1/" rel="noopener" referrerpolicy="no-referrer"><img alt="Featured image of post AI JS-SDK 项目总结（一）" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/img/cover/react.webp" fetchpriority="high" decoding="async" width="1200" height="720" jampack-sized="true"></a></div><div class="article-details"><header class="article-category"><a href="/c/react/" style="background-color:#bed5ef;color:#0f253d" rel="noopener" referrerpolicy="no-referrer">React</a></header><div class="article-title-wrapper"><h2 class="article-title"><a href="/p/ai-js-sdk-1/" rel="noopener" referrerpolicy="no-referrer">AI JS-SDK 项目总结（一）</a></h2></div><footer class="article-meta"><div class="inline-meta"><svg width="56" height="56" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-calendar-time" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"></path><circle cx="18" cy="18" r="4"></circle><path d="M15 3v4M7 3v4m-4 4h16m-1 5.496V18l1 1"></path></svg>
+<time class="article-time--published" datetime="2025-07-31T00:00:00Z">2025 年 7月 31 日</time>
+<svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-clock" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
+<time class="article-time--reading">阅读时长: 16 分钟</time></div></footer></div></header><aside class="article-toc"><details><summary><div class="article-toc-title"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="m9 6 6 6-6 6"></path></svg>
+<span>目录</span></div></summary><nav class="toc-nav"><ol><li><a href="#项目搭建">项目搭建</a><ol><li><a href="#目录结构">目录结构</a></li><li><a href="#pnpm-workspace">pnpm workspace</a></li><li><a href="#commitlintconfigjs">commitlint.config.js</a></li><li><a href="#eslintconfigjs">eslint.config.js</a></li><li><a href="#stylelintconfigjs">stylelint.config.js</a></li><li><a href="#tailwindconfigjs">tailwind.config.js</a></li><li><a href="#nginx-configconf">nginx-config.conf</a></li><li><a href="#turbojson">turbo.json</a></li><li><a href="#子包配置">子包配置</a></li></ol></li><li><a href="#状态管理">状态管理</a><ol><li><a href="#zustand">Zustand</a></li></ol></li><li><a href="#构建-sdk">构建 SDK</a><ol><li><a href="#sdk-结构">SDK 结构</a></li><li><a href="#sdk-配置">SDK 配置</a></li><li><a href="#sdk-使用">SDK 使用</a></li></ol></li><li><a href="#参考">参考</a></li></ol></nav></details></aside><section class="article-content"><p>劳动节之前，公司决定把 AI 融入到内部项目（WMS|ERP|CRM|…）当中；同时，为了能兼顾商业化场景，最好能避免对现有项目做任何业务流程上的修改；最后确定，AI 通过 JS-SDK 插件融入到现有系统；此外，需要一个 Web 端作为独立的 C 端入口，一个 Admin 管理端用来配置 AI（模型、插件、提示词、知识库、智能体预览…）。劳动节回来，我被分到了三块儿任务：</p><ul><li>整体项目搭建；</li><li>Web 端 &amp; JS-SDK 插件端（仅交互差别）；</li><li>Admin 管理端中的智能体调试以及提示词对比。</li></ul><p><img alt="JS-SDK" class="gallery-image" data-flex-basis="427px" data-flex-grow="178" height="1074" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/p/ai-js-sdk-1/ai.sdk_hu_8c75496da67b02ac.webp" srcset="/p/ai-js-sdk-1/ai.sdk_hu_dab93d3742fa9783.png 800w, /p/ai-js-sdk-1/ai.sdk_hu_d8c40897e91000f2.png 1600w, /p/ai-js-sdk-1/ai.sdk_hu_8c75496da67b02ac.png 1915w" width="1915" fetchpriority="high" decoding="async">
+<img alt="Web" class="gallery-image" data-flex-basis="427px" data-flex-grow="178" height="1075" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/p/ai-js-sdk-1/ai.web_hu_d753b5b2fcedf6e1.webp" srcset="/p/ai-js-sdk-1/ai.web_hu_373dbe1102126526.png 800w, /p/ai-js-sdk-1/ai.web_hu_ea95fb07f1f4176e.png 1600w, /p/ai-js-sdk-1/ai.web_hu_d753b5b2fcedf6e1.png 1915w" width="1915" fetchpriority="high" decoding="async">
+<img alt="Admin" class="gallery-image" data-flex-basis="427px" data-flex-grow="178" height="1075" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/p/ai-js-sdk-1/ai.admin_hu_823f12142340058b.webp" srcset="/p/ai-js-sdk-1/ai.admin_hu_b523a82fcd49e363.png 800w, /p/ai-js-sdk-1/ai.admin_hu_8c8b563deedf4321.png 1600w, /p/ai-js-sdk-1/ai.admin_hu_823f12142340058b.png 1916w" width="1916" fetchpriority="high" decoding="async"></p><p>这三个任务都指向了一个功能模块 - AI 对话框；这篇文章就对开发过程做一下简单的记录。</p><h2 id="项目搭建">项目搭建</h2><p>为了最大化的组件复用，提高开发效率，决定基于 <a class="link" href="https://pnpm.io/zh/workspaces" target="_blank" rel="noopener" referrerpolicy="no-referrer">pnpm workspace</a>
+、<a class="link" href="https://turborepo.com/docs" target="_blank" rel="noopener" referrerpolicy="no-referrer">Turborepo</a>
+、<a class="link" href="https://cn.vite.dev/guide" target="_blank" rel="noopener" referrerpolicy="no-referrer">Vite</a>
+搭建一个 monorepo 项目。</p><h3 id="目录结构">目录结构</h3><ul><li>主应用 Admin 和 Web 放在 apps 目录下，每个应用都是完整的 Vite 项目；</li><li>JS-SDK、shared 公共代码和 types 类型共享等子包，放在 packages 目录下；</li><li>SVG 图标文件放在根目录的 icons 文件夹下，根据<strong>应用名称｜子包名称｜是否保留颜色</strong>进行分类；</li><li>env 文件、Lint 配置、Deploy 配置、Turborepo 配置、workspace 配置、Tailwind CSS 配置等，均放在根目录下；</li><li>Admin、Web、JS-SDK、Shared 都有自己独立的 tsconfig.json，根目录 tsconfig.json 仅匹配根目录的 *.config.ts|js。</li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">apps</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">admin</span>                     <span class="err">主应用一</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">tsconfig</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">json</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">tsconfig</span><span class="o">.</span><span class="n">json</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">tsconfig</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">json</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">└──</span> <span class="n">vite</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">└──</span> <span class="n">web</span>                       <span class="err">主应用二</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">└──</span> <span class="n">vite</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">deploy</span>                        <span class="err">部署配置</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">└──</span> <span class="n">deployment</span><span class="o">.</span><span class="n">yml</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">icons</span>                         <span class="n">SVG</span> <span class="err">图标文件</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">colorless</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">└──</span> <span class="n">upload</span><span class="o">.</span><span class="n">svg</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">└──</span> <span class="n">color</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>       <span class="err">├──</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>       <span class="err">└──</span> <span class="n">word</span><span class="o">.</span><span class="n">svg</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">packages</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">js</span><span class="o">-</span><span class="n">sdk</span>                    <span class="n">SDK</span> <span class="err">插件端</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">└──</span> <span class="n">vite</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">shared</span>                    <span class="err">公共</span> <span class="n">apis</span><span class="err">、</span><span class="n">hooks</span><span class="err">、</span><span class="n">components</span><span class="err">、</span><span class="n">style</span> <span class="err">等</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">apis</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">chat</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">chat</span><span class="o">.</span><span class="n">oss</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">chat</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">└──</span> <span class="n">index</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">└──</span> <span class="n">vars</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">assets</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">└──</span> <span class="n">user</span><span class="o">-</span><span class="n">avatar</span><span class="o">.</span><span class="n">png</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">components</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">└──</span> <span class="n">index</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">enums</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">└──</span> <span class="n">upload</span><span class="o">.</span><span class="n">enums</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">hooks</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">└──</span> <span class="n">use</span><span class="o">-</span><span class="n">selection</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">request</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">http</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">index</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">└──</span> <span class="n">interceptors</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>       <span class="err">├──</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>       <span class="err">└──</span> <span class="n">index</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">index</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">package</span><span class="o">.</span><span class="n">json</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">tsup</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">js</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">vitest</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">stores</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">└──</span> <span class="n">store</span><span class="o">-</span><span class="n">key</span><span class="o">-</span><span class="n">constant</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">styles</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">chat</span><span class="o">.</span><span class="n">css</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">└──</span> <span class="n">highlight</span><span class="o">.</span><span class="n">css</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">tsconfig</span><span class="o">.</span><span class="n">json</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">types</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">│</span>   <span class="err">└──</span> <span class="n">index</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>   <span class="err">└──</span> <span class="n">utils</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>       <span class="err">├──</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>       <span class="err">├──</span> <span class="n">cn</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">│</span>       <span class="err">└──</span> <span class="n">index</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">└──</span> <span class="n">types</span>                     <span class="err">公共类型</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>       <span class="err">├──</span> <span class="n">package</span><span class="o">.</span><span class="n">json</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>       <span class="err">├──</span> <span class="n">global</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>       <span class="err">├──</span> <span class="n">react</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>       <span class="err">└──</span> <span class="n">vite</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">patches</span>                       <span class="err">@</span><span class="n">ant</span><span class="o">-</span><span class="n">design</span><span class="o">/</span><span class="n">x</span> <span class="err">补丁</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">└──</span> <span class="err">@</span><span class="n">ant</span><span class="o">-</span><span class="n">design__x</span><span class="o">.</span><span class="n">patch</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="o">.</span><span class="n">env</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">development</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">production</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="o">.</span><span class="n">gitignore</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="o">.</span><span class="n">npmrc</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="o">.</span><span class="n">nvmrc</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">Dockerfile</span>                    <span class="err">部署配置</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">nginx</span><span class="o">-</span><span class="n">config</span><span class="o">.</span><span class="n">conf</span>             <span class="err">部署配置</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">commitlint</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">js</span>          <span class="n">commitlint</span> <span class="err">配置</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">eslint</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">js</span>              <span class="n">ESLint</span> <span class="err">配置</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">stylelint</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">js</span>           <span class="n">Stylelint</span> <span class="err">配置</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">tailwind</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">js</span>            <span class="n">Tailwind</span> <span class="n">CSS</span> <span class="err">配置</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">pnpm</span><span class="o">-</span><span class="n">lock</span><span class="o">.</span><span class="n">yaml</span>                <span class="err">依赖锁</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">pnpm</span><span class="o">-</span><span class="n">workspace</span><span class="o">.</span><span class="n">yaml</span>           <span class="n">workspace</span> <span class="err">配置：</span><span class="n">packages</span><span class="err">、</span><span class="n">patchedDependencies</span><span class="err">、</span><span class="n">catalog</span> <span class="err">等</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">package</span><span class="o">.</span><span class="n">json</span>                  <span class="n">npm</span><span class="o">-</span><span class="n">scripts</span><span class="err">、</span><span class="n">git</span><span class="o">-</span><span class="n">hooks</span><span class="err">、</span><span class="n">lint</span><span class="o">-</span><span class="n">staged</span><span class="err">、</span><span class="n">engines</span><span class="err">、</span><span class="n">cli</span><span class="o">-</span><span class="n">dependencies</span> <span class="err">等</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">tsconfig</span><span class="o">.</span><span class="n">json</span>                 <span class="n">TypeScript</span> <span class="err">配置</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">turbo</span><span class="o">.</span><span class="n">json</span>                    <span class="n">Turborepo</span> <span class="err">配置</span>
+</span></span><span class="line"><span class="cl"><span class="err">└──</span> <span class="n">README</span><span class="o">.</span><span class="n">md</span>                     <span class="err">说明文件</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="pnpm-workspace">pnpm workspace</h3><p>在之前的项目经历中，使用过 Lerna + yarn workspace 的搭配，但也仅限于使用，好像不久之后，Lerna 停更了；这次使用 pnpm workspace 管理项目：</p><ul><li>pnpx codemod pnpm/catalog 可以将依赖统一到 pnpm-workspace.yaml 中进行管理，不用担心 package 依赖版本混乱；</li><li>pnpm 支持依赖共享，所有依赖都在根目录的 node_modules/.pnpm 中，子包的依赖通过<strong>软连接</strong>指向根目录；</li><li>支持 workspace 协议，package 只需要做好<a class="link" href="https://dev.to/bnb/conditional-exports-supporting-both-import-and-require-3ihg" target="_blank" rel="noopener" referrerpolicy="no-referrer"><strong>条件导出</strong></a>
+，别的 package 就能直接引用到当前最新的代码；</li><li>支持 <a class="link" href="https://pnpm.io/zh/package_json#publishconfig" target="_blank" rel="noopener" referrerpolicy="no-referrer">publishConfig</a>
+，可以在发布时自动替换 package 的条件导出配置，方便将 package 发布到私有 npm；</li><li>通过 --filter、--recursive、--workspace-root，很方便对 package 进行管理；</li><li>仅暴露 package.json 中声明的依赖，杜绝幽灵依赖问题。</li></ul><p>pnpm-workspace.yaml 包含了：</p><ul><li>子包所在的目录；</li><li>对哪些依赖打了补丁；</li><li>pnpm 包管理的一些配置；</li><li>在安装期间，禁用的一些依赖的安装脚本；</li><li>统一各个子包的依赖版本，搭配<a class="link" href="https://marketplace.visualstudio.com/items?itemName=antfu.pnpm-catalog-lens" target="_blank" rel="noopener" referrerpolicy="no-referrer">PNPM Catalog Lens</a>
+使用；</li><li><a class="link" href="https://www.pnpm.cn/next/catalogs" target="_blank" rel="noopener" referrerpolicy="no-referrer">Catalog</a>
+的特点官网写的很清楚：<ul><li>减少 package.json 文件的合并冲突；</li><li>保持各个子包的共同的依赖项版本一致；</li><li>升级或者更新依赖项版本时，只需更改一处；</li><li>pnpm update/pnpm up 命令不支持修改 Catalog；</li><li>每次有新加的依赖时，只需执行 pnpx codemod pnpm/catalog 就能同步到 Catalog；</li><li>pnpx codemod pnpm/catalog 还不支持<strong>对等依赖</strong>的同步；</li><li>不方便搭配 <a class="link" href="https://github.com/raineorshine/npm-check-updates" target="_blank" rel="noopener" referrerpolicy="no-referrer">npm-check-updates</a>
+使用。</li></ul></li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">packages</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">apps/*</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">packages/*</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">patchedDependencies</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">'@ant-design/x'</span><span class="p">:</span><span class="w"> </span><span class="l">patches/@ant-design__x.patch</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">packageManagerStrict</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">packageManagerStrictVersion</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">managePackageManagerVersions</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">ignoredBuiltDependencies</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">esbuild</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">simple-git-hooks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">unrs-resolver</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">catalog</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">react</span><span class="p">:</span><span class="w"> </span><span class="l">^18.0.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">react-dom</span><span class="p">:</span><span class="w"> </span><span class="l">^18.0.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">...</span><span class="w">
+</span></span></span></code></pre></td></tr></tbody></table></div></div><h3 id="commitlintconfigjs">commitlint.config.js</h3><p>pnpm 还不支持直接获取子包名称，这样我们就没办法对 commit-message 中的 scope 字段进行验证；可以通过这个 <a class="link" href="https://github.com/orgs/pnpm/discussions/4150" target="_blank" rel="noopener" referrerpolicy="no-referrer">issue</a>
+中的命令，曲线救国：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">exec</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'node:child_process'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">promisify</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'node:util'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">execAsync</span> <span class="o">=</span> <span class="nx">promisify</span><span class="p">(</span><span class="nx">exec</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">extends</span><span class="o">:</span> <span class="p">[</span><span class="s1">'@commitlint/config-conventional'</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">rules</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">'body-min-length'</span><span class="o">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s1">'always'</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">'subject-case'</span><span class="o">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s1">'never'</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">'scope-enum'</span><span class="o">:</span> <span class="kr">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="p">{</span> <span class="nx">stdout</span> <span class="p">}</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">execAsync</span><span class="p">(</span><span class="s1">'pnpm list --recursive --depth -1'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">pkgs</span> <span class="o">=</span> <span class="nx">stdout</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">'\n'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">line</span> <span class="p">=&gt;</span> <span class="nx">line</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">'@'</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">line</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="k">return</span> <span class="nx">line</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="s1">'@example/'</span><span class="p">,</span> <span class="s1">''</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="s1">'@'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s1">'always'</span><span class="p">,</span> <span class="p">[...</span><span class="nx">pkgs</span><span class="p">,</span> <span class="s1">'root'</span><span class="p">]];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>此时，commitlint 将 scope 限制为 admin、web、js-sdk、shared、types、root。</p><h3 id="eslintconfigjs">eslint.config.js</h3><p>ESLint 规则使用的是 <a class="link" href="https://eslint-config.antfu.me" target="_blank" rel="noopener" referrerpolicy="no-referrer">@antfu/eslint-config</a>
+，规则非常全面；我做了一些规则修改：</p><ul><li>使用 <a class="link" href="https://github.com/JoshuaKGoldberg/eslint-plugin-package-json" target="_blank" rel="noopener" referrerpolicy="no-referrer">eslint-plugin-package-json</a>
+搭配 <a class="link" href="https://github.com/keithamus/sort-package-json" target="_blank" rel="noopener" referrerpolicy="no-referrer">sort-package-json</a>
+对 package.json 做格式化，同时关闭 <a class="link" href="https://ota-meshi.github.io/eslint-plugin-jsonc/rules/sort-keys.html" target="_blank" rel="noopener" referrerpolicy="no-referrer">jsonc/sort-keys</a>
+规则，或者直接使用 <a class="link" href="https://github.com/camacho/format-package" target="_blank" rel="noopener" referrerpolicy="no-referrer"><strong>format-package</strong></a>
+；否则，会破坏<strong>条件导出</strong>的字段规则（types -&gt; import -&gt; require）；</li><li>排除了 CI/CD 配置文件、lock 文件、Turborepo 缓存目录、pnpm patch 目录、coverage 测试覆盖率目录、zip|rar 文件；</li><li>对配置文件单独配置了 <a class="link" href="https://github.com/eslint-community/eslint-plugin-n/blob/master/docs/rules/prefer-global/console.md" target="_blank" rel="noopener" referrerpolicy="no-referrer">n/prefer-global/console</a>
+、<a class="link" href="https://github.com/eslint-community/eslint-plugin-n/blob/master/docs/rules/prefer-global/process.md" target="_blank" rel="noopener" referrerpolicy="no-referrer">n/prefer-global/process</a>
+和 <a class="link" href="https://github.com/mysticatea/eslint-plugin-node/blob/master/docs/rules/prefer-global/process.md" target="_blank" rel="noopener" referrerpolicy="no-referrer">node/prefer-global/process</a>
+规则；</li><li>关闭一些调试限制 <a class="link" href="https://zh-hans.eslint.org/docs/latest/rules/no-console" target="_blank" rel="noopener" referrerpolicy="no-referrer">no-console</a>
+、<a class="link" href="https://zh-hans.eslint.org/docs/latest/rules/no-debugger" target="_blank" rel="noopener" referrerpolicy="no-referrer">no-debugger</a>
+、<a class="link" href="https://zh-hans.eslint.org/docs/latest/rules/no-new" target="_blank" rel="noopener" referrerpolicy="no-referrer">no-new</a>
+，Vite 通过配置，会在编译时去除 debugger 和 console。</li></ul><p>这些并非完整配置，仅涉及到了比较重要的<strong>修改点</strong>；</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">antfu</span> <span class="kr">from</span> <span class="s1">'@antfu/eslint-config'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">packageJson</span> <span class="kr">from</span> <span class="s1">'eslint-plugin-package-json'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="nx">antfu</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 忽略目录
+</span></span></span><span class="line"><span class="cl">    <span class="nx">ignores</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 流水线部署相关
+</span></span></span><span class="line"><span class="cl">      <span class="s1">'./nginx-config.conf'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'./Dockerfile'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'./deploy/**'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// lock/workspace 文件由包管理工具管理
+</span></span></span><span class="line"><span class="cl">      <span class="s1">'**/pnpm-workspace.yaml'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/package-lock.json'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/pnpm-lock.yaml'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/yarn.lock'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/.angular/**'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/.idea/**'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/.pnpm/**'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/.svelte/**'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/.turbo/**'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/.vscode/**'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/node_modules/**'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/coverage/**'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/dist-ssr/**'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/patches/**'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/public/**'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/static/**'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/build/**'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/dist/**'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/temp/**'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/tmp/**'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/*.rar'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'**/*.zip'</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">rules</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// https://zh-hans.eslint.org/docs/latest/rules/no-console
+</span></span></span><span class="line"><span class="cl">      <span class="s1">'no-console'</span><span class="o">:</span> <span class="p">[</span><span class="s1">'off'</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// https://zh-hans.eslint.org/docs/latest/rules/no-debugger
+</span></span></span><span class="line"><span class="cl">      <span class="s1">'no-debugger'</span><span class="o">:</span> <span class="p">[</span><span class="s1">'off'</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// https://zh-hans.eslint.org/docs/latest/rules/no-new
+</span></span></span><span class="line"><span class="cl">      <span class="s1">'no-new'</span><span class="o">:</span> <span class="p">[</span><span class="s1">'off'</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// https://ota-meshi.github.io/eslint-plugin-jsonc/rules/sort-keys.html
+</span></span></span><span class="line"><span class="cl">      <span class="s1">'jsonc/sort-keys'</span><span class="o">:</span> <span class="p">[</span><span class="s1">'off'</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// https://github.com/antfu/eslint-plugin-antfu/blob/main/src/rules/consistent-list-newline.md
+</span></span></span><span class="line"><span class="cl">      <span class="s1">'object-curly-newline'</span><span class="o">:</span> <span class="p">[</span><span class="s1">'off'</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// https://github.com/mysticatea/eslint-plugin-node/blob/master/docs/rules/prefer-global/process.md
+</span></span></span><span class="line"><span class="cl">      <span class="s1">'node/prefer-global/process'</span><span class="o">:</span> <span class="p">[</span><span class="s1">'error'</span><span class="p">,</span> <span class="s1">'always'</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// https://typescript-eslint.io/rules/ban-ts-comment
+</span></span></span><span class="line"><span class="cl">      <span class="s1">'ts/ban-ts-comment'</span><span class="o">:</span> <span class="p">[</span><span class="s1">'off'</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// https://github.com/antfu/eslint-config/issues/582
+</span></span></span><span class="line"><span class="cl">      <span class="s1">'style/max-len'</span><span class="o">:</span> <span class="p">[</span><span class="s1">'off'</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">files</span><span class="o">:</span> <span class="p">[</span><span class="s1">'**/*.config.js'</span><span class="p">,</span> <span class="s1">'**/*.config.ts'</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// https://github.com/eslint-community/eslint-plugin-n/blob/master/docs/rules/prefer-global
+</span></span></span><span class="line"><span class="cl">    <span class="nx">rules</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'n/prefer-global/console'</span><span class="o">:</span> <span class="p">[</span><span class="s1">'error'</span><span class="p">,</span> <span class="s1">'always'</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'n/prefer-global/process'</span><span class="o">:</span> <span class="p">[</span><span class="s1">'error'</span><span class="p">,</span> <span class="s1">'always'</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">files</span><span class="o">:</span> <span class="p">[</span><span class="s1">'**/*.d.ts'</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">rules</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'style/curly-newline'</span><span class="o">:</span> <span class="p">[</span><span class="s1">'off'</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">files</span><span class="o">:</span> <span class="p">[</span><span class="s1">'**/package.json'</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span> <span class="s1">'package-json'</span><span class="o">:</span> <span class="nx">packageJson</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">rules</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">'package-json/order-properties'</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'error'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">order</span><span class="o">:</span> <span class="s1">'sort-package-json'</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>在后续的新项目中尝试了 Biome，决定以后<strong>弃用 ESLint</strong>；ESLint 太慢了，而且很容易损坏大文件。</p><h3 id="stylelintconfigjs">stylelint.config.js</h3><p>Stylelint 需要使用 <a class="link" href="https://github.com/43081j/postcss-lit" target="_blank" rel="noopener" referrerpolicy="no-referrer">postcss-lit</a>
+才能完成对 js(x)、ts(x) 的正确解析；需要使用 <a class="link" href="https://github.com/zhilidali/stylelint-config-tailwindcss" target="_blank" rel="noopener" referrerpolicy="no-referrer">stylelint-config-tailwindcss</a>
+完成对 Tailwind CSS 的支持：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="cm">/** @type {import('stylelint').Config} */</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">extends</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl">    <span class="s1">'stylelint-config-tailwindcss'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">'stylelint-config-recess-order'</span>
+</span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">overrides</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">files</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'**/*.cjs'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'**/*.cts'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'**/*.mjs'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'**/*.mts'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'**/*.js'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'**/*.jsx'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'**/*.ts'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'**/*.tsx'</span>
+</span></span><span class="line"><span class="cl">      <span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">customSyntax</span><span class="o">:</span> <span class="s1">'postcss-lit'</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>Stylelint 比较<strong>疯癫</strong>的一点是，他竟然会对<strong>二进制文件</strong>进行校验；最好在 ignoreFiles 中排出项目中的二进制文件。</p><img alt="Stylelint 疯癫" title="Stylelint 疯癫" style="display:block;margin:0 auto;width:100%" src="stylelint.crazy.webp" loading="lazy" decoding="async" width="643" height="272" jampack-sized="true"><h3 id="tailwindconfigjs">tailwind.config.js</h3><p>虽然 Tailwind CSS 4 已经不需要单独的 tailwind.config.js 了；但是，如果有使用第三方插件，还是独立的配置文件比较方便；这里使用了几个插件：</p><ul><li><a class="link" href="https://github.com/egoist/tailwindcss-icons" target="_blank" rel="noopener" referrerpolicy="no-referrer">@egoist/tailwindcss-icons</a>
+，将 Iconify 映射到 Tailwind CSS；</li><li><a class="link" href="https://github.com/iconify/tools" target="_blank" rel="noopener" referrerpolicy="no-referrer">@iconify/tools</a>
+，解析本地 SVG 文件并映射为 IconifyJSON；</li><li><a class="link" href="https://github.com/jamiebuilds/tailwindcss-animate" target="_blank" rel="noopener" referrerpolicy="no-referrer">tailwindcss-animate</a>
+，补足动画类名，Tailwind CSS 内置的动画比较贫瘠；</li><li><a class="link" href="https://github.com/the-lemonboy/tailwindcss-px-to-viewport" target="_blank" rel="noopener" referrerpolicy="no-referrer">tailwindcss-px-to-viewport</a>
+，不使用 PostCSS 的情况下，将 px 转换为 vw/vh。</li></ul><p><a class="link" href="https://github.com/egoist/tailwindcss-icons" target="_blank" rel="noopener" referrerpolicy="no-referrer">@egoist/tailwindcss-icons</a>
+怎么用，可以查看这个<a class="link" href="https://github.com/egoist/tailwindcss-icons/issues/37" target="_blank" rel="noopener" referrerpolicy="no-referrer">栗子</a>
+：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="cm">/** @type {import('tailwindcss').Config} */</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">resolve</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'node:path'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">iconsPlugin</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'@egoist/tailwindcss-icons'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">cleanupSVG</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">importDirectorySync</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">isEmptyColor</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">parseColors</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">runSVGO</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="nx">from</span> <span class="s1">'@iconify/tools'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">animate</span> <span class="nx">from</span> <span class="s1">'tailwindcss-animate'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">pxToViewport</span> <span class="nx">from</span> <span class="s1">'tailwindcss-px-to-viewport'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">workspaceRootSync</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'workspace-root'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取 monorepo 根目录
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">workspaceRoot</span> <span class="o">=</span> <span class="nx">workspaceRootSync</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// https://github.com/the-lemonboy/tailwindcss-px-to-viewport/blob/master/README_CN.md
+</span></span></span><span class="line"><span class="cl">  <span class="nx">theme</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">extend</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">pxToViewPort</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 基准视口配置
+</span></span></span><span class="line"><span class="cl">        <span class="nx">PresetScreen</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">width</span><span class="o">:</span> <span class="mi">750</span><span class="p">,</span> <span class="c1">// 默认设计稿宽度（单位：px）
+</span></span></span><span class="line"><span class="cl">          <span class="nx">height</span><span class="o">:</span> <span class="mi">1080</span> <span class="c1">// 默认设计稿高度（单位：px）
+</span></span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 默认配置没有包含对 border-radius 的处理
+</span></span></span><span class="line"><span class="cl">        <span class="nx">utilities</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">rounded</span><span class="o">:</span> <span class="p">[</span><span class="s1">'border-radius'</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">plugins</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">animate</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">iconsPlugin</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">collections</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">colorless</span><span class="o">:</span> <span class="nx">getCollections</span><span class="p">(</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">workspaceRoot</span><span class="p">,</span> <span class="s1">'./icons/colorless'</span><span class="p">)),</span> <span class="c1">// 单色图标
+</span></span></span><span class="line"><span class="cl">        <span class="nx">color</span><span class="o">:</span> <span class="nx">getCollections</span><span class="p">(</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">workspaceRoot</span><span class="p">,</span> <span class="s1">'./icons/color'</span><span class="p">))</span> <span class="c1">// 彩色图标
+</span></span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">pxToViewport</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// https://iconify.design/docs/libraries/tools/import/directory.html
+</span></span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">getCollections</span><span class="p">(</span><span class="nx">path</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 读取 svg 目录
+</span></span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">iconSet</span> <span class="o">=</span> <span class="nx">importDirectorySync</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">includeSubDirs</span><span class="o">:</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 遍历目录文件
+</span></span></span><span class="line"><span class="cl">  <span class="nx">iconSet</span><span class="p">.</span><span class="nx">forEachSync</span><span class="p">((</span><span class="nx">name</span><span class="p">,</span> <span class="nx">type</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 文件过滤
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">type</span> <span class="o">!==</span> <span class="s1">'icon'</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">svg</span> <span class="o">=</span> <span class="nx">iconSet</span><span class="p">.</span><span class="nx">toSVG</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">svg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">iconSet</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">svg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 清理优化 svg
+</span></span></span><span class="line"><span class="cl">      <span class="nx">cleanupSVG</span><span class="p">(</span><span class="nx">svg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">endsWith</span><span class="p">(</span><span class="s1">'colorless'</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 单色图标，默认继承父级的颜色
+</span></span></span><span class="line"><span class="cl">        <span class="nx">parseColors</span><span class="p">(</span><span class="nx">svg</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">defaultColor</span><span class="o">:</span> <span class="s1">'currentColor'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">callback</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="s1">'currentColor'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">runSVGO</span><span class="p">(</span><span class="nx">svg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">iconSet</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">svg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 更新 svg
+</span></span></span><span class="line"><span class="cl">    <span class="nx">iconSet</span><span class="p">.</span><span class="nx">fromSVG</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">svg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 导出 icon
+</span></span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">iconSet</span><span class="p">.</span><span class="kr">export</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>但是，这个配置在子包中，没有了图标类名提示（在非 monorepo 中正常）；并且如果 SVG 更新，需要<a class="link" href="https://github.com/antfu/vite-plugin-restart" target="_blank" rel="noopener" referrerpolicy="no-referrer">重启</a>
+Vite。</p><p>除此之外，还有两个辅助函数：</p><ul><li><a class="link" href="https://github.com/lukeed/clsx" target="_blank" rel="noopener" referrerpolicy="no-referrer">clsx</a>
+，提升基于条件的 JSX 类名书写体验；</li><li><a class="link" href="https://github.com/dcastil/tailwind-merge" target="_blank" rel="noopener" referrerpolicy="no-referrer">tailwind-merge</a>
+，解决 Tailwind CSS 类名合并优先级问题。</li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="kr">type</span> <span class="p">{</span> <span class="nx">ClassValue</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'clsx'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">clsx</span> <span class="kr">from</span> <span class="s1">'clsx'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">twMerge</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'tailwind-merge'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">cn</span><span class="p">(...</span><span class="nx">inputs</span>: <span class="kt">ClassValue</span><span class="p">[])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">twMerge</span><span class="p">(</span><span class="nx">clsx</span><span class="p">(</span><span class="nx">inputs</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p><a class="link" href="https://dev.to/sheraz4194/mastering-tailwind-css-overcome-styling-conflicts-with-tailwind-merge-and-clsx-1dol" target="_blank" rel="noopener" referrerpolicy="no-referrer">cn</a>
+工具函数可以这样使用：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">BubbleFooter</span>: <span class="kt">React.FC</span><span class="o">&lt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Partial</span><span class="p">&lt;</span><span class="nt">BubbleFooterProps</span> <span class="err">&amp;</span> <span class="na">React.HTMLAttributes</span><span class="p">&lt;</span><span class="nt">HTMLElement</span><span class="p">&gt;&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">className</span><span class="p">,</span> <span class="nx">placement</span> <span class="o">=</span> <span class="s1">'start'</span><span class="p">,</span> <span class="nx">shortcuts</span><span class="p">,</span> <span class="nx">tools</span><span class="p">,</span> <span class="p">...</span><span class="nx">restProps</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span><span class="na">...restProps</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="nx">cn</span><span class="p">(</span><span class="s1">'w-full'</span><span class="p">,</span> <span class="nx">className</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'text-left'</span><span class="o">:</span> <span class="nx">placement</span> <span class="o">===</span> <span class="s1">'start'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">'text-right'</span><span class="o">:</span> <span class="nx">placement</span> <span class="o">===</span> <span class="s1">'end'</span>
+</span></span><span class="line"><span class="cl">      <span class="p">})}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span><span class="nx">tools</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span><span class="nx">shortcuts</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>在 monorepo 项目中，<a class="link" href="https://github.com/tailwindlabs/tailwindcss-intellisense" target="_blank" rel="noopener" referrerpolicy="no-referrer">Tailwind CSS IntelliSense</a>
+会有一些<a class="link" href="https://github.com/tailwindlabs/tailwindcss-intellisense/issues/1139" target="_blank" rel="noopener" referrerpolicy="no-referrer">类名提示的问题</a>
+；需要<a class="link" href="https://github.com/tailwindlabs/tailwindcss/issues/13136" target="_blank" rel="noopener" referrerpolicy="no-referrer">修改</a>
+编辑器配置（WebStorm 同理），指明每个子包的 CSS 入口文件：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"tailwindCSS.experimental.configFile"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"packages/js-sdk/index.css"</span><span class="p">:</span> <span class="s2">"**"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"apps/admin/src/index.css"</span><span class="p">:</span> <span class="s2">"**"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"apps/web/src/index.css"</span><span class="p">:</span> <span class="s2">"**"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="nginx-configconf">nginx-config.conf</h3><p>当前项目是个 monorepo，它们走的同一条流水线，运行在同一个容器内，使用同一个 nginx 配置；Admin 和 SDK 部署在同一个域名的不同路径下；代理 SDK 时，需要借助 alias 指令 cd 到 SDK 的打包目录：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">server {
+</span></span><span class="line"><span class="cl">    listen  80;
+</span></span><span class="line"><span class="cl">    server_name localhost;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    root /usr/share/nginx/html/admin;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    # 处理主应用请求
+</span></span><span class="line"><span class="cl">    location / {
+</span></span><span class="line"><span class="cl">        try_files $uri $uri/ /index.html;
+</span></span><span class="line"><span class="cl">        proxy_http_version 1.1;
+</span></span><span class="line"><span class="cl">        proxy_set_header Upgrade $http_upgrade;
+</span></span><span class="line"><span class="cl">        proxy_set_header Connection keep-alive;
+</span></span><span class="line"><span class="cl">        proxy_set_header Host $host;
+</span></span><span class="line"><span class="cl">        proxy_cache_bypass $http_upgrade;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    # 处理 SDK 静态资源请求
+</span></span><span class="line"><span class="cl">    location /sdk/ {
+</span></span><span class="line"><span class="cl">        alias /usr/share/nginx/html/sdk/;
+</span></span><span class="line"><span class="cl">        add_header Access-Control-Allow-Origin *;
+</span></span><span class="line"><span class="cl">        add_header Access-Control-Allow-Methods GET;
+</span></span><span class="line"><span class="cl">        # add_header Cache-Control "no-cache, no-store, must-revalidate";
+</span></span><span class="line"><span class="cl">        # add_header Pragma "no-cache";
+</span></span><span class="line"><span class="cl">        # add_header Expires "0";
+</span></span><span class="line"><span class="cl">        try_files $uri =404;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></tbody></table></div></div><p>由于 SDK 体积比较大，最好启用 gzip 压缩：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gzip</span> <span class="n">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gzip_vary</span> <span class="n">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gzip_min_length</span> <span class="mi">1024</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gzip_comp_level</span> <span class="mi">6</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gzip_disable</span> <span class="s2">"msie6"</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gzip_types</span>
+</span></span><span class="line"><span class="cl">        <span class="n">text</span><span class="o">/</span><span class="n">plain</span>
+</span></span><span class="line"><span class="cl">        <span class="n">text</span><span class="o">/</span><span class="n">css</span>
+</span></span><span class="line"><span class="cl">        <span class="n">text</span><span class="o">/</span><span class="n">xml</span>
+</span></span><span class="line"><span class="cl">        <span class="n">text</span><span class="o">/</span><span class="n">javascript</span>
+</span></span><span class="line"><span class="cl">        <span class="n">application</span><span class="o">/</span><span class="n">javascript</span>
+</span></span><span class="line"><span class="cl">        <span class="n">application</span><span class="o">/</span><span class="n">xml</span><span class="o">+</span><span class="n">rss</span>
+</span></span><span class="line"><span class="cl">        <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+</span></span><span class="line"><span class="cl">        <span class="n">application</span><span class="o">/</span><span class="n">xhtml</span><span class="o">+</span><span class="n">xml</span>
+</span></span><span class="line"><span class="cl">        <span class="n">application</span><span class="o">/</span><span class="n">xml</span>
+</span></span><span class="line"><span class="cl">        <span class="n">application</span><span class="o">/</span><span class="n">x</span><span class="o">-</span><span class="n">javascript</span>
+</span></span><span class="line"><span class="cl">        <span class="n">image</span><span class="o">/</span><span class="n">svg</span><span class="o">+</span><span class="n">xml</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gzip_proxied</span> <span class="n">any</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gzip_buffers</span> <span class="mi">32</span> <span class="mi">4</span><span class="n">k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 启用 gzip 压缩的最低 HTTP 协议版本</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gzip_http_version</span> <span class="mf">1.1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="turbojson">turbo.json</h3><p>Turborepo 可以帮助我们：</p><ul><li>并行执行 npm-scripts；不然，每次打包都需要单独执行每个子包的命令；</li><li>通过 dependsOn 字段，调整命令执行<a class="link" href="https://turborepo.com/docs/crafting-your-repository/configuring-tasks#running-tasks-in-the-right-order" target="_blank" rel="noopener" referrerpolicy="no-referrer">顺序</a>
+，先编译<strong>依赖</strong>，再编译<strong>应用</strong>；</li><li>利用<a class="link" href="https://turborepo.com/docs/crafting-your-repository/caching#remote-caching" target="_blank" rel="noopener" referrerpolicy="no-referrer">缓存</a>
+，跳过未修改子包的命令执行。</li></ul><p>有一点令人费解：outputs 属性值，是相对于<strong>子包根目录</strong>的；不是<strong>turbo.json 所在的目录</strong>，也不是<strong>项目根目录</strong>；下面是非完整配置：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"$schema"</span><span class="p">:</span> <span class="s2">"https://turborepo.com/schema.json"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"globalDependencies"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"./env"</span><span class="p">,</span> <span class="s2">"./env.development"</span><span class="p">,</span> <span class="s2">"./env.production"</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"concurrency"</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"tasks"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"build"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 执行项目中所有的 build 命令
+</span></span></span><span class="line"><span class="cl">      <span class="nt">"dependsOn"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"^build"</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 输出目录是相对于每个子包的根目录的
+</span></span></span><span class="line"><span class="cl">      <span class="nt">"outputs"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"../../dist/prod/**"</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"test:coverage"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"dependsOn"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"^test:coverage"</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 开发环境禁用缓存
+</span></span></span><span class="line"><span class="cl">    <span class="nt">"dev"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"cache"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"persistent"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"dependsOn"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"^dev"</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"preview"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"cache"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"persistent"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"dependsOn"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"^preview"</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>这样，只需要在项目根目录配置好 npm-scripts，就可以很方便的执行子包中的命令：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl">  <span class="nt">"scripts"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"build"</span><span class="p">:</span> <span class="s2">"turbo build"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"build:admin"</span><span class="p">:</span> <span class="s2">"turbo @example/admin#build"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"build:web"</span><span class="p">:</span> <span class="s2">"turbo @example/web#build"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"build:js-sdk"</span><span class="p">:</span> <span class="s2">"turbo @example/js-sdk#build"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"dev"</span><span class="p">:</span> <span class="s2">"turbo dev"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"dev:admin"</span><span class="p">:</span> <span class="s2">"turbo @example/admin#dev"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"dev:web"</span><span class="p">:</span> <span class="s2">"turbo @example/web#dev"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"dev:js-sdk"</span><span class="p">:</span> <span class="s2">"turbo @example/js-sdk#dev"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"postinstall"</span><span class="p">:</span> <span class="s2">"turbo telemetry disable"</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>最后，建议通过 postinstall 钩子，将 Turborepo 的数据收集关闭。</p><h3 id="子包配置">子包配置</h3><p>因为 pnpm 支持 workspace 协议，所以 packages 目录下的子包在配置好<a class="link" href="https://nodejs.org/api/packages.html#packages_conditional_exports" target="_blank" rel="noopener" referrerpolicy="no-referrer"><strong>条件导出</strong></a>
+的情况下，可以走<strong>只导出，不编译</strong>的策略：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"@example/shared"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"private"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"description"</span><span class="p">:</span> <span class="s2">"公共方法、组件、Hooks，支持源码引用和构建后发布"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"keywords"</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"license"</span><span class="p">:</span> <span class="s2">"ISC"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"author"</span><span class="p">:</span> <span class="s2">"frontend"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"sideEffects"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"styles/*.css"</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"module"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"exports"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"."</span><span class="p">:</span> <span class="s2">"./index.ts"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"./apis"</span><span class="p">:</span> <span class="s2">"./apis/index.ts"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"./chat.css"</span><span class="p">:</span> <span class="s2">"./styles/chat.css"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"./highlight.css"</span><span class="p">:</span> <span class="s2">"./styles/highlight.css"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"./components"</span><span class="p">:</span> <span class="s2">"./components/index.ts"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"./hooks"</span><span class="p">:</span> <span class="s2">"./hooks/index.ts"</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//...
+</span></span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"main"</span><span class="p">:</span> <span class="s2">"./index.ts"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"module"</span><span class="p">:</span> <span class="s2">"./index.ts"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"types"</span><span class="p">:</span> <span class="s2">"./index.ts"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"dependencies"</span><span class="p">:</span> <span class="p">{},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"devDependencies"</span><span class="p">:</span> <span class="p">{},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"peerDependencies"</span><span class="p">:</span> <span class="p">{},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"scripts"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"build"</span><span class="p">:</span> <span class="s2">"tsup --out-dir ../../dist/prod/shared"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"check-types"</span><span class="p">:</span> <span class="s2">"tsc --noEmit"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"test:coverage"</span><span class="p">:</span> <span class="s2">"vitest run --coverage"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"publishConfig"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"exports"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"."</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"import"</span><span class="p">:</span> <span class="s2">"./dist/index.js"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"require"</span><span class="p">:</span> <span class="s2">"./dist/index.cjs"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"types"</span><span class="p">:</span> <span class="s2">"./dist/index.d.ts"</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"./apis"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"import"</span><span class="p">:</span> <span class="s2">"./dist/apis/index.js"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"require"</span><span class="p">:</span> <span class="s2">"./dist/apis/index.cjs"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"types"</span><span class="p">:</span> <span class="s2">"./dist/apis/index.d.ts"</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"./chat.css"</span><span class="p">:</span> <span class="s2">"./dist/chat.css"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"./highlight.css"</span><span class="p">:</span> <span class="s2">"./dist/highlight.css"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"./components"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"import"</span><span class="p">:</span> <span class="s2">"./dist/components/index.js"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"require"</span><span class="p">:</span> <span class="s2">"./dist/components/index.cjs"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"types"</span><span class="p">:</span> <span class="s2">"./dist/components/index.d.ts"</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"./hooks"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"import"</span><span class="p">:</span> <span class="s2">"./dist/hooks/index.js"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"require"</span><span class="p">:</span> <span class="s2">"./dist/hooks/index.cjs"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"types"</span><span class="p">:</span> <span class="s2">"./dist/hooks/index.d.ts"</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">//...
+</span></span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"main"</span><span class="p">:</span> <span class="s2">"./dist/index.cjs"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"module"</span><span class="p">:</span> <span class="s2">"./dist/index.js"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"types"</span><span class="p">:</span> <span class="s2">"./dist/index.d.ts"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>这个策略省去了本地开发时，子包编译的过程；任何修改都能被应用的 HMR 立即捕获，但也意味着 path-alias 在子包中不可用。不过需要注意，条件导出对 package.json 中的字段顺序有<a class="link" href="https://github.com/JoshuaKGoldberg/eslint-plugin-package-json/issues/928" target="_blank" rel="noopener" referrerpolicy="no-referrer">要求</a>
+，需要<strong>从具体到不具体</strong>。</p><p>如果子包需要单独发布，直接走 tsup 打包即可；以下是<strong>非完整配置</strong>：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">defineConfig</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'tsup'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">peerDependencies</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./package.json'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">compilerOptions</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./tsconfig.json'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">entry</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">'index.ts'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">'apis/index.ts'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">'components/index.ts'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">'hooks/index.ts'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">'styles/chat.css'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">'styles/highlight.css'</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">target</span>: <span class="kt">compilerOptions.target</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">sourcemap</span>: <span class="kt">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">outDir</span><span class="o">:</span> <span class="s1">'dist'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">dts</span>: <span class="kt">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">splitting</span>: <span class="kt">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">clean</span>: <span class="kt">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">format</span><span class="o">:</span> <span class="p">[</span><span class="s1">'esm'</span><span class="p">,</span> <span class="s1">'cjs'</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">external</span>: <span class="kt">Object.keys</span><span class="p">(</span><span class="nx">peerDependencies</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">publicDir</span><span class="o">:</span> <span class="s1">'.'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">loader</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">'.css'</span><span class="o">:</span> <span class="s1">'css'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">'.js'</span><span class="o">:</span> <span class="s1">'js'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">'.jsx'</span><span class="o">:</span> <span class="s1">'jsx'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">'.ts'</span><span class="o">:</span> <span class="s1">'ts'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">'.tsx'</span><span class="o">:</span> <span class="s1">'tsx'</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">treeshake</span>: <span class="kt">true</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="状态管理">状态管理</h2><p>项目中使用了两个状态库，<a class="link" href="https://zustand-demo.pmnd.rs" target="_blank" rel="noopener" referrerpolicy="no-referrer">Zustand</a>
+和 <a class="link" href="https://github.com/dai-shi/use-context-selector" target="_blank" rel="noopener" referrerpolicy="no-referrer">use-context-selector</a>
+；Zustand 存放需要<strong>持久化</strong>的状态，包括：快捷指令列表、入口按钮位置、面板展开状态等；context 存放<strong>不能被序列化</strong>的状态，包括：SDK 认证配置、流式调用方法等。</p><p><a class="link" href="https://github.com/dai-shi/use-context-selector" target="_blank" rel="noopener" referrerpolicy="no-referrer">use-context-selector</a>
+不必多说，相比于 useContext，他的状态颗粒度更细，能跳过不必要的渲染。</p><p>两者的区别，可以参考<a class="link" href="https://blog.jimmieluo.com/zustand-and-react-context" target="_blank" rel="noopener" referrerpolicy="no-referrer">Zustand 和 React Context</a>
+：</p><ul><li>Zustand 创建的状态是<strong>单例</strong>的，Context 中的状态实例是和 Provider 绑定的；</li><li>Context 中状态的生命周期是和组件的生命周期绑定的，而 Zustand 不是；</li><li>Zustand.createStore 和 Context 结合使用，可生成多实例状态。</li></ul><p>当「Zustand + Context」结合使用时，因为 Context 是组件树的一部分，导致 Zustand 创建的状态被迫有了「层级」；此时，<a class="link" href="https://gemini.google.com/share/7e0f0661bb30" target="_blank" rel="noopener" referrerpolicy="no-referrer">建议使用 atom</a>
+来管理状态。</p><h3 id="zustand">Zustand</h3><p>持久化状态中，不仅需要保存 JS-SDK 状态，还需要保存：客户端标识 deviceId、登录用户信息 userInfo（Admin 端）、登录凭证 token（Admin 端）等；为了方便创建状态，需要一个 Zustand 工厂函数：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">create</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'zustand'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">combine</span><span class="p">,</span> <span class="nx">persist</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'zustand/middleware'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">cloneDeep</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'lodash-es'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">type</span> <span class="nx">Updater</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">(</span><span class="nx">updater</span><span class="o">:</span> <span class="p">(</span><span class="nx">value</span>: <span class="kt">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">MakeUpdater</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">lastUpdateTime</span>: <span class="kt">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">markUpdate</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">update</span>: <span class="kt">Updater</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">SecondParam</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kr">extends</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">_f</span>: <span class="kt">infer</span> <span class="nx">_F</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">_s</span>: <span class="kt">infer</span> <span class="nx">_S</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">...</span><span class="nx">args</span>: <span class="kt">infer</span> <span class="nx">_U</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">=&gt;</span> <span class="kt">any</span>
+</span></span><span class="line"><span class="cl">  <span class="o">?</span> <span class="nx">_S</span>
+</span></span><span class="line"><span class="cl">  : <span class="kt">never</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">SetStoreState</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">partial</span>: <span class="kt">T</span> <span class="o">|</span> <span class="nx">Partial</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">|</span> <span class="p">((</span><span class="nx">state</span>: <span class="kt">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">T</span> <span class="o">|</span> <span class="nx">Partial</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">replace?</span>: <span class="kt">boolean</span> <span class="o">|</span> <span class="kc">undefined</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">createPersistStore</span><span class="p">&lt;</span><span class="nt">T</span> <span class="na">extends</span> <span class="na">object</span><span class="p">,</span> <span class="na">M</span><span class="p">&gt;(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">state</span>: <span class="kt">T</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">methods</span><span class="o">:</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">set</span><span class="o">:</span> <span class="nx">SetStoreState</span><span class="p">&lt;</span><span class="nt">T</span> <span class="err">&amp;</span> <span class="na">MakeUpdater</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;&gt;,</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">get</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">T</span> <span class="o">&amp;</span> <span class="nx">MakeUpdater</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">M</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">persistOptions</span>: <span class="kt">SecondParam</span><span class="p">&lt;</span><span class="nt">typeof</span> <span class="na">persist</span><span class="p">&lt;</span><span class="nt">T</span> <span class="err">&amp;</span> <span class="na">M</span> <span class="err">&amp;</span> <span class="na">MakeUpdater</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;&gt;&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 创建状态实例
+</span></span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">create</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 状态持久化
+</span></span></span><span class="line"><span class="cl">    <span class="nx">persist</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 将状态和状态更新方法合并
+</span></span></span><span class="line"><span class="cl">      <span class="nx">combine</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">lastUpdateTime</span>: <span class="kt">0</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="kr">set</span><span class="p">,</span> <span class="kr">get</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="p">...</span><span class="nx">methods</span><span class="p">(</span><span class="kr">set</span> <span class="kr">as</span> <span class="nx">SetStoreState</span><span class="p">&lt;</span><span class="nt">T</span> <span class="err">&amp;</span> <span class="na">MakeUpdater</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;&gt;,</span> <span class="kr">get</span> <span class="kr">as</span> <span class="kt">any</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">markUpdate() {</span>
+</span></span><span class="line"><span class="cl">              <span class="kr">set</span><span class="p">({</span> <span class="nx">lastUpdateTime</span>: <span class="kt">Date.now</span><span class="p">()</span> <span class="p">}</span> <span class="kr">as</span> <span class="nx">Partial</span><span class="o">&lt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">T</span> <span class="o">&amp;</span> <span class="nx">M</span> <span class="o">&amp;</span> <span class="nx">MakeUpdater</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">              <span class="o">&gt;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">update</span><span class="p">(</span><span class="nx">updater</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="kr">const</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">cloneDeep</span><span class="p">(</span><span class="kr">get</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">              <span class="nx">updater</span><span class="p">(</span><span class="nx">state</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">              <span class="kr">set</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">                <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">lastUpdateTime</span>: <span class="kt">Date.now</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">              <span class="p">});</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span> <span class="kr">as</span> <span class="nx">M</span> <span class="o">&amp;</span> <span class="nx">MakeUpdater</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">persistOptions</span> <span class="kr">as</span> <span class="kt">any</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>通过工厂函数，可以快速创建状态实例：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">AUTH_TOKEN</span>: <span class="kt">TokenDto</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">accessToken</span><span class="o">:</span> <span class="s1">''</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">refreshToken</span><span class="o">:</span> <span class="s1">''</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">useAuthTokenStore</span> <span class="o">=</span> <span class="nx">createPersistStore</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="p">...</span><span class="nx">AUTH_TOKEN</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">set</span> <span class="o">=&gt;</span> <span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">reset() {</span>
+</span></span><span class="line"><span class="cl">      <span class="kr">set</span><span class="p">(</span><span class="nx">AUTH_TOKEN</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span><span class="o">:</span> <span class="s1">'example-bot-token'</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>以 useAuthTokenStore 为例，有三种获取状态的方式：</p><ol><li>useAuthTokenStore()：在组件中访问整个状态；</li><li>useAuthTokenStore().getState()：获取当前的状态快照，不触发重新渲染；</li><li>useAuthTokenStore(state =&gt; state.accessToken)：在组件中访问部分状态。</li></ol><h2 id="构建-sdk">构建 SDK</h2><p>为了能增强宿主环境的 AI 能力，SDK 需要能满足以下功能：</p><ol><li>宿主环境能够通过划词菜单快捷指令，给 AI 发送消息；<ul><li>方便用户选中内容后，快速给 AI 发消息。</li></ul></li><li>宿主环境能够通过调用 SDK 的方法，给 AI 发送消息；<ul><li>通过 SDK 暴露的方法调用，更灵活，更能融入宿主环境，比如广告位调用 AI。</li></ul></li><li>用户点击 AI 返回的消息，宿主环境能够接收到反馈；<ul><li>AI 生成订单/合同后，用户可以根据 AI 提示，通知宿主跳转到订单/合同详情。</li></ul></li><li>SDK 输入框 placeholder 能够让宿主环境自定义；<ul><li>这算是一种<strong>品牌化</strong>需求，公司想 SDK 向 SaaS 服务的方向发展。</li></ul></li><li>SDK 入口按钮能够自定义/显隐控制/位置记忆；<ul><li>敏感页面/打印页面需要暂时隐藏 AI 入口。</li></ul></li><li>统一拦截器，方便宿主环境能对用户操作进行控制。<ul><li>例如，未在宿主环境登录的用户，禁止使用 AI 功能。</li></ul></li></ol><h3 id="sdk-结构">SDK 结构</h3><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">ChatSdk</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">public</span> <span class="nx">name</span>: <span class="kt">string</span> <span class="o">=</span> <span class="s1">'ChatSdk'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">public</span> <span class="kr">async</span> <span class="nx">configUpdate</span><span class="p">(</span><span class="nx">configFromExternal</span>: <span class="kt">ChatSdkConfig</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">public</span> <span class="kr">async</span> <span class="nx">unmount</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">beforeUnmountFromHost</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">unmountedFromHost</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span><span class="o">:</span> <span class="nx">ChatSdkUnmountParams</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">public</span> <span class="kr">async</span> <span class="nx">sendMessage</span><span class="p">(</span><span class="nx">message</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">autoSend</span>: <span class="kt">boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">public</span> <span class="kr">async</span> <span class="nx">toggleEntry</span><span class="p">(</span><span class="nx">hidden</span>: <span class="kt">boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span><span class="nx">configFromExternal</span>: <span class="kt">ChatSdkConfig</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{}</span> <span class="kr">as</span> <span class="nx">ChatSdkConfig</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">appRoot</span>: <span class="kt">HTMLDivElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'div'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">appInstance</span>: <span class="kt">Root</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">container</span>: <span class="kt">HTMLElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'main'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">shadowRoot</span>: <span class="kt">ShadowRoot</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="kr">static</span> <span class="nx">instance</span>: <span class="kt">ChatSdk</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="kr">async</span> <span class="nx">mount</span><span class="p">(</span><span class="nx">configFromExternal</span>: <span class="kt">ChatSdkConfig</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="kr">async</span> <span class="nx">configProduce</span><span class="p">(</span><span class="nx">configFromExternal</span>: <span class="kt">ChatSdkConfig</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="kr">async</span> <span class="nx">configChanged() {</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'ChatSdk.configChanged'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="kr">async</span> <span class="nx">beforeUnmount() {</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="kr">async</span> <span class="nx">linkStyle() {</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="kr">async</span> <span class="nx">render() {</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">ChatSdk</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>这里隐去了实现细节，只说一下思路：</p><ol><li>构造函数接收 SDK 的配置，并构造 SDK 实例，需要做两件事：<ol><li>保存 this 实例，确保 SDK 运行在<strong>单例模式</strong>；</li><li>在 try…catch 中调用 mount，完成渲染节点的初始化。</li></ol></li><li>mount 用来完成渲染节点的初始化，需要做三件事：<ol><li>调用 configProduce 校验<strong>用户配置</strong>并标准化输出；</li><li>通过 container.attachShadow 创建 ShadowDOM 节点；</li><li>调用 linkStyle 将样式注入到 ShadowDOM 内部；</li><li>调用 render 函数，完成 React 组件渲染。</li></ol></li><li>render 函数通过调用 React.createRoot 渲染组件；</li><li>unmount 函数用来销毁 SDK 实例：<ol><li>调用宿主传入的 beforeUnmountFromHost(this)；</li><li>调用 beforeUnmount：<ol><li>卸载 React 组件树；</li><li>移除挂载节点 appRoot；</li><li>移除 ShadowDOM 容器 container；</li><li>重置 appRoot 和 container，为下一次 mount 做准备。</li></ol></li><li>调用宿主传入的 unmountedFromHost(null)。</li></ol></li><li>configUpdate 函数接收一个新配置，并重载 React 组件树；</li><li>sendMessage 方便宿主快速给 AI 发送消息；</li><li>toggleEntry 方便宿主隐藏/展示 AI 入口。</li></ol><h3 id="sdk-配置">SDK 配置</h3><p>为了能满足上述需求，我们来看一下初始化时，需要传入哪些配置：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">ChatSdkConfig</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">auth</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">releaseKey</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">onCustomEvent</span><span class="o">?:</span> <span class="p">(</span><span class="nx">event</span>: <span class="kt">ChatSdkConfigEventParams</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">onEntranceInterceptor?</span>: <span class="kt">EntranceInterceptor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">userInfo?</span>: <span class="kt">ChatSdkConfigUserInfo</span> <span class="o">|</span> <span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">ChatSdkConfigUserInfo</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">toolContext?</span>: <span class="kt">ChatSdkConfigToolContext</span> <span class="o">|</span> <span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">ChatSdkConfigToolContext</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">senderPlaceholder?</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">title?</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">entranceButton?</span>: <span class="kt">HTMLElement</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">renderContext?</span>: <span class="kt">RenderContext</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">ChatSdkConfigEventParams</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">eventPayload</span>: <span class="kt">any</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">eventType</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">type</span> <span class="nx">EntranceInterceptor</span> <span class="o">=</span> <span class="p">(</span><span class="kr">from</span><span class="o">:</span> <span class="nx">EntranceFrom</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">type</span> <span class="nx">EntranceFrom</span> <span class="o">=</span> <span class="s1">'ContextMenu'</span> <span class="o">|</span> <span class="s1">'EntranceButton'</span> <span class="o">|</span> <span class="s1">'SmartButton'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">ChatSdkConfigUserInfo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">nickname</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">from</span><span class="o">?:</span> <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">url?</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">id?</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">ChatSdkConfigToolContext</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">prop</span>: <span class="kt">string</span><span class="p">]</span><span class="o">:</span> <span class="kt">any</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">RenderContext</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">sendMessageInner</span><span class="o">?:</span> <span class="p">(</span><span class="nx">message</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">autoSend?</span>: <span class="kt">boolean</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">toggleEntryInner</span><span class="o">?:</span> <span class="p">(</span><span class="nx">hidden</span>: <span class="kt">boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">]</span><span class="o">:</span> <span class="kt">any</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><ol><li>auth.releaseKey 需要是一个 JWT，内部 payload 包含了：配置 ID、生成时间、过期时间、权限、合法域名等；</li><li>onCustomEvent 是一个 AI 向宿主发送消息时，通知宿主的渠道，宿主可以拿到事件类型、事件载荷；返回值决定了 AI 面板的显示｜隐藏；</li><li>onEntranceInterceptor 是一个拦截器，当宿主尝试调用 SDK 的能力时，SDK 内部都会先调用拦截器；通过返回值，判断宿主当前是否允许使用 AI；</li><li>userInfo 和 toolContext 都会在 SDK 内部转换成函数的形式；每次向 AI 提问时，都会作为 SSE 的 payload 的一部分；</li><li>senderPlaceholder、title、entranceButton 是用来自定义 SDK 的 UI 的，entranceButton 通过 dangerouslySetInnerHTML 渲染，并经过了 DOMPurify 净化：<ul><li>如果要最大化自定义 entranceButton，entranceButton 应由<strong>宿主</strong>实现，通过 SDK 暴露的方法调用 SDK 的功能；SDK 隐藏自带的入口。</li></ul></li><li>renderContext 是 SDK 实例，不需要宿主提供；React 将向 renderContext 绑定一些方法，这样宿主通过 SDK 实例，可以调用内部方法。</li></ol><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="nb">window</span><span class="p">.</span><span class="nx">_Example_ChatSdk_</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">window</span><span class="p">.</span><span class="nx">Example</span><span class="p">.</span><span class="nx">ChatSdk</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">auth</span><span class="o">:</span> <span class="p">{</span> <span class="nx">releaseKey</span>: <span class="kt">environment.releaseKey</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">onCustomEvent</span>: <span class="kt">async</span> <span class="p">({</span> <span class="nx">eventPayload</span><span class="p">,</span> <span class="nx">eventType</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// &lt;custom-event eventType='sendToMySelf' eventPayload='eventPayload' /&gt;
+</span></span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Example.ChatSdk.onCustomEvent.eventPayload'</span><span class="p">,</span> <span class="nx">eventPayload</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Example.ChatSdk.onCustomEvent.eventType'</span><span class="p">,</span> <span class="nx">eventType</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">eventType</span> <span class="o">===</span> <span class="s1">'sendToMySelf'</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">window</span><span class="p">.</span><span class="nx">_Example_ChatSdk_</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">(</span><span class="nx">eventPayload</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">onEntranceInterceptor</span>: <span class="kt">async</span> <span class="kr">from</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Example.ChatSdk.onEntranceInterceptor.from'</span><span class="p">,</span> <span class="kr">from</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="kr">from</span> <span class="o">===</span> <span class="s1">'ContextMenu'</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isLogin</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// 未登录，不能使用划词
+</span></span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 宿主环境用户信息
+</span></span></span><span class="line"><span class="cl">  <span class="nx">userInfo</span><span class="o">:</span> <span class="p">{</span> <span class="nx">nickname</span><span class="o">:</span> <span class="s1">'用户昵称'</span><span class="p">,</span> <span class="nx">id</span><span class="o">:</span> <span class="s1">'user-123456'</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">toolContext</span><span class="o">:</span> <span class="p">{</span> <span class="kr">from</span><span class="o">:</span> <span class="s1">'localhost:3000'</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">title</span><span class="o">:</span> <span class="s1">'宿主自定义 AI 标题'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">senderPlaceholder</span><span class="o">:</span> <span class="s1">'宿主自定义 placeholder'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">entranceButton</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">'&lt;img src="./assets/host-ai-entrance-button.png" alt="宿主自定义 AI 入口"&gt;'</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>这样做有以下好处：</p><ul><li>广告位可以配置为<code>&lt;a href="javascript:window?._Example_ChatSdk_?.sendMessage('广告')"/&gt;</code>；用户点击后，直接向 AI 发消息；</li><li>如果要支持更多自定义事件，只需要通过 Admin 端修改 AI 提示词，并更新宿主环境的配置，无需修改 SDK 代码；</li><li>如果要给 AI 调用添加任何<strong>前置条件</strong>，只需要更新宿主环境配置，无需修改 SDK 代码。</li></ul><h3 id="sdk-使用">SDK 使用</h3><p>在本地开发环境，一开始使用的是 Vite 默认的引入方式：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">"module"</span> <span class="na">src</span><span class="o">=</span><span class="s">"./index.tsx"</span> <span class="na">crossorigin</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>这样引入不方便拿到 ChatSdk 构造函数。后来切换到了下面这种：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">"module"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * 这里，Example 只是举个例子
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * 需要和 viteConfig.build.name 对应
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">import</span> <span class="nx">Example</span> <span class="nx">from</span> <span class="s1">'./index.js'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">new</span> <span class="nx">Example</span><span class="p">.</span><span class="nx">ChatSdk</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>但是，上线的时候，肯定不能这么使用：</p><ol><li>在第三方宿主环境使用 ESM 格式的包，是不明智的：<ol><li><code>type="module"</code>脚本必须通过 CORS 校验；</li><li>必须添加<code>crossorigin="anonymous"</code>；</li><li>脚本服务器必须添加 CORS 响应头。</li></ol></li><li>体积较大，打包 UMD 格式时，会将所有依赖打包为一个 JS：<ol><li>和 Coze 一样，打包产物有 5MB+，即使 gzip 也有 2MB+，这还是去了 sourcemap 的情况下；</li><li>SDK 和宿主的业务逻辑耦合性弱，不需要同宿主环境代码一起加载，拖慢宿主加载速度。</li></ol></li></ol><p>在生产环境，需要使用异步加载：</p><ol><li>使用 loadSDKJS 加载 SDK 资源：<ol><li>因为在本地开发环境，Vite 输出的是 ESM 格式，所以<code>type="module"</code>；</li><li>线上部署的 UMD 格式，需要在配置时，改为<code>type="text/javascript"</code>；</li><li>这样加载更灵活，比如在后台管理的登录页，引入 SDK 也无意义。</li></ol></li><li>loadSDKJS 接收一个回调函数，用于在加载完成之后初始化 SDK 实例。</li></ol><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">loadSDKJS</span> <span class="o">=</span> <span class="p">(</span><span class="nx">src</span><span class="p">,</span> <span class="nx">onLoaded</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">window</span><span class="o">?</span><span class="p">.</span><span class="nx">Example</span><span class="o">?</span><span class="p">.</span><span class="nx">ChatSdk</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">scriptEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'script'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">scriptEle</span><span class="p">.</span><span class="nx">crossorigin</span> <span class="o">=</span> <span class="s1">'anonymous'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">scriptEle</span><span class="p">.</span><span class="kr">type</span> <span class="o">=</span> <span class="s1">'module'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">scriptEle</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">src</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">scriptEle</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">scriptEle</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">onLoaded</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">onLoaded</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="nx">loadSDKJS</span><span class="p">(</span><span class="s1">'http://localhost:3000/index.js'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">new</span> <span class="nb">window</span><span class="p">.</span><span class="nx">Example</span><span class="p">.</span><span class="nx">ChatSdk</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="参考">参考</h2><ul><li><a class="link" href="https://github.com/orgs/pnpm/discussions/4150" target="_blank" rel="noopener" referrerpolicy="no-referrer">In a Workspace, How to List Packages That Exist Internally in the Repository?</a></li><li><a class="link" href="https://github.com/tailwindlabs/tailwindcss/issues/13136" target="_blank" rel="noopener" referrerpolicy="no-referrer">Automatic Content Detection in Monorepos Only Finds Direct Package</a></li><li><a class="link" href="https://github.com/tailwindlabs/tailwindcss-intellisense/issues/1139" target="_blank" rel="noopener" referrerpolicy="no-referrer">Intellisense Autocomplete Is not Working for My Project Structure</a></li><li><a class="link" href="https://github.com/JoshuaKGoldberg/eslint-plugin-package-json/issues/928" target="_blank" rel="noopener" referrerpolicy="no-referrer">Feature: Enforce Order of Imports and Exports</a></li><li><a class="link" href="https://gemini.google.com/share/7e0f0661bb30" target="_blank" rel="noopener" referrerpolicy="no-referrer">Atom vs. Zustand: State Management</a></li><li><a class="link" href="https://github.com/egoist/tailwindcss-icons/issues/37" target="_blank" rel="noopener" referrerpolicy="no-referrer">Load SVGs from Filesystem</a></li><li><a class="link" href="https://tkdodo.eu/blog/zustand-and-react-context" target="_blank" rel="noopener" referrerpolicy="no-referrer">Zustand and React Context</a></li><li><a class="link" href="https://www.doubao.com/thread/w9316058160570354" target="_blank" rel="noopener" referrerpolicy="no-referrer">思考 crossorigin 重要性</a></li></ul></section><footer class="article-meta article-footer"><section class="article-not-by-ai-badge"><a href="https://notbyai.fyi/cn" referrerpolicy="no-referrer" rel="noopener" target="_blank" title="Not By AI"><svg width="131" height="42" fill="none" viewBox="0 0 131 42"><path fill="#fff" stroke="#000" d="M.5.5H116c8.008.0 14.5 6.4919 14.5 14.5v26.5H15C6.9919 41.5.5 35.0081.5 27z"></path><path fill="#000" d="M17.9605 24.1575c3.4661 2.8068 8.4231 2.8068 11.8892.0l-1.3402-1.6549c-2.6847 2.174-6.5241 2.174-9.2088.0zm1.4435-3.6441v-2.8769h2.1296v2.8769zm6.608-2.8769v2.8769h2.1295v-2.8769z"></path><path fill="#000" fill-rule="evenodd" d="M35 21.5C35 27.8513 29.8513 33 23.5 33S12 27.8513 12 21.5 17.1487 10 23.5 10 35 15.1487 35 21.5m-2.1295.0c0 5.1752-4.1953 9.3705-9.3705 9.3705s-9.3705-4.1953-9.3705-9.3705 4.1953-9.3705 9.3705-9.3705 9.3705 4.1953 9.3705 9.3705" clip-rule="evenodd"></path><path fill="#000" d="m61.844 12.1721.1995.711.1859-.0634.9209-.3145v2.55c0 .1266-.0498.1656-.1794.1656-.1097.0-.4787.0-.9075-.0098.0997.2046.1994.5163.2294.7013.6082.0.9872-.0194 1.2365-.1363.2393-.1169.329-.3215.329-.7305v-2.7826c.3523-.1208.709-.2434 1.0571-.3635l-.1097-.6721a95 95 0 01-.9474.3168V9.6396h.9474v-.6818h-.9474V7h-.708v1.9578h-1.1567v.6818h1.1567v2.1336c-.4926.1569-.9439.2951-1.3063.3989"></path><path fill="#000" fill-rule="evenodd" d="M66.0322 10.7695c-.718.0-.8975-.2533-.8975-.9643V7.3994h2.6127v1.9285H65.763v.487c0 .302.0498.3896.2692.3896h1.2664c.1795.0.4488-.0097.6083-.0389a9 9 0 01.0199.1766c.0142.1332.0298.2802.0499.3786-.1396.0389-.3988.0487-.6681.0487zm-.2692-2.8637h1.3761v.9156H65.763zm3.3106 2.815c-.708.0-.8875-.2435-.8875-.9546V7.3994h2.6226v1.8993h-1.9943v.4773c0 .2922.0498.3896.2792.3896h1.3262c.1795.0.4787-.0195.6382-.0585.01.1754.0399.4286.0599.565-.1396.0487-.4089.0487-.6881.0487zm-.2592-2.815h1.396v.8864h-1.396z" clip-rule="evenodd"></path><path fill="#000" d="M66.83 14.1299c-.5585.5454-1.5158 1.0519-2.3733 1.3733.1695.1169.4487.3507.5783.4773.8377-.3701 1.8548-.9837 2.4731-1.5974zm1.6254.3214c.7578.4578 1.7351 1.1299 2.2237 1.5487l.6183-.3896c-.5186-.4286-1.5058-1.0714-2.2537-1.5097zm-17.9793 1.4805c-.6781-.3701-1.8149-.8376-2.9417-1.198l.4687-.487c1.1268.3506 2.3533.8084 3.0813 1.1785zM42 15.4156c1.067-.2533 2.4032-.75 3.0713-1.1688l.6881.4285c-.8376.4968-2.1739 1.0033-3.2409 1.276-.1097-.1461-.3589-.3994-.5185-.5357M56.1556 7.217c.0015-.067.0029-.1302.0045-.1878h.8276l-9e-4.0422c-.008.348-.0188.818-.0635 1.3653.1406 1.1454.7478 5.2769 4.3025 6.823-.2194.1656-.4388.4189-.5485.6234-2.5071-1.144-3.5872-3.5484-4.0775-5.3684-.4698 1.9497-1.5317 4.1298-3.9698 5.4074-.1296-.1948-.3789-.4189-.6083-.5747 3.9976-1.9757 4.0968-6.4545 4.1339-8.1305m18.903 2.2181c.079-.3748.153-.7421.2175-1.0811l-.7478-.078c-.2194 1.2273-.5984 2.8929-.8875 3.8864l.7578.0682c.0278-.1004.0566-.2079.0862-.3214h3.8851a35 35 0 01-.1244 1.1493h-6.1604v.6819h6.0611c-.1428.848-.3054 1.2836-.5067 1.4513-.1197.0974-.2393.1071-.4687.1071-.2493.0-.9374.0-1.6254-.0682.1296.1948.2293.487.2493.6916.6482.0389 1.2963.0487 1.6254.0292.3789-.0195.6083-.0877.8476-.3117.2643-.2582.4586-.7987.6292-1.8993H81v-.6819h-2.009c.0524-.424.1033-.9112.1542-1.4707.01-.1072.0299-.3312.0299-.3312h-4.5268c.0896-.3703.182-.7719.2717-1.1786h4.3748v-.6428z"></path><path fill="#000" fill-rule="evenodd" d="M65.1746 11.6266v.6234h1.3363v1.1299h-1.7551v.6233h6.3521v-.6233h-1.5556V12.25h1.3262v-.6234h-1.3262v-.6623h-.6881v.6623H67.189v-.6428h-.6781v.6428zm2.0144 1.7533V12.25h1.6752v1.1299zm-24.9995.711v-.6234h1.4359V9.0649h2.5129v-.6136h-3.6696v-.6331h3.6696v-.8085h.7379v.8085h3.909v.6331h-3.909v.6136h2.7623v4.4026h1.406v.6234zm2.1539-.6234h4.5472v-.6818h-4.5472zm0-1.1493h4.5472v-.5844h-4.5472zm0-1.0617h4.5472v-.5747h-4.5472zm0-1.0325h4.5472v-.6428h-4.5472z" clip-rule="evenodd"></path><path fill="#000" d="M72.3245 9.659V7.526h8.4362v2.133h-.7778V8.2079h-6.9205V9.659z"></path><path fill="#000" fill-rule="evenodd" d="M105.32 26.2505c0-.2607.016-.8309.016-.8309h-3.912v-1.5479h4.149c.191 2.3521.537 4.5993 1.078 6.4267-.875.9892-1.892 1.8173-3.039 2.4531.495.4562 1.341 1.4501 1.676 1.9552.85-.547 1.642-1.1985 2.37-1.9428.68 1.1752 1.535 1.8776 2.596 1.8776 1.644.0 2.395-.6843 2.746-3.8615-.623-.2444-1.437-.7983-1.964-1.3523-.08 1.9878-.271 2.8024-.591 2.8024-.385.0-.775-.5441-1.133-1.4646 1.153-1.6411 2.077-3.567 2.746-5.7044l-2.347-.5703c-.315 1.1187-.728 2.1682-1.233 3.1335-.214-1.1359-.388-2.4138-.504-3.7526h4.866v-2.3299h-1.698l.804-.8473c-.559-.5377-1.676-1.2546-2.491-1.6945l-1.405 1.4175c.503.3154 1.098.7262 1.597 1.1243h-1.812a39 39 0 01-.008-2.2485h-2.443c.003.7431.019 1.4959.049 2.2485h-6.4518v4.8879c0 2.1345-.0798 5.0184-1.2613 6.941.5269.277 1.5807 1.1568 1.9798 1.6293.8143-1.2502 1.2573-2.9912 1.4893-4.7247.317.5885.556 1.4753.586 2.1504.735.0 1.405-.0163 1.837-.0978.479-.0978.846-.2607 1.197-.7332.383-.5214.463-2.0204.511-5.3442m-4.123 3.9636c.119-.9089.181-1.8141.209-2.6438h1.652c-.035 1.6219-.095 2.2941-.229 2.4928-.128.163-.271.2118-.479.2118-.248.0-.676-.0153-1.153-.0608" clip-rule="evenodd"></path><path fill="#000" d="M86.8673 22.112c.2641-.6933.4999-1.407.6977-2.1181l-2.4109-.554c-.5429 2.1996-1.5648 4.4318-2.7942 5.7678.5908.3259 1.6286 1.0265 2.0916 1.4338.4782-.6083.9492-1.3671 1.3875-2.2158h3.0672v2.4928h-4.1353v2.2811h4.1353v2.8024h-6.0354v2.3137h14.5297V32.002h-6.0673v-2.8024h4.5824v-2.2811h-4.5824v-2.4928h5.2211V22.112h-5.2211v-2.835h-2.427v2.835zm-39.5237 6.3525c.0941-.436.142-.8504.1552-1.2201h-3.6526V25.11h3.6564v-1.6293h-3.816v-2.1996h3.816v-1.9226h2.2992V27c0 2.8513-.8622 6.0611-4.774 7.9837-.3832-.5703-1.1017-1.3035-1.6606-1.7597a1092 1092 0 01.9249-2.0804l-.877.1415L43 28.9226c1.1273-.099 2.7056-.273 4.3436-.4581"></path><path fill="#000" fill-rule="evenodd" d="M72.6755 34.3305 67.632 19.7976h-3.3623l-5.0822 14.5329h3.1111l.9855-2.9874h5.2465l.9178 2.9874zm-6.7537-11.2103 1.7778 5.7186h-3.6135z" clip-rule="evenodd"></path><path fill="#000" d="M53.7456 19.3585v1.9226h4.1833v2.1996h-4.1833V25.11h3.8001v2.1344h-3.8001v1.6619h4.4707v2.1996h-4.4707v3.6497h-2.3312V19.3585zm21.4669 2.9111v9.5922h-1.7543v2.4721h6.2608v-2.4721h-1.55v-9.5922h1.55v-2.472h-6.2608v2.472z"></path></svg></a></section></footer></article><aside><h2 class="section-title">相关文章</h2><div class="subsection-list"><div class="article-list--tile"><article class="has-image"><a href="/p/ai-js-sdk-2/" rel="noopener" referrerpolicy="no-referrer"><div class="article-image"><img alt="Featured image of post AI JS-SDK 项目总结（二）" loading="lazy" src="/img/cover/react.webp" decoding="async" width="1200" height="720" jampack-sized="true"></div><div class="article-details"><h2 class="article-title">AI JS-SDK 项目总结（二）</h2></div></a></article><article class="has-image"><a href="/p/react-suspense/" rel="noopener" referrerpolicy="no-referrer"><div class="article-image"><img alt="Featured image of post 「转」我在函数组件中可以随便写，最通俗异步组件原理" loading="lazy" src="/img/cover/react.webp" decoding="async" width="1200" height="720" jampack-sized="true"></div><div class="article-details"><h2 class="article-title">「转」我在函数组件中可以随便写，最通俗异步组件原理</h2></div></a></article><article class="has-image"><a href="/p/react-design/" rel="noopener" referrerpolicy="no-referrer"><div class="article-image"><img alt="Featured image of post React 复习笔记（下）" loading="lazy" src="/img/cover/react.webp" decoding="async" width="1200" height="720" jampack-sized="true"></div><div class="article-details"><h2 class="article-title">React 复习笔记（下）</h2></div></a></article><article class="has-image"><a href="/p/react-hook/" rel="noopener" referrerpolicy="no-referrer"><div class="article-image"><img alt="Featured image of post React 复习笔记（中）" loading="lazy" src="/img/cover/react.webp" decoding="async" width="1200" height="720" jampack-sized="true"></div><div class="article-details"><h2 class="article-title">React 复习笔记（中）</h2></div></a></article><article class="has-image"><a href="/p/react-note/" rel="noopener" referrerpolicy="no-referrer"><div class="article-image"><img alt="Featured image of post React 复习笔记（上）" loading="lazy" src="/img/cover/react.webp" decoding="async" width="1200" height="720" jampack-sized="true"></div><div class="article-details"><h2 class="article-title">React 复习笔记（上）</h2></div></a></article></div></div></aside><footer class="site-footer"><section class="copyright">©
+2017 -
+2026 馬腊咯稽</section><section class="powerby">博客内容仅供参考，本人不对其准确性、完整性或适用性作出任何保证<br>转载内容仅为分享，不代表本人观点。如涉及侵权，请联系删除<br>使用 <b><a href="https://gohugo.io" target="_blank" rel="noopener" referrerpolicy="no-referrer">Hugo</a></b> 构建，
+主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" referrerpolicy="no-referrer" data-version="4.0.3">Stack</a></b> 由 <b><a href="https://jimmycai.com" target="_blank" rel="noopener" referrerpolicy="no-referrer">Jimmy</a></b> 设计</section></footer><script type="module">import i from"/ts/gallery.js";const e=document.querySelector(".article-content"),n=e&&(e.querySelectorAll("figure").length>0||e.querySelectorAll("img.gallery-image").length>0);if(n){i(e);const l=(await import("https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js")).default,o="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css",t=document.createElement("link");t.rel="stylesheet",t.href=o,document.head.appendChild(t),new l({gallerySelector:".article-content",childSelector:"figure a.image-link",pswpModule:()=>import("https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.esm.min.js")}).init()}
+</script></main></div><script type="text/javascript" src="/ts/main.b75bae5e2b63dbe9b4f38be3668b34ac1760d3207ce1e867048cf3648238efc7.js" crossorigin="anonymous" defer=""></script><script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" crossorigin="anonymous"></script><script>NProgress.configure({showSpinner:!1}),NProgress.start(),document.addEventListener("readystatechange",()=>{document.readyState==="interactive"&&NProgress.inc(.8),document.readyState==="complete"&&NProgress.done()})</script></body></html>

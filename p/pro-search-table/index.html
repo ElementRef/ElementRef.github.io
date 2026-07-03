@@ -1,0 +1,1019 @@
+<!DOCTYPE html><html lang="zh" dir="ltr"><head><meta charset="utf-8"><style>@layer __jampack__{:where(img[jampack-sized]){max-width:100%;height:auto}}</style><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><meta name="description" content="业务场景 公司面向 B 端的产品是一个后台管理系统，分了五个业务线，这五个业务线服务于不同的业务对象；但他们都有一个共同的特点：数据展示大多以搜索 + 表格的形式；作为一个有着一二百个页面的管理系统，每次新增页面都要将模版代码拷贝一份；一来开发效率低下，二来复用性不够、冗余代码比较多。\n"><title>封装 ProSearch 与 ProTable 组件 · I AM BEA, I DRINK TEA</title><link rel="canonical" href="https://ElementRef.github.io/p/pro-search-table/"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="preload" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&amp;display=swap" as="style"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&amp;display=swap"><link rel="stylesheet" href="/scss/style.min.1243efdf0a4b2d5e8a94d9b48d38408d382af8ff47fff9e97cce76f84b9ccca6.css"><meta property="og:title" content="封装 ProSearch 与 ProTable 组件"><meta property="og:description" content="业务场景 公司面向 B 端的产品是一个后台管理系统，分了五个业务线，这五个业务线服务于不同的业务对象；但他们都有一个共同的特点：数据展示大多以搜索 + 表格的形式；作为一个有着一二百个页面的管理系统，每次新增页面都要将模版代码拷贝一份；一来开发效率低下，二来复用性不够、冗余代码比较多。\n"><meta property="og:url" content="https://ElementRef.github.io/p/pro-search-table/"><meta property="og:site_name" content="馬腊咯稽"><meta property="og:type" content="article"><meta property="og:locale" content="zh_CN"><meta property="article:section" content="Post"><meta property="article:published_time" content="2023-01-03T00:00:00+00:00"><meta property="article:modified_time" content="2023-01-03T00:00:00+00:00"><meta property="og:image" content="https://ElementRef.github.io/img/cover/angular.png"><meta property="og:logo" content="/favicon.svg"><meta name="twitter:site" content="@SpiciComic"><meta name="twitter:creator" content="@SpiciComic"><meta name="twitter:title" content="封装 ProSearch 与 ProTable 组件"><meta name="twitter:description" content="业务场景 公司面向 B 端的产品是一个后台管理系统，分了五个业务线，这五个业务线服务于不同的业务对象；但他们都有一个共同的特点：数据展示大多以搜索 + 表格的形式；作为一个有着一二百个页面的管理系统，每次新增页面都要将模版代码拷贝一份；一来开发效率低下，二来复用性不够、冗余代码比较多。\n"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://ElementRef.github.io/img/cover/angular.png"><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><meta name="apple-mobile-web-app-title" content="馬腊咯稽"><meta http-equiv="Content-Security-Policy" content=" frame-src https://*.bilibili.com https://*.qq.com https://*.youtube.com https://youtu.be https://www.youtube-nocookie.com; upgrade-insecure-requests "><script src="https://umami.spicicomic.workers.dev/elementref.js" crossorigin="anonymous" data-website-id="87868be0-a9cf-4f8c-8fee-e3cbb99e6cf2" defer=""></script><script src="https://static.cloudflareinsights.com/beacon.min.js" crossorigin="anonymous" data-cf-beacon="{&quot;token&quot;: &quot;9d3fb1ef9fac4cb0b7d041747556f0c4&quot;}" defer=""></script></head><body class="article-page"><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container extended flex main-container on-phone--column"><aside class="sidebar sticky left-sidebar"><button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="菜单">
+<span class="hamburger-box"><span class="hamburger-inner"></span></span></button><header><figure class="site-avatar"><a href="/" rel="noopener" referrerpolicy="no-referrer"><img src="/img/avatar_hu_28c494226642278b.webp" width="600" height="600" class="site-logo" alt="Avatar" fetchpriority="high" decoding="async"></a></figure><div class="site-meta"><h1 class="site-name"><a href="/" rel="noopener" referrerpolicy="no-referrer">馬腊咯稽</a></h1><h2 class="site-description">I AM BEA, I DRINK TEA</h2></div></header><ol class="menu-social"><li><a href="https://github.com/ElementRef" title="GitHub" referrerpolicy="no-referrer" rel="noopener" target="_blank"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-brand-github" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"></path></svg></a></li><li><a href="https://douban.com/people/nicknoonan" title="DouBan" referrerpolicy="no-referrer" rel="noopener" target="_blank"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-douban" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M4 20h16M5 4h14M8 8h8a2 2 0 012 2v2a2 2 0 01-2 2H8a2 2 0 01-2-2v-2a2 2 0 012-2m8 6-2 6m-6-3 1 3"></path></svg></a></li><li><a href="https://last.fm/zh/user/SpiciComic/listening-report" title="Last.fm" referrerpolicy="no-referrer" rel="noopener" target="_blank"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-lastfm" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M20 8c-.83-1-1.388-1-2-1s-2 .271-2 2 1.384 2.233 3 3 2.125 1.812 2 3-1 2-3 2-3-1-3.5-2-1.585-4.78-2.497-6a5 5 0 10-1 7"></path></svg></a></li></ol><ol class="menu" id="main-menu"><li><a href="/"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-home" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M5 12H3l9-9 9 9h-2M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"></path></svg>
+<span>主页</span></a></li><li><a href="/archives/"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-archive" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><rect width="18" height="4" x="3" y="4" rx="2"></rect><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+<span>归档</span></a></li><li><a href="/terminal/"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-terminal" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="m5 7 5 5-5 5m7 2h7"></path></svg>
+<span>命令</span></a></li><li><a href="/links/"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"></path><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"></path></svg>
+<span>好文</span></a></li><li><a href="/artificial-intelligence/"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icons-tabler-outline icon-tabler-brain" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M15.5 13A3.5 3.5.0 0012 16.5v1a3.5 3.5.0 007 0v-1.8M8.5 13a3.5 3.5.0 013.5 3.5v1a3.5 3.5.0 01-7 0v-1.8"></path><path d="M17.5 16a3.5 3.5.0 000-7H17"></path><path d="M19 9.3V6.5a3.5 3.5.0 00-7 0M6.5 16a3.5 3.5.0 010-7H7"></path><path d="M5 9.3V6.5a3.5 3.5.0 017 0v10"></path></svg>
+<span>机智</span></a></li><li><a href="/about/"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-user" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><circle cx="12" cy="7" r="4"></circle><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"></path></svg>
+<span>关于</span></a></li><li class="menu-bottom-section"><ol class="menu"><li id="dark-mode-toggle"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-toggle-left" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><circle cx="8" cy="12" r="2"></circle><rect width="20" height="12" x="2" y="6" rx="6"></rect></svg>
+<svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-toggle-right" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><circle cx="16" cy="12" r="2"></circle><rect width="20" height="12" x="2" y="6" rx="6"></rect></svg>
+<span>主题</span></li></ol></li></ol></aside><aside class="sidebar sticky right-sidebar"><section class="archives widget"><div class="widget-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-hash" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M5 9h14M5 15h14M11 4 7 20M17 4l-4 16"></path></svg></div><h2 class="section-title widget-title">目录</h2><div class="widget--toc"><nav class="toc-nav" id="TableOfContents"><ol><li><a href="#业务场景">业务场景</a></li><li><a href="#实现-prosearch">实现 ProSearch</a><ol><li><a href="#封装常见表单">封装常见表单</a></li><li><a href="#渲染自定义表单">渲染自定义表单</a></li><li><a href="#处理表单间的依赖">处理表单间的依赖</a></li><li><a href="#加载-selectoptions">加载 select.options</a></li></ol></li><li><a href="#实现-protable">实现 ProTable</a><ol><li><a href="#封装-thead">封装 thead</a></li><li><a href="#封装-tbody">封装 tbody</a></li><li><a href="#数据请求">数据请求</a></li></ol></li><li><a href="#总结">总结</a></li></ol></nav></div></section></aside><main class="full-width main"><article class="has-image main-article"><header class="article-header"><div class="article-image"><a href="/p/pro-search-table/" rel="noopener" referrerpolicy="no-referrer"><img alt="Featured image of post 封装 ProSearch 与 ProTable 组件" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/img/cover/angular.png" fetchpriority="high" decoding="async" width="1200" height="720" jampack-sized="true"></a></div><div class="article-details"><header class="article-category"><a href="/c/angular/" style="background-color:#d2beef;color:#220f3d" rel="noopener" referrerpolicy="no-referrer">Angular</a></header><div class="article-title-wrapper"><h2 class="article-title"><a href="/p/pro-search-table/" rel="noopener" referrerpolicy="no-referrer">封装 ProSearch 与 ProTable 组件</a></h2></div><footer class="article-meta"><div class="inline-meta"><svg width="56" height="56" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-calendar-time" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"></path><circle cx="18" cy="18" r="4"></circle><path d="M15 3v4M7 3v4m-4 4h16m-1 5.496V18l1 1"></path></svg>
+<time class="article-time--published" datetime="2023-01-03T00:00:00Z">2023 年 1月 3 日</time>
+<svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-clock" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
+<time class="article-time--reading">阅读时长: 8 分钟</time></div></footer></div></header><aside class="article-toc"><details><summary><div class="article-toc-title"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="m9 6 6 6-6 6"></path></svg>
+<span>目录</span></div></summary><nav class="toc-nav"><ol><li><a href="#业务场景">业务场景</a></li><li><a href="#实现-prosearch">实现 ProSearch</a><ol><li><a href="#封装常见表单">封装常见表单</a></li><li><a href="#渲染自定义表单">渲染自定义表单</a></li><li><a href="#处理表单间的依赖">处理表单间的依赖</a></li><li><a href="#加载-selectoptions">加载 select.options</a></li></ol></li><li><a href="#实现-protable">实现 ProTable</a><ol><li><a href="#封装-thead">封装 thead</a></li><li><a href="#封装-tbody">封装 tbody</a></li><li><a href="#数据请求">数据请求</a></li></ol></li><li><a href="#总结">总结</a></li></ol></nav></details></aside><section class="article-content"><h2 id="业务场景">业务场景</h2><p>公司面向 B 端的产品是一个后台管理系统，分了五个业务线，这五个业务线服务于不同的业务对象；但他们都有一个共同的特点：数据展示大多以搜索 + 表格的形式；作为一个有着一二百个页面的管理系统，每次新增页面都要将模版代码拷贝一份；一来开发效率低下，二来复用性不够、冗余代码比较多。</p><p>为了解决这些问题，催生了 ProSearch 和 ProTable，通过配置的方式快速搭建页面。</p><h2 id="实现-prosearch">实现 ProSearch</h2><p>ProSearch 本质就是一个带了样式的 FormGroup，需要将所有筛选项包裹起来：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">form</span>
+</span></span><span class="line"><span class="cl">  <span class="err">[</span><span class="na">formGroup</span><span class="err">]="</span><span class="na">validateForm</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">  <span class="err">(</span><span class="na">ngSubmit</span><span class="err">)="</span><span class="na">submitForm</span><span class="err">()"</span>
+</span></span><span class="line"><span class="cl">  <span class="na">nzLayout</span><span class="o">=</span><span class="s">"inline"</span>
+</span></span><span class="line"><span class="cl">  <span class="na">nz-form</span>
+</span></span><span class="line"><span class="cl"><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">nz-row</span> <span class="na">style</span><span class="o">=</span><span class="s">"width: 100%"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="err">[</span><span class="na">nzSpan</span><span class="err">]="</span><span class="na">4</span><span class="err">"</span> <span class="na">nz-col</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">div</span> <span class="err">[</span><span class="na">nzGutter</span><span class="err">]="[</span><span class="na">8</span><span class="err">,</span> <span class="na">8</span><span class="err">]"</span> <span class="na">nz-row</span> <span class="na">nzJustify</span><span class="o">=</span><span class="s">"end"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">nz-col</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">button</span> <span class="na">nz-button</span> <span class="na">nzType</span><span class="o">=</span><span class="s">"primary"</span> <span class="na">type</span><span class="o">=</span><span class="s">"submit"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">i</span> <span class="na">nz-icon</span> <span class="na">nzType</span><span class="o">=</span><span class="s">"search"</span><span class="p">&gt;&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            查询
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">nz-col</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">button</span> <span class="err">(</span><span class="na">click</span><span class="err">)="</span><span class="na">refresh</span><span class="err">()"</span> <span class="na">nz-button</span> <span class="na">nzType</span><span class="o">=</span><span class="s">"default"</span> <span class="na">type</span><span class="o">=</span><span class="s">"button"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">i</span> <span class="na">nz-icon</span> <span class="na">nzType</span><span class="o">=</span><span class="s">"reload"</span><span class="p">&gt;&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            刷新
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>我们需要实现 submitForm 和 refresh 来提供<strong>查询</strong>和<strong>刷新</strong>功能，并通过 EventEmitter 将相关事件抛出：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">ProSearchComponent</span> <span class="kr">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@Output</span><span class="p">()</span> <span class="nx">onRefresh</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventEmitter</span><span class="p">&lt;</span><span class="nt">any</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@Output</span><span class="p">()</span> <span class="nx">onSubmit</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventEmitter</span><span class="p">&lt;</span><span class="nt">any</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">submitForm() {</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">values</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">validateForm</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">onSubmit</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="nx">values</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">refresh() {</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">onRefresh</span><span class="p">.</span><span class="nx">emit</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="封装常见表单">封装常见表单</h3><p>ProSearch 封装了一些常见的搜索项，比如 input、select、range-picker、date-picker；具体渲染哪些表单，需要根据传入的配置来：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngFor</span><span class="o">=</span><span class="s">"let item of searchFormList"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">nz-col</span> <span class="na">nzSpan</span><span class="o">=</span><span class="s">"7"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- 基础筛选 --&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">"!item.renderSearchType; else renderSelfSearch"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">nz-form-item</span> <span class="err">[</span><span class="na">ngSwitch</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">type</span><span class="err">"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="c">&lt;!-- input --&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngSwitchCase</span><span class="o">=</span><span class="s">"'input'"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">nz-form-label</span> <span class="na">nzNoColon</span> <span class="na">nzSm</span><span class="o">=</span><span class="s">"6"</span><span class="p">&gt;</span>{{ item.label }}<span class="p">&lt;/</span><span class="nt">nz-form-label</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">nz-form-control</span> <span class="na">nzSm</span><span class="o">=</span><span class="s">"18"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">input</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">formControlName</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">formControlName</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">nzAllowClear</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">nzAllowClear</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">placeholder</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">placeholder</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="err">(</span><span class="na">ngModelChange</span><span class="err">)="</span><span class="na">onChange</span><span class="err">($</span><span class="na">event</span><span class="err">,</span> <span class="na">validateForm</span><span class="err">,</span> <span class="na">item</span><span class="err">)"</span>
+</span></span><span class="line"><span class="cl">              <span class="na">nz-input</span>
+</span></span><span class="line"><span class="cl">            <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;/</span><span class="nt">nz-form-control</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="c">&lt;!-- select --&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngSwitchCase</span><span class="o">=</span><span class="s">"'select'"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">nz-form-label</span> <span class="na">nzNoColon</span> <span class="na">nzSm</span><span class="o">=</span><span class="s">"6"</span><span class="p">&gt;</span>{{ item.label }}<span class="p">&lt;/</span><span class="nt">nz-form-label</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">nz-form-control</span> <span class="na">nzSm</span><span class="o">=</span><span class="s">"18"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">nz-select</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">formControlName</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">formControlName</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">nzAllowClear</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">nzAllowClear</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">nzPlaceHolder</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">placeholder</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">nzShowSearch</span><span class="err">]="</span><span class="na">true</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="err">(</span><span class="na">ngModelChange</span><span class="err">)="</span><span class="na">onChange</span><span class="err">($</span><span class="na">event</span><span class="err">,</span> <span class="na">validateForm</span><span class="err">,</span> <span class="na">item</span><span class="err">)"</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">              <span class="p">&lt;</span><span class="nt">nz-option</span>
+</span></span><span class="line"><span class="cl">                <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">"!item.noShowSelectAll"</span>
+</span></span><span class="line"><span class="cl">                <span class="na">nzLabel</span><span class="o">=</span><span class="s">"全部"</span>
+</span></span><span class="line"><span class="cl">                <span class="na">nzSelected</span>
+</span></span><span class="line"><span class="cl">                <span class="na">nzValue</span><span class="o">=</span><span class="s">""</span>
+</span></span><span class="line"><span class="cl">              <span class="p">&gt;&lt;/</span><span class="nt">nz-option</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">              <span class="p">&lt;</span><span class="nt">nz-option</span>
+</span></span><span class="line"><span class="cl">                <span class="err">*</span><span class="na">ngFor</span><span class="o">=</span><span class="s">"let oItem of item.option"</span>
+</span></span><span class="line"><span class="cl">                <span class="err">[</span><span class="na">nzLabel</span><span class="err">]="</span><span class="na">oItem</span><span class="err">.</span><span class="na">label</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">                <span class="err">[</span><span class="na">nzValue</span><span class="err">]="</span><span class="na">oItem</span><span class="err">.</span><span class="na">value</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="p">&gt;&lt;/</span><span class="nt">nz-option</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;/</span><span class="nt">nz-select</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;/</span><span class="nt">nz-form-control</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="c">&lt;!-- range-picker --&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngSwitchCase</span><span class="o">=</span><span class="s">"'range-picker'"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">nz-form-label</span> <span class="na">nzNoColon</span> <span class="na">nzSm</span><span class="o">=</span><span class="s">"6"</span><span class="p">&gt;</span>{{ item.label }}<span class="p">&lt;/</span><span class="nt">nz-form-label</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">nz-form-control</span> <span class="na">nzSm</span><span class="o">=</span><span class="s">"18"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">nz-range-picker</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">formControlName</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">formControlName</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">nzAllowClear</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">nzAllowClear</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">nzRanges</span><span class="err">]="</span><span class="na">rangePicker</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">nzShowTime</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">nzShowTime</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="err">(</span><span class="na">ngModelChange</span><span class="err">)="</span><span class="na">onChange</span><span class="err">($</span><span class="na">event</span><span class="err">,</span> <span class="na">validateForm</span><span class="err">,</span> <span class="na">item</span><span class="err">)"</span>
+</span></span><span class="line"><span class="cl">              <span class="na">style</span><span class="o">=</span><span class="s">"width: 100%"</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&gt;&lt;/</span><span class="nt">nz-range-picker</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;/</span><span class="nt">nz-form-control</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="c">&lt;!-- date-picker --&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngSwitchCase</span><span class="o">=</span><span class="s">"'date-picker'"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">nz-form-label</span> <span class="na">nzNoColon</span> <span class="na">nzSm</span><span class="o">=</span><span class="s">"12"</span> <span class="na">style</span><span class="o">=</span><span class="s">"width: 200px"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            {{ item.label }}
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;/</span><span class="nt">nz-form-label</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">nz-form-control</span> <span class="na">nzSm</span><span class="o">=</span><span class="s">"12"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">nz-date-picker</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">formControlName</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">formControlName</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">nzAllowClear</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">nzAllowClear</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">nzMode</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">nzMode</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="err">(</span><span class="na">ngModelChange</span><span class="err">)="</span><span class="na">onChange</span><span class="err">($</span><span class="na">event</span><span class="err">,</span> <span class="na">validateForm</span><span class="err">,</span> <span class="na">item</span><span class="err">)"</span>
+</span></span><span class="line"><span class="cl">              <span class="na">style</span><span class="o">=</span><span class="s">"width: 100%"</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&gt;&lt;/</span><span class="nt">nz-date-picker</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;/</span><span class="nt">nz-form-control</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>这里的<strong>配置</strong>指的是 SearchFormListItem，组件会根据 searchFormList 渲染对应的表单：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">SearchFormListItem</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">type</span><span class="o">:</span> <span class="kt">string</span><span class="p">;</span> <span class="c1">// 表单类型，type="select"
+</span></span></span><span class="line"><span class="cl">  <span class="nx">timeQueryParams?</span>: <span class="kt">string</span><span class="p">[];</span> <span class="c1">// 时间相关字段，timeQueryParams=["createTimeStart", "createTimeEnd"]
+</span></span></span><span class="line"><span class="cl">  <span class="nx">renderSearchType?</span>: <span class="kt">string</span><span class="p">;</span> <span class="c1">// 自定义渲染模版，renderSearchType="companyIdSelectRef"
+</span></span></span><span class="line"><span class="cl">  <span class="nx">placeholder</span>: <span class="kt">string</span><span class="p">;</span> <span class="c1">// 占位描述，placeholder="请输入姓名"
+</span></span></span><span class="line"><span class="cl">  <span class="nx">option?</span>: <span class="kt">Array</span><span class="o">&lt;</span><span class="p">{</span> <span class="nx">label</span>: <span class="kt">string</span><span class="p">;</span> <span class="nx">value</span>: <span class="kt">string</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// 自定义选项，option=[{label: "选项一", value: 1},...]
+</span></span></span><span class="line"><span class="cl">  <span class="nx">onChange?</span>: <span class="kt">Function</span><span class="p">;</span> <span class="c1">// 表单值变化时触发 onChange
+</span></span></span><span class="line"><span class="cl">  <span class="nx">nzShowTime?</span>: <span class="kt">boolean</span><span class="p">;</span> <span class="c1">// type="range-picker"时，是否显示时间选择
+</span></span></span><span class="line"><span class="cl">  <span class="nx">nzMode?</span>: <span class="kt">string</span><span class="p">;</span> <span class="c1">// nz-date-picker 属性
+</span></span></span><span class="line"><span class="cl">  <span class="nx">nzAllowClear?</span>: <span class="kt">boolean</span><span class="p">;</span> <span class="c1">// 是否显示清除按钮
+</span></span></span><span class="line"><span class="cl">  <span class="nx">noShowSelectAll?</span>: <span class="kt">boolean</span><span class="p">;</span> <span class="c1">// 是否显示「全部」选项
+</span></span></span><span class="line"><span class="cl">  <span class="nx">label</span>: <span class="kt">string</span><span class="p">;</span> <span class="c1">// 表单描述，label="商户名称"
+</span></span></span><span class="line"><span class="cl">  <span class="nx">isNumber?</span>: <span class="kt">boolean</span><span class="p">;</span> <span class="c1">// 是否将 option 中的 value 转换为数字
+</span></span></span><span class="line"><span class="cl">  <span class="nx">initValidate?</span>: <span class="kt">Function</span><span class="p">;</span> <span class="c1">// 表单初始值，initValidate=()=&gt;''
+</span></span></span><span class="line"><span class="cl">  <span class="nx">handleQueryParams?</span>: <span class="kt">Function</span><span class="p">;</span> <span class="c1">// 处理成自己想要搜索参数值
+</span></span></span><span class="line"><span class="cl">  <span class="nx">formControlName</span>: <span class="kt">string</span><span class="p">;</span> <span class="c1">// 表单字段，formControlName="name"
+</span></span></span><span class="line"><span class="cl">  <span class="nx">dependence?</span>: <span class="kt">string</span><span class="p">[];</span> <span class="c1">// 依赖于其他搜索项，dependence: ['orgId']
+</span></span></span><span class="line"><span class="cl">  <span class="nx">_reset?</span>: <span class="kt">string</span><span class="p">[];</span> <span class="c1">// 不需要传入
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">ProSearchComponent</span> <span class="kr">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@Input</span><span class="p">()</span> <span class="nx">searchFormList</span>: <span class="kt">SearchFormListItem</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">validateForm</span>: <span class="kt">UntypedFormGroup</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">ngOnInit() {</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 生成 validateForm，并设置初始值
+</span></span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">group</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">searchFormList</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">nzAllowClear</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">item</span><span class="p">.</span><span class="nx">nzAllowClear</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="kr">type</span> <span class="o">===</span> <span class="s1">'range-picker'</span> <span class="o">&amp;&amp;</span> <span class="nx">item</span><span class="p">.</span><span class="nx">timeQueryParams</span><span class="o">?</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">group</span><span class="p">[</span><span class="nx">item</span><span class="p">.</span><span class="nx">formControlName</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">item</span><span class="p">.</span><span class="nx">initValidate</span>
+</span></span><span class="line"><span class="cl">            <span class="o">?</span> <span class="nx">item</span><span class="p">.</span><span class="nx">initValidate</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">searchParams</span><span class="p">.</span><span class="nx">range</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">formControlName</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">];</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="kr">type</span> <span class="o">===</span> <span class="s1">'date-picker'</span> <span class="o">&amp;&amp;</span> <span class="nx">item</span><span class="p">.</span><span class="nx">timeQueryParams</span><span class="o">?</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">group</span><span class="p">[</span><span class="nx">item</span><span class="p">.</span><span class="nx">formControlName</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">item</span><span class="p">.</span><span class="nx">initValidate</span>
+</span></span><span class="line"><span class="cl">            <span class="o">?</span> <span class="nx">item</span><span class="p">.</span><span class="nx">initValidate</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">searchParams</span><span class="p">.</span><span class="nx">rangeS</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">formControlName</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">];</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">group</span><span class="p">[</span><span class="nx">item</span><span class="p">.</span><span class="nx">formControlName</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">item</span><span class="p">.</span><span class="nx">initValidate</span>
+</span></span><span class="line"><span class="cl">            <span class="o">?</span> <span class="nx">item</span><span class="p">.</span><span class="nx">initValidate</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">searchParams</span><span class="p">.</span><span class="nx">echoParams</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">formControlName</span><span class="p">,</span> <span class="nx">item</span><span class="p">.</span><span class="nx">isNumber</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">];</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">[</span><span class="sb">`get</span><span class="si">${</span><span class="nx">item</span><span class="p">.</span><span class="kr">type</span><span class="si">}</span><span class="sb">`</span><span class="p">]</span><span class="o">?</span><span class="p">.({});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 生成 validateForm
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">validateForm</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">formBuilder</span><span class="p">.</span><span class="nx">group</span><span class="p">(</span><span class="nx">group</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">handleInitParams</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">initParams</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>当然作为一个通用组件，这些还不够；为了尽可能覆盖业务场景，还包含了一些业务相关的比较常用的筛选：BillTypeSelect、CompanyIdSelect、MainstayIdSelect、OrgIdSelect、TransactionTypeSelect 等；具体要包含哪些组件，需要跟着具体业务来；我这里是根据使用频率来的，这些业务相关的筛选几乎存在于所有业务线中：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngFor</span><span class="o">=</span><span class="s">"let item of searchFormList"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">nz-col</span> <span class="na">nzSpan</span><span class="o">=</span><span class="s">"7"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">"!item.renderSearchType; else renderSelfSearch"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">nz-form-item</span> <span class="err">[</span><span class="na">ngSwitch</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">type</span><span class="err">"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngSwitchCase</span><span class="o">=</span><span class="s">"'BillTypeSelect'"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">nz-form-label</span> <span class="na">nzNoColon</span> <span class="na">nzSm</span><span class="o">=</span><span class="s">"6"</span><span class="p">&gt;</span>{{ item.label }}<span class="p">&lt;/</span><span class="nt">nz-form-label</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">nz-form-control</span> <span class="na">nzSm</span><span class="o">=</span><span class="s">"18"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">nz-select</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">formControlName</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">formControlName</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">nzAllowClear</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">nzAllowClear</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">nzPlaceHolder</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">placeholder</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">nzShowSearch</span><span class="err">]="</span><span class="na">true</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="err">(</span><span class="na">ngModelChange</span><span class="err">)="</span><span class="na">item</span><span class="err">.</span><span class="na">onChange</span> <span class="err">&amp;&amp;</span> <span class="na">item</span><span class="err">.</span><span class="na">onChange</span><span class="err">($</span><span class="na">event</span><span class="err">,</span> <span class="na">validateForm</span><span class="err">)"</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">              <span class="p">&lt;</span><span class="nt">nz-option</span>
+</span></span><span class="line"><span class="cl">                <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">"!item.noShowSelectAll"</span>
+</span></span><span class="line"><span class="cl">                <span class="na">nzLabel</span><span class="o">=</span><span class="s">"全部"</span>
+</span></span><span class="line"><span class="cl">                <span class="na">nzSelected</span>
+</span></span><span class="line"><span class="cl">                <span class="na">nzValue</span><span class="o">=</span><span class="s">""</span>
+</span></span><span class="line"><span class="cl">              <span class="p">&gt;&lt;/</span><span class="nt">nz-option</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">              <span class="p">&lt;</span><span class="nt">nz-option</span>
+</span></span><span class="line"><span class="cl">                <span class="err">*</span><span class="na">ngFor</span><span class="o">=</span><span class="s">"let oItem of selfSelectList[item.type]"</span>
+</span></span><span class="line"><span class="cl">                <span class="err">[</span><span class="na">nzLabel</span><span class="err">]="</span><span class="na">oItem</span><span class="err">.</span><span class="na">label</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">                <span class="err">[</span><span class="na">nzValue</span><span class="err">]="</span><span class="na">oItem</span><span class="err">.</span><span class="na">value</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="p">&gt;&lt;/</span><span class="nt">nz-option</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;/</span><span class="nt">nz-select</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;/</span><span class="nt">nz-form-control</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngSwitchCase</span><span class="o">=</span><span class="s">"'CompanyIdSelect'"</span><span class="p">&gt;</span>...<span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngSwitchCase</span><span class="o">=</span><span class="s">"'MainstayIdSelect'"</span><span class="p">&gt;</span>...<span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngSwitchCase</span><span class="o">=</span><span class="s">"'TransactionTypeSelect'"</span><span class="p">&gt;</span>...<span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngSwitchCase</span><span class="o">=</span><span class="s">"'OrgIdSelect'"</span><span class="p">&gt;</span>...<span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="c">&lt;!-- 如果都没有匹配，就渲染一个 input --&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngSwitchDefault</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">nz-form-label</span> <span class="na">nzNoColon</span> <span class="na">nzSm</span><span class="o">=</span><span class="s">"6"</span><span class="p">&gt;</span>{{ item.label }}<span class="p">&lt;/</span><span class="nt">nz-form-label</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">nz-form-control</span> <span class="na">nzSm</span><span class="o">=</span><span class="s">"18"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">input</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">formControlName</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">formControlName</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">nzAllowClear</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">nzAllowClear</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="err">[</span><span class="na">placeholder</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">placeholder</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">              <span class="na">nz-input</span>
+</span></span><span class="line"><span class="cl">            <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;/</span><span class="nt">nz-form-control</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nt">nz-form-item</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="渲染自定义表单">渲染自定义表单</h3><p>最后，还有一种常见的情况；如果 ProSearch 内置的表单都不能满足需求时，ProSearch 应该有渲染一段 TemplateRef 的能力；我们将通过 renderSelfSearch 提供这种能力：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngFor</span><span class="o">=</span><span class="s">"let item of searchFormList"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">nz-col</span> <span class="na">nzSpan</span><span class="o">=</span><span class="s">"7"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">"!item.renderSearchType; else renderSelfSearch"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      ...
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">ng-template</span> <span class="err">#</span><span class="na">renderSelfSearch</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">ng-container</span>
+</span></span><span class="line"><span class="cl">        <span class="err">[</span><span class="na">ngTemplateOutlet</span><span class="err">]="</span><span class="na">templateRef</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">        <span class="err">[</span><span class="na">ngTemplateOutletContext</span><span class="err">]="{</span>
+</span></span><span class="line"><span class="cl">          <span class="na">record:</span> <span class="na">item</span><span class="err">,</span>
+</span></span><span class="line"><span class="cl">          <span class="na">rt:</span> <span class="na">item</span><span class="err">.</span><span class="na">renderSearchType</span><span class="err">,</span>
+</span></span><span class="line"><span class="cl">          <span class="na">validateForm:</span> <span class="na">validateForm</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}"</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&gt;&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">ng-template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>外部代码段通过 TemplateRef 提供，为了保证外部代码能和 validateForm 产生关联，需要将 validateForm 暴露出去；为了能够渲染到正确的位置，需要将 item.renderSearchType 暴露出去；使用时，直接在插槽中做判断即可：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">app-pro-search</span>
+</span></span><span class="line"><span class="cl">  <span class="err">[</span><span class="na">searchFormList</span><span class="err">]="</span><span class="na">searchOption</span><span class="err">.</span><span class="na">searchFormList</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">  <span class="err">(</span><span class="na">onSubmit</span><span class="err">)="</span><span class="na">onSubmit</span><span class="err">($</span><span class="na">event</span><span class="err">)"</span>
+</span></span><span class="line"><span class="cl">  <span class="err">(</span><span class="na">onRefresh</span><span class="err">)="</span><span class="na">onRefresh</span><span class="err">()"</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span><span class="na">proSearch</span>
+</span></span><span class="line"><span class="cl"><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="c">&lt;!-- 拿到 ngTemplateOutletContext 暴露的上下文 --&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">ng-template</span> <span class="na">let-record</span><span class="o">=</span><span class="s">"record"</span> <span class="na">let-rt</span><span class="o">=</span><span class="s">"rt"</span> <span class="na">let-validateForm</span><span class="o">=</span><span class="s">"validateForm"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- 通过 rt 确认渲染位置 --&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">"rt === 'searchName'"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">input</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">ng-template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">app-pro-search</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>Angular 和 Vue 的模版的灵活性都不及 JSX，比如上边的 renderSelfSearch 在 for 循环中会被渲染多次；每次匹配的内容是根据 rt 来的。</p><h3 id="处理表单间的依赖">处理表单间的依赖</h3><p>上文中已经提到了一部分，SearchFormListItem 上有一个私有属性 _reset；它是在初始化的时候，根据 item.dependence 生成的：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 处理表单之间的依赖关系
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">dependence</span><span class="o">?</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">item</span><span class="p">.</span><span class="nx">dependence</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 找到 item 依赖项
+</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">currentDependence</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">searchFormList</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">y</span> <span class="o">=&gt;</span> <span class="nx">y</span><span class="p">.</span><span class="nx">formControlName</span> <span class="o">===</span> <span class="nx">x</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 更新依赖项的 _reset 列表
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 当表单 ngModelChange 触发时
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 会遍历 _reset，将对应表单值重置
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">currentDependence</span><span class="p">.</span><span class="nx">_reset</span><span class="o">?</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">currentDependence</span><span class="p">.</span><span class="nx">_reset</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">formControlName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">currentDependence</span><span class="p">.</span><span class="nx">_reset</span> <span class="o">=</span> <span class="p">[</span><span class="nx">item</span><span class="p">.</span><span class="nx">formControlName</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * this.searchParams.echoParams 是一个公共方法
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 用来从 URL 中获取数据
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">params</span><span class="p">[</span><span class="nx">currentDependence</span><span class="p">.</span><span class="nx">formControlName</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">searchParams</span><span class="p">.</span><span class="nx">echoParams</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">currentDependence</span><span class="p">.</span><span class="nx">formControlName</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">currentDependence</span><span class="p">.</span><span class="nx">isNumber</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * 获取 options 数据（params 是查询参数）
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * item.type 会比较令人迷惑，它可以是普通的表单类型：date-picker、input...
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * 但在这里，它和业务产生了关联：SelectOrgId、SelectMainstayId...
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">[</span><span class="sb">`get</span><span class="si">${</span><span class="nx">item</span><span class="p">.</span><span class="kr">type</span><span class="si">}</span><span class="sb">`</span><span class="p">]</span><span class="o">?</span><span class="p">.({</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span><span class="nx">params</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>当依赖项变动时，我们可以根据依赖项上的 _reset 列表执行一些动作，比如重置<strong>依赖于当前表单值的表单</strong>的值；重新拉取<strong>依赖于当前表单值的表单</strong> options：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">ProSearchComponent</span> <span class="kr">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">onChange</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">validateForm</span><span class="p">,</span> <span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">onChange</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">item</span><span class="p">.</span><span class="nx">onChange</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">validateForm</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 依赖关系处理
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">_reset</span><span class="o">?</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">item</span><span class="p">.</span><span class="nx">_reset</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">resetItem</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 重置依赖项的值
+</span></span></span><span class="line"><span class="cl">        <span class="nx">validateForm</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">resetItem</span><span class="p">).</span><span class="nx">setValue</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">searchFormList</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="nx">x</span><span class="p">.</span><span class="nx">formControlName</span> <span class="o">===</span> <span class="nx">resetItem</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 找到依赖项对应的 searchFormListItem
+</span></span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">x</span><span class="p">.</span><span class="nx">dependence</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">y</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="nx">params</span><span class="p">[</span><span class="nx">y</span><span class="p">]</span> <span class="o">=</span> <span class="nx">validateForm</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">y</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">});</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 重新请求依赖项对应的 options
+</span></span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="p">[</span><span class="sb">`get</span><span class="si">${</span><span class="nx">x</span><span class="p">.</span><span class="kr">type</span><span class="si">}</span><span class="sb">`</span><span class="p">]</span><span class="o">?</span><span class="p">.({</span>
+</span></span><span class="line"><span class="cl">              <span class="p">...</span><span class="nx">params</span>
+</span></span><span class="line"><span class="cl">            <span class="p">});</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">      <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果处于「无按钮」模式，每次修改都需要重新查询
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">noButton</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">submitForm</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="加载-selectoptions">加载 select.options</h3><p>你可能会有疑问，代码中的 this</p>\[\`get${x.type}\`\]<p>?.({}) 这些是什么；这些是用来加载 SelectOptions 的，这些方法被预先写在了 ProSearch 中：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">ProSearchComponent</span> <span class="kr">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// CompanyIdSelect 商户选择
+</span></span></span><span class="line"><span class="cl">  <span class="nx">getCompanyIdSelect() {</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// OrgIdSelect 机构选择
+</span></span></span><span class="line"><span class="cl">  <span class="nx">getOrgIdSelect() {</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// MainstayIdSelect 主体选择
+</span></span></span><span class="line"><span class="cl">  <span class="nx">getMainstayIdSelect</span><span class="p">({</span> <span class="nx">orgId</span> <span class="o">=</span> <span class="s1">''</span> <span class="p">})</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// BillTypeSelect 类型选择
+</span></span></span><span class="line"><span class="cl">  <span class="nx">getBillTypeSelect() {</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// TransactionTypeSelect 交易类型
+</span></span></span><span class="line"><span class="cl">  <span class="nx">getTransactionTypeSelect() {</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>如果不在 ProSearch 中提供，也可提供过 SearchFormListItem 提供。</p><h2 id="实现-protable">实现 ProTable</h2><p>同 ProSearch 一样，ProTable 就是一个带了样式的 Table；将 Table 封装起来，就不用一遍遍的写复杂的配置和分页逻辑了：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">nz-table</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span><span class="na">basicTable</span>
+</span></span><span class="line"><span class="cl">  <span class="err">[</span><span class="na">nzData</span><span class="err">]="</span><span class="na">data</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">  <span class="err">[</span><span class="na">nzLoading</span><span class="err">]="</span><span class="na">loading</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">  <span class="err">[</span><span class="na">nzFrontPagination</span><span class="err">]="</span><span class="na">false</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">  <span class="err">[</span><span class="na">nzPageIndex</span><span class="err">]="</span><span class="na">paginationData</span><span class="err">.</span><span class="na">pageIndex</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">  <span class="err">[</span><span class="na">nzPageSize</span><span class="err">]="</span><span class="na">paginationData</span><span class="err">.</span><span class="na">pageSize</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">  <span class="err">[</span><span class="na">nzTotal</span><span class="err">]="</span><span class="na">paginationData</span><span class="err">.</span><span class="na">total</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">  <span class="err">[</span><span class="na">nzScroll</span><span class="err">]="{</span> <span class="na">x:</span> <span class="na">xScroll</span> <span class="err">}"</span>
+</span></span><span class="line"><span class="cl">  <span class="err">[</span><span class="na">nzShowQuickJumper</span><span class="err">]="</span><span class="na">true</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">  <span class="err">[</span><span class="na">nzShowSizeChanger</span><span class="err">]="</span><span class="na">true</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">  <span class="err">[</span><span class="na">nzShowTotal</span><span class="err">]="</span><span class="na">totalTemplate</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">  <span class="err">(</span><span class="na">nzPageIndexChange</span><span class="err">)="</span><span class="na">handlePageIndex</span><span class="err">($</span><span class="na">event</span><span class="err">)"</span>
+</span></span><span class="line"><span class="cl">  <span class="err">(</span><span class="na">nzPageSizeChange</span><span class="err">)="</span><span class="na">handlePageSize</span><span class="err">($</span><span class="na">event</span><span class="err">)"</span>
+</span></span><span class="line"><span class="cl">  <span class="na">nzBordered</span>
+</span></span><span class="line"><span class="cl"><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;</span>...<span class="p">&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>...<span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">nz-table</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">ng-template</span> <span class="err">#</span><span class="na">totalTemplate</span> <span class="na">let-total</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  共 {{ total }} 条记录 第 {{ paginationData.pageIndex }} / {{ pages }} 页
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">ng-template</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="封装-thead">封装 thead</h3><p>和 ProSearch 的思路相同，通过循环传入的配置来渲染 thead：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">tr</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">"columns.length; else selfThead"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngFor</span><span class="o">=</span><span class="s">"let item of columns"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">th</span>
+</span></span><span class="line"><span class="cl">      <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">"!item.renderThType; else renderTheadContent"</span>
+</span></span><span class="line"><span class="cl">      <span class="err">[</span><span class="na">nzRight</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">right</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">      <span class="err">[</span><span class="na">nzWidth</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">width</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      {{ item.title }}
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">ng-template</span> <span class="err">#</span><span class="na">renderTheadContent</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">th</span> <span class="err">[</span><span class="na">nzRight</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">right</span><span class="err">"</span> <span class="err">[</span><span class="na">nzWidth</span><span class="err">]="</span><span class="na">item</span><span class="err">.</span><span class="na">width</span><span class="err">"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">ng-template</span>
+</span></span><span class="line"><span class="cl">          <span class="err">[</span><span class="na">ngTemplateOutlet</span><span class="err">]="</span><span class="na">templateRef</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">          <span class="err">[</span><span class="na">ngTemplateOutletContext</span><span class="err">]="{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">record:</span> <span class="na">item</span><span class="err">,</span>
+</span></span><span class="line"><span class="cl">            <span class="na">rt:</span> <span class="na">item</span><span class="err">.</span><span class="na">renderThType</span><span class="err">,</span>
+</span></span><span class="line"><span class="cl">            <span class="na">text:</span> <span class="na">item</span><span class="err">.</span><span class="na">title</span><span class="err">,</span>
+</span></span><span class="line"><span class="cl">            <span class="na">type:</span> <span class="err">'</span><span class="na">th</span><span class="err">'</span>
+</span></span><span class="line"><span class="cl">          <span class="err">}"</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&gt;&lt;/</span><span class="nt">ng-template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">ng-template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">ng-template</span> <span class="err">#</span><span class="na">selfThead</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">ng-content</span> <span class="na">select</span><span class="o">=</span><span class="s">"[thead]"</span><span class="p">&gt;&lt;/</span><span class="nt">ng-content</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">ng-template</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>thead 的情况很简单，我们只需要渲染 title 就可以了；如果不能满足要求，可以通过 TemplateRef 来自定义渲染内容：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">app-pro-table</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span><span class="na">proTable</span>
+</span></span><span class="line"><span class="cl">  <span class="err">[</span><span class="na">columns</span><span class="err">]="</span><span class="na">columns</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">  <span class="err">(</span><span class="na">onChangePageSize</span><span class="err">)="</span><span class="na">onChangePageSize</span><span class="err">($</span><span class="na">event</span><span class="err">)"</span>
+</span></span><span class="line"><span class="cl">  <span class="err">(</span><span class="na">onChangePageIndex</span><span class="err">)="</span><span class="na">onChangePageIndex</span><span class="err">($</span><span class="na">event</span><span class="err">)"</span>
+</span></span><span class="line"><span class="cl"><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">ng-template</span> <span class="na">let-record</span><span class="o">=</span><span class="s">"record"</span> <span class="na">let-rt</span><span class="o">=</span><span class="s">"rt"</span> <span class="na">let-text</span><span class="o">=</span><span class="s">"text"</span> <span class="na">let-type</span><span class="o">=</span><span class="s">"type"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- type === 'th' 渲染到 thead --&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">"type === 'th'"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">"rt === 'check'"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">th</span>
+</span></span><span class="line"><span class="cl">          <span class="err">[</span><span class="na">nzChecked</span><span class="err">]="</span><span class="na">checkedMap</span><span class="err">.</span><span class="na">get</span><span class="err">(</span><span class="na">record</span><span class="err">.</span><span class="na">id</span><span class="err">)"</span>
+</span></span><span class="line"><span class="cl">          <span class="err">(</span><span class="na">nzCheckedChange</span><span class="err">)="</span><span class="na">checkAll</span><span class="err">($</span><span class="na">event</span><span class="err">)"</span>
+</span></span><span class="line"><span class="cl">          <span class="err">[</span><span class="na">nzDisabled</span><span class="err">]="</span><span class="na">checkeAllFlag</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">          <span class="na">nzShowCheckbox</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&gt;&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">ng-template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">app-pro-table</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>这里需要拿 type 做一层判断，判断渲染到 thead 还是 tbody。</p><h3 id="封装-tbody">封装 tbody</h3><p>和 thead 类似，tbody 同样要循环 columns，并在 TemplateRef 中渲染自定义内容：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">"columns.length; else selfTbody"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">tr</span> <span class="err">*</span><span class="na">ngFor</span><span class="o">=</span><span class="s">"let item of basicTable.data; let i = index"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">ng-container</span> <span class="err">*</span><span class="na">ngFor</span><span class="o">=</span><span class="s">"let citem of columns"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">td</span>
+</span></span><span class="line"><span class="cl">        <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">"!citem.renderTdType; else renderContent"</span>
+</span></span><span class="line"><span class="cl">        <span class="err">[</span><span class="na">nzRight</span><span class="err">]="</span><span class="na">citem</span><span class="err">.</span><span class="na">right</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">        <span class="err">[</span><span class="na">nzWidth</span><span class="err">]="</span><span class="na">citem</span><span class="err">.</span><span class="na">width</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        {{ item[citem.key] | emptyValue }}
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">ng-template</span> <span class="err">#</span><span class="na">renderContent</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">td</span> <span class="err">[</span><span class="na">nzRight</span><span class="err">]="</span><span class="na">citem</span><span class="err">.</span><span class="na">right</span><span class="err">"</span> <span class="err">[</span><span class="na">nzWidth</span><span class="err">]="</span><span class="na">citem</span><span class="err">.</span><span class="na">width</span><span class="err">"</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">ng-template</span>
+</span></span><span class="line"><span class="cl">            <span class="err">[</span><span class="na">ngTemplateOutlet</span><span class="err">]="</span><span class="na">templateRef</span><span class="err">"</span>
+</span></span><span class="line"><span class="cl">            <span class="err">[</span><span class="na">ngTemplateOutletContext</span><span class="err">]="{</span>
+</span></span><span class="line"><span class="cl">              <span class="na">index:</span> <span class="na">i</span><span class="err">,</span>
+</span></span><span class="line"><span class="cl">              <span class="na">pageIndex:</span> <span class="na">paginationData</span><span class="err">.</span><span class="na">pageIndex</span><span class="err">,</span>
+</span></span><span class="line"><span class="cl">              <span class="na">pageSize:</span> <span class="na">paginationData</span><span class="err">.</span><span class="na">pageSize</span><span class="err">,</span>
+</span></span><span class="line"><span class="cl">              <span class="na">record:</span> <span class="na">item</span><span class="err">,</span>
+</span></span><span class="line"><span class="cl">              <span class="na">rt:</span> <span class="na">citem</span><span class="err">.</span><span class="na">renderTdType</span><span class="err">,</span>
+</span></span><span class="line"><span class="cl">              <span class="na">text:</span> <span class="na">item</span><span class="err">[</span><span class="na">citem</span><span class="err">.</span><span class="na">key</span><span class="err">],</span>
+</span></span><span class="line"><span class="cl">              <span class="na">type:</span> <span class="err">'</span><span class="na">td</span><span class="err">',</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}"</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&gt;&lt;/</span><span class="nt">ng-template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nt">ng-template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">ng-container</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">ng-template</span> <span class="err">#</span><span class="na">selfTbody</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">ng-content</span> <span class="na">select</span><span class="o">=</span><span class="s">"[tbody]"</span><span class="p">&gt;&lt;/</span><span class="nt">ng-content</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">ng-template</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="数据请求">数据请求</h3><p>如果使用外部数据，可以传入 data 选项，并通过抛出的 onChangePageIndex、onChangePageSize 触发数据分页请求：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">ColumnsItem</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">title</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">key</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">width</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">renderTdType?</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">renderThType?</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">right?</span>: <span class="kt">string</span> <span class="o">|</span> <span class="kr">boolean</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ex</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">ProTableComponent</span> <span class="kr">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@Input</span><span class="p">()</span> <span class="nx">columns</span>: <span class="kt">ColumnsItem</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@Input</span><span class="p">()</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@Output</span><span class="p">()</span> <span class="nx">onChangePageIndex</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventEmitter</span><span class="p">&lt;</span><span class="nt">any</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@Output</span><span class="p">()</span> <span class="nx">onChangePageSize</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventEmitter</span><span class="p">&lt;</span><span class="nt">any</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>这种使用场景不多；因为项目中，接口请求都会封装到不同的 Service 中，我们通过传入不同的 Service 以及不同的请求方法名称，就可以将数据请求逻辑封装到 ProTable 内部：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">ProTableComponent</span> <span class="kr">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@Input</span><span class="p">()</span> <span class="nx">columns</span>: <span class="kt">ColumnsItem</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@Input</span><span class="p">()</span> <span class="nx">requestService</span>: <span class="kt">any</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@Input</span><span class="p">()</span> <span class="nx">requestApiName</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@Input</span><span class="p">()</span> <span class="nx">initParams</span>: <span class="kt">any</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@Input</span><span class="p">()</span> <span class="nx">otherParams</span>: <span class="kt">any</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@Output</span><span class="p">()</span> <span class="nx">onRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventEmitter</span><span class="p">&lt;</span><span class="nt">any</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">loading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">lastQueryParams</span>: <span class="kt">Params</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">paginationData</span>: <span class="kt">PaginationData</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">pageIndex</span>: <span class="kt">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">pageSize</span>: <span class="kt">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">total</span>: <span class="kt">0</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">pages</span>: <span class="kt">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">raw</span>: <span class="kt">any</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">route</span>: <span class="kt">ActivatedRoute</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">router</span>: <span class="kt">Router</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">ngOnInit() {</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">.</span><span class="nx">queryParams</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">params</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="kd">let</span> <span class="nx">lastQueryParams</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">...</span><span class="k">this</span><span class="p">.</span><span class="nx">initParams</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">...</span><span class="nx">params</span>
+</span></span><span class="line"><span class="cl">      <span class="p">};</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">lastQueryParams</span> <span class="o">=</span> <span class="nx">lastQueryParams</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">requestService</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">requestApiName</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">getList</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">pageNo</span>: <span class="kt">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">pageSize</span>: <span class="kt">10</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">...</span><span class="nx">lastQueryParams</span>
+</span></span><span class="line"><span class="cl">          <span class="p">},</span>
+</span></span><span class="line"><span class="cl">          <span class="k">this</span><span class="p">.</span><span class="nx">otherParams</span>
+</span></span><span class="line"><span class="cl">        <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">getList</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span> <span class="nx">otherParams</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">loading</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">requestService</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">requestApiName</span><span class="p">](</span><span class="nx">params</span><span class="p">,</span> <span class="nx">otherParams</span><span class="p">).</span><span class="nx">subscribe</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">result</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">loading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">records</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">ext</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">ext</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">pages</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">pages</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">paginationData</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">paginationData</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">raw</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">raw</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">onRequest</span><span class="o">?</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>当然，你可能会疑惑；数据请求接口的入参从哪里来呢？我们采用的方式是从 URL 中拿取，在 Angular 中 ActivatedRoute.queryParams 是一个 RxJS 对象；当我们修改 URL 中的查询参数时，ActivatedRoute.queryParams 的订阅者会拿到最新的参数并自动运行，无需考虑手动调用和参数传递问题。</p><p>通过 ActivatedRoute，实现了 ProSearch 与 ProTable 的解藕和数据传递问题。</p><h2 id="总结">总结</h2><p>ProSearch 与 ProTable 的诞生主要还是依附于 renderless 模式的使用；通过渲染插槽来实现渲染内容的自定义。</p><p>Angular 中的 ngTemplateOutlet 和 Vue 中的 Slot 的便捷性明显不如 JSX 的 renderProps 模式；毕竟渲染函数的表现力真的不如 JSX。</p><p>虽有诸多不便，但是如果想实现 UI 的复用；插槽可能是唯一的选择。对于 renderless 模式，推荐 Tailwind CSS 作者的 <a class="link" href="https://adamwathan.me/renderless-components-in-vuejs" target="_blank" rel="noopener" referrerpolicy="no-referrer">Renderless Components in Vue.js</a>
+。</p></section><footer class="article-meta article-footer"><section class="article-not-by-ai-badge"><a href="https://notbyai.fyi/cn" referrerpolicy="no-referrer" rel="noopener" target="_blank" title="Not By AI"><svg width="131" height="42" fill="none" viewBox="0 0 131 42"><path fill="#fff" stroke="#000" d="M.5.5H116c8.008.0 14.5 6.4919 14.5 14.5v26.5H15C6.9919 41.5.5 35.0081.5 27z"></path><path fill="#000" d="M17.9605 24.1575c3.4661 2.8068 8.4231 2.8068 11.8892.0l-1.3402-1.6549c-2.6847 2.174-6.5241 2.174-9.2088.0zm1.4435-3.6441v-2.8769h2.1296v2.8769zm6.608-2.8769v2.8769h2.1295v-2.8769z"></path><path fill="#000" fill-rule="evenodd" d="M35 21.5C35 27.8513 29.8513 33 23.5 33S12 27.8513 12 21.5 17.1487 10 23.5 10 35 15.1487 35 21.5m-2.1295.0c0 5.1752-4.1953 9.3705-9.3705 9.3705s-9.3705-4.1953-9.3705-9.3705 4.1953-9.3705 9.3705-9.3705 9.3705 4.1953 9.3705 9.3705" clip-rule="evenodd"></path><path fill="#000" d="m61.844 12.1721.1995.711.1859-.0634.9209-.3145v2.55c0 .1266-.0498.1656-.1794.1656-.1097.0-.4787.0-.9075-.0098.0997.2046.1994.5163.2294.7013.6082.0.9872-.0194 1.2365-.1363.2393-.1169.329-.3215.329-.7305v-2.7826c.3523-.1208.709-.2434 1.0571-.3635l-.1097-.6721a95 95 0 01-.9474.3168V9.6396h.9474v-.6818h-.9474V7h-.708v1.9578h-1.1567v.6818h1.1567v2.1336c-.4926.1569-.9439.2951-1.3063.3989"></path><path fill="#000" fill-rule="evenodd" d="M66.0322 10.7695c-.718.0-.8975-.2533-.8975-.9643V7.3994h2.6127v1.9285H65.763v.487c0 .302.0498.3896.2692.3896h1.2664c.1795.0.4488-.0097.6083-.0389a9 9 0 01.0199.1766c.0142.1332.0298.2802.0499.3786-.1396.0389-.3988.0487-.6681.0487zm-.2692-2.8637h1.3761v.9156H65.763zm3.3106 2.815c-.708.0-.8875-.2435-.8875-.9546V7.3994h2.6226v1.8993h-1.9943v.4773c0 .2922.0498.3896.2792.3896h1.3262c.1795.0.4787-.0195.6382-.0585.01.1754.0399.4286.0599.565-.1396.0487-.4089.0487-.6881.0487zm-.2592-2.815h1.396v.8864h-1.396z" clip-rule="evenodd"></path><path fill="#000" d="M66.83 14.1299c-.5585.5454-1.5158 1.0519-2.3733 1.3733.1695.1169.4487.3507.5783.4773.8377-.3701 1.8548-.9837 2.4731-1.5974zm1.6254.3214c.7578.4578 1.7351 1.1299 2.2237 1.5487l.6183-.3896c-.5186-.4286-1.5058-1.0714-2.2537-1.5097zm-17.9793 1.4805c-.6781-.3701-1.8149-.8376-2.9417-1.198l.4687-.487c1.1268.3506 2.3533.8084 3.0813 1.1785zM42 15.4156c1.067-.2533 2.4032-.75 3.0713-1.1688l.6881.4285c-.8376.4968-2.1739 1.0033-3.2409 1.276-.1097-.1461-.3589-.3994-.5185-.5357M56.1556 7.217c.0015-.067.0029-.1302.0045-.1878h.8276l-9e-4.0422c-.008.348-.0188.818-.0635 1.3653.1406 1.1454.7478 5.2769 4.3025 6.823-.2194.1656-.4388.4189-.5485.6234-2.5071-1.144-3.5872-3.5484-4.0775-5.3684-.4698 1.9497-1.5317 4.1298-3.9698 5.4074-.1296-.1948-.3789-.4189-.6083-.5747 3.9976-1.9757 4.0968-6.4545 4.1339-8.1305m18.903 2.2181c.079-.3748.153-.7421.2175-1.0811l-.7478-.078c-.2194 1.2273-.5984 2.8929-.8875 3.8864l.7578.0682c.0278-.1004.0566-.2079.0862-.3214h3.8851a35 35 0 01-.1244 1.1493h-6.1604v.6819h6.0611c-.1428.848-.3054 1.2836-.5067 1.4513-.1197.0974-.2393.1071-.4687.1071-.2493.0-.9374.0-1.6254-.0682.1296.1948.2293.487.2493.6916.6482.0389 1.2963.0487 1.6254.0292.3789-.0195.6083-.0877.8476-.3117.2643-.2582.4586-.7987.6292-1.8993H81v-.6819h-2.009c.0524-.424.1033-.9112.1542-1.4707.01-.1072.0299-.3312.0299-.3312h-4.5268c.0896-.3703.182-.7719.2717-1.1786h4.3748v-.6428z"></path><path fill="#000" fill-rule="evenodd" d="M65.1746 11.6266v.6234h1.3363v1.1299h-1.7551v.6233h6.3521v-.6233h-1.5556V12.25h1.3262v-.6234h-1.3262v-.6623h-.6881v.6623H67.189v-.6428h-.6781v.6428zm2.0144 1.7533V12.25h1.6752v1.1299zm-24.9995.711v-.6234h1.4359V9.0649h2.5129v-.6136h-3.6696v-.6331h3.6696v-.8085h.7379v.8085h3.909v.6331h-3.909v.6136h2.7623v4.4026h1.406v.6234zm2.1539-.6234h4.5472v-.6818h-4.5472zm0-1.1493h4.5472v-.5844h-4.5472zm0-1.0617h4.5472v-.5747h-4.5472zm0-1.0325h4.5472v-.6428h-4.5472z" clip-rule="evenodd"></path><path fill="#000" d="M72.3245 9.659V7.526h8.4362v2.133h-.7778V8.2079h-6.9205V9.659z"></path><path fill="#000" fill-rule="evenodd" d="M105.32 26.2505c0-.2607.016-.8309.016-.8309h-3.912v-1.5479h4.149c.191 2.3521.537 4.5993 1.078 6.4267-.875.9892-1.892 1.8173-3.039 2.4531.495.4562 1.341 1.4501 1.676 1.9552.85-.547 1.642-1.1985 2.37-1.9428.68 1.1752 1.535 1.8776 2.596 1.8776 1.644.0 2.395-.6843 2.746-3.8615-.623-.2444-1.437-.7983-1.964-1.3523-.08 1.9878-.271 2.8024-.591 2.8024-.385.0-.775-.5441-1.133-1.4646 1.153-1.6411 2.077-3.567 2.746-5.7044l-2.347-.5703c-.315 1.1187-.728 2.1682-1.233 3.1335-.214-1.1359-.388-2.4138-.504-3.7526h4.866v-2.3299h-1.698l.804-.8473c-.559-.5377-1.676-1.2546-2.491-1.6945l-1.405 1.4175c.503.3154 1.098.7262 1.597 1.1243h-1.812a39 39 0 01-.008-2.2485h-2.443c.003.7431.019 1.4959.049 2.2485h-6.4518v4.8879c0 2.1345-.0798 5.0184-1.2613 6.941.5269.277 1.5807 1.1568 1.9798 1.6293.8143-1.2502 1.2573-2.9912 1.4893-4.7247.317.5885.556 1.4753.586 2.1504.735.0 1.405-.0163 1.837-.0978.479-.0978.846-.2607 1.197-.7332.383-.5214.463-2.0204.511-5.3442m-4.123 3.9636c.119-.9089.181-1.8141.209-2.6438h1.652c-.035 1.6219-.095 2.2941-.229 2.4928-.128.163-.271.2118-.479.2118-.248.0-.676-.0153-1.153-.0608" clip-rule="evenodd"></path><path fill="#000" d="M86.8673 22.112c.2641-.6933.4999-1.407.6977-2.1181l-2.4109-.554c-.5429 2.1996-1.5648 4.4318-2.7942 5.7678.5908.3259 1.6286 1.0265 2.0916 1.4338.4782-.6083.9492-1.3671 1.3875-2.2158h3.0672v2.4928h-4.1353v2.2811h4.1353v2.8024h-6.0354v2.3137h14.5297V32.002h-6.0673v-2.8024h4.5824v-2.2811h-4.5824v-2.4928h5.2211V22.112h-5.2211v-2.835h-2.427v2.835zm-39.5237 6.3525c.0941-.436.142-.8504.1552-1.2201h-3.6526V25.11h3.6564v-1.6293h-3.816v-2.1996h3.816v-1.9226h2.2992V27c0 2.8513-.8622 6.0611-4.774 7.9837-.3832-.5703-1.1017-1.3035-1.6606-1.7597a1092 1092 0 01.9249-2.0804l-.877.1415L43 28.9226c1.1273-.099 2.7056-.273 4.3436-.4581"></path><path fill="#000" fill-rule="evenodd" d="M72.6755 34.3305 67.632 19.7976h-3.3623l-5.0822 14.5329h3.1111l.9855-2.9874h5.2465l.9178 2.9874zm-6.7537-11.2103 1.7778 5.7186h-3.6135z" clip-rule="evenodd"></path><path fill="#000" d="M53.7456 19.3585v1.9226h4.1833v2.1996h-4.1833V25.11h3.8001v2.1344h-3.8001v1.6619h4.4707v2.1996h-4.4707v3.6497h-2.3312V19.3585zm21.4669 2.9111v9.5922h-1.7543v2.4721h6.2608v-2.4721h-1.55v-9.5922h1.55v-2.472h-6.2608v2.472z"></path></svg></a></section></footer></article><aside><h2 class="section-title">相关文章</h2><div class="subsection-list"><div class="article-list--tile"><article class="has-image"><a href="/p/angular-route-reuse/" rel="noopener" referrerpolicy="no-referrer"><div class="article-image"><img alt="Featured image of post Angular 路由复用" loading="lazy" src="/img/cover/angular.png" decoding="async" width="1200" height="720" jampack-sized="true"></div><div class="article-details"><h2 class="article-title">Angular 路由复用</h2></div></a></article><article class="has-image"><a href="/p/angular-component-design/" rel="noopener" referrerpolicy="no-referrer"><div class="article-image"><img alt="Featured image of post Angular 组件设计" loading="lazy" src="/img/cover/angular.png" decoding="async" width="1200" height="720" jampack-sized="true"></div><div class="article-details"><h2 class="article-title">Angular 组件设计</h2></div></a></article><article class="has-image"><a href="/p/angular-quick-start/" rel="noopener" referrerpolicy="no-referrer"><div class="article-image"><img alt="Featured image of post Angular 快速上手" loading="lazy" src="/img/cover/angular.png" decoding="async" width="1200" height="720" jampack-sized="true"></div><div class="article-details"><h2 class="article-title">Angular 快速上手</h2></div></a></article></div></div></aside><footer class="site-footer"><section class="copyright">©
+2017 -
+2026 馬腊咯稽</section><section class="powerby">博客内容仅供参考，本人不对其准确性、完整性或适用性作出任何保证<br>转载内容仅为分享，不代表本人观点。如涉及侵权，请联系删除<br>使用 <b><a href="https://gohugo.io" target="_blank" rel="noopener" referrerpolicy="no-referrer">Hugo</a></b> 构建，
+主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" referrerpolicy="no-referrer" data-version="4.0.3">Stack</a></b> 由 <b><a href="https://jimmycai.com" target="_blank" rel="noopener" referrerpolicy="no-referrer">Jimmy</a></b> 设计</section></footer><script type="module">import i from"/ts/gallery.js";const e=document.querySelector(".article-content"),n=e&&(e.querySelectorAll("figure").length>0||e.querySelectorAll("img.gallery-image").length>0);if(n){i(e);const l=(await import("https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js")).default,o="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css",t=document.createElement("link");t.rel="stylesheet",t.href=o,document.head.appendChild(t),new l({gallerySelector:".article-content",childSelector:"figure a.image-link",pswpModule:()=>import("https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.esm.min.js")}).init()}
+</script></main></div><script type="text/javascript" src="/ts/main.b75bae5e2b63dbe9b4f38be3668b34ac1760d3207ce1e867048cf3648238efc7.js" crossorigin="anonymous" defer=""></script><script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" crossorigin="anonymous"></script><script>NProgress.configure({showSpinner:!1}),NProgress.start(),document.addEventListener("readystatechange",()=>{document.readyState==="interactive"&&NProgress.inc(.8),document.readyState==="complete"&&NProgress.done()})</script></body></html>
