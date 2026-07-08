@@ -878,15 +878,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;row&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;003&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="事务隔离级别-1"&gt;事务隔离级别
-&lt;/h3&gt;
-&lt;p&gt;MySQL 是一个客户端/服务器架构的软件，对于同一个服务器来说，可以有若干个客户端与之连接；每个客户端与服务器连接上之后，就可以称之为一个&lt;strong&gt;会话&lt;/strong&gt;（Session）。&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;MySQL 是一个客户端/服务器架构的软件，对于同一个服务器来说，可以有若干个客户端与之连接；每个客户端与服务器连接上之后，就可以称之为一个&lt;strong&gt;会话&lt;/strong&gt;（Session）。&lt;/p&gt;
 &lt;p&gt;每个客户端都可以在自己的会话中向服务器发出请求语句，一个请求语句可能是某个事务的一部分，也就是对于服务器来说可能&lt;strong&gt;同时处理多个事务&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;理论上在某个事务对某个数据进行访问时，其他事务应该进行排队；当该事务提交之后，其他事务才可以继续访问这个数据；但是这样子的话对性能影响太大。&lt;/p&gt;
 &lt;p&gt;我们既想保持事务的隔离性，又想让服务器在处理访问同一数据的多个事务时性能尽量高些。&lt;/p&gt;
 &lt;p&gt;鱼和熊掌不可得兼，舍一部分隔离性而取性能者也。&lt;/p&gt;
-&lt;h4 id="事务并发执行遇到的问题"&gt;事务并发执行遇到的问题
-&lt;/h4&gt;
+&lt;h3 id="事务并发执行遇到的问题"&gt;事务并发执行遇到的问题
+&lt;/h3&gt;
 &lt;p&gt;怎么个舍弃法呢？我们先得看一下&lt;strong&gt;访问相同数据的事务&lt;/strong&gt;在不保证串行执行（也就是执行完一个再执行另一个）的情况下可能会出现哪些问题：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -1053,8 +1051,8 @@
 
  &lt;/blockquote&gt;
 
-&lt;h4 id="sql-标准中的四种隔离级别"&gt;SQL 标准中的四种隔离级别
-&lt;/h4&gt;
+&lt;h3 id="sql-标准中的四种隔离级别"&gt;SQL 标准中的四种隔离级别
+&lt;/h3&gt;
 &lt;p&gt;上边介绍了几种并发事务执行过程中可能遇到的一些问题，这些问题也有轻重缓急之分：&lt;code&gt;脏写 &amp;gt; 脏读 &amp;gt; 不可重复读 &amp;gt; 幻读&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;上边所说的舍弃一部分隔离性来换取一部分性能在这里就体现在：设立一些隔离级别，隔离级别越低，越严重的问题就越可能发生。有一帮人制定了一个所谓的 SQL 标准，在标准中设立了 4 个隔离级别：&lt;/p&gt;
 &lt;table&gt;
@@ -1094,8 +1092,8 @@
 	&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;脏写这个问题太严重了，不论是哪种隔离级别，都不允许脏写的情况发生。&lt;/p&gt;
-&lt;h4 id="mysql-中支持的四种隔离级别"&gt;MySQL 中支持的四种隔离级别
-&lt;/h4&gt;
+&lt;h3 id="mysql-中支持的四种隔离级别"&gt;MySQL 中支持的四种隔离级别
+&lt;/h3&gt;
 &lt;p&gt;不同的数据库厂商对 SQL 标准中规定的四种隔离级别支持不一样，比方说 Oracle 就只支持 READ COMMITTED 和 SERIALIZABLE 隔离级别。&lt;/p&gt;
 &lt;p&gt;MySQL 虽然支持 4 种隔离级别，但与 SQL 标准中所规定的各级隔离级别允许发生的问题却有些出入。&lt;/p&gt;
 &lt;p&gt;MySQL 在 REPEATABLE READ 隔离级别下，是可以禁止幻读问题的发生的。&lt;/p&gt;
