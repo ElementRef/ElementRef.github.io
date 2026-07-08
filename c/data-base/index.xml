@@ -208,9 +208,7 @@
 &lt;p&gt;当把现实世界的状态转换映射到数据库世界时，持久性意味着该转换对应的数据库操作所修改的数据都应该在磁盘上保留下来，不论之后发生了什么事故，本次转换造成的影响都&lt;strong&gt;不应该被丢失掉&lt;/strong&gt;。&lt;/p&gt;
 
  &lt;blockquote&gt;
- &lt;h4 id="以下内容来自-gemini"&gt;以下内容来自 Gemini
-&lt;/h4&gt;
-&lt;p&gt;&lt;del&gt;数据库事务持久性的意思是，对数据库的所有操作都应该被记录下来；意思是，数据库内部有日志系统，操作都能被默默记下？&lt;/del&gt;&lt;/p&gt;
+ &lt;p&gt;&lt;del&gt;数据库事务持久性的意思是，对数据库的所有操作都应该被记录下来；意思是，数据库内部有日志系统，操作都能被默默记下？&lt;/del&gt;&lt;/p&gt;
 &lt;p&gt;这个理解不完全准确。你提到了“日志系统”和“记录操作”，这确实抓住了持久性实现的核心手段（即 WAL 日志机制），但在概念定义和具体执行逻辑上，有一些关键的偏差。&lt;/p&gt;
 &lt;h4 id="什么是持久性durability"&gt;什么是持久性（Durability）？
 &lt;/h4&gt;
@@ -934,9 +932,7 @@
 &lt;/ul&gt;
 
  &lt;blockquote&gt;
- &lt;h4 id="以下内容来自-gemini-1"&gt;以下内容来自 Gemini
-&lt;/h4&gt;
-&lt;p&gt;&lt;del&gt;怎么区分「脏读」、「不可重复读」和「幻读」？明明都是，一个事务能读到另一个事务对数据的修改啊？&lt;/del&gt;&lt;/p&gt;
+ &lt;p&gt;&lt;del&gt;怎么区分「脏读」、「不可重复读」和「幻读」？明明都是，一个事务能读到另一个事务对数据的修改啊？&lt;/del&gt;&lt;/p&gt;
 &lt;p&gt;它们的本质完全一样：&lt;strong&gt;都是一个事务在执行期间，受到了另一个并发事务的“干扰”，读到了对方的修改。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;既然本质相同，那为什么还要分三个词？因为它们发生在&lt;strong&gt;不同的时间节点&lt;/strong&gt;、读到了&lt;strong&gt;不同状态的数据&lt;/strong&gt;。区分它们的关键，在于看那个“干扰你的事务”&lt;strong&gt;处于什么阶段&lt;/strong&gt;，以及它&lt;strong&gt;修改了什么类型的数据&lt;/strong&gt;。&lt;/p&gt;
 &lt;h4 id="脏读-dirty-read读了未提交的假数据"&gt;脏读 (Dirty Read)：读了“未提交”的假数据
@@ -1433,9 +1429,7 @@
 &lt;/ul&gt;
 
  &lt;blockquote&gt;
- &lt;h4 id="以下内容来自-gemini-2"&gt;以下内容来自 Gemini
-&lt;/h4&gt;
-&lt;p&gt;&lt;del&gt;完全看不懂，这段文字是不是有不正确的地方？&lt;/del&gt;&lt;/p&gt;
+ &lt;p&gt;&lt;del&gt;完全看不懂，这段文字是不是有不正确的地方？&lt;/del&gt;&lt;/p&gt;
 &lt;p&gt;这段文字整体上&lt;strong&gt;没有原则性的错误&lt;/strong&gt;，它描述的正是 &lt;strong&gt;InnoDB 存储引擎在进行 &lt;code&gt;UPDATE&lt;/code&gt; 操作时的底层物理页修改与加锁逻辑&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;你觉得完全看不懂，是因为这段话把&lt;strong&gt;存储空间的底层变化&lt;/strong&gt;和&lt;strong&gt;事务锁的并发控制&lt;/strong&gt;揉在了一起，而且术语有些晦涩。为了让你清晰理解，我们把它拆解成三种大白话场景。&lt;/p&gt;
 &lt;p&gt;在 InnoDB 中，更新一条记录并不是简单地“抹掉旧字、写上新字”，它取决于&lt;strong&gt;字段长度有没有变&lt;/strong&gt;以及&lt;strong&gt;主键（键值）有没有变&lt;/strong&gt;。&lt;/p&gt;
@@ -1615,8 +1609,6 @@
 
  &lt;blockquote&gt;
  &lt;p&gt;DDL 语句执行时会隐式的提交当前会话中的事务，这主要是 DDL 语句的执行一般都会在若干个特殊事务中完成；在开启这些特殊事务前，需要将当前会话中的事务提交掉。&lt;/p&gt;
-&lt;h4 id="以下内容来自-gemini-3"&gt;以下内容来自 Gemini
-&lt;/h4&gt;
 &lt;p&gt;无论你是改表结构（DDL），还是增删改查数据（DML），都会给表加锁。唯一的区别在于，它们加的是不同种类、不同级别的锁。&lt;/p&gt;
 &lt;h4 id="元数据锁mdl-只要碰表人人有份"&gt;元数据锁（MDL）—— 只要碰表，人人有份
 &lt;/h4&gt;
@@ -1832,9 +1824,7 @@
 &lt;p&gt;一个事务对新插入的记录可以不显式的加锁（生成一个锁结构），但是由于事务 id 这个牛逼的东东的存在，相当于加了一个隐式锁。别的事务在对这条记录加 S 锁或者 X 锁时，由于隐式锁的存在，会先帮助当前事务生成一个锁结构，然后自己再生成一个锁结构后进入等待状态。&lt;/p&gt;
 
  &lt;blockquote&gt;
- &lt;h4 id="以下内容来自-gemini-4"&gt;以下内容来自 Gemini
-&lt;/h4&gt;
-&lt;p&gt;&lt;del&gt;上面这段文字完全看不懂了&lt;/del&gt;&lt;/p&gt;
+ &lt;p&gt;&lt;del&gt;上面这段文字完全看不懂了&lt;/del&gt;&lt;/p&gt;
 &lt;h4 id="核心矛盾insert-为什么平时不加锁"&gt;核心矛盾：INSERT 为什么平时不加锁？
 &lt;/h4&gt;
 &lt;p&gt;在数据库里，加锁（生成锁结构）是需要&lt;strong&gt;消耗内存和 CPU&lt;/strong&gt; 的。&lt;/p&gt;
@@ -1885,6 +1875,16 @@
 
  &lt;/blockquote&gt;
 
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="参考"&gt;参考
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://share.gemini.google/kLkhqZx4J7Xv" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;InnoDB 更新操作底层逻辑解析&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://share.gemini.google/104AdYvba5xd" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;数据库持久性：日志与提交&lt;/a&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>「Gemini」外键约束与数据完整性</title><link>https://ElementRef.github.io/p/foreign-key-constraints-and-data-integrity/</link><pubDate>Sat, 04 Jul 2026 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/foreign-key-constraints-and-data-integrity/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/data-base.png" alt="Featured image of post 「Gemini」外键约束与数据完整性" /&gt;&lt;p&gt;最近在看 Drizzle 的文档，看到了数据映射关系的部分；&lt;a class="link" href="https://drizzle.zhcndoc.com/docs/relations-schema-declaration" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;Drizzle 关系基础知识&lt;/a&gt;
