@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>React on 馬腊咯稽</title><link>https://ElementRef.github.io/c/react/</link><description>Recent Content in React on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo 0.163.3</generator><language>zh</language><lastBuildDate>Sat, 02 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/c/react/index.xml" rel="self" type="application/rss+xml"/><item><title>AI JS-SDK 项目总结（二）</title><link>https://ElementRef.github.io/p/ai-js-sdk-2/</link><pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/ai-js-sdk-2/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/react.png" alt="Featured image of post AI JS-SDK 项目总结（二）" /&gt;&lt;h2 id="antdesign"&gt;AntDesign
 &lt;/h2&gt;
 &lt;p&gt;因为存在 Admin 端，并且&lt;strong&gt;对话组件&lt;/strong&gt;需要同时在 Admin|Web|JS-SDK 三个环境中使用；索性使用 AntDesign 作为组件库，恰好 AntDesign 也为 AI 应用推出了 &lt;a class="link" href="https://x.ant.design" target="_blank" rel="noopener" referrerpolicy="no-referrer"
- &gt;AntDesign X&lt;/a&gt;
+ &gt;AntDesign/X&lt;/a&gt;
 。&lt;/p&gt;
 &lt;h3 id="popover-与-tooltip"&gt;Popover 与 Tooltip
 &lt;/h3&gt;
@@ -674,7 +674,8 @@
 &lt;li&gt;比如 w-12 是基于 --spacing 计算的，--spacing 在 Tailwind CSS 中的值为 0.25rem。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;为了避免 SDK 样式受宿主影响，在写 SDK 时，要使用具体单位 px，不要使用 rem。&lt;/li&gt;
+&lt;li&gt;为了避免 SDK 样式受宿主影响，在写 SDK 时，要使用具体单位 px，不要使用 rem；&lt;/li&gt;
+&lt;li&gt;重置 font-size 是为了避免样式继承的影响。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -715,10 +716,10 @@
  &gt;静态资源处理&lt;/a&gt;
 ：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;./index.css?inline，经过编译，作为&lt;strong&gt;内联样式&lt;/strong&gt;处理，不会生成单独的 CSS 文件；&lt;/li&gt;
-&lt;li&gt;./index.css?raw，未经编译，获取到的是 index.css 的原始文本；&lt;/li&gt;
-&lt;li&gt;./index.css?url，未经编译，获取到的是 index.css 的路径信息；&lt;/li&gt;
-&lt;li&gt;./index.css?worker，作为&lt;strong&gt;WebWorker&lt;/strong&gt;处理。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;./index.css?inline&lt;/code&gt;，经过编译，作为&lt;strong&gt;内联样式&lt;/strong&gt;处理，不会生成单独的 CSS 文件；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;./index.css?raw&lt;/code&gt;，未经编译，获取到的是 index.css 的原始文本；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;./index.css?url&lt;/code&gt;，未经编译，获取到的是 index.css 的路径信息；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;./index.css?worker&lt;/code&gt;，作为&lt;strong&gt;WebWorker&lt;/strong&gt;处理。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;显然，只有第一种 ?inline 最合适，未经 Tailwind CSS 编译的原始文件没什么价值。&lt;/p&gt;
 &lt;p&gt;有了样式代码，怎么将 CSS 注入到 ShadowDOM 中呢？需要借助 &lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/CSSStyleSheet" target="_blank" rel="noopener" referrerpolicy="no-referrer"
@@ -786,8 +787,8 @@
  &gt;CSS 变量&lt;/a&gt;
 上；其实，这些变量已经被写入到了 ShadowDOM 中，但未生效：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Tailwind CSS 默认会将变量写到 :root 选择器中，但在 ShadowDOM 中没有这个选择器，只有 :host；&lt;/li&gt;
-&lt;li&gt;Tailwind CSS 4 中，内置的 CSS 变量通过 &lt;a class="link" href="https://tailwindcss.com/docs/upgrade-guide#browser-requirements" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+&lt;li&gt;Tailwind CSS 默认会将变量写到 :root 选择器中，但在 ShadowDOM 中只有 :host 选择器；&lt;/li&gt;
+&lt;li&gt;最新的 Tailwind CSS 4 中，内置的 CSS 变量通过 &lt;a class="link" href="https://tailwindcss.com/docs/upgrade-guide#browser-requirements" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;@property&lt;/a&gt;
  注册，来实现 CSS 过渡、默认值、类型约束。&lt;/li&gt;
 &lt;/ol&gt;
@@ -846,10 +847,10 @@
  编译后的 CSS 变量会同时存在于 :root 和 :host 中。&lt;/p&gt;
 &lt;p&gt;尝试修改 JSX 代码中的类名，发现新的样式并没有生效；起初以为是 Tailwind CSS 配置的问题，但是手动刷新页面后，样式生效了；说明新的 CSS 没能热更新到页面：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;import './index.css'&lt;/code&gt;将被视为&lt;strong&gt;模块依赖&lt;/strong&gt;；CSS 将被编译并注入到 HTML；&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;import innerStyle from './index.css?inline'&lt;/code&gt;将被视为&lt;strong&gt;静态资源&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;import './index.css'&lt;/code&gt;将被视为&lt;strong&gt;模块依赖&lt;/strong&gt;；Vite 知道要将 CSS 编译并注入到 HTML；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;import innerStyle from './index.css?inline'&lt;/code&gt;将被视为&lt;strong&gt;静态资源&lt;/strong&gt;，不知道如何处理 innerStyle。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;此时，Vite 是知道 ./index.css?inline 有更新的，但是不知道如何&lt;strong&gt;应用更新&lt;/strong&gt;，毕竟 CSS 不再是一个模块依赖了；需要借助 &lt;a class="link" href="https://cn.vite.dev/guide/api-hmr#hot-accept-cb" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+&lt;p&gt;此时，Vite 是知道&lt;code&gt;./index.css?inline&lt;/code&gt;有更新的，但是不知道如何&lt;strong&gt;应用更新&lt;/strong&gt;；毕竟 CSS 不再是一个模块依赖了；需要借助 &lt;a class="link" href="https://cn.vite.dev/guide/api-hmr#hot-accept-cb" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;import.meta.hot.accept&lt;/a&gt;
  告知 Vite 如何应用更新：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -894,7 +895,7 @@
 &lt;p&gt;&lt;img alt="ShadowDOM" class="gallery-image" data-flex-basis="380px" data-flex-grow="158" height="625" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/ai-js-sdk-2/shadowdom.style_hu_8b0b791823f8e638.png" srcset="https://ElementRef.github.io/p/ai-js-sdk-2/shadowdom.style_hu_21ab7fd1644f8919.png 800w, https://ElementRef.github.io/p/ai-js-sdk-2/shadowdom.style_hu_8b0b791823f8e638.png 992w" width="992"&gt;
 
 &lt;/p&gt;
-&lt;p&gt;最后，每个应用需要在自己的 index.css 中使用 &lt;a class="link" href="https://tailwindcss.com/docs/detecting-classes-in-source-files#explicitly-registering-sources" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+&lt;p&gt;最后，每个子应用需要在自己的 index.css 中使用 &lt;a class="link" href="https://tailwindcss.com/docs/detecting-classes-in-source-files#explicitly-registering-sources" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;@source&lt;/a&gt;
  指定一下 shared 目录：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -993,8 +994,8 @@
  失效了。&lt;/p&gt;
 &lt;p&gt;当然，这里对判断失效有以下几点额外的说明：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;直接对 document 调用了 addEventListener，事件对象会在 ShadowBoundary 进行&lt;strong&gt;事件重定向&lt;/strong&gt;；&lt;/li&gt;
-&lt;li&gt;最新的 React 早已经将事件委托到了 FiberRoot 节点，所以不影响 React 内部事件派发；&lt;/li&gt;
+&lt;li&gt;对 document 调用 addEventListener，事件对象会在 ShadowBoundary 进行&lt;strong&gt;事件重定向&lt;/strong&gt;；&lt;/li&gt;
+&lt;li&gt;React 早已经将事件委托到了 FiberRoot 节点，所以不影响 React 内部事件派发；&lt;/li&gt;
 &lt;li&gt;mode:closed 会修改事件路径，此时拿到的事件对象是被修改屏蔽过的。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;至于 mode:closed 真的安全性更高吗？这只不过是我的&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_components/Using_shadow_DOM#element.shadowroot_%E5%92%8C%E2%80%9Cmode%E2%80%9D%E9%80%89%E9%A1%B9" target="_blank" rel="noopener" referrerpolicy="no-referrer"
@@ -1556,7 +1557,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;这里有一个细节，我们需要获取响应头中的一个自定义 cosec-request-id 头部信息，当报错时，需要作为 requestId 展示给用户；但是在&lt;strong&gt;跨域&lt;/strong&gt;的情况下，仅会暴露&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Glossary/CORS-safelisted_response_header" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+&lt;/div&gt;&lt;p&gt;这里有一个细节，我们需要获取响应头中的一个自定义&lt;code&gt;cosec-request-id&lt;/code&gt;头部信息，当报错时，需要作为 requestId 展示给用户；但是在&lt;strong&gt;跨域&lt;/strong&gt;的情况下，仅会暴露&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Glossary/CORS-safelisted_response_header" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;白名单&lt;/a&gt;
 内的头部信息；需要服务端添加 &lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Reference/Headers/Access-Control-Expose-Headers" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;Access-Control-Expose-Headers
@@ -1718,7 +1719,7 @@
 。&lt;/p&gt;
 &lt;h3 id="自定义元素"&gt;自定义元素
 &lt;/h3&gt;
-&lt;p&gt;有一个场景，我们和 AI 约定，某种情况下，请返回&lt;code&gt;&amp;lt;custom-event event-type='order' event-payload='8186340'&amp;gt;自定义元素&amp;lt;/custom-event&amp;gt;&lt;/code&gt;；用户点击之后，可以将 eventType 和 eventPayload 发送给&lt;strong&gt;宿主&lt;/strong&gt;，让宿主执行后续逻辑：&lt;/p&gt;
+&lt;p&gt;有一个场景：我们和 AI 约定，某种情况下，请返回 &amp;lt;custom-event event-type=&amp;lsquo;order&amp;rsquo; event-payload=&amp;lsquo;8186340&amp;rsquo;&amp;gt;自定义元素&amp;lt;/custom-event&amp;gt;；用户点击之后，可以将 eventType 和 eventPayload 发送给&lt;strong&gt;宿主&lt;/strong&gt;，让宿主执行后续逻辑：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1970,7 +1971,7 @@
 &lt;li&gt;如何判断什么情况下展示菜单，什么情况下隐藏菜单；&lt;/li&gt;
 &lt;li&gt;用户按下鼠标，是先发送给 AI，还是先隐藏菜单。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;划词菜单通过绝对定位渲染在一个 viewport 大小的 div 上，div 通过设置 pointer-events-none 忽略了所有&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Pointer_events" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+&lt;p&gt;划词菜单通过绝对定位渲染在一个 viewport 大小的节点上，元素通过设置 pointer-events-none 忽略了所有&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Pointer_events" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;指针事件&lt;/a&gt;
 ；当配置了&lt;strong&gt;快捷指令&lt;/strong&gt;、菜单开关打开、用户选中内容存在时，展示菜单：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -2157,13 +2158,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;useEffect&lt;/span&gt;&lt;span class="p"&gt;(()&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 执行顺序 pointerdown -&amp;gt; pointerup -&amp;gt; click
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addEventListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;pointerdown&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;handlePointerDown&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addEventListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;selectionchange&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;handleSelectionChange&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addEventListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;pointerdown&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;handlePointerDown&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addEventListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;pointerup&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;handlePointerUp&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addEventListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;selectionchange&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;handleSelectionChange&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;removeEventListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;selectionchange&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;handleSelectionChange&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;removeEventListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;pointerdown&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;handlePointerDown&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;removeEventListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;pointerup&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;handlePointerUp&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;removeEventListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;selectionchange&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;handleSelectionChange&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="p"&gt;[]);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -2214,22 +2215,22 @@
 &lt;li&gt;选区右侧空间足够：
 &lt;ol&gt;
 &lt;li&gt;选区顶部空间足够，理想状态；&lt;/li&gt;
-&lt;li&gt;选区顶部空间不足，但是底部空间足够，；&lt;/li&gt;
-&lt;li&gt;选区顶部空间不足，并且底部空间不足，菜单不能完全展示/菜单需要和选区发生重合。&lt;/li&gt;
+&lt;li&gt;选区顶部空间不足，但是底部空间足够；&lt;/li&gt;
+&lt;li&gt;选区顶部空间不足，并且底部空间不足。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;选区右侧空间不足，但是左侧空间足够：
 &lt;ol&gt;
 &lt;li&gt;选区顶部空间足够；&lt;/li&gt;
 &lt;li&gt;选区顶部空间不足，但是底部空间足够；&lt;/li&gt;
-&lt;li&gt;选区顶部空间不足，并且底部空间不足，菜单不能完全展示/菜单需要和选区发生重合。&lt;/li&gt;
+&lt;li&gt;选区顶部空间不足，并且底部空间不足。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;选区右侧空间不足，并且左侧空间不足，代表&lt;strong&gt;选区跨行&lt;/strong&gt;：
 &lt;ol&gt;
 &lt;li&gt;选区顶部空间足够；&lt;/li&gt;
 &lt;li&gt;选区顶部空间不足，但是底部空间足够；&lt;/li&gt;
-&lt;li&gt;选区顶部空间不足，并且底部空间不足，菜单不能完全展示/菜单需要和选区发生重合。&lt;/li&gt;
+&lt;li&gt;选区顶部空间不足，并且底部空间不足。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
