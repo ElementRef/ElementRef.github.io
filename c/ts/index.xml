@@ -944,11 +944,12 @@
 &lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAEBKCmBHArvCAXAQsgliAJvAE7QDeAUNNAPTXSAUroKbmgfdGB2-oO-RgQjaDK8pdBmHQ5g0AEYB7fAE8AFAEoyfKkXjpkRAHbQZSqtHRgiAc1UAuOPGDii&amp;#43;ADwYiODUYA00MBqkA&amp;#43;F7qoAHInF-YnQpAGl4KXMHJyNoAB9&amp;#43;KQBbCRBE6GQNQgAzJ3h8Xz09f0MwFNViAEkc&amp;#43;AAPcw1kNOJdOXMAN3EcfGgAXi9FEqorDQxoQJxOwXhIqQHoAAMpmfR4AH0JaQ2AElJA4NCIqIB&amp;#43;ADp0cQBldEdneQBfJYBuP2gxidXZgFlVMEWFBGegA1lFzABybZSCHFYGTcqVdZEWqEervR5vYE4XLaACCRCIYCk5xwEAJRNkBmMqgA2t91vMALpyBRA&amp;#43;HUkzoemONZzKJM87&amp;#43;ZAQAAWMgZ8D&amp;#43;BjkWJGj2g8BAEHgww5hi5POms2Ziy1fOlYCZcpKj10mL4ZqotAYLA4nEALJp8ARCESi&amp;#43;BgQhECDyNXKVTqLQ6YGcswWKw2ex3OJuDzeOElQ4hIhheYxaPOTIQVLpTLZPIFIrvMpEpE1OqNaDNVpEdpdHp9QZ&amp;#43;vSfdCTXk6qKLFYd9Ybd2e4gQPYHILJ1NnS43DNGJ6vd6t9va9aGwHvKhg6LQCEDr0QWHrhGlqooisYk16HH4wnE0nkm9UjV0yXM1nNkqh7kvgVCkXiyWGrKGKKsqqrsiGT5fr2-JSEyeoAf8xoYuacpWjQdBMGwgD3sYAIfqAEPKgAOps6Biugi6Dipu6b3EYbK6CoaiaNo7yfuYCARnYsTOLGng&amp;#43;MWY7HGm-AzlmObiBkST5vA&amp;#43;QaIUCalIiJ6og0TQtKIbQlB00DdL0AxDOBLbiOMbbfgs-TLJKGxlORI5JgJk5XLc1FzheoyGV80GrmZ&amp;#43;klJucmJgpyJKeiwIWtiuIyBSt5kpFj40lBy4wSytHwvokH6p2sG-mKEoef8QEhSBKrvnon7pYyArwblBhISFKGWnwNqYawgCn5oAR9GEcRgjCNAKDELIlFCdRyV6PRgZMRBcWsZY1gcTO3HxnxRwpicW6cfESTZmkYl5nU0mycWAXlmiKk1nWWkNrpxWLiZ3YWb1RBSDZ-HLfMFwOTOzkLm5xlVQCXmHr5h4lhUilniFLnQFeEUPneMUyKVJlJcVVAI9BzJZf&amp;#43;v35fKhVgYeqMJbqZllVKiEQ2hVChdAZqPEAA" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;点击&lt;/a&gt;
 查看源码。&lt;/p&gt;
-&lt;p&gt;你会发现，四者除了内部的 privateKey 之外，完全相同；privateKey 的目的是为了保存一些信息，方便之后使用。&lt;/p&gt;
-&lt;p&gt;真实项目中，一般使用&lt;a class="link" href="https://github.com/microsoft/reflect-metadata" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+&lt;p&gt;你会发现，四者除了内部的 privateKey 之外，完全相同；privateKey 的目的是为了保存一些信息，方便之后使用。真实项目中，一般使用&lt;a class="link" href="https://github.com/microsoft/reflect-metadata" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;reflect-metadata&lt;/a&gt;
-，但目的是一样的；都是暂存一些元数据，等待方法被真正调用时，提供一些我们之前保存的额外的上下文信息。&lt;/p&gt;
-&lt;p&gt;或者你当作闭包来理解，也是可以的。&lt;/p&gt;
+，但目的是一样的。&lt;/p&gt;
+&lt;p&gt;都是暂存一些元数据，等待方法被真正调用时，提供一些我们之前保存的额外的上下文信息。&lt;/p&gt;
+&lt;p&gt;我们的 privateKey 没考虑继承的场景，reflect-metadata 会自动处理这些边缘场景。&lt;/p&gt;
+&lt;p&gt;你可以把这段逻辑当作闭包来理解，都是一种暂存数据的方式。&lt;/p&gt;
 &lt;p&gt;我们将这些相似的逻辑合并一下：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
