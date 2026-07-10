@@ -742,11 +742,9 @@
 &lt;/div&gt;&lt;p&gt;&lt;a class="link" href="https://www.typescriptlang.org/play/?removeComments=true&amp;amp;importHelpers=true&amp;amp;experimentalDecorators=true&amp;amp;emitDecoratorMetadata=true&amp;amp;target=99&amp;amp;jsx=1&amp;amp;pretty=true&amp;amp;isolatedModules=true&amp;amp;isolatedDeclarations=false&amp;amp;suppressImplicitAnyIndexErrors=true#code/MYGwhgzhAECCCuAXAFgYTI4yCiAPMAtgA4gCm0A3gFDTTDwBODpAdorMMAPbxsAKpBgQCWUYVxbQAvNADkAVQiDZAbio1oAAQAU6TDiZcG2hCj1Y8hEqQCUAHlNoMF-MTIA&amp;#43;Gxp2wAJiJYBIVEIcRZtWT8A2XtHcxxXa08NMAAlUgBHeGFmKOEWADFwm0oNWm4WCC4yADoQLgBzCIBJaAA5UlJfODh-fOggkTEJaAAVLmhU3hi1WgBfKgWAM15gRDDegMGQsO0iQRFEbeGWAC5oCEQGfIaS6lpmREZJFZY1jbtR6FJcRFZfGAAeQARgArUhrdzaMrQRBgBgNUiIc6jAA0MKIDC4&amp;#43;wYiAAngBpUh484Aa2JXCWY3RtFovlIEGA1yIiCM5z4WJx&amp;#43;IAIgymcIWUYNHcYRVLpQ6IxmGwONxeEcDjsRjIFEoGLJoHNpLD4YjENBIAaWHjZrSxfqjMIGvkwCAALJI5BcboyOEIpEAbUx2ME&amp;#43;KJeIAuqa6XzmayGDUAG62&amp;#43;DkGTaGqJ3UQc68UksLgAdxYHoDJSk7lKtNpwip2noTFY7E4PH4ipO0AAhFIZDjDsdQhIRcXiygsZnoCxSAPsIZjLJmpV4EslsJgMIqwN652WDMYfNviAlNBS9BtPj9pToJbrSxbQ6UM7pC25K93hIYkWew8kc9j9dT&amp;#43;fHc6amAiCQ8X3XUkVRA0EQgGxg1pBZizmU04MWKg73WEZ4lHLFjCWLECHOApVhQlhu2gR432Qj4vh&amp;#43;P4WABaAQXBSFoV7YDkWpDFOV9QliTJCkqTRGF6UZMM2QGdjcTxXlBIFcNhSfcoJHFChB0IcgtRkLCuAIKDzXfK0bXtb8XR1d1EC9US-WJIN&amp;#43;NDKSjCjGM4z3RNf3A1MWHTLMczzaRC3uHsrjxWSe13fc8UPKkTz0i8nRdG9ZDIh8iOfF8ngYSQIrPfTL18X9-xAQC3T1UDk0g9doNKrVgGcZA90EDDEp7AB6BroEAe&amp;#43;VAFO5QAwHUATFTAHvowAoOUAUqNSrkypqlIOpGm0AADdCjGgApsOgAASCgzwIUg5nOKbQNqowSufGDoPgtQFm0n4rDIbUhwHOIqssNxSG0Erzoe390iyHJSDyQpihUIA" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;点击&lt;/a&gt;
 查看源码。&lt;/p&gt;
-&lt;p&gt;如果运行这段代码，你会发现 AdminPermission 装饰器并没有起作用；原因是，每次我们获取原始方法时，都是通过 target&lt;/p&gt;
-\[propertyKey\]&lt;p&gt; 拿的。&lt;/p&gt;
+&lt;p&gt;如果运行这段代码，你会发现 AdminPermission 装饰器并没有起作用；原因是，每次我们获取原始方法时，都是通过&lt;code&gt;target[propertyKey]&lt;/code&gt;拿的。&lt;/p&gt;
 &lt;p&gt;拿到的都是原来的方法没错，但是在这种&lt;strong&gt;装饰器叠加&lt;/strong&gt;的场景中，我们想拿到&lt;strong&gt;被上一个装饰器装饰&lt;/strong&gt;后的方法。&lt;/p&gt;
-&lt;p&gt;所以我们不能再通过 target&lt;/p&gt;
-\[propertyKey\]&lt;p&gt; 获取原始方法了：&lt;/p&gt;
+&lt;p&gt;所以我们不能再通过&lt;code&gt;target[propertyKey]&lt;/code&gt;获取原始方法了：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -947,6 +945,10 @@
  &gt;点击&lt;/a&gt;
 查看源码。&lt;/p&gt;
 &lt;p&gt;你会发现，四者除了内部的 privateKey 之外，完全相同；privateKey 的目的是为了保存一些信息，方便之后使用。&lt;/p&gt;
+&lt;p&gt;真实项目中，一般使用&lt;a class="link" href="https://github.com/microsoft/reflect-metadata" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;reflect-metadata&lt;/a&gt;
+，但目的是一样的；都是暂存一些元数据，等待方法被真正调用时，提供一些我们之前保存的额外的上下文信息。&lt;/p&gt;
+&lt;p&gt;或者你当作闭包来理解，也是可以的。&lt;/p&gt;
 &lt;p&gt;我们将这些相似的逻辑合并一下：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;

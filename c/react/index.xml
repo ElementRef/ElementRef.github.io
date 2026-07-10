@@ -2750,10 +2750,10 @@
 &lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;主应用 Admin 和 Web 放在 apps 目录下，每个应用都是完整的 Vite 项目；&lt;/li&gt;
-&lt;li&gt;JS-SDK、shared 公共代码和 types 类型共享等子包，放在 packages 目录下；&lt;/li&gt;
+&lt;li&gt;JS-SDK、Shared 公共代码和 Types 类型共享等子包，放在 packages 目录下；&lt;/li&gt;
 &lt;li&gt;SVG 图标文件放在根目录的 icons 文件夹下，根据&lt;strong&gt;应用名称｜子包名称｜是否保留颜色&lt;/strong&gt;进行分类；&lt;/li&gt;
 &lt;li&gt;env 文件、Lint 配置、Deploy 配置、Turborepo 配置、workspace 配置、Tailwind CSS 配置等，均放在根目录下；&lt;/li&gt;
-&lt;li&gt;Admin、Web、JS-SDK、Shared 都有自己独立的 tsconfig.json，根目录 tsconfig.json 仅匹配根目录的 *.config.ts|js。&lt;/li&gt;
+&lt;li&gt;Admin、Web、JS-SDK、Shared 都有自己独立的&lt;code&gt;tsconfig.json&lt;/code&gt;，根目录&lt;code&gt;tsconfig.json&lt;/code&gt;仅匹配根目录的&lt;code&gt;*.config.ts|js&lt;/code&gt;。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -3685,6 +3685,8 @@
 &lt;/span&gt;&lt;span class="lnt"&gt;25
 &lt;/span&gt;&lt;span class="lnt"&gt;26
 &lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;server {
@@ -3708,6 +3710,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; alias /usr/share/nginx/html/sdk/;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; add_header Access-Control-Allow-Origin *;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; add_header Access-Control-Allow-Methods GET;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; # 开始是想要禁用缓存，但 nginx 默认配置已经提供了协商缓存
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; # 后续测试流程，未发现客户端缓存不能及时更新的问题
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; # add_header Cache-Control &amp;#34;no-cache, no-store, must-revalidate&amp;#34;;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; # add_header Pragma &amp;#34;no-cache&amp;#34;;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; # add_header Expires &amp;#34;0&amp;#34;;
