@@ -1892,8 +1892,8 @@
  &gt;Renderless Components in Vue.js&lt;/a&gt;
 。&lt;/p&gt;</description></item><item><title>Angular 组件设计</title><link>https://ElementRef.github.io/p/angular-component-design/</link><pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/angular-component-design/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/angular.png" alt="Featured image of post Angular 组件设计" /&gt;&lt;h2 id="ngtemplateoutlet"&gt;ngTemplateOutlet
 &lt;/h2&gt;
-&lt;p&gt;从字面来看，就像 &amp;lt;router-outlet/&amp;gt; 之于 router 一样，ngTemplateOutlet 就是 &lt;strong&gt;TemplateRef&lt;/strong&gt; 的“出口”。除了渲染 TemplateRef 之外，它还支持指定一个对象 context 作为“模版内容”的渲染上下文。&lt;/p&gt;
-&lt;p&gt;Vue 的 scopedSlots 和 React 的 renderProps 以及后来的 Composition API 和 Hooks 都在践行“逻辑与 UI”的分离；因为 UI 的自由度非常高，形态千变万化，而数据逻辑的自由度就小不少，UI 更多是数据逻辑的延伸。有了 ngTemplateOutlet，也可以在 Angular 中分离逻辑与 UI（虽然 Angular 在这方面的最佳实践是“依赖注入 Service”）。&lt;/p&gt;
+&lt;p&gt;从字面来看，就像&lt;code&gt;&amp;lt;router-outlet/&amp;gt;&lt;/code&gt;之于 router 一样，ngTemplateOutlet 就是 &lt;strong&gt;TemplateRef&lt;/strong&gt; 的“出口”。除了渲染 TemplateRef 之外，它还支持指定一个对象 context 作为模版内容的“渲染上下文”。&lt;/p&gt;
+&lt;p&gt;Vue 的 scopedSlots 和 React 的 renderProps 以及后来的 Composition API 和 Hooks 都在践行“逻辑与 UI”的分离；因为 UI 的自由度非常高，形态千变万化，而数据逻辑的自由度就小不少，UI 更多是数据逻辑的延伸。有了 ngTemplateOutlet，也可以在 Angular 中分离逻辑与 UI（虽然 Angular 在这方面的最佳实践是 Service）。&lt;/p&gt;
 &lt;p&gt;使用 ngTemplateOutlet 构造 DynamicTabListSlotComponent：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -2504,13 +2504,13 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id="ngcomponentoutlet"&gt;ngComponentOutlet
 &lt;/h2&gt;
-&lt;p&gt;组件类装饰器中有一个可选的属性 selector，selector 决定了组件的实例化位置；当组件装饰器中缺少 selector 属性（或者 selector 属性值为空）时，Ng 会为其生成一个 &amp;lt;ng-component/&amp;gt; 标签。&lt;/p&gt;
+&lt;p&gt;组件类装饰器中有一个可选的属性 selector，selector 决定了组件的实例化位置；当组件装饰器中缺少 selector 属性（或者 selector 属性值为空）时，Ng 会为其生成一个&lt;code&gt;&amp;lt;ng-component/&amp;gt;&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;没有 selector 属性的组件可以通过以下两种方式渲染到页面中：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;ngComponentOutlet；&lt;/li&gt;
-&lt;li&gt;router-outlet。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;router-outlet/&amp;gt;&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;ngComponentOutlet。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&amp;lt;router-outlet/&amp;gt; 不用多说了；和 ngTemplateOutlet 一样，ngComponentOutlet 也是通过 ng-container 渲染组件的：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;router-outlet/&amp;gt;&lt;/code&gt;不用多说了；和 ngTemplateOutlet 一样，ngComponentOutlet 也是通过&lt;code&gt;&amp;lt;ng-container/&amp;gt;&lt;/code&gt;渲染组件的：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -3037,6 +3037,10 @@
 &lt;/span&gt;&lt;span class="lnt"&gt;62
 &lt;/span&gt;&lt;span class="lnt"&gt;63
 &lt;/span&gt;&lt;span class="lnt"&gt;64
+&lt;/span&gt;&lt;span class="lnt"&gt;65
+&lt;/span&gt;&lt;span class="lnt"&gt;66
+&lt;/span&gt;&lt;span class="lnt"&gt;67
+&lt;/span&gt;&lt;span class="lnt"&gt;68
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;@Component&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
@@ -3077,7 +3081,11 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 对数据流进行格式化
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(({&lt;/span&gt; &lt;span class="nx"&gt;records&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;records&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;);&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;paginationData&lt;/span&gt;: &lt;span class="kt"&gt;PaginationData&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;pageIndex&lt;/span&gt;: &lt;span class="kt"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;pageSize&lt;/span&gt;: &lt;span class="kt"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;total&lt;/span&gt;: &lt;span class="kt"&gt;0&lt;/span&gt; &lt;span class="p"&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;paginationData&lt;/span&gt;: &lt;span class="kt"&gt;PaginationData&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;pageIndex&lt;/span&gt;: &lt;span class="kt"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;pageSize&lt;/span&gt;: &lt;span class="kt"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;total&lt;/span&gt;: &lt;span class="kt"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;pages&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;lastQueryParams&lt;/span&gt;: &lt;span class="kt"&gt;SearchParams&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;loading&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -3905,9 +3913,9 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; */&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;控制台会报**&lt;a class="link" href="https://angular.cn/errors/NG0100" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+&lt;/div&gt;&lt;p&gt;控制台会报&lt;a class="link" href="https://angular.cn/errors/NG0100" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;NG100 错误&lt;/a&gt;
-**，原因是多选框的勾选会改变 checkbox，从而触发“变更检测”，导致 DOM 更新，在 DOM 重新渲染的过程中，timeGetter 的返回值和在“变更检测”过程中的返回值不同；渲染前后的值的不同被“发现”了，导致错误被抛出。&lt;/p&gt;
+，原因是多选框的勾选会改变 checkbox，从而触发“变更检测”，导致 DOM 更新，在 DOM 重新渲染的过程中，timeGetter 的返回值和在“变更检测”过程中的返回值不同；渲染前后的值的不同被“发现”了，导致错误被抛出。&lt;/p&gt;
 &lt;p&gt;值的变化是什么时候被发现的呢？在组件被渲染到页面的过程中，组件内部会有一个被称为 View 的数据结构，保存着&lt;strong&gt;对组件实例的引用&lt;/strong&gt;和&lt;strong&gt;绑定表达式的值&lt;/strong&gt;；在变更检测过程中，编译器会将需要更新的 DOM 属性打上标记；对于每个被标记的属性，编译器都会创建一个绑定，该绑定定义了&lt;strong&gt;要更新的属性名称&lt;/strong&gt;以及&lt;strong&gt;用来获取新值的表达式&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;在“变更检测”过程中，会运行&lt;strong&gt;编译器为视图生成的&lt;/strong&gt;所有绑定表达式，并将执行结果和&lt;strong&gt;储存在 View 中的 oldValue&lt;/strong&gt;进行比较，这就是“脏”检查的由来；如果值有变化，那么就会更新“界面”和“oldValue”；当前组件的“变更检测”进行完毕，就会对“子组件”进行相同的操作。&lt;/p&gt;
 &lt;p&gt;在上述例子中，Angular 在 spanView 和 timeGetter 之间建立了一种绑定关系；在每次检测过程中，绑定表达式被执行，timeGetter 返回的时间戳并被日期管道处理，日期管道返回的值会和 oldValue 进行比较，如果检测到值的差异，spanView 的 textContent 会被更新。&lt;/p&gt;

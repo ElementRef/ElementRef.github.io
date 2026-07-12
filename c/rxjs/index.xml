@@ -503,7 +503,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id="observable"&gt;Observable
 &lt;/h2&gt;
-&lt;p&gt;不同于创建器（调用后返回 Observable 对象），Subject 是一个实现了 Observable 接口的“类”；需要先进行 new 调用，然后将数据“手动”放入“流”中（subject.next(value)）。&lt;/p&gt;
+&lt;p&gt;不同于创建器（调用后返回 Observable 对象），Subject 是一个实现了 Observable 接口的“类”；需要先进行 new 调用，然后将数据“手动”放入“流”中&lt;code&gt;subject.next(value)&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;有别于普通的 Observable 对象（单播），Subject 返回的是一个“多播”，可以被多次 subscribe，可以将值传递给多个观察者；所以常常被用来存放应用状态。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -925,7 +925,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; */&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;triggerEvents&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;mergeMap&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;/**
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; * 如果第二个值 Second 在两秒之内传给 switchMap
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; * 如果第二个值 Second 在若干秒之内传给 switchMap
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; * switchMap 会丢弃对第一个值 First 的处理
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; * 所以结果是：
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; * 若干秒之后，只会打印 Got: Second
