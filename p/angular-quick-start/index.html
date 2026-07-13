@@ -417,7 +417,7 @@
 </span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * constructor 是在 injector 上下文中调用的唯一方法
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * Angular 的 DI 系统会自动帮我们实例化注入的 Service
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * Angular 的 DI 系统会自动帮我们实例化注入 Service
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * 并将服务实例绑定到当前实例上（也就是 this）
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * 方便我们以 this.xxService 的方式调用
 </span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
@@ -774,8 +774,8 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span><span class="o">&gt;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">route</span>: <span class="kt">ActivatedRoute</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">apiService</span>: <span class="kt">ApiService</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">apiService</span>: <span class="kt">ApiService</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">route</span>: <span class="kt">ActivatedRoute</span>
 </span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="p">{}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="nx">ngOnInit() {</span>
@@ -858,8 +858,8 @@
 </span></span><span class="line"><span class="cl">  <span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">route</span>: <span class="kt">ActivatedRoute</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">apiService</span>: <span class="kt">ApiService</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">apiService</span>: <span class="kt">ApiService</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">route</span>: <span class="kt">ActivatedRoute</span>
 </span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="p">{}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>如果不喜欢模版中出现太多 async，可以借助 combineLatest 将多个 Observable 合并：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -942,8 +942,8 @@
 </span></span><span class="line"><span class="cl">  <span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">route</span>: <span class="kt">ActivatedRoute</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">apiService</span>: <span class="kt">ApiService</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">apiService</span>: <span class="kt">ApiService</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">route</span>: <span class="kt">ActivatedRoute</span>
 </span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="p">{}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></tbody></table></div></div><p>自从 Angular 的编译和渲染引擎切换到 Ivy 之后：</p><ol><li>ChangeDetectionStrategy.Default 策略下，在每次“变更检测”的过程中，“纯”管道的 transform 方法，只有在入参发生变化的情况下才会被调用；</li><li>ChangeDetectionStrategy.Default 策略下，在每次“变更检测”的过程中，“非纯”管道的 transform 方法都会被调用；</li><li>当使用 async 管道时（它是“非纯”的），最好使用 ChangeDetectionStrategy.OnPush 策略；</li><li>无论是否是“纯”管道，每个管道都会有自己的实例（ViewEngine 时期，“纯”管道是共享实例的）；</li><li>在同一模版中，使用了两次 A 管道，则会有两个 A 管道的实例存在。</li></ol><h2 id="服务">服务</h2><p>服务是 Angular 的核心，他是专门用来处理某件事情的（数据请求、数据共享等）具有明确定义的 class；一般情况下，服务用来创建与视图无关但需要跨组件共享的数据/逻辑。</p><p>官方推崇“Component 处理页面展示，Service 处理内在逻辑”的原则（有点像 React 中的 UI 组件和逻辑组件）。</p><p>服务一般（具体看 providedIn 的取值）以单例的形式存在，实例化之后，应用于整个应用。</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1327,7 +1327,7 @@
 </span><span class="lnt">147
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * 使用“响应式表单”，需要在 NgModule 中导入 ReactiveFormsModule 和 FormsModule：
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * ReactiveFormsModule：提供 formControl、ngFormGroup 等指令；
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * ReactiveFormsModule：提供 formControl、formGroup 等指令；
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * FormsModule：提供 ngForm、ngModel 等模版驱动指令。
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * ngForm 的 selector 包含了 form:not([formGroup]) ；
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * 所以，一般不用显式添加 ngForm 指令。
@@ -1539,7 +1539,7 @@
 </span></span></span><span class="line"><span class="cl">  <span class="nx">component?</span>: <span class="kt">Type</span><span class="p">&lt;</span><span class="nt">any</span><span class="p">&gt;;</span> <span class="c1">// 匹配之后，要实例化的组件
 </span></span></span><span class="line"><span class="cl">  <span class="nx">data?</span>: <span class="kt">Data</span><span class="p">;</span> <span class="c1">// 携带的数据，可通过 ActivatedRoute 获取
 </span></span></span><span class="line"><span class="cl">  <span class="nx">loadChildren?</span>: <span class="kt">LoadChildren</span><span class="p">;</span> <span class="c1">// 懒加载模块
-</span></span></span><span class="line"><span class="cl">  <span class="nx">matcher?</span>: <span class="kt">UrlMatcher</span><span class="p">;</span> <span class="c1">// 自定义匹配算
+</span></span></span><span class="line"><span class="cl">  <span class="nx">matcher?</span>: <span class="kt">UrlMatcher</span><span class="p">;</span> <span class="c1">// 自定义匹配算法
 </span></span></span><span class="line"><span class="cl">  <span class="nx">outlet?</span>: <span class="kt">string</span><span class="p">;</span> <span class="c1">// 当同级有多个 &lt;router-outlet name="xxx"/&gt; 时，指定从渲染出口
 </span></span></span><span class="line"><span class="cl">  <span class="nx">path?</span>: <span class="kt">string</span><span class="p">;</span> <span class="c1">// 匹配路径
 </span></span></span><span class="line"><span class="cl">  <span class="nx">pathMatch?</span>: <span class="kt">string</span><span class="p">;</span> <span class="c1">// 路径匹配策略，prefix（默认）｜full
@@ -1736,8 +1736,8 @@
 </span></span><span class="line"><span class="cl">    <span class="p">});</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="依赖注入">依赖注入</h2><p>依赖是指系统中的各个组成部分之间的相互关系；具体到 Angular，是指某个 class 执行其功能“所需的”服务（@Injectable）或对象。</p><p>在传统模式中，如果组件 A 依赖服务 B，A 会在内部创建一个 B 的实例；在依赖注入模式中，依赖项 B 会通过 A 的 constructor 注入（默认行为是 new 调用），保存在 A 的私有属性上。</p><p>当 class 需要某个依赖时，该依赖就会作为参数添加到 class 的构造函数中。当 Angular 实例化 class 时，DI 会在“注入器树”中查找（从局部开始，向上冒泡，直到 root）provider；如果没有找到 provider，会报错。</p><p>如果要保证外部注入的服务是自己（当前 class）独有的（<a class="link" href="https://angular.cn/guide/dependency-injection-in-action#multiple-service-instances-sandboxing" target="_blank" rel="noopener" referrerpolicy="no-referrer">沙箱式隔离</a>
-），只需在自己的元数据 providers 中列出 Service 即可（就能拥有自己独有的服务实例）。</p><p>如果“允许依赖缺失”或者需要“限制依赖查找范围”，可以使用修饰符更改默认的依赖查找机制：</p><ul><li>@Host 将依赖查找范围限定在宿主组件（包含当前指令的组件，或当前组件的宿主元素所属的组件）的注入器中；</li><li>@Self 只在当前组件 / 指令自己的注入器中查找依赖，不会向上游（父组件、模块等）的注入器查找；</li><li>@SkipSelf 跳过当前组件 / 指令自己的注入器，直接从父组件或祖先组件的注入器中查找依赖；</li><li>@Optional 标记依赖为可选的。如果依赖找不到，Angular 不会抛出错误，而是注入 null。</li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="依赖注入">依赖注入</h2><p>依赖是指系统中的各个组成部分之间的相互关系；具体到 Angular，是指某个 class 执行其功能所需的<code>@Injectable</code>服务或对象。</p><p>在传统模式中，如果组件 A 依赖服务 B，A 会在内部创建一个 B 的实例；在依赖注入模式中，依赖项 B 会通过 A 的 constructor 注入（默认行为是 new 调用），保存在 A 的私有属性上。</p><p>当 class 需要某个依赖时，该依赖就会作为参数添加到 class 的构造函数中。当 Angular 实例化 class 时，DI 会在“注入器树”中查找（从局部开始，向上冒泡，直到 root）provider；如果没有找到 provider，会报错。</p><p>如果要保证外部注入的服务是自己（当前 class）独有的（<a class="link" href="https://angular.cn/guide/dependency-injection-in-action#multiple-service-instances-sandboxing" target="_blank" rel="noopener" referrerpolicy="no-referrer">沙箱式隔离</a>
+），只需在自己的元数据 providers 中列出 Service 即可（就能拥有自己独有的服务实例）。</p><p>如果“允许依赖缺失”或者需要“限制依赖查找范围”，可以使用修饰符更改默认的依赖查找机制：</p><ul><li><code>@Host</code>将依赖查找范围限定在宿主组件（包含当前指令的组件，或当前组件的宿主元素所属的组件）的注入器中；</li><li><code>@Self</code>只在当前组件 / 指令自己的注入器中查找依赖，不会向上游（父组件、模块等）的注入器查找；</li><li><code>@SkipSelf</code>跳过当前组件 / 指令自己的注入器，直接从父组件或祖先组件的注入器中查找依赖；</li><li><code>@Optional</code>标记依赖为可选的。如果依赖找不到，Angular 不会抛出错误，而是注入 null。</li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1839,7 +1839,7 @@
 </span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">eg</span>: <span class="kt">Example</span>
 </span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="p">{}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="双向绑定">双向绑定</h2><p>Angular 也有 Vue 中的 v-model 机制（modelValue/update:modelValue），语法为 [(value)]；实现思路同样也是基于“组件传值”和“自定义事件”（语法糖）。</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="双向绑定">双向绑定</h2><p>Angular 也有 Vue 中的 v-model 机制<code>modelValue/update:modelValue</code>，语法为<code>[(value)]</code>；实现思路同样也是基于“组件传值”和“自定义事件”（语法糖）。</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1915,7 +1915,7 @@
 </span></span><span class="line"><span class="cl">  <span class="na">on-output</span><span class="o">=</span><span class="s">"onOutput($event)"</span>
 </span></span><span class="line"><span class="cl">  <span class="na">on-click</span><span class="o">=</span><span class="s">"onClick()"</span>
 </span></span><span class="line"><span class="cl"><span class="p">&gt;&lt;/</span><span class="nt">my-component</span><span class="p">&gt;</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="模版变量">模版变量</h2><p>模版变量，顾名思义，就是存在于组件模版中的变量；模版变量可以引用：元素、指令、组件等：</p><ul><li>如果在组件上声明变量，该变量就会引用该组件实例；</li><li>如果在原生 HTML 标签上声明变量，该变量就会引用该元素；</li><li>如果你在 &lt;ng-template/&gt; 上声明变量，该变量就会引用一个 TemplateRef 实例；</li><li>如果该变量在右侧指定了一个名字（例如，#var=“ngModel”），该变量就会引用所在元素上具有这个 exportAs 名字的指令或组件。</li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="模版变量">模版变量</h2><p>模版变量，顾名思义，就是存在于组件模版中的变量；模版变量可以引用：元素、指令、组件等：</p><ul><li>如果在组件上声明变量，该变量就会引用该组件实例；</li><li>如果在原生 HTML 标签上声明变量，该变量就会引用该元素；</li><li>如果你在 &lt;ng-template/&gt; 上声明变量，该变量就会引用一个 TemplateRef 实例；</li><li>如果该变量在右侧指定了一个名字（例如，<code>#var="ngModel"</code>），该变量就会引用所在元素上具有这个 exportAs 名字的指令或组件。</li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1956,6 +1956,14 @@
 </span><span class="lnt">23
 </span><span class="lnt">24
 </span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
 </span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">BrowserModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@angular/platform-browser'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">HttpClientModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@angular/common/http'</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -1973,8 +1981,16 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * 酱紫就可以通过 @Inject(HTTP_INTERCEPTORS) 获取多个 provider
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * 如果 multi: false，后边的 provide 会覆盖前边的 provider
 </span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span> <span class="nx">provide</span>: <span class="kt">HTTP_INTERCEPTORS</span><span class="p">,</span> <span class="nx">useClass</span>: <span class="kt">SpinInterceptor</span><span class="p">,</span> <span class="nx">multi</span>: <span class="kt">true</span> <span class="p">},</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span> <span class="nx">provide</span>: <span class="kt">HTTP_INTERCEPTORS</span><span class="p">,</span> <span class="nx">useClass</span>: <span class="kt">ErrorInterceptor</span><span class="p">,</span> <span class="nx">multi</span>: <span class="kt">true</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">provide</span>: <span class="kt">HTTP_INTERCEPTORS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">useClass</span>: <span class="kt">SpinInterceptor</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">multi</span>: <span class="kt">true</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">provide</span>: <span class="kt">HTTP_INTERCEPTORS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">useClass</span>: <span class="kt">ErrorInterceptor</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">multi</span>: <span class="kt">true</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="p">],</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">imports</span><span class="o">:</span> <span class="p">[</span><span class="nx">BrowserModule</span><span class="p">,</span> <span class="nx">HttpClientModule</span><span class="p">],</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">declarations</span><span class="o">:</span> <span class="p">[</span><span class="nx">AppComponent</span><span class="p">],</span>
@@ -2492,8 +2508,8 @@
 </span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="mi">5000</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><p>在开发的过程中，可能会遇到**<a class="link" href="https://angular.cn/errors/NG0100" target="_blank" rel="noopener" referrerpolicy="no-referrer">NG100 错误</a>
-**，特别是在 ngAfterViewInit 钩子中执行“手动”渲染操作时；原因是，在开发模式下，每次"变更检测"后，都会执行一次"附加检查"，如果在附加检查过程中，视图和"变更检测"后的视图不一致，会报 NG100 错误。</p><p>解决方法是，将同步渲染逻辑改为异步（宏任务、微任务均可），或者同步调用 detectChanges 重新进行变更检测。</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span></span></code></pre></td></tr></tbody></table></div></div><p>在开发的过程中，可能会遇到<a class="link" href="https://angular.cn/errors/NG0100" target="_blank" rel="noopener" referrerpolicy="no-referrer">NG100 错误</a>
+，特别是在 ngAfterViewInit 钩子中执行“手动”渲染操作时；原因是，在开发模式下，每次"变更检测"后，都会执行一次"附加检查"，如果在附加检查过程中，视图和"变更检测"后的视图不一致，会报 NG100 错误。</p><p>解决方法是，将同步渲染逻辑改为异步（宏任务、微任务均可），或者同步调用 detectChanges 重新进行变更检测。</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2545,7 +2561,7 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// ...
 </span></span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="aot-与-jit">AOT 与 JIT</h2><p>组件和模版需要经过编译，才能在浏览器中运行；Angular 提供了两种编译方式：</p><ul><li>Ahead-Of-Time 预编译（在打包/构建时编译，Angular 9 之后）：<ul><li>和别的模版一样，*.vue 和 *.jsx 也需要进行编译才能在浏览器中运行；</li><li>可以尽早地检测到代码中的错误，用户体验更有保障；</li><li>省去了在运行时编译的开销，应用响应更快；</li><li>减少了受 XSS 攻击的风险；</li><li>可以减小应用的体积。</li></ul></li><li>Just-In-Time 即时编译（在运行时编译，Angular 9 之前）：<ul><li>代码修改之后不需要重新编译，编译会在代码执行之前进行（按需编译）；</li><li>编译工作大多在浏览器内部进行，编译时间更短；</li><li>在项目中，较少被用到的组件更适合即时编译。</li></ul></li></ul><p>AOT 预编译分为三个阶段：</p><ol><li>代码分析：收集元数据并检验元数据中的错误：<ul><li>被收集的元数据存在于类装饰器/构造函数中；</li><li>AOT 收集器会根据 TS 编译器生成的 *.d.ts 输出 *.metadata.json；</li><li>*.metadata.json 包括了全部装饰器的元数据，结构就像 AST 一样；</li><li>AOT 编译器不支持“箭头函数”，所以不要在元数据中使用“() =&gt; {}”。</li></ul></li><li>代码生成：解释元数据（*.metadata.json），并对含有 useClass、useValue、useFactory 和 data 的对象字面量进行特殊处理（元数据重写）；</li><li>模版类型检查：TS 编译器会验证模版中绑定的表达式。</li></ol><p>JIT 编译器可以替代 AOT 编译器，在“运行时”将模板编译（需要将 compiler 打包）为浏览器中的可执行模板代码。</p><h2 id="安全">安全</h2><p>为了防范 XSS，Angular 认为所有值都是不可信任的；任何值在插入 DOM 之前，都会被进行“无害化”处理（前提是使用 Angular 模版，如果在代码中直接使用 DOM API，将没有“无害化”处理）。</p><p>Angular 定义了四个安全上下文：</p><ul><li>HTML：被解释为 HTML 的值，例如被绑定到 innerHTML 的值；</li><li>CSS：作为 CSS 被绑定到 style 属性的值；</li><li>网址：作为 URL 使用的值，例如被绑定到 a 标签 href 属性的值；</li><li>资源：作为代码需要被下载并运行的值，例如被绑定到 script 标签 src 属性的值。</li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span></span></code></pre></td></tr></tbody></table></div></div><h2 id="aot-与-jit">AOT 与 JIT</h2><p>组件和模版需要经过编译，才能在浏览器中运行；Angular 提供了两种编译方式：</p><ul><li>Ahead-Of-Time 预编译（在打包/构建时编译，Angular 9 之后）：<ul><li>和别的模版一样，<code>*.vue</code>和<code>*.jsx</code>也需要进行编译才能在浏览器中运行；</li><li>可以尽早地检测到代码中的错误，用户体验更有保障；</li><li>省去了在运行时编译的开销，应用响应更快；</li><li>减少了受 XSS 攻击的风险；</li><li>可以减小应用的体积。</li></ul></li><li>Just-In-Time 即时编译（在运行时编译，Angular 9 之前）：<ul><li>代码修改之后不需要重新编译，编译会在代码执行之前进行（按需编译）；</li><li>编译工作大多在浏览器内部进行，编译时间更短；</li><li>在项目中，较少被用到的组件更适合即时编译。</li></ul></li></ul><p>AOT 预编译分为三个阶段：</p><ol><li>代码分析：收集元数据并检验元数据中的错误：<ul><li>被收集的元数据存在于类装饰器/构造函数中；</li><li>AOT 收集器会根据 TS 编译器生成的<code>*.d.ts</code>输出<code>*.metadata.json</code>；</li><li><code>*.metadata.json</code>包括了全部装饰器的元数据，结构就像 AST 一样；</li><li>AOT 编译器不支持“箭头函数”，所以不要在元数据中使用<code>() =&gt; {}</code>。</li></ul></li><li>代码生成：解释元数据<code>*.metadata.json</code>，并对含有 useClass、useValue、useFactory 和 data 的对象字面量进行特殊处理（元数据重写）；</li><li>模版类型检查：TS 编译器会验证模版中绑定的表达式。</li></ol><p>JIT 编译器可以替代 AOT 编译器，在“运行时”将模板编译（需要将 compiler 打包）为浏览器中的可执行模板代码。</p><h2 id="安全">安全</h2><p>为了防范 XSS，Angular 认为所有值都是不可信任的；任何值在插入 DOM 之前，都会被进行“无害化”处理（前提是使用 Angular 模版，如果在代码中直接使用 DOM API，将没有“无害化”处理）。</p><p>Angular 定义了四个安全上下文：</p><ul><li>HTML：被解释为 HTML 的值，例如被绑定到 innerHTML 的值；</li><li>CSS：作为 CSS 被绑定到 style 属性的值；</li><li>网址：作为 URL 使用的值，例如被绑定到 a 标签 href 属性的值；</li><li>资源：作为代码需要被下载并运行的值，例如被绑定到 script 标签 src 属性的值。</li></ul><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
