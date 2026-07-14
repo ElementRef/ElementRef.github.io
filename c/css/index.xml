@@ -6,8 +6,8 @@
 &lt;p&gt;使用 TailwindCLI:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;安装 TailwindCLI；&lt;/li&gt;
-&lt;li&gt;在 CSS 中添加 @tailwind 指令；&lt;/li&gt;
-&lt;li&gt;运行 tailwindcss &amp;ndash;watch 命令；&lt;/li&gt;
+&lt;li&gt;在 CSS 中添加&lt;code&gt;@tailwind&lt;/code&gt;指令；&lt;/li&gt;
+&lt;li&gt;运行&lt;code&gt;tailwindcss --watch&lt;/code&gt;命令；&lt;/li&gt;
 &lt;li&gt;将输出的 CSS 文件引入到 HTML 中。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;作为 PostCSS 插件使用：&lt;/p&gt;
@@ -134,7 +134,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id="伪元素"&gt;伪元素
 &lt;/h3&gt;
-&lt;p&gt;当需要定义 ::before 和 ::after 的样式时，可以使用 before|after 修饰符：&lt;/p&gt;
+&lt;p&gt;当需要定义 ::before 和 ::after 的样式时，可以使用&lt;code&gt;before|after&lt;/code&gt;修饰符：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -159,7 +159,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;label&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;当需要定义 placeholder 的样式时，可以使用 placeholder 修饰符：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;当需要定义 placeholder 的样式时，可以使用&lt;code&gt;placeholder&lt;/code&gt;修饰符：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -182,7 +182,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;label&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;当需要定义 fileInput 的样式时，可以使用 file 修饰符：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;当需要定义 fileInput 的样式时，可以使用&lt;code&gt;file&lt;/code&gt;修饰符：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -215,7 +215,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;label&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;当需要定义 ol|ul 内部的符号样式时，可以使用 marker 修饰符：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;当需要定义 ol 和 ul 内部的符号样式时，可以使用&lt;code&gt;marker&lt;/code&gt;修饰符：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -238,7 +238,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;ul&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;当需要定义选中文字的样式时，可以使用 selection 修饰符：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;当需要定义选中文字的样式时，可以使用&lt;code&gt;selection&lt;/code&gt;修饰符：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -261,7 +261,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;当需要定义首行或首字的样式时，可以使用 first-line|first-letter 修饰符：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;当需要定义首行或首字的样式时，可以使用&lt;code&gt;first-line|first-letter&lt;/code&gt;修饰符：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -288,7 +288,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;当需要定义 &amp;lt;dialog&amp;gt; 的背景样式时，可以使用 backdrop 修饰符：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;当需要定义&lt;code&gt;&amp;lt;dialog/&amp;gt;&lt;/code&gt;的背景样式时，可以使用&lt;code&gt;backdrop&lt;/code&gt;修饰符：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -303,7 +303,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id="元素标记"&gt;元素标记
 &lt;/h3&gt;
-&lt;p&gt;当想要基于&lt;strong&gt;上层元素&lt;/strong&gt;的状态而改变自身样式时，可以给上层元素一个 group 标记：&lt;/p&gt;
+&lt;p&gt;当想要基于&lt;strong&gt;上层元素&lt;/strong&gt;的状态而改变自身样式时，可以给上层元素一个&lt;code&gt;group&lt;/code&gt;标记：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -402,7 +402,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;当想要基于&lt;strong&gt;同级兄弟元素&lt;/strong&gt;的状态而改变自身样式时，可以给同级兄弟元素一个 peer 标记：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;当想要基于&lt;strong&gt;同级兄弟元素&lt;/strong&gt;的状态而改变自身样式时，可以给同级兄弟元素一个&lt;code&gt;peer&lt;/code&gt;标记：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -443,7 +443,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;label&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;当想要基于&lt;strong&gt;后代元素&lt;/strong&gt;的状态而改变自身样式时，可以使用 has-* 修饰符：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;当想要基于&lt;strong&gt;后代元素&lt;/strong&gt;的状态而改变自身样式时，可以使用&lt;code&gt;has-*&lt;/code&gt;修饰符：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -464,7 +464,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;label&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;group|peer|has 修饰符可以结合使用：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;group|peer|has&lt;/code&gt;修饰符可以结合使用：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -507,7 +507,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;fieldset&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;* 修饰符匹配&lt;strong&gt;子元素&lt;/strong&gt;，就像&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Universal_selectors" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;*&lt;/code&gt;修饰符匹配&lt;strong&gt;子元素&lt;/strong&gt;，就像&lt;a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Universal_selectors" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;通配选择器&lt;/a&gt;
 一样，作用域略有不同：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -548,7 +548,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id="媒体查询"&gt;媒体查询
 &lt;/h3&gt;
-&lt;p&gt;响应式 &lt;strong&gt;md&lt;/strong&gt;、&lt;strong&gt;lg&lt;/strong&gt;&amp;hellip;：&lt;/p&gt;
+&lt;p&gt;响应式&lt;code&gt;md、lg...&lt;/code&gt;：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -557,7 +557,7 @@
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;grid grid-cols-3 md:grid-cols-4 grid-cols-6&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;黑暗模式 &lt;strong&gt;dark&lt;/strong&gt;：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;黑暗模式&lt;code&gt;dark&lt;/code&gt;：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -616,7 +616,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;减弱动态效果 &lt;strong&gt;motion-reduce&lt;/strong&gt;：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;减弱动态效果&lt;code&gt;motion-reduce&lt;/code&gt;：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -631,7 +631,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;button&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;高对比度模式 &lt;strong&gt;contrast-more&lt;/strong&gt;：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;高对比度模式&lt;code&gt;contrast-more&lt;/code&gt;：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -664,7 +664,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;form&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;强制颜色模式 &lt;strong&gt;forced-colors&lt;/strong&gt;：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;强制颜色模式&lt;code&gt;forced-colors&lt;/code&gt;：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -697,7 +697,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;form&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;屏幕方向 &lt;strong&gt;portrait&lt;/strong&gt;、&lt;strong&gt;landscape&lt;/strong&gt;：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;屏幕方向&lt;code&gt;portrait、landscape&lt;/code&gt;：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -722,7 +722,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;打印模式 &lt;strong&gt;print&lt;/strong&gt;：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;打印模式&lt;code&gt;print&lt;/code&gt;：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -747,7 +747,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;规则检测 &lt;strong&gt;supports-&lt;/strong&gt;：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;规则检测&lt;code&gt;supports-*&lt;/code&gt;：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -758,7 +758,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id="属性选择"&gt;属性选择
 &lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;ltr|rtl&lt;/strong&gt; 用来匹配 HTML 元素的 dir 属性：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ltr|rtl&lt;/code&gt;用来匹配 HTML 元素的&lt;code&gt;dir&lt;/code&gt;属性：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -791,7 +791,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;strong&gt;open&lt;/strong&gt; 用来匹配 &amp;lt;dialog&amp;gt;|&amp;lt;details&amp;gt; 元素的 open 状态：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;open&lt;/code&gt;用来匹配&lt;code&gt;&amp;lt;dialog/&amp;gt;|&amp;lt;details/&amp;gt;&lt;/code&gt;元素的 open 状态：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -830,7 +830,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id="自定义修饰符"&gt;自定义修饰符
 &lt;/h3&gt;
-&lt;p&gt;官方的例子中，使用 &amp;amp; 匹配当前元素，使用 @ 匹配媒体查询；基本和 CSS 规范和 Sass|Less|Stylus 保持一致：&lt;/p&gt;
+&lt;p&gt;官方的例子中，使用&lt;code&gt;&amp;amp;&lt;/code&gt;匹配当前元素，使用&lt;code&gt;@&lt;/code&gt;匹配媒体查询；基本和 CSS 规范和 Sass|Less|Stylus 保持一致：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -889,7 +889,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;当然，你可以在配置文件中使用 &lt;strong&gt;addVariant&lt;/strong&gt; 添加自定义修饰符：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;当然，你可以在配置文件中使用&lt;code&gt;addVariant&lt;/code&gt;添加自定义修饰符：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -925,16 +925,16 @@
 &lt;/h2&gt;
 &lt;p&gt;Tailwind CSS 默认提供了以下响应断点，分别是：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;sm，对应 @media (min-width: 640px)；&lt;/li&gt;
-&lt;li&gt;md，对应 @media (min-width: 768px)；&lt;/li&gt;
-&lt;li&gt;lg，对应 @media (min-width: 1024px)；&lt;/li&gt;
-&lt;li&gt;xl，对应 @media (min-width: 1280px)；&lt;/li&gt;
-&lt;li&gt;2xl，对应 @media (min-width: 1536px)；&lt;/li&gt;
-&lt;li&gt;max-sm，对应 @media not all and (min-width: 640px)；&lt;/li&gt;
-&lt;li&gt;max-md，对应 @media not all and (min-width: 768px)；&lt;/li&gt;
-&lt;li&gt;max-lg，对应 @media not all and (min-width: 1024px)；&lt;/li&gt;
-&lt;li&gt;max-xl，对应 @media not all and (min-width: 1280px)；&lt;/li&gt;
-&lt;li&gt;max-2xl，对应 @media not all and (min-width: 1536px)。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sm&lt;/code&gt;，对应&lt;code&gt;@media (min-width: 640px)&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;md&lt;/code&gt;，对应&lt;code&gt;@media (min-width: 768px)&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;lg&lt;/code&gt;，对应&lt;code&gt;@media (min-width: 1024px)&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;xl&lt;/code&gt;，对应&lt;code&gt;@media (min-width: 1280px)&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;2xl&lt;/code&gt;，对应&lt;code&gt;@media (min-width: 1536px)&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;max-sm&lt;/code&gt;，对应&lt;code&gt;@media not all and (min-width: 640px)&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;max-md&lt;/code&gt;，对应&lt;code&gt;@media not all and (min-width: 768px)&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;max-lg&lt;/code&gt;，对应&lt;code&gt;@media not all and (min-width: 1024px)&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;max-xl&lt;/code&gt;，对应&lt;code&gt;@media not all and (min-width: 1280px)&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;max-2xl&lt;/code&gt;，对应&lt;code&gt;@media not all and (min-width: 1536px)&lt;/code&gt;。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Tailwind 遵循了&lt;strong&gt;移动设备优先&lt;/strong&gt;的设计原则，不被断点修饰的类名会在所有尺寸的设备上生效；被断点修饰的类名，会在对应尺寸及以上的设备上生效：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -1006,7 +1006,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id="黑暗模式"&gt;黑暗模式
 &lt;/h2&gt;
-&lt;p&gt;Tailwind CSS 使用 prefers-color-scheme 媒体查询来切换黑暗模式（media 策略）；如果想要手动切换，可以使用 selector 策略：&lt;/p&gt;
+&lt;p&gt;Tailwind CSS 使用&lt;code&gt;media&lt;/code&gt;策略&lt;code&gt;prefers-color-scheme&lt;/code&gt;媒体查询来切换黑暗模式；如果想要手动切换，可以使用&lt;code&gt;selector&lt;/code&gt;策略：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -1021,7 +1021,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;dark:{class} 将不再根据 prefers-color-scheme 切换，而是根据 &amp;lt;html&amp;gt; 上是否有 class=&amp;lsquo;dark&amp;rsquo; 来切换：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;dark:{class}&lt;/code&gt;将不再根据&lt;code&gt;prefers-color-scheme&lt;/code&gt;切换，而是根据&lt;code&gt;&amp;lt;html/&amp;gt;&lt;/code&gt;上是否有&lt;code&gt;class='dark'&lt;/code&gt;来切换：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1048,7 +1048,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;这样，你就可以通过 JavaScript 控制 class=&amp;lsquo;dark&amp;rsquo; 来切换黑暗模式：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;这样，你就可以通过 JavaScript 控制&lt;code&gt;class='dark'&lt;/code&gt;来切换黑暗模式：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -1075,7 +1075,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id="样式复用"&gt;样式复用
 &lt;/h2&gt;
-&lt;p&gt;在使用 Tailwind CSS 时，你可能会遇到一些样式重复的情况，比如下方的 &amp;lt;img&amp;gt;：&lt;/p&gt;
+&lt;p&gt;在使用 Tailwind CSS 时，你可能会遇到一些样式重复的情况，比如下方的&lt;code&gt;&amp;lt;img/&amp;gt;&lt;/code&gt;：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
@@ -1137,7 +1137,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;如果能通过模版循环、组件等方式复用，那将是极好的；如果不能，Tailwind CSS 提供了 &lt;a class="link" href="https://tailwindcss.com/docs/functions-and-directives#apply" target="_blank" rel="noopener" referrerpolicy="no-referrer"
- &gt;@apply&lt;/a&gt;
+ &gt;&lt;code&gt;@apply&lt;/code&gt;&lt;/a&gt;
  方法来提取公共样式：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -1318,11 +1318,11 @@
  &gt;ITCSS&lt;/a&gt;
  将样式分成了三层：base、components 和 utilities：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;base 层包含所有的&lt;a class="link" href="https://tailwindcss.com/docs/preflight" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+&lt;li&gt;&lt;code&gt;base&lt;/code&gt;层包含所有的&lt;a class="link" href="https://tailwindcss.com/docs/preflight" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;基础样式&lt;/a&gt;
 ，比如样式重置、元素默认样式等，优先级最低；&lt;/li&gt;
-&lt;li&gt;components 层开放给开发者或第三方样式库，用来自定义组件样式，优先级次之；&lt;/li&gt;
-&lt;li&gt;utilities 层包含工具类样式，比如 flex、grid、ml-* 等，优先级最高。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;components&lt;/code&gt;层开放给开发者或第三方样式库，用来自定义组件样式，优先级次之；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;utilities&lt;/code&gt;层包含工具类样式，比如&lt;code&gt;flex&lt;/code&gt;、&lt;code&gt;grid&lt;/code&gt;、&lt;code&gt;ml-*&lt;/code&gt;等，优先级最高。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;如果你想自定义这些层，可以在配置文件中修改：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -1443,12 +1443,18 @@
 &lt;/span&gt;&lt;span class="lnt"&gt;43
 &lt;/span&gt;&lt;span class="lnt"&gt;44
 &lt;/span&gt;&lt;span class="lnt"&gt;45
+&lt;/span&gt;&lt;span class="lnt"&gt;46
+&lt;/span&gt;&lt;span class="lnt"&gt;47
+&lt;/span&gt;&lt;span class="lnt"&gt;48
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-css" data-lang="css"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;tailwind&lt;/span&gt; &lt;span class="nt"&gt;base&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c"&gt;/* 注入 Tailwind CSS 和 plugins 注册的的基础样式 */&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;tailwind&lt;/span&gt; &lt;span class="nt"&gt;components&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c"&gt;/* 注入 Tailwind CSS 和 plugins 注册的的组件类名 */&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;tailwind&lt;/span&gt; &lt;span class="nt"&gt;utilities&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c"&gt;/* 注入 Tailwind CSS 和 plugins 注册的的工具类名 */&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;/* 扩展 base，@layer 用来告诉 Tailwind CSS，这些自定义样式需要被注入在哪一层 */&lt;/span&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-css" data-lang="css"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;tailwind&lt;/span&gt; &lt;span class="nt"&gt;base&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c"&gt;/* 注入基础样式 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;tailwind&lt;/span&gt; &lt;span class="nt"&gt;components&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c"&gt;/* 注入组件类名 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;tailwind&lt;/span&gt; &lt;span class="nt"&gt;utilities&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c"&gt;/* 注入工具类名 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt; @layer 用来告诉 Tailwind CSS
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt; 这些自定义样式需要被注入在哪一层
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;*/&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;layer&lt;/span&gt; &lt;span class="nt"&gt;base&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c"&gt;/* 定义类型变量 */&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;root&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -1729,7 +1735,6 @@
 &lt;/span&gt;&lt;span class="lnt"&gt;156
 &lt;/span&gt;&lt;span class="lnt"&gt;157
 &lt;/span&gt;&lt;span class="lnt"&gt;158
-&lt;/span&gt;&lt;span class="lnt"&gt;159
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="kr"&gt;type&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;Config&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;tailwindcss&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -1832,13 +1837,12 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;matchUtilities&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;addComponents&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;matchComponents&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;addBase&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;addVariant&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;matchVariant&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;addBase&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;theme&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;config&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;corePlugins&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;e&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;corePlugins&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;})&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// &amp;lt;div class=&amp;#34;content-auto lg:content-visible&amp;#34;&amp;gt;&amp;lt;/div&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;addUtilities&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
@@ -1974,6 +1978,13 @@
 &lt;li&gt;行内样式不能使用伪类/伪元素，而 Tailwind CSS 借助于修饰符，支持在 class 中使用伪类/伪元素；&lt;/li&gt;
 &lt;li&gt;行内样式不能使用媒体查询，而 Tailwind CSS 借助于修饰符，支持在 class 中使用媒体查询；&lt;/li&gt;
 &lt;li&gt;在组件化开发的趋势下，超长的 class 被封装在组件内部，不至于难于维护。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="参考"&gt;参考
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://share.gemini.google/KX9Rak4QZTB1" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Tailwind 自定义主题的实现&lt;/a&gt;
+&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>《CSS 新世界》笔记</title><link>https://ElementRef.github.io/p/css-last/</link><pubDate>Mon, 28 Feb 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/css-last/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/css.png" alt="Featured image of post 《CSS 新世界》笔记" /&gt;&lt;h2 id="前置知识"&gt;前置知识
 &lt;/h2&gt;
 &lt;p&gt;&lt;a class="link" href="https://www.zhangxinxu.com/wordpress/2011/03/css-css3-unit-units" target="_blank" rel="noopener" referrerpolicy="no-referrer"
