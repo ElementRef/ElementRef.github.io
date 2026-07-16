@@ -1035,7 +1035,7 @@
 &lt;p&gt;假设你执行 &lt;code&gt;SELECT * FROM users WHERE age &amp;gt; 30;&lt;/code&gt;，此时查出来 3 条记录。你想拉个大网，把所有大于 30 岁的人都罩住，不让别人破坏这个结果。但问题是，如果另一个事务执行 &lt;code&gt;INSERT INTO users (name, age) VALUES ('新员工', 35);&lt;/code&gt;，这条新数据在数据库里&lt;strong&gt;原本是不存在的&lt;/strong&gt;。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;既然它原本不存在，你的行锁该加在谁头上？你根本无锁可加！&lt;/li&gt;
-&lt;li&gt;这种凭空蹦出来的“新记录”，行锁直接失效了。为了挡住它，数据库必须发明一种全新的锁——&lt;strong&gt;间隙锁（Gap Lock）&lt;/strong&gt;，把行与行之间的“空白地带”死死封锁住，不让新数据插进来。&lt;/li&gt;
+&lt;li&gt;这种凭空蹦出来的“新记录”，行锁直接失效了。为了挡住它，数据库必须发明一种全新的锁 — &lt;strong&gt;间隙锁（Gap Lock）&lt;/strong&gt;，把行与行之间的“空白地带”死死封锁住，不让新数据插进来。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="从-mvcc快照读的角度来看"&gt;从 MVCC（快照读）的角度来看
 &lt;/h4&gt;
@@ -1607,7 +1607,7 @@
  &lt;blockquote&gt;
  &lt;p&gt;DDL 语句执行时会隐式的提交当前会话中的事务，这主要是 DDL 语句的执行一般都会在若干个特殊事务中完成；在开启这些特殊事务前，需要将当前会话中的事务提交掉。&lt;/p&gt;
 &lt;p&gt;无论你是改表结构（DDL），还是增删改查数据（DML），都会给表加锁。唯一的区别在于，它们加的是不同种类、不同级别的锁。&lt;/p&gt;
-&lt;h4 id="元数据锁mdl-只要碰表人人有份"&gt;元数据锁（MDL）—— 只要碰表，人人有份
+&lt;h4 id="元数据锁mdl-只要碰表人人有份"&gt;元数据锁（MDL）— 只要碰表，人人有份
 &lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;当你做 &lt;code&gt;SELECT&lt;/code&gt;、&lt;code&gt;INSERT&lt;/code&gt;、&lt;code&gt;UPDATE&lt;/code&gt;、&lt;code&gt;DELETE&lt;/code&gt; 时：MySQL 会给表加一个 &lt;strong&gt;MDL 读锁&lt;/strong&gt;（也叫共享意向锁）。这个锁很温柔，它&lt;strong&gt;不会&lt;/strong&gt;阻止其他会话也来读写数据。它唯一的目的，就是为了阻止别人在这时候来修改表结构（DDL）。&lt;/li&gt;
