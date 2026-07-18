@@ -1,0 +1,915 @@
+<!DOCTYPE html><html lang="zh" dir="ltr"><head><meta charset="utf-8"><style>@layer __jampack__{:where(img[jampack-sized]){max-width:100%;height:auto}}</style><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><meta name="description" content="这两天在看 Electron 的文档 ，边看边提了一些问题给Gemini ，这里算是问题归档吧。\nElectron 离屏渲染这一小节，是要表达什么的？看不懂意图 理解这一节的意图，核心在于明白一个看似矛盾的前提：\n"><title>「Gemini」Electron 学习笔记（四） · I AM BEA, I DRINK TEA</title><link rel="canonical" href="https://ElementRef.github.io/p/electron-note-4/"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="preload" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&amp;display=swap" as="style"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&amp;display=swap"><link rel="stylesheet" href="/scss/style.min.06fc1e79812f0b3546b17df0bac11b53ed3e28f11344e97ab3cd191b89e06ef3.css"><meta property="og:title" content="「Gemini」Electron 学习笔记（四）"><meta property="og:description" content="这两天在看 Electron 的文档 ，边看边提了一些问题给Gemini ，这里算是问题归档吧。\nElectron 离屏渲染这一小节，是要表达什么的？看不懂意图 理解这一节的意图，核心在于明白一个看似矛盾的前提：\n"><meta property="og:url" content="https://ElementRef.github.io/p/electron-note-4/"><meta property="og:site_name" content="馬腊咯稽"><meta property="og:type" content="article"><meta property="og:locale" content="zh_CN"><meta property="article:section" content="Post"><meta property="article:published_time" content="2026-07-18T00:00:00+00:00"><meta property="article:modified_time" content="2026-07-18T00:00:00+00:00"><meta property="og:image" content="https://ElementRef.github.io/img/cover/electron.png"><meta property="og:logo" content="/favicon.svg"><meta name="twitter:site" content="@SpiciComic"><meta name="twitter:creator" content="@SpiciComic"><meta name="twitter:title" content="「Gemini」Electron 学习笔记（四）"><meta name="twitter:description" content="这两天在看 Electron 的文档 ，边看边提了一些问题给Gemini ，这里算是问题归档吧。\nElectron 离屏渲染这一小节，是要表达什么的？看不懂意图 理解这一节的意图，核心在于明白一个看似矛盾的前提：\n"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://ElementRef.github.io/img/cover/electron.png"><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><meta name="apple-mobile-web-app-title" content="馬腊咯稽"><meta http-equiv="Content-Security-Policy" content=" frame-src https://*.bilibili.com https://*.qq.com https://*.youtube.com https://youtu.be https://www.youtube-nocookie.com; upgrade-insecure-requests "><script src="https://cf-insights-proxy.spicicomic.workers.dev/elementref.js" crossorigin="anonymous" data-cf-beacon="{&quot;token&quot;: &quot;9d3fb1ef9fac4cb0b7d041747556f0c4&quot;}" defer=""></script><script src="https://umami.spicicomic.workers.dev/elementref.js" crossorigin="anonymous" data-website-id="87868be0-a9cf-4f8c-8fee-e3cbb99e6cf2" defer=""></script></head><body class="article-page"><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container extended flex main-container on-phone--column"><aside class="sidebar sticky left-sidebar"><button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="菜单">
+<span class="hamburger-box"><span class="hamburger-inner"></span></span></button><header><figure class="site-avatar"><a href="/" rel="noopener" referrerpolicy="no-referrer"><img src="/img/avatar_hu_28c494226642278b.webp" width="600" height="600" class="site-logo" alt="Avatar" fetchpriority="high" decoding="async"></a></figure><div class="site-meta"><h1 class="site-name"><a href="/" rel="noopener" referrerpolicy="no-referrer">馬腊咯稽</a></h1><h2 class="site-description">I AM BEA, I DRINK TEA</h2></div></header><ol class="menu-social"><li><a href="https://github.com/ElementRef" title="GitHub" referrerpolicy="no-referrer" rel="noopener" target="_blank"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-brand-github" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"></path></svg></a></li><li><a href="https://x.com/SpiciComic" title="Twitter" referrerpolicy="no-referrer" rel="noopener" target="_blank"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-brand-twitter" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"></path></svg></a></li><li><a href="https://last.fm/user/SpiciComic" title="Last.fm" referrerpolicy="no-referrer" rel="noopener" target="_blank"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-lastfm" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M20 8c-.83-1-1.388-1-2-1s-2 .271-2 2 1.384 2.233 3 3 2.125 1.812 2 3-1 2-3 2-3-1-3.5-2-1.585-4.78-2.497-6a5 5 0 10-1 7"></path></svg></a></li></ol><ol class="menu" id="main-menu"><li><a href="/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-home-star"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M19.258 10.258 12 3l-9 9h2v7a2 2 0 002 2h4"></path><path d="M9 21v-6a2 2 0 012-2h1.5"></path><path d="M17.8 20.817l-2.172 1.138a.392.392.0 01-.568-.41l.415-2.411-1.757-1.707a.389.389.0 01.217-.665l2.428-.352 1.086-2.193a.392.392.0 01.702.0l1.086 2.193 2.428.352a.39.39.0 01.217.665l-1.757 1.707.414 2.41a.39.39.0 01-.567.411L17.8 20.817"></path></svg>
+<span>主页</span></a></li><li><a href="/archives/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-library"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M7 5.667A2.667 2.667.0 019.667 3h8.666A2.667 2.667.0 0121 5.667v8.666A2.667 2.667.0 0118.333 17H9.667A2.667 2.667.0 017 14.333V5.667"></path><path d="M4.012 7.26A2.005 2.005.0 003 8.997v10c0 1.1.9 2 2 2h10c.75.0 1.158-.385 1.5-1"></path><path d="M11 7h5"></path><path d="M11 10h6"></path><path d="M11 13h3"></path></svg>
+<span>归档</span></a></li><li><a href="/commands/"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="oicon oicon-tabler oicon-tabler-brand-powershell oicons-tabler-outline" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M4.887 20h11.868c.893.0 1.664-.665 1.847-1.592l2.358-12c.212-1.081-.442-2.14-1.462-2.366A1.8 1.8.0 0019.113 4H7.245c-.893.0-1.664.665-1.847 1.592l-2.358 12c-.212 1.081.442 2.14 1.462 2.366q.191.042.385.042"></path><path d="m9 8 4 4-6 4m5 0h3"></path></svg>
+<span>命令</span></a></li><li><a href="/links/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mood-crazy-happy"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M3 12a9 9 0 1018 0A9 9 0 103 12"></path><path d="M7 8.5l3 3"></path><path d="M7 11.5l3-3"></path><path d="M14 8.5l3 3"></path><path d="M14 11.5l3-3"></path><path d="M9.5 15a3.5 3.5.0 005 0"></path></svg>
+<span>好文</span></a></li><li><a href="/artificial-intelligence/"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icons-tabler-outline icon-tabler-brain" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M15.5 13A3.5 3.5.0 0012 16.5v1a3.5 3.5.0 007 0v-1.8M8.5 13a3.5 3.5.0 013.5 3.5v1a3.5 3.5.0 01-7 0v-1.8"></path><path d="M17.5 16a3.5 3.5.0 000-7H17"></path><path d="M19 9.3V6.5a3.5 3.5.0 00-7 0M6.5 16a3.5 3.5.0 010-7H7"></path><path d="M5 9.3V6.5a3.5 3.5.0 017 0v10"></path></svg>
+<span>机智</span></a></li><li><a href="/about/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-meeple"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 20H4a1 1 0 01-1-1c0-2 3.378-4.907 4-6-1 0-4-.5-4-2 0-2 4-3.5 6-4 0-1.5.5-4 3-4s3 2.5 3 4c2 .5 6 2 6 4 0 1.5-3 2-4 2 .622 1.093 4 4 4 6a1 1 0 01-1 1h-5c-1 0-2-4-3-4s-2 4-3 4"></path></svg>
+<span>关于</span></a></li><li class="menu-bottom-section"><ol class="menu"><li id="dark-mode-toggle"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-sunrise"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M3 17h1m16 0h1M5.6 10.6l.7.7m12.1-.7-.7.7M8 17a4 4 0 018 0"></path><path d="M3 21h18"></path><path d="M12 9V3l3 3M9 6l3-3"></path></svg>
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-sunset"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M3 17h1m16 0h1M5.6 10.6l.7.7m12.1-.7-.7.7M8 17a4 4 0 018 0"></path><path d="M3 21h18"></path><path d="M12 3v6l3-3M9 6l3 3"></path></svg>
+<span>主题</span></li></ol></li></ol></aside><aside class="sidebar sticky right-sidebar"><section class="archives widget"><div class="widget-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-hash" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M5 9h14M5 15h14M11 4 7 20M17 4l-4 16"></path></svg></div><h2 class="section-title widget-title">目录</h2><div class="widget--toc"><nav class="toc-nav" id="TableOfContents"><ol><li><a href="#electron-离屏渲染这一小节是要表达什么的看不懂意图">Electron 离屏渲染这一小节，是要表达什么的？看不懂意图</a><ol><li><a href="#它的典型应用场景能用来干什么">它的典型应用场景（能用来干什么？）</a><ol><li><a href="#1-3d-游戏--虚拟世界中的内嵌网页3d-texture">1. 3D 游戏 / 虚拟世界中的“内嵌网页”（3D Texture）</a></li><li><a href="#2-自动化截图与视频生成headless-node-工具">2. 自动化截图与视频生成（Headless Node 工具）</a></li><li><a href="#3-ar--vr-混合现实">3. AR / VR 混合现实</a></li></ol></li><li><a href="#它是怎么工作的核心机制">它是怎么工作的？（核心机制）</a></li><li><a href="#总结">总结</a></li></ol></li><li><a href="#最近打开的文件是通过-appaddrecentdocument-实现的可是操作系统有设置项可以不展示这些文件记录操作系统能使-addrecentdocument-这个-api-成为摆设">「最近打开的文件」是通过 app.addRecentDocument 实现的；可是操作系统有设置项，可以不展示这些文件记录；操作系统能使 addRecentDocument 这个 API 成为摆设？</a><ol><li><a href="#1-操作系统是如何让它成为摆设的">1. 操作系统是如何让它成为“摆设”的？</a><ol><li><a href="#在-windows-上的表现">在 Windows 上的表现</a></li><li><a href="#在-macos-上的表现">在 macOS 上的表现</a></li></ol></li><li><a href="#2-既然系统能关掉为什么文档还要教我们用它">2. 既然系统能关掉，为什么文档还要教我们用它？</a></li><li><a href="#3-工业级应用的完美架构双轨制double-track">3. 工业级应用的完美架构：双轨制（Double-Track）</a></li><li><a href="#最佳实践代码设计">最佳实践代码设计</a></li><li><a href="#总结-1">总结</a></li></ol></li><li><a href="#webview-和-iframe-有什么不同为什么-electron-不推荐-webview"><code>&lt;webview&gt;</code> 和 <code>&lt;iframe&gt;</code> 有什么不同？为什么 Electron 不推荐 <code>&lt;webview&gt;</code>？</a><ol><li><a href="#1-核心技术对比webview-vs-iframe">1. 核心技术对比：<code>&lt;webview&gt;</code> vs <code>&lt;iframe&gt;</code></a></li><li><a href="#2-为什么-electron-极力不推荐使用-webview">2. 为什么 Electron 极力不推荐使用 <code>&lt;webview&gt;</code>？</a><ol><li><a href="#致命痛点一底层的硬伤导致-bug-频发">致命痛点一：底层的硬伤导致 Bug 频发</a></li><li><a href="#致命痛点二可怕的性能与内存开销">致命痛点二：可怕的性能与内存开销</a></li><li><a href="#致命痛点三dom-生命周期的隐患">致命痛点三：DOM 生命周期的隐患</a></li></ol></li><li><a href="#3-2026-年我们该用什么替代它们">3. 2026 年，我们该用什么替代它们？</a><ol><li><a href="#为什么-webcontentsview-是终极解法">为什么 <code>WebContentsView</code> 是终极解法？</a></li></ol></li><li><a href="#决策树我该选哪一个">决策树：我该选哪一个？</a></li></ol></li><li><a href="#如果要在-dock-图标上展示角标比如有-3-个代办怎么实现系统默认实现的在-windows-章节说是-browserwindowsetoverlayicon-这个方法可以实现不知道-macos-怎么实现">如果要在 Dock 图标上展示角标（比如有 3 个代办），怎么实现？系统默认实现的？在 Windows 章节，说是 BrowserWindow.setOverlayIcon 这个方法可以实现；不知道 macOS 怎么实现</a><ol><li><a href="#1-macos-上的实现方式">1. macOS 上的实现方式</a><ol><li><a href="#核心实现代码">核心实现代码</a></li><li><a href="#为什么说它是系统默认实现的">为什么说它是系统默认实现的？</a></li></ol></li><li><a href="#2-跨平台最佳实践windows-vs-macos-二合一">2. 跨平台最佳实践（Windows vs macOS 二合一）</a></li><li><a href="#3-补充macos-独占的-dock-视觉特效">3. 补充：macOS 独占的 Dock 视觉特效</a><ol><li><a href="#1-让-dock-图标弹跳起来bounce">1. 让 Dock 图标“弹跳”起来（Bounce）</a></li><li><a href="#2-动态下载进度条download-progress">2. 动态下载进度条（Download Progress）</a></li></ol></li></ol></li><li><a href="#让-dock-图标弹跳起来竟然不是-macos-自己实现的">「让 Dock 图标“弹跳”起来」竟然不是 macOS 自己实现的？</a><ol><li><a href="#1-原生弹跳是一个受控的安全机制">1. 原生“弹跳”是一个受控的安全机制</a></li><li><a href="#2-什么是系统自动实现的弹跳">2. 什么是“系统自动实现”的弹跳？</a></li><li><a href="#3-为什么-electron-专门提供这个-api">3. 为什么 Electron 专门提供这个 API？</a></li><li><a href="#总结-2">总结</a></li></ol></li><li><a href="#electron-内部的网页最好是不是-spa尽管-spa-可能有白屏问题">Electron 内部的网页，最好是不是 SPA？尽管 SPA 可能有白屏问题</a><ol><li><a href="#1-为什么在-electron-中spa-比在-web-端更爽">1. 为什么在 Electron 中，SPA 比在 Web 端更爽？</a></li><li><a href="#2-那么electron-里的白屏到底是怎么来的">2. 那么，Electron 里的“白屏”到底是怎么来的？</a></li><li><a href="#3-终极解法如何彻底干掉-electron-的白屏">3. 终极解法：如何彻底干掉 Electron 的白屏？</a><ol><li><a href="#方案先隐藏渲染好再显示">方案：先隐藏，渲染好再显示</a></li></ol></li><li><a href="#总结-3">总结</a></li></ol></li><li><a href="#-webkit-app-region-drag-还是-app-region-drag文档里两种都有">-webkit-app-region: drag 还是 app-region: drag？文档里两种都有</a><ol><li><a href="#1-为什么必须用--webkit-app-region">1. 为什么必须用 <code>-webkit-app-region</code>？</a></li><li><a href="#2-编写无框窗口frameless-window拖拽的标准写法">2. 编写无框窗口（Frameless Window）拖拽的标准写法</a></li><li><a href="#避坑指南为什么我的拖拽区域不能点击了">避坑指南：为什么我的拖拽区域不能点击了？</a></li><li><a href="#总结-4">总结</a></li></ol></li><li><a href="#electron-都有一个关于的弹窗里边通常有一个-logo用的-chrome-版本之类的信息这个弹窗也是-web-吗">Electron 都有一个「关于」的弹窗，里边通常有一个 Logo，用的 Chrome 版本之类的信息；这个弹窗也是 Web 吗？</a><ol><li><a href="#方案一操作系统原生弹窗非-web纯原生-ui">方案一：操作系统原生弹窗（非 Web，纯原生 UI）</a><ol><li><a href="#在-macos-上的表现-1">在 macOS 上的表现</a></li><li><a href="#在-windows-上的表现-1">在 Windows 上的表现</a></li><li><a href="#核心实现代码-1">核心实现代码</a></li></ol></li><li><a href="#方案二全自定义弹窗纯-web-页面">方案二：全自定义弹窗（纯 Web 页面）</a><ol><li><a href="#工作原理">工作原理</a></li></ol></li><li><a href="#总结-5">总结</a></li></ol></li><li><a href="#通过你给我的例子感觉经常需要调整-browserwindow-的配置你的例子中大多数配置都是在-new-的时候初始化好的比如用户访问关于我应该怎么再-new-一个-browserwindow">通过你给我的例子，感觉经常需要调整 BrowserWindow 的配置；你的例子中，大多数配置都是在 new 的时候初始化好的。比如用户访问「关于」，我应该怎么再 new 一个 BrowserWindow？</a><ol><li><a href="#最佳实践单例窗口管理">最佳实践：单例窗口管理</a></li><li><a href="#触发场景-a用户点击了系统的原生菜单栏">触发场景 A：用户点击了系统的原生菜单栏</a></li><li><a href="#触发场景-b用户点击了网页前端react--vue里的关于按钮">触发场景 B：用户点击了网页前端（React / Vue）里的“关于”按钮</a></li><li><a href="#总结-6">总结</a></li></ol></li><li><a href="#在-macos-上新应用打开都要请求很多权限比如定位本地网络麦克风等要怎么实现windows-上似乎没有权限申请">在 macOS 上，新应用打开都要请求很多权限，比如定位、本地网络、麦克风等；要怎么实现？Windows 上似乎没有权限申请</a><ol><li><a href="#1-在-macos-上如何实现权限申请">1. 在 macOS 上如何实现权限申请？</a><ol><li><a href="#第一步在打包配置中声明权限使用原因-infoplist">第一步：在打包配置中声明“权限使用原因” (InfoPlist)</a></li><li><a href="#第二步在-electron-主进程中主动检测和请求">第二步：在 Electron 主进程中主动检测和请求</a></li></ol></li><li><a href="#2-windows-上真的不需要申请权限吗">2. Windows 上真的不需要申请权限吗？</a><ol><li><a href="#例外情况如果是分发到-windows-应用商店-uwp--msix">例外情况：如果是分发到 Windows 应用商店 (UWP / MSIX)</a></li></ol></li><li><a href="#总结-7">总结</a></li></ol></li><li><a href="#在-macos-上申请权限之后往往需要重启应用这个重启的过程是全程系统接管的吗">在 macOS 上申请权限之后，往往需要重启应用；这个重启的过程，是全程系统接管的吗？</a><ol><li><a href="#1-操作系统的底层接管逻辑先斩后奏">1. 操作系统的底层接管逻辑：“先斩后奏”</a></li><li><a href="#2-这种强行接管会带来哪些工程痛点">2. 这种“强行接管”会带来哪些工程痛点？</a></li><li><a href="#3-工业级应用的优雅自救方案主动重启">3. 工业级应用的优雅自救方案（主动重启）</a><ol><li><a href="#最佳实践流程设计">最佳实践流程设计</a></li><li><a href="#核心实现如何用代码优雅地自己重启">核心实现：如何用代码优雅地“自己重启”？</a></li></ol></li><li><a href="#总结-8">总结</a></li></ol></li><li><a href="#一些应用支持配置网络代理electron-怎么实现">一些应用支持配置网络代理，Electron 怎么实现？</a><ol><li><a href="#1-配置代理地址sessetproxy">1. 配置代理地址（<code>ses.setProxy</code>）</a><ol><li><a href="#核心-api">核心 API</a></li><li><a href="#关键点">关键点</a></li></ol></li><li><a href="#2-处理代理认证login-事件">2. 处理代理认证（<code>login</code> 事件）</a></li><li><a href="#3-常见的工程化实践方案">3. 常见的工程化实践方案</a><ol><li><a href="#模式-a跟随系统system-proxy">模式 A：跟随系统（System Proxy）</a></li><li><a href="#模式-b手动配置-uiuser-config">模式 B：手动配置 UI（User Config）</a></li></ol></li><li><a href="#避坑指南">避坑指南</a></li></ol></li><li><a href="#在网页中只能使用-file-协议请求-asar-归档文件中的内容吗">在网页中，只能使用 file: 协议请求 ASAR 归档文件中的内容吗？</a><ol><li><a href="#官方极力推荐的终极解法自定义协议custom-protocol">官方极力推荐的终极解法：自定义协议（Custom Protocol）</a><ol><li><a href="#核心实现步骤typescript">核心实现步骤（TypeScript）</a></li></ol></li><li><a href="#为什么不建议用-file痛点剖析">为什么不建议用 <code>file://</code>？（痛点剖析）</a></li><li><a href="#总结-9">总结</a></li></ol></li><li><a href="#为什么文档中使用-file-协议">为什么文档中使用 file: 协议？</a><ol><li><a href="#1-降低新手的认知和上手门槛">1. 降低新手的认知和上手门槛</a></li><li><a href="#2-在最基础的纯静态场景下它确实能跑通">2. 在最基础的“纯静态”场景下它确实能跑通</a></li><li><a href="#3-历史包袱与文档更新的滞后性">3. 历史包袱与文档更新的滞后性</a></li><li><a href="#官方文档隐藏的免责声明">官方文档隐藏的“免责声明”</a></li></ol></li><li><a href="#asar-完整性检查到底要不要开">ASAR 完整性检查到底要不要开？</a><ol><li><a href="#1-为什么要开不开有什么后果">1. 为什么要开？不开有什么后果？</a><ol><li><a href="#不开-asar-完整性检查默认状态">不开 ASAR 完整性检查（默认状态）</a></li><li><a href="#安全闭环">安全闭环</a></li></ol></li><li><a href="#2-怎么开2026-年现代构建配置">2. 怎么开？（2026 年现代构建配置）</a><ol><li><a href="#electron-builderyml-最佳安全实践配置"><code>electron-builder.yml</code> 最佳安全实践配置</a></li></ol></li><li><a href="#3-开了它就高枕无忧了吗技术局限性">3. 开了它就高枕无忧了吗？（技术局限性）</a><ol><li><a href="#工业级安全闭环">工业级安全闭环</a></li></ol></li><li><a href="#总结-10">总结</a></li></ol></li><li><a href="#electron-中的-es-模块支持顶层-await-了吗">Electron 中的 ES 模块支持顶层 await 了吗？</a><ol><li><a href="#1-渲染进程网页端100-完美支持">1. 渲染进程（网页端）：100% 完美支持</a></li><li><a href="#2-主进程nodejs-端支持但需要迈过工程坎">2. 主进程（Node.js 端）：支持，但需要迈过「工程坎」</a><ol><li><a href="#问题-apackagejson-的-type-module-冲突">问题 A：package.json 的 <code>type: "module"</code> 冲突</a></li><li><a href="#最佳工程解法让-vite--rspack-在编译时抹平差异">最佳工程解法：让 Vite / Rspack 在编译时抹平差异</a></li></ol></li><li><a href="#避坑指南主进程顶层-await-的生命周期死锁">避坑指南：主进程顶层 await 的「生命周期死锁」</a></li><li><a href="#最佳安全准则">最佳安全准则</a></li></ol></li><li><a href="#为什么-preload-script-必须使用-mjs而其他的不用">为什么 Preload Script 必须使用 .mjs？而其他的不用？</a><ol><li><a href="#1-根源preload-脚本被夹在两个世界中间">1. 根源：Preload 脚本被夹在两个世界中间</a></li><li><a href="#2-为什么-preload-不能像网页那样随意">2. 为什么 Preload 不能像网页那样随意？</a><ol><li><a href="#为什么不能用-commonjs-jsrequire">为什么不能用 CommonJS (<code>.js</code>/<code>require</code>)？</a></li><li><a href="#为什么不能像网页渲染进程那样交给打包工具二合一">为什么不能像网页（渲染进程）那样交给打包工具二合一？</a></li></ol></li><li><a href="#3-为什么是-mjsesm">3. 为什么是 <code>.mjs</code>（ESM）？</a><ol><li><a href="#为什么主进程和渲染进程不用这么麻烦">为什么“主进程”和“渲染进程”不用这么麻烦？</a></li></ol></li><li><a href="#总结-11">总结</a></li></ol></li><li><a href="#文档注意事项中的您必须在-app-的-ready-事件之前使用-await是什么意思">文档注意事项中的「您必须在 app 的 ready 事件之前使用 await」是什么意思？</a><ol><li><a href="#1-核心原因有些-api-属于投胎型api">1. 核心原因：有些 API 属于“投胎型”API</a><ol><li><a href="#错误的写法在-ready-之后-await">错误的写法（在 ready 之后 await）</a></li><li><a href="#正确的写法在-ready-之前执行--await">正确的写法（在 ready 之前执行 / await）</a></li></ol></li><li><a href="#2-还有哪些东西必须在-ready-之前处理">2. 还有哪些东西必须在 <code>ready</code> 之前处理？</a></li><li><a href="#总结-12">总结</a></li></ol></li></ol></nav></div></section></aside><main class="full-width main"><article class="has-image main-article"><header class="article-header"><div class="article-image"><a href="/p/electron-note-4/" rel="noopener" referrerpolicy="no-referrer"><img alt="Featured image of post 「Gemini」Electron 学习笔记（四）" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/img/cover/electron.webp" fetchpriority="high" decoding="async" width="1200" height="720" jampack-sized="true"></a></div><div class="article-details"><header class="article-category"><a href="/c/electron/" style="background-color:#c0beef;color:#120f3d" rel="noopener" referrerpolicy="no-referrer">Electron</a></header><div class="article-title-wrapper"><h2 class="article-title"><a href="/p/electron-note-4/" rel="noopener" referrerpolicy="no-referrer">「Gemini」Electron 学习笔记（四）</a></h2></div><footer class="article-meta"><div class="inline-meta"><svg width="56" height="56" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-calendar-time" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"></path><circle cx="18" cy="18" r="4"></circle><path d="M15 3v4M7 3v4m-4 4h16m-1 5.496V18l1 1"></path></svg>
+<time class="article-time--published" datetime="2026-07-18T00:00:00Z">2026 年 7月 18 日</time>
+<svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-clock" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
+<time class="article-time--reading">阅读时长: 48 分钟</time></div></footer></div></header><aside class="article-toc"><details><summary><div class="article-toc-title"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"></path><path d="m9 6 6 6-6 6"></path></svg>
+<span>目录</span></div></summary><nav class="toc-nav"><ol><li><a href="#electron-离屏渲染这一小节是要表达什么的看不懂意图">Electron 离屏渲染这一小节，是要表达什么的？看不懂意图</a><ol><li><a href="#它的典型应用场景能用来干什么">它的典型应用场景（能用来干什么？）</a><ol><li><a href="#1-3d-游戏--虚拟世界中的内嵌网页3d-texture">1. 3D 游戏 / 虚拟世界中的“内嵌网页”（3D Texture）</a></li><li><a href="#2-自动化截图与视频生成headless-node-工具">2. 自动化截图与视频生成（Headless Node 工具）</a></li><li><a href="#3-ar--vr-混合现实">3. AR / VR 混合现实</a></li></ol></li><li><a href="#它是怎么工作的核心机制">它是怎么工作的？（核心机制）</a></li><li><a href="#总结">总结</a></li></ol></li><li><a href="#最近打开的文件是通过-appaddrecentdocument-实现的可是操作系统有设置项可以不展示这些文件记录操作系统能使-addrecentdocument-这个-api-成为摆设">「最近打开的文件」是通过 app.addRecentDocument 实现的；可是操作系统有设置项，可以不展示这些文件记录；操作系统能使 addRecentDocument 这个 API 成为摆设？</a><ol><li><a href="#1-操作系统是如何让它成为摆设的">1. 操作系统是如何让它成为“摆设”的？</a><ol><li><a href="#在-windows-上的表现">在 Windows 上的表现</a></li><li><a href="#在-macos-上的表现">在 macOS 上的表现</a></li></ol></li><li><a href="#2-既然系统能关掉为什么文档还要教我们用它">2. 既然系统能关掉，为什么文档还要教我们用它？</a></li><li><a href="#3-工业级应用的完美架构双轨制double-track">3. 工业级应用的完美架构：双轨制（Double-Track）</a></li><li><a href="#最佳实践代码设计">最佳实践代码设计</a></li><li><a href="#总结-1">总结</a></li></ol></li><li><a href="#webview-和-iframe-有什么不同为什么-electron-不推荐-webview"><code>&lt;webview&gt;</code> 和 <code>&lt;iframe&gt;</code> 有什么不同？为什么 Electron 不推荐 <code>&lt;webview&gt;</code>？</a><ol><li><a href="#1-核心技术对比webview-vs-iframe">1. 核心技术对比：<code>&lt;webview&gt;</code> vs <code>&lt;iframe&gt;</code></a></li><li><a href="#2-为什么-electron-极力不推荐使用-webview">2. 为什么 Electron 极力不推荐使用 <code>&lt;webview&gt;</code>？</a><ol><li><a href="#致命痛点一底层的硬伤导致-bug-频发">致命痛点一：底层的硬伤导致 Bug 频发</a></li><li><a href="#致命痛点二可怕的性能与内存开销">致命痛点二：可怕的性能与内存开销</a></li><li><a href="#致命痛点三dom-生命周期的隐患">致命痛点三：DOM 生命周期的隐患</a></li></ol></li><li><a href="#3-2026-年我们该用什么替代它们">3. 2026 年，我们该用什么替代它们？</a><ol><li><a href="#为什么-webcontentsview-是终极解法">为什么 <code>WebContentsView</code> 是终极解法？</a></li></ol></li><li><a href="#决策树我该选哪一个">决策树：我该选哪一个？</a></li></ol></li><li><a href="#如果要在-dock-图标上展示角标比如有-3-个代办怎么实现系统默认实现的在-windows-章节说是-browserwindowsetoverlayicon-这个方法可以实现不知道-macos-怎么实现">如果要在 Dock 图标上展示角标（比如有 3 个代办），怎么实现？系统默认实现的？在 Windows 章节，说是 BrowserWindow.setOverlayIcon 这个方法可以实现；不知道 macOS 怎么实现</a><ol><li><a href="#1-macos-上的实现方式">1. macOS 上的实现方式</a><ol><li><a href="#核心实现代码">核心实现代码</a></li><li><a href="#为什么说它是系统默认实现的">为什么说它是系统默认实现的？</a></li></ol></li><li><a href="#2-跨平台最佳实践windows-vs-macos-二合一">2. 跨平台最佳实践（Windows vs macOS 二合一）</a></li><li><a href="#3-补充macos-独占的-dock-视觉特效">3. 补充：macOS 独占的 Dock 视觉特效</a><ol><li><a href="#1-让-dock-图标弹跳起来bounce">1. 让 Dock 图标“弹跳”起来（Bounce）</a></li><li><a href="#2-动态下载进度条download-progress">2. 动态下载进度条（Download Progress）</a></li></ol></li></ol></li><li><a href="#让-dock-图标弹跳起来竟然不是-macos-自己实现的">「让 Dock 图标“弹跳”起来」竟然不是 macOS 自己实现的？</a><ol><li><a href="#1-原生弹跳是一个受控的安全机制">1. 原生“弹跳”是一个受控的安全机制</a></li><li><a href="#2-什么是系统自动实现的弹跳">2. 什么是“系统自动实现”的弹跳？</a></li><li><a href="#3-为什么-electron-专门提供这个-api">3. 为什么 Electron 专门提供这个 API？</a></li><li><a href="#总结-2">总结</a></li></ol></li><li><a href="#electron-内部的网页最好是不是-spa尽管-spa-可能有白屏问题">Electron 内部的网页，最好是不是 SPA？尽管 SPA 可能有白屏问题</a><ol><li><a href="#1-为什么在-electron-中spa-比在-web-端更爽">1. 为什么在 Electron 中，SPA 比在 Web 端更爽？</a></li><li><a href="#2-那么electron-里的白屏到底是怎么来的">2. 那么，Electron 里的“白屏”到底是怎么来的？</a></li><li><a href="#3-终极解法如何彻底干掉-electron-的白屏">3. 终极解法：如何彻底干掉 Electron 的白屏？</a><ol><li><a href="#方案先隐藏渲染好再显示">方案：先隐藏，渲染好再显示</a></li></ol></li><li><a href="#总结-3">总结</a></li></ol></li><li><a href="#-webkit-app-region-drag-还是-app-region-drag文档里两种都有">-webkit-app-region: drag 还是 app-region: drag？文档里两种都有</a><ol><li><a href="#1-为什么必须用--webkit-app-region">1. 为什么必须用 <code>-webkit-app-region</code>？</a></li><li><a href="#2-编写无框窗口frameless-window拖拽的标准写法">2. 编写无框窗口（Frameless Window）拖拽的标准写法</a></li><li><a href="#避坑指南为什么我的拖拽区域不能点击了">避坑指南：为什么我的拖拽区域不能点击了？</a></li><li><a href="#总结-4">总结</a></li></ol></li><li><a href="#electron-都有一个关于的弹窗里边通常有一个-logo用的-chrome-版本之类的信息这个弹窗也是-web-吗">Electron 都有一个「关于」的弹窗，里边通常有一个 Logo，用的 Chrome 版本之类的信息；这个弹窗也是 Web 吗？</a><ol><li><a href="#方案一操作系统原生弹窗非-web纯原生-ui">方案一：操作系统原生弹窗（非 Web，纯原生 UI）</a><ol><li><a href="#在-macos-上的表现-1">在 macOS 上的表现</a></li><li><a href="#在-windows-上的表现-1">在 Windows 上的表现</a></li><li><a href="#核心实现代码-1">核心实现代码</a></li></ol></li><li><a href="#方案二全自定义弹窗纯-web-页面">方案二：全自定义弹窗（纯 Web 页面）</a><ol><li><a href="#工作原理">工作原理</a></li></ol></li><li><a href="#总结-5">总结</a></li></ol></li><li><a href="#通过你给我的例子感觉经常需要调整-browserwindow-的配置你的例子中大多数配置都是在-new-的时候初始化好的比如用户访问关于我应该怎么再-new-一个-browserwindow">通过你给我的例子，感觉经常需要调整 BrowserWindow 的配置；你的例子中，大多数配置都是在 new 的时候初始化好的。比如用户访问「关于」，我应该怎么再 new 一个 BrowserWindow？</a><ol><li><a href="#最佳实践单例窗口管理">最佳实践：单例窗口管理</a></li><li><a href="#触发场景-a用户点击了系统的原生菜单栏">触发场景 A：用户点击了系统的原生菜单栏</a></li><li><a href="#触发场景-b用户点击了网页前端react--vue里的关于按钮">触发场景 B：用户点击了网页前端（React / Vue）里的“关于”按钮</a></li><li><a href="#总结-6">总结</a></li></ol></li><li><a href="#在-macos-上新应用打开都要请求很多权限比如定位本地网络麦克风等要怎么实现windows-上似乎没有权限申请">在 macOS 上，新应用打开都要请求很多权限，比如定位、本地网络、麦克风等；要怎么实现？Windows 上似乎没有权限申请</a><ol><li><a href="#1-在-macos-上如何实现权限申请">1. 在 macOS 上如何实现权限申请？</a><ol><li><a href="#第一步在打包配置中声明权限使用原因-infoplist">第一步：在打包配置中声明“权限使用原因” (InfoPlist)</a></li><li><a href="#第二步在-electron-主进程中主动检测和请求">第二步：在 Electron 主进程中主动检测和请求</a></li></ol></li><li><a href="#2-windows-上真的不需要申请权限吗">2. Windows 上真的不需要申请权限吗？</a><ol><li><a href="#例外情况如果是分发到-windows-应用商店-uwp--msix">例外情况：如果是分发到 Windows 应用商店 (UWP / MSIX)</a></li></ol></li><li><a href="#总结-7">总结</a></li></ol></li><li><a href="#在-macos-上申请权限之后往往需要重启应用这个重启的过程是全程系统接管的吗">在 macOS 上申请权限之后，往往需要重启应用；这个重启的过程，是全程系统接管的吗？</a><ol><li><a href="#1-操作系统的底层接管逻辑先斩后奏">1. 操作系统的底层接管逻辑：“先斩后奏”</a></li><li><a href="#2-这种强行接管会带来哪些工程痛点">2. 这种“强行接管”会带来哪些工程痛点？</a></li><li><a href="#3-工业级应用的优雅自救方案主动重启">3. 工业级应用的优雅自救方案（主动重启）</a><ol><li><a href="#最佳实践流程设计">最佳实践流程设计</a></li><li><a href="#核心实现如何用代码优雅地自己重启">核心实现：如何用代码优雅地“自己重启”？</a></li></ol></li><li><a href="#总结-8">总结</a></li></ol></li><li><a href="#一些应用支持配置网络代理electron-怎么实现">一些应用支持配置网络代理，Electron 怎么实现？</a><ol><li><a href="#1-配置代理地址sessetproxy">1. 配置代理地址（<code>ses.setProxy</code>）</a><ol><li><a href="#核心-api">核心 API</a></li><li><a href="#关键点">关键点</a></li></ol></li><li><a href="#2-处理代理认证login-事件">2. 处理代理认证（<code>login</code> 事件）</a></li><li><a href="#3-常见的工程化实践方案">3. 常见的工程化实践方案</a><ol><li><a href="#模式-a跟随系统system-proxy">模式 A：跟随系统（System Proxy）</a></li><li><a href="#模式-b手动配置-uiuser-config">模式 B：手动配置 UI（User Config）</a></li></ol></li><li><a href="#避坑指南">避坑指南</a></li></ol></li><li><a href="#在网页中只能使用-file-协议请求-asar-归档文件中的内容吗">在网页中，只能使用 file: 协议请求 ASAR 归档文件中的内容吗？</a><ol><li><a href="#官方极力推荐的终极解法自定义协议custom-protocol">官方极力推荐的终极解法：自定义协议（Custom Protocol）</a><ol><li><a href="#核心实现步骤typescript">核心实现步骤（TypeScript）</a></li></ol></li><li><a href="#为什么不建议用-file痛点剖析">为什么不建议用 <code>file://</code>？（痛点剖析）</a></li><li><a href="#总结-9">总结</a></li></ol></li><li><a href="#为什么文档中使用-file-协议">为什么文档中使用 file: 协议？</a><ol><li><a href="#1-降低新手的认知和上手门槛">1. 降低新手的认知和上手门槛</a></li><li><a href="#2-在最基础的纯静态场景下它确实能跑通">2. 在最基础的“纯静态”场景下它确实能跑通</a></li><li><a href="#3-历史包袱与文档更新的滞后性">3. 历史包袱与文档更新的滞后性</a></li><li><a href="#官方文档隐藏的免责声明">官方文档隐藏的“免责声明”</a></li></ol></li><li><a href="#asar-完整性检查到底要不要开">ASAR 完整性检查到底要不要开？</a><ol><li><a href="#1-为什么要开不开有什么后果">1. 为什么要开？不开有什么后果？</a><ol><li><a href="#不开-asar-完整性检查默认状态">不开 ASAR 完整性检查（默认状态）</a></li><li><a href="#安全闭环">安全闭环</a></li></ol></li><li><a href="#2-怎么开2026-年现代构建配置">2. 怎么开？（2026 年现代构建配置）</a><ol><li><a href="#electron-builderyml-最佳安全实践配置"><code>electron-builder.yml</code> 最佳安全实践配置</a></li></ol></li><li><a href="#3-开了它就高枕无忧了吗技术局限性">3. 开了它就高枕无忧了吗？（技术局限性）</a><ol><li><a href="#工业级安全闭环">工业级安全闭环</a></li></ol></li><li><a href="#总结-10">总结</a></li></ol></li><li><a href="#electron-中的-es-模块支持顶层-await-了吗">Electron 中的 ES 模块支持顶层 await 了吗？</a><ol><li><a href="#1-渲染进程网页端100-完美支持">1. 渲染进程（网页端）：100% 完美支持</a></li><li><a href="#2-主进程nodejs-端支持但需要迈过工程坎">2. 主进程（Node.js 端）：支持，但需要迈过「工程坎」</a><ol><li><a href="#问题-apackagejson-的-type-module-冲突">问题 A：package.json 的 <code>type: "module"</code> 冲突</a></li><li><a href="#最佳工程解法让-vite--rspack-在编译时抹平差异">最佳工程解法：让 Vite / Rspack 在编译时抹平差异</a></li></ol></li><li><a href="#避坑指南主进程顶层-await-的生命周期死锁">避坑指南：主进程顶层 await 的「生命周期死锁」</a></li><li><a href="#最佳安全准则">最佳安全准则</a></li></ol></li><li><a href="#为什么-preload-script-必须使用-mjs而其他的不用">为什么 Preload Script 必须使用 .mjs？而其他的不用？</a><ol><li><a href="#1-根源preload-脚本被夹在两个世界中间">1. 根源：Preload 脚本被夹在两个世界中间</a></li><li><a href="#2-为什么-preload-不能像网页那样随意">2. 为什么 Preload 不能像网页那样随意？</a><ol><li><a href="#为什么不能用-commonjs-jsrequire">为什么不能用 CommonJS (<code>.js</code>/<code>require</code>)？</a></li><li><a href="#为什么不能像网页渲染进程那样交给打包工具二合一">为什么不能像网页（渲染进程）那样交给打包工具二合一？</a></li></ol></li><li><a href="#3-为什么是-mjsesm">3. 为什么是 <code>.mjs</code>（ESM）？</a><ol><li><a href="#为什么主进程和渲染进程不用这么麻烦">为什么“主进程”和“渲染进程”不用这么麻烦？</a></li></ol></li><li><a href="#总结-11">总结</a></li></ol></li><li><a href="#文档注意事项中的您必须在-app-的-ready-事件之前使用-await是什么意思">文档注意事项中的「您必须在 app 的 ready 事件之前使用 await」是什么意思？</a><ol><li><a href="#1-核心原因有些-api-属于投胎型api">1. 核心原因：有些 API 属于“投胎型”API</a><ol><li><a href="#错误的写法在-ready-之后-await">错误的写法（在 ready 之后 await）</a></li><li><a href="#正确的写法在-ready-之前执行--await">正确的写法（在 ready 之前执行 / await）</a></li></ol></li><li><a href="#2-还有哪些东西必须在-ready-之前处理">2. 还有哪些东西必须在 <code>ready</code> 之前处理？</a></li><li><a href="#总结-12">总结</a></li></ol></li></ol></nav></details></aside><section class="article-content"><p>这两天在看 Electron 的<a class="link" href="https://www.electronjs.org/zh/docs/latest" target="_blank" rel="noopener" referrerpolicy="no-referrer">文档</a>
+，边看边提了一些问题给<a class="link" href="https://share.gemini.google/fQ4cqWZG4nX2" target="_blank" rel="noopener" referrerpolicy="no-referrer">Gemini</a>
+，这里算是问题归档吧。</p><blockquote><h2 id="electron-离屏渲染这一小节是要表达什么的看不懂意图">Electron 离屏渲染这一小节，是要表达什么的？看不懂意图</h2></blockquote><p>理解这一节的意图，核心在于明白一个看似矛盾的前提：</p><p><strong>“既然 Electron 本身就是一个浏览器外壳，为什么我们要让它不显示任何窗口，而是在‘幕后’悄悄渲染网页？”</strong></p><p>Electron 文档中引入“离屏渲染（Offscreen Rendering）”<strong>，并不是为了日常的桌面 App 界面开发，而是为了向你提供一种</strong>“把 Chromium 当作图形渲染引擎 / 数据源”的特权能力。</p><p>简单来说，它的核心意图是：<strong>“只用 Chromium 的渲染能力去画网页，但不要把它呈现在屏幕上。网页渲染出的每一帧画面，我们要直接拿走它的‘像素数据（Bitmap / 纹理）’去派其他用场。”</strong></p><h3 id="它的典型应用场景能用来干什么">它的典型应用场景（能用来干什么？）</h3><p>当你开启了 <code>offscreen: true</code>，Electron 就变成了一个<strong>没有肉身的“灵魂画手”</strong>。业界通常用它来做以下三件事：</p><h4 id="1-3d-游戏--虚拟世界中的内嵌网页3d-texture">1. 3D 游戏 / 虚拟世界中的“内嵌网页”（3D Texture）</h4><p>比如你正在用 Unity、Unreal（虚幻引擎）或 Three.js 制作一个 3D 游戏。游戏中有一台 3D 电视机，你想让这台电视机播放一个真实的网页（比如 Bilibili 的弹幕视频，或者网页版聊天室）。</p><ul><li><strong>做法：</strong> 在后台用 Electron 离屏渲染该网页。</li><li><strong>意图：</strong> 监听 <code>paint</code> 事件获取每一帧的图片（像素数据），然后把这张图片贴在 3D 场景里那个电视机的模型上（作为 3D 纹理）。</li><li><strong>效果：</strong> 玩家可以在 3D 游戏中实时看到并交互这个网页，而桌面上不会弹出一个多余的浏览器窗口。</li></ul><h4 id="2-自动化截图与视频生成headless-node-工具">2. 自动化截图与视频生成（Headless Node 工具）</h4><p>你需要做一个后台服务，自动输入一个 URL，然后输出该网页的截屏，或者录制该网页的动态动画（比如一些在线生成 PPT、生成海报、生成视频的 SaaS 服务）。</p><ul><li><strong>做法：</strong> 开启离屏渲染并加载目标页面。</li><li><strong>意图：</strong> 实时截获 <code>paint</code> 事件返回的 <code>image</code>（<code>NativeImage</code> 对象），将其转为 PNG 保存到硬盘，或者拼接成视频。</li></ul><h4 id="3-ar--vr-混合现实">3. AR / VR 混合现实</h4><p>在 AR / VR 设备中，传统的 2D 操作系统窗口是无法直接放置的。通过离屏渲染，你可以把整个网页界面变成三维空间中漂浮的一个画布，让用户戴着设备与网页交互。</p><h3 id="它是怎么工作的核心机制">它是怎么工作的？（核心机制）</h3><p>通常在前端，浏览器渲染出的内容会直接通过操作系统的窗口管理器画在屏幕上。但在<strong>离屏渲染</strong>模式下，链路被截断了：</p><ol><li><p><strong>没有窗口：</strong> <code>BrowserWindow</code> 依然存在，但它在桌面上是<strong>不可见且无实体的（Frameless &amp; Invisible）</strong>。</p></li><li><p><strong>像素回调：</strong> 网页正常渲染，但当页面发生变化（如动画、滚动）时，Chromium 会触发一个主进程事件：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 页面每次刷新，主进程就会拿到这一帧的画面像素数据
+</span></span></span><span class="line"><span class="cl"><span class="nx">webContents</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'paint'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">dirty</span><span class="p">,</span> <span class="nx">image</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// image 就是这一帧的 NativeImage 原始数据
+</span></span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">getBitmap</span><span class="p">();</span> <span class="c1">// 拿到原始内存 Buffer
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// 接下来你可以：写入 3D 引擎、保存为图片、通过 WebRTC 广播出去...
+</span></span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></td></tr></tbody></table></div></div></li><li><p><strong>高效更新：</strong> 它还提供了 <code>dirty</code> 区域参数，告诉你这一帧网页里具体是“哪个矩形区域”发生了变化。你不用每次都复制整张图，只需要更新变化的部分（Dirty Area）即可，非常高效。</p></li></ol><h3 id="总结">总结</h3><p>如果把常规的 Electron 开发比作“做一辆车，让人坐进去看外面的风景（用户看着窗口）”<strong>；
+那么离屏渲染就是</strong>“做一台隐蔽的摄像机，把外面风景拍成视频信号，传输到别的地方（获取像素数据移作他用）”。</p><p>如果你只是在开发常规的桌面客户端软件，这一小节你<strong>完全可以略过</strong>。只有当你需要跨界处理 <strong>3D 整合、网页截图 / 录屏服务、或者做某些特殊的无窗口自动化挂机工具</strong>时，才会用到这个高级特性。</p><blockquote><h2 id="最近打开的文件是通过-appaddrecentdocument-实现的可是操作系统有设置项可以不展示这些文件记录操作系统能使-addrecentdocument-这个-api-成为摆设">「最近打开的文件」是通过 app.addRecentDocument 实现的；可是操作系统有设置项，可以不展示这些文件记录；操作系统能使 addRecentDocument 这个 API 成为摆设？</h2></blockquote><p>你的推断是<strong>完全正确</strong>的：<strong>在操作系统的用户权限和全局设置面前，Electron 的 <code>app.addRecentDocument</code> 确实会直接沦为“摆设”</strong>。</p><p>这是一个典型的“操作系统权限凌驾于软件 API”的场景。作为开发者，你必须接受一个事实：<strong><code>app.addRecentDocument</code> 只是在向操作系统发出一个“建议”，而最终决定权完全在操作系统和用户手里</strong>。</p><p>我们可以从系统底层、应用逻辑以及工业级的最佳实践，来拆解这里面的运行机制：</p><h3 id="1-操作系统是如何让它成为摆设的">1. 操作系统是如何让它成为“摆设”的？</h3><p><code>app.addRecentDocument(path)</code> 的底层并不是 Electron 自己在应用内部写了一个“最近文件列表”，而是调用了操作系统原生的系统级 API：</p><ul><li><strong>macOS：</strong> 调用了 Cocoa 框架的 <code>[[NSDocumentController sharedDocumentController] noteNewRecentDocumentURL:...]</code>。</li><li><strong>Windows：</strong> 调用了 COM 组件的 <code>SHAddToRecentDocs</code>。</li></ul><p>当用户在操作系统级关闭了“最近打开的项目”时，系统底层的反应是这样的：</p><h4 id="在-windows-上的表现">在 Windows 上的表现</h4><p>如果用户在 Windows 设置中关闭了 <em>“在‘开始’菜单、跳转列表和文件资源管理器中显示最近打开的项目”</em>：</p><ul><li>当你的 Electron 应用调用 <code>app.addRecentDocument(path)</code> 时，Windows 底层的 <code>SHAddToRecentDocs</code> 内部会<strong>直接无视并丢弃</strong>这条数据。</li><li>因此，用户右键点击你的应用任务栏图标时，<strong>Jump List（跳转列表）里的“最近”分类会直接消失</strong>，整个 API 完全失效。</li></ul><h4 id="在-macos-上的表现">在 macOS 上的表现</h4><p>如果用户在 macOS 的系统设置中将“最近使用的项目”数量设置为“无”或关闭：</p><ul><li>系统底层收到 <code>noteNewRecentDocumentURL</code> 请求后，不会将其写入该应用的系统偏好记录中。</li><li>此时，无论是 Dock 栏图标右键菜单中的“最近使用的文件”，还是应用原生顶部菜单栏里的 <code>File ──► Open Recent</code>（如果使用了原生 role），<strong>都会变成一片空白</strong>。</li></ul><h3 id="2-既然系统能关掉为什么文档还要教我们用它">2. 既然系统能关掉，为什么文档还要教我们用它？</h3><p>既然操作系统一关它就废了，为什么我们不干脆自己用 JS / TS 在应用内部实现一套“最近打开文件”呢？</p><p>因为原生 API 带来了<strong>系统级联动</strong>的独特优势，这是纯前端自己画菜单绝对做不到的：</p><ol><li><strong>全局资源管理器联动：</strong> 在 Windows 的“文件资源管理器”的“主页 / 最近使用”里，或者 Mac 的 Finder 的“最近使用”标签页中，操作系统会自动把你的应用和它打开的文件关联起来。用户可以在系统文件管理器里直接看到并双击它们。</li><li><strong>免打开快速启动：</strong> 用户<strong>不需要先启动你的 App</strong>，只需要在系统的 Dock 栏或任务栏右键你的 App 图标，就能直接点开上次看到一半的文件。如果自己用前端画，用户必须先打开你的 App 窗口才能看到列表。</li></ol><h3 id="3-工业级应用的完美架构双轨制double-track">3. 工业级应用的完美架构：双轨制（Double-Track）</h3><p>正是因为操作系统随时能让这个 API 成为“摆设”，像 <strong>VS Code</strong> 这样的顶级应用在处理“最近打开的文件 / 项目”时，从来不会单单依赖操作系统的 <code>addRecentDocument</code>。</p><p>它们无一例外都采用了“双轨制”架构设计：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[ 用户在应用内打开了一个文件 ]
+</span></span><span class="line"><span class="cl">              │
+</span></span><span class="line"><span class="cl">              ├──► 轨道 A: 调用 app.addRecentDocument(path)
+</span></span><span class="line"><span class="cl">              │    (尽力而为：如果系统支持且没关，就同步到系统的任务栏 / Dock栏右键菜单)
+</span></span><span class="line"><span class="cl">              │
+</span></span><span class="line"><span class="cl">              └──► 轨道 B: 写入应用内部数据库 (如 SQLite / 键值对 JSON 文件)
+</span></span><span class="line"><span class="cl">                   (绝对掌控：不管系统怎么设置，App 内部的“最近打开”历史列表永远可靠)
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="最佳实践代码设计">最佳实践代码设计</h3><p>当用户成功打开一个文件时，你的主进程应该同时做两件事：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">app</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'electron'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">myLocalDatabase</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./services/dbService'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">async</span> <span class="kd">function</span> <span class="nx">handleFileOpen</span><span class="p">(</span><span class="nx">filePath</span>: <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 1. 尝试通知操作系统（系统关了就关了，反正这里不会报错）
+</span></span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">app</span><span class="p">.</span><span class="nx">addRecentDocument</span><span class="p">(</span><span class="nx">filePath</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s1">'操作系统最近文件服务不可用：'</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 2. 必须在应用本地的数据库 / 配置文件中同步持久化一份！
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// 这样无论系统设置如何，你应用内部自己用 React / Vue 画的“最近打开文件”列表永远是 100% 准确的
+</span></span></span><span class="line"><span class="cl">  <span class="k">await</span> <span class="nx">myLocalDatabase</span><span class="p">.</span><span class="nx">insertRecentFile</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">openedAt</span>: <span class="kt">Date.now</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">path</span>: <span class="kt">filePath</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="总结-1">总结</h3><p>操作系统<strong>确实有能力且经常</strong>把 <code>app.addRecentDocument</code> 变成摆设。作为开发者，我们可以把它当成一种“体验上的锦上添花（渐进增强）”。你的核心业务数据和 App 内部展示的“最近文件”菜单，必须握在自己本地的数据库和前端路由里，这才是最稳固的软件架构。</p><blockquote><h2 id="webview-和-iframe-有什么不同为什么-electron-不推荐-webview"><code>&lt;webview&gt;</code> 和 <code>&lt;iframe&gt;</code> 有什么不同？为什么 Electron 不推荐 <code>&lt;webview&gt;</code>？</h2></blockquote><p>简单来说：<strong><code>&lt;iframe&gt;</code> 是标准的 Web 技术，它的安全沙箱和控制权极其有限；而 <code>&lt;webview&gt;</code> 是 Chromium 早期的“黑科技”，它允许你在网页内嵌入一个近乎拥有“完全独立浏览器特权”的子窗口</strong>。</p><p>然而，由于<code>&lt;webview&gt;</code>底层的硬伤，Electron 官方现在不仅不推荐它，甚至在很多现代桌面应用中都在极力去它。</p><p>要理解这两者的本质区别和为什么它被嫌弃，我们需要从它们的<strong>底层架构</strong>和<strong>安全模型</strong>说起。</p><h3 id="1-核心技术对比webview-vs-iframe">1. 核心技术对比：<code>&lt;webview&gt;</code> vs <code>&lt;iframe&gt;</code></h3><div class="table-wrapper"><table><thead><tr><th>维度</th><th><code>&lt;iframe&gt;</code></th><th><code>&lt;webview&gt;</code> (Electron / Chrome Apps)</th></tr></thead><tbody><tr><td><strong>底层本质</strong></td><td>网页内的标准 HTML 节点。</td><td>一个独立的、嵌入在当前渲染进程中的 <strong>Out-of-Process Frame（进程外子框架）</strong>，本质上是由主进程直接管理的独立 <code>webContents</code>。</td></tr><tr><td><strong>进程模型</strong></td><td>默认与父页面共享同一个渲染进程（除非触发跨域且开启了 Site Isolation）。</td><td><strong>绝对拥有独立的渲染进程</strong>，与你 App 外壳的渲染进程物理隔离。</td></tr><tr><td><strong>特权与控制力</strong></td><td>受同源策略（SOP）和 CSP 的极严格限制。父页面几乎无法干涉跨域 iframe 内部的 DOM 或网络请求。</td><td>父页面可以通过 Electron 的 API，直接拦截 <code>&lt;webview&gt;</code> 里的网络请求、注入自定义 Preload 脚本、控制前进后退，控制权极大。</td></tr><tr><td><strong>安全沙箱</strong></td><td>相对安全，但如果与父页面同源，可能会被恶意脚本通过 <code>window.parent</code> 实施攻击。</td><td><strong>天然的沙箱隔离</strong>。外部网站运行在其中，绝无可能访问到父页面的 Node.js 特权 API。</td></tr></tbody></table></div><h3 id="2-为什么-electron-极力不推荐使用-webview">2. 为什么 Electron 极力不推荐使用 <code>&lt;webview&gt;</code>？</h3><p>既然 <code>&lt;webview&gt;</code> 拥有独立的进程、极强的控制力，而且还天然安全隔离，为什么 Electron 官方还在文档中挂起黄牌警告，极力劝阻开发者使用它呢？</p><p>这背后的原因主要有三个：</p><h4 id="致命痛点一底层的硬伤导致-bug-频发">致命痛点一：底层的硬伤导致 Bug 频发</h4><p><code>&lt;webview&gt;</code> 最初是谷歌为了 <strong>Chrome Apps</strong> 生态设计的。由于它要在现有的渲染进程 DOM 树里，硬生生“抠出”一块区域给另一个独立的渲染进程去画图，这在 Chromium 底层涉及到了极其复杂的合成渲染（Compositing）机制。</p><ul><li><strong>拖拽（Drag &amp; Drop）与右键菜单 Bug：</strong> 在 <code>&lt;webview&gt;</code> 内部，点击右键、双击、或者尝试拖拽文件时，经常会发生事件丢失，导致右键菜单定位偏移或干脆无法弹出。</li><li><strong>焦点丢失：</strong> 当用户在 <code>&lt;webview&gt;</code> 里的输入框打字，然后点击你 App 外壳的输入框时，键盘焦点经常会卡死在 <code>&lt;webview&gt;</code> 里切不出来。</li><li><strong>官方无法修复：</strong> 这些 Bug 大多源于 Chromium 自身的架构设计，Electron 团队根本没有权限也无法从底层去修复它们。</li></ul><h4 id="致命痛点二可怕的性能与内存开销">致命痛点二：可怕的性能与内存开销</h4><p>由于 <code>&lt;webview&gt;</code> 本质上是伪装成 HTML 节点的另一个 <code>webContents</code>：</p><ul><li>在页面里多写一个 <code>&lt;webview&gt;</code>，系统就会毫无节制地多开一个完整的 Chromium 渲染进程。</li><li>每一个 <code>&lt;webview&gt;</code> 都会消耗几十到上百 MB 的内存。如果你做了一个“多标签页浏览器”功能，在前端用 Vue / React 渲染了 10 个 <code>&lt;webview&gt;</code> 节点，用户的电脑内存会瞬间被吃空。</li></ul><h4 id="致命痛点三dom-生命周期的隐患">致命痛点三：DOM 生命周期的隐患</h4><p>在 React 或 Vue 中，如果页面发生重新渲染，DOM 节点可能会被无意中销毁并重建。
+如果你的 <code>&lt;webview&gt;</code> 节点因为前端组件更新被重新挂载（Remount），<strong>它内部的所有状态（用户登录的 Session、表单输入、历史记录）会瞬间全部丢失，且无法恢复</strong>。这在前端工程中是一场灾难。</p><h3 id="3-2026-年我们该用什么替代它们">3. 2026 年，我们该用什么替代它们？</h3><p>如果你现在需要开发一个在应用内加载第三方网页（如 GitHub、AI 聊天页面）的功能，官方和业界推荐的黄金方案是 <code>WebContentsView</code>（旧版本中称为 <code>BrowserView</code>）。</p><h4 id="为什么-webcontentsview-是终极解法">为什么 <code>WebContentsView</code> 是终极解法？</h4><p>因为 <code>WebContentsView</code> <strong>彻底摆脱了 DOM 树的束缚</strong>。</p><ol><li><strong>纯原生贴纸：</strong> 它是直接由主进程在你的窗口上方“贴”上去的一个原生 Chromium 视图。它不属于前端 HTML 的一部分，因此绝对不会受到前端 React / Vue 重新渲染、销毁 DOM 的影响。</li><li><strong>没有事件 Bug：</strong> 因为它是原生的视图（View），所以右键、拖拽、焦点切换全部由 Chromium 原生接管，100% 灵敏，零 Bug。</li><li><strong>内存可控：</strong> 它的生命周期和销毁完全由你在主进程（Node.js 端）手动控制，你可以非常优雅地缓存或销毁它，从而极大地节省内存。</li></ol><h3 id="决策树我该选哪一个">决策树：我该选哪一个？</h3><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">     你需要在 Electron 中加载外部网页吗？
+</span></span><span class="line"><span class="cl">                      │
+</span></span><span class="line"><span class="cl">                      ▼
+</span></span><span class="line"><span class="cl">        【是，它是一个完整的第三方网站】
+</span></span><span class="line"><span class="cl">        【(如 GitHub, Google, 外部 H5)】
+</span></span><span class="line"><span class="cl">                      │
+</span></span><span class="line"><span class="cl">                      ▼
+</span></span><span class="line"><span class="cl">           【使用 WebContentsView】
+</span></span><span class="line"><span class="cl">           (性能最好，安全，无 Bug)
+</span></span><span class="line"><span class="cl">                      │
+</span></span><span class="line"><span class="cl">                      ├───► [否，我只是想嵌入一个自己写的小组件]
+</span></span><span class="line"><span class="cl">                      │     [且需要绝对的 CSS 样式 / 环境隔离]
+</span></span><span class="line"><span class="cl">                      │               │
+</span></span><span class="line"><span class="cl">                      │               ▼
+</span></span><span class="line"><span class="cl">                      │         【使用 &lt;iframe&gt;】
+</span></span><span class="line"><span class="cl">                      │         (简单，开销极小)
+</span></span><span class="line"><span class="cl">                      │
+</span></span><span class="line"><span class="cl">                      └───► [除非你在维护 5 年前极其老旧的 Electron 项目]
+</span></span><span class="line"><span class="cl">                            [否则永远不要再新建 &lt;webview&gt; 节点]
+</span></span></code></pre></td></tr></tbody></table></div></div><blockquote><h2 id="如果要在-dock-图标上展示角标比如有-3-个代办怎么实现系统默认实现的在-windows-章节说是-browserwindowsetoverlayicon-这个方法可以实现不知道-macos-怎么实现">如果要在 Dock 图标上展示角标（比如有 3 个代办），怎么实现？系统默认实现的？在 Windows 章节，说是 BrowserWindow.setOverlayIcon 这个方法可以实现；不知道 macOS 怎么实现</h2></blockquote><p>你提到了 Windows 下的 <code>BrowserWindow.setOverlayIcon</code>，这个方法确实可以在 Windows 任务栏的 App 图标右下角贴上一个微型的状态图标（比如一个小红点或带数字的 icon）。</p><p>但是在 macOS 上，系统的设计规范和底层 API 是完全不同的。在 macOS 上，我们称之为 <strong>Dock Badge（Dock 栏徽章 / 角标）</strong>。</p><p>在 Electron 中，macOS 的 Dock 角标<strong>不需要</strong>像 Windows 那样费尽心思去绘制一个 <code>setOverlayIcon</code> 的图片，它是<strong>由系统直接支持并完美实现的</strong>。</p><h3 id="1-macos-上的实现方式">1. macOS 上的实现方式</h3><p>Electron 针对 macOS 的系统特性，在全局的 <code>app</code> 模块上提供了一个极为简单直观的 API：<code>app.dock.setBadge(text)</code>。</p><h4 id="核心实现代码">核心实现代码</h4><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">ipcMain</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'electron'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 假设收到渲染进程（前端）发来的未读消息数更新通知
+</span></span></span><span class="line"><span class="cl"><span class="nx">ipcMain</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'update-unread-count'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">count</span>: <span class="kt">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span> <span class="o">===</span> <span class="s1">'darwin'</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 传入字符串，系统会自动在 Dock 图标右上角绘制红底白字的圆圈
+</span></span></span><span class="line"><span class="cl">      <span class="nx">app</span><span class="p">.</span><span class="nx">dock</span><span class="p">.</span><span class="nx">setBadge</span><span class="p">(</span><span class="nx">count</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 传入空字符串，清除角标
+</span></span></span><span class="line"><span class="cl">      <span class="nx">app</span><span class="p">.</span><span class="nx">dock</span><span class="p">.</span><span class="nx">setBadge</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h4 id="为什么说它是系统默认实现的">为什么说它是系统默认实现的？</h4><p>当你调用 <code>app.dock.setBadge('3')</code> 时：</p><ol><li><strong>无需自绘：</strong> 你不需要准备任何红色圆圈的图片，也不用担心字体大小和对齐问题。</li><li><strong>原生动效：</strong> macOS 系统底层（Cocoa API）会自动在你的 Dock 图标右上角绘制那个经典的<strong>红底、白字、带微弱阴影和渐变的原生圆圈</strong>。</li><li><strong>自适应：</strong> 如果未读数从 <code>3</code> 变成 <code>99+</code>，红圈会自动横向拉伸变宽，这完全是由 macOS 操作系统自动帮你算好的。</li></ol><h3 id="2-跨平台最佳实践windows-vs-macos-二合一">2. 跨平台最佳实践（Windows vs macOS 二合一）</h3><p>在实际的工业级项目中，由于 Windows 和 Mac 的视觉规范和 API 完全不同，我们通常会写一个统一的方法来处理跨平台的图标标记。</p><p>在 Windows 上，除了可以用 <code>setOverlayIcon</code> 外，现代 Windows 11 也支持任务栏徽章。不过最稳妥且视觉效果最好的方案，依然是针对两个平台进行<strong>分支适配</strong>：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">BrowserWindow</span><span class="p">,</span> <span class="nx">nativeImage</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'electron'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 统一更新应用图标未读角标
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param win 主窗口实例 (Windows 下需要)
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param count 未读数量
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">updateAppBadge</span><span class="p">(</span><span class="nx">win</span>: <span class="kt">BrowserWindow</span> <span class="o">|</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">count</span>: <span class="kt">number</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span> <span class="o">===</span> <span class="s1">'darwin'</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// macOS: 极其简单，直接调用原生 Dock API
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">app</span><span class="p">.</span><span class="nx">dock</span><span class="p">.</span><span class="nx">setBadge</span><span class="p">(</span><span class="nx">count</span> <span class="o">&gt;</span> <span class="mi">99</span> <span class="o">?</span> <span class="s1">'99+'</span> <span class="o">:</span> <span class="nx">count</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">app</span><span class="p">.</span><span class="nx">dock</span><span class="p">.</span><span class="nx">setBadge</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span> <span class="o">===</span> <span class="s1">'win32'</span> <span class="o">&amp;&amp;</span> <span class="nx">win</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Windows: 任务栏图标叠加层 (Overlay Icon)
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 1. 在主进程中动态绘制一个带数字的小圆圈，或者使用预设的红点图片
+</span></span></span><span class="line"><span class="cl">      <span class="c1">// 这里以加载一张预设的红点图标为例（通常是 16x16 像素的 PNG）
+</span></span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">badgeIcon</span> <span class="o">=</span> <span class="nx">nativeImage</span><span class="p">.</span><span class="nx">createFromPath</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'assets/red-dot.png'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">win</span><span class="p">.</span><span class="nx">setOverlayIcon</span><span class="p">(</span><span class="nx">badgeIcon</span><span class="p">,</span> <span class="sb">`您有 </span><span class="si">${</span><span class="nx">count</span><span class="si">}</span><span class="sb"> 条未读消息`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 2. 传入 null 清除叠加图标
+</span></span></span><span class="line"><span class="cl">      <span class="nx">win</span><span class="p">.</span><span class="nx">setOverlayIcon</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="s1">''</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="3-补充macos-独占的-dock-视觉特效">3. 补充：macOS 独占的 Dock 视觉特效</h3><p>既然提到了 macOS 的 Dock 栏，Electron 还额外赠送了你两个非常好玩的原生 API，能让你的应用在收到紧急通知时，体验跟原生软件一模一样：</p><h4 id="1-让-dock-图标弹跳起来bounce">1. 让 Dock 图标“弹跳”起来（Bounce）</h4><p>当有非常紧急的呼叫或消息时，你可以让 Dock 栏的图标像 QQ / 微信 那样一跳一跳地吸引用户注意：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 让 Dock 图标开始弹跳
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 'critical': 连续不停地弹跳，直到用户点击激活窗口
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 'informational': 只轻轻弹跳一两下
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">dock</span><span class="p">.</span><span class="nx">bounce</span><span class="p">(</span><span class="s1">'critical'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 当用户点击或你处理完毕后，可以随时取消弹跳
+</span></span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">dock</span><span class="p">.</span><span class="nx">cancelBounce</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h4 id="2-动态下载进度条download-progress">2. 动态下载进度条（Download Progress）</h4><p>如果你在做文件下载，macOS 的 Dock 图标下方可以显示一个微型的半透明灰色进度条：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 进度范围是 0.0 ~ 1.0
+</span></span></span><span class="line"><span class="cl"><span class="nx">mainWindow</span><span class="p">.</span><span class="nx">setProgressBar</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span> <span class="c1">// 此时 Dock 图标下方和 Windows 任务栏都会出现 50% 进度条
+</span></span></span></code></pre></td></tr></tbody></table></div></div><blockquote><h2 id="让-dock-图标弹跳起来竟然不是-macos-自己实现的">「让 Dock 图标“弹跳”起来」竟然不是 macOS 自己实现的？</h2></blockquote><p>其实，<strong>它的确是 macOS 自己实现的</strong>，Electron 只是充当了那个“按下开关的传话筒”。</p><p>在 macOS 系统中，决定一个 Dock 图标什么时候弹跳、以什么频率弹跳、弹跳时带有什么物理曲线和动画，这套极其复杂的物理引擎和动画机制，<strong>100% 运行在操作系统的底层（由 macOS 的 <code>Dock.app</code> 进程和 Cocoa 框架掌控）</strong>。</p><p>那么，为什么我们还需要在 Electron 代码里写 <code>app.dock.bounce()</code> 呢？</p><h3 id="1-原生弹跳是一个受控的安全机制">1. 原生“弹跳”是一个受控的安全机制</h3><p>macOS 的系统设计原则是：<strong>绝对不允许任何第三方 App 在没有经过系统 / 用户允许的情况下，在后台流氓式地、无节制地抢夺用户的视觉焦点</strong>。</p><p>如果操作系统的设计是“只要应用在后台收到新消息，系统就自动让它弹跳”，那用户的 Dock 栏在群聊轰炸时就会变成一个令人崩溃的“蹦迪现场”。</p><p>因此，macOS 把“弹跳”的控制权设计成了一个<strong>严格的、双向确认的 API 关卡</strong>：</p><ol><li><strong>开关在应用手里：</strong> 只有你（开发者）最清楚什么时候收到的消息是“十万火急”的（比如视频通话来电），什么时候是“无足轻重”的（比如群聊有人发了张表情包）。因此，系统把“触发弹跳的决定权”交给了应用的 API。</li><li><strong>物理实现在系统手里：</strong> 当你在 Electron 里调用 <code>app.dock.bounce('critical')</code> 时，Electron 的 C++ 底层会向 macOS 系统发送一条高优先级的系统指令（调用了 Apple 的原生 API <code>[NSApp requestUserAttention:NSCriticalRequest]</code>）。</li><li><strong>系统接管一切：</strong> 收到指令后，macOS 才会调动系统级的动画资源，让你的 App 图标在 Dock 栏上开始划出那道完美的物理抛物线。</li></ol><h3 id="2-什么是系统自动实现的弹跳">2. 什么是“系统自动实现”的弹跳？</h3><p>在 macOS 中，确实有一些弹跳是<strong>完全由系统默认触发，不需要你写一行代码的</strong>。比如：</p><ul><li><strong>应用启动时：</strong> 当你双击打开任何一个 Electron 应用时，图标在 Dock 栏上会一上一下地弹跳，直到窗口完全加载出来。这个过程是 <strong>macOS 强制且自动实现的</strong>，目的是告诉用户：“别着急，App 正在后台努力加载中。”</li><li><strong>应用崩溃 / 无响应时：</strong> 如果你的 Electron 主进程卡死或者突然崩溃，系统有时也会让图标跳动，或者当你尝试在它卡死时点击它，它会跳动以示警告。</li></ul><h3 id="3-为什么-electron-专门提供这个-api">3. 为什么 Electron 专门提供这个 API？</h3><p>在纯 Web 浏览器里，网页（SPA）运行在严格的安全沙箱中。你在网页里写任何 JavaScript 脚本，都绝对没有办法调用操作系统的 <code>NSApp</code> 接口。也就是说，<strong>网页绝对没办法让 Chrome 浏览器的图标在 Dock 栏弹跳</strong>。</p><p>而 Electron 的核心价值，就是<strong>打破了这条沙箱边界</strong>。</p><p>通过 <code>app.dock.bounce()</code>，Electron 在主进程（Node.js 端）搭了一座桥，让你可以像写原生 macOS 软件（用 Swift / Objective-C 编写的 App）一样，随时向系统发出“请用户注意”的申请。</p><h3 id="总结-2">总结</h3><p>这就好比汽车里的“双闪警示灯”。闪烁的频率、电路的控制、灯泡的亮灭完全是汽车系统自己实现的；但什么时候遇到紧急情况、什么时候该按下那个红色的三角按钮，必须要由身为驾驶员（开发者）的你来决定。</p><blockquote><h2 id="electron-内部的网页最好是不是-spa尽管-spa-可能有白屏问题">Electron 内部的网页，最好是不是 SPA？尽管 SPA 可能有白屏问题</h2></blockquote><p>是的，<strong>在 Electron 内部，网页的首选绝对是 SPA（单页应用）</strong>。</p><p>甚至可以说，SPA 和 Electron 简直是天作之合。在传统 Web 端最让人头疼的“白屏时间（FCP / TTI 慢）”，在 Electron 的本地运行环境下，几乎天然就被消灭了。</p><p>我们可以从以下几个维度来拆解为什么 Electron 极度偏爱 SPA，以及如何优雅地彻底干掉那仅存的“本地白屏”问题。</p><h3 id="1-为什么在-electron-中spa-比在-web-端更爽">1. 为什么在 Electron 中，SPA 比在 Web 端更爽？</h3><p>在浏览器里，SPA 被人诟病白屏，是因为用户需要通过网络去下载好几兆的 JS 包。但在 Electron 里，规则全变了：</p><ul><li><strong>零网络延迟（Instant Load）：</strong> 你的 SPA 资源（HTML、JS、CSS）是直接打包在客户端本地的。Electron 加载网页是通过 <code>file://</code> 协议或自定义协议读取本地 SSD/HDD。读取一个 5MB 的 JS 包只需要几毫秒，几乎是瞬间完成。</li><li><strong>根本不需要 SEO：</strong> 桌面应用不需要被百度或 Google 检索，所以 SSR（服务端渲染）最大优势之一（SEO 友好）在 Electron 里完全失去了用武之地。</li><li><strong>状态极其稳定：</strong> 在桌面应用中，用户期望的操作体验是“顺滑无缝”的。如果采用 MPA（多页应用），每次切页面窗口都会闪烁一下，并且由于页面刷新，内存里的全局变量和 WebSocket 连接会全部中断重连。SPA 的组件级切换能带来最纯正的“原生应用感”。</li></ul><h3 id="2-那么electron-里的白屏到底是怎么来的">2. 那么，Electron 里的“白屏”到底是怎么来的？</h3><p>既然资源都在本地，为什么有时候启动 Electron 还是会看到一瞬间的白屏？</p><p>这通常不是 SPA 路由的锅，而是 <strong>Chromium 初始化窗口与渲染进程启动的时间差</strong> 导致的：</p><ol><li>主进程调用 <code>new BrowserWindow()</code>，操作系统开始绘制窗口。</li><li>此时 Chromium 渲染引擎刚刚启动，本地 HTML 还没来得及加载和解析。</li><li>窗口已经画好了（一片空白），等了几十毫秒后，JS 运行，界面才蹦出来。</li></ol><h3 id="3-终极解法如何彻底干掉-electron-的白屏">3. 终极解法：如何彻底干掉 Electron 的白屏？</h3><p>在实际工程中，我们有非常成熟的方案来解决这个启动白屏问题。最推荐的做法是 <strong>“优雅显现（ready-to-show）”模式</strong>。</p><h4 id="方案先隐藏渲染好再显示">方案：先隐藏，渲染好再显示</h4><p>在创建窗口时，先让窗口处于隐藏状态（<code>show: false</code>）。等渲染进程把 SPA 的首屏 DOM 彻底画好、准备就绪后，再让窗口一瞬间亮出来：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">BrowserWindow</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'electron'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">win</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BrowserWindow</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">width</span>: <span class="kt">800</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">height</span>: <span class="kt">600</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="c1">// 1. 初始化时先藏起来，避免白屏暴露给用户
+</span></span></span><span class="line"><span class="cl">  <span class="nx">show</span>: <span class="kt">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="c1">// 2. 设置与你 App 主题一致的背景色（即使闪烁也是暗色，不刺眼）
+</span></span></span><span class="line"><span class="cl">  <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">'#1e1e1e'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">webPreferences</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">contextIsolation</span>: <span class="kt">true</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">nodeIntegration</span>: <span class="kt">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">win</span><span class="p">.</span><span class="nx">loadFile</span><span class="p">(</span><span class="s1">'dist/index.html'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 3. 监听 ready-to-show 事件
+</span></span></span><span class="line"><span class="cl"><span class="nx">win</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">'ready-to-show'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 4. 此时首屏已在内存中渲染完毕，瞬间展示，视觉体验极佳
+</span></span></span><span class="line"><span class="cl">  <span class="nx">win</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><blockquote><p><strong>进阶技巧（骨架屏）：</strong>
+如果你的 SPA 首屏需要依赖复杂的本地数据库查询（比如 VS Code 启动时需要读取上次的文件列表），你可以直接在 <code>index.html</code> 的 <code>&lt;body&gt;</code> 标签里硬编码写一段极为轻量的纯 CSS 骨架屏（Skeleton）。
+这样在 JS 框架（React / Vue）还没激活时，用户一开窗口就能看到界面轮廓，完全感知不到白屏。</p></blockquote><h3 id="总结-3">总结</h3><p>在 Electron 中：</p><ol><li><strong>不要用 SSR</strong>，它会极大地增加主进程打包和本地运行的复杂度。</li><li><strong>坚决使用 SPA</strong>，配合 Vite 等现代构建工具，把所有静态资源打到本地。</li><li>用 <code>show: false</code> + <code>ready-to-show</code> 的原生机制，把启动时的白屏时间完全隐藏在幕后。</li></ol><blockquote><h2 id="-webkit-app-region-drag-还是-app-region-drag文档里两种都有">-webkit-app-region: drag 还是 app-region: drag？文档里两种都有</h2></blockquote><p>在 2026 年的今天，<strong>如果你是在为 Electron 编写生产环境代码，你应该优先且坚决使用带前缀的 <code>-webkit-app-region: drag</code></strong>。</p><p>虽然你可能在某些非官方文档或 CSS 提示中看到了不带前缀的 <code>app-region</code>，但从底层的标准现状来看，它们有着本质的区别。</p><h3 id="1-为什么必须用--webkit-app-region">1. 为什么必须用 <code>-webkit-app-region</code>？</h3><p>核心原因在于：<strong><code>app-region</code> 并不是一个正式通过的、标准的 W3C CSS 属性</strong>。</p><ul><li><strong>它是 Chromium 的专属私有特性</strong>：这个属性最初是由 Chromium 团队（为了 Chrome Apps 和后来的 Electron、PWA）私有实现的，用来告诉底层的窗口管理器“网页的这一块区域可以用来拖拽窗口”。</li><li><strong>前缀保护机制</strong>：因为这不是标准属性，Chromium 引擎在实现它时，将其严格限制在了 <code>-webkit-</code> 前缀下。</li><li><strong>不带前缀的后果</strong>：如果你在 CSS 中写 <code>app-region: drag</code>，Chromium 渲染引擎（Blink）在解析 CSS 时，会<strong>直接将其作为非法 / 无法识别的属性过滤掉</strong>，导致你的自定义标题栏完全无法拖拽。</li></ul><h3 id="2-编写无框窗口frameless-window拖拽的标准写法">2. 编写无框窗口（Frameless Window）拖拽的标准写法</h3><p>在 Electron 中，实现一个完美的、跨平台无缝拖拽的标题栏，标准的 CSS 写法如下：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="c">/* 1. 让整个自定义标题栏区域可以被拖拽 */</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">titlebar</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kp">-webkit-</span><span class="n">app-region</span><span class="p">:</span> <span class="n">drag</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">height</span><span class="p">:</span> <span class="mi">32</span><span class="kt">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">background-color</span><span class="p">:</span> <span class="mh">#1e1e1e</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">align-items</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c">/* 2. 极其重要：必须把标题栏内部的按钮、输入框等交互元素排除在外 */</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">titlebar</span> <span class="nt">button</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">titlebar</span> <span class="nt">input</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">titlebar</span> <span class="p">.</span><span class="nc">menu-item</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c">/* 恢复为不可拖拽，保证点击、双击事件能正常响应 */</span>
+</span></span><span class="line"><span class="cl">  <span class="kp">-webkit-</span><span class="n">app-region</span><span class="p">:</span> <span class="n">no-drag</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="避坑指南为什么我的拖拽区域不能点击了">避坑指南：为什么我的拖拽区域不能点击了？</h3><p>当你给一个元素设置了 <code>-webkit-app-region: drag</code> 后，它在底层的行为就<strong>不再是一个普通的 HTML 元素，而更像是一个操作系统的原生窗口“把手”</strong>。</p><p>这会带来两个经典的副作用，你在开发时必须注意：</p><ol><li><strong>鼠标事件被拦截</strong>：一旦设为 <code>drag</code>，该元素上所有的鼠标事件（如 <code>click</code>、<code>mouseenter</code>、<code>mouseleave</code>、<code>contextmenu</code>）在渲染进程中<strong>将全部失效</strong>。因为操作系统会优先把鼠标按下事件当作“拖拽窗口”指令消费掉。</li><li><strong>必须显式排除控制按钮</strong>：如果你在标题栏里放了“最小化、最大化、关闭”按钮，必须给这些按钮单独加上 <code>-webkit-app-region: no-drag</code>。否则，用户点击这些按钮时，不仅无法触发点击事件，反而会变成“拖拽窗口”，体验非常糟糕。</li></ol><h3 id="总结-4">总结</h3><p>在 Electron 开发中，不要猜测和尝试标准 CSS 的写法，<strong>请 100% 认准 <code>-webkit-app-region: drag</code></strong>。</p><blockquote><h2 id="electron-都有一个关于的弹窗里边通常有一个-logo用的-chrome-版本之类的信息这个弹窗也是-web-吗">Electron 都有一个「关于」的弹窗，里边通常有一个 Logo，用的 Chrome 版本之类的信息；这个弹窗也是 Web 吗？</h2></blockquote><p>在 Electron 中，这个经典的“关于（About）”弹窗<strong>有两种完全不同的实现方式</strong>。你看到的那个弹窗是 Web 页面还是操作系统原生窗口，完全取决于开发者是用了一行代码的“懒人偷懒方案”，还是追求精致的“全自定义方案”。</p><h3 id="方案一操作系统原生弹窗非-web纯原生-ui">方案一：操作系统原生弹窗（非 Web，纯原生 UI）</h3><p>如果开发者在主进程中调用了 Electron 内置的 <code>app.setAboutPanelOptions(options)</code> 和 <code>app.showAboutPanel()</code>，那么这个弹窗<strong>完全是操作系统底层的原生组件，跟 Web / HTML 没有任何关系</strong>。</p><h4 id="在-macos-上的表现-1">在 macOS 上的表现</h4><p>它是苹果标准的 <code>NSAboutPanel</code>。你会看到一个典型的 Mac 风格小方块，居中展示 App 图标、名字、版本号以及版权信息。</p><h4 id="在-windows-上的表现-1">在 Windows 上的表现</h4><p>它调用的是 Windows 原生的 <code>TaskDialogIndirect</code> 或标准消息框（MessageBox），视觉上就是典型的 Windows 系统对话框。</p><h4 id="核心实现代码-1">核心实现代码</h4><p>开发者只需要在主进程里写几行配置，甚至<strong>连 Chrome、Node.js 的版本号都不用自己查</strong>，系统会自动读取并塞进去：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">process</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'electron'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 1. 配置关于面板的信息
+</span></span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">setAboutPanelOptions</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">applicationName</span><span class="o">:</span> <span class="s1">'我的超酷 App'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">applicationVersion</span><span class="o">:</span> <span class="s1">'1.0.0'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">copyright</span><span class="o">:</span> <span class="s1">'Copyright © 2026'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">version</span><span class="o">:</span> <span class="sb">`Chromium: </span><span class="si">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">versions</span><span class="p">.</span><span class="nx">chrome</span><span class="si">}</span><span class="sb"> | Node: </span><span class="si">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">versions</span><span class="p">.</span><span class="nx">node</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">credits</span><span class="o">:</span> <span class="s1">'感谢全体开源社区贡献者。'</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 2. 在菜单栏被点击时触发
+</span></span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">showAboutPanel</span><span class="p">();</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><blockquote><p><strong>特点：</strong> 这种方式最省事，性能开销为零，而且完美契合当前操作系统的原生视觉规范。但缺点是<strong>样式完全固定，开发者无法通过 CSS 修改任何样式和布局</strong>。</p></blockquote><h3 id="方案二全自定义弹窗纯-web-页面">方案二：全自定义弹窗（纯 Web 页面）</h3><p>像 <strong>VS Code</strong>、<strong>Discord</strong> 或是很多注重品牌视觉的桌面应用，它们嫌弃系统自带的“关于”面板太丑或太低级，就会选择<strong>自己用 Web 技术手写一个</strong>。</p><h4 id="工作原理">工作原理</h4><p>它的本质就是一个<strong>没有边框、没有菜单栏的微型 <code>BrowserWindow</code></strong>。</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">BrowserWindow</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'electron'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">path</span> <span class="kr">from</span> <span class="s1">'path'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">createAboutWindow() {</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">aboutWin</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BrowserWindow</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">width</span>: <span class="kt">400</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">height</span>: <span class="kt">300</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">resizable</span>: <span class="kt">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">minimizable</span>: <span class="kt">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">maximizable</span>: <span class="kt">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">frame</span>: <span class="kt">false</span><span class="p">,</span> <span class="c1">// 关掉原生边框，方便用 HTML / CSS 自己画
+</span></span></span><span class="line"><span class="cl">    <span class="nx">webPreferences</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">preload</span>: <span class="kt">path.join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'preload.js'</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">sandbox</span>: <span class="kt">true</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 加载本地的 SPA 页面（例如用 React / Vue 画的精美关于卡片）
+</span></span></span><span class="line"><span class="cl">  <span class="nx">aboutWin</span><span class="p">.</span><span class="nx">loadFile</span><span class="p">(</span><span class="s1">'about.html'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>而在 <code>about.html</code> 的前端 JavaScript 中，开发者会通过 <code>process.versions</code> 把这些版本信息渲染到 DOM 上：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 在 Preload 脚本中暴露给前端，或者直接在支持的上下文读取
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">chromeVersion</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">versions</span><span class="p">.</span><span class="nx">chrome</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">electronVersion</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">versions</span><span class="p">.</span><span class="nx">electron</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'info'</span><span class="p">).</span><span class="nx">innerText</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">  <span class="sb">`Powered by Chrome v</span><span class="si">${</span><span class="nx">chromeVersion</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="总结-5">总结</h3><p>判断你手头那个 Electron 应用的“关于”弹窗是不是 Web，有一个非常简单的<strong>肉眼鉴别小技巧</strong>：</p><ol><li>尝试在弹窗的文字上<strong>按住鼠标左键拖拽拖动</strong>。如果文字能被蓝色高亮选中，或者你按下 <code>Ctrl+R</code> / <code>Cmd+R</code> 界面突然闪烁刷新了一下，那它 100% 是一个 <strong>Web 页面</strong>。</li><li>如果它严丝合缝，文字无法选中，右键毫无反应，且长得跟系统其他自带软件的关于界面一模一样，那它就是<strong>系统原生的弹窗</strong>。</li></ol><blockquote><h2 id="通过你给我的例子感觉经常需要调整-browserwindow-的配置你的例子中大多数配置都是在-new-的时候初始化好的比如用户访问关于我应该怎么再-new-一个-browserwindow">通过你给我的例子，感觉经常需要调整 BrowserWindow 的配置；你的例子中，大多数配置都是在 new 的时候初始化好的。比如用户访问「关于」，我应该怎么再 new 一个 BrowserWindow？</h2></blockquote><p>在 Electron 中，每当你想打开一个新窗口（比如“关于”窗口、设置窗口、或者是独立的内置浏览器标签页），最标准的做法确实是<strong>再次</strong> <code>new BrowserWindow</code>。</p><p>但有一个非常关键的工程痛点：<strong>如果用户重复点击“关于”按钮，你的代码如果不加控制，就会瘋狂 <code>new</code> 出十几个重叠的“关于”窗口，导致内存暴涨，体验极差</strong>。</p><p>因此，在实际开发中，我们必须使用「单例模式（或窗口引用管理）」来优雅地创建和复用新窗口。</p><p>下面我为你演示如何优雅地在运行时 <code>new</code> 一个“关于”窗口，并确保它<strong>全局唯一、完美复用</strong>：</p><h3 id="最佳实践单例窗口管理">最佳实践：单例窗口管理</h3><p>我们可以在主进程中，通过一个文件模块（或者直接写在刚才提到的 <code>WindowManager</code> 类里）来统一管理“关于”窗口。</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// src/main/windows/aboutWindow.ts
+</span></span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">BrowserWindow</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'electron'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">path</span> <span class="kr">from</span> <span class="s1">'path'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 1. 在模块作用域内持有一个私有引用，用来跟踪当前窗口是否存在
+</span></span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">aboutWindow</span>: <span class="kt">BrowserWindow</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">openAboutWindow() {</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 2. 防重点击机制：如果窗口已经存在，直接让它聚焦（提到最前），而不是 new 一个新的
+</span></span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">aboutWindow</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">aboutWindow</span><span class="p">.</span><span class="nx">isMinimized</span><span class="p">())</span> <span class="nx">aboutWindow</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">aboutWindow</span><span class="p">.</span><span class="nx">focus</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 3. 窗口不存在，new 一个新的，并进行个性化初始化配置
+</span></span></span><span class="line"><span class="cl">  <span class="nx">aboutWindow</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BrowserWindow</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">width</span>: <span class="kt">380</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">height</span>: <span class="kt">480</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">resizable</span>: <span class="kt">false</span><span class="p">,</span> <span class="c1">// 关于窗口通常不需要缩放
+</span></span></span><span class="line"><span class="cl">    <span class="nx">minimizable</span>: <span class="kt">false</span><span class="p">,</span> <span class="c1">// 禁用最小化按钮
+</span></span></span><span class="line"><span class="cl">    <span class="nx">maximizable</span>: <span class="kt">false</span><span class="p">,</span> <span class="c1">// 禁用最大化按钮
+</span></span></span><span class="line"><span class="cl">    <span class="nx">fullscreenable</span>: <span class="kt">false</span><span class="p">,</span> <span class="c1">// 禁用全屏
+</span></span></span><span class="line"><span class="cl">    <span class="nx">title</span><span class="o">:</span> <span class="s1">'关于应用'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">show</span>: <span class="kt">false</span><span class="p">,</span> <span class="c1">// 先隐藏，配合 ready-to-show 优雅显现
+</span></span></span><span class="line"><span class="cl">    <span class="nx">webPreferences</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">preload</span>: <span class="kt">path.join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../preload/index.js'</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">sandbox</span>: <span class="kt">true</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 4. 去除原生的顶部菜单栏（仅针对 Windows / Linux，macOS 的菜单在屏幕最上方）
+</span></span></span><span class="line"><span class="cl">  <span class="nx">aboutWindow</span><span class="p">.</span><span class="nx">removeMenu</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 5. 加载特定的本地 Web 页面
+</span></span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">===</span> <span class="s1">'development'</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">aboutWindow</span><span class="p">.</span><span class="nx">loadURL</span><span class="p">(</span><span class="s1">'http://localhost:3000/#/about'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">aboutWindow</span><span class="p">.</span><span class="nx">loadFile</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../renderer/index.html'</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span> <span class="nx">hash</span><span class="o">:</span> <span class="s1">'about'</span> <span class="p">}</span> <span class="c1">// 优雅加载 SPA 的特定子页面
+</span></span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 6. 渲染就绪后再显示，防止短暂白屏
+</span></span></span><span class="line"><span class="cl">  <span class="nx">aboutWindow</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">'ready-to-show'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">aboutWindow</span><span class="o">?</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 7. 极其重要：当窗口关闭时，必须把引用设为 null，否则下次就无法再次打开了！
+</span></span></span><span class="line"><span class="cl">  <span class="nx">aboutWindow</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'closed'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">aboutWindow</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="触发场景-a用户点击了系统的原生菜单栏">触发场景 A：用户点击了系统的原生菜单栏</h3><p>在 macOS 的应用菜单或者 Windows 的 Help 菜单中，当用户点击“关于”时触发：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// src/main/menu.ts
+</span></span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Menu</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'electron'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">openAboutWindow</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./windows/aboutWindow'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">menuTemplate</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">label</span><span class="o">:</span> <span class="s1">'帮助'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">submenu</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">label</span><span class="o">:</span> <span class="s1">'关于本应用'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">click</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">// 用户点击时，直接运行我们刚才写好的方法
+</span></span></span><span class="line"><span class="cl">          <span class="nx">openAboutWindow</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">menu</span> <span class="o">=</span> <span class="nx">Menu</span><span class="p">.</span><span class="nx">buildFromTemplate</span><span class="p">(</span><span class="nx">menuTemplate</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Menu</span><span class="p">.</span><span class="nx">setApplicationMenu</span><span class="p">(</span><span class="nx">menu</span><span class="p">);</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="触发场景-b用户点击了网页前端react--vue里的关于按钮">触发场景 B：用户点击了网页前端（React / Vue）里的“关于”按钮</h3><p>这时候就需要通过 <strong>IPC（进程间通信）</strong> 让前端给主进程“发个微信”：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 1. 在主进程中注册 IPC 监听 (src/main/ipc/index.ts)
+</span></span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ipcMain</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'electron'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">openAboutWindow</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'../windows/aboutWindow'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">registerIpcHandlers() {</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">ipcMain</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'app:open-about'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">openAboutWindow</span><span class="p">();</span> <span class="c1">// 主进程收到前端消息，直接执行
+</span></span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 2. 在前端组件中（React / Vue 页面）直接调用
+</span></span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">AboutButton() {</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">handleClick</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 通过 preload 暴露的 API 向主进程通信
+</span></span></span><span class="line"><span class="cl">    <span class="nb">window</span><span class="p">.</span><span class="nx">electron</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">'app:open-about'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">handleClick</span><span class="p">}&gt;</span><span class="err">关于本软件</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="总结-6">总结</h3><p>在 Electron 这种多窗口架构中，<code>new</code> 一个新窗口本身非常廉价，但你需要注意两点：</p><ol><li><strong>防止“多开”：</strong> 必须使用局部变量或单例管理器（如 <code>aboutWindow</code> 是否为 <code>null</code>）来守门，如果窗口已存在，应该直接 <code>focus()</code> 把它叫醒。</li><li><strong>销毁监听：</strong> 必须要在 <code>closed</code> 事件里把保存该窗口引用的变量清空，完成垃圾回收，让它能够迎接下一次的 <code>new</code>。</li></ol><blockquote><h2 id="在-macos-上新应用打开都要请求很多权限比如定位本地网络麦克风等要怎么实现windows-上似乎没有权限申请">在 macOS 上，新应用打开都要请求很多权限，比如定位、本地网络、麦克风等；要怎么实现？Windows 上似乎没有权限申请</h2></blockquote><p>macOS 和 Windows 在安全和隐私控制哲学上有着极大的差异：</p><ul><li><strong>macOS 是“严格的沙箱与运行时授权制”</strong>：即使你的 App 已经安装成功，任何涉及敏感隐私的 API（定位、麦克风、摄像头、本地网络）在第一次调用时，都<strong>必须</strong>由操作系统弹窗、经用户手动同意后才能使用。</li><li><strong>Windows 是“默认信任制 / 安装时授权制”</strong>：Windows 传统的 win32 应用（这也是 Electron 打包出来的默认格式）在运行时拥有极高的特权。一旦用户运行了你的 <code>.exe</code>，它默认就可以直接读写硬盘、调用麦克风和摄像头、扫描本地网络，不需要在运行时弹出系统的隐私确认框。</li></ul><p>下面为你拆解，在 Electron 中如何分别处理这两个平台的权限申请。</p><h3 id="1-在-macos-上如何实现权限申请">1. 在 macOS 上如何实现权限申请？</h3><p>在 macOS 上，权限申请不是由 Electron 直接控制弹不弹窗的，而是<strong>由操作系统在你的 App 第一次尝试调用敏感 API 时，自动拦截并弹窗</strong>。</p><p>作为开发者，你需要做以下两件事，否则你的 App 在尝试调用这些 API 时会<strong>直接崩溃（Crash）<strong>或被操作系统</strong>无情拒绝</strong>。</p><h4 id="第一步在打包配置中声明权限使用原因-infoplist">第一步：在打包配置中声明“权限使用原因” (InfoPlist)</h4><p>macOS 强制要求你必须在应用的 <code>Info.plist</code> 文件中，为每个需要申请的权限写一段“人话”（使用原因）。当系统弹窗时，这段话会展示给用户看。</p><p>如果你使用 <strong>electron-builder</strong> 进行打包，你需要在 <code>electron-builder.yml</code>（或 <code>package.json</code> 中的 <code>build</code> 字段）里配置 <code>extendInfo</code>：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># electron-builder.yml 配置示例</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">mac</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">target</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">dmg</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">extendInfo</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 申请麦克风权限</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">NSMicrophoneUsageDescription</span><span class="p">:</span><span class="w"> </span><span class="s1">'我们需要访问您的麦克风以进行语音通话和录音功能。'</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 申请摄像头权限</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">NSCameraUsageDescription</span><span class="p">:</span><span class="w"> </span><span class="s1">'我们需要访问您的摄像头以进行视频会议。'</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 申请定位权限</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">NSLocationWhenInUseUsageDescription</span><span class="p">:</span><span class="w"> </span><span class="s1">'我们需要获取您的位置以提供准确的本地服务。'</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 申请本地网络权限（iOS/macOS 14+ 严格限制）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">NSLocalNetworkUsageDescription</span><span class="p">:</span><span class="w"> </span><span class="s1">'我们需要扫描本地网络以发现和连接您的智能设备。'</span><span class="w">
+</span></span></span></code></pre></td></tr></tbody></table></div></div><blockquote><p><strong>避坑警告</strong>：如果你在代码里调用了获取麦克风的 API，但打包时没有在 <code>Info.plist</code> 中配置 <code>NSMicrophoneUsageDescription</code>，macOS 会认为你的 App 在搞潜行偷听，会<strong>直接强行闪退</strong>（SIGABRT 信号崩溃）你的应用。</p></blockquote><h4 id="第二步在-electron-主进程中主动检测和请求">第二步：在 Electron 主进程中主动检测和请求</h4><p>虽然操作系统会在你调用 API（比如前端调用 <code>navigator.mediaDevices.getUserMedia</code>）时自动弹窗，但在工业级应用中，我们通常会在前端展示一个好看的引导界面。</p><p>Electron 在主进程中提供了 <code>systemPreferences</code> 模块，允许你主动检测和请求权限：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// src/main/services/permissionService.ts
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 主动请求麦克风 / 摄像头权限（仅限 macOS）
+</span></span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">async</span> <span class="kd">function</span> <span class="nx">requestMediaPermissions() {</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span> <span class="o">!==</span> <span class="s1">'darwin'</span><span class="p">)</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 1. 检查当前麦克风状态
+</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">systemPreferences</span><span class="p">.</span><span class="nx">getMediaAccessStatus</span><span class="p">(</span><span class="s1">'microphone'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'not-determined'</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 2. 第一次使用，主动向系统发起弹窗申请
+</span></span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">granted</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">systemPreferences</span><span class="p">.</span><span class="nx">askForMediaAccess</span><span class="p">(</span><span class="s1">'microphone'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">granted</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">status</span> <span class="o">===</span> <span class="s1">'granted'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'获取 macOS 媒体权限失败：'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="2-windows-上真的不需要申请权限吗">2. Windows 上真的不需要申请权限吗？</h3><p><strong>在传统的桌面版 Electron 开发中，答案是：真的不需要</strong>。</p><p>这是因为：</p><ol><li><strong>传统的 Win32 应用特权极高</strong>：Electron 默认打包出来的 <code>.exe</code> 安装包属于传统的桌面应用。在 Windows 的安全模型里，这类应用一旦运行，就默认拥有访问摄像头、麦克风和本地网络的全部权限。</li><li><strong>唯一可能弹窗的场景——防火墙（本地网络）</strong>：
+当你的 Electron 应用试图在本地建立一个 Socket 服务器（比如启动了一个本地的 Express / Koa 服务，或者进行 P2P 传输），Windows 系统的 <strong>Defender 防火墙</strong>会弹出一个经典的提示：“Windows 安全中心已阻止此应用的部分功能（允许其在专用 / 公用网络通信）”。</li></ol><ul><li><strong>如何解决？</strong> 这不需要你在 Electron 代码里写任何东西。在安装阶段，你可以通过打包工具（如 NSIS 制作的安装包）向系统注册防火墙例外，这样用户在安装时就已经允许了网络通信，运行期间就不会再弹窗了。</li></ul><h4 id="例外情况如果是分发到-windows-应用商店-uwp--msix">例外情况：如果是分发到 Windows 应用商店 (UWP / MSIX)</h4><p>如果你计划将你的 Electron 应用打包成 <code>.msix</code> 格式，并提交到 <strong>Microsoft Store（微软应用商店）</strong>，那么它就会被强制纳入 Windows 现代应用（UWP）的安全沙箱。</p><p>这时候，你就<strong>必须</strong>在打包配置文件（<code>AppXManifest.xml</code>）中声明你需要哪些特权（Capabilities）：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;Capabilities&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;Capability</span> <span class="na">Name=</span><span class="s">"internetClient"</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;DeviceCapability</span> <span class="na">Name=</span><span class="s">"microphone"</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;DeviceCapability</span> <span class="na">Name=</span><span class="s">"webcam"</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Capabilities&gt;</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p>声明后，当用户在 Windows 商店下载你的应用时，商店页面会明确告知用户“此应用需要使用麦克风和摄像头”，用户下载即代表在安装时统一授权，运行时同样不会像 macOS 那样频繁中断用户。</p><h3 id="总结-7">总结</h3><ul><li><strong>开发 macOS 版</strong>：你必须像对待 iOS 开发一样严谨。不仅要在 <code>Info.plist</code> 里写满理由，还要在主进程里用 <code>systemPreferences</code> 做好权限状态的拦截和降级引导（比如当用户拒绝权限时，引导他们去“系统设置 ──► 隐私与安全性”手动开启）。</li><li><strong>开发 Windows 版</strong>：保持松弛。你完全可以假定所有硬件权限都是默认开启的。你只需要处理好在极少数由于杀毒软件拦截或防火墙策略导致的调用失败时的 Try-Catch 容错即可。</li></ul><blockquote><h2 id="在-macos-上申请权限之后往往需要重启应用这个重启的过程是全程系统接管的吗">在 macOS 上申请权限之后，往往需要重启应用；这个重启的过程，是全程系统接管的吗？</h2></blockquote><p>在 macOS 上，当用户在“系统设置 ──► 隐私与安全性”中手动为你的应用开启（或关闭）某项敏感权限（比如摄像头、麦克风、辅助功能或完全磁盘访问权限）时，<strong>这个重启过程确实是由操作系统底层的安全机制（TCC，即 Transparency, Consent, and Control）深度接管的，但它并不是一个温和的、用户习以为常的“优雅重启”，而是一次无情的“强制终止”</strong>。</p><p>这里面的运行逻辑和对应用开发的影响非常特殊，我们可以从以下三个层面来剖析：</p><h3 id="1-操作系统的底层接管逻辑先斩后奏">1. 操作系统的底层接管逻辑：“先斩后奏”</h3><p>一旦用户在系统设置里勾选或取消了你 App 的某项权限，macOS 会瞬间执行以下操作：</p><ol><li><strong>强行终止进程（SIGKILL / SIGTERM）</strong>：
+macOS 底层的 <code>taskgated</code> 或 <code>tccd</code> 守护进程检测到权限变更，会<strong>直接向你的应用发送强制退出信号</strong>。这时候，你的 Electron 进程会被操作系统强行杀掉。</li><li><strong>系统弹窗询问（由系统接管）</strong>：
+此时，macOS 会弹出一个系统级的提示框，通常写着：<blockquote><p>“‘XXX’在重新启动前将无法访问[某权限]。您要现在退出吗？”</p></blockquote></li></ol><ul><li>如果用户点击 <strong>“现在退出”</strong>，系统会直接杀掉你的 App 进程（此时应用就处于关闭状态，需要用户手动重新双击打开）。</li><li>在某些最新的 macOS 版本或特定权限（如辅助功能 / 截屏录制）下，系统可能只提供一个“退出并重新打开”的单按钮选项。</li></ul><p>无论如何，<strong>macOS 绝对不会在后台帮你保存应用的状态、不负责帮你重新拉起进程，它只负责最核心的一件事：确保旧的、没有新权限凭证的进程被彻底杀死</strong>。</p><h3 id="2-这种强行接管会带来哪些工程痛点">2. 这种“强行接管”会带来哪些工程痛点？</h3><p>因为系统接管了杀进程的步骤，但<strong>不负责</strong>帮你恢复状态，这会导致以下几个非常糟糕的用户体验：</p><ul><li><strong>数据丢失</strong>：由于是被系统强制杀死，Electron 主进程的 <code>app.on('will-quit')</code> 或渲染进程的 <code>window.onbeforeunload</code> 事件可能根本来不及完全执行，导致用户未保存的数据直接丢失。</li><li><strong>启动中断</strong>：应用突然消失，用户需要自己去应用程序里重新找图标双击，这对于小白用户来说非常让人困惑。</li></ul><h3 id="3-工业级应用的优雅自救方案主动重启">3. 工业级应用的优雅自救方案（主动重启）</h3><p>既然被动等待系统去杀进程体验很差，像 <strong>Discord、Teams</strong> 等主流 Electron 应用会采取“主动出击”的策略：</p><p><strong>在用户前往系统设置之前，由我们的 App 主动控制好一切，并在必要时由我们的代码发起真正的“优雅重启”</strong>。</p><h4 id="最佳实践流程设计">最佳实践流程设计</h4><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[ 检测到需要特殊权限 ]
+</span></span><span class="line"><span class="cl">          │
+</span></span><span class="line"><span class="cl">          ▼
+</span></span><span class="line"><span class="cl">[ 在 App 内部弹出一个精美的提示框 ] ──► (告诉用户：我们需要这个权限，点击按钮将为您打开系统设置)
+</span></span><span class="line"><span class="cl">          │
+</span></span><span class="line"><span class="cl">          ▼
+</span></span><span class="line"><span class="cl">[ 用户点击“去设置”按钮 ]
+</span></span><span class="line"><span class="cl">          │
+</span></span><span class="line"><span class="cl">          ├─► 1. 主进程调用 `shell.openExternal('x-apple.systempreferences:com.apple.preference.security?Privacy_Camera')`
+</span></span><span class="line"><span class="cl">          │      (精准帮用户定位并打开系统设置里的对应隐私项)
+</span></span><span class="line"><span class="cl">          │
+</span></span><span class="line"><span class="cl">          └─► 2. 主进程在本地保存当前用户的草稿和数据 (防止一会儿被系统杀死丢数据)
+</span></span></code></pre></td></tr></tbody></table></div></div><h4 id="核心实现如何用代码优雅地自己重启">核心实现：如何用代码优雅地“自己重启”？</h4><p>如果系统没有强行杀死你的 App，或者你想在用户授权后主动帮他重启，Electron 提供了一个非常完美的自动重启动作：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">app</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'electron'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">saveAndGracefulRestart() {</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 1. 在这里执行你应用特有的、最后的数据保存逻辑
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// myDataService.saveAllPendingData();
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// 2. 告诉 Electron 在退出后重新拉起自己
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// relaunch 会在当前进程安全退出后，自动通过命令行重新运行你的 App
+</span></span></span><span class="line"><span class="cl">  <span class="nx">app</span><span class="p">.</span><span class="nx">relaunch</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 3. 优雅地退出当前实例
+</span></span></span><span class="line"><span class="cl">  <span class="nx">app</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="总结-8">总结</h3><p>在 macOS 上，权限变更触发的重启<strong>底层杀进程动作是由系统 100% 强行接管的</strong>。</p><p>作为开发者，我们不能傻傻地等着系统去强制把我们“干掉”。最佳的做法是在引导用户去系统设置之前，<strong>先在本地把用户的临时数据存好（防丢死锁）</strong>。如果用户在设置里勾选完后系统没有自动强制退出，你可以在应用里提供一个“检测已授权，点击一键重启”的按钮，调用 <code>app.relaunch()</code> 来帮用户完成这个闭环。</p><blockquote><h2 id="一些应用支持配置网络代理electron-怎么实现">一些应用支持配置网络代理，Electron 怎么实现？</h2></blockquote><p>在 Electron 中，实现网络代理配置的核心不在前端，而是在主进程（Main Process）中。Electron 通过 <code>session</code> 模块提供了非常完善的代理控制接口。</p><p>对于大多数 Electron 应用来说，你需要处理两种情况：<strong>配置代理地址</strong>和<strong>处理代理认证（账号密码）</strong>。</p><h3 id="1-配置代理地址sessetproxy">1. 配置代理地址（<code>ses.setProxy</code>）</h3><p>Electron 的所有网络请求都由 <code>session</code> 管理。默认情况下，你可以通过 <code>session.defaultSession</code> 来全局控制代理。</p><h4 id="核心-api">核心 API</h4><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">session</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'electron'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 设置代理
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param proxyConfig 代理规则对象
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">setProxy</span><span class="p">(</span><span class="nx">config</span><span class="o">:</span> <span class="p">{</span> <span class="nx">httpProxy</span>: <span class="kt">string</span><span class="p">;</span> <span class="nx">bypass</span>: <span class="kt">string</span> <span class="p">})</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">await</span> <span class="nx">session</span><span class="p">.</span><span class="nx">defaultSession</span><span class="p">.</span><span class="nx">setProxy</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 格式："http=127.0.0.1:7890;https=127.0.0.1:7890"
+</span></span></span><span class="line"><span class="cl">    <span class="nx">proxyRules</span><span class="o">:</span> <span class="sb">`http=</span><span class="si">${</span><span class="nx">config</span><span class="p">.</span><span class="nx">httpProxy</span><span class="si">}</span><span class="sb">;https=</span><span class="si">${</span><span class="nx">config</span><span class="p">.</span><span class="nx">httpProxy</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 排除列表，不走代理的地址 (如本地服务)
+</span></span></span><span class="line"><span class="cl">    <span class="nx">proxyBypassRules</span>: <span class="kt">config.bypass</span> <span class="o">||</span> <span class="s1">'&lt;local&gt;'</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h4 id="关键点">关键点</h4><ul><li><strong>格式要求</strong>：<code>proxyRules</code> 必须遵循 Chrome 的代理规则字符串格式。如果多个协议共用一个代理，确保按照 <code>http=...;https=...</code> 的格式书写。</li><li><strong>即时生效</strong>：调用 <code>setProxy</code> 后，应用内所有的 <code>fetch</code>、<code>axios</code> 请求以及 <code>BrowserWindow</code> 加载的网页请求都会立即切换到新代理，无需重启应用。</li></ul><h3 id="2-处理代理认证login-事件">2. 处理代理认证（<code>login</code> 事件）</h3><p>这是很多开发者最容易踩坑的地方。如果你的代理服务器需要用户名和密码，仅仅配置 <code>proxyRules</code> 是不够的。当请求通过代理时，底层会触发一个 <code>login</code> 事件，你必须在这里填入凭证。</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 在主进程初始化时监听
+</span></span></span><span class="line"><span class="cl"><span class="nx">session</span><span class="p">.</span><span class="nx">defaultSession</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">'login'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">webContents</span><span class="p">,</span> <span class="nx">request</span><span class="p">,</span> <span class="nx">authInfo</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// authInfo.isProxy 表示是否为代理认证
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">authInfo</span><span class="p">.</span><span class="nx">isProxy</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 阻止默认弹窗（如果存在的话）
+</span></span></span><span class="line"><span class="cl">      <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 填入你的凭证
+</span></span></span><span class="line"><span class="cl">      <span class="nx">callback</span><span class="p">(</span><span class="s1">'my-username'</span><span class="p">,</span> <span class="s1">'my-password'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 如果是网站本身的 Basic Auth，也在这里处理
+</span></span></span><span class="line"><span class="cl">      <span class="nx">callback</span><span class="p">();</span> <span class="c1">// 或者不提供凭证
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="3-常见的工程化实践方案">3. 常见的工程化实践方案</h3><p>在实际开发中，不要把代理逻辑写死。通常有两种模式：</p><h4 id="模式-a跟随系统system-proxy">模式 A：跟随系统（System Proxy）</h4><p>如果用户在操作系统层面（Windows 设置或 macOS 系统设置）已经配置了全局代理，Electron 默认是<strong>不一定</strong>会自动获取的。
+你可以通过以下配置让 Electron 尽可能“听系统的话”：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 传入 null 或空规则，通常会让 Electron 尝试回退到系统默认配置
+</span></span></span><span class="line"><span class="cl"><span class="nx">session</span><span class="p">.</span><span class="nx">defaultSession</span><span class="p">.</span><span class="nx">setProxy</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">proxyRules</span><span class="o">:</span> <span class="s1">''</span> <span class="c1">// 清空自定义规则，让底层网络栈尝试自动发现系统代理
+</span></span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h4 id="模式-b手动配置-uiuser-config">模式 B：手动配置 UI（User Config）</h4><p>如果你的应用像 VS Code 或其他专业工具一样，允许用户在“设置”面板里手动输入代理地址：</p><ol><li><strong>用户保存</strong>：前端（渲染进程）通过 <code>ipcRenderer</code> 将代理地址传给主进程。</li><li><strong>主进程持久化</strong>：主进程将配置写入 <code>userData</code> 目录下的 JSON 文件（不要放在 LocalStorage，那是前端的）。</li><li><strong>应用启动时加载</strong>：在 <code>app.whenReady()</code> 之后，立即读取该 JSON，调用 <code>session.defaultSession.setProxy()</code>，确保应用启动那一刻代理就生效。</li></ol><h3 id="避坑指南">避坑指南</h3><ol><li><strong>分 session 代理</strong>：如果你在应用里使用了 <code>partition</code> 创建了多个独立的 <code>session</code>（比如为了隔离不同用户的 Cookie），<strong>记得给每个 session 分别设置代理</strong>，<code>session.defaultSession</code> 只控制默认的那一个。</li><li><strong>HTTPS 代理与证书</strong>：如果代理服务器使用自签名证书，或者是在做中间人攻击（解密 HTTPS），你可能还需要配置 <code>session.defaultSession.setCertificateVerifyProc</code> 来忽略 SSL 证书错误，否则代理连接会失败。</li><li><strong>Bypass Rules 的重要性</strong>：<strong>永远不要忘记设置 <code>proxyBypassRules</code></strong>。如果不设置，你访问 <code>localhost</code>或公司内部局域网 IP 时，也会强制走代理，这会导致访问失败或极慢。记得加上<code>&lt;local&gt;</code> 和你内部 API 的域名或 IP 段。</li></ol><blockquote><h2 id="在网页中只能使用-file-协议请求-asar-归档文件中的内容吗">在网页中，只能使用 file: 协议请求 ASAR 归档文件中的内容吗？</h2></blockquote><p><strong>不是的，在 Electron 中，这其实是一条非常经典且必须要避开的“反模式（Anti-pattern）”</strong>。</p><p>在渲染进程（网页）中，如果你的应用开启了现代安全策略（如严格的沙箱模式 <code>sandbox: true</code> 或启用了 CSP），<strong>直接使用 <code>file://</code> 协议去请求 ASAR 内部的资源通常会失败</strong>，操作系统和 Chromium 的安全沙箱会出于“防范本地文件系统跨域攻击”的机制将其死死拦截。</p><p>在现代 Electron 工程中，我们有且仅有一种被官方强烈推荐的黄金方案：<strong>自定义特权协议（Custom Protocol）</strong>。</p><h3 id="官方极力推荐的终极解法自定义协议custom-protocol">官方极力推荐的终极解法：自定义协议（Custom Protocol）</h3><p>不要让前端直接面对冷冰冰的 <code>file://</code> 路径。我们可以在主进程中注册一个专属的、安全的特权协议（比如 <code>app://</code> 或 <code>static://</code>），让它在幕后帮前端去解压和读取 ASAR 文件。</p><h4 id="核心实现步骤typescript">核心实现步骤（TypeScript）</h4><h5 id="1-在应用启动前注册特权协议">1. 在应用启动前注册特权协议</h5><p>必须在 <code>app.whenReady()</code> 之前，告诉 Chromium 这是一个“像 <code>https</code> 一样安全、允许跨域、允许加载本地资源”的特权协议。</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// src/main/index.ts
+</span></span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">protocol</span><span class="p">,</span> <span class="nx">net</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'electron'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">path</span> <span class="kr">from</span> <span class="s1">'path'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 声明自定义协议的特权
+</span></span></span><span class="line"><span class="cl"><span class="nx">protocol</span><span class="p">.</span><span class="nx">registerSchemesAsPrivileged</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">scheme</span><span class="o">:</span> <span class="s1">'app'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">privileges</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">allowServiceWorkers</span>: <span class="kt">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">bypassCSP</span>: <span class="kt">false</span><span class="p">,</span>    <span class="c1">// 是否绕过 CSP（建议设为 false，保持安全）
+</span></span></span><span class="line"><span class="cl">      <span class="nx">corsEnabled</span>: <span class="kt">true</span>    <span class="c1">// 允许跨域
+</span></span></span><span class="line"><span class="cl">      <span class="nx">secure</span>: <span class="kt">true</span><span class="p">,</span>        <span class="c1">// 标记为安全上下文（支持 Cookie, Storage 等）
+</span></span></span><span class="line"><span class="cl">      <span class="nx">standard</span>: <span class="kt">true</span><span class="p">,</span>      <span class="c1">// 行为表现像 http / https
+</span></span></span><span class="line"><span class="cl">      <span class="nx">supportFetchAPI</span>: <span class="kt">true</span><span class="p">,</span> <span class="c1">// 极其重要：允许前端使用 fetch() 请求
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">]);</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h5 id="2-在主进程中拦截并读取-asar">2. 在主进程中拦截并读取 ASAR</h5><p>在 <code>app.whenReady()</code> 之后，通过 <code>protocol.handle</code> 建立一个本地的“微型反向代理”，把前端的 <code>app://</code> 请求映射到 ASAR 归档文件中：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">whenReady</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 拦截所有 app:// 开头的请求
+</span></span></span><span class="line"><span class="cl">  <span class="nx">protocol</span><span class="p">.</span><span class="nx">handle</span><span class="p">(</span><span class="s1">'app'</span><span class="p">,</span> <span class="nx">request</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 假设请求是：app://assets/logo.png
+</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URL</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">relativePath</span> <span class="o">=</span> <span class="nx">url</span><span class="p">.</span><span class="nx">pathname</span><span class="p">;</span> <span class="c1">// 拿到 '/assets/logo.png'
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 拼装出 ASAR 内部的绝对路径
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 注意：Electron 底层魔改了 Node.js 的 fs 模块，当路径中含有 '.asar' 时，它会自动当成普通文件夹读取
+</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">asarPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">app</span><span class="p">.</span><span class="nx">getAppPath</span><span class="p">(),</span> <span class="s1">'dist'</span><span class="p">,</span> <span class="nx">relativePath</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 使用 net.fetch 直接返回本地文件的 Response 流，性能极高且支持分块加载
+</span></span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">net</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`file://</span><span class="si">${</span><span class="nx">asarPath</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h5 id="3-前端spa-网页的丝滑使用体验">3. 前端（SPA 网页）的丝滑使用体验</h5><p>现在，你的 React / Vue 代码可以完全忘记 <code>file://</code> 协议，像请求普通服务器一样去请求 ASAR 内部的资源：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 1. 在 HTML / CSS 中直接当成图片地址
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">Logo</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">"app://assets/logo.png"</span> <span class="na">alt</span><span class="o">=</span><span class="s">"Logo"</span> <span class="p">/&gt;;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 2. 在 JS 中直接通过标准 fetch() 请求 ASAR 内的 JSON 配置文件
+</span></span></span><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">loadConfig() {</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s1">'app://config/settings.json'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'成功读取 ASAR 内的配置：'</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="为什么不建议用-file痛点剖析">为什么不建议用 <code>file://</code>？（痛点剖析）</h3><p>如果你强行使用 <code>file://</code> 协议，你会在开发和生产环境中踩到这三大深坑：</p><ol><li><strong>绝对路径暴露与绝对路径灾难</strong>：
+SPA（特别是像你常用的 Vite 构建的单页应用）默认的资源路径都是绝对根路径（如 <code>/assets/index.js</code>）。如果用 <code>file://</code> 协议，它会直接去用户电脑的根目录 <code>C:\assets\index.js</code> 找文件，直接导致<strong>首屏白屏、资源全部 404</strong>。</li><li><strong>CSP（内容安全策略）冲突</strong>：
+为了防范恶意 XSS 攻击，现代高安全性 Electron 应用都会配置 CSP 头部。如果允许 <code>file://</code> 协议，意味着恶意脚本一旦注入，就能肆无忌惮地读取用户整块硬盘的任何文件。而限制为 <code>app://</code>，恶意脚本就只能读取你 ASAR 包内公开的那几个静态文件。</li><li><strong>Web Worker 和 Service Worker 瘫痪</strong>：
+Chromium 处于对隐私的保护，<strong>严禁</strong>在 <code>file://</code> 协议下运行 Web Worker 或 Service Worker。如果你的应用需要进行大量的复杂计算或离线缓存，<code>file://</code> 会让前端技术栈直接断了双腿。</li></ol><h3 id="总结-9">总结</h3><p>网页中<strong>绝对不是</strong>只能使用 <code>file:</code> 协议。恰恰相反，在现代 Electron 架构中，<strong>使用 <code>protocol.handle</code> 注册一个自定义特权协议（如 <code>app://</code>）才是读取 ASAR 归档文件最标准、最安全、也最不容易让 SPA 路由和路径报错的工业级解法</strong>。</p><blockquote><h2 id="为什么文档中使用-file-协议">为什么文档中使用 file: 协议？</h2></blockquote><p>因为对于文档编写者而言，<strong><code>file:</code> 协议是解释 Electron 基本原理时成本最低、最直观的“新手村”方案</strong>。</p><p>官方文档和很多入门教程之所以在示例中频繁使用 <code>file:</code> 协议（例如 <code>win.loadFile('index.html')</code>，其底层就是转化为 <code>file:</code> 协议加载），主要是出于以下三个原因：</p><h3 id="1-降低新手的认知和上手门槛">1. 降低新手的认知和上手门槛</h3><p>如果文档一上来就要求你配置 <code>protocol.registerSchemesAsPrivileged</code>，然后用 <code>protocol.handle</code> 拦截请求，再用 <code>net.fetch</code> 处理文件映射…… 这一整套主进程的底层概念会让刚接触 Electron 的开发者直接“劝退”。</p><p>相比之下，<code>file:</code> 协议符合所有网页开发者对“本地双击打开 HTML”的直观认知，能让新手在 3 秒钟内看到第一个窗口跑起来。</p><h3 id="2-在最基础的纯静态场景下它确实能跑通">2. 在最基础的“纯静态”场景下它确实能跑通</h3><p>如果你的桌面应用极其简单：</p><ul><li>所有的静态资源引用都是相对路径（如 <code>./style.css</code>，而不是 <code>/style.css</code>）。</li><li>没有使用 React / Vue 等现代前端框架的客户端路由（SPA Routing）。</li><li>没有配置严格的 CSP（内容安全策略）。</li></ul><p>在符合这些极简条件时，直接用 <code>file:</code> 协议加载 ASAR 内部的网页，确实不会报错。文档为了保持示例代码的绝对精简，通常会选择这种没有任何额外配置的“裸跑”方案。</p><h3 id="3-历史包袱与文档更新的滞后性">3. 历史包袱与文档更新的滞后性</h3><p>这是一个非常现实的工程问题。</p><p>在 Electron 的早期版本（几年前）中，注册自定义协议（如 <code>protocol.registerFileProtocol</code> 等旧 API）非常繁琐，且在不同版本间频繁发生重构和废弃。由于历史遗留，大量的官方起步教程、Demo（如 <code>electron-quick-start</code>）和第三方博客，至今依然沿用着几年前最古老的 <code>file:</code> 接入方式，并被一代代开发者复制粘贴至今。</p><h3 id="官方文档隐藏的免责声明">官方文档隐藏的“免责声明”</h3><p>其实，Electron 官方并不是没有警告过。如果你仔细翻阅官方文档中关于 <strong>“安全（Security）”</strong> 的核心章节，你会发现官方有一条明确的警告：</p><blockquote><p><strong>“不要在生产环境中直接对不信任的内容或复杂的应用放开 <code>file:</code> 协议访问。”</strong></p></blockquote><p>在现代（2026 年）的工业级 Electron 开发中，业界已经形成了一套不成文的默契：</p><ul><li><strong>文档 / 教程里的 <code>file:</code></strong>：仅用于快速验证想法、写 Hello World。</li><li><strong>实际生产项目</strong>：一律使用<strong>自定义协议（Custom Protocol）<strong>或者</strong>本地启动的轻量级安全 Web 服务</strong>来托管本地 SPA 资源。</li></ul><blockquote><h2 id="asar-完整性检查到底要不要开">ASAR 完整性检查到底要不要开？</h2></blockquote><p>简而言之：<strong>只要你的应用要发布给普通用户（生产环境），就一定要开</strong>。</p><p>这不仅是官方目前强烈推荐的安全最佳实践，更是防御客户端篡改、保护代码资产的<strong>第一道核心防线</strong>。</p><h3 id="1-为什么要开不开有什么后果">1. 为什么要开？不开有什么后果？</h3><p>Electron 应用打包后，你的核心业务代码（HTML / JS / CSS 以及 <code>node_modules</code>）都会被打包进 <code>app.asar</code> 这个归档文件中。</p><h4 id="不开-asar-完整性检查默认状态">不开 ASAR 完整性检查（默认状态）</h4><p><code>app.asar</code> 本质上只是一个没有任何加密和校验的<strong>未压缩的 tar 包</strong>。</p><ul><li><strong>黑客 / 小白用户可以轻松篡改：</strong> 任何人都可以在安装目录下，用一行命令 <code>npx asar extract app.asar ./src</code> 把它解开，修改你的 JS 逻辑（比如绕过你的授权激活检测、注入恶意广告），然后执行 <code>npx asar pack</code> 重新打包。</li><li><strong>杀毒软件和系统信任度：</strong> 如果你的 ASAR 很容易被注入恶意脚本，那你的应用极易成为本地木马病毒借壳运行的载体，导致应用被杀毒软件误杀。</li></ul><h4 id="安全闭环">安全闭环</h4><p>开启 ASAR 完整性检查（<code>ASAR Integrity</code>）后，打包工具会在编译时计算出 <code>app.asar</code> 的 <code>SHA-256</code> 哈希值，并<strong>硬编码进应用的二进制主程序</strong>（Windows 的 <code>.exe</code> 资源或 macOS 的二进制文件）。
+运行期间，主程序启动时会率先比对两者的哈希值：</p><blockquote><p><strong>一旦发现 <code>app.asar</code> 被拆包动过，主程序会立刻强制闪退（Terminate），不给篡改代码任何运行的机会</strong>。</p></blockquote><h3 id="2-怎么开2026-年现代构建配置">2. 怎么开？（2026 年现代构建配置）</h3><p>在现代 Electron 开发中，开启完整性检查非常简单，通常配合 <strong>Electron Fuses（熔丝机制）</strong> 一起启用。</p><p>如果你使用的是社区主流的 <code>electron-builder</code> 或 <code>electron-vite</code>，只需要在配置文件中加入几行配置即可。</p><h4 id="electron-builderyml-最佳安全实践配置"><code>electron-builder.yml</code> 最佳安全实践配置</h4><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># electron-builder.yml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># 启用 Electron 熔丝配置</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">electronFuses</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 1. 核心：开启 ASAR 运行时完整性校验</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">EnableEmbeddedAsarIntegrityValidation</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 2. 强力配合：确保应用只从 app.asar 中加载代码，防止黑客绕过 ASAR 跑本地散装 JS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">OnlyLoadAppFromAsar</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></td></tr></tbody></table></div></div><p>打包工具（如 <code>@electron/packager</code> 或 <code>@electron/forge</code>）会在后台自动帮你计算哈希并完成注入，你无需手动去算 hash 值。</p><h3 id="3-开了它就高枕无忧了吗技术局限性">3. 开了它就高枕无忧了吗？（技术局限性）</h3><p>作为一名开发者，需要理性认识到：<strong>ASAR 完整性检查防御的是“代码篡改（Tampering）”，而不是“代码逆向（Reverse Engineering）”</strong>。</p><p>即便开了完整性检查，你的核心 JS 源码依然是<strong>明文</strong>躺在 ASAR 包里的。如果别人只是想看你的业务逻辑或提取你的 API Key，直接解包出来阅读即可。</p><h4 id="工业级安全闭环">工业级安全闭环</h4><p>如果你要做到真正的“防篡改 + 防逆向”两手抓，业界标准的做法是：</p><ol><li><strong>ASAR 完整性检查（ASAR Integrity）</strong>：守住入口，防止代码被篡改并重新运行。</li><li><strong>V8 字节码编译（V8 Bytecode）</strong>：通过工具（如 <code>electron-vite</code> 提供的字节码保护）将你的 JS / TS 编译为 V8 引擎能直接识别的二进制字节码（<code>.jsc</code>），彻底消灭可读的明文 JS 源码。</li></ol><h3 id="总结-10">总结</h3><div class="table-wrapper"><table><thead><tr><th>场景</th><th>是否开启</th><th>理由</th></tr></thead><tbody><tr><td><strong>本地开发阶段（Dev）</strong></td><td><strong>关</strong></td><td>频繁改代码、HMR（热重载）需要快速读写本地散装资源，开了会影响效率。</td></tr><tr><td><strong>打包发布给用户（Prod）</strong></td><td><strong>必须开</strong></td><td>阻止重包攻击（Repackaging），这是桌面应用获得平台安全信任和防御破解的底线。</td></tr></tbody></table></div><blockquote><h2 id="electron-中的-es-模块支持顶层-await-了吗">Electron 中的 ES 模块支持顶层 await 了吗？</h2></blockquote><p>在 2026 年的今天，答案是：<strong>支持，但这里面有一个非常重要且容易踩坑的「分层支持」情况</strong>。</p><p>Electron 内部由 <strong>Node.js（主进程）</strong> 和 <strong>Chromium（渲染进程）</strong> 两个完全不同的 Runtime 驱动。虽然它们目前都已经完全具备了对 ES 模块（ESM）及<strong>顶层 await（Top-level await）</strong> 的原生支持，但在实际工程落地中，两者的使用限制大不相同。</p><h3 id="1-渲染进程网页端100-完美支持">1. 渲染进程（网页端）：100% 完美支持</h3><p>在你的前端代码或者 Preload 脚本中，顶层 await 已经非常成熟。</p><p>只要你的现代前端构建工具（如 Vite）输出的是标准的 ESM 格式，或者你在 HTML 中使用了 <code>&lt;script type="module"&gt;</code>，你就可以肆无忌惮地使用它。这对于在页面加载前先去异步请求一些配置数据极其方便：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// src/renderer/main.ts（渲染进程 ESM）
+</span></span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">createApp</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'vue'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">App</span> <span class="kr">from</span> <span class="s1">'./App.vue'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 完美的顶层 await 支持
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 在应用挂载前，直接异步 fetch 本地或远程的配置文件
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s1">'app://config/settings.json'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">createApp</span><span class="p">(</span><span class="nx">App</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">provide</span><span class="p">(</span><span class="s1">'globalConfig'</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">mount</span><span class="p">(</span><span class="s1">'#app'</span><span class="p">);</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="2-主进程nodejs-端支持但需要迈过工程坎">2. 主进程（Node.js 端）：支持，但需要迈过「工程坎」</h3><p>在 Electron 的主进程（Main Process）中，底层使用的是 Node.js。Node.js 在很早的版本就已经原生支持了 ESM 和顶层 await，但是你在 Electron 主进程中开启它，会面临两个棘手的问题：</p><h4 id="问题-apackagejson-的-type-module-冲突">问题 A：package.json 的 <code>type: "module"</code> 冲突</h4><p>要在 Node.js 中使用顶层 await，文件必须被识别为 ES 模块。通常的做法是在 <code>package.json</code> 中配置 <code>"type": "module"</code>。</p><ul><li><strong>坑点：</strong> 一旦你开启了这个全局配置，你项目中所有未经编译的第三方 Node 模块如果只支持 CommonJS (CJS)，都会直接报错爆掉。</li></ul><h4 id="最佳工程解法让-vite--rspack-在编译时抹平差异">最佳工程解法：让 Vite / Rspack 在编译时抹平差异</h4><p>在实际企业级开发中，<strong>我们几乎从来不在主进程中直接裸跑原生的 ESM 文件</strong>。</p><p>像你平时使用的现代 Electron 构建工具（如 <code>electron-vite</code>），在打包主进程时，通常会通过底层的 Rollup / Esbuild 将主进程的 TS 代码转换为符合 CommonJS 规范的单文件，或者通过<strong>特殊的打包配置输出符合特性的 ESM 包</strong>。</p><p>如果你使用的是 <strong>Vite + 现代配置</strong>，你可以在主进程打包中直接书写顶层 await，Vite 会帮你安全地编译好：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// src/main/index.ts（主进程中，经 Vite / Esbuild 编译）
+</span></span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">BrowserWindow</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'electron'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">initializeDatabase</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'./db'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 主进程中的顶层 await 实践
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 在窗口创建前，必须强行保证本地 SQLite 数据库异步初始化完毕
+</span></span></span><span class="line"><span class="cl"><span class="k">await</span> <span class="nx">initializeDatabase</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">whenReady</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">createMainWindow</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">createMainWindow() {</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">win</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BrowserWindow</span><span class="p">({</span> <span class="nx">width</span>: <span class="kt">800</span><span class="p">,</span> <span class="nx">height</span>: <span class="kt">600</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">win</span><span class="p">.</span><span class="nx">loadURL</span><span class="p">(</span><span class="s1">'http://localhost:3000'</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="避坑指南主进程顶层-await-的生命周期死锁">避坑指南：主进程顶层 await 的「生命周期死锁」</h3><p>虽然技术上支持，但在主进程的顶层（Top-level）使用 await 时，必须死死记住一个心智模型：</p><blockquote><p><strong>主进程的顶层 await 会直接阻塞整个 Electron 应用程序的生命周期！</strong></p></blockquote><p>如果你在主进程文件的最顶层写了一个需要耗时 5 秒钟的网络 <code>fetch</code> 请求，这意味着<strong>在网络请求完成之前，<code>app.whenReady()</code> 永远不会被触发，你的 App 看起来就像是死锁闪退或卡死在后台</strong>，操作系统甚至会认为你的程序已经无响应。</p><h3 id="最佳安全准则">最佳安全准则</h3><ul><li><strong>渲染进程</strong>：随便用，通常只用来处理路由或轻量配置阻塞。</li><li><strong>主进程</strong>：顶层 await <strong>只用于耗时极短的本地操作</strong>（如读取一个几十 KB 的本地 JSON、初始化本地轻量数据库连接）。任何涉及网络请求、耗时文件扫描的异步逻辑，<strong>依然必须</strong>乖乖放进 <code>app.whenReady().then(async () =&gt; { ... })</code> 的内部生命周期中去执行。</li></ul><blockquote><h2 id="为什么-preload-script-必须使用-mjs而其他的不用">为什么 Preload Script 必须使用 .mjs？而其他的不用？</h2></blockquote><p>在 Electron 现代安全架构的演进中，<strong>Preload 脚本的格式限制实际上并不是 Electron 官方“强制”要求的，而是现代构建工具（特别是 Vite）和 Chromium 沙箱策略共同夹击下的工程选择</strong>。</p><p>你之所以会发现 Preload 脚本<strong>必须</strong>叫 <code>.mjs</code>（或者在构建后输出为 ESM 格式），而主进程和渲染进程可以相对自由，是因为 Preload 脚本正好处在一个极其特殊的“夹缝环境”中。</p><h3 id="1-根源preload-脚本被夹在两个世界中间">1. 根源：Preload 脚本被夹在两个世界中间</h3><p>我们要先看 Electron 目前最核心的安全基石：<strong><code>contextIsolation: true</code>（上下文隔离）</strong>。</p><p>在这个模式下，Preload 脚本的运行环境非常奇特：</p><ul><li><strong>它能访问 Node.js API：</strong> 它有特权去调用 <code>ipcRenderer</code>，甚至在配置允许时调用 <code>fs</code>、<code>path</code> 等。</li><li><strong>它运行在 Chromium 的独立沙箱里：</strong> 它与网页（渲染进程）的 JavaScript 是完全隔离的。</li></ul><p>在这个特殊的沙箱环境中，Chromium 引擎对脚本的模块化加载有着极其严苛的限制。</p><h3 id="2-为什么-preload-不能像网页那样随意">2. 为什么 Preload 不能像网页那样随意？</h3><h4 id="为什么不能用-commonjs-jsrequire">为什么不能用 CommonJS (<code>.js</code>/<code>require</code>)？</h4><p>随着 Electron 和 Chromium 对沙箱（Sandbox）的收紧，<strong>现代 Preload 脚本在开启沙箱时，是严禁在运行时使用底层的 <code>require()</code> 语法的</strong>。因为原生的 <code>require</code> 是同步读取文件系统的，这会直接破坏 Chromium 的安全沙箱规则。因此，传统的 CommonJS 格式在现代 Preload 中直接被判了死刑。</p><h4 id="为什么不能像网页渲染进程那样交给打包工具二合一">为什么不能像网页（渲染进程）那样交给打包工具二合一？</h4><p>在网页端（渲染进程），像 Vite 这样的工具可以把你的 React / Vue 代码、路由、状态管理全部打包融合成一个巨大的 <code>index.js</code>，甚至可以通过本地自定义协议（如 <code>app://</code>）以 ESM 模块的方式用 <code>&lt;script type="module"&gt;</code> 异步加载。</p><p>但 <strong>Preload 脚本不行</strong>。Preload 必须在<strong>网页的第一行任何代码执行之前</strong>，由 Electron 主进程强行注入到 Chromium 的置顶上下文中。它必须是一个<strong>独立的、符合规范的、可被 Chromium 引擎直接解析的单个文件</strong>。</p><h3 id="3-为什么是-mjsesm">3. 为什么是 <code>.mjs</code>（ESM）？</h3><p>为了让 Preload 脚本既能安全地导入模块（比如导入自定义的类型、工具函数），又能通过 Chromium 的安全审查，<strong>它必须输出为标准的 ES 模块（ECMAScript Modules）</strong>。</p><p>在 Node.js 和很多现代构建工具的默认规则中：</p><ul><li><code>.js</code>：默认被当成古老的 CommonJS（CJS）处理。</li><li><code>.mjs</code>：强制标记为现代的 <strong>ES 模块（ESM）</strong>。</li></ul><p>当 Vite 看到你的 Preload 脚本是 <code>.mjs</code>，或者你配置了将其输出为 <code>.mjs</code> 时，Vite 会采用专用的打包策略：</p><ol><li><strong>树摇与合并</strong>：把你在 Preload 里引用的第三方库或辅助函数全部打包合并成一个孤零零的纯纯的 ES 模块文件。</li><li><strong>使用标准 <code>import / export</code></strong>：这样生成的代码里只有标准的 <code>import</code>，没有 <code>require</code>。当 Electron 把这个 <code>.mjs</code> 喂给 Chromium 时，Chromium 的沙箱引擎能完美识别并安全执行。</li></ol><h4 id="为什么主进程和渲染进程不用这么麻烦">为什么“主进程”和“渲染进程”不用这么麻烦？</h4><p>我们可以对比一下这三者的编译待遇：</p><ul><li><strong>渲染进程（网页）</strong>：Vite 专门为它服务。Vite 本身就是基于 ESM 的，网页端怎么写，Vite 都能通过开发服务器（Dev Server）或生成标准的 <code>index.html</code> 完美托管，不需要刻意改成 <code>.mjs</code>。</li><li><strong>主进程（Node.js）</strong>：主进程运行在纯粹的 Node.js 环境中，不碰 Chromium 沙箱。Vite 打包主进程时，通常会通过底层配置（如打包成单个 <code>.js</code> 文件，内部自动处理好 <code>require</code>），Node.js 吞下 CommonJS 毫无压力。</li><li><strong>Preload 脚本</strong>：姥姥不疼老爷不爱。它既要满足 Vite 的 ESM 编译链，又要满足 Chromium 苛刻的沙箱注入格式。因此，<strong>显式地使用 <code>.mjs</code> 扩展名，是目前工程上通知构建工具和运行时“这货是一个纯净的、无 require 的原生 ES 模块”最稳妥、最不容易报错的手段</strong>。</li></ul><h3 id="总结-11">总结</h3><p>在现代 Electron 项目中，把 Preload 脚本配置为 <code>.mjs</code> 输出，本质上是<strong>为了顺应 Chromium 沙箱去 CommonJS 化的趋势，同时让 Vite 能够正确地对其进行 ESM 格式的单文件打包</strong>。</p><blockquote><h2 id="文档注意事项中的您必须在-app-的-ready-事件之前使用-await是什么意思">文档注意事项中的「您必须在 app 的 ready 事件之前使用 await」是什么意思？</h2></blockquote><p>这句话在技术上其实有一点小小的语义歧义，但在 Electron 的语境下，它是在向你强调一个非常关键的<strong>顺序问题</strong>：</p><p>它的真正意思是：<strong>“如果你有某些核心的全局配置、特权协议注册，你必须在 <code>app.whenReady()</code> 被触发之前就完成它们的执行（包括等待它们的异步结果），绝对不能等到 ready 事件之后才去做”</strong>。</p><p>这里的 <code>await</code> 通常指代的是<strong>阻塞后续生命周期，确保配置率先生效</strong>的动作。我们来看看为什么官方要如此严厉地强调这个顺序。</p><h3 id="1-核心原因有些-api-属于投胎型api">1. 核心原因：有些 API 属于“投胎型”API</h3><p>Electron 的生命周期非常严格。有一些基础的底层配置 API，被戏称为“投胎型 API” —— <strong>它们必须在 Electron 刚一睁眼、还没有初始化完 Chromium 内核和网络栈之前就完成注册。一旦错过了 <code>ready</code> 那个时间节点，它们就彻底失效了</strong>。</p><p>最典型的代表就是我们前面聊到的：<strong><code>protocol.registerSchemesAsPrivileged</code>（注册自定义特权协议）</strong>。</p><h4 id="错误的写法在-ready-之后-await">错误的写法（在 ready 之后 await）</h4><p>如果你把注册协议的逻辑放到了 ready 之后去异步 await：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">protocol</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'electron'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 错误示范：等 ready 之后再去处理
+</span></span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">whenReady</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 此时 Chromium 内部的网络沙箱规范已经定型固化了！
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// 这里的 await 哪怕成功执行了，Chromium 也不会再承认 'app://' 是特权协议了
+</span></span></span><span class="line"><span class="cl">  <span class="k">await</span> <span class="nx">protocol</span><span class="p">.</span><span class="nx">registerSchemesAsPrivileged</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span> <span class="nx">scheme</span><span class="o">:</span> <span class="s1">'app'</span><span class="p">,</span> <span class="nx">privileges</span><span class="o">:</span> <span class="p">{</span> <span class="nx">standard</span>: <span class="kt">true</span><span class="p">,</span> <span class="nx">secure</span>: <span class="kt">true</span> <span class="p">}</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">createWindow</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><p><strong>后果：</strong> 你的自定义协议在前端会彻底瘫痪，因为 Chromium 拒绝在安全上下文里加载它。</p><h4 id="正确的写法在-ready-之前执行--await">正确的写法（在 ready 之前执行 / await）</h4><p>你必须把这些配置直接平铺暴露在主进程文件的<strong>最顶层</strong>，甚至在文件顶层去 <code>await</code> 它们的初始化，确保在 <code>ready</code> 触发前，这些设置已经死死地写入到了系统底座中：</p><div class="highlight"><div class="chroma"><table class="lntable"><tbody><tr><td class="lntd"><pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td><td class="lntd"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">protocol</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'electron'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 正确示范：在最顶层（ready 之前）直接配置或使用顶层 await
+</span></span></span><span class="line"><span class="cl"><span class="nx">protocol</span><span class="p">.</span><span class="nx">registerSchemesAsPrivileged</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">scheme</span><span class="o">:</span> <span class="s1">'app'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">privileges</span><span class="o">:</span> <span class="p">{</span> <span class="nx">standard</span>: <span class="kt">true</span><span class="p">,</span> <span class="nx">secure</span>: <span class="kt">true</span><span class="p">,</span> <span class="nx">supportFetchAPI</span>: <span class="kt">true</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 哪怕有一些异步的本地轻量配置，也可以在这里顶层 await
+</span></span></span><span class="line"><span class="cl"><span class="c1">// await loadLocalConfig();
+</span></span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">whenReady</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 此时 ready 触发，底座已完美建好
+</span></span></span><span class="line"><span class="cl">  <span class="nx">createWindow</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></td></tr></tbody></table></div></div><h3 id="2-还有哪些东西必须在-ready-之前处理">2. 还有哪些东西必须在 <code>ready</code> 之前处理？</h3><p>除了自定义特权协议，以下这些敏感操作也强烈建议（或必须）在 <code>app.whenReady()</code> 之前准备就绪：</p><ol><li><strong>单实例锁检测 <code>app.requestSingleInstanceLock()</code></strong>：
+你必须在最顶层去判断当前是不是已经有一个相同的 App 正在运行了。如果是，直接退出，根本不需要等到 <code>ready</code> 去浪费内存初始化应用。</li><li><strong>崩溃报告初始化 <code>crashReporter.start()</code></strong>：
+如果在 <code>ready</code> 之前程序就因为硬件兼容性崩了，只有在最顶层初始化的崩溃报告器才能抓到这个早期崩溃。</li><li><strong>部分硬编码的命令行开关 <code>app.commandLine.appendSwitch</code></strong>：
+比如禁用硬件加速、配置特殊的 Chrome 实验性功能，必须在进程刚启动时塞进命令行参数里。</li></ol><h3 id="总结-12">总结</h3><p>文档中说这句话的目的，是为了<strong>防止你把初始化代码一股脑全塞进 <code>app.whenReady().then(...)</code> 的大括号里</strong>。</p><p>理解这个概念的心智模型很简单：<code>app.whenReady()</code> 标志着“地基已经全部打好，水泥已经彻底干了”<strong>。所有用来改变地基属性的图纸和材料（如自定义协议、命令行开关），你</strong>必须在水泥倒下去（<code>ready</code> 触发）之前，用代码（或顶层 <code>await</code>）把它们递给操作系统。</p></section><footer class="article-meta article-footer"></footer></article><aside><h2 class="section-title">相关文章</h2><div class="subsection-list"><div class="article-list--tile"><article class="has-image"><a href="/p/electron-note-3/" rel="noopener" referrerpolicy="no-referrer"><div class="article-image"><img alt="Featured image of post 「Gemini」Electron 学习笔记（三）" loading="lazy" src="/img/cover/electron.webp" decoding="async" width="1200" height="720" jampack-sized="true"></div><div class="article-details"><h2 class="article-title">「Gemini」Electron 学习笔记（三）</h2></div></a></article><article class="has-image"><a href="/p/electron-note-2/" rel="noopener" referrerpolicy="no-referrer"><div class="article-image"><img alt="Featured image of post 「Gemini」Electron 学习笔记（二）" loading="lazy" src="/img/cover/electron.webp" decoding="async" width="1200" height="720" jampack-sized="true"></div><div class="article-details"><h2 class="article-title">「Gemini」Electron 学习笔记（二）</h2></div></a></article><article class="has-image"><a href="/p/electron-note-1/" rel="noopener" referrerpolicy="no-referrer"><div class="article-image"><img alt="Featured image of post 「Gemini」Electron 学习笔记（一）" loading="lazy" src="/img/cover/electron.webp" decoding="async" width="1200" height="720" jampack-sized="true"></div><div class="article-details"><h2 class="article-title">「Gemini」Electron 学习笔记（一）</h2></div></a></article></div></div></aside><footer class="site-footer"><section class="copyright">©
+2017 -
+2026 馬腊咯稽</section><section class="powerby">博客内容仅供参考，本人不对其准确性、完整性或适用性作出任何保证<br>转载内容仅为分享，不代表本人观点。如涉及侵权，请联系删除<br>使用 <b><a href="https://gohugo.io" target="_blank" rel="noopener" referrerpolicy="no-referrer">Hugo 0.164.0</a></b> 构建，
+主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" referrerpolicy="no-referrer" data-version="4.0.3">Stack 4.0.3</a></b> 由 <b><a href="https://jimmycai.com" target="_blank" rel="noopener" referrerpolicy="no-referrer">Jimmy</a></b> 设计</section></footer><script type="module">import i from"/ts/gallery.js";const e=document.querySelector(".article-content"),n=e&&(e.querySelectorAll("figure").length>0||e.querySelectorAll("img.gallery-image").length>0);if(n){i(e);const l=(await import("https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js")).default,o="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css",t=document.createElement("link");t.rel="stylesheet",t.href=o,document.head.appendChild(t),new l({gallerySelector:".article-content",childSelector:"figure a.image-link",pswpModule:()=>import("https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.esm.min.js")}).init()}
+</script></main></div><script type="text/javascript" src="/ts/main.b75bae5e2b63dbe9b4f38be3668b34ac1760d3207ce1e867048cf3648238efc7.js" crossorigin="anonymous" defer=""></script><script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" crossorigin="anonymous"></script><script>NProgress.configure({showSpinner:!1}),NProgress.start(),document.addEventListener("readystatechange",()=>{document.readyState==="interactive"&&NProgress.inc(.8),document.readyState==="complete"&&NProgress.done()})</script></body></html>

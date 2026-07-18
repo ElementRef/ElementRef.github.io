@@ -211,10 +211,10 @@
 &lt;p&gt;这个理解不完全准确。你提到了“日志系统”和“记录操作”，这确实抓住了持久性实现的核心手段（即 WAL 日志机制），但在概念定义和具体执行逻辑上，有一些关键的偏差。&lt;/p&gt;
 &lt;h4 id="什么是持久性durability"&gt;什么是持久性（Durability）？
 &lt;/h4&gt;
-&lt;p&gt;在 ACID 特性中，持久性（Durability）的准确定义是：&lt;strong&gt;一旦事务被提交（Commit），它对数据库中数据的改变就是永久性的。接下来的每个操作或故障（比如断电、系统崩溃）都不应该对其有任何影响。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在 ACID 特性中，持久性（Durability）的准确定义是：&lt;strong&gt;一旦事务被提交（Commit），它对数据库中数据的改变就是永久性的。接下来的每个操作或故障（比如断电、系统崩溃）都不应该对其有任何影响&lt;/strong&gt;。&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;不是“所有操作”都要持久化，而是“已提交的事务”才必须持久化。&lt;/strong&gt; 如果一个事务执行到一半失败了或者回滚（Rollback）了，它所做的修改不仅不应该被持久化，反而应该被彻底清除（这是原子性的要求）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;持久性的核心目的是“抗故障能力”。&lt;/strong&gt; 它的重点不是默默记下你干了什么用来记账，而是确保当服务器突然断电、操作系统崩溃时，已经向用户承诺“成功”的数据绝对不会丢失。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不是“所有操作”都要持久化，而是“已提交的事务”才必须持久化&lt;/strong&gt;。如果一个事务执行到一半失败了或者回滚（Rollback）了，它所做的修改不仅不应该被持久化，反而应该被彻底清除（这是原子性的要求）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;持久性的核心目的是“抗故障能力”&lt;/strong&gt;。它的重点不是默默记下你干了什么用来记账，而是确保当服务器突然断电、操作系统崩溃时，已经向用户承诺“成功”的数据绝对不会丢失。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="数据库确实有日志系统但它记的不是操作"&gt;数据库确实有日志系统，但它记的不是“操作”
 &lt;/h4&gt;
@@ -237,7 +237,7 @@
 &lt;p&gt;持久性指的是“只要拉勾承诺过（Commit）的事情，天塌下来也得认”。而底层的日志系统，并不是盲目记录所有发生的事情，而是精准、高效地通过 &lt;strong&gt;Redo Log&lt;/strong&gt; 记录底层的物理变更，以此作为对抗系统崩溃的“复活甲”。&lt;/p&gt;
 &lt;p&gt;&lt;del&gt;所以，持久性是数据库的一种承诺？只要事务提交成功，那所发生的数据变化一定生效？&lt;/del&gt;&lt;/p&gt;
 &lt;p&gt;没错，你这次精准地抓住了它的本质！&lt;strong&gt;持久性（Durability）本质上就是数据库对用户的一份“铁律承诺”&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;只要数据库向你返回了“事务提交成功（Commit Success）”，它就在向你保证：&lt;strong&gt;就算下一秒服务器被拔了电源、机房突发大火，只要硬盘没被物理砸毁，重启之后这份数据变化也一定生效，绝不赖账。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;只要数据库向你返回了“事务提交成功（Commit Success）”，它就在向你保证：&lt;strong&gt;就算下一秒服务器被拔了电源、机房突发大火，只要硬盘没被物理砸毁，重启之后这份数据变化也一定生效，绝不赖账&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;为了让你更直观地理解这个承诺是如何在复杂、脆弱的硬件环境下兑现的，我们可以看下面这个标准的 &lt;strong&gt;WAL（预写式日志）工作流&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;我们可以把这个承诺的兑现过程，拆解为三个最核心的逻辑：&lt;/p&gt;
 &lt;h4 id="承诺的触发点必须是提交成功"&gt;承诺的触发点：必须是“提交成功”
@@ -264,7 +264,7 @@
 &lt;li&gt;&lt;strong&gt;硬件物理损坏：&lt;/strong&gt; 如果存储日志的硬盘直接烧了、磁头损坏，或者遭遇了不可逆的物理破坏，那属于不可抗力。为了防范这个，工程上通常会做&lt;strong&gt;分布式副本/主备复制&lt;/strong&gt;（把日志同步到其他机器上）。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;人为性能妥协（非常重要）：&lt;/strong&gt; 在实际开发中，有些高并发业务为了追求极致的写入性能，会主动关闭“严格持久化”。例如在 MySQL 中把 &lt;code&gt;innodb_flush_log_at_trx_commit&lt;/code&gt; 设置为 &lt;code&gt;0&lt;/code&gt; 或 &lt;code&gt;2&lt;/code&gt;。这时候，数据库在 &lt;code&gt;COMMIT&lt;/code&gt; 时不会强制把日志刷到磁盘，而是先放在操作系统缓存里。这种情况下，如果服务器突然断电，就会&lt;strong&gt;丢失 1 秒左右的数据&lt;/strong&gt;。这时候，是人类自己为了性能，主动让数据库“放弃”了一部分持久性承诺。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;所以，用一句话来概括：&lt;strong&gt;持久性就是用“顺序写盘的底层日志”，来为“内存中的高效修改”做担保，从而在软件层面上实现了对用户永不失信的承诺。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;所以，用一句话来概括：&lt;strong&gt;持久性就是用“顺序写盘的底层日志”，来为“内存中的高效修改”做担保，从而在软件层面上实现了对用户永不失信的承诺&lt;/strong&gt;。&lt;/p&gt;
 
  &lt;/blockquote&gt;
 
@@ -930,7 +930,7 @@
 
  &lt;blockquote&gt;
  &lt;p&gt;&lt;del&gt;怎么区分「脏读」、「不可重复读」和「幻读」？明明都是，一个事务能读到另一个事务对数据的修改啊？&lt;/del&gt;&lt;/p&gt;
-&lt;p&gt;它们的本质完全一样：&lt;strong&gt;都是一个事务在执行期间，受到了另一个并发事务的“干扰”，读到了对方的修改。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它们的本质完全一样：&lt;strong&gt;都是一个事务在执行期间，受到了另一个并发事务的“干扰”，读到了对方的修改&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;既然本质相同，那为什么还要分三个词？因为它们发生在&lt;strong&gt;不同的时间节点&lt;/strong&gt;、读到了&lt;strong&gt;不同状态的数据&lt;/strong&gt;。区分它们的关键，在于看那个“干扰你的事务”&lt;strong&gt;处于什么阶段&lt;/strong&gt;，以及它&lt;strong&gt;修改了什么类型的数据&lt;/strong&gt;。&lt;/p&gt;
 &lt;h4 id="脏读-dirty-read读了未提交的假数据"&gt;脏读 (Dirty Read)：读了“未提交”的假数据
 &lt;/h4&gt;
@@ -1014,7 +1014,7 @@
 &lt;/ul&gt;
 &lt;p&gt;所以，它们不是重合的概念，而是由于&lt;strong&gt;并发控制的实现难度不同&lt;/strong&gt;，被硬生生划分出来的三个递进的并发痛点。&lt;/p&gt;
 &lt;p&gt;&lt;del&gt;幻读是读到了之前没读到的新记录，那如果另一个事务在删数据，导致当前事务读到的记录越来越少，那还是幻读吗？&lt;/del&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;在标准的数据库定义中，这不叫幻读，它属于「不可重复读」的范畴。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在标准的数据库定义中，这不叫幻读，它属于「不可重复读」的范畴&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;既然“凭空多出记录”叫幻读，那“凭空变少记录”不也一样像幻觉吗？为什么数据库专家非要把它们区别对待？&lt;/p&gt;
 &lt;h4 id="严格的学术与标准定义"&gt;严格的学术与标准定义
 &lt;/h4&gt;
@@ -1025,7 +1025,7 @@
 &lt;/ul&gt;
 &lt;h4 id="为什么非要这么分底层的锁逻辑完全不同"&gt;为什么非要这么分？（底层的锁逻辑完全不同）
 &lt;/h4&gt;
-&lt;p&gt;数据库不把它们混为一谈，不是为了玩文字游戏，而是因为&lt;strong&gt;在悲观锁并发控制中，防范 &lt;code&gt;DELETE&lt;/code&gt; 和防范 &lt;code&gt;INSERT&lt;/code&gt; 的技术成本完全不同。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;数据库不把它们混为一谈，不是为了玩文字游戏，而是因为&lt;strong&gt;在悲观锁并发控制中，防范 &lt;code&gt;DELETE&lt;/code&gt; 和防范 &lt;code&gt;INSERT&lt;/code&gt; 的技术成本完全不同&lt;/strong&gt;。&lt;/p&gt;
 &lt;h4 id="场景-a防范数据变少delete"&gt;场景 A：防范数据变少（DELETE）
 &lt;/h4&gt;
 &lt;p&gt;假设你执行 &lt;code&gt;SELECT * FROM users WHERE id = 5;&lt;/code&gt;。为了防止别的事务在你执行期间把这条数据 &lt;code&gt;DELETE&lt;/code&gt; 掉，数据库只需要给 &lt;code&gt;id = 5&lt;/code&gt; 的这一行加上行锁（Row Lock）或读锁。别的事务想删也删不了，只能排队。&lt;/p&gt;
@@ -1830,7 +1830,7 @@
 &lt;p&gt;既然事务 A 偷懒没加锁，事务 B 怎么知道这条数据是“未提交”的呢？&lt;/p&gt;
 &lt;h4 id="破局聚簇索引的隐藏身份证情景一"&gt;破局：聚簇索引的“隐藏身份证”（情景一）
 &lt;/h4&gt;
-&lt;p&gt;InnoDB 的解决方案非常绝：&lt;strong&gt;不写锁日记，但写在“身份证”上。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;InnoDB 的解决方案非常绝：&lt;strong&gt;不写锁日记，但写在“身份证”上&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;每一条数据在底层存储时，都有一个隐藏的列叫 &lt;code&gt;trx_id&lt;/code&gt;（事务 ID）。你可以把它理解为&lt;strong&gt;最后修改这行数据的“人”的身份证号&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;现在，整个过程变成了这样：&lt;/p&gt;
 &lt;ol&gt;
@@ -1839,8 +1839,8 @@
 &lt;li&gt;&lt;strong&gt;事务 B 的心理活动&lt;/strong&gt;：
 &lt;ul&gt;
 &lt;li&gt;“咦？内存里没有这行记录的锁结构啊，看来我可以随便改？”&lt;/li&gt;
-&lt;li&gt;“等一下，我得稳一波。我看看这行记录的身份证（&lt;code&gt;trx_id&lt;/code&gt;）是谁的……哦，是 &lt;code&gt;100&lt;/code&gt;。”&lt;/li&gt;
-&lt;li&gt;“我去查一下系统当前的‘活跃事务列表’……靠，&lt;code&gt;100&lt;/code&gt; 号事务居然&lt;strong&gt;还在运行，没提交&lt;/strong&gt;！”&lt;/li&gt;
+&lt;li&gt;“等一下，我得稳一波。我看看这行记录的身份证（&lt;code&gt;trx_id&lt;/code&gt;）是谁的&amp;hellip;&amp;hellip;哦，是 &lt;code&gt;100&lt;/code&gt;。”&lt;/li&gt;
+&lt;li&gt;“我去查一下系统当前的‘活跃事务列表’&amp;hellip;&amp;hellip;靠，&lt;code&gt;100&lt;/code&gt; 号事务居然&lt;strong&gt;还在运行，没提交&lt;/strong&gt;！”&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;高能操作来了（对应原文的“帮助当前事务创建一个锁”）&lt;/strong&gt;：
@@ -1852,7 +1852,7 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;这就是“隐式锁”：&lt;strong&gt;平时看不见，但只要别人想来碰，它就会自动现形（转为显式锁）。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这就是“隐式锁”：&lt;strong&gt;平时看不见，但只要别人想来碰，它就会自动现形（转为显式锁）&lt;/strong&gt;。&lt;/p&gt;
 &lt;h4 id="进阶二级索引怎么判断情景二"&gt;进阶：二级索引怎么判断？（情景二）
 &lt;/h4&gt;
 &lt;p&gt;如果事务 B 查找的不是主键，而是普通的索引（二级索引，比如 &lt;code&gt;age&lt;/code&gt; 字段的索引），该怎么办？&lt;/p&gt;
@@ -3196,7 +3196,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;row&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;000&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;第一个读取语句并没有获取到参数的值，也就是说&lt;strong&gt;OUT 参数的值默认为 NULL&lt;/strong&gt;。在存储过程执行完毕之后，再次读取变量 b 的值，发现它的值已经被设置成 123；说明在过程中对该变量的赋值对调用者是可见的。&lt;strong&gt;OUT 参数只能用于赋值，对它赋值是可以被调用者看到的。&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;第一个读取语句并没有获取到参数的值，也就是说&lt;strong&gt;OUT 参数的值默认为 NULL&lt;/strong&gt;。在存储过程执行完毕之后，再次读取变量 b 的值，发现它的值已经被设置成 123；说明在过程中对该变量的赋值对调用者是可见的。&lt;strong&gt;OUT 参数只能用于赋值，对它赋值是可以被调用者看到的&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;由于 OUT 参数只是为了用于将存储过程执行过程中产生的数据赋值给它后交给调用者查看，那么在调用存储过程时，实际的&lt;strong&gt;参数就不允许是常量&lt;/strong&gt;！&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
