@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vue on 馬腊咯稽</title><link>https://ElementRef.github.io/c/vue/</link><description>Recent Content in Vue on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo 0.164.0</generator><language>zh</language><lastBuildDate>Mon, 15 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/c/vue/index.xml" rel="self" type="application/rss+xml"/><item><title>「Gemini」Vue 的 Vapor 模式：性能革新</title><link>https://ElementRef.github.io/p/vue-vapor/</link><pubDate>Mon, 15 Jun 2026 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vue-vapor/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="Featured image of post 「Gemini」Vue 的 Vapor 模式：性能革新" /&gt;&lt;p&gt;最近在小红书上看到&lt;a class="link" href="https://www.xiaohongshu.com/explore/6a2ec5c3000000003502307f?xsec_token=CBp1naSsNCslkEA_GJrA6m04mzwiWtQI6rTnIDSnHeuYw=" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vue on 馬腊咯稽</title><link>https://ElementRef.github.io/c/vue/</link><description>Recent Content in Vue on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo 0.164.0</generator><language>zh</language><lastBuildDate>Mon, 15 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/c/vue/index.xml" rel="self" type="application/rss+xml"/><item><title>「Gemini」Vue 的 Vapor 模式：性能革新</title><link>https://ElementRef.github.io/p/vue-vapor/</link><pubDate>Mon, 15 Jun 2026 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vue-vapor/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.webp" alt="Featured image of post 「Gemini」Vue 的 Vapor 模式：性能革新" /&gt;&lt;p&gt;最近在小红书上看到&lt;a class="link" href="https://www.xiaohongshu.com/explore/6a2ec5c3000000003502307f?xsec_token=CBp1naSsNCslkEA_GJrA6m04mzwiWtQI6rTnIDSnHeuYw=" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;Vue 4 完整路线解读｜前端新趋势✨&lt;/a&gt;
 酱紫的帖子，后来证明博主是在&lt;strong&gt;夸大/博流量&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;许久不用 Vue，更不清楚什么 Vapor；问一问 AI 蒜鸟。&lt;/p&gt;
@@ -7,7 +7,7 @@
 。&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Vue 的 Vapor 模式：性能革新" class="gallery-image" data-flex-basis="11px" data-flex-grow="4" height="37407" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/vue-vapor/talk.with.gemini_hu_915adf6928a13b8c.png" srcset="https://ElementRef.github.io/p/vue-vapor/talk.with.gemini_hu_f0e5aed35806ee20.png 800w, https://ElementRef.github.io/p/vue-vapor/talk.with.gemini_hu_be28886db6d8cd0c.png 1600w, https://ElementRef.github.io/p/vue-vapor/talk.with.gemini_hu_915adf6928a13b8c.png 1840w" width="1840"&gt;
 
-&lt;/p&gt;</description></item><item><title>VueRouter 2.x 源码学习</title><link>https://ElementRef.github.io/p/vue-router/</link><pubDate>Thu, 06 Jan 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vue-router/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="Featured image of post VueRouter 2.x 源码学习" /&gt;&lt;h2 id="vueuserouter"&gt;Vue.use(Router)
+&lt;/p&gt;</description></item><item><title>VueRouter 2.x 源码学习</title><link>https://ElementRef.github.io/p/vue-router/</link><pubDate>Thu, 06 Jan 2022 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vue-router/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.webp" alt="Featured image of post VueRouter 2.x 源码学习" /&gt;&lt;h2 id="vueuserouter"&gt;Vue.use(Router)
 &lt;/h2&gt;
 &lt;p&gt;Vue.use 会调用 Router 的静态 install 方法：&lt;/p&gt;
 &lt;ol&gt;
@@ -2052,7 +2052,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;总之，VueRouter 在初始化的时候，会向组件 mixin 一些钩子函数；在 beforeCreate 中，会借助 Vue.util.defineReactive API 将 vm._route 转换为 getter/setter；又因为 router-view 在调用 h 函数渲染组件的时候，会访问 vm._route.matched，router-view 所在实例的 renderWatcher 形成对 vm._route 的依赖。所以，每当 vm._route 变化，router-view 会自动匹配自己要渲染的组件。&lt;/p&gt;
 &lt;p&gt;router-link 默认会渲染出一个绑定了事件的 a 标签，用户点击时，会调用 transitionTo 进行导航；transitionTo 会计算出最新的 route，调用 History API 更新 URL，调用路由钩子，更新 vm._route，触发 router-view 更新。&lt;/p&gt;
-&lt;p&gt;至于 popstate 事件，主要用来处理浏览器的行为（history.pushState/replaceState 并不会触发 popstate）并调用 transitionTo 更新页面。&lt;/p&gt;</description></item><item><title>Vue 2.x/3.x 比较</title><link>https://ElementRef.github.io/p/vue-compare/</link><pubDate>Sun, 24 Oct 2021 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vue-compare/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="Featured image of post Vue 2.x/3.x 比较" /&gt;&lt;h2 id="响应式原理-2x"&gt;响应式原理 2.x
+&lt;p&gt;至于 popstate 事件，主要用来处理浏览器的行为（history.pushState/replaceState 并不会触发 popstate）并调用 transitionTo 更新页面。&lt;/p&gt;</description></item><item><title>Vue 2.x/3.x 比较</title><link>https://ElementRef.github.io/p/vue-compare/</link><pubDate>Sun, 24 Oct 2021 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vue-compare/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.webp" alt="Featured image of post Vue 2.x/3.x 比较" /&gt;&lt;h2 id="响应式原理-2x"&gt;响应式原理 2.x
 &lt;/h2&gt;
 &lt;p&gt;Dep 用来存放/管理订阅者（watcher）的对象；每个 Dep 实例都存在于&lt;strong&gt;对象每个属性对应的 getter/setter 所在的闭包里&lt;/strong&gt;并且都有唯一的 id。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -15243,7 +15243,7 @@
 &lt;li&gt;&lt;a class="link" href="https://book.douban.com/subject/32581281" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;《深入浅出 Vue.js》&lt;/a&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>基于作用域插槽的 Renderless 组件</title><link>https://ElementRef.github.io/p/renderless-component/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/renderless-component/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="Featured image of post 基于作用域插槽的 Renderless 组件" /&gt;&lt;p&gt;回来一查，原来是作用域插槽的高阶（算是吧）用法。&lt;/p&gt;
+&lt;/ul&gt;</description></item><item><title>基于作用域插槽的 Renderless 组件</title><link>https://ElementRef.github.io/p/renderless-component/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/renderless-component/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.webp" alt="Featured image of post 基于作用域插槽的 Renderless 组件" /&gt;&lt;p&gt;回来一查，原来是作用域插槽的高阶（算是吧）用法。&lt;/p&gt;
 &lt;h2 id="普通插槽与作用域插槽"&gt;普通插槽与作用域插槽
 &lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -15851,7 +15851,7 @@
 &lt;li&gt;&lt;a class="link" href="https://adamwathan.me/renderless-components-in-vuejs" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;Renderless Components In Vue.js&lt;/a&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>Vue Composition API</title><link>https://ElementRef.github.io/p/composition-api/</link><pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/composition-api/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="Featured image of post Vue Composition API" /&gt;&lt;h2 id="与-hooks-的区别"&gt;与 Hooks 的区别
+&lt;/ul&gt;</description></item><item><title>Vue Composition API</title><link>https://ElementRef.github.io/p/composition-api/</link><pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/composition-api/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.webp" alt="Featured image of post Vue Composition API" /&gt;&lt;h2 id="与-hooks-的区别"&gt;与 Hooks 的区别
 &lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;更符合 JS 习惯；&lt;/li&gt;
@@ -16993,7 +16993,7 @@
 &lt;li&gt;isReactive，判断对象是否是 reactive 创建的一个响应式代理；&lt;/li&gt;
 &lt;li&gt;isReadonly，判断对象是否是 readonly 创建的一个只读代理；&lt;/li&gt;
 &lt;li&gt;isRef，判断值是否为 ref 对象。&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>Vue 3.0 来了</title><link>https://ElementRef.github.io/p/vue-coming/</link><pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vue-coming/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="Featured image of post Vue 3.0 来了" /&gt;&lt;h2 id="改变"&gt;改变
+&lt;/ul&gt;</description></item><item><title>Vue 3.0 来了</title><link>https://ElementRef.github.io/p/vue-coming/</link><pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vue-coming/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.webp" alt="Featured image of post Vue 3.0 来了" /&gt;&lt;h2 id="改变"&gt;改变
 &lt;/h2&gt;
 &lt;p&gt;Vue 新版本根据&lt;a class="link" href="https://github.com/vuejs/rfcs" target="_blank" rel="noopener" referrerpolicy="no-referrer"
  &gt;社区&lt;/a&gt;
@@ -17053,7 +17053,7 @@
 &lt;/p&gt;
 &lt;h2 id="ie11"&gt;IE11
 &lt;/h2&gt;
-&lt;p&gt;Vue 3.0 将为 IE11 建立专门的 build，开发者可以选择不同的版本；2.7 将会是 2.x 时代的最后一个版本，有 18 个月的支持期。&lt;/p&gt;</description></item><item><title>Vue 2.x 复习总结</title><link>https://ElementRef.github.io/p/vue-note/</link><pubDate>Wed, 04 Mar 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vue-note/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.png" alt="Featured image of post Vue 2.x 复习总结" /&gt;&lt;h2 id="生命周期"&gt;生命周期
+&lt;p&gt;Vue 3.0 将为 IE11 建立专门的 build，开发者可以选择不同的版本；2.7 将会是 2.x 时代的最后一个版本，有 18 个月的支持期。&lt;/p&gt;</description></item><item><title>Vue 2.x 复习总结</title><link>https://ElementRef.github.io/p/vue-note/</link><pubDate>Wed, 04 Mar 2020 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vue-note/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vue.webp" alt="Featured image of post Vue 2.x 复习总结" /&gt;&lt;h2 id="生命周期"&gt;生命周期
 &lt;/h2&gt;
 &lt;p&gt;&lt;img alt="生命周期" class="gallery-image" data-flex-basis="94px" data-flex-grow="39" height="3039" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/vue-note/lifecycle_hu_578aee12e1516a15.png" srcset="https://ElementRef.github.io/p/vue-note/lifecycle_hu_81122394908f1728.png 800w, https://ElementRef.github.io/p/vue-note/lifecycle_hu_578aee12e1516a15.png 1200w" width="1200"&gt;
 
