@@ -1757,7 +1757,7 @@
 &lt;p&gt;MySQL 在 REPEATABLE READ 隔离级别下是可以解决幻读问题的，解决方案有两种：MVCC 方案、加锁方案。&lt;/p&gt;
 &lt;p&gt;在使用加锁方案解决时有个大问题，就是事务在第一次执行读取操作时，那些幻影记录尚不存在，我们无法给这些幻影记录加上记录锁。&lt;/p&gt;
 &lt;p&gt;设计 InnoDB 的大叔提出了一种称之为 Gap Locks 的锁，官方的类型名称为：LOCK_GAP，我们也可以简称为&lt;strong&gt;gap 锁&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="LOCK_GAP" class="gallery-image" data-flex-basis="496px" data-flex-grow="206" height="438" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/how-mysql-works/LOCK_GAP.1_hu_f50e935b391d2ca5.webp" srcset="https://ElementRef.github.io/p/how-mysql-works/LOCK_GAP.1_hu_eca77352c2a57cc5.webp 800w, https://ElementRef.github.io/p/how-mysql-works/LOCK_GAP.1_hu_f50e935b391d2ca5.webp 906w" width="906"&gt;
+&lt;p&gt;&lt;img alt="Gap Locks" class="gallery-image" data-flex-basis="496px" data-flex-grow="206" height="438" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/how-mysql-works/LOCK_GAP.1_hu_f50e935b391d2ca5.webp" srcset="https://ElementRef.github.io/p/how-mysql-works/LOCK_GAP.1_hu_eca77352c2a57cc5.webp 800w, https://ElementRef.github.io/p/how-mysql-works/LOCK_GAP.1_hu_f50e935b391d2ca5.webp 906w" width="906"&gt;
 
 &lt;/p&gt;
 &lt;p&gt;为 number 值为 8 的记录加了 gap 锁，意味着不允许别的事务在 number 值为 8 的记录&lt;strong&gt;前边&lt;/strong&gt;的间隙插入新记录，其实就是 number 列的值&lt;code&gt;(3, 8)&lt;/code&gt;这个区间的新记录是不允许立即插入的。&lt;/p&gt;
@@ -1766,14 +1766,14 @@
 &lt;p&gt;如果你对一条记录加了 gap 锁（不论是共享 gap 锁还是独占 gap 锁），并&lt;strong&gt;不会限制&lt;/strong&gt;其他事务对这条记录加记录锁或者继续加 gap 锁。&lt;/p&gt;
 &lt;p&gt;给一条记录加了 gap 锁只是不允许其他事务往这条记录前边的间隙插入新记录，那对于最后一条记录之后的间隙，也就是 hero 表中 number 值为 20 的记录之后的间隙该咋办呢？也就是说给哪条记录加 gap 锁才能阻止其他事务插入 number 值在&lt;code&gt;(20, +∞)&lt;/code&gt;这个区间的新记录呢？&lt;/p&gt;
 &lt;p&gt;为了实现阻止其他事务插入 number 值在&lt;code&gt;(20, +∞)&lt;/code&gt;这个区间的新记录，我们可以给索引中的最后一条记录，也就是 number 值为 20 的那条记录所在页面的 Supremum 记录（该页面中最大的记录）加上一个 gap 锁。&lt;/p&gt;
-&lt;p&gt;&lt;img class="gallery-image" data-flex-basis="503px" data-flex-grow="209" height="500" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/how-mysql-works/LOCK_GAP.2_hu_80571a06172b3911.webp" srcset="https://ElementRef.github.io/p/how-mysql-works/LOCK_GAP.2_hu_187d1fd332acf17b.webp 800w, https://ElementRef.github.io/p/how-mysql-works/LOCK_GAP.2_hu_80571a06172b3911.webp 1048w" width="1048"&gt;
+&lt;p&gt;&lt;img alt="Gap Locks" class="gallery-image" data-flex-basis="503px" data-flex-grow="209" height="500" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/how-mysql-works/LOCK_GAP.2_hu_80571a06172b3911.webp" srcset="https://ElementRef.github.io/p/how-mysql-works/LOCK_GAP.2_hu_187d1fd332acf17b.webp 800w, https://ElementRef.github.io/p/how-mysql-works/LOCK_GAP.2_hu_80571a06172b3911.webp 1048w" width="1048"&gt;
 
 &lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Next-Key Locks&lt;/p&gt;
 &lt;p&gt;有时候我们既想锁住某条记录，又想阻止其他事务在该记录前边的间隙插入新记录，所以设计 InnoDB 的大叔们就提出了一种称之为 Next-Key Locks 的锁；官方的类型名称为：LOCK_ORDINARY，我们也可以简称为&lt;strong&gt;next-key 锁&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img class="gallery-image" data-flex-basis="547px" data-flex-grow="228" height="460" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/how-mysql-works/LOCK_ORDINARY_hu_f877261d78e001d9.webp" srcset="https://ElementRef.github.io/p/how-mysql-works/LOCK_ORDINARY_hu_8cf08a0e0e9412c5.webp 800w, https://ElementRef.github.io/p/how-mysql-works/LOCK_ORDINARY_hu_f877261d78e001d9.webp 1049w" width="1049"&gt;
+&lt;p&gt;&lt;img alt="Next-Key Locks" class="gallery-image" data-flex-basis="547px" data-flex-grow="228" height="460" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/how-mysql-works/LOCK_ORDINARY_hu_f877261d78e001d9.webp" srcset="https://ElementRef.github.io/p/how-mysql-works/LOCK_ORDINARY_hu_8cf08a0e0e9412c5.webp 800w, https://ElementRef.github.io/p/how-mysql-works/LOCK_ORDINARY_hu_f877261d78e001d9.webp 1049w" width="1049"&gt;
 
 &lt;/p&gt;
 &lt;p&gt;next-key 锁的本质就是一个记录锁和一个 gap 锁的&lt;strong&gt;合体&lt;/strong&gt;；它既能保护该条记录，又能阻止别的事务将新记录插入被保护记录前边的间隙。&lt;/p&gt;
@@ -1783,11 +1783,11 @@
 &lt;p&gt;一个事务在插入一条记录时需要判断一下插入位置是不是被别的事务加了所谓的 gap 锁（next-key 锁也包含 gap 锁）；如果有的话，插入操作需要等待，直到拥有 gap 锁的那个事务提交。&lt;/p&gt;
 &lt;p&gt;设计 InnoDB 的大叔规定事务在等待的时候也需要在内存中生成一个锁结构，表明有事务想在某个间隙中插入新记录，但是现在在等待。&lt;/p&gt;
 &lt;p&gt;设计 InnoDB 的大叔就把这种类型的锁命名为 Insert Intention Locks，官方的类型名称为：LOCK_INSERT_INTENTION，我们也可以称为&lt;strong&gt;插入意向锁&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img class="gallery-image" data-flex-basis="548px" data-flex-grow="228" height="457" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/how-mysql-works/LOCK_INSERT_INTENTION.1_hu_4d9dd35514e68fab.webp" srcset="https://ElementRef.github.io/p/how-mysql-works/LOCK_INSERT_INTENTION.1_hu_b09c4fa5e9d19050.webp 800w, https://ElementRef.github.io/p/how-mysql-works/LOCK_INSERT_INTENTION.1_hu_4d9dd35514e68fab.webp 1044w" width="1044"&gt;
+&lt;p&gt;&lt;img alt="Insert Intention Locks" class="gallery-image" data-flex-basis="548px" data-flex-grow="228" height="457" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/how-mysql-works/LOCK_INSERT_INTENTION.1_hu_4d9dd35514e68fab.webp" srcset="https://ElementRef.github.io/p/how-mysql-works/LOCK_INSERT_INTENTION.1_hu_b09c4fa5e9d19050.webp 800w, https://ElementRef.github.io/p/how-mysql-works/LOCK_INSERT_INTENTION.1_hu_4d9dd35514e68fab.webp 1044w" width="1044"&gt;
 
 &lt;/p&gt;
 &lt;p&gt;现在 T1 为 number 值为 8 的记录加了一个 gap 锁，然后 T2 和 T3 分别想向 hero 表中插入 number 值分别为 4、5 的两条记录，所以现在为 number 值为 8 的记录加的锁的示意图就如下所示：&lt;/p&gt;
-&lt;p&gt;&lt;img class="gallery-image" data-flex-basis="367px" data-flex-grow="152" height="617" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/how-mysql-works/LOCK_INSERT_INTENTION.2_hu_5d1a456edee65243.webp" srcset="https://ElementRef.github.io/p/how-mysql-works/LOCK_INSERT_INTENTION.2_hu_c051c4ee361ee2e3.webp 800w, https://ElementRef.github.io/p/how-mysql-works/LOCK_INSERT_INTENTION.2_hu_5d1a456edee65243.webp 944w" width="944"&gt;
+&lt;p&gt;&lt;img alt="Insert Intention Locks" class="gallery-image" data-flex-basis="367px" data-flex-grow="152" height="617" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://ElementRef.github.io/p/how-mysql-works/LOCK_INSERT_INTENTION.2_hu_5d1a456edee65243.webp" srcset="https://ElementRef.github.io/p/how-mysql-works/LOCK_INSERT_INTENTION.2_hu_c051c4ee361ee2e3.webp 800w, https://ElementRef.github.io/p/how-mysql-works/LOCK_INSERT_INTENTION.2_hu_5d1a456edee65243.webp 944w" width="944"&gt;
 
 &lt;/p&gt;
 
