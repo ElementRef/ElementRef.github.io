@@ -1,4 +1,1360 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vite on 馬腊咯稽</title><link>https://ElementRef.github.io/c/vite/</link><description>Recent Content in Vite on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo 0.164.0</generator><language>zh</language><lastBuildDate>Tue, 29 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/c/vite/index.xml" rel="self" type="application/rss+xml"/><item><title>Vite 学习笔记</title><link>https://ElementRef.github.io/p/vite-start/</link><pubDate>Tue, 29 Oct 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vite-start/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vite.webp" alt="Featured image of post Vite 学习笔记" /&gt;&lt;p&gt;Vite 内部有两套实现：&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vite on 馬腊咯稽</title><link>https://ElementRef.github.io/c/vite/</link><description>Recent Content in Vite on 馬腊咯稽</description><follow_challenge><feedId>80533990418010112</feedId><userId>56003584240037888</userId></follow_challenge><generator>Hugo 0.164.0</generator><language>zh</language><lastBuildDate>Mon, 20 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://ElementRef.github.io/c/vite/index.xml" rel="self" type="application/rss+xml"/><item><title>「Gemini」Electron 学习笔记（五）</title><link>https://ElementRef.github.io/p/electron-note-5/</link><pubDate>Mon, 20 Jul 2026 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/electron-note-5/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/electron.webp" alt="Featured image of post 「Gemini」Electron 学习笔记（五）" /&gt;&lt;p&gt;这两天在看 electron-vite 的&lt;a class="link" href="https://cn.electron-vite.org/guide" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;文档&lt;/a&gt;
+，边看边提了一些问题给&lt;a class="link" href="https://share.gemini.google/1BAD5VLa9P0A" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;Gemini&lt;/a&gt;
+，这里算是问题归档吧。&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;h2 id="electron-vite-似乎不支持-angular"&gt;electron-vite 似乎不支持 Angular？
+&lt;/h2&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;从官方角度和开箱即用的体验来看，&lt;code&gt;electron-vite&lt;/code&gt; 确实没有原生支持 Angular&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在运行 &lt;code&gt;npm create @quick-start/electron@latest&lt;/code&gt; 初始化项目时，官方提供的框架预设只有 &lt;strong&gt;Vue、React、Svelte、Solid&lt;/strong&gt; 等。&lt;/p&gt;
+&lt;h3 id="为什么不支持"&gt;为什么不支持？
+&lt;/h3&gt;
+&lt;p&gt;核心原因在于 &lt;strong&gt;构建生态的差异&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;electron-vite&lt;/code&gt; 是完全基于 Vite 构建的。&lt;/li&gt;
+&lt;li&gt;Angular 拥有自己极其封闭且强大的 CLI 构建系统（历史上使用 Webpack，新版本逐步转向基于 esbuild 深度定制的系统）。Angular 的依赖注入、模板编译（AOT）等特性，高度依赖其官方的 &lt;code&gt;@angular-devkit&lt;/code&gt;，这使得它很难直接塞进标准的 Vite 插件流中。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="如果非要在-electron-vite-里用-angular-怎么办"&gt;如果非要在 &lt;code&gt;electron-vite&lt;/code&gt; 里用 Angular 怎么办？
+&lt;/h3&gt;
+&lt;p&gt;虽然官方不提供模板，但技术上是可行的。这需要借助社区的 &lt;strong&gt;AnalogJS&lt;/strong&gt;（一个为 Angular 提供 Vite 支持的元框架生态），利用它提供的 &lt;code&gt;@analogjs/vite-plugin-angular&lt;/code&gt; 插件来硬接入 &lt;code&gt;electron-vite&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;你可以参考以下思路进行手动配置：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;安装核心依赖&lt;/strong&gt;：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;npm install @analogjs/vite-plugin-angular @angular/core @angular/common @angular/compiler @angular/platform-browser-dynamic --save
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start="2"&gt;
+&lt;li&gt;&lt;strong&gt;修改 &lt;code&gt;electron.vite.config.ts&lt;/code&gt;&lt;/strong&gt;：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;resolve&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;path&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;defineConfig&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;externalizeDepsPlugin&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;electron-vite&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;angular&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;@analogjs/vite-plugin-angular&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="k"&gt;default&lt;/span&gt; &lt;span class="nx"&gt;defineConfig&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;main&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;plugins&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;externalizeDepsPlugin&lt;/span&gt;&lt;span class="p"&gt;()]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;preload&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;plugins&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;externalizeDepsPlugin&lt;/span&gt;&lt;span class="p"&gt;()]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;renderer&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;root&lt;/span&gt;: &lt;span class="kt"&gt;resolve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;src/renderer&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;plugins&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 强制将 Angular 插件注入到渲染进程的 Vite 配置中
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;angular&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start="3"&gt;
+&lt;li&gt;&lt;strong&gt;调整渲染进程入口&lt;/strong&gt;：将主页面的 &lt;code&gt;main.tsx&lt;/code&gt; 或 &lt;code&gt;main.js&lt;/code&gt; 改为 TypeScript 版本的 &lt;code&gt;main.ts&lt;/code&gt;，并使用 Angular 的常规引导方式（&lt;code&gt;bootstrapModule&lt;/code&gt;）去挂载你的 Angular 根模块或组件。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="更好的替代方案"&gt;更好的替代方案
+&lt;/h3&gt;
+&lt;p&gt;如果你不想折腾这种极其容易因为版本升级而崩溃的“硬合”配置，在 Electron 中使用 Angular 更推荐以下传统且稳定的道路：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Angular CLI + Electron 传统模式&lt;/strong&gt;：直接用 Angular CLI 创建标准项目，通过修改 &lt;code&gt;angular.json&lt;/code&gt; 中的 &lt;code&gt;outputPath&lt;/code&gt;，再配合一个简单的 &lt;code&gt;main.js&lt;/code&gt;（Electron 主进程代码）来直接加载 Angular 编译出来的静态文件。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;使用 Electron Forge&lt;/strong&gt;：配合官方或社区的 Webpack / esbuild 插件，将 Angular 的构建输出与 Electron 的生命周期打包挂钩。&lt;/li&gt;
+&lt;/ol&gt;
+
+ &lt;blockquote&gt;
+ &lt;h2 id="analogjsvite-plugin-angular-足够作为生产级项目的依赖吗analogjs-足够可靠吗"&gt;@analogjs/vite-plugin-angular 足够作为生产级项目的依赖吗？@analogjs 足够可靠吗？
+&lt;/h2&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;直接给出结论：&lt;strong&gt;如果你开发的是商业级、核心业务、或者生命周期要求极长的“传统”生产级项目，&lt;code&gt;@analogjs/vite-plugin-angular&lt;/code&gt; 和 AnalogJS 目前不能算作绝对稳妥的生产级依赖&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;但是，如果你正在做的是&lt;strong&gt;个人工具、内部系统、或者像 Electron 桌面端这种天然需要 Vite 生态滋养的特化项目&lt;/strong&gt;，它是目前非官方路径下质量最高、也是唯一的现实解。&lt;/p&gt;
+&lt;p&gt;为了帮你做技术评估，我们可以从以下几个维度来看待 &lt;code&gt;@analogjs&lt;/code&gt; 生态目前的真实状态：&lt;/p&gt;
+&lt;h3 id="1-团队与生态的可靠性它会烂尾吗"&gt;1. 团队与生态的可靠性（它会烂尾吗？）
+&lt;/h3&gt;
+&lt;p&gt;答案是：&lt;strong&gt;大概率不会，它是 Angular 社区的顶级明星项目&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;背景硬朗&lt;/strong&gt;：AnalogJS 并不是某个无名小卒的玩具，它的核心作者是 &lt;strong&gt;Brandon Roberts&lt;/strong&gt;（前 Angular 团队成员、NgRx 核心维护者）。该项目深受 Angular 官方团队的认可与技术关注。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;活跃度极高&lt;/strong&gt;：从 GitHub 的提交记录和发包频率来看，该项目保持着高密度的迭代（目前处于 2.x 稳定期与 3.x 架构演进阶段）。只要 Angular 和 Vite 的基建还在，这个项目大概率会一直有人修 bug。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-analogjsvite-plugin-angular-的本质与隐患"&gt;2. &lt;code&gt;@analogjs/vite-plugin-angular&lt;/code&gt; 的本质与隐患
+&lt;/h3&gt;
+&lt;p&gt;这个插件的核心工作是&lt;strong&gt;在 Vite 的插件流水线中模拟 Angular 的编译器（如 JIT 模式开发、AOT 模式生产打包）&lt;/strong&gt;。正是这种“魔改”，带来了生产环境的潜在隐患：&lt;/p&gt;
+&lt;h4 id="追随官方更新的时间差"&gt;追随官方更新的“时间差”
+&lt;/h4&gt;
+&lt;p&gt;Angular 的编译器（@angular/compiler-cli）和内部依赖（如 Zone.js、全新的 Zoneless 机制、Signals 响应式）在频繁迭代。每当 Angular 发布大版本（如 v18, v19, v20），AnalogJS 团队都需要去适配底层的 AST 解析和转换逻辑。&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;&lt;strong&gt;风险点&lt;/strong&gt;：一旦官方编译器改动了某些未公开的 API，你的项目在升级 Angular 版本时，可能会卡在 AnalogJS 插件升级的“空档期”，破坏团队的升级节奏。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;h4 id="第三方-angular-组件库的兼容性"&gt;第三方 Angular 组件库的兼容性
+&lt;/h4&gt;
+&lt;p&gt;Angular 传统的生态（如 Angular Material、NG-ZORRO 等）都是基于官方的 &lt;code&gt;ng-packagr&lt;/code&gt; 或 Angular CLI 打包成符合 Angular Package Format（APF）的规范。&lt;/p&gt;
+&lt;p&gt;当这些库被引入到 Vite 环境时，Vite 的依赖预构建（Dependency Pre-bundling）和 AnalogJS 的转换器有时会发生冲突（例如 CommonJS / ESM 混用、依赖注入元数据丢失等）。你可能需要花费大量精力在 &lt;code&gt;vite.config.ts&lt;/code&gt; 中写 &lt;code&gt;optimizeDeps.include&lt;/code&gt; 或配置 &lt;code&gt;ssr.noExternal&lt;/code&gt;。&lt;/p&gt;
+&lt;h3 id="3-生产级评估总结"&gt;3. 生产级评估总结
+&lt;/h3&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;评估维度&lt;/th&gt;
+					&lt;th&gt;状态&lt;/th&gt;
+					&lt;th&gt;结论&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;代码正确性&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;高&lt;/td&gt;
+					&lt;td&gt;编译出的产物在边缘情况（Edge Cases）之外表现稳定。&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;开发体验&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;极佳&lt;/td&gt;
+					&lt;td&gt;HMR（热更新）速度远超官方的 Webpack 年代，与 Vite 生态无缝对接。&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;生态兼容性&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;中等&lt;/td&gt;
+					&lt;td&gt;遇到复杂的企业级第三方纯 Angular 插件时，容易踩到构建坑。&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;长期维护成本&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;偏高&lt;/td&gt;
+					&lt;td&gt;依赖于开源团队对 Angular 官方进度的跟进速度。&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="给你的大方向建议"&gt;给你的大方向建议
+&lt;/h3&gt;
+&lt;p&gt;结合你之前提到的 &lt;code&gt;electron-vite&lt;/code&gt; 上使用 Angular 的场景：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;如果是商业大型桌面端&lt;/strong&gt;：
+不建议使用 &lt;code&gt;@analogjs/vite-plugin-angular&lt;/code&gt;。
+&lt;strong&gt;推荐解法&lt;/strong&gt;：渲染进程老老实实采用 Angular 官方推荐的 &lt;code&gt;Application Builder&lt;/code&gt;（基于 esbuild）进行构建，构建产物输出到 Electron 的指定目录。然后通过普通的 Vite / ts-node 只去管主进程（Main）和预加载（Preload）的构建。虽然损失了渲染进程的一部分 Vite 特性，但换来了绝对的生产级稳定。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;如果是中小型 / 个人项目，或者极度依赖 Vite 插件生态&lt;/strong&gt;：
+完全可以大胆使用 AnalogJS 的插件。它能让你享受到极致的开发高效率，但在遇到构建报错时，你需要具备看懂 Vite Transform 流程和 AST 报错的调试能力。&lt;/li&gt;
+&lt;/ol&gt;
+
+ &lt;blockquote&gt;
+ &lt;h2 id="那在-linux-环境使用已经上线了的-electron-应用不要求应用拆掉沙盒吧还是说-sudo--以管理员身份运行会影响-electron-应用中渲染进程的沙箱隔离"&gt;那在 Linux 环境使用已经上线了的 Electron 应用，不要求应用拆掉沙盒吧？还是说 sudo / 以管理员身份运行，会影响 Electron 应用中渲染进程的沙箱隔离？
+&lt;/h2&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;不要求，也不应该拆掉沙盒&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;对于已经上线的生产级 Electron 应用，&lt;strong&gt;绝对不应该&lt;/strong&gt;要求普通用户使用 &lt;code&gt;sudo&lt;/code&gt; 或 &lt;code&gt;root&lt;/code&gt; 权限去运行它。只要用户是以普通用户（Non-root）身份运行应用，Chromium 的沙盒机制就会完美且正常地工作，提供渲染进程的隔离保护。&lt;/p&gt;
+&lt;p&gt;至于你的第二个疑问：&lt;strong&gt;如果用户真的用了 &lt;code&gt;sudo&lt;/code&gt; 或者以管理员身份去运行，会发生什么？它确实会彻底摧毁渲染进程的沙箱隔离&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;这里的逻辑非常清晰，我们可以从以下两个层面来剖析：&lt;/p&gt;
+&lt;h3 id="1-为什么上线的应用不需要拆沙盒"&gt;1. 为什么上线的应用不需要拆沙盒？
+&lt;/h3&gt;
+&lt;p&gt;在现代主流的 Linux 发行版（如 Ubuntu 22.04+、Debian、Fedora）中，Linux 内核都默认开启了 &lt;strong&gt;非特权用户命名空间（Unprivileged User Namespaces）&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;当普通用户启动 Electron 应用时：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;主进程以普通用户权限启动。&lt;/li&gt;
+&lt;li&gt;Chromium 利用操作系统的 User Namespaces 特性，&lt;strong&gt;不需要任何 root 权限&lt;/strong&gt;，就能成功为渲染进程创建出一个“完全隔离的小黑屋”（沙盒）。&lt;/li&gt;
+&lt;li&gt;渲染进程被锁在里面，无法读写用户的主目录文件，也无法执行未授权的系统调用。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;因此，线上应用默认开启沙盒是完全没有障碍的。&lt;/p&gt;
+&lt;h3 id="2-如果用-sudo--管理员运行会发生什么"&gt;2. 如果用 &lt;code&gt;sudo&lt;/code&gt; / 管理员运行，会发生什么？
+&lt;/h3&gt;
+&lt;p&gt;如果用户在终端敲下 &lt;code&gt;sudo ./my-electron-app&lt;/code&gt;，这不仅会影响沙箱，还会带来灾难性的安全隐患。此时会发生两种情况：&lt;/p&gt;
+&lt;h4 id="情况-a应用直接崩溃默认表现"&gt;情况 A：应用直接崩溃（默认表现）
+&lt;/h4&gt;
+&lt;p&gt;正如前面提到的，Chromium 只要检测到当前是 &lt;code&gt;root&lt;/code&gt; 权限，为了防止潜在的权限提升漏洞，它会直接拒绝启动并报错崩溃。这时候，应用是&lt;strong&gt;无法运行&lt;/strong&gt;的，沙箱压根没机会建立。&lt;/p&gt;
+&lt;h4 id="情况-b如果开发者为了能跑通强制加上了---no-sandbox"&gt;情况 B：如果开发者为了能跑通，强制加上了 &lt;code&gt;--no-sandbox&lt;/code&gt;
+&lt;/h4&gt;
+&lt;p&gt;如果开发者为了让 &lt;code&gt;sudo&lt;/code&gt; 能跑通，在代码里或启动命令中硬塞了 &lt;code&gt;--no-sandbox&lt;/code&gt;（或者 &lt;code&gt;--noSandbox&lt;/code&gt;），那么：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;沙箱隔离彻底消失&lt;/strong&gt;：渲染进程将和主进程一样，直接暴露在操作系统的最高权限（&lt;code&gt;root&lt;/code&gt;）之下。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;灾难性的后果&lt;/strong&gt;：此时，如果你的 Electron 应用加载了一个带有恶意脚本的网页，或者网页中存在 XSS 漏洞，黑客的恶意代码就可以&lt;strong&gt;直接利用渲染进程的 root 权限&lt;/strong&gt;，在用户的系统里执行 &lt;code&gt;rm -rf /&lt;/code&gt;、安装木马、窃取全系统的密码文件。因为沙箱这道防火墙已经被你手动拆掉了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="线上-linux-electron-应用的正确权限设计"&gt;线上 Linux Electron 应用的正确权限设计
+&lt;/h3&gt;
+&lt;p&gt;如果你的应用&lt;strong&gt;确实需要执行某些必须用 root 权限的操作&lt;/strong&gt;（例如修改系统网络配置、读写限制级硬件设备），业界标准做法绝对不是让用户 &lt;code&gt;sudo&lt;/code&gt; 启动整个 Electron 应用，而是采用 &lt;strong&gt;权限分离架构&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;整体低权限运行&lt;/strong&gt;：Electron 的主进程和渲染进程依然由普通用户启动，Chromium 沙盒完好无损。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;按需提权（Polkit / pkexec）&lt;/strong&gt;：当应用需要做高权限操作时，主进程通过 &lt;code&gt;child_process&lt;/code&gt; 去调用一个独立的轻量级 Shell 脚本或 Helper 工具，并使用 Linux 官方的 &lt;code&gt;pkexec&lt;/code&gt;（或社区的 &lt;code&gt;sudo-prompt&lt;/code&gt; 库）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;弹出原生鉴权框&lt;/strong&gt;：此时系统会弹出一个安全的原生密码输入框（类似于安装软件时的提示），验证通过后，只有那个&lt;strong&gt;临时的 Helper 工具&lt;/strong&gt;以 root 身份运行，执行完后立即销毁。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这样，你的 Electron 主体和渲染进程始终被安全地包裹在普通用户环境和 Chromium 沙盒中，既保证了功能，又守住了底线。&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;h2 id="在-macos--windows-上没有sudo-破坏渲染沙箱的问题吧"&gt;在 macOS / Windows 上，没有「sudo 破坏渲染沙箱」的问题吧？
+&lt;/h2&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;在 macOS 和 Windows 上，&lt;strong&gt;同样存在&lt;/strong&gt;因为以管理员权限（&lt;code&gt;sudo&lt;/code&gt; 或以管理员身份运行）启动而导致“沙盒被破坏”或发生异常的问题，但由于操作系统的底层安全架构不同，表现形式和 Chromium 的应对策略与 Linux 截然不同。&lt;/p&gt;
+&lt;p&gt;我们可以把 macOS 和 Windows 分开来看：&lt;/p&gt;
+&lt;h3 id="1-macos比-linux-更严格的限制"&gt;1. macOS：比 Linux 更严格的限制
+&lt;/h3&gt;
+&lt;p&gt;在 macOS 上，如果你在终端尝试使用 &lt;code&gt;sudo /Applications/YourApp.app/Contents/MacOS/YourApp&lt;/code&gt; 启动一个标准的 Electron 应用，通常会遇到以下情况：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Chromium 同样会拒绝或行为异常&lt;/strong&gt;：macOS 底层的沙盒依赖于操作系统的 &lt;code&gt;Sandbox.framework&lt;/code&gt;（App Sandbox）以及特殊的进程隔离机制。当你在 &lt;code&gt;sudo&lt;/code&gt; 环境下启动时，由于环境变量（如 &lt;code&gt;$HOME&lt;/code&gt;、&lt;code&gt;$USER&lt;/code&gt;）的错乱以及 &lt;code&gt;root&lt;/code&gt; 用户特殊的权限上下文，Chromium 的渲染进程在初始化沙盒时往往会失败，导致应用&lt;strong&gt;直接闪退或拒绝渲染窗口&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;破坏沙箱的代价极大&lt;/strong&gt;：如果你在 macOS 上强行加上 &lt;code&gt;--no-sandbox&lt;/code&gt; 以 &lt;code&gt;root&lt;/code&gt; 身份运行，渲染进程同样会失去隔离，直接继承 &lt;code&gt;root&lt;/code&gt; 权限。这在 macOS 的应用商店（App Store）审核中是一道绝对的死刑红线，甚至会因为触发系统的 SIP（系统完整性保护）限制而导致部分敏感 API 直接失效。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-windows不会崩溃但沙盒会被严重降级"&gt;2. Windows：不会崩溃，但沙盒会被“严重降级”
+&lt;/h3&gt;
+&lt;p&gt;Windows 的情况最具有欺骗性，因为&lt;strong&gt;当你右键选择“以管理员身份运行”一个 Electron 应用时，它通常能正常打开，不会像 Linux 那样直接崩溃&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;但是，&lt;strong&gt;它的沙箱其实已经被严重削弱或破坏了&lt;/strong&gt;：&lt;/p&gt;
+&lt;h4 id="权限继承与沙箱突破风险"&gt;权限继承与沙箱突破风险
+&lt;/h4&gt;
+&lt;p&gt;在 Windows 上，Chromium 的沙盒是通过非常复杂的 &lt;strong&gt;Token 降权机制（Restricted Tokens）&lt;/strong&gt; 和 &lt;strong&gt;工作对象（Job Objects）&lt;/strong&gt; 来实现的。&lt;/p&gt;
+&lt;p&gt;当应用以管理员（Administrator）身份启动时，主进程拥有最高令牌。虽然 Chromium 会尝试对渲染进程的 Token 进行降权，但由于底层父进程是管理员，被降权后的渲染进程依然可能保留了比普通用户高得多的系统权限（例如对某些系统注册表键值、敏感目录的访问权）。&lt;/p&gt;
+&lt;p&gt;更危险的是，Windows 的&lt;strong&gt;用户账户控制（UAC）&lt;/strong&gt; 机制决定了，高权限进程生成的子进程更容易通过某些 OS 漏洞实现“权限提升（Privilege Escalation）”。一旦渲染进程被黑客攻破，它从管理员沙盒中“逃逸”出来掌控整台电脑的难度，要远远小于从普通用户沙盒中逃逸。&lt;/p&gt;
+&lt;h4 id="带来严重的降级副作用il-不匹配"&gt;带来严重的“降级副作用”（IL 不匹配）
+&lt;/h4&gt;
+&lt;p&gt;Windows 依靠 &lt;strong&gt;完整性级别（Integrity Level, IL）&lt;/strong&gt; 来隔离进程。普通 Electron 应用的渲染进程运行在 &lt;code&gt;AppContainer&lt;/code&gt; 或 &lt;code&gt;Low IL&lt;/code&gt;（极低完整性级别）。&lt;/p&gt;
+&lt;p&gt;当主进程以管理员（High IL）运行时，这种级别的落差会导致很多 Windows 特有功能出现诡异的 Bug。比如最经典的：&lt;strong&gt;低完整性级别的渲染进程，无法通过拖拽（Drag and Drop）接收来自普通资源管理器（Medium IL）的文件&lt;/strong&gt;，这会导致应用内的拖拽功能直接失效。&lt;/p&gt;
+&lt;h3 id="总结全平台的铁律"&gt;总结：全平台的铁律
+&lt;/h3&gt;
+&lt;p&gt;无论是 Linux、macOS 还是 Windows，&lt;strong&gt;“以最高管理员权限运行多进程的浏览器 / Electron 应用”在安全领域都是绝对的反模式&lt;/strong&gt;。&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;操作系统&lt;/th&gt;
+					&lt;th&gt;以管理员启动的表现&lt;/th&gt;
+					&lt;th&gt;沙盒状态&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;Linux&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;直接崩溃拒启动（除非强制加 &lt;code&gt;--no-sandbox&lt;/code&gt;）&lt;/td&gt;
+					&lt;td&gt;彻底消失（若加了参数）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;macOS&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;进程初始化失败、闪退或行为异常&lt;/td&gt;
+					&lt;td&gt;被破坏或失效&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;Windows&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;能正常打开，但功能可能受限（如拖拽失效）&lt;/td&gt;
+					&lt;td&gt;严重削弱，逃逸风险剧增&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;不要在任何平台上尝试让用户以 &lt;code&gt;sudo&lt;/code&gt; 或管理员身份去启动整个 Electron 应用。在 Windows 上，如果应用需要管理员权限，正确的做法是通过配置打包工具（如 &lt;code&gt;electron-builder&lt;/code&gt;），在 &lt;code&gt;requestedExecutionLevel&lt;/code&gt; 中将其设为 &lt;code&gt;highestAvailable&lt;/code&gt;，但同样只推荐在&lt;strong&gt;不得不做全盘系统管理&lt;/strong&gt;的特殊工具软件中才这么做。普通的桌面应用，依然应该坚守低权限运行的底线。&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;h2 id="可是不是有-fuse-吗--no-sandbox-还能使用现代-electron-应用会怎样处理这种情况发现权限不对直接禁止运行"&gt;可是不是有 FUSE 吗？&lt;code&gt;--no-sandbox&lt;/code&gt; 还能使用？现代 Electron 应用会怎样处理这种情况？发现权限不对，直接禁止运行？
+&lt;/h2&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;确实，既然 Electron 官方推出了 Fuses 机制（允许开发者在打包时像“熔断保险丝”一样，永久禁用二进制文件中的某些后门特性），那为什么 &lt;code&gt;--no-sandbox&lt;/code&gt; 还能大行其道？现代应用到底是怎么兼顾安全与非正常运行环境的？&lt;/p&gt;
+&lt;h3 id="1-澄清一个误区fuses-并没有禁用---no-sandbox的选项"&gt;1. 澄清一个误区：Fuses 并没有“禁用 &lt;code&gt;--no-sandbox&lt;/code&gt;”的选项
+&lt;/h3&gt;
+&lt;p&gt;如果你翻阅 Electron 官方的 Fuses 选项列表（例如 &lt;code&gt;RunAsNode&lt;/code&gt;、&lt;code&gt;OnlyLoadAppFromAsar&lt;/code&gt; 等），你会发现&lt;strong&gt;截至目前，官方并没有提供一个叫做 &lt;code&gt;DisableNoSandbox&lt;/code&gt; 的熔断器&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;为什么不提供？因为 &lt;code&gt;--no-sandbox&lt;/code&gt; 不是 Electron 独有的黑魔法，它是&lt;strong&gt;底层 Chromium 内核的核心硬编码命令行参数&lt;/strong&gt;。在某些极端且合法的环境（如 Docker 容器、不支持非特权用户命名空间的 Linux 发行版内核、自动化 UI 测试环境如 Playwright）中，&lt;strong&gt;不加 &lt;code&gt;--no-sandbox&lt;/code&gt; 应用就是绝对无法运行的&lt;/strong&gt;。如果彻底熔断它，等于直接放弃了这些特定用户群。&lt;/p&gt;
+&lt;h3 id="2-现代-electron-应用是如何检测并拒绝高权限运行的"&gt;2. 现代 Electron 应用是如何检测并“拒绝”高权限运行的？
+&lt;/h3&gt;
+&lt;p&gt;既然不能从二进制层面把 &lt;code&gt;--no-sandbox&lt;/code&gt; 一刀切地熔断掉，现代优秀的桌面应用（如 VS Code、Discord、Slack 等）就会把这道防线挪到&lt;strong&gt;应用代码层&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;它们&lt;strong&gt;不会&lt;/strong&gt;等 Chromium 报错崩溃，而是在 &lt;strong&gt;主进程（Main Process）生命周期的最早期&lt;/strong&gt;，主动去探测当前的运行权限。&lt;/p&gt;
+&lt;h4 id="核心策略权限不对直接报错禁止运行"&gt;核心策略：权限不对，直接报错禁止运行
+&lt;/h4&gt;
+&lt;p&gt;现代应用在代码中通常会这样处理：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;span class="lnt"&gt;31
+&lt;/span&gt;&lt;span class="lnt"&gt;32
+&lt;/span&gt;&lt;span class="lnt"&gt;33
+&lt;/span&gt;&lt;span class="lnt"&gt;34
+&lt;/span&gt;&lt;span class="lnt"&gt;35
+&lt;/span&gt;&lt;span class="lnt"&gt;36
+&lt;/span&gt;&lt;span class="lnt"&gt;37
+&lt;/span&gt;&lt;span class="lnt"&gt;38
+&lt;/span&gt;&lt;span class="lnt"&gt;39
+&lt;/span&gt;&lt;span class="lnt"&gt;40
+&lt;/span&gt;&lt;span class="lnt"&gt;41
+&lt;/span&gt;&lt;span class="lnt"&gt;42
+&lt;/span&gt;&lt;span class="lnt"&gt;43
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;app&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;dialog&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;electron&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;os&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;os&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;checkSecurityEnvironment() {&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 1. 检测 Linux / macOS 下的 root 身份
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;process&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;platform&lt;/span&gt; &lt;span class="o"&gt;!==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;win32&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;userInfo&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;os&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;userInfo&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;userInfo&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;uid&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="nx"&gt;userInfo&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;username&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;root&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;showFatalError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s1"&gt;&amp;#39;安全警告&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s1"&gt;&amp;#39;为了您的系统安全，本应用禁止以 root / 管理员权限运行。&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 2. 检测 Windows 下的管理员权限
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;process&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;platform&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;win32&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 现代应用常通过尝试写入限制级系统盘，或调用 net session 命令来判断是否拥有管理员 Token
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;isAdmin&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;checkWindowsAdminStatus&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;isAdmin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;showFatalError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;安全警告&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;请勿以管理员身份运行此应用。&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 3. 针对商业敏感应用（如网银、加密钱包）：检测 --no-sandbox 标志
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 哪怕用户绕过了 root 检测，只要强行注入了该参数，直接拒绝
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;commandLine&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;hasSwitch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;no-sandbox&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;process&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;includes&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;--no-sandbox&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;showFatalError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;安全策略限制&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;检测到沙箱被强行关闭，应用拒绝启动。&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;showFatalError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;title&lt;/span&gt;: &lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;message&lt;/span&gt;: &lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;dialog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;showErrorBox&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;quit&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="c1"&gt;// 干净地退出应用，而不是让 Chromium 发生段错误崩溃
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;whenReady&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="nx"&gt;then&lt;/span&gt;&lt;span class="p"&gt;(()&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nx"&gt;checkSecurityEnvironment&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 创建窗口...
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="3-现代-electron-应用的整体安全防御体系"&gt;3. 现代 Electron 应用的整体安全防御体系
+&lt;/h3&gt;
+&lt;p&gt;那么，现代应用在打包上线时，是如何组合使用 &lt;strong&gt;Fuses&lt;/strong&gt; 与 &lt;strong&gt;沙箱&lt;/strong&gt; 来搭建铁桶阵的？它们通常会遵循以下标准工业配置：&lt;/p&gt;
+&lt;h4 id="第一步熔断高风险的-node-后门使用-fuses"&gt;第一步：熔断高风险的 Node 后门（使用 Fuses）
+&lt;/h4&gt;
+&lt;p&gt;虽然保留了 &lt;code&gt;--no-sandbox&lt;/code&gt; 的可能性，但开发者通过 Electron Fuses 熔断了其他能直接被用来注入恶意代码的开关：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;RunAsNode = false&lt;/code&gt;：禁用通过 &lt;code&gt;ELECTRON_RUN_AS_NODE=1&lt;/code&gt; 环境变量把你的桌面应用当成普通 Node.js 解释器来执行任意脚本的后门。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NodeOptions = false&lt;/code&gt;：禁用 &lt;code&gt;NODE_OPTIONS&lt;/code&gt; 环境变量，防止黑客通过外部注入篡改 Node 运行时的行为。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;OnlyLoadAppFromAsar = true&lt;/code&gt;：强行限制应用只能读取打包好的 &lt;code&gt;app.asar&lt;/code&gt;，防止黑客在本地应用目录塞入解包的恶意 JS 文件来覆盖你的逻辑。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="第二步强制全局开启沙箱代码层"&gt;第二步：强制全局开启沙箱（代码层）
+&lt;/h4&gt;
+&lt;p&gt;在应用的最顶层（必须在 &lt;code&gt;app.on('ready')&lt;/code&gt; 之前），现代应用会显式调用：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;enableSandbox&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="c1"&gt;// 强制所有渲染进程必须启用沙箱，无视任何 BrowserWindow 里的配置
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="第三步平台分发治理"&gt;第三步：平台分发治理
+&lt;/h4&gt;
+&lt;p&gt;现代应用在向用户分发时，会极力避免用户接触到终端命令：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Linux 上&lt;/strong&gt;：发布为标准的 &lt;code&gt;.deb&lt;/code&gt; / &lt;code&gt;.rpm&lt;/code&gt; 或 Snap / Flatpak 容器。在 &lt;code&gt;.desktop&lt;/code&gt; 快捷方式文件中写死正常的启动命令，决不带 &lt;code&gt;--no-sandbox&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Windows 上&lt;/strong&gt;：打包时配置 UAC 级别为 &lt;code&gt;asInvoker&lt;/code&gt;（即永远以&lt;strong&gt;发起者当前的普通权限&lt;/strong&gt;运行，即使当前登录的是管理员账户，也不主动索要提权）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="总结"&gt;总结
+&lt;/h3&gt;
+&lt;p&gt;现代 Electron 应用的逻辑是：&lt;strong&gt;“我可以把 &lt;code&gt;--no-sandbox&lt;/code&gt; 留给那些在 Docker 容器里做自动化测试的工程师，但如果一个普通的真实用户在日常操作系统里试图用 &lt;code&gt;sudo&lt;/code&gt; 或者强加 &lt;code&gt;--no-sandbox&lt;/code&gt; 来运行我，我的业务代码会立刻察觉，弹窗警告，并把自己当场杀掉。”&lt;/strong&gt;&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;h2 id="从-electron-20-开始预加载脚本默认沙盒化不再拥有完整-nodejs-环境的访问权electron-vite-说可以关闭沙盒如何对-preload-script关闭沙盒"&gt;「从 Electron 20 开始，预加载脚本默认沙盒化，不再拥有完整 Node.js 环境的访问权」？electron-vite 说可以关闭沙盒，如何对 Preload Script 关闭沙盒？
+&lt;/h2&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;Electron 20 的确做出了这个重大的安全转变：默认将预加载脚本（Preload Script）置于沙盒环境中。这意味着在默认情况下，你不能在 Preload 中直接使用 &lt;code&gt;require('fs')&lt;/code&gt; 或调用大量的 Node.js 内置模块，除非显式通过 IPC（进程间通信）向主进程要数据。&lt;/p&gt;
+&lt;p&gt;在 &lt;code&gt;electron-vite&lt;/code&gt; 架构中，如果你因为历史遗留代码、或者纯粹需要开发一个重度依赖底层 API 的本地工具，想要&lt;strong&gt;关闭沙盒以恢复 Preload 脚本对完整 Node.js 环境的访问权&lt;/strong&gt;，有两种层面的做法：&lt;/p&gt;
+&lt;h3 id="方法一针对特定窗口关闭沙盒推荐"&gt;方法一：针对特定窗口关闭沙盒（推荐）
+&lt;/h3&gt;
+&lt;p&gt;这是最常用的做法。你不需要全局关闭沙盒，只需要在主进程（Main Process）创建 &lt;code&gt;BrowserWindow&lt;/code&gt; 时，通过 &lt;code&gt;webPreferences&lt;/code&gt; 显式关闭 &lt;code&gt;sandbox&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;在你的主进程代码（通常是 &lt;code&gt;src/main/index.ts&lt;/code&gt; 或类似文件）中修改：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;BrowserWindow&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;electron&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;join&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;path&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;createWindow() {&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;mainWindow&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;BrowserWindow&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;width&lt;/span&gt;: &lt;span class="kt"&gt;900&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;height&lt;/span&gt;: &lt;span class="kt"&gt;670&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;webPreferences&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 1. 指向经过 electron-vite 编译后的 preload 路径
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;preload&lt;/span&gt;: &lt;span class="kt"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;__dirname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;../preload/index.js&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 2. 关闭后，该窗口的 Preload 脚本将重新拥有完整的 Node.js 访问权
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;sandbox&lt;/span&gt;: &lt;span class="kt"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 3. 建议保持开启：为了安全，依然建议保持 contextIsolation 为 true
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 然后通过 contextBridge 将 Node 能力按需暴露给渲染进程
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;contextIsolation&lt;/span&gt;: &lt;span class="kt"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// ... 加载页面逻辑
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="方法二在应用全局彻底禁用沙盒"&gt;方法二：在应用全局彻底禁用沙盒
+&lt;/h3&gt;
+&lt;p&gt;如果你希望整个应用内的所有窗口、所有 Preload 脚本都退回到 Electron 20 之前的状态，你可以在主进程的最顶部、应用准备就绪之前，通过改写 Chromium 的命令行参数来&lt;strong&gt;全局禁用沙盒&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;app&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;BrowserWindow&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;electron&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 必须在 app.whenReady() 之前，甚至在所有逻辑的最上方调用
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;commandLine&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;appendSwitch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;no-sandbox&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 或者使用：app.commandLine.appendSwitch(&amp;#39;disable-gpu-sandbox&amp;#39;)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;whenReady&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="nx"&gt;then&lt;/span&gt;&lt;span class="p"&gt;(()&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 此时创建的所有窗口默认都不会再受到沙盒限制
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;createWindow&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;&lt;strong&gt;警告&lt;/strong&gt;：这就是我们在前几个问题中讨论过的 &lt;code&gt;--no-sandbox&lt;/code&gt;。在应用代码里全局写死这个开关，相当于主动放弃了 Chromium 所有的底层安全隔离。除非是受限的专用设备或内部自动化环境，否则强烈不建议在生产环境使用。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;h3 id="核心避坑指南sandbox-false-后怎么在-preload-里写-node-代码"&gt;核心避坑指南：&lt;code&gt;sandbox: false&lt;/code&gt; 后怎么在 Preload 里写 Node 代码？
+&lt;/h3&gt;
+&lt;p&gt;当你把 &lt;code&gt;sandbox: false&lt;/code&gt; 配置好后，&lt;code&gt;electron-vite&lt;/code&gt; 会在构建时为你保留 Node 模块的引用。你在 Preload 脚本（&lt;code&gt;src/preload/index.ts&lt;/code&gt;）中可以这样写：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;contextBridge&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;electron&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;fs&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;fs&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 此时允许直接引入 Node 原生模块
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;os&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;os&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 即使关闭了沙盒，为了渲染进程（前端页面）的安全
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 依然应该通过 contextBridge 把能力“桥接”过去
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 而不是直接把 Node 注入给 window
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;contextBridge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;exposeInMainWorld&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;myCustomAPI&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;readLocalFile&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;path&lt;/span&gt;: &lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 只有在 sandbox: false 时
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 这里的 fs.readFileSync 才能正常执行
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;fs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;readFileSync&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;utf-8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;getPlatform&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;os&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;platform&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="为什么-electron-vite-允许这么做"&gt;为什么 &lt;code&gt;electron-vite&lt;/code&gt; 允许这么做？
+&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;electron-vite&lt;/code&gt; 在打包 &lt;code&gt;preload&lt;/code&gt; 时，内部使用了 Vite 的 &lt;code&gt;ssr&lt;/code&gt; 编译模式或特定的 &lt;code&gt;external&lt;/code&gt; 插件。它很聪明：当它发现你在 Preload 中 &lt;code&gt;import fs from 'fs'&lt;/code&gt; 时，它不会试图把整个 Node.js 的 &lt;code&gt;fs&lt;/code&gt; 源码打包进文件，而是保持其为 CommonJS 的 &lt;code&gt;require('fs')&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;当你配合 &lt;code&gt;sandbox: false&lt;/code&gt; 启动窗口时，Electron 运行时会顺理成章地把真正的 Node.js &lt;code&gt;require&lt;/code&gt; 环境塞给 Preload，从而完美跑通。&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;h2 id="sandbox-false-不只是给-preload-script-开了口子吧renderer-不是也能访问-nodejs-了"&gt;sandbox: false 不只是给 Preload Script 开了口子吧？Renderer 不是也能访问 Node.js 了？
+&lt;/h2&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;这是一个极其普遍的&lt;strong&gt;误解&lt;/strong&gt;，但事实并非如此。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;仅仅设置 &lt;code&gt;sandbox: false&lt;/code&gt;，渲染进程（Renderer）依然是绝对无法访问 Node.js 的&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;Electron 早就把“沙盒化”和“前端页面能不能用 Node.js”这两件事在底层解耦了。决定网页能不能直接用 Node.js 的，其实是另一个叫 &lt;code&gt;nodeIntegration&lt;/code&gt; 的开关。&lt;/p&gt;
+&lt;p&gt;为了让你彻底看清它们之间的交错关系，我们来看这个四象限矩阵：&lt;/p&gt;
+&lt;h3 id="核心参数控制矩阵"&gt;核心参数控制矩阵
+&lt;/h3&gt;
+&lt;p&gt;在 &lt;code&gt;webPreferences&lt;/code&gt; 中，有三个参数共同决定了权限：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;sandbox&lt;/code&gt;: 控制进程是否在操作系统级别被隔离。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;contextIsolation&lt;/code&gt;: 控制 Preload 脚本和网页是否共享同一个 JS 全局上下文（&lt;code&gt;window&lt;/code&gt; 对象）。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;nodeIntegration&lt;/code&gt;: 控制网页（Renderer）中是否可以直接使用 &lt;code&gt;require&lt;/code&gt;、&lt;code&gt;process&lt;/code&gt; 等 Node.js 变量。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;现代 Electron（在 &lt;code&gt;sandbox: false&lt;/code&gt; 时）的标准行为如下：&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;配置组合&lt;/th&gt;
+					&lt;th&gt;Preload 脚本权限&lt;/th&gt;
+					&lt;th&gt;渲染进程（网页）权限&lt;/th&gt;
+					&lt;th&gt;安全性评价&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;sandbox: true&lt;/code&gt;, &lt;code&gt;contextIsolation: true&lt;/code&gt;, &lt;code&gt;nodeIntegration: false&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;受限&lt;/strong&gt;。只能调用极少数 Electron API，无法直接 &lt;code&gt;require('fs')&lt;/code&gt;。&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;纯前端环境&lt;/strong&gt;。没有任何 Node.js 权限。&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;极高&lt;/strong&gt;（官方推荐）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;sandbox: false&lt;/code&gt;, &lt;code&gt;contextIsolation: true&lt;/code&gt;, &lt;code&gt;nodeIntegration: false&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;完全解禁&lt;/strong&gt;。可以直接 &lt;code&gt;require('fs')&lt;/code&gt; 运行任何 Node 代码。&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;纯前端环境&lt;/strong&gt;。依然无法访问任何 Node.js API，&lt;code&gt;window.process&lt;/code&gt; 是 &lt;code&gt;undefined&lt;/code&gt;。&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;中&lt;/strong&gt;（适合本地复杂工具）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;sandbox: false&lt;/code&gt;, &lt;code&gt;contextIsolation: false&lt;/code&gt;, &lt;code&gt;nodeIntegration: true&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;完全解禁&lt;/strong&gt;。&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;完全解禁&lt;/strong&gt;。网页里可以直接写 &lt;code&gt;require('fs')&lt;/code&gt;。一旦加载恶意网页，当场被黑。&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;极低&lt;/strong&gt;（灾难级，已被高版本 Electron 废弃）&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="为什么-sandbox-false-后网页还是没有-nodejs"&gt;为什么 &lt;code&gt;sandbox: false&lt;/code&gt; 后，网页还是没有 Node.js？
+&lt;/h3&gt;
+&lt;p&gt;因为只要 &lt;code&gt;contextIsolation: true&lt;/code&gt;（上下文隔离）和 &lt;code&gt;nodeIntegration: false&lt;/code&gt; 还在生效：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;JS 隔离墙还在&lt;/strong&gt;：Chromium 为你的前端网页创建了一个干净的 JS 运行时环境。即便在它的隔壁（Preload 脚本）拥有毁天灭地的 Node.js 权限，由于上下文隔离，网页根本摸不到 Preload 里的任何变量和宿主环境。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;唯一的安全通道&lt;/strong&gt;：网页想要用底层的能力，必须通过 Preload 脚本显式使用 &lt;code&gt;contextBridge.exposeInMainWorld&lt;/code&gt; 漏给它的、被精确阉割过的 API。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="总结-1"&gt;总结
+&lt;/h3&gt;
+&lt;p&gt;设置 &lt;code&gt;sandbox: false&lt;/code&gt; 的准确影响是：&lt;strong&gt;你拆掉了操作系统针对渲染进程的“内核级防护罩”，允许了 Preload 脚本这个“内鬼”在后台调用底层 Node.js，但前端页面（Renderer）本身依然被锁在由 V8 引擎搭建的“纯网页小黑屋”里，无法直接触碰 Node.js&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;所以，只要你保持 &lt;code&gt;contextIsolation: true&lt;/code&gt; 并且不要作死通过 &lt;code&gt;contextBridge&lt;/code&gt; 把诸如 &lt;code&gt;require&lt;/code&gt; 或整个 &lt;code&gt;fs&lt;/code&gt; 模块打包原样送给网页，Renderer 进程就是安全的。&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;h2 id="看了-electron-vite-文档似乎支持对多窗口的应用每个窗口使用不同的-preload-script"&gt;看了 electron-vite 文档，似乎支持对多窗口的应用，每个窗口使用不同的 Preload Script？
+&lt;/h2&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;是的，&lt;code&gt;electron-vite&lt;/code&gt; 完美支持多窗口、多 Preload 脚本的配置。&lt;/p&gt;
+&lt;p&gt;这正是 &lt;code&gt;electron-vite&lt;/code&gt; 区别于普通 Vite 配置的强大之处。作为一个专门为 Electron 打造的构建工具，它的底层针对 &lt;code&gt;preload&lt;/code&gt; 目录做了 &lt;strong&gt;多入口自动打包（Multi-Entry Bundling）&lt;/strong&gt; 的深度定制。&lt;/p&gt;
+&lt;p&gt;你完全不需要去折腾复杂的 Webpack 或多个 Vite 实例，只需要按照它的约定组织目录，就能实现每个窗口拥有自己独立的、按需定制的 Preload 脚本。&lt;/p&gt;
+&lt;h3 id="1-目录结构约定"&gt;1. 目录结构约定
+&lt;/h3&gt;
+&lt;p&gt;在 &lt;code&gt;electron-vite&lt;/code&gt; 中，多 Preload 脚本的最标准的实践方式是&lt;strong&gt;分目录 / 分文件存放&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── src
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ├── main
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ └── index.ts
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ├── preload
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ ├── index.ts // 窗口 A (比如主窗口) 的 Preload 脚本
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ ├── login.ts // 窗口 B (比如登录窗口) 的 Preload 脚本
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ └── settings.ts // 窗口 C (比如设置窗口) 的 Preload 脚本
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └── renderer
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ├── index.html
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └── ...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="2-工具底层的打包逻辑"&gt;2. 工具底层的打包逻辑
+&lt;/h3&gt;
+&lt;p&gt;当你运行 &lt;code&gt;npm run build&lt;/code&gt; 或 &lt;code&gt;electron-vite dev&lt;/code&gt; 时，&lt;code&gt;electron-vite&lt;/code&gt; 会自动扫描 &lt;code&gt;src/preload&lt;/code&gt; 目录下的所有顶层 &lt;code&gt;.ts&lt;/code&gt; 或 &lt;code&gt;.js&lt;/code&gt; 文件，并将它们&lt;strong&gt;分别编译&lt;/strong&gt;输出到打包目录。&lt;/p&gt;
+&lt;p&gt;输出后的生产 / 开发目录结构会变成这样：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;span class="lnt"&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;out
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ├── main
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │ └── index.js
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ├── preload
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │ ├── index.js // 编译后的窗口 A 脚本
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │ ├── login.js // 编译后的窗口 B 脚本
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │ └── settings.js // 编译后的窗口 C 脚本
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; └── renderer
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; └── ...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="3-在主进程main中精确引用"&gt;3. 在主进程（Main）中精确引用
+&lt;/h3&gt;
+&lt;p&gt;在你的主进程代码（&lt;code&gt;src/main/index.ts&lt;/code&gt;）中，创建不同窗口时，只需要通过 &lt;code&gt;path.join&lt;/code&gt; 准确指向 &lt;code&gt;out/preload&lt;/code&gt; 目录下对应的编译产物即可：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;span class="lnt"&gt;31
+&lt;/span&gt;&lt;span class="lnt"&gt;32
+&lt;/span&gt;&lt;span class="lnt"&gt;33
+&lt;/span&gt;&lt;span class="lnt"&gt;34
+&lt;/span&gt;&lt;span class="lnt"&gt;35
+&lt;/span&gt;&lt;span class="lnt"&gt;36
+&lt;/span&gt;&lt;span class="lnt"&gt;37
+&lt;/span&gt;&lt;span class="lnt"&gt;38
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;app&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;BrowserWindow&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;electron&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;join&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;path&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 1. 创建主窗口（使用默认的 index.js）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;createMainWindow() {&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;mainWindow&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;BrowserWindow&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;width&lt;/span&gt;: &lt;span class="kt"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;height&lt;/span&gt;: &lt;span class="kt"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;webPreferences&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 指向编译后的默认预加载脚本
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;preload&lt;/span&gt;: &lt;span class="kt"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;__dirname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;../preload/index.js&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;contextIsolation&lt;/span&gt;: &lt;span class="kt"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;mainWindow&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;loadURL&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;process&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;env&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ELECTRON_RENDERER_URL&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="sb"&gt;`file://&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;__dirname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;../renderer/index.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 2. 创建登录窗口（使用特化的 login.js）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;createLoginWindow() {&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;loginWindow&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;BrowserWindow&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;width&lt;/span&gt;: &lt;span class="kt"&gt;400&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;height&lt;/span&gt;: &lt;span class="kt"&gt;500&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;webPreferences&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 精确指向编译后的登录窗口预加载脚本
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;preload&lt;/span&gt;: &lt;span class="kt"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;__dirname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;../preload/login.js&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 如果这个独立窗口需要调用高风险的 Node.js 原生模块，可以单独为它关闭沙盒
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;sandbox&lt;/span&gt;: &lt;span class="kt"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;contextIsolation&lt;/span&gt;: &lt;span class="kt"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 假设你的登录页面是前端路由下的一个独立别名页面
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;process&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;env&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ELECTRON_RENDERER_URL&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;loginWindow&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;loadURL&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;process&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;env&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ELECTRON_RENDERER_URL&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt;/login.html`&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;loginWindow&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;loadFile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;__dirname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;../renderer/login.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="多-preload-架构的最佳实践安全建议"&gt;多 Preload 架构的最佳实践安全建议
+&lt;/h3&gt;
+&lt;p&gt;既然可以通过 &lt;code&gt;electron-vite&lt;/code&gt; 轻松拆分 Preload 脚本，强烈建议你遵循 &lt;strong&gt;“最小权限原则”&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;防范能力溢出&lt;/strong&gt;：不要把所有窗口需要的底层 API 全都塞进一个大而全的 &lt;code&gt;index.ts&lt;/code&gt; 里。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;按需分配&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;主窗口的 &lt;code&gt;index.ts&lt;/code&gt; 只暴露日常业务需要的通信能力。&lt;/li&gt;
+&lt;li&gt;只有需要读写本地文件的特定设置窗口（&lt;code&gt;settings.ts&lt;/code&gt;），才为其关闭 &lt;code&gt;sandbox&lt;/code&gt; 并引入 &lt;code&gt;fs&lt;/code&gt; 模块。&lt;/li&gt;
+&lt;li&gt;登录窗口的 &lt;code&gt;login.ts&lt;/code&gt; 则保持绝对干净，除了基础的 IPC 登录调用，不给它任何多余的系统权限，防止渲染第三方潜在不安全页面时发生敏感凭证泄露。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+ &lt;blockquote&gt;
+ &lt;h2 id="为什么-preload-script-如果要使用-esm-规范必须非沙盒化"&gt;为什么 Preload Script 如果要使用 ESM 规范，必须非沙盒化？
+&lt;/h2&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;一句话道破本质：&lt;strong&gt;因为“沙盒化”的 Preload 脚本本质上并不是运行在 Node.js 环境中，而是运行在 Chromium 的浏览器环境里；而 Chromium 渲染进程的机制，天然无法直接执行本地文件系统的 ESM 静态导入&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;为了让你彻底明白，我们需要看一看 Electron 在“开启沙盒”与“关闭沙盒”时，底层到底是用谁的加载器（Loader）在跑代码。&lt;/p&gt;
+&lt;h3 id="1-开启沙盒时代码由-chromium-接管只有假-require"&gt;1. 开启沙盒时：代码由 Chromium 接管（只有假 &lt;code&gt;require&lt;/code&gt;）
+&lt;/h3&gt;
+&lt;p&gt;当你保持默认的 &lt;code&gt;sandbox: true&lt;/code&gt; 时：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;运行时环境&lt;/strong&gt;：Electron 为了安全，不会给这个进程分配真正的 Node.js 运行时。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;代码加载器&lt;/strong&gt;：这个 Preload 脚本是在 &lt;strong&gt;Chromium（纯浏览器内核）&lt;/strong&gt; 的上下文中被当成一段普通的纯 JavaScript 脚本执行的。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;为什么能用 &lt;code&gt;require&lt;/code&gt;？&lt;/strong&gt;：你在沙盒化 Preload 里看到的 &lt;code&gt;require()&lt;/code&gt;，根本不是 Node.js 的模块加载器，而是 Electron 用 JS 注入进去的一个 &lt;strong&gt;Polyfill（伪造函数）&lt;/strong&gt;。它被硬编码成只允许加载极其有限的几个 API（如 &lt;code&gt;electron&lt;/code&gt;、&lt;code&gt;events&lt;/code&gt;、&lt;code&gt;timers&lt;/code&gt;、&lt;code&gt;url&lt;/code&gt;），其底层是 Chromium 的 V8 引擎直接注入的 C++ 绑定。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;此时如果写 &lt;code&gt;import { x } from './foo.js'&lt;/code&gt; 为什么会死掉？&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;因为 Chromium 的脚本加载器在不配置 &lt;code&gt;type=&amp;quot;module&amp;quot;&lt;/code&gt; 的情况下，根本不认识 &lt;code&gt;import&lt;/code&gt; 关键字，会直接报语法错误（SyntaxError）。&lt;/li&gt;
+&lt;li&gt;即使 Chromium 认识，浏览器标准的 ESM 加载是&lt;strong&gt;基于网络协议异步拉取&lt;/strong&gt;的（通过 &lt;code&gt;http://&lt;/code&gt; 或 &lt;code&gt;file://&lt;/code&gt;）。而在页面还没加载出来的早期阶段，沙盒内根本没有完整的本地文件系统上下文去支持相对路径的静态模块解析。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="2-关闭沙盒时代码由-nodejs-真正的-esm-loader-接管"&gt;2. 关闭沙盒时：代码由 Node.js 真正的 ESM Loader 接管
+&lt;/h3&gt;
+&lt;p&gt;当你设置了 &lt;code&gt;sandbox: false&lt;/code&gt; 时，底层局势发生了彻底逆转：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;运行时环境&lt;/strong&gt;：Electron 会在这个渲染进程的幕后，同时初始化一个&lt;strong&gt;完整的 Node.js 运行时环境&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;代码加载器&lt;/strong&gt;：既然有了 Node.js 运行时，Electron 就可以在加载 Preload 脚本时，名正言顺地调用 &lt;strong&gt;Node.js 官方的原生 ESM 加载器（Node&amp;rsquo;s ESM Loader）&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Node.js 的 ESM 加载器天生就知道怎么在本地文件系统中去解析 &lt;code&gt;import / export&lt;/code&gt;、怎么查找 &lt;code&gt;node_modules&lt;/code&gt; 里的依赖、怎么处理依赖树。因此，只有在非沙盒化、Node.js 参与进来的情况下，原生的 &lt;code&gt;import&lt;/code&gt; 语句才能够成功跑通。&lt;/p&gt;
+&lt;h3 id="3-既然如此electron-vite-是怎么让你在日常开发中假装在沙盒里用-esm-的"&gt;3. 既然如此，&lt;code&gt;electron-vite&lt;/code&gt; 是怎么让你在日常开发中“假装”在沙盒里用 ESM 的？
+&lt;/h3&gt;
+&lt;p&gt;你可能会问：“不对啊，我用 &lt;code&gt;electron-vite&lt;/code&gt; 初始化项目时，明明开启了沙盒，但我依然在 &lt;code&gt;preload.ts&lt;/code&gt; 里愉快地写 &lt;code&gt;import&lt;/code&gt; 且没有报错，这是为什么？”&lt;/p&gt;
+&lt;p&gt;答案是：&lt;strong&gt;因为 &lt;code&gt;electron-vite&lt;/code&gt; 在构建阶段（Compile Time）作弊了&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;当你运行 &lt;code&gt;electron-vite dev&lt;/code&gt; 或 &lt;code&gt;build&lt;/code&gt; 时：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Vite 里的 &lt;strong&gt;Rollup&lt;/strong&gt; 充当了打包工具。&lt;/li&gt;
+&lt;li&gt;它会把你写在 &lt;code&gt;src/preload/index.ts&lt;/code&gt; 里的所有 &lt;code&gt;import&lt;/code&gt; 语句&lt;strong&gt;在编译时完全展开并揉碎&lt;/strong&gt;，最终把你和所有依赖项全部融合成一个&lt;strong&gt;没有任何 &lt;code&gt;import&lt;/code&gt; 语句的单文件（Single Bundle）&lt;/strong&gt;，输出为普通的 CommonJS 或 IIFE 格式。&lt;/li&gt;
+&lt;li&gt;只要没有了 &lt;code&gt;import&lt;/code&gt; 关键字，这段融合成单文件的代码就能在沙盒环境中被 Chromium 顺利执行。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="总结-2"&gt;总结
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;原生限制&lt;/strong&gt;：Electron 官方文档明确说明：&lt;strong&gt;Sandboxed preload scripts can&amp;rsquo;t use ESM imports.&lt;/strong&gt;（沙盒化的预加载脚本不能使用 ESM 导入）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;要用真 ESM&lt;/strong&gt;：如果你不想通过打包工具把代码揉成一团，而是想让 Electron 在运行时以原生 &lt;code&gt;.mjs&lt;/code&gt; 的形式去按需动态&lt;code&gt;import&lt;/code&gt;本地模块，就必须通过&lt;code&gt;sandbox: false&lt;/code&gt; 放出 Node.js 真正的加载器。&lt;/li&gt;
+&lt;/ul&gt;
+
+ &lt;blockquote&gt;
+ &lt;h2 id="electron-vite-支持源码生成-v8-字节码缓存但是有一些限制仅支持-cjs需要关闭沙盒以及不能跨平台那生产环境要不要使用呢"&gt;electron-vite 支持源码生成 V8 字节码缓存，但是有一些限制：仅支持 CJS、需要关闭沙盒以及不能跨平台。那生产环境要不要使用呢？
+&lt;/h2&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;我们先说结论：&lt;strong&gt;对于绝大多数普通的商业应用，不建议在生产环境盲目开启 V8 字节码缓存&lt;/strong&gt;。只有当你的项目符合“代码防剽窃是绝对核心诉求（如商业保密算法、付费离线工具）”或者“应用体量巨大导致启动极其缓慢”时，才值得去承受它带来的代价。&lt;/p&gt;
+&lt;p&gt;我们可以把 &lt;code&gt;electron-vite&lt;/code&gt; 提到的这三个限制拆开，看看它们在生产环境中会引发哪些连锁反应：&lt;/p&gt;
+&lt;h3 id="1-致命缺陷不能跨平台跨架构"&gt;1. 致命缺陷：不能跨平台（跨架构）
+&lt;/h3&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;&lt;strong&gt;限制：编译出的字节码（&lt;code&gt;.jsc&lt;/code&gt;）与生成它的 V8 引擎版本、操作系统、甚至 CPU 架构（x64 / arm64）强绑定&lt;/strong&gt;。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;维护地狱&lt;/strong&gt;：这意味着你不能在 Windows 开发者机器上编译出一个包，然后分发给所有平台的受众。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CI / CD 成本飙升&lt;/strong&gt;：你必须搭建一个极其庞大的自动化流水线。打包 Windows x64、Windows arm64、macOS (Intel)、macOS (M 系列)、Linux x64 各自的包时，必须使用&lt;strong&gt;完全对应架构的真实机器或特化虚拟机&lt;/strong&gt;在本地各自编译一次字节码。一旦由于 CI 环境的 Node / Electron 版本和最终打包的版本有 0.0.1 的微小偏差，用户下载后就会遭遇&lt;strong&gt;应用启动直接白屏 / 闪退&lt;/strong&gt;的灾难。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-安全开倒车需要关闭沙盒"&gt;2. 安全开倒车：需要关闭沙盒
+&lt;/h3&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;&lt;strong&gt;限制：必须要 &lt;code&gt;sandbox: false&lt;/code&gt;&lt;/strong&gt;。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;正如我们前面深入探讨过的，关闭沙盒等于拔掉了 Chromium 最核心的硬件级防火墙。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;代价过高&lt;/strong&gt;：为了保护代码“不被看懂”，反而把用户的“操作系统权限”暴露在了高风险之下。如果你的应用内有网页渲染，或者会加载第三方内容，这就留下了致命的安全漏洞。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;讽刺的安全悖论&lt;/strong&gt;：为了&lt;strong&gt;防君子（防逆向抄袭）&lt;/strong&gt;，而放过了&lt;strong&gt;小偷（由于无沙盒导致的潜在远程代码执行漏洞）&lt;/strong&gt;，在现代安全审计中通常是无法通过的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-技术开倒车仅支持-cjscommonjs"&gt;3. 技术开倒车：仅支持 CJS（CommonJS）
+&lt;/h3&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;&lt;strong&gt;限制：不支持现代的 ESM 架构&lt;/strong&gt;。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;现代前端生态（包括主流的打包工具、最新的第三方库）都在全面拥抱 ESM。强制回退到 CJS 会导致你在选型组件库、使用最新网络请求库或工具函数时，频繁遇到 &lt;code&gt;ERR_REQUIRE_ASYNC_MODULE&lt;/code&gt; 等打包恶梦，强行割裂了现代前端的开发体验（DX）。&lt;/p&gt;
+&lt;h3 id="那么生产环境到底要不要用"&gt;那么，生产环境到底要不要用？
+&lt;/h3&gt;
+&lt;h4 id="明确不推荐使用的场景"&gt;明确不推荐使用的场景：
+&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;传统的 SaaS 客户端 / 办公软件 / 网页套壳应用&lt;/strong&gt;：你的核心业务逻辑和数据都在云端服务器上，本地前端代码只有 UI 逻辑。这时候把前端 UI 代码编译成字节码没有任何商业商业价值。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;极度注重安全和隐私的应用（如金融、IM、钱包）&lt;/strong&gt;：绝对不能为了代码混淆而关闭沙盒。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="建议考虑使用的场景"&gt;建议考虑使用的场景
+&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;核心资产在前端的纯离线商业应用&lt;/strong&gt;：比如你开发了一款功能强大的“离线音视频剪辑软件”或“AI 局部重绘工具”，算法全部在前端 Main / Preload 进程里写死，且软件需要付费购买。为了防止别人买一份后直接解包（&lt;code&gt;asar e&lt;/code&gt;）改掉你的激活逻辑然后重新打包分发，这时候必须上字节码。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对启动时间（Time-to-First-Byte）有极致追求的超级大厂巨无霸应用&lt;/strong&gt;：V8 字节码由于跳过了文本解析（Parsing）和编译（Compiling）阶段，直接加载执行，能让体积巨大的 JS 脚本启动速度提升 30% 以上。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="如果放弃字节码生产环境如何保护代码"&gt;如果放弃字节码，生产环境如何保护代码？
+&lt;/h3&gt;
+&lt;p&gt;如果你只是单纯想保护代码，不想让别人轻易看懂，同时又想保留 &lt;strong&gt;“开启沙盒”&lt;/strong&gt; 和 &lt;strong&gt;“完美跨平台”&lt;/strong&gt; 的神仙体验，业内标准的工业级方案是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;利用 &lt;code&gt;electron-vite&lt;/code&gt; 默认的混淆与压缩&lt;/strong&gt;：
+&lt;code&gt;electron-vite&lt;/code&gt; 底层配合了 Terser / esbuild，默认在生产环境会把变量名压缩成 &lt;code&gt;a, b, c&lt;/code&gt;，代码揉成一团。对于 90% 的逆向者来说，读这种混淆后的混账代码已经足够让他们放弃了。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;引入更高级的纯 JS 混淆器（如 JavaScript Obfuscator）&lt;/strong&gt;：
+在打包流水线中加入一层混淆插件，进行&lt;strong&gt;字符串加密、控制流平坦化（Control Flow Flattening）、死代码注入&lt;/strong&gt;。这种混淆出来的纯 JS 代码同样具备极高的逆向成本，但它&lt;strong&gt;完全不影响沙盒，且百分之百完美跨平台&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关键逻辑下沉到 Node-API (N-API) C++ / Rust 模块&lt;/strong&gt;：
+将最核心的加密算法、激活校验逻辑用 Rust (配合 &lt;code&gt;napi-rs&lt;/code&gt;) 或 C++ 编写，编译成底层二进制的 &lt;code&gt;.node&lt;/code&gt; 模块。前端只负责调用这个原生模块。这样既保护了核心资产，又保证了前端渲染层的轻量与安全。&lt;/li&gt;
+&lt;/ol&gt;
+
+ &lt;blockquote&gt;
+ &lt;h2 id="electron-vite文档中的由于-asar-的限制我们不能将所有文件打包到-asar-存档中是什么意思"&gt;electron-vite 文档中的「由于 ASAR 的限制，我们不能将所有文件打包到 ASAR 存档中」是什么意思？
+&lt;/h2&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;简单来说：&lt;strong&gt;ASAR 并不是一个像 &lt;code&gt;.zip&lt;/code&gt; 或 &lt;code&gt;.tar&lt;/code&gt; 那样的“真正解压”的归档格式。它是一个“虚拟文件系统”（Virtual File System）。这就导致了很多依赖操作系统底层特性的文件，一旦被塞进 ASAR 就会直接失效&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;为了让你彻底明白，我们来看看究竟是哪些文件不能进 ASAR，以及为什么 &lt;code&gt;electron-vite&lt;/code&gt; 必须要特殊处理它们。&lt;/p&gt;
+&lt;h3 id="1-为什么会有-asar-限制底层的秘密"&gt;1. 为什么会有 ASAR 限制？（底层的秘密）
+&lt;/h3&gt;
+&lt;p&gt;当你在 Electron 中读取一个 ASAR 内部的文件（比如 &lt;code&gt;fs.readFileSync('app.asar/config.json')&lt;/code&gt;）时，并不是操作系统在帮你读，而是 &lt;strong&gt;Electron 在底层重写了 Node.js 的 &lt;code&gt;fs&lt;/code&gt; 模块&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;Electron 在 Node.js 核心代码里打了一个“补丁”：当发现路径包含 &lt;code&gt;.asar&lt;/code&gt; 时，它会去解析 ASAR 的文件头索引，然后在内存中把那一段二进制数据“假装”成一个独立的文件交给你。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;但是，Electron 只能重写 Node.js 的 API，它管不到操作系统和第三方 C++ 库&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id="2-哪些文件绝对不能塞进-asar"&gt;2. 哪些文件绝对不能塞进 ASAR？
+&lt;/h3&gt;
+&lt;p&gt;以下三类文件是 &lt;code&gt;electron-vite&lt;/code&gt; 提示必须排除在 ASAR 之外的典型代表：&lt;/p&gt;
+&lt;h4 id="限制一nodejs-原生模块node-二进制文件"&gt;限制一：Node.js 原生模块（&lt;code&gt;.node&lt;/code&gt; 二进制文件）
+&lt;/h4&gt;
+&lt;p&gt;如果你的项目用到了 C++ 或 Rust 编写的原生模块（比如 &lt;code&gt;sharp&lt;/code&gt; 图片处理、&lt;code&gt;sqlite3&lt;/code&gt; 数据库等），操作系统在加载它们时，调用的是底层的内核 API（如 Windows 的 &lt;code&gt;LoadLibrary&lt;/code&gt; 或 Linux 的 &lt;code&gt;dlopen&lt;/code&gt;）。&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;&lt;strong&gt;为什么不行&lt;/strong&gt;：操作系统的这些底层函数只认&lt;strong&gt;真实的绝对路径&lt;/strong&gt;。它们顺着路径过去，一看到 &lt;code&gt;.asar&lt;/code&gt; 这个根本不存在的虚拟大文件，直接就懵了，导致抛出 &lt;code&gt;Cannot open ...&lt;/code&gt; 动态链接库找不到的错误。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;h4 id="限制二需要被外部程序调用的可执行文件exe--脚本"&gt;限制二：需要被外部程序调用的可执行文件（&lt;code&gt;.exe&lt;/code&gt; / 脚本）
+&lt;/h4&gt;
+&lt;p&gt;如果你的 Electron 应用内置了一个第三方的 CLI 工具（例如 &lt;code&gt;ffmpeg.exe&lt;/code&gt; 用来转码，或者一个 Python 脚本），你需要在主进程里通过 &lt;code&gt;child_process.spawn()&lt;/code&gt; 去启动它。&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;&lt;strong&gt;为什么不行&lt;/strong&gt;：操作系统要启动一个新进程，必须为它分配独立的进程空间并读取其二进制代码。操作系统的进程调度器是无法读取并执行被关在 ASAR 压缩包内部的文件的。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;h4 id="限制三某些第三方-c-库直接执行的文件读写"&gt;限制三：某些第三方 C++ 库直接执行的文件读写
+&lt;/h4&gt;
+&lt;p&gt;有些第三方库底层是纯 C++ 写的（没有用 Node.js 的 &lt;code&gt;fs&lt;/code&gt;）。它们在读取你传入的路径时，会绕过 Node.js 的补丁，直接向操作系统索要文件。一旦路径里有 &lt;code&gt;app.asar&lt;/code&gt;，这些 C++ 库就会直接报错说“找不到文件”。&lt;/p&gt;
+&lt;h3 id="3-electron-vite-是如何优雅处理这个限制的"&gt;3. &lt;code&gt;electron-vite&lt;/code&gt; 是如何优雅处理这个限制的？
+&lt;/h3&gt;
+&lt;p&gt;在传统的 Electron 打包中，如果你用 &lt;code&gt;electron-builder&lt;/code&gt;，你必须在 &lt;code&gt;package.json&lt;/code&gt; 里极其痛苦地手动配置 &lt;code&gt;asarUnpack&lt;/code&gt; 参数，把这些“刺头文件”一个个挑出来，告诉打包工具：“这些文件别塞进压缩包，单独放在外面！”&lt;/p&gt;
+&lt;p&gt;而 &lt;code&gt;electron-vite&lt;/code&gt; 作为一个智能的脚手架，在构建（&lt;code&gt;build&lt;/code&gt;）阶段帮开发者做了自动自动化处理：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;自动识别并排除（Unpack）&lt;/strong&gt;：它在打包主进程和预加载脚本时，如果检测到你 &lt;code&gt;import&lt;/code&gt; 或 &lt;code&gt;require&lt;/code&gt; 了 &lt;code&gt;.node&lt;/code&gt; 原生组件，或者配置了特定的静态资产（Assets），它会通过插件将这些依赖文件&lt;strong&gt;自动移动到 ASAR 归档之外的独立目录中&lt;/strong&gt;（通常在安装目录的 &lt;code&gt;resources/app.asar.unpacked/&lt;/code&gt; 文件夹下）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;重写路径映射&lt;/strong&gt;：&lt;code&gt;electron-vite&lt;/code&gt; 还会聪明地在编译后的代码中，将原本指向 &lt;code&gt;app.asar&lt;/code&gt; 内部的路径，自动重写修正为指向外部那个真实的 &lt;code&gt;app.asar.unpacked&lt;/code&gt; 路径，从而保证程序运行时操作系统能正确加载它。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="总结-3"&gt;总结
+&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;electron-vite&lt;/code&gt; 文档里的这句话是在提醒你：&lt;strong&gt;不要试图把所有东西（尤其是原生二进制文件、可执行工具、动态链接库）都当成普通的前端静态资源混在一起&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;现代 Electron 应用的发布目录（&lt;code&gt;resources&lt;/code&gt; 文件夹）下，标准形态往往是一个精简的 &lt;code&gt;app.asar&lt;/code&gt; 核心代码包，旁边并排躺着一个 &lt;code&gt;app.asar.unpacked&lt;/code&gt; 文件夹，里面放着所有因为上述限制而不得不“裸奔”的二进制硬件级依赖。&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;h2 id="new-browserwindow-都会传入-width-和-height有办法设置一个最大最小尺寸吗能禁止用户改变窗口大小吗"&gt;new BrowserWindow 都会传入 width 和 height，有办法设置一个最大最小尺寸吗？能禁止用户改变窗口大小吗？
+&lt;/h2&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;当然可以。Electron 的 &lt;code&gt;BrowserWindow&lt;/code&gt; 提供了非常直观的属性来控制窗口的尺寸范围以及缩放行为。&lt;/p&gt;
+&lt;p&gt;你可以直接在创建窗口的配置对象（&lt;code&gt;options&lt;/code&gt;）中传入这些参数。&lt;/p&gt;
+&lt;h3 id="1-设置最大和最小尺寸"&gt;1. 设置最大和最小尺寸
+&lt;/h3&gt;
+&lt;p&gt;使用 &lt;code&gt;minWidth&lt;/code&gt;、&lt;code&gt;minHeight&lt;/code&gt;、&lt;code&gt;maxWidth&lt;/code&gt; 和 &lt;code&gt;maxHeight&lt;/code&gt; 属性。设置后，用户用鼠标拖拽边缘缩放时，一旦达到临界值就无法再放大或缩小。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;mainWindow&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;BrowserWindow&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;width&lt;/span&gt;: &lt;span class="kt"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;height&lt;/span&gt;: &lt;span class="kt"&gt;600&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 限制最小尺寸（防止 UI 挤压变形）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;minWidth&lt;/span&gt;: &lt;span class="kt"&gt;400&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;minHeight&lt;/span&gt;: &lt;span class="kt"&gt;300&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 限制最大尺寸
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;maxWidth&lt;/span&gt;: &lt;span class="kt"&gt;1200&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;maxHeight&lt;/span&gt;: &lt;span class="kt"&gt;900&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;webPreferences&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// ... 你的其他配置
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="2-彻底禁止用户改变窗口大小"&gt;2. 彻底禁止用户改变窗口大小
+&lt;/h3&gt;
+&lt;p&gt;如果你希望这是一个&lt;strong&gt;固定尺寸&lt;/strong&gt;的窗口（比如经典的登录弹窗、小工具、音乐播放器挂件），可以直接将 &lt;code&gt;resizable&lt;/code&gt; 属性设置为 &lt;code&gt;false&lt;/code&gt;。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;span class="lnt"&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;loginWindow&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;BrowserWindow&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;width&lt;/span&gt;: &lt;span class="kt"&gt;400&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;height&lt;/span&gt;: &lt;span class="kt"&gt;500&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 彻底禁用拖拽缩放
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;resizable&lt;/span&gt;: &lt;span class="kt"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;webPreferences&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// ... 你的其他配置
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="resizable-false-在不同平台上的表现细节"&gt;&lt;code&gt;resizable: false&lt;/code&gt; 在不同平台上的表现细节
+&lt;/h4&gt;
+&lt;p&gt;这个设置是系统级生效的，各平台会展现出符合自身原生规范的行为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Windows / Linux&lt;/strong&gt;：鼠标悬停在窗口边缘时，不会再出现双向缩放的双箭头光标，也无法点击拖拽。同时，窗口右上角的 &lt;strong&gt;“最大化”按钮会变成灰色（禁用状态）&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;macOS&lt;/strong&gt;：窗口左上角的 &lt;strong&gt;绿色“全屏 / 最大化”按钮会变灰禁用&lt;/strong&gt;，并且无法通过拖动窗口边缘来改变大小。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-进阶如何动态控制"&gt;3. 进阶：如何动态控制？
+&lt;/h3&gt;
+&lt;p&gt;如果你的应用有类似“点击‘展开高级设置’后窗口需要变大，且此时允许用户调整大小”的业务场景，你不需要重新创建窗口，可以通过窗口实例的方法进行&lt;strong&gt;动态控制&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 动态禁止缩放
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;mainWindow&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setResizable&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 动态允许缩放并修改尺寸限制
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;mainWindow&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setResizable&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;mainWindow&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setMinimumSize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;600&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;400&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;mainWindow&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setMaximumSize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1600&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1200&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 动态代码调整窗口大小（不管 resizable 是 true 还是 false，代码永远可以控制）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;mainWindow&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setSize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;700&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// 第三参数为 true 表示带动画过渡（仅 macOS 有效）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+ &lt;blockquote&gt;
+ &lt;h2 id="在-electron-中manualchunks-应该无关紧要了吧相反手动分包异步加载感觉在本地文件系统中毫无优势了"&gt;在 Electron 中，manualChunks 应该无关紧要了吧？相反手动分包、异步加载感觉在本地文件系统中，毫无优势了
+&lt;/h2&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;在传统的 Web 开发中，&lt;code&gt;manualChunks&lt;/code&gt;（手动分包）和异步加载（Code Splitting）是绝对的性能圣经，因为它们解决的是&lt;strong&gt;网络带宽和延迟&lt;/strong&gt;的问题（通过减小首屏体积，让浏览器少下载几十 KB 的代码）。&lt;/p&gt;
+&lt;p&gt;但是在 Electron 环境下，由于所有资源都是从本地硬盘（SSD / 闪存）以 &lt;code&gt;file://&lt;/code&gt; 协议读取的，局势发生了根本性的扭转。&lt;/p&gt;
+&lt;p&gt;不过，结论不能一刀切。对于&lt;strong&gt;主进程 / Preload&lt;/strong&gt;和&lt;strong&gt;渲染进程&lt;/strong&gt;，&lt;code&gt;manualChunks&lt;/code&gt; 的重要性需要分开来看：&lt;/p&gt;
+&lt;h3 id="1-主进程main与预加载preload彻底无关紧要"&gt;1. 主进程（Main）与预加载（Preload）：彻底无关紧要
+&lt;/h3&gt;
+&lt;p&gt;在主进程和 Preload 脚本中，不仅&lt;strong&gt;毫无优势&lt;/strong&gt;，甚至应该&lt;strong&gt;极力避免&lt;/strong&gt;分包和异步加载。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;本地 I/O 快到不需要分包&lt;/strong&gt;：Node.js 在本地磁盘读取一个 5MB 的单文件 JS 脚本，和读取 50 个 100KB 的碎文件，在现代 SSD 上的耗时差异几乎可以忽略不计。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;异步加载带来严重的负面副作用&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;打包混乱&lt;/strong&gt;：如果你在主进程或 Preload 里用了动态 &lt;code&gt;import()&lt;/code&gt; 或异步加载，打包工具（如 Rollup）会强行切出零碎的 &lt;code&gt;chunk-xyz.js&lt;/code&gt; 块。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;路径地狱&lt;/strong&gt;：正如我们前面聊到的，Electron 极其依赖 &lt;code&gt;__dirname&lt;/code&gt; 和相对路径。在多窗口、多 Preload 的复杂架构下，这些被自动切出来的公共 Chunk 文件在打包到 &lt;code&gt;out/&lt;/code&gt; 目录后，极容易发生&lt;strong&gt;主进程找不到 Chunk、或 Preload 路径漂移导致白屏&lt;/strong&gt;的构建惨剧。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;&lt;strong&gt;&lt;code&gt;electron-vite&lt;/code&gt; 的默认做法&lt;/strong&gt;：
+&lt;code&gt;electron-vite&lt;/code&gt; 在打包主进程和 Preload 时，默认策略就是把它们&lt;strong&gt;尽可能融合成单一文件（Single Bundle）&lt;/strong&gt;，直接无视并抹平所有异步分包。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;h3 id="2-渲染进程renderer依然有用但目的变了"&gt;2. 渲染进程（Renderer）：依然有用，但目的变了
+&lt;/h3&gt;
+&lt;p&gt;对于渲染进程（也就是你的前端网页 Vue / React 部分），虽然网络延迟消失了，但在大型项目中，&lt;code&gt;manualChunks&lt;/code&gt; 依然有其存在的价值。不过，此时的目的已经从“节省网络带宽”&lt;strong&gt;变成了&lt;/strong&gt;“优化 CPU 解析和运行时内存”。&lt;/p&gt;
+&lt;p&gt;在本地文件系统中，虽然“下载”不需要时间，但 &lt;strong&gt;Chromium V8 引擎解析和编译 JavaScript 是需要时间的&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id="为什么渲染进程有时还需要分包"&gt;为什么渲染进程有时还需要分包？
+&lt;/h3&gt;
+&lt;h4 id="原因-a防止-v8-引擎解析阻塞主线程卡顿"&gt;原因 A：防止 V8 引擎解析阻塞主线程（卡顿）
+&lt;/h4&gt;
+&lt;p&gt;如果你的渲染进程不分包，打包出一个 15MB 的巨型 &lt;code&gt;index.js&lt;/code&gt;。当窗口启动时，Chromium 的主线程需要一口气读入这 15MB 文本，并进行词法分析、语法树构建（AST）和实时编译。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;后果&lt;/strong&gt;：这会导致你的桌面应用在启动或跳转时，出现长达数百毫秒甚至数秒的 &lt;strong&gt;界面完全冻结（卡死、掉帧）&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;分包的优势&lt;/strong&gt;：通过 &lt;code&gt;manualChunks&lt;/code&gt; 把路由、大型组件（如 ECharts、Monaco Editor）切开。只有当用户点击对应页面时，才去读取和解析对应的代码块。这样把 CPU 的编译压力分摊到用户的操作过程中，&lt;strong&gt;能显著提升应用的视觉首屏启动速度（Time to Interactive）&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="原因-b控制内存占用memory-footprint"&gt;原因 B：控制内存占用（Memory Footprint）
+&lt;/h4&gt;
+&lt;p&gt;桌面用户对内存非常敏感（尤其是 Electron 应用经常被戏称为“内存怪兽”）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果一上来就把所有页面的组件库、图表库全部打包在单个大文件里，它们会在启动时全部加载到 V8 的堆内存中。&lt;/li&gt;
+&lt;li&gt;使用异步加载，那些只有在特定场景（如“导出 PDF 报表”）下才用到的重度依赖，在用户没点击前&lt;strong&gt;压根不会进入内存&lt;/strong&gt;，从而让你的 Electron 应用在日常挂机时保持极低的内存占用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="总结-4"&gt;总结
+&lt;/h3&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;进程类型&lt;/th&gt;
+					&lt;th&gt;要不要用 &lt;code&gt;manualChunks&lt;/code&gt; / 异步加载？&lt;/th&gt;
+					&lt;th&gt;原因&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;主进程（Main）&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;绝对不要&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;本地读取极快，分包极易引发路径错乱和白屏报错。&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;预加载（Preload）&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;绝对不要&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;必须保持单文件，确保每个窗口的上下文注入逻辑干净、可靠。&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;渲染进程 (Renderer）&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;视项目体量而定&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;小项目不需要&lt;/strong&gt;（直接一把梭打成单文件更省心）；&lt;strong&gt;大型复杂应用需要&lt;/strong&gt;（目的不是省网速，而是为了降低 CPU 解析耗时、减少应用运行内存）。&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+
+ &lt;blockquote&gt;
+ &lt;h2 id="我理解-electron-vite-将主进程和预加载脚本中的依赖视为外部依赖打包时不编译只复制可为什么文档上讲渲染进程中使用的依赖最好安装为-devdependencies以帮助减小最终安装包的体积"&gt;我理解 electron-vite 将主进程和预加载脚本中的依赖视为外部依赖，打包时不编译，只复制；可为什么文档上讲「渲染进程中使用的依赖最好安装为 devDependencies，以帮助减小最终安装包的体积」？
+&lt;/h2&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;这是一个极其容易让人产生误解的痛点，也是很多初学 &lt;code&gt;electron-vite&lt;/code&gt; 的开发者最常踩的坑。&lt;/p&gt;
+&lt;p&gt;简单来说：&lt;strong&gt;这并不是因为打包工具会直接把 &lt;code&gt;dependencies&lt;/code&gt; 里的东西原封不动装进安装包，而是为了“欺骗”最终的打包机（如 &lt;code&gt;electron-builder&lt;/code&gt;）&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;为了彻底帮你理清这背后的底层逻辑，我们需要看一看 &lt;code&gt;electron-vite&lt;/code&gt; 在构建时，&lt;strong&gt;前端部分&lt;/strong&gt;和&lt;strong&gt;打包工具&lt;/strong&gt;之间发生了一场怎样的“捉迷藏”。&lt;/p&gt;
+&lt;h3 id="1-渲染进程的命运它在编译后就消失了"&gt;1. 渲染进程的命运：它在编译后就“消失”了
+&lt;/h3&gt;
+&lt;p&gt;首先，我们要明确一个事实：你的渲染进程（Vue、React 等前端代码），经过 &lt;code&gt;electron-vite build&lt;/code&gt; 之后，所有的 &lt;code&gt;.vue&lt;/code&gt;、&lt;code&gt;.tsx&lt;/code&gt; 以及你引入的 &lt;code&gt;lodash&lt;/code&gt;、&lt;code&gt;axios&lt;/code&gt;、&lt;code&gt;element-plus&lt;/code&gt;，&lt;strong&gt;都已经被 Vite 里的 Rollup 彻底编译、揉碎、压缩成了 &lt;code&gt;out/renderer&lt;/code&gt; 目录下几个极小的静态 &lt;code&gt;.js&lt;/code&gt; 和 &lt;code&gt;.css&lt;/code&gt; 文件&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;也就是说，运行时的网页，&lt;strong&gt;完全不再需要&lt;/strong&gt;去 &lt;code&gt;node_modules&lt;/code&gt; 里面实时读取这些第三方库了。&lt;/p&gt;
+&lt;h3 id="2-问题出在-electron-builder打包机的一刀切策略"&gt;2. 问题出在 &lt;code&gt;electron-builder&lt;/code&gt;（打包机）的“一刀切”策略
+&lt;/h3&gt;
+&lt;p&gt;当生产环境的代码编译完成后，我们会调用 &lt;code&gt;electron-builder&lt;/code&gt; 来生成最终的 &lt;code&gt;.exe&lt;/code&gt; 或 &lt;code&gt;.dmg&lt;/code&gt; 安装包。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;electron-builder&lt;/code&gt; 在打包时，有一个雷打不动的工业标准逻辑：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;它会扫描你的 &lt;code&gt;package.json&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;它认为：&lt;strong&gt;所有声明在 &lt;code&gt;devDependencies&lt;/code&gt; 里的库，都只是开发时用的（比如 Vite、TypeScript、ESLint），生产环境不需要，直接扔掉，不打包&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;它认为：&lt;strong&gt;所有声明在 &lt;code&gt;dependencies&lt;/code&gt; 里的库，都是运行时必须用的，它会把这些库对应的 &lt;code&gt;node_modules&lt;/code&gt; 文件夹，原封不动地全部塞进最终给用户的 ASAR 压缩包里&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="3-冲突爆发为什么要听文档的劝"&gt;3. 冲突爆发：为什么要听文档的劝？
+&lt;/h3&gt;
+&lt;p&gt;如果你把渲染进程用到的依赖（比如 &lt;code&gt;Vue&lt;/code&gt;、&lt;code&gt;Pinia&lt;/code&gt;）写在了 &lt;code&gt;dependencies&lt;/code&gt; 里，就会发生下面这幕荒诞的场景：&lt;/p&gt;
+&lt;h4 id="错误的做法装在-dependencies"&gt;错误的做法（装在 &lt;code&gt;dependencies&lt;/code&gt;）
+&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;electron-vite&lt;/code&gt; 编译渲染进程，把 &lt;code&gt;echarts&lt;/code&gt; 编译进了 &lt;code&gt;out/renderer/index.js&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;electron-builder&lt;/code&gt; 开始打包，发现 &lt;code&gt;package.json&lt;/code&gt; 的 &lt;code&gt;dependencies&lt;/code&gt; 里有 &lt;code&gt;echarts&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;它不管三七二十一，把整个 &lt;code&gt;node_modules/echarts&lt;/code&gt; 文件夹（可能足足有 &lt;strong&gt;几十 MB&lt;/strong&gt;）&lt;strong&gt;又原封不动地塞进了最终的安装包里&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;后果&lt;/strong&gt;：用户下载的安装包里，既包含编译后的图表代码，又包含一套完全死掉、应用永远不会去读取的 &lt;code&gt;echarts&lt;/code&gt; 源码。&lt;strong&gt;体积直接翻倍，甚至白白暴增上百 MB&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="正确的做法听从文档装在-devdependencies"&gt;正确的做法（听从文档，装在 &lt;code&gt;devDependencies&lt;/code&gt;）
+&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;你把 &lt;code&gt;Vue&lt;/code&gt;、&lt;code&gt;echarts&lt;/code&gt; 统统安装在 &lt;code&gt;devDependencies&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;electron-vite&lt;/code&gt; 在构建时，依然能正常找到它们，并将它们打包进 &lt;code&gt;out/renderer&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;electron-builder&lt;/code&gt; 启动，扫描 &lt;code&gt;dependencies&lt;/code&gt;，发现里面&lt;strong&gt;没有&lt;/strong&gt;这些前端库，于是放心地把 &lt;code&gt;node_modules&lt;/code&gt; 里的 &lt;code&gt;Vue&lt;/code&gt;、&lt;code&gt;echarts&lt;/code&gt; 文件夹统统过滤掉。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;结果&lt;/strong&gt;：最终的安装包极其纯净，体积达到了极致的瘦身。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="终极防坑指南到底谁该放-dependencies"&gt;终极防坑指南：到底谁该放 &lt;code&gt;dependencies&lt;/code&gt;？
+&lt;/h3&gt;
+&lt;p&gt;既然渲染进程的依赖都要往 &lt;code&gt;devDependencies&lt;/code&gt; 里塞，那 &lt;code&gt;dependencies&lt;/code&gt; 是不是就可以空着了？&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;绝对不行！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;根据你之前提到的 &lt;code&gt;electron-vite&lt;/code&gt; 的外部依赖处理机制，你需要严格遵守以下划分铁律：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;name&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;my-electron-app&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;dependencies&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;sqlite3&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;^5.1.0&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;serialport&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;^12.0.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;devDependencies&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;electron&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;^30.0.0&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;electron-vite&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;^2.0.0&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;vue&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;^3.4.0&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;echarts&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;^5.5.0&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;typescript&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;^5.0.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;准入 &lt;code&gt;dependencies&lt;/code&gt; 的唯一标准&lt;/strong&gt;：&lt;strong&gt;主进程（Main）或预加载脚本（Preload）中使用的、无法被打包合并的本地原生二进制模块（Native Modules）或需要动态加载的第三方 Node 库&lt;/strong&gt;（如数据库、硬件串口驱动、高级文件加密库）。这些文件因为前面提到过的 ASAR 限制，必须保持 &lt;code&gt;node_modules&lt;/code&gt; 的原始结构让操作系统去 &lt;code&gt;require&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;准入 &lt;code&gt;devDependencies&lt;/code&gt; 的标准&lt;/strong&gt;：所有的开发工具、构建脚手架，以及&lt;strong&gt;所有的渲染进程（前端页面）依赖项&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+
+ &lt;blockquote&gt;
+ &lt;h2 id="文档上有这句话具有多个入口点包括动态入口点的应用什么是多个入口点多-browserwindow-的意思还是多-mainjs-的意思"&gt;文档上有这句话「具有多个入口点（包括动态入口点）的应用」，什么是「多个入口点」？多 BrowserWindow 的意思还是多 main.js 的意思？
+&lt;/h2&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;文档里的「多个入口点（Multiple Entry Points）」&lt;strong&gt;在构建工具（Vite / Rollup）的语境下，指的是&lt;/strong&gt;物理文件层面的编译起点，而不是指 Electron 运行时的进程或窗口数量。&lt;/p&gt;
+&lt;p&gt;结合 Electron 的工程实际，它的含义在&lt;strong&gt;主进程 / Preload&lt;/strong&gt;和&lt;strong&gt;渲染进程&lt;/strong&gt;中分别代表不同的技术表现。&lt;/p&gt;
+&lt;p&gt;具体可以从以下两个层面来理解：&lt;/p&gt;
+&lt;h3 id="1-在主进程main与-preload-层面指多个独立的-js--ts-构建起点"&gt;1. 在主进程（Main）与 Preload 层面：指「多个独立的 JS / TS 构建起点」
+&lt;/h3&gt;
+&lt;p&gt;它既不是指多个 &lt;code&gt;main.js&lt;/code&gt;，也不是纯粹指多个 &lt;code&gt;BrowserWindow&lt;/code&gt;，而是指&lt;strong&gt;编译工具需要将多份独立的代码，分别打包成独立的输出文件&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;最典型的例子就是我们之前聊到的 &lt;strong&gt;“多 Preload 脚本架构”&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;src/preload/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── index.ts --&amp;gt; 入口点 1 --&amp;gt; 编译成 out/preload/index.js
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── login.ts --&amp;gt; 入口点 2 --&amp;gt; 编译成 out/preload/login.js
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└── settings.ts --&amp;gt; 入口点 3 --&amp;gt; 编译成 out/preload/settings.js
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在 &lt;code&gt;electron-vite&lt;/code&gt; 的底层配置中，它需要把 &lt;code&gt;index.ts&lt;/code&gt;、&lt;code&gt;login.ts&lt;/code&gt;、&lt;code&gt;settings.ts&lt;/code&gt; 全部当成独立的&lt;strong&gt;入口点（Entry Points）&lt;/strong&gt;。打包工具会为每个入口点单独梳理依赖树，确保它们相互独立，最终输出三个不同的文件，供主进程创建不同的 &lt;code&gt;BrowserWindow&lt;/code&gt; 时按需加载。&lt;/p&gt;
+&lt;h3 id="2-在渲染进程renderer层面指多页面应用mpa"&gt;2. 在渲染进程（Renderer）层面：指「多页面应用（MPA）」
+&lt;/h3&gt;
+&lt;p&gt;在前端（Vue / React）打包时，多入口通常对应的是 &lt;strong&gt;多 HTML 页面结构&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;如果你的桌面端应用为了性能和隔离，不打算把所有窗口都做成单页面应用（SPA）的路由切换，而是想让“主窗口”和“独立播放器窗口”完全解耦：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;src/renderer/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── index.html --&amp;gt; 入口点 1 (主窗口页面，挂载主前端代码)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── player.html --&amp;gt; 入口点 2 (播放器窗口页面，挂载轻量播放器代码)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└── index.html.d.ts ...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这里的 &lt;code&gt;index.html&lt;/code&gt; 和 &lt;code&gt;player.html&lt;/code&gt; 就是渲染进程的&lt;strong&gt;多个入口点&lt;/strong&gt;。Vite 会分别为它们打包，生成两套完全独立的前端资源。&lt;/p&gt;
+&lt;h3 id="3-什么是动态入口点dynamic-entry-points"&gt;3. 什么是「动态入口点（Dynamic Entry Points）」？
+&lt;/h3&gt;
+&lt;p&gt;文档中特意提到了“包括动态入口点”，这是 &lt;code&gt;electron-vite&lt;/code&gt; 针对 Electron 开发者做的一项极其贴心的&lt;strong&gt;自动化自动化扫描机制&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在传统的 Vite 网页开发中，如果你想搞多页面，你必须在 &lt;code&gt;vite.config.ts&lt;/code&gt; 里死死地写硬编码：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 传统繁琐的硬编码入口配置
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;input&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;main&lt;/span&gt;: &lt;span class="kt"&gt;resolve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;__dirname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;index.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;player&lt;/span&gt;: &lt;span class="kt"&gt;resolve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;__dirname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;player.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;而 &lt;code&gt;electron-vite&lt;/code&gt; 的&lt;strong&gt;动态入口点&lt;/strong&gt;意味着：&lt;strong&gt;你不需要手动去修改配置文件&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;它的底层构建脚本会自动去扫描你的 &lt;code&gt;src/preload/&lt;/code&gt; 目录或 &lt;code&gt;src/renderer/&lt;/code&gt; 目录。只要你在这个目录下新建了一个 &lt;code&gt;chat.ts&lt;/code&gt; 或者 &lt;code&gt;setting.html&lt;/code&gt;，构建系统会&lt;strong&gt;动态、实时地将它识别为一个新的入口点&lt;/strong&gt;并加入打包队列。&lt;/p&gt;
+&lt;h3 id="总结-5"&gt;总结
+&lt;/h3&gt;
+&lt;p&gt;文档里的这句话，是在夸赞它自己的&lt;strong&gt;多任务工程化打包能力&lt;/strong&gt;。它的真实意思是：&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;“无论你的项目有多复杂 —— 哪怕你写了 5 个不同的 Preload 脚本给不同的窗口用（多 Preload 入口），又写了 3 个独立的 HTML 页面给不同的业务用（多渲染入口），而且你还随时可能在目录里新增文件（动态入口）—— &lt;strong&gt;&lt;code&gt;electron-vite&lt;/code&gt; 都能在不需要你改动任何配置的情况下，自动把它们完美、独立地打包出来&lt;/strong&gt;。”&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+
+
+ &lt;blockquote&gt;
+ &lt;h2 id="electron-vite-对静态资源的处理是不是都不按照静态资源那样原封不动复制过去而是都会在编译其中过一遍"&gt;electron-vite 对静态资源的处理，是不是都不按照静态资源那样原封不动复制过去？而是都会在编译其中过一遍？
+&lt;/h2&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;结论是：&lt;strong&gt;不完全是。它采取了“分而治之”的聪明策略。它把静态资源分成了两类：一类会“在编译器里过一遍”，而另一类则是真正的“原封不动复制过去”&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;之所以要这么做，完全是因为 Electron 应用特殊的本地多进程（Main, Preload, Renderer）运行架构所决定的。我们把它们拆开来看，你就彻底明白了：&lt;/p&gt;
+&lt;h3 id="1-第一类渲染进程renderer中的静态资源--在编译器里过一遍"&gt;1. 第一类：渲染进程（Renderer）中的静态资源 —— 「在编译器里过一遍」
+&lt;/h3&gt;
+&lt;p&gt;如果你在 &lt;code&gt;src/renderer&lt;/code&gt; 目录下的 Vue / React 代码中像网页开发那样引用资源：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 在前端组件里直接 import 图片或样式
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;logoUrl&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;../assets/logo.png&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;./style.css&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;处理方式&lt;/strong&gt;：&lt;strong&gt;绝对会过一遍编译器（Vite / Rollup）&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;编译行为&lt;/strong&gt;：Vite 会对它们进行静态分析。如果是小图片，它可能会直接将其转成 &lt;strong&gt;Base64 字符串&lt;/strong&gt;内联进 JS 代码中；如果是大图片，它会对其进行&lt;strong&gt;哈希重命名&lt;/strong&gt;（变成 &lt;code&gt;logo-C_x9B2a.png&lt;/code&gt;），并自动把代码中的路径重写为编译后的相对路径。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;为什么&lt;/strong&gt;：这是为了利用现代前端的工程化优势（压缩、缓存、代码体积优化）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-第二类主进程与-preload-中引用的静态资源--半真半假的过一遍"&gt;2. 第二类：主进程与 Preload 中引用的静态资源 —— 「半真半假的过一遍」
+&lt;/h3&gt;
+&lt;p&gt;如果你在主进程（&lt;code&gt;src/main&lt;/code&gt;）中需要加载一些本地文件，例如托盘图标（Tray Icon）或特定的 CLI 脚本：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;trayIcon&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;../../resources/icon.png?asset&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;处理方式&lt;/strong&gt;：&lt;strong&gt;它在编译器里“挂了个名”，但肉体被直接复制走了&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;编译行为&lt;/strong&gt;：带有 &lt;code&gt;?asset&lt;/code&gt; 后缀的资源，&lt;code&gt;electron-vite&lt;/code&gt; 的底层插件在编译时，&lt;strong&gt;不会&lt;/strong&gt;去读取、压缩或魔改这个图片文件的二进制内容。它做的事情是：
+&lt;ol&gt;
+&lt;li&gt;将文件直接&lt;strong&gt;复制&lt;/strong&gt;到输出目录的特定位置（通常是 &lt;code&gt;out/main/assets/&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;在编译器里重写代码路径&lt;/strong&gt;：把你在代码里写的相对路径，在编译输出的 &lt;code&gt;out/main/index.js&lt;/code&gt; 中，自动修正为能在运行时正确找到该文件的绝对 / 相对路径。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-第三类真正的原封不动复制--专门的静态资源目录"&gt;3. 第三类：真正的“原封不动复制” —— 专门的静态资源目录
+&lt;/h3&gt;
+&lt;p&gt;在 &lt;code&gt;electron-vite&lt;/code&gt; 创建的项目中，根目录下通常会有一个特殊的 &lt;strong&gt;&lt;code&gt;resources&lt;/code&gt;&lt;/strong&gt; 文件夹（注意：它不在 &lt;code&gt;src&lt;/code&gt; 内部）。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── src/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── resources/ &amp;lt;-- 真正的静态资源保留地
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ├── icon.png
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └── extra-tool.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── electron.vite.config.ts
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;处理方式&lt;/strong&gt;：&lt;strong&gt;完全不进编译器，纯粹的、原封不动地复制&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;底层机制&lt;/strong&gt;：&lt;code&gt;electron-vite&lt;/code&gt; 的构建脚本内部硬编码了对这个目录的保护。当你运行 &lt;code&gt;npm run build&lt;/code&gt; 时，这个目录下的所有东西会被&lt;strong&gt;绕过任何语法分析和打包逻辑&lt;/strong&gt;，通过底层的类似 &lt;code&gt;fs-extra&lt;/code&gt; 的文件拷贝工具，直接白白地复制到你的打包输出目录（如 &lt;code&gt;out/resources/&lt;/code&gt;）或者最终打包机的资源目录中。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;为什么需要它&lt;/strong&gt;：因为正如我们之前聊到的 &lt;strong&gt;ASAR 限制&lt;/strong&gt;，有些文件（如 &lt;code&gt;.exe&lt;/code&gt;、&lt;code&gt;.node&lt;/code&gt; 二进制驱动、大型音视频测试资产）一旦进了编译器或者进了 ASAR 压缩包就会彻底死掉。这个目录就是为了让它们能够“保持处子之身”安全降落到生产环境中。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="总结你在开发时应该怎么选"&gt;总结：你在开发时应该怎么选？
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;如果是 &lt;strong&gt;前端网页展示的图标、背景、样式&lt;/strong&gt;：放心地写在 &lt;code&gt;src/renderer/assets&lt;/code&gt; 里，让编译器去优化、压缩和重命名。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用的托盘图标、通知图标&lt;/strong&gt;：放进 &lt;code&gt;resources&lt;/code&gt; 目录，或者在主进程中使用 &lt;code&gt;?asset&lt;/code&gt; 后缀引入，确保路径在多进程编译后不会漂移。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;第三方的 CLI 工具（如 ffmpeg）、原生插件或必须由外部系统直接读取的配置文件&lt;/strong&gt;：&lt;strong&gt;必须&lt;/strong&gt;扔进根目录的 &lt;code&gt;resources&lt;/code&gt; 文件夹里，严禁让编译器碰它们一下。&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Vite 学习笔记</title><link>https://ElementRef.github.io/p/vite-start/</link><pubDate>Tue, 29 Oct 2024 00:00:00 +0000</pubDate><guid>https://ElementRef.github.io/p/vite-start/</guid><description>&lt;img src="https://ElementRef.github.io/img/cover/vite.webp" alt="Featured image of post Vite 学习笔记" /&gt;&lt;p&gt;Vite 内部有两套实现：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;开发环境下，借助 esbuild 和预打包缓存实现快速的 HMR：
 &lt;ul&gt;
