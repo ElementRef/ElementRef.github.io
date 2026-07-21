@@ -1567,6 +1567,13 @@
  &gt;Access-Control-Expose-Headers
 &lt;/a&gt;
  响应头。&lt;/p&gt;
+&lt;p&gt;如果不想脱离项目中已经搭建好的请求体系，可以使用 &lt;a class="link" href="https://github.com/rexxars/eventsource-parser" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;rexxars/eventsource-parser&lt;/a&gt;
+ 或 &lt;a class="link" href="https://github.com/lukeed/fetch-event-stream" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;lukeed/fetch-event-stream&lt;/a&gt;
+ 替代 &lt;a class="link" href="https://github.com/Azure/fetch-event-source" target="_blank" rel="noopener" referrerpolicy="no-referrer"
+ &gt;@microsoft/fetch-event-source&lt;/a&gt;
+；他们只负责解析 SSE 响应体。&lt;/p&gt;
 &lt;h2 id="markdown-渲染"&gt;Markdown 渲染
 &lt;/h2&gt;
 &lt;p&gt;AI 返回的消息是 md 格式，需要借助第三方渲染插件；这里使用的是 &lt;a class="link" href="https://github.com/remarkjs/react-markdown" target="_blank" rel="noopener" referrerpolicy="no-referrer"
